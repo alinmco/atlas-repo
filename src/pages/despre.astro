@@ -1,0 +1,67 @@
+---
+import Base from "../layouts/Base.astro";
+---
+
+<Base title="Despre" description="Cum se fac paginile din atlas și ce poți aștepta de la ele.">
+  <article class="wrap">
+    <header class="intro">
+      <h1>Despre atlas</h1>
+      <p class="prose lede">
+        Atlasul explică proiecte open-source de pe GitHub pe înțelesul oricui: ce fac, cum le folosești, ce
+        servicii plătite pot înlocui și ce poți construi cu ele.
+      </p>
+    </header>
+
+    <section>
+      <h2>Cum se face o pagină</h2>
+      <p class="prose">
+        Un asistent AI citește documentația oficială și codul fiecărui proiect, apoi scrie o explicație simplă.
+        Exemplele de cod sunt preluate din documentația oficială, cu link spre sursă. Prețurile serviciilor plătite
+        sunt luate de pe site-urile lor, cu data la care au fost consultate.
+      </p>
+    </section>
+
+    <section>
+      <h2>Ce nu facem</h2>
+      <p class="prose">
+        Nu rulăm și nu testăm proiectele. Rețetele, adică combinațiile de proiecte, sunt propuneri construite din
+        documentație. Înainte să te bazezi pe ceva de aici, verifică sursa: proiectele open-source se schimbă des.
+      </p>
+    </section>
+
+    <section>
+      <h2>Ideile de afaceri</h2>
+      <p class="prose">
+        Ideile de monetizare pornesc de la licența proiectului și de la afaceri reale care vând deja ceva asemănător.
+        Nu conțin estimări de venit și nu sunt sfat juridic sau financiar. Când licența nu permite uzul comercial,
+        ideea apare cu un avertisment: o poți face doar construind propria implementare, de la zero.
+      </p>
+    </section>
+  </article>
+</Base>
+
+<style>
+  .intro {
+    padding: 3rem 0 2rem;
+    border-bottom: 2px solid var(--ink);
+    margin-bottom: 2rem;
+  }
+
+  h1 {
+    font-size: var(--step-3);
+  }
+
+  .lede {
+    margin-top: 0.75rem;
+    font-size: var(--step-1);
+  }
+
+  section {
+    margin-bottom: 2.5rem;
+  }
+
+  section h2 {
+    font-size: var(--step-2);
+    margin-bottom: 0.75rem;
+  }
+</style>

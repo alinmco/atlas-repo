@@ -22,7 +22,7 @@
       "Consola /ruflo și interfața de terminal `npx ruflo tui` cu costuri, evenimente și misiuni",
       "Jurnale de audit pentru acțiunile de federare între mașini"
     ],
-    "verified_at": "2026-10-25",
+    "updated_at": "2026-10-25",
     "pairs_well_with": [
       "https://github.com/ruvnet/RuVector",
       "https://github.com/ruvnet/agentic-flow",

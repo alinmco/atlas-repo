@@ -6,13 +6,13 @@ interface Props {
   description?: string;
 }
 
-const { title, description = "Repo-uri GitHub explicate simplu, cu exemple rulate și verificate." } = Astro.props;
+const { title, description = "Repo-uri GitHub explicate simplu, cu exemple din documentația oficială." } = Astro.props;
 const path = Astro.url.pathname;
 const nav = [
   { href: "/", label: "Repo-uri" },
   { href: "/retete/", label: "Rețete" },
   { href: "/idei/", label: "Idei" },
-  { href: "/metodologie/", label: "Cum verificăm" },
+  { href: "/despre/", label: "Despre" },
 ];
 const isActive = (href) => (href === "/" ? path === "/" || path.startsWith("/repo/") : path.startsWith(href));
 ---
@@ -53,8 +53,8 @@ const isActive = (href) => (href === "/" ? path === "/" || path.startsWith("/rep
     <footer class="site-footer">
       <div class="wrap">
         <p class="soft">
-          Exemplele marcate „Verificat” au fost rulate de un agent și reproduse independent de un al doilea.{" "}
-          <a href="/metodologie/">Vezi cum verificăm.</a>
+          Explicații scrise de un asistent AI pe baza documentației oficiale. Proiectele nu sunt testate de noi.{" "}
+          <a href="/despre/">Află mai multe.</a>
         </p>
       </div>
     </footer>

@@ -1,8 +1,8 @@
 #!/usr/bin/env node
-// Validarea „cu cod” a conținutului site-ului.
+// Verifică formatul conținutului site-ului, ca build-ul să nu se strice.
 //
-//   node scripts/validate.mjs                    → validează tot din content/
-//   node scripts/validate.mjs --draft <fișier>   → validează un draft din drafts/
+//   node scripts/validate.mjs                    → verifică tot din content/
+//   node scripts/validate.mjs --draft <fișier>   → verifică un draft din drafts/
 //   node scripts/validate.mjs --hook             → folosit de hook-ul Claude Code (citește stdin)
 //
 // Iese cu cod 0 dacă totul e în regulă. În modul --hook iese cu cod 2 la erori,
@@ -18,10 +18,8 @@ const CONTENT = path.join(ROOT, "content");
 const TODAY = new Date().toISOString().slice(0, 10);
 
 const ajv = new Ajv({ allErrors: true, strict: false });
-const repoSchema = readJson(path.join(CONTENT, "schema/repo.schema.json"));
-const recipeSchema = readJson(path.join(CONTENT, "schema/recipe.schema.json"));
-const checkRepo = ajv.compile(repoSchema);
-const checkRecipe = ajv.compile(recipeSchema);
+const checkRepo = ajv.compile(readJson(path.join(CONTENT, "schema/repo.schema.json")));
+const checkRecipe = ajv.compile(readJson(path.join(CONTENT, "schema/recipe.schema.json")));
 
 const SECRET_PATTERNS = [
   [/sk-ant-[A-Za-z0-9_-]{10,}/, "cheie API Anthropic"],
@@ -31,6 +29,8 @@ const SECRET_PATTERNS = [
   [/-----BEGIN [A-Z ]*PRIVATE KEY-----/, "cheie privată"],
   [/\bxox[baprs]-[A-Za-z0-9-]{10,}/, "token Slack"],
 ];
+
+const HYPE = /garantat|venit pasiv|bani u[sș]or|sigur c[aâ][sș]tigi|[iî]mbog[aă][tț]|f[aă]r[aă] niciun efort|f[aă]r[aă] risc/i;
 
 // ---------- utilitare ----------
 
@@ -51,19 +51,17 @@ function rel(file) {
   return path.relative(ROOT, file);
 }
 
-function wordCount(text) {
-  return String(text ?? "").trim().split(/\s+/).filter(Boolean).length;
-}
-
 function nonEmpty(value) {
   return typeof value === "string" && value.trim().length > 0;
 }
 
+function wordCount(text) {
+  return String(text ?? "").trim().split(/\s+/).filter(Boolean).length;
+}
+
 function schemaErrors(validate, data, where) {
   if (validate(data)) return [];
-  return validate.errors.map(
-    (e) => `${where}: câmpul ${e.instancePath || "(rădăcină)"} ${e.message}`
-  );
+  return validate.errors.map((e) => `${where}: câmpul ${e.instancePath || "(rădăcină)"} ${e.message}`);
 }
 
 function scanSecrets(data, where) {
@@ -73,36 +71,29 @@ function scanSecrets(data, where) {
   );
 }
 
-function checkDates(data, where, fields) {
-  const errors = [];
-  for (const [label, value] of fields) {
-    if (nonEmpty(value) && value > TODAY) {
-      errors.push(`${where}: ${label} (${value}) este în viitor.`);
-    }
-  }
-  return errors;
+function notInFuture(value, label, where) {
+  return nonEmpty(value) && value > TODAY ? [`${where}: ${label} (${value}) este în viitor.`] : [];
+}
+
+// ---------- reguli comune ----------
+
+function checkOneLiner(text, where) {
+  const n = wordCount(text);
+  return n > 15 ? [`${where}: one_liner are ${n} cuvinte (maximum 15).`] : [];
 }
 
 function checkPrices(replaces, where) {
   const errors = [];
-  (replaces || []).forEach((r, i) => {
-    const at = `${where}: replaces[${i}] (${r.service})`;
-    if (r.price !== null && r.price !== undefined) {
+  (Array.isArray(replaces) ? replaces : []).forEach((r, i) => {
+    const at = `${where}: replaces[${i}] (${r?.service})`;
+    if (r?.price !== null && r?.price !== undefined) {
       if (!nonEmpty(r.price_source_url)) errors.push(`${at}: prețul nu are price_source_url.`);
       if (!nonEmpty(r.price_checked_at)) errors.push(`${at}: prețul nu are price_checked_at.`);
     }
-    if (!Array.isArray(r.what_you_lose) || r.what_you_lose.length === 0) {
-      errors.push(`${at}: lipsește „what_you_lose” (orice comparație trebuie să spună ce pierzi).`);
-    }
-    errors.push(...checkDates(r, at, [["price_checked_at", r.price_checked_at]]));
+    errors.push(...notInFuture(r?.price_checked_at, "price_checked_at", at));
   });
   return errors;
 }
-
-// ---------- reguli pentru ideile de monetizare ----------
-// Ideile trebuie să fie realiste: cerere dovedită cu surse, fără promisiuni de câștig.
-
-const HYPE = /garantat|venit pasiv|bani u[sș]or|sigur c[aâ][sș]tigi|[iî]mbog[aă][tț]|f[aă]r[aă] niciun efort|f[aă]r[aă] risc/i;
 
 function checkMonetization(list, where, { repoLicense } = {}) {
   const errors = [];
@@ -113,11 +104,11 @@ function checkMonetization(list, where, { repoLicense } = {}) {
     }
     const evidence = Array.isArray(m?.demand_evidence) ? m.demand_evidence : [];
     if (evidence.length === 0) {
-      errors.push(`${at}: lipsește „demand_evidence” (cel puțin o afacere reală care dovedește cererea).`);
+      errors.push(`${at}: lipsește „demand_evidence” (cel puțin o afacere reală, cu link).`);
     }
     evidence.forEach((e, j) => {
       if (!nonEmpty(e?.url)) errors.push(`${at}: demand_evidence[${j}] nu are url.`);
-      errors.push(...checkDates(e ?? {}, `${at}: demand_evidence[${j}]`, [["checked_at", e?.checked_at]]));
+      errors.push(...notInFuture(e?.checked_at, "checked_at", `${at}: demand_evidence[${j}]`));
     });
     if (!Array.isArray(m?.risks) || m.risks.length === 0) {
       errors.push(`${at}: lipsesc riscurile. Orice idee de afacere are riscuri.`);
@@ -127,7 +118,7 @@ function checkMonetization(list, where, { repoLicense } = {}) {
       errors.push(`${at}: licența ${use === "interzis" ? "interzice" : "nu clarifică"} uzul comercial, deci „path” trebuie să fie „construiești propria implementare”.`);
     }
     if (m?.path === "construiești propria implementare" && !nonEmpty(m?.own_build_notes)) {
-      errors.push(`${at}: lipsește „own_build_notes” (ce construiești tu, cum îmbunătățești ideea, ce nu ai voie să copiezi).`);
+      errors.push(`${at}: lipsește „own_build_notes” (ce construiești tu și ce nu ai voie să preiei).`);
     }
     if (repoLicense && m?.license_check?.license && m.license_check.license !== repoLicense) {
       errors.push(`${at}: licența din license_check („${m.license_check.license}”) diferă de cea din tech_sheet („${repoLicense}”).`);
@@ -136,184 +127,99 @@ function checkMonetization(list, where, { repoLicense } = {}) {
   return errors;
 }
 
-// ---------- reguli pentru un repo ----------
+// ---------- un repo / o rețetă ----------
 
-function validateRepo(data, where, { published }) {
-  const errors = [...schemaErrors(checkRepo, data, where)];
-  // Regulile de mai jos rulează și când schema are erori, ca toate problemele să apară deodată.
-  data = {
-    ...data,
-    one_liner: data.one_liner ?? "",
-    examples: Array.isArray(data.examples) ? data.examples : [],
-    replaces: Array.isArray(data.replaces) ? data.replaces : [],
-    tech_sheet: data.tech_sheet ?? {},
-  };
-
-  if (wordCount(data.one_liner) > 15) {
-    errors.push(`${where}: one_liner are ${wordCount(data.one_liner)} cuvinte (maximum 15).`);
-  }
-
-  const verified = data.examples.filter((e) => e.status === "verificat");
-  verified.forEach((e) => {
-    if (!nonEmpty(e.real_output)) {
-      errors.push(`${where}: exemplul „${e.title}” e marcat verificat, dar real_output e gol.`);
-    }
-  });
-  data.examples
-    .filter((e) => e.status !== "verificat")
-    .forEach((e) => {
-      if (!nonEmpty(e.failure_reason)) {
-        errors.push(`${where}: exemplul „${e.title}” are status „${e.status}”, dar fără failure_reason.`);
-      }
-    });
-
-  const docMode = data.verification_level === "documentație";
-  const fromDocs = data.examples.filter((e) => e.status === "din documentație");
-
-  if (docMode) {
-    // Modul „documentație”: fără rulare, dar fiecare exemplu are sursa oficială.
-    if (verified.length > 0) {
-      errors.push(`${where}: în modul „documentație” nu pot exista exemple „verificat”. Folosește modul „rulat”.`);
-    }
-    if (published && fromDocs.length === 0) {
-      errors.push(`${where}: în modul „documentație” trebuie cel puțin un exemplu „din documentație”.`);
-    }
-    fromDocs.forEach((e) => {
-      if (!nonEmpty(e.source_url) || !/^https?:\/\//.test(e.source_url)) {
-        errors.push(`${where}: exemplul „${e.title}” e „din documentație”, dar nu are source_url valid.`);
-      }
-    });
-  } else {
-    if (fromDocs.length > 0) {
-      errors.push(`${where}: exemplele „din documentație” sunt permise doar în modul „documentație”.`);
-    }
-    if (published && verified.length === 0) {
-      errors.push(`${where}: niciun exemplu verificat. Nu se poate publica în modul „rulat”.`);
-    }
-  }
-  if (verified.length > 0 && !nonEmpty(data.tech_sheet.tested_commit_sha)) {
-    errors.push(`${where}: tech_sheet.tested_commit_sha lipsește.`);
-  }
-
-  const complet = data.replaces.some((r) => r.replacement_level === "complet");
-  if (complet && (verified.length === 0 || docMode)) {
-    errors.push(`${where}: replacement_level „complet” cere exemple rulate și verificate.`);
-  }
-
-  errors.push(...checkPrices(data.replaces, where));
-  errors.push(...checkMonetization(data.monetization, where, { repoLicense: data.tech_sheet.license }));
-  errors.push(...checkDates(data, where, [["verified_at", data.verified_at]]));
-  errors.push(...scanSecrets(data, where));
-  return errors;
+function validateRepo(data, where) {
+  return [
+    ...schemaErrors(checkRepo, data, where),
+    ...checkOneLiner(data.one_liner, where),
+    ...checkPrices(data.replaces, where),
+    ...checkMonetization(data.monetization, where, { repoLicense: data.tech_sheet?.license }),
+    ...notInFuture(data.updated_at, "updated_at", where),
+    ...scanSecrets(data, where),
+  ];
 }
 
-// ---------- reguli pentru o rețetă ----------
-
-function validateRecipe(data, where, { published, knownSlugs }) {
-  const errors = [...schemaErrors(checkRecipe, data, where)];
-  data = {
-    ...data,
-    one_liner: data.one_liner ?? "",
-    steps: Array.isArray(data.steps) ? data.steps : [],
-    replaces: Array.isArray(data.replaces) ? data.replaces : [],
-  };
-
-  if (wordCount(data.one_liner) > 15) {
-    errors.push(`${where}: one_liner are ${wordCount(data.one_liner)} cuvinte (maximum 15).`);
-  }
-  if (data.status === "verificat") {
-    data.steps.forEach((s, i) => {
-      if (!nonEmpty(s.real_output)) errors.push(`${where}: pasul ${i + 1} nu are real_output.`);
-    });
-    if (!nonEmpty(data.final_result)) errors.push(`${where}: final_result e gol.`);
-  } else if (!nonEmpty(data.failure_reason)) {
-    errors.push(`${where}: status „${data.status}” fără failure_reason.`);
-  }
-  if (published && data.status !== "verificat") {
-    errors.push(`${where}: doar rețetele verificate se publică.`);
-  }
+function validateRecipe(data, where, knownSlugs) {
+  const errors = [
+    ...schemaErrors(checkRecipe, data, where),
+    ...checkOneLiner(data.one_liner, where),
+    ...checkPrices(data.replaces, where),
+    ...notInFuture(data.created_at, "created_at", where),
+    ...scanSecrets(data, where),
+  ];
   if (knownSlugs) {
-    data.steps.forEach((s, i) => {
-      if (!knownSlugs.has(s.repo_slug)) {
-        errors.push(`${where}: pasul ${i + 1} folosește repo-ul „${s.repo_slug}”, care nu e în catalog.`);
+    (Array.isArray(data.steps) ? data.steps : []).forEach((s, i) => {
+      if (!knownSlugs.has(s?.repo_slug)) {
+        errors.push(`${where}: pasul ${i + 1} folosește repo-ul „${s?.repo_slug}”, care nu e în catalog.`);
       }
     });
   }
-  errors.push(...checkPrices(data.replaces, where));
-  errors.push(...checkDates(data, where, [["verified_at", data.verified_at]]));
-  errors.push(...scanSecrets(data, where));
   return errors;
 }
 
-// ---------- validarea întregului content/ ----------
+// ---------- tot conținutul ----------
+
+function readList(name, errors) {
+  const file = path.join(CONTENT, `${name}.json`);
+  if (!fs.existsSync(file)) {
+    errors.push(`content/${name}.json lipsește.`);
+    return [];
+  }
+  const data = tryReadJson(file, errors);
+  if (data !== null && !Array.isArray(data)) errors.push(`content/${name}.json trebuie să fie o listă ([]).`);
+  return Array.isArray(data) ? data : [];
+}
+
+function jsonFiles(dir) {
+  return fs.existsSync(dir) ? fs.readdirSync(dir).filter((f) => f.endsWith(".json")) : [];
+}
 
 function validateContent() {
   const errors = [];
   const lists = {};
   for (const name of ["index", "categories", "candidates", "gaps", "ideas", "recipes"]) {
-    const file = path.join(CONTENT, `${name}.json`);
-    if (!fs.existsSync(file)) {
-      errors.push(`content/${name}.json lipsește.`);
-      continue;
-    }
-    const data = tryReadJson(file, errors);
-    if (data !== null && !Array.isArray(data)) errors.push(`content/${name}.json trebuie să fie o listă ([]).`);
-    lists[name] = Array.isArray(data) ? data : [];
+    lists[name] = readList(name, errors);
   }
-  const categories = new Set(lists.categories || []);
-  (lists.ideas || []).forEach((idea, i) => {
+  const categories = new Set(lists.categories);
+  const indexSlugs = new Set(lists.index.map((e) => e.slug));
+
+  lists.ideas.forEach((idea, i) => {
     errors.push(...checkMonetization(idea?.monetization, `content/ideas.json[${i}] (${idea?.title})`));
   });
-  const index = lists.index || [];
-  const indexSlugs = new Set(index.map((e) => e.slug));
 
-  // repo-uri
-  const repoDir = path.join(CONTENT, "repos");
-  const repoFiles = fs.existsSync(repoDir) ? fs.readdirSync(repoDir).filter((f) => f.endsWith(".json")) : [];
   const repoSlugs = new Set();
-  for (const f of repoFiles) {
-    const file = path.join(repoDir, f);
+  for (const f of jsonFiles(path.join(CONTENT, "repos"))) {
+    const file = path.join(CONTENT, "repos", f);
     const where = rel(file);
     const data = tryReadJson(file, errors);
     if (!data) continue;
-    errors.push(...validateRepo(data, where, { published: true }));
+    errors.push(...validateRepo(data, where));
     if (data.slug && `${data.slug}.json` !== f) errors.push(`${where}: numele fișierului trebuie să fie ${data.slug}.json.`);
     if (data.slug) repoSlugs.add(data.slug);
     if (data.slug && !indexSlugs.has(data.slug)) errors.push(`${where}: lipsește din content/index.json.`);
     (data.categories || []).forEach((c) => {
       if (!categories.has(c)) errors.push(`${where}: categoria „${c}” nu există în content/categories.json.`);
     });
-    // dovezi
-    const evDir = path.join(CONTENT, "evidence", data.slug || "");
-    const evFiles = data.slug && fs.existsSync(evDir) ? fs.readdirSync(evDir) : [];
-    if (data.slug && data.verification_level !== "documentație" && evFiles.length === 0) errors.push(`${where}: lipsesc dovezile din content/evidence/${data.slug}/.`);
-    (data.examples || []).forEach((e) => {
-      if (nonEmpty(e.evidence_file) && !evFiles.includes(e.evidence_file)) {
-        errors.push(`${where}: fișierul de dovadă „${e.evidence_file}” nu există în content/evidence/${data.slug}/.`);
-      }
-    });
   }
-  index.forEach((e) => {
+  lists.index.forEach((e) => {
     if (!repoSlugs.has(e.slug)) errors.push(`content/index.json: „${e.slug}” nu are fișier în content/repos/.`);
   });
 
-  // rețete
-  const recipeDir = path.join(CONTENT, "recipes");
-  const recipeFiles = fs.existsSync(recipeDir) ? fs.readdirSync(recipeDir).filter((f) => f.endsWith(".json")) : [];
-  const recipeList = new Set((lists.recipes || []).map((r) => r.slug));
-  for (const f of recipeFiles) {
-    const file = path.join(recipeDir, f);
+  const recipeList = new Set(lists.recipes.map((r) => r.slug));
+  for (const f of jsonFiles(path.join(CONTENT, "recipes"))) {
+    const file = path.join(CONTENT, "recipes", f);
     const where = rel(file);
     const data = tryReadJson(file, errors);
     if (!data) continue;
-    errors.push(...validateRecipe(data, where, { published: true, knownSlugs: repoSlugs }));
+    errors.push(...validateRecipe(data, where, repoSlugs));
     if (data.slug && `${data.slug}.json` !== f) errors.push(`${where}: numele fișierului trebuie să fie ${data.slug}.json.`);
     if (data.slug && !recipeList.has(data.slug)) errors.push(`${where}: lipsește din content/recipes.json.`);
   }
   return errors;
 }
 
-// ---------- validarea unui draft ----------
+// ---------- un draft ----------
 
 function validateDraft(file) {
   const errors = [];
@@ -326,22 +232,20 @@ function validateDraft(file) {
   const knownSlugs = fs.existsSync(indexFile) ? new Set(readJson(indexFile).map((e) => e.slug)) : null;
 
   if (Array.isArray(data.recipes)) {
-    data.recipes.forEach((r, i) =>
-      errors.push(...validateRecipe(r, `${where} recipes[${i}]`, { published: false, knownSlugs }))
-    );
+    data.recipes.forEach((r, i) => errors.push(...validateRecipe(r, `${where} recipes[${i}]`, knownSlugs)));
     if (!Array.isArray(data.missing_pieces)) errors.push(`${where}: lipsește lista missing_pieces.`);
     (data.missing_pieces || []).forEach((p, i) => {
       errors.push(...checkMonetization(p?.monetization, `${where} missing_pieces[${i}]`));
     });
   } else {
-    errors.push(...validateRepo(data, where, { published: false }));
+    errors.push(...validateRepo(data, where));
   }
   return errors;
 }
 
-// ---------- validarea unui singur fișier (folosită de hook) ----------
+// ---------- un singur fișier (hook) ----------
 // Hook-ul rulează după fiecare scriere, deci verifică doar fișierul scris.
-// Legăturile dintre fișiere (index, dovezi, categorii) le verifică `npm run validate`.
+// Legăturile dintre fișiere le verifică `npm run validate`.
 
 function validateSingleContentFile(abs) {
   const errors = [];
@@ -349,10 +253,9 @@ function validateSingleContentFile(abs) {
   const data = tryReadJson(abs, errors);
   if (!data) return errors;
   const dir = path.basename(path.dirname(abs));
-  if (dir === "repos") return validateRepo(data, where, { published: true });
-  if (dir === "recipes") return validateRecipe(data, where, { published: true, knownSlugs: null });
-  if (!Array.isArray(data)) return [`${where}: trebuie să fie o listă ([]).`];
-  return [];
+  if (dir === "repos") return validateRepo(data, where);
+  if (dir === "recipes") return validateRecipe(data, where, null);
+  return Array.isArray(data) ? [] : [`${where}: trebuie să fie o listă ([]).`];
 }
 
 // ---------- pornire ----------
@@ -362,8 +265,7 @@ function report(errors, { hook }) {
     if (!hook) console.log("✅ Validare reușită.");
     process.exit(0);
   }
-  const text = `❌ Validarea a găsit ${errors.length} problem${errors.length === 1 ? "ă" : "e"}:\n- ${errors.join("\n- ")}`;
-  console.error(text);
+  console.error(`❌ Validarea a găsit ${errors.length} problem${errors.length === 1 ? "ă" : "e"}:\n- ${errors.join("\n- ")}`);
   process.exit(hook ? 2 : 1);
 }
 
@@ -380,11 +282,14 @@ if (args[0] === "--hook") {
       process.exit(0);
     }
     const abs = path.resolve(ROOT, filePath);
-    const inContent = abs.startsWith(CONTENT + path.sep) && !abs.startsWith(path.join(CONTENT, "schema"));
-    const isDraft = abs.startsWith(path.join(ROOT, "drafts") + path.sep) && abs.endsWith(".json") && !abs.endsWith(".audit.json");
-    if (inContent && abs.endsWith(".json")) report(validateSingleContentFile(abs), { hook: true });
-    else if (isDraft) report(validateDraft(abs), { hook: true });
-    else process.exit(0);
+    const inside = (dir) => abs.startsWith(path.join(ROOT, dir) + path.sep);
+    if (inside("content") && !inside(path.join("content", "schema")) && abs.endsWith(".json")) {
+      report(validateSingleContentFile(abs), { hook: true });
+    } else if (inside("drafts") && abs.endsWith(".json")) {
+      report(validateDraft(abs), { hook: true });
+    } else {
+      process.exit(0);
+    }
   });
 } else if (args[0] === "--draft") {
   if (!args[1]) {

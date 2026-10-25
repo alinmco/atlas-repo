@@ -131,7 +131,7 @@ pre {
   white-space: nowrap;
 }
 
-/* Ștampila de verificare: singurul loc unde verdele apare puternic. */
+/* Etichete scurte (ex: „Din documentația oficială”). */
 .stamp {
   display: inline-flex;
   align-items: center;

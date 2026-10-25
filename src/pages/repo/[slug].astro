@@ -1,34 +1,16 @@
 ---
-import fs from "node:fs";
-import path from "node:path";
 import Base from "../../layouts/Base.astro";
 import Monetization from "../../components/Monetization.astro";
-import {
-  repos,
-  repoByUrl,
-  verifiedExamples,
-  failedExamples,
-  recipesUsing,
-  formatDate,
-  daysSince,
-  isDocMode,
-  docExamples,
-} from "../../lib/data.js";
+import { repos, repoByUrl, recipesUsing, formatDate } from "../../lib/data.js";
 
 export function getStaticPaths() {
   return repos.map((repo) => ({ params: { slug: repo.slug }, props: { repo } }));
 }
 
 const { repo } = Astro.props;
-const verified = verifiedExamples(repo);
-const failed = failedExamples(repo);
-const docMode = isDocMode(repo);
-const fromDocs = docExamples(repo);
 const inRecipes = recipesUsing(repo.slug);
-const old = daysSince(repo.verified_at) > 90;
-const sha = repo.tech_sheet.tested_commit_sha;
-const hasSetup = fs.existsSync(path.join(process.cwd(), "content", "evidence", repo.slug, "setup.sh"));
-const evidenceUrl = (file) => `/dovezi/${repo.slug}/${file}`;
+const sha = repo.tech_sheet.commit_sha;
+const restricted = repo.monetization?.some((m) => ["interzis", "neclar"].includes(m.license_check?.commercial_use));
 ---
 
 <Base title={repo.name} description={repo.one_liner}>
@@ -38,11 +20,7 @@ const evidenceUrl = (file) => `/dovezi/${repo.slug}/${file}`;
       <h1>{repo.name}</h1>
       <p class="lede">{repo.one_liner}</p>
       <p class="head-meta">
-        {docMode ? (
-          <span class="stamp stamp--doc">Prezentare din documentație, {formatDate(repo.verified_at)}</span>
-        ) : (
-          <span class={`stamp ${old ? "stamp--old" : ""}`}>Verificat {formatDate(repo.verified_at)}</span>
-        )}
+        <span class="stamp stamp--doc">Din documentația oficială, {formatDate(repo.updated_at)}</span>
         <a href={repo.repo_url} rel="noopener">Vezi codul pe GitHub</a>
       </p>
     </header>
@@ -77,8 +55,7 @@ const evidenceUrl = (file) => `/dovezi/${repo.slug}/${file}`;
                         {s.price}
                         {s.price_source_url && (
                           <span class="soft">
-                            {" "}(<a href={s.price_source_url} rel="noopener">verificat {formatDate(s.price_checked_at)}</a>
-                            {s.needs_recheck && ", de reconfirmat"})
+                            {" "}(<a href={s.price_source_url} rel="noopener">consultat {formatDate(s.price_checked_at)}</a>)
                           </span>
                         )}
                       </>
@@ -109,79 +86,36 @@ const evidenceUrl = (file) => `/dovezi/${repo.slug}/${file}`;
           </section>
         )}
 
-        {docMode && (
-          <section>
-            <h2>{fromDocs.length === 1 ? "Exemplu din documentația oficială" : "Exemple din documentația oficială"}</h2>
-            <div class="doc-note prose">
-              <p><strong>{fromDocs.length === 1 ? "Nu l-am rulat." : "Nu le-am rulat."}</strong> {fromDocs[0]?.failure_reason}</p>
-              <p>
-                {fromDocs.length === 1 ? "Exemplul e preluat" : "Exemplele sunt preluate"} exact din documentația
-                proiectului, iar un al doilea agent a verificat sursa. Nu putem garanta că funcționează pe versiunea
-                actuală.
+        <section>
+          <h2>{repo.examples.length === 1 ? "Exemplu din documentație" : "Exemple din documentație"}</h2>
+          <p class="prose soft doc-note">
+            {repo.examples.length === 1
+              ? "Exemplul e preluat din documentația oficială a proiectului. Nu l-am rulat noi, așa că verifică sursa pentru versiunea cea mai nouă."
+              : "Exemplele sunt preluate din documentația oficială a proiectului. Nu le-am rulat noi, așa că verifică sursa pentru versiunea cea mai nouă."}
+          </p>
+          {repo.examples.map((ex) => (
+            <div class="example">
+              <h3>{ex.title}</h3>
+              <p class="prose">{ex.scenario}</p>
+              {ex.prerequisites.length > 0 && (
+                <p class="soft prereq">Ai nevoie de: {ex.prerequisites.join(", ")}</p>
+              )}
+              {ex.commands.length > 0 && (
+                <pre class="terminal terminal--commands"><code>{ex.commands.join("\n")}</code></pre>
+              )}
+              {ex.code && <pre class="terminal"><code>{ex.code}</code></pre>}
+              {ex.output_from_docs && (
+                <figure class="doc-output">
+                  <figcaption class="soft">Rezultatul arătat în documentație</figcaption>
+                  <pre class="terminal"><code>{ex.output_from_docs}</code></pre>
+                </figure>
+              )}
+              <p class="soft source">
+                Sursa: <a href={ex.source_url} rel="noopener">documentația oficială</a>
               </p>
             </div>
-            {fromDocs.map((ex) => (
-              <div class="example">
-                <h3>{ex.title}</h3>
-                <p class="prose">{ex.scenario}</p>
-                {ex.prerequisites.length > 0 && (
-                  <p class="soft prereq">Ai nevoie de: {ex.prerequisites.join(", ")}</p>
-                )}
-                {ex.commands.length > 0 && (
-                  <pre class="terminal terminal--commands"><code>{ex.commands.join("\n")}</code></pre>
-                )}
-                {ex.code && <pre class="terminal"><code>{ex.code}</code></pre>}
-                {ex.real_output && (
-                  <figure class="doc-output">
-                    <figcaption class="soft">Rezultatul arătat în documentație (nerulat de noi)</figcaption>
-                    <pre class="terminal"><code>{ex.real_output}</code></pre>
-                  </figure>
-                )}
-                <p class="soft env">
-                  Sursa: <a href={ex.source_url} rel="noopener">documentația oficială</a>
-                  {sha && <>, versiunea <code>{sha.slice(0, 7)}</code></>}.
-                </p>
-              </div>
-            ))}
-          </section>
-        )}
-
-        {!docMode && (
-          <section>
-            <h2>{verified.length === 1 ? "Exemplu testat" : "Exemple testate"}</h2>
-            {verified.map((ex) => (
-              <div class="example">
-                <h3>{ex.title}</h3>
-                <p class="prose">{ex.scenario}</p>
-                {ex.prerequisites.length > 0 && (
-                  <p class="soft prereq">Ai nevoie de: {ex.prerequisites.join(", ")}</p>
-                )}
-                {ex.commands.length > 0 && (
-                  <pre class="terminal terminal--commands"><code>{ex.commands.join("\n")}</code></pre>
-                )}
-                {ex.code && <pre class="terminal"><code>{ex.code}</code></pre>}
-                <figure class="specimen">
-                  <figcaption>
-                    <span class="stamp">Rezultat real, reprodus independent</span>
-                    {typeof ex.time_to_first_result_minutes === "number" && (
-                      <span class="soft">Primul rezultat în ~{ex.time_to_first_result_minutes} min</span>
-                    )}
-                  </figcaption>
-                  <pre class="terminal"><code>{ex.real_output}</code></pre>
-                  <p class="soft env">
-                    Testat pe {[ex.environment?.os, ex.environment?.runtime].filter(Boolean).join(", ")}
-                    {sha && <>, commit <code>{sha.slice(0, 7)}</code></>}.
-                    {ex.evidence_file && (
-                      <>
-                        {" "}<a href={evidenceUrl(ex.evidence_file)}>Log-ul complet</a>
-                      </>
-                    )}
-                  </p>
-                </figure>
-              </div>
-            ))}
-          </section>
-        )}
+          ))}
+        </section>
 
         <section>
           <h2>Când să nu-l folosești</h2>
@@ -235,34 +169,18 @@ const evidenceUrl = (file) => `/dovezi/${repo.slug}/${file}`;
           <section>
             <h2>Cum poți câștiga bani cu el</h2>
             <p class="prose soft money-note">
-              Idei verificate față de licență și față de afaceri care vând deja ceva asemănător. Nu sunt
-              promisiuni de venit și nici sfat juridic sau financiar.
-              {repo.monetization.some((m) => ["interzis", "neclar"].includes(m.license_check?.commercial_use)) &&
-                " Licența acestui repo nu permite uzul comercial, deci ideile de mai jos se pot face doar cu o implementare proprie."}
+              Idei pornite de la licență și de la afaceri care vând deja ceva asemănător. Nu sunt promisiuni de venit
+              și nici sfat juridic sau financiar.
+              {restricted && " Licența acestui repo nu permite uzul comercial, deci ideile se pot face doar cu o implementare proprie."}
             </p>
             {repo.monetization.map((idea) => <Monetization idea={idea} />)}
           </section>
         )}
 
-        {failed.length > 0 && (
-          <section class="limits">
-            <h2>Limitări cunoscute</h2>
-            {failed.map((ex) => (
-              <div class="limit">
-                <p>
-                  <span class="stamp stamp--failed">{ex.status === "esuat" ? "Nu a funcționat" : "Neverificat"}</span>
-                </p>
-                <h3>{ex.title}</h3>
-                <p class="prose">{ex.failure_reason}</p>
-              </div>
-            ))}
-          </section>
-        )}
-
-        {repo.confidence_notes && (
+        {repo.notes && (
           <section>
-            <h2>Note de verificare</h2>
-            <p class="prose soft">{repo.confidence_notes}</p>
+            <h2>Note</h2>
+            <p class="prose soft">{repo.notes}</p>
           </section>
         )}
       </div>
@@ -272,13 +190,15 @@ const evidenceUrl = (file) => `/dovezi/${repo.slug}/${file}`;
         <dl>
           <dt>Pentru</dt>
           <dd>{repo.audience}</dd>
+          <dt>Pornire</dt>
+          <dd>{repo.setup_difficulty}</dd>
           <dt>Licență</dt>
           <dd>{repo.tech_sheet.license}</dd>
           <dt>Limbaj</dt>
           <dd>{repo.tech_sheet.language}</dd>
           {sha && (
             <>
-              <dt>{docMode ? "Versiune citită" : "Versiune testată"}</dt>
+              <dt>Versiune citită</dt>
               <dd><code>{sha.slice(0, 7)}</code></dd>
             </>
           )}
@@ -299,9 +219,6 @@ const evidenceUrl = (file) => `/dovezi/${repo.slug}/${file}`;
           <dt>Categorii</dt>
           <dd>{repo.categories.join(", ")}</dd>
         </dl>
-        {hasSetup && (
-          <a class="setup" href={evidenceUrl("setup.sh")}>Scriptul de instalare care a funcționat</a>
-        )}
       </aside>
     </div>
   </article>
@@ -432,6 +349,12 @@ const evidenceUrl = (file) => `/dovezi/${repo.slug}/${file}`;
     margin: 0 0 0.5rem;
   }
 
+  .doc-note,
+  .money-note {
+    font-size: var(--step--1);
+    margin-bottom: 1.25rem;
+  }
+
   .example {
     margin-bottom: 2.5rem;
   }
@@ -440,54 +363,13 @@ const evidenceUrl = (file) => `/dovezi/${repo.slug}/${file}`;
     margin-top: 0.75rem;
   }
 
-  .prereq {
+  .prereq,
+  .source {
     font-size: var(--step--1);
-  }
-
-  .specimen {
-    margin: 1rem 0 0;
-    padding: 1rem;
-    border: 2px solid var(--verified);
-    border-radius: 8px;
-    background: var(--verified-tint);
-  }
-
-  .specimen figcaption {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 0.5rem 1rem;
-    margin-bottom: 0.75rem;
-    font-size: var(--step--1);
-  }
-
-  .specimen .stamp {
-    background: var(--paper-raised);
-  }
-
-  .env {
-    font-size: var(--step--1);
-    margin-top: 0.75rem;
-  }
-
-  .money-note {
-    font-size: var(--step--1);
-  }
-
-  .doc-note {
-    padding: 0.9rem 1rem;
-    margin-bottom: 1.5rem;
-    border: 2px dashed var(--ink-soft);
-    border-radius: 8px;
-    font-size: var(--step--1);
-  }
-
-  .doc-note p + p {
-    margin-top: 0.4rem;
   }
 
   .doc-output {
-    margin: 0;
+    margin: 0.75rem 0 0;
   }
 
   .doc-output figcaption {
@@ -497,17 +379,6 @@ const evidenceUrl = (file) => `/dovezi/${repo.slug}/${file}`;
 
   .recipes-line {
     margin-top: 1rem;
-  }
-
-  .limits .limit {
-    padding: 1rem;
-    border-left: 3px solid var(--failed);
-    background: var(--failed-tint);
-    margin-bottom: 1rem;
-  }
-
-  .limit h3 {
-    margin: 0.5rem 0 0.25rem;
   }
 
   .sheet {
@@ -534,11 +405,5 @@ const evidenceUrl = (file) => `/dovezi/${repo.slug}/${file}`;
 
   .sheet dd {
     margin: 0;
-  }
-
-  .setup {
-    display: inline-block;
-    margin-top: 1.25rem;
-    font-weight: 700;
   }
 </style>
