@@ -159,7 +159,7 @@ Zero idei e un răspuns valid și onest; nu forța.
     "commit_sha": "",
     "last_commit_date": "",
     "stars": 0,
-    "requirements": []
+    "requirements": ["toate cerințele de instalare din documentație: sistem de operare, programe și versiuni (ex: Node.js >= 20, Python 3.11, Git), conturi sau chei API necesare. Din ele se generează promptul „Instalează cu Claude” de pe site."]
   },
   "monetization": [
     {

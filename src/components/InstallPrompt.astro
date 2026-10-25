@@ -1,0 +1,107 @@
+---
+import { buildInstallPrompt } from "../lib/install-prompt.js";
+
+const { repo } = Astro.props;
+const prompt = buildInstallPrompt(repo);
+---
+
+<section class="install" aria-labelledby="install-title" data-install>
+  <h2 id="install-title">Instalează cu Claude</h2>
+  <p class="soft">Copiază promptul și lipește-l în Claude Code. Claude citește documentația oficială și instalează totul.</p>
+  <div class="box">
+    <pre class="terminal" data-prompt tabindex="0"><code>{prompt}</code></pre>
+    <button type="button" class="copy" data-copy>Copiază</button>
+  </div>
+  <p class="soft note">Prompt generat automat din documentație, netestat.</p>
+</section>
+
+<style>
+  .install {
+    padding: 1.25rem;
+    background: var(--paper-raised);
+    border: 1px solid var(--rule);
+    border-radius: var(--radius);
+    margin: 2rem 0 3rem;
+  }
+
+  .install h2 {
+    font-size: var(--step-1);
+    margin-bottom: 0.25rem;
+  }
+
+  .box {
+    position: relative;
+    margin-top: 0.9rem;
+  }
+
+  .box .terminal {
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+    overflow-x: hidden;
+    padding-top: 3rem;
+    font-size: var(--step--1);
+  }
+
+  .copy {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    min-height: 2.25rem;
+    padding: 0.3rem 0.9rem;
+    font: inherit;
+    font-size: var(--step--1);
+    font-weight: 700;
+    color: var(--on-accent);
+    background: var(--accent);
+    border: 0;
+    border-radius: 8px;
+    cursor: pointer;
+  }
+
+  .copy:hover {
+    filter: brightness(1.1);
+  }
+
+  .copy:focus-visible {
+    outline: 3px solid var(--focus);
+    outline-offset: 2px;
+  }
+
+  .note {
+    font-size: var(--step--1);
+    margin-top: 0.6rem;
+  }
+</style>
+
+<script>
+  document.querySelectorAll("[data-install]").forEach((root) => {
+    const btn = root.querySelector("[data-copy]");
+    const pre = root.querySelector("[data-prompt]");
+    let timer;
+    const done = () => {
+      btn.textContent = "Copiat ✓";
+      clearTimeout(timer);
+      timer = setTimeout(() => (btn.textContent = "Copiază"), 2000);
+    };
+    const select = () => {
+      const range = document.createRange();
+      range.selectNodeContents(pre);
+      const sel = window.getSelection();
+      sel.removeAllRanges();
+      sel.addRange(range);
+    };
+    btn.addEventListener("click", async () => {
+      const text = pre.textContent;
+      try {
+        if (!navigator.clipboard) throw new Error("fără clipboard");
+        await navigator.clipboard.writeText(text);
+        done();
+      } catch {
+        select();
+        try {
+          if (document.execCommand("copy")) done();
+        } catch {}
+      }
+    });
+  });
+</script>
