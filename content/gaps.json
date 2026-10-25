@@ -18,5 +18,25 @@
     "gap": "Nu există în documentație un exemplu complet de la cap la coadă (sarcină dată, agenți porniți, rezultat obținut) cu output real; exemplele arată fragmente izolate.",
     "source_slug": "ruflo",
     "added_at": "2026-10-25"
+  },
+  {
+    "gap": "Nu există un singur format de instalare pentru toți agenții: Android CLI, comenzi de plugin pentru Claude Code și Codex, import manual în Android Studio",
+    "source_slug": "android-skills",
+    "added_at": "2026-10-25"
+  },
+  {
+    "gap": "Unele skill-uri cer pași manuali sau unelte externe (de ex. r8-analyzer cere Python și pachetul protobuf pe anumite versiuni de AGP/R8)",
+    "source_slug": "android-skills",
+    "added_at": "2026-10-25"
+  },
+  {
+    "gap": "Repo-ul nu are release-uri GitHub verificate; versiunea apare doar în manifestul plugin-ului (1.0.17 în .codex-plugin/plugin.json) și în data 'last-updated' din fiecare skill",
+    "source_slug": "android-skills",
+    "added_at": "2026-10-25"
+  },
+  {
+    "gap": "Contribuțiile publice nu sunt acceptate momentan, doar issue-uri",
+    "source_slug": "android-skills",
+    "added_at": "2026-10-25"
   }
 ]

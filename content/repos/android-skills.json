@@ -1,0 +1,222 @@
+{
+  "slug": "android-skills",
+  "repo_url": "https://github.com/android/skills",
+  "name": "Android skills (android/skills)",
+  "one_liner": "Instrucțiuni oficiale Google care învață asistenții AI să programeze corect aplicații Android.",
+  "problem_solved": "Asistenții AI (Claude Code, Gemini, Codex etc.) greșesc des la sarcini Android specifice: migrarea de la XML la Jetpack Compose, trecerea la AGP 9, aplicații edge-to-edge, reguli R8, Navigation 3, Play Billing. Repo-ul conține 'skills' (fișiere SKILL.md) scrise de echipa Android, cu pași clari și cod de referință, pe care agentul le citește singur când sarcina se potrivește. Astfel agentul urmează ghidurile oficiale în loc să ghicească din memorie. Conform README-ului, se concentrează pe cazurile în care evaluările arată că modelele AI se descurcă slab.",
+  "analogy": "Ca o fișă de rețetă lăsată în bucătărie de un bucătar-șef: bucătarul-ajutor (agentul AI) o deschide doar când are de gătit exact acel fel de mâncare și o urmează pas cu pas.",
+  "how_it_works": [
+    "pas 1: instalezi skill-urile (cu Android CLI, ca plugin în Claude Code/Codex, sau copiind folderele) în proiectul tău sau în directoarele agentului",
+    "pas 2: ceri agentului o sarcină obișnuită, de exemplu 'Make my app UI edge-to-edge.'",
+    "pas 3: agentul compară cererea cu descrierea fiecărui skill (câmpul 'description' din SKILL.md) și îl activează pe cel potrivit",
+    "pas 4: agentul urmează pașii din SKILL.md (analiză, plan, modificări de cod, uneori scripturi din folderul skill-ului) și îți modifică proiectul Android"
+  ],
+  "categories": [
+    "Dezvoltare aplicații Android",
+    "Agenți AI pentru programare"
+  ],
+  "search_intents": [
+    "vreau ca asistentul AI să scrie cod Android corect",
+    "vreau să migrez o aplicație Android de la XML la Jetpack Compose cu ajutor AI",
+    "vreau să fac aplicația edge-to-edge cu un agent AI",
+    "vreau să trec proiectul la AGP 9 automat",
+    "vreau să instalez skills Android în Claude Code",
+    "vreau să curăț regulile R8 / Proguard din aplicație"
+  ],
+  "audience": "intermediar",
+  "setup_difficulty": "mediu",
+  "replaces": [],
+  "examples": [
+    {
+      "title": "Instalarea skill-urilor cu Android CLI",
+      "scenario": "Ai un proiect Android și vrei ca agentul tău AI să aibă skill-urile oficiale. Instalezi unul singur în proiect sau pe toate.",
+      "prerequisites": [
+        "Android CLI instalat (comanda 'android'), descărcat de pe developer.android.com/tools/agents",
+        "Un agent AI care suportă standardul agent skills (cont/abonament la agentul ales, posibil plătit; repo-ul nu cere chei API)",
+        "Un proiect Android"
+      ],
+      "commands": [
+        "android skills add r8-analyzer --project=.",
+        "android skills add --all",
+        "android skills update --all",
+        "android skills update wear-compose-m3"
+      ],
+      "code": null,
+      "output_from_docs": null,
+      "source_url": "https://github.com/android/skills#install-android-skills"
+    },
+    {
+      "title": "Instalare ca plugin în Claude Code sau Codex și activare cu o cerere obișnuită",
+      "scenario": "Folosești Claude Code sau Codex și vrei toate skill-urile ca plugin. Apoi ceri agentului o sarcină, iar acesta alege singur skill-ul potrivit.",
+      "prerequisites": [
+        "Claude Code sau Codex instalat și autentificat (abonament/cont propriu, posibil plătit)",
+        "Un proiect Android deschis în agent"
+      ],
+      "commands": [
+        "/plugin marketplace add android/skills",
+        "/plugin install android-skills@android-skills",
+        "codex plugin marketplace add android/skills",
+        "codex plugin add android-skills@android-skills"
+      ],
+      "code": "Prompt de activare dat în documentație ca exemplu: \"Make my app UI edge-to-edge.\"",
+      "output_from_docs": null,
+      "source_url": "https://github.com/android/skills#install-as-an-agent-plugin"
+    }
+  ],
+  "connectors": {
+    "inputs": [
+      "Un proiect Android (cod Kotlin/Java, fișiere Gradle: build.gradle, build.gradle.kts, gradle.properties, libs.versions.toml, AndroidManifest.xml, layout-uri XML)",
+      "O cerere în limbaj natural dată agentului AI (ex: 'Make my app UI edge-to-edge.')"
+    ],
+    "outputs": [
+      "Modificări în codul proiectului Android făcute de agent (Kotlin/Compose, manifest, fișiere Gradle)",
+      "Rapoarte generate de unele skill-uri, de ex. r8-analyzer scrie tmp/keepradius/analysis_result.txt (din SKILL.md)",
+      "Skill-urile în sine: foldere cu SKILL.md în format Markdown cu antet YAML, plus scripts/ și references/"
+    ],
+    "pairs_well_with": [
+      {
+        "repo_url": "https://github.com/android/nowinandroid",
+        "name": "Now in Android",
+        "why": "Aplicația de referință oficială: agentul poate citi codul ei ca model de arhitectură, iar tu o folosești ca proiect de test pentru skill-uri (cod sursă -> exemplu de urmat). Ultimul commit: 2026-10-25.",
+        "in_catalog": false
+      },
+      {
+        "repo_url": "https://github.com/android/compose-samples",
+        "name": "Compose samples",
+        "why": "Aplicații de exemplu în Jetpack Compose; completează skill-urile de migrare și temă cu cod concret de comparat. Ultimul commit: 2026-10-23.",
+        "in_catalog": false
+      },
+      {
+        "repo_url": "https://github.com/anthropics/claude-code",
+        "name": "Claude Code",
+        "why": "Agentul care încarcă skill-urile prin plugin (comenzile /plugin din README); cererea ta devine modificări în proiect. Ultimul commit: 2026-10-24.",
+        "in_catalog": false
+      },
+      {
+        "repo_url": "https://github.com/google-gemini/gemini-cli",
+        "name": "Gemini CLI",
+        "why": "README-ul menționează Gemini ca destinație implicită de instalare (~/.gemini/antigravity/skills), iar pagina oficială arată o demonstrație cu Gemini CLI. Ultimul commit: 2026-10-25.",
+        "in_catalog": false
+      },
+      {
+        "repo_url": "https://github.com/anthropics/skills",
+        "name": "Anthropic Skills",
+        "why": "Același format SKILL.md; folositor ca model dacă îți scrii propriile skill-uri lângă cele Android. Ultimul commit: 2026-10-09.",
+        "in_catalog": false
+      }
+    ],
+    "gaps_noticed": [
+      "Nu există un singur format de instalare pentru toți agenții: Android CLI, comenzi de plugin pentru Claude Code și Codex, import manual în Android Studio",
+      "Unele skill-uri cer pași manuali sau unelte externe (de ex. r8-analyzer cere Python și pachetul protobuf pe anumite versiuni de AGP/R8)",
+      "Repo-ul nu are release-uri GitHub verificate; versiunea apare doar în manifestul plugin-ului (1.0.17 în .codex-plugin/plugin.json) și în data 'last-updated' din fiecare skill",
+      "Contribuțiile publice nu sunt acceptate momentan, doar issue-uri"
+    ]
+  },
+  "when_not_to_use": [
+    "Nu lucrezi cu Android: skill-urile sunt strict pentru dezvoltare Android (Compose, Gradle/AGP, Play, Wear, TV, XR, mașini).",
+    "Nu folosești un agent AI: fără agent, fișierele SKILL.md sunt doar documentație de citit.",
+    "Vrei garanții: README-ul spune explicit că AI-ul poate greși și că rezultatele trebuie verificate.",
+    "Vrei ajutor la teme de bază, bine cunoscute de modele (README: nu sunt prioritare bune practici elementare de Compose).",
+    "Ai nevoie de contribuții sau modificări acceptate în repo: contribuțiile publice nu sunt acceptate acum.",
+    "Unele skill-uri cer versiuni minime (de ex. edge-to-edge cere Jetpack Compose și țintă SDK 35 sau mai nouă), deci proiecte vechi necesită pregătire."
+  ],
+  "alternatives": [
+    {
+      "name": "Anthropic Skills",
+      "url": "https://github.com/anthropics/skills",
+      "difference": "Colecție generală de skill-uri (nu doar Android), același standard; nu conține ghiduri oficiale Android."
+    },
+    {
+      "name": "Documentația oficială Android + Android CLI",
+      "url": "https://developer.android.com/tools/agents/android-cli",
+      "difference": "Android CLI include și baza de cunoștințe Android; skill-urile din repo adaugă fluxuri de lucru pas cu pas pentru agent."
+    }
+  ],
+  "tech_sheet": {
+    "license": "Apache-2.0",
+    "language": "Markdown (SKILL.md) cu fragmente Kotlin și scripturi Python; GitHub îl etichetează Kotlin",
+    "commit_sha": "4ebabf2b0fd6c04b7150023c8b612f80592a6226",
+    "last_commit_date": "2026-10-23",
+    "stars": 9679,
+    "requirements": [
+      "Un agent AI compatibil cu standardul agent skills (Claude Code, Codex, Gemini CLI etc.)",
+      "Android CLI (recomandat pentru instalare) sau instalare manuală/plugin",
+      "Un proiect Android; unele skill-uri cer versiuni minime (ex: SDK 35, AGP 9) sau Python"
+    ]
+  },
+  "monetization": [
+    {
+      "model": "serviciu de instalare și configurare",
+      "what_you_sell": "Migrări de aplicații Android (XML la Jetpack Compose, upgrade AGP 9, edge-to-edge, Navigation 3) făcute cu un agent AI ghidat de skill-urile oficiale, cu verificare umană a rezultatului.",
+      "for_whom": "Firme mici și echipe cu aplicații Android mai vechi, fără timp intern pentru modernizare.",
+      "license_check": {
+        "license": "Apache-2.0",
+        "commercial_use": "permis",
+        "conditions": "Apache-2.0 permite folosirea comercială. Dacă redistribui fișierele skill, păstrezi LICENSE.txt și notele de copyright și marchezi modificările. Numele și logo-urile Android/Google nu sunt acordate prin licență. Agentul AI folosit (și modelul lui) are propriii termeni."
+      },
+      "path": "folosești repo-ul direct",
+      "own_build_notes": null,
+      "demand_evidence": [
+        {
+          "name": "UpStack - Hire Jetpack Compose developers",
+          "url": "https://upstackhq.com/hire-developers/jetpack-compose",
+          "price": "neconfirmat: pagina sursă nu s-a putut verifica (eroare 502 la verificare)",
+          "what_it_proves": "Există o piață de dezvoltatori Compose contractați la oră; migrarea e muncă plătită la oră.",
+          "checked_at": "2026-10-25"
+        }
+      ],
+      "startup_cost": "Fără licență de plătit pentru repo. Costul real: abonamentul/API-ul agentului AI ales (preț nestabilit aici) și timpul tău pentru verificarea rezultatelor.",
+      "time_to_first_client": "Necunoscut; depinde de portofoliu și de canalul de vânzare. Nu există o estimare sursată.",
+      "difficulty": "mediu",
+      "risks": [
+        "Concurență gratuită: oricine poate instala aceleași skill-uri chiar din repo, deci valoarea ta e experiența și verificarea, nu skill-urile.",
+        "AI-ul poate greși (avertisment din README); răspunderea pentru aplicația clientului rămâne la tine.",
+        "Google poate schimba formatul skill-urilor sau instrumentele (Android CLI, plugin) oricând; skill-urile se actualizează des.",
+        "Codul clientului ajunge la furnizorul agentului AI: trebuie clarificat în contract."
+      ],
+      "first_steps": [
+        "Instalează skill-urile pe un proiect propriu de test, nu al unui client.",
+        "Încearcă o migrare mică (un singur ecran XML) și documentează timpul și corecturile necesare.",
+        "Redactează o ofertă cu preț fix pe ecran sau oră, pe baza experienței reale.",
+        "Verifică în contract cine răspunde de rezultat și ce spui despre folosirea unui agent AI."
+      ]
+    },
+    {
+      "model": "consultanță și training",
+      "what_you_sell": "Training pentru echipe Android despre cum se lucrează cu agenți AI și skill-uri (alegere, instalare, scriere de skill-uri proprii în aceeași structură SKILL.md, verificarea rezultatelor).",
+      "for_whom": "Echipe de dezvoltare Android și dezvoltatori independenți care vor să adopte fluxuri cu agenți AI.",
+      "license_check": {
+        "license": "Apache-2.0",
+        "commercial_use": "permis",
+        "conditions": "Poți folosi și cita conținutul din materiale comerciale cu păstrarea LICENSE.txt și a notelor de copyright. Nu folosi numele sau logo-ul Android/Google ca și cum cursul ar fi oficial."
+      },
+      "path": "folosești repo-ul direct",
+      "own_build_notes": null,
+      "demand_evidence": [
+        {
+          "name": "Effective Android - Jetpack Compose and Internals course",
+          "url": "https://effectiveandroid.gumroad.com/l/dfedea/ddwoioz",
+          "price": "neconfirmat: pagina sursă nu a afișat prețul la verificare",
+          "what_it_proves": "Se vând deja cursuri Android avansate în Compose pe platforme de cursuri; prețul nu a putut fi confirmat.",
+          "checked_at": "2026-10-25"
+        }
+      ],
+      "startup_cost": "Timp pentru pregătirea materialului; costuri de platformă de curs sau înregistrare, nestabilite aici.",
+      "time_to_first_client": "Necunoscut; nu există o estimare sursată.",
+      "difficulty": "mediu",
+      "risks": [
+        "Subiectul se schimbă rapid; materialele devin vechi în luni.",
+        "Google publică documentație gratuită pe subiect, ceea ce limitează ce poți cere pentru conținut generic.",
+        "Fără propriile rezultate demonstrabile, credibilitatea e greu de construit.",
+        "Cererea dovedită e pentru cursuri Compose, nu pentru cursuri despre agenți AI; nu am găsit un curs specific pe skill-uri Android."
+      ],
+      "first_steps": [
+        "Parcurge README-ul și pagina oficială android-skills și notează unde pică începătorii.",
+        "Scrie un ghid scurt cu exemple reale pe un proiect de test, cu ce a mers și ce nu.",
+        "Oferă mai întâi un atelier mic echipelor cunoscute pentru a primi feedback."
+      ]
+    }
+  ],
+  "updated_at": "2026-10-25",
+  "notes": "Repo nou. Citit: README, LICENSE.txt (Apache-2.0 complet), manifestele .claude-plugin și .codex-plugin, SKILL.md pentru edge-to-edge, r8-analyzer, android-cli și migrate-xml-views, plus paginile oficiale developer.android.com/tools/agents/android-skills și /android-cli. Nu am rulat nimic. Repo-ul conține 33 de skill-uri (SKILL.md) grupate pe domenii. Release-uri GitHub: neverificate (gh lipsește, API-ul de releases nu a fost interogat). Documentația nu arată niciun output pentru comenzile de instalare, deci output_from_docs e null. Câmpul replaces e gol: nu am găsit un serviciu plătit pe care să-l înlocuiască realist (sunt instrucțiuni gratuite pentru agenți). Prețurile din monetizare nu au putut fi confirmate pe paginile sursă și nu sunt publicate; linkurile sunt păstrate ca punct de plecare. Pagina UpStack răspunde cu eroare 502 la verificare. Stars și data commit-ului din API-ul GitHub, verificate la 2026-10-25. Android CLI colectează date de utilizare (dezactivabil cu --no-metrics) și are limitări pe Windows (emulator dezactivat, descărcarea din PowerShell nesuportată), conform paginii oficiale."
+}

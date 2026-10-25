@@ -26,5 +26,33 @@
     "suggested_by": "ruflo",
     "why": "Ruflo vorbește MCP, deci poate fi folosit alături de alte servere MCP (fișiere, git, baze de date), iar clientul tău le oferă agenților împreună cu uneltele Ruflo (activ, ultim commit 2026-10-25).",
     "added_at": "2026-10-25"
+  },
+  {
+    "repo_url": "https://github.com/android/nowinandroid",
+    "name": "Now in Android",
+    "suggested_by": "android-skills",
+    "why": "Aplicația de referință oficială: agentul poate citi codul ei ca model de arhitectură, iar tu o folosești ca proiect de test pentru skill-uri (cod sursă -> exemplu de urmat). Ultimul commit: 2026-10-25.",
+    "added_at": "2026-10-25"
+  },
+  {
+    "repo_url": "https://github.com/android/compose-samples",
+    "name": "Compose samples",
+    "suggested_by": "android-skills",
+    "why": "Aplicații de exemplu în Jetpack Compose; completează skill-urile de migrare și temă cu cod concret de comparat. Ultimul commit: 2026-10-23.",
+    "added_at": "2026-10-25"
+  },
+  {
+    "repo_url": "https://github.com/google-gemini/gemini-cli",
+    "name": "Gemini CLI",
+    "suggested_by": "android-skills",
+    "why": "README-ul menționează Gemini ca destinație implicită de instalare (~/.gemini/antigravity/skills), iar pagina oficială arată o demonstrație cu Gemini CLI. Ultimul commit: 2026-10-25.",
+    "added_at": "2026-10-25"
+  },
+  {
+    "repo_url": "https://github.com/anthropics/skills",
+    "name": "Anthropic Skills",
+    "suggested_by": "android-skills",
+    "why": "Același format SKILL.md; folositor ca model dacă îți scrii propriile skill-uri lângă cele Android. Ultimul commit: 2026-10-09.",
+    "added_at": "2026-10-25"
   }
 ]
