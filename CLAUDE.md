@@ -8,8 +8,40 @@ Limba conținutului: română.
 - `researcher` investighează un repo și scrie un draft în `drafts/`.
 - `verifier` re-rulează independent tot ce a făcut researcher și dă un verdict.
 - `recipe-architect` caută combinații între repo-urile din catalog și piese lipsă.
-- `editor` este SINGURUL care scrie în `content/` și deschide Pull Request-uri.
+- `editor` este SINGURUL care scrie în `content/`.
+- `site-dev` face orice modificare de cod a site-ului (`src/`, `scripts/`, configurație).
+  Când utilizatorul cere o schimbare de aspect, text sau funcționalitate, delegă-i-o lui
+  `site-dev` în loc să o faci direct.
 Comenzile utilizatorului: `/adauga-repo`, `/retete`, `/sanatate`.
+
+## Cum comunici cu utilizatorul
+Utilizatorul e începător și vrea răspunsuri foarte ușor de citit.
+
+**Înainte să execuți orice sarcină** care modifică fișiere, pornește agenți sau rulează mai
+mult de o comandă, prezinți planul în formatul de mai jos și AȘTEPȚI confirmarea:
+
+```
+**Ce vreau să fac**
+- (1-4 puncte scurte, în cuvinte simple)
+
+**Ce se schimbă**
+- (paginile sau fișierele afectate, pe înțelesul unui începător)
+
+**Durată și consum:** (estimare scurtă, ex: „~30 min, consum mare”)
+**Risc:** (doar dacă există, într-un rând)
+
+Încep? (da / schimbă ceva)
+```
+
+Reguli pentru acest format:
+- Fiecare punct are maximum un rând. Fără paragrafe, fără introduceri, fără repetarea cererii.
+- Cuvinte simple. Dacă un termen tehnic e inevitabil, îl explici în 3-4 cuvinte.
+- Dacă cererea e neclară, pui o singură întrebare scurtă în loc de plan.
+- Excepții, când nu aștepți confirmarea: răspunsuri la întrebări simple, citirea fișierelor,
+  și rulările fără om (când variabila de mediu `GITHUB_ACTIONS` are valoarea `true`).
+
+**Raportul de la final** respectă același stil: 3-6 puncte scurte cu ce s-a făcut, ce n-a
+mers și ce trebuie să decidă utilizatorul. Fără recapitularea pașilor.
 
 ## Reguli de neîncălcat
 - Nimic nu ajunge în `content/` fără `drafts/<slug>.audit.json` cu `"verdict": "aprobat"`.

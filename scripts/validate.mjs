@@ -99,6 +99,43 @@ function checkPrices(replaces, where) {
   return errors;
 }
 
+// ---------- reguli pentru ideile de monetizare ----------
+// Ideile trebuie să fie realiste: cerere dovedită cu surse, fără promisiuni de câștig.
+
+const HYPE = /garantat|venit pasiv|bani u[sș]or|sigur c[aâ][sș]tigi|[iî]mbog[aă][tț]|f[aă]r[aă] niciun efort|f[aă]r[aă] risc/i;
+
+function checkMonetization(list, where, { repoLicense } = {}) {
+  const errors = [];
+  (Array.isArray(list) ? list : []).forEach((m, i) => {
+    const at = `${where}: monetization[${i}]`;
+    if (HYPE.test(JSON.stringify(m))) {
+      errors.push(`${at}: conține promisiuni de câștig („garantat”, „venit pasiv” etc.). Ideile trebuie să fie realiste.`);
+    }
+    const evidence = Array.isArray(m?.demand_evidence) ? m.demand_evidence : [];
+    if (evidence.length === 0) {
+      errors.push(`${at}: lipsește „demand_evidence” (cel puțin o afacere reală care dovedește cererea).`);
+    }
+    evidence.forEach((e, j) => {
+      if (!nonEmpty(e?.url)) errors.push(`${at}: demand_evidence[${j}] nu are url.`);
+      errors.push(...checkDates(e ?? {}, `${at}: demand_evidence[${j}]`, [["checked_at", e?.checked_at]]));
+    });
+    if (!Array.isArray(m?.risks) || m.risks.length === 0) {
+      errors.push(`${at}: lipsesc riscurile. Orice idee de afacere are riscuri.`);
+    }
+    const use = m?.license_check?.commercial_use;
+    if ((use === "interzis" || use === "neclar") && m?.path !== "construiești propria implementare") {
+      errors.push(`${at}: licența ${use === "interzis" ? "interzice" : "nu clarifică"} uzul comercial, deci „path” trebuie să fie „construiești propria implementare”.`);
+    }
+    if (m?.path === "construiești propria implementare" && !nonEmpty(m?.own_build_notes)) {
+      errors.push(`${at}: lipsește „own_build_notes” (ce construiești tu, cum îmbunătățești ideea, ce nu ai voie să copiezi).`);
+    }
+    if (repoLicense && m?.license_check?.license && m.license_check.license !== repoLicense) {
+      errors.push(`${at}: licența din license_check („${m.license_check.license}”) diferă de cea din tech_sheet („${repoLicense}”).`);
+    }
+  });
+  return errors;
+}
+
 // ---------- reguli pentru un repo ----------
 
 function validateRepo(data, where, { published }) {
@@ -143,6 +180,7 @@ function validateRepo(data, where, { published }) {
   }
 
   errors.push(...checkPrices(data.replaces, where));
+  errors.push(...checkMonetization(data.monetization, where, { repoLicense: data.tech_sheet.license }));
   errors.push(...checkDates(data, where, [["verified_at", data.verified_at]]));
   errors.push(...scanSecrets(data, where));
   return errors;
@@ -202,6 +240,9 @@ function validateContent() {
     lists[name] = Array.isArray(data) ? data : [];
   }
   const categories = new Set(lists.categories || []);
+  (lists.ideas || []).forEach((idea, i) => {
+    errors.push(...checkMonetization(idea?.monetization, `content/ideas.json[${i}] (${idea?.title})`));
+  });
   const index = lists.index || [];
   const indexSlugs = new Set(index.map((e) => e.slug));
 
@@ -268,6 +309,9 @@ function validateDraft(file) {
       errors.push(...validateRecipe(r, `${where} recipes[${i}]`, { published: false, knownSlugs }))
     );
     if (!Array.isArray(data.missing_pieces)) errors.push(`${where}: lipsește lista missing_pieces.`);
+    (data.missing_pieces || []).forEach((p, i) => {
+      errors.push(...checkMonetization(p?.monetization, `${where} missing_pieces[${i}]`));
+    });
   } else {
     errors.push(...validateRepo(data, where, { published: false }));
   }

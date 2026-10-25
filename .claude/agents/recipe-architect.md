@@ -39,6 +39,12 @@ Pentru fiecare gol din `content/gaps.json` și fiecare lanț rupt:
    într-un weekend, stack-ul recomandat, primii 3 pași.
 3. Estimează onest dificultatea și riscurile (licențe, API-uri instabile, termeni de utilizare).
 4. Spune ce rețete ar debloca proiectul dacă ar exista.
+5. Opțional, adaugă în `"monetization"` 0-2 moduri realiste prin care proiectul ar putea aduce
+   bani, cu aceleași reguli ca la researcher: verifici licențele componentelor (dacă interzic
+   uzul comercial, ideea merge pe drumul „construiești propria implementare”, cu
+   `"own_build_notes"`), cel puțin o afacere reală care dovedește cererea (URL, preț dacă e
+   public, data verificării), fără estimări de venit și fără promisiuni, cu riscuri reale.
+   Zero idei de monetizare e un răspuns valid.
 
 ## Reguli de scriere
 - Ton prietenos, fără jargon nedefinit.
@@ -86,7 +92,18 @@ Scrie `drafts/recipes-<YYYY-MM-DD>.json`, conform `content/schema/recipe.schema.
       "first_steps": [],
       "difficulty": "ușor | mediu | greu",
       "risks": [],
-      "unlocks_recipes": []
+      "unlocks_recipes": [],
+      "monetization": [
+        {
+          "model": "", "what_you_sell": "", "for_whom": "",
+          "license_check": {"license": "licențele componentelor", "commercial_use": "permis | permis cu condiții | interzis | neclar", "conditions": ""},
+          "path": "folosești repo-ul direct | construiești propria implementare",
+          "own_build_notes": null,
+          "demand_evidence": [{"name": "", "url": "", "price": null, "what_it_proves": "", "checked_at": "YYYY-MM-DD"}],
+          "startup_cost": "", "time_to_first_client": "", "difficulty": "ușor | mediu | greu",
+          "risks": [], "first_steps": []
+        }
+      ]
     }
   ]
 }

@@ -126,7 +126,11 @@ Așa, nimic nu ajunge live fără să treacă validarea și fără să apeși tu
 
 Poți da și mai multe linkuri deodată, separate prin spațiu.
 
-**Ce se întâmplă:** `researcher` investighează și rulează exemplele, `verifier` le re-rulează de la
+**Întâi primești planul.** Claude îți arată pe scurt, în puncte, ce va face, cât durează și ce
+se schimbă. Răspunzi `da` ca să pornească, sau spui ce vrei altfel. Așa se întâmplă la orice
+sarcină care modifică ceva, nu doar la această comandă.
+
+**Ce se întâmplă apoi:** `researcher` investighează și rulează exemplele, `verifier` le re-rulează de la
 zero, `editor` scrie fișierele site-ului, apoi se deschide un Pull Request. Durează de obicei
 între 15 și 60 de minute per repo. Poți lăsa calculatorul să lucreze.
 
@@ -167,6 +171,22 @@ Dacă pe PR-ul automat nu pornește verificarea `validate-and-build`, închide P
 Poți adăuga o direcție: `/retete concentrează-te pe unelte audio`.
 
 Pentru un raport fără modificări: `/sanatate doar raport`.
+
+## Opțional: site-ul protejat, vizibil doar pentru tine
+
+Gratuit, fără cod, cu **Vercel Authentication**:
+
+1. Pe Vercel, deschide proiectul → **Settings → Deployment Protection**.
+2. Activează **Vercel Authentication** și alege **All Deployments** (nu doar „Standard
+   Protection”, care lasă site-ul principal public).
+3. **Save**.
+
+De acum, site-ul se deschide doar după ce te loghezi în contul tău Vercel. Pe planul gratuit
+poți crea și un singur link de partajare, din aceeași pagină, dacă vrei să-l arăți cuiva.
+Când vrei să-l faci public, alegi din nou „Standard Protection”.
+
+Atenție: dacă repo-ul de pe GitHub e public, conținutul se vede oricum acolo. Ca să fie
+privat cu adevărat, trebuie privat și repo-ul.
 
 ---
 

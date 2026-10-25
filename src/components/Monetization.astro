@@ -1,0 +1,168 @@
+---
+// O idee de monetizare: ce vinzi, cui, ce permite licența, ce dovedește cererea, ce te costă.
+import { formatDate } from "../lib/data.js";
+
+interface Props {
+  idea: any;
+  repoName?: string;
+  repoSlug?: string;
+  headingLevel?: "h3" | "h4";
+}
+
+const { idea, repoName, repoSlug, headingLevel = "h3" } = Astro.props;
+const Heading = headingLevel;
+const license = idea.license_check;
+const restricted = license && (license.commercial_use === "interzis" || license.commercial_use === "neclar");
+const buildOwn = idea.path === "construiești propria implementare";
+---
+
+<div class="money">
+  {restricted && (
+    <div class="warn" role="note">
+      <p class="warn-title">
+        {license.commercial_use === "interzis"
+          ? `Atenție: licența ${license.license} interzice uzul comercial.`
+          : `Atenție: licența ${license.license} nu clarifică dacă uzul comercial e permis.`}
+      </p>
+      <p>
+        Ideea e valabilă doar dacă construiești propria implementare, de la zero. Nu ai voie să preiei cod,
+        modele, date, nume sau design din acest repo. Înainte să lansezi o afacere, verifică cu un jurist.
+      </p>
+    </div>
+  )}
+  <Heading class="money-title">{idea.what_you_sell}</Heading>
+  <p class="soft money-sub">
+    Pentru {idea.for_whom}. Model: {idea.model}.
+    {repoName && repoSlug && (
+      <>
+        {" "}Pornește de la <a href={`/repo/${repoSlug}/`}>{repoName}</a>.
+      </>
+    )}
+  </p>
+
+  <dl class="money-facts">
+    <dt>Cum pornești</dt>
+    <dd>{buildOwn ? "Construiești propria implementare" : "Folosești repo-ul direct"}</dd>
+    {idea.own_build_notes && (
+      <>
+        <dt>{buildOwn ? "Ce construiești tu" : "Cum o poți îmbunătăți"}</dt>
+        <dd>{idea.own_build_notes}</dd>
+      </>
+    )}
+    {license && (
+      <>
+        <dt>Licența</dt>
+        <dd>
+          {license.license}: uz comercial {license.commercial_use}.
+          {license.conditions && <> {license.conditions}</>}
+        </dd>
+      </>
+    )}
+    <dt>Cererea există</dt>
+    <dd>
+      <ul class="plain evidence">
+        {idea.demand_evidence.map((e) => (
+          <li>
+            <a href={e.url} rel="noopener">{e.name}</a>
+            {e.price && <> vinde la {e.price}</>}
+            {" "}(verificat {formatDate(e.checked_at)}). {e.what_it_proves}
+          </li>
+        ))}
+      </ul>
+    </dd>
+    <dt>Cost de pornire</dt>
+    <dd>{idea.startup_cost}</dd>
+    <dt>Până la primul client</dt>
+    <dd>{idea.time_to_first_client}</dd>
+    <dt>Dificultate</dt>
+    <dd>{idea.difficulty}</dd>
+    <dt>Riscuri</dt>
+    <dd>{idea.risks.join("; ")}</dd>
+  </dl>
+
+  {idea.first_steps?.length > 0 && (
+    <details class="steps">
+      <summary>Primii pași</summary>
+      <ol>
+        {idea.first_steps.map((s) => <li>{s}</li>)}
+      </ol>
+    </details>
+  )}
+</div>
+
+<style>
+  .money {
+    padding: 1.25rem 0 1.5rem;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .warn {
+    padding: 0.75rem 1rem;
+    margin-bottom: 0.9rem;
+    border-left: 3px solid var(--failed);
+    background: var(--failed-tint);
+    max-width: var(--measure);
+    font-size: var(--step--1);
+  }
+
+  .warn-title {
+    font-weight: 700;
+    color: var(--failed);
+    margin-bottom: 0.25rem;
+  }
+
+  .money-title {
+    font-family: var(--font-display);
+    font-size: var(--step-1);
+    line-height: 1.25;
+    margin: 0;
+  }
+
+  .money-sub {
+    margin-top: 0.3rem;
+    font-size: var(--step--1);
+    max-width: var(--measure);
+  }
+
+  .money-facts {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0.15rem;
+    margin: 0.9rem 0 0;
+    max-width: var(--measure);
+  }
+
+  @media (min-width: 40rem) {
+    .money-facts {
+      grid-template-columns: 11rem minmax(0, 1fr);
+      gap: 0.45rem 1rem;
+    }
+  }
+
+  .money-facts dt {
+    font-weight: 700;
+  }
+
+  .money-facts dd {
+    margin: 0 0 0.5rem;
+  }
+
+  .evidence li + li {
+    margin-top: 0.3rem;
+  }
+
+  .steps {
+    margin-top: 0.5rem;
+  }
+
+  .steps summary {
+    cursor: pointer;
+    font-weight: 700;
+  }
+
+  .steps ol {
+    margin: 0.5rem 0 0;
+    padding-left: 1.4rem;
+    max-width: var(--measure);
+  }
+</style>

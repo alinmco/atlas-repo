@@ -6,6 +6,14 @@ disable-model-invocation: true
 
 Instrucțiuni suplimentare (opțional): $ARGUMENTS
 
+## Pasul 0: planul, pe scurt
+Înainte de orice altceva, prezintă planul în formatul din CLAUDE.md („Cum comunici cu
+utilizatorul”) și așteaptă confirmarea. Pentru această comandă, planul spune:
+- câte repo-uri, prețuri și rețete au expirat (citește întâi `content/`);
+- ce vei re-verifica în această rulare (maximum 5 repo-uri);
+- durata estimată. Pentru „doar raport”, nu e nevoie de confirmare.
+Dacă variabila de mediu `GITHUB_ACTIONS` are valoarea `true`, sari peste confirmare.
+
 ## 1. Raportul
 Pe baza fișierelor din `content/`, întocmește lista:
 - repo-urile cu `"verified_at"` mai vechi de 90 de zile;

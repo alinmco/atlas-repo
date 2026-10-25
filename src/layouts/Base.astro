@@ -11,7 +11,7 @@ const path = Astro.url.pathname;
 const nav = [
   { href: "/", label: "Repo-uri" },
   { href: "/retete/", label: "Rețete" },
-  { href: "/idei/", label: "Idei de construit" },
+  { href: "/idei/", label: "Idei" },
   { href: "/metodologie/", label: "Cum verificăm" },
 ];
 const isActive = (href) => (href === "/" ? path === "/" || path.startsWith("/repo/") : path.startsWith(href));
