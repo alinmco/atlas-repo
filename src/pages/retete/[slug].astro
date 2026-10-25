@@ -1,0 +1,169 @@
+---
+import Base from "../../layouts/Base.astro";
+import { recipes, repoBySlug, formatDate } from "../../lib/data.js";
+
+export function getStaticPaths() {
+  return recipes.map((recipe) => ({ params: { slug: recipe.slug }, props: { recipe } }));
+}
+
+const { recipe } = Astro.props;
+---
+
+<Base title={recipe.title} description={recipe.one_liner}>
+  <article class="wrap">
+    <header class="head">
+      <p class="crumb soft"><a href="/retete/">Toate rețetele</a></p>
+      <h1>{recipe.title}</h1>
+      <p class="lede">{recipe.one_liner}</p>
+      <p class="head-meta">
+        <span class="stamp">Rulată cap-coadă {formatDate(recipe.verified_at)}</span>
+        {typeof recipe.total_time_minutes === "number" && <span class="soft">Durează ~{recipe.total_time_minutes} min</span>}
+        <span class="soft">Pentru {recipe.audience}</span>
+      </p>
+    </header>
+
+    <section>
+      <h2>Problema</h2>
+      <p class="prose">{recipe.problem}</p>
+    </section>
+
+    <section>
+      <h2>Pașii</h2>
+      <ol class="plain steps">
+        {recipe.steps.map((step, i) => {
+          const repo = repoBySlug(step.repo_slug);
+          return (
+            <li class="step">
+              <p class="step-num" aria-hidden="true">{i + 1}</p>
+              <div class="step-body">
+                <h3>{repo ? <a href={`/repo/${repo.slug}/`}>{repo.name}</a> : step.repo_slug}</h3>
+                <p class="prose">{step.what_it_does}</p>
+                <p class="soft io">Primește {step.input} și produce {step.output}.</p>
+                {step.commands.length > 0 && (
+                  <pre class="terminal terminal--commands"><code>{step.commands.join("\n")}</code></pre>
+                )}
+                {step.code && <pre class="terminal"><code>{step.code}</code></pre>}
+                <pre class="terminal"><code>{step.real_output}</code></pre>
+              </div>
+            </li>
+          );
+        })}
+      </ol>
+    </section>
+
+    <section>
+      <h2>Rezultatul final</h2>
+      <figure class="specimen">
+        <figcaption><span class="stamp">Rezultat real, reprodus independent</span></figcaption>
+        <pre class="terminal"><code>{recipe.final_result}</code></pre>
+      </figure>
+    </section>
+
+    {recipe.replaces.length > 0 && (
+      <section>
+        <h2>Ce înlocuiește întregul flux</h2>
+        <ul class="prose">
+          {recipe.replaces.map((s) => (
+            <li>
+              <a href={s.service_url} rel="noopener">{s.service}</a>
+              {s.price && <> ({s.price}{s.price_source_url && <>, <a href={s.price_source_url} rel="noopener">verificat {formatDate(s.price_checked_at)}</a></>})</>}.
+              Ce pierzi: {s.what_you_lose.join(", ")}.
+            </li>
+          ))}
+        </ul>
+      </section>
+    )}
+
+    {recipe.confidence_notes && (
+      <section>
+        <h2>Note de verificare</h2>
+        <p class="prose soft">{recipe.confidence_notes}</p>
+      </section>
+    )}
+  </article>
+</Base>
+
+<style>
+  .head {
+    padding: 2.5rem 0 2rem;
+    border-bottom: 2px solid var(--ink);
+    margin-bottom: 2rem;
+  }
+
+  .crumb {
+    font-size: var(--step--1);
+    margin-bottom: 1rem;
+  }
+
+  h1 {
+    font-size: var(--step-3);
+  }
+
+  .lede {
+    font-size: var(--step-1);
+    margin-top: 0.5rem;
+    max-width: 40ch;
+  }
+
+  .head-meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.75rem 1.25rem;
+    margin-top: 1.25rem;
+    font-size: var(--step--1);
+  }
+
+  section {
+    margin-bottom: 3rem;
+    max-width: 52rem;
+  }
+
+  section h2 {
+    font-size: var(--step-2);
+    margin-bottom: 1rem;
+  }
+
+  .step {
+    display: grid;
+    grid-template-columns: 2.5rem minmax(0, 1fr);
+    gap: 1rem;
+    padding-bottom: 2rem;
+  }
+
+  .step-num {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: var(--step-2);
+    line-height: 1;
+    color: var(--ink-soft);
+  }
+
+  .step-body > * + * {
+    margin-top: 0.75rem;
+  }
+
+  .step-body h3 {
+    font-size: var(--step-1);
+  }
+
+  .io {
+    font-size: var(--step--1);
+  }
+
+  .specimen {
+    margin: 0;
+    padding: 1rem;
+    border: 2px solid var(--verified);
+    border-radius: 8px;
+    background: var(--verified-tint);
+  }
+
+  .specimen figcaption {
+    margin-bottom: 0.75rem;
+  }
+
+  .specimen .stamp {
+    background: var(--paper-raised);
+  }
+</style>

@@ -1,0 +1,458 @@
+---
+import fs from "node:fs";
+import path from "node:path";
+import Base from "../../layouts/Base.astro";
+import {
+  repos,
+  repoByUrl,
+  verifiedExamples,
+  failedExamples,
+  recipesUsing,
+  formatDate,
+  daysSince,
+} from "../../lib/data.js";
+
+export function getStaticPaths() {
+  return repos.map((repo) => ({ params: { slug: repo.slug }, props: { repo } }));
+}
+
+const { repo } = Astro.props;
+const verified = verifiedExamples(repo);
+const failed = failedExamples(repo);
+const inRecipes = recipesUsing(repo.slug);
+const old = daysSince(repo.verified_at) > 90;
+const sha = repo.tech_sheet.tested_commit_sha;
+const hasSetup = fs.existsSync(path.join(process.cwd(), "content", "evidence", repo.slug, "setup.sh"));
+const evidenceUrl = (file) => `/dovezi/${repo.slug}/${file}`;
+---
+
+<Base title={repo.name} description={repo.one_liner}>
+  <article class="wrap">
+    <header class="head">
+      <p class="crumb soft"><a href="/">Toate repo-urile</a></p>
+      <h1>{repo.name}</h1>
+      <p class="lede">{repo.one_liner}</p>
+      <p class="head-meta">
+        <span class={`stamp ${old ? "stamp--old" : ""}`}>Verificat {formatDate(repo.verified_at)}</span>
+        <a href={repo.repo_url} rel="noopener">Vezi codul pe GitHub</a>
+      </p>
+    </header>
+
+    <div class="layout">
+      <div class="main">
+        <section>
+          <h2>Ce problemă rezolvă</h2>
+          <p class="prose">{repo.problem_solved}</p>
+          <p class="analogy prose">{repo.analogy}</p>
+        </section>
+
+        <section>
+          <h2>Cum funcționează</h2>
+          <ol class="flow">
+            {repo.how_it_works.map((step) => <li>{step}</li>)}
+          </ol>
+        </section>
+
+        {repo.replaces.length > 0 && (
+          <section>
+            <h2>Alternativă gratuită la</h2>
+            <div class="replaces">
+              {repo.replaces.map((s) => (
+                <div class="service">
+                  <h3>
+                    <a href={s.service_url} rel="noopener">{s.service}</a>
+                  </h3>
+                  <p class="price">
+                    {s.price ? (
+                      <>
+                        {s.price}
+                        {s.price_source_url && (
+                          <span class="soft">
+                            {" "}(<a href={s.price_source_url} rel="noopener">verificat {formatDate(s.price_checked_at)}</a>
+                            {s.needs_recheck && ", de reconfirmat"})
+                          </span>
+                        )}
+                      </>
+                    ) : (
+                      <span class="soft">Preț nepublicat</span>
+                    )}
+                  </p>
+                  <p class="level">Înlocuire {s.replacement_level}</p>
+                  <dl class="tradeoffs">
+                    {s.what_you_keep.length > 0 && (
+                      <>
+                        <dt>Ce primești la fel</dt>
+                        <dd>{s.what_you_keep.join(", ")}</dd>
+                      </>
+                    )}
+                    <dt>Ce pierzi</dt>
+                    <dd>{s.what_you_lose.join(", ")}</dd>
+                    {s.hidden_costs.length > 0 && (
+                      <>
+                        <dt>Costuri ascunse</dt>
+                        <dd>{s.hidden_costs.join(", ")}</dd>
+                      </>
+                    )}
+                  </dl>
+                </div>
+              ))}
+            </div>
+          </section>
+        )}
+
+        <section>
+          <h2>{verified.length === 1 ? "Exemplu testat" : "Exemple testate"}</h2>
+          {verified.map((ex) => (
+            <div class="example">
+              <h3>{ex.title}</h3>
+              <p class="prose">{ex.scenario}</p>
+              {ex.prerequisites.length > 0 && (
+                <p class="soft prereq">Ai nevoie de: {ex.prerequisites.join(", ")}</p>
+              )}
+              {ex.commands.length > 0 && (
+                <pre class="terminal terminal--commands"><code>{ex.commands.join("\n")}</code></pre>
+              )}
+              {ex.code && <pre class="terminal"><code>{ex.code}</code></pre>}
+              <figure class="specimen">
+                <figcaption>
+                  <span class="stamp">Rezultat real, reprodus independent</span>
+                  {typeof ex.time_to_first_result_minutes === "number" && (
+                    <span class="soft">Primul rezultat în ~{ex.time_to_first_result_minutes} min</span>
+                  )}
+                </figcaption>
+                <pre class="terminal"><code>{ex.real_output}</code></pre>
+                <p class="soft env">
+                  Testat pe {[ex.environment?.os, ex.environment?.runtime].filter(Boolean).join(", ")}
+                  {sha && <>, commit <code>{sha.slice(0, 7)}</code></>}.
+                  {ex.evidence_file && (
+                    <>
+                      {" "}<a href={evidenceUrl(ex.evidence_file)}>Log-ul complet</a>
+                    </>
+                  )}
+                </p>
+              </figure>
+            </div>
+          ))}
+        </section>
+
+        <section>
+          <h2>Când să nu-l folosești</h2>
+          <ul class="prose">
+            {repo.when_not_to_use.map((w) => <li>{w}</li>)}
+          </ul>
+          {repo.alternatives.length > 0 && (
+            <>
+              <h3 class="sub">Alternative</h3>
+              <ul class="prose">
+                {repo.alternatives.map((a) => (
+                  <li>
+                    <a href={a.url} rel="noopener">{a.name}</a>: {a.difference}
+                  </li>
+                ))}
+              </ul>
+            </>
+          )}
+        </section>
+
+        {(repo.connectors.pairs_well_with.length > 0 || inRecipes.length > 0) && (
+          <section>
+            <h2>Se combină bine cu</h2>
+            <ul class="prose">
+              {repo.connectors.pairs_well_with.map((p) => {
+                const local = repoByUrl(p.repo_url);
+                return (
+                  <li>
+                    {local ? <a href={`/repo/${local.slug}/`}>{p.name}</a> : <a href={p.repo_url} rel="noopener">{p.name}</a>}
+                    {!local && <span class="soft"> (încă nu e în atlas)</span>}: {p.why}
+                  </li>
+                );
+              })}
+            </ul>
+            {inRecipes.length > 0 && (
+              <p class="prose recipes-line">
+                Apare în rețetele:{" "}
+                {inRecipes.map((r, i) => (
+                  <>
+                    {i > 0 && ", "}
+                    <a href={`/retete/${r.slug}/`}>{r.title}</a>
+                  </>
+                ))}
+                .
+              </p>
+            )}
+          </section>
+        )}
+
+        {failed.length > 0 && (
+          <section class="limits">
+            <h2>Limitări cunoscute</h2>
+            {failed.map((ex) => (
+              <div class="limit">
+                <p>
+                  <span class="stamp stamp--failed">{ex.status === "esuat" ? "Nu a funcționat" : "Neverificat"}</span>
+                </p>
+                <h3>{ex.title}</h3>
+                <p class="prose">{ex.failure_reason}</p>
+              </div>
+            ))}
+          </section>
+        )}
+
+        {repo.confidence_notes && (
+          <section>
+            <h2>Note de verificare</h2>
+            <p class="prose soft">{repo.confidence_notes}</p>
+          </section>
+        )}
+      </div>
+
+      <aside class="sheet" aria-label="Fișa tehnică">
+        <h2>Fișa tehnică</h2>
+        <dl>
+          <dt>Pentru</dt>
+          <dd>{repo.audience}</dd>
+          <dt>Licență</dt>
+          <dd>{repo.tech_sheet.license}</dd>
+          <dt>Limbaj</dt>
+          <dd>{repo.tech_sheet.language}</dd>
+          {sha && (
+            <>
+              <dt>Versiune testată</dt>
+              <dd><code>{sha.slice(0, 7)}</code></dd>
+            </>
+          )}
+          <dt>Ultimul commit</dt>
+          <dd>{formatDate(repo.tech_sheet.last_commit_date)}</dd>
+          {typeof repo.tech_sheet.stars === "number" && (
+            <>
+              <dt>Stele</dt>
+              <dd>{repo.tech_sheet.stars.toLocaleString("ro-RO")}</dd>
+            </>
+          )}
+          {repo.tech_sheet.requirements.length > 0 && (
+            <>
+              <dt>Cerințe</dt>
+              <dd>{repo.tech_sheet.requirements.join(", ")}</dd>
+            </>
+          )}
+          <dt>Categorii</dt>
+          <dd>{repo.categories.join(", ")}</dd>
+        </dl>
+        {hasSetup && (
+          <a class="setup" href={evidenceUrl("setup.sh")}>Scriptul de instalare care a funcționat</a>
+        )}
+      </aside>
+    </div>
+  </article>
+</Base>
+
+<style>
+  .head {
+    padding: 2.5rem 0 2rem;
+    border-bottom: 2px solid var(--ink);
+  }
+
+  .crumb {
+    font-size: var(--step--1);
+    margin-bottom: 1rem;
+  }
+
+  h1 {
+    font-size: var(--step-3);
+  }
+
+  .lede {
+    font-size: var(--step-1);
+    margin-top: 0.5rem;
+    max-width: 40ch;
+  }
+
+  .head-meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.75rem 1.25rem;
+    margin-top: 1.25rem;
+  }
+
+  .layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 2.5rem;
+    margin-top: 2rem;
+  }
+
+  @media (min-width: 60rem) {
+    .layout {
+      grid-template-columns: minmax(0, 1fr) 18rem;
+      gap: 4rem;
+    }
+
+    .sheet {
+      position: sticky;
+      top: 1.5rem;
+      align-self: start;
+    }
+  }
+
+  section {
+    margin-bottom: 3rem;
+  }
+
+  section h2 {
+    font-size: var(--step-2);
+    margin-bottom: 1rem;
+  }
+
+  h3 {
+    font-size: var(--step-1);
+  }
+
+  .sub {
+    margin-top: 1.5rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .analogy {
+    margin-top: 1rem;
+    padding-left: 1rem;
+    border-left: 3px solid var(--rule);
+    font-style: italic;
+  }
+
+  .flow {
+    padding-left: 1.4rem;
+    max-width: var(--measure);
+  }
+
+  .flow li + li {
+    margin-top: 0.4rem;
+  }
+
+  .replaces {
+    display: grid;
+    gap: 1.5rem;
+  }
+
+  .service {
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .price {
+    margin-top: 0.25rem;
+  }
+
+  .level {
+    font-size: var(--step--1);
+    margin-top: 0.25rem;
+  }
+
+  .tradeoffs {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0.15rem;
+    margin: 0.75rem 0 0;
+    max-width: var(--measure);
+  }
+
+  @media (min-width: 40rem) {
+    .tradeoffs {
+      grid-template-columns: 11rem minmax(0, 1fr);
+      gap: 0.4rem 1rem;
+    }
+  }
+
+  .tradeoffs dt {
+    font-weight: 700;
+  }
+
+  .tradeoffs dd {
+    margin: 0 0 0.5rem;
+  }
+
+  .example {
+    margin-bottom: 2.5rem;
+  }
+
+  .example > * + * {
+    margin-top: 0.75rem;
+  }
+
+  .prereq {
+    font-size: var(--step--1);
+  }
+
+  .specimen {
+    margin: 1rem 0 0;
+    padding: 1rem;
+    border: 2px solid var(--verified);
+    border-radius: 8px;
+    background: var(--verified-tint);
+  }
+
+  .specimen figcaption {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.5rem 1rem;
+    margin-bottom: 0.75rem;
+    font-size: var(--step--1);
+  }
+
+  .specimen .stamp {
+    background: var(--paper-raised);
+  }
+
+  .env {
+    font-size: var(--step--1);
+    margin-top: 0.75rem;
+  }
+
+  .recipes-line {
+    margin-top: 1rem;
+  }
+
+  .limits .limit {
+    padding: 1rem;
+    border-left: 3px solid var(--failed);
+    background: var(--failed-tint);
+    margin-bottom: 1rem;
+  }
+
+  .limit h3 {
+    margin: 0.5rem 0 0.25rem;
+  }
+
+  .sheet {
+    padding: 1.25rem;
+    background: var(--paper-raised);
+    border: 1px solid var(--rule);
+    border-radius: 8px;
+    font-size: var(--step--1);
+  }
+
+  .sheet h2 {
+    font-size: var(--step-1);
+    margin-bottom: 0.75rem;
+  }
+
+  .sheet dl {
+    margin: 0;
+  }
+
+  .sheet dt {
+    color: var(--ink-soft);
+    margin-top: 0.6rem;
+  }
+
+  .sheet dd {
+    margin: 0;
+  }
+
+  .setup {
+    display: inline-block;
+    margin-top: 1.25rem;
+    font-weight: 700;
+  }
+</style>

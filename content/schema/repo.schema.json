@@ -1,0 +1,118 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Repo",
+  "type": "object",
+  "required": [
+    "slug", "repo_url", "name", "one_liner", "problem_solved", "analogy", "how_it_works",
+    "categories", "search_intents", "audience", "replaces", "examples", "connectors",
+    "when_not_to_use", "alternatives", "tech_sheet", "verified_at", "confidence_notes"
+  ],
+  "properties": {
+    "slug": { "type": "string", "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$" },
+    "repo_url": { "type": "string", "pattern": "^https://github\\.com/[^/]+/[^/]+/?$" },
+    "name": { "type": "string", "minLength": 1 },
+    "one_liner": { "type": "string", "minLength": 1 },
+    "problem_solved": { "type": "string", "minLength": 1 },
+    "analogy": { "type": "string", "minLength": 1 },
+    "how_it_works": { "type": "array", "minItems": 2, "items": { "type": "string" } },
+    "categories": { "type": "array", "minItems": 1, "maxItems": 3, "items": { "type": "string", "minLength": 1 } },
+    "search_intents": { "type": "array", "items": { "type": "string" } },
+    "audience": { "enum": ["începător", "intermediar", "avansat"] },
+    "replaces": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["service", "service_url", "price", "price_source_url", "price_checked_at", "replacement_level", "what_you_keep", "what_you_lose", "hidden_costs"],
+        "properties": {
+          "service": { "type": "string", "minLength": 1 },
+          "service_url": { "type": "string", "pattern": "^https?://" },
+          "price": { "type": ["string", "null"] },
+          "price_source_url": { "type": ["string", "null"] },
+          "price_checked_at": { "type": ["string", "null"], "pattern": "^\\d{4}-\\d{2}-\\d{2}$" },
+          "replacement_level": { "enum": ["complet", "parțial", "doar pentru cazuri simple"] },
+          "what_you_keep": { "type": "array", "items": { "type": "string" } },
+          "what_you_lose": { "type": "array", "minItems": 1, "items": { "type": "string" } },
+          "hidden_costs": { "type": "array", "items": { "type": "string" } },
+          "needs_recheck": { "type": "boolean" }
+        }
+      }
+    },
+    "examples": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["title", "scenario", "prerequisites", "commands", "real_output", "time_to_first_result_minutes", "status", "environment"],
+        "properties": {
+          "title": { "type": "string", "minLength": 1 },
+          "scenario": { "type": "string", "minLength": 1 },
+          "prerequisites": { "type": "array", "items": { "type": "string" } },
+          "commands": { "type": "array", "items": { "type": "string" } },
+          "code": { "type": ["string", "null"] },
+          "real_output": { "type": ["string", "null"] },
+          "evidence_file": { "type": ["string", "null"] },
+          "time_to_first_result_minutes": { "type": ["number", "null"], "minimum": 0 },
+          "status": { "enum": ["verificat", "esuat", "neverificat"] },
+          "failure_reason": { "type": ["string", "null"] },
+          "environment": {
+            "type": "object",
+            "properties": {
+              "os": { "type": "string" },
+              "runtime": { "type": "string" },
+              "versions": { "type": "object" }
+            }
+          }
+        }
+      }
+    },
+    "connectors": {
+      "type": "object",
+      "required": ["inputs", "outputs", "pairs_well_with", "gaps_noticed"],
+      "properties": {
+        "inputs": { "type": "array", "items": { "type": "string" } },
+        "outputs": { "type": "array", "items": { "type": "string" } },
+        "pairs_well_with": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["repo_url", "name", "why"],
+            "properties": {
+              "repo_url": { "type": "string" },
+              "name": { "type": "string" },
+              "why": { "type": "string" },
+              "in_catalog": { "type": "boolean" }
+            }
+          }
+        },
+        "gaps_noticed": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "when_not_to_use": { "type": "array", "minItems": 1, "items": { "type": "string" } },
+    "alternatives": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["name", "url", "difference"],
+        "properties": {
+          "name": { "type": "string" },
+          "url": { "type": "string" },
+          "difference": { "type": "string" }
+        }
+      }
+    },
+    "tech_sheet": {
+      "type": "object",
+      "required": ["license", "language", "tested_commit_sha", "last_commit_date", "stars", "requirements"],
+      "properties": {
+        "license": { "type": "string" },
+        "language": { "type": "string" },
+        "tested_commit_sha": { "type": "string" },
+        "last_commit_date": { "type": "string" },
+        "stars": { "type": ["number", "null"] },
+        "requirements": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "verified_at": { "type": "string", "pattern": "^\\d{4}-\\d{2}-\\d{2}$" },
+    "confidence_notes": { "type": "string" }
+  }
+}

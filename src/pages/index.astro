@@ -1,0 +1,272 @@
+---
+import Base from "../layouts/Base.astro";
+import { repos, categories, verifiedExamples, fastestMinutes, formatDate, daysSince } from "../lib/data.js";
+
+const usedCategories = categories.filter((c) => repos.some((r) => r.categories.includes(c)));
+const exampleCount = repos.reduce((n, r) => n + verifiedExamples(r).length, 0);
+const services = new Set(repos.flatMap((r) => r.replaces.map((s) => s.service)));
+const suggestions = [...new Set(repos.flatMap((r) => r.search_intents))].slice(0, 4);
+
+function searchText(r) {
+  return [r.name, r.one_liner, r.problem_solved, ...r.search_intents, ...r.categories, ...r.replaces.map((s) => s.service)].join(" ");
+}
+
+const plural = (n, one, many) => (n === 1 ? `${n} ${one}` : `${n} ${many}`);
+---
+
+<Base title="Atlas de repo-uri">
+  <section class="hero wrap">
+    <label for="q"><h1>Ce vrei să faci?</h1></label>
+    <div class="search">
+      <input
+        id="q"
+        type="search"
+        autocomplete="off"
+        placeholder="ex: să transcriu un podcast"
+        aria-describedby="summary"
+      />
+    </div>
+    {suggestions.length > 0 && (
+      <p class="suggestions">
+        <span class="soft">Încearcă:</span>
+        {suggestions.map((s) => <button type="button" class="suggestion" data-q={s}>{s}</button>)}
+      </p>
+    )}
+    {repos.length > 0 && (
+      <p id="summary" class="soft summary">
+        {plural(repos.length, "repo", "repo-uri")}, {plural(exampleCount, "exemplu rulat și reprodus", "exemple rulate și reproduse")}
+        {services.size > 0 && <>, alternative la {plural(services.size, "serviciu plătit", "servicii plătite")}</>}.
+      </p>
+    )}
+  </section>
+
+  <section class="wrap catalog" aria-label="Repo-uri">
+    {repos.length === 0 ? (
+      <div class="empty prose">
+        <h2>Atlasul e gol deocamdată</h2>
+        <p>
+          Primul repo apare aici după ce rulezi <code>/adauga-repo</code> cu un link GitHub în Claude Code și
+          aprobi Pull Request-ul.
+        </p>
+      </div>
+    ) : (
+      <>
+        {usedCategories.length > 1 && (
+          <div class="filters" role="group" aria-label="Filtrează după categorie">
+            <button type="button" class="chip" data-cat="" aria-pressed="true">Toate</button>
+            {usedCategories.map((c) => (
+              <button type="button" class="chip" data-cat={c} aria-pressed="false">{c}</button>
+            ))}
+          </div>
+        )}
+        <ul class="plain rows" id="rows">
+          {repos.map((r) => {
+            const fastest = fastestMinutes(r);
+            const old = daysSince(r.verified_at) > 90;
+            return (
+              <li class="row" data-search={searchText(r)} data-cats={r.categories.join("|")} data-intents={r.search_intents.join("|")}>
+                <div class="row-main">
+                  <h2 class="row-title"><a href={`/repo/${r.slug}/`}>{r.name}</a></h2>
+                  <p class="row-line">{r.one_liner}</p>
+                  <p class="row-match soft" hidden></p>
+                </div>
+                <div class="row-meta">
+                  <span class={`stamp ${old ? "stamp--old" : ""}`}>Verificat {formatDate(r.verified_at)}</span>
+                  {fastest !== null && <span class="soft">Primul rezultat în ~{fastest} min</span>}
+                  {r.replaces.length > 0 && (
+                    <span class="soft">În loc de {r.replaces.map((s) => s.service).join(", ")}</span>
+                  )}
+                </div>
+              </li>
+            );
+          })}
+        </ul>
+        <p class="no-results soft" id="no-results" hidden>
+          Nimic nu se potrivește încă. Încearcă alte cuvinte sau alege „Toate”.
+        </p>
+      </>
+    )}
+  </section>
+</Base>
+
+<script>
+  const input = document.querySelector("#q");
+  const rows = [...document.querySelectorAll(".row")];
+  const chips = [...document.querySelectorAll(".chip")];
+  const noResults = document.querySelector("#no-results");
+  let category = "";
+
+  const norm = (s) => s.toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "");
+  const STOP = new Set(["sa", "vreau", "un", "o", "de", "la", "si", "cu", "in", "pe", "din", "ce", "ma", "mi", "imi", "a", "al", "ale"]);
+
+  function apply() {
+    const words = norm(input.value).split(/\s+/).filter((w) => w.length > 1 && !STOP.has(w));
+    let shown = 0;
+    for (const row of rows) {
+      const text = norm(row.dataset.search);
+      const inCat = !category || row.dataset.cats.split("|").includes(category);
+      const matches = words.every((w) => text.includes(w));
+      const visible = inCat && matches;
+      row.hidden = !visible;
+      if (visible) shown++;
+      const hint = row.querySelector(".row-match");
+      const intent = words.length ? row.dataset.intents.split("|").find((i) => words.every((w) => norm(i).includes(w))) : null;
+      hint.hidden = !intent;
+      hint.textContent = intent ? `Potrivit pentru: „${intent}”` : "";
+    }
+    if (noResults) noResults.hidden = shown > 0;
+  }
+
+  input?.addEventListener("input", apply);
+  chips.forEach((chip) =>
+    chip.addEventListener("click", () => {
+      category = chip.dataset.cat;
+      chips.forEach((c) => c.setAttribute("aria-pressed", String(c === chip)));
+      apply();
+    })
+  );
+  document.querySelectorAll(".suggestion").forEach((b) =>
+    b.addEventListener("click", () => {
+      input.value = b.dataset.q;
+      input.focus();
+      apply();
+    })
+  );
+</script>
+
+<style>
+  .hero {
+    padding-top: clamp(3rem, 9vw, 6.5rem);
+    padding-bottom: 2.5rem;
+  }
+
+  .hero h1 {
+    font-size: var(--step-4);
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    margin-bottom: 1.25rem;
+  }
+
+  .search input {
+    width: 100%;
+    max-width: 44rem;
+    font: inherit;
+    font-size: var(--step-1);
+    padding: 0.85rem 1rem;
+    border: 2px solid var(--ink);
+    border-radius: 6px;
+    background: var(--paper-raised);
+    color: var(--ink);
+  }
+
+  .search input::placeholder {
+    color: var(--ink-soft);
+  }
+
+  .suggestions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0.5rem;
+    margin-top: 1rem;
+  }
+
+  .suggestion {
+    font: inherit;
+    font-size: var(--step--1);
+    background: none;
+    border: 0;
+    padding: 0;
+    color: var(--ink);
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+    cursor: pointer;
+  }
+
+  .summary {
+    margin-top: 1.5rem;
+  }
+
+  .filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .chip {
+    font: inherit;
+    font-size: var(--step--1);
+    padding: 0.3rem 0.8rem;
+    border: 1px solid var(--rule);
+    border-radius: 999px;
+    background: transparent;
+    color: var(--ink);
+    cursor: pointer;
+  }
+
+  .chip[aria-pressed="true"] {
+    background: var(--ink);
+    color: var(--paper);
+    border-color: var(--ink);
+  }
+
+  .rows {
+    border-top: 2px solid var(--ink);
+  }
+
+  .row {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.6rem;
+    padding: 1.25rem 0;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  @media (min-width: 52rem) {
+    .row {
+      grid-template-columns: minmax(0, 1fr) 17rem;
+      gap: 2rem;
+    }
+  }
+
+  .row-title {
+    font-size: var(--step-1);
+  }
+
+  .row-title a {
+    text-decoration: none;
+  }
+
+  .row-title a:hover {
+    text-decoration: underline;
+  }
+
+  .row-line {
+    margin-top: 0.25rem;
+    max-width: var(--measure);
+  }
+
+  .row-match {
+    margin-top: 0.35rem;
+    font-size: var(--step--1);
+  }
+
+  .row-meta {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.35rem;
+    font-size: var(--step--1);
+  }
+
+  .no-results,
+  .empty {
+    padding: 2rem 0;
+  }
+
+  .empty h2 {
+    font-size: var(--step-2);
+    margin-bottom: 0.75rem;
+  }
+</style>

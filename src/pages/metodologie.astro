@@ -1,0 +1,133 @@
+---
+import Base from "../layouts/Base.astro";
+---
+
+<Base title="Cum verificăm" description="Cum ajunge un repo în atlas și de ce poți avea încredere în exemple.">
+  <article class="wrap">
+    <header class="intro">
+      <h1>Cum verificăm</h1>
+      <p class="prose lede">
+        Pe internet găsești ușor exemple care nu mai funcționează. Aici, un exemplu apare doar după ce a fost
+        rulat de două ori, de doi agenți care nu se văd unul pe celălalt.
+      </p>
+    </header>
+
+    <ol class="plain steps">
+      <li>
+        <h2>Cercetare și rulare</h2>
+        <p class="prose">
+          Un agent citește codul și documentația repo-ului, alege una sau două situații reale în care l-ai folosi
+          și îl rulează efectiv într-un mediu izolat. Salvează output-ul complet al terminalului și scriptul exact de
+          instalare.
+        </p>
+      </li>
+      <li>
+        <h2>Reproducere independentă</h2>
+        <p class="prose">
+          Un al doilea agent pornește de la zero, în alt mediu, cu aceeași versiune a codului. Rulează comenzile
+          exact cum sunt scrise, fără să le repare. Dacă nu obține același rezultat, exemplul nu trece. Tot el
+          verifică prețurile serviciilor plătite, direct pe site-urile oficiale.
+        </p>
+      </li>
+      <li>
+        <h2>Validare automată</h2>
+        <p class="prose">
+          Înainte de publicare, un script verifică reguli care nu depind de nicio judecată: fiecare preț are o
+          sursă și o dată, fiecare comparație spune și ce pierzi, nu există chei sau date personale, iar log-urile
+          brute există.
+        </p>
+      </li>
+      <li>
+        <h2>Re-verificare periodică</h2>
+        <p class="prose">
+          Proiectele open-source se schimbă. Exemplele mai vechi de 90 de zile sunt rulate din nou. Ce nu mai
+          funcționează nu dispare: rămâne pe pagină la „Limitări cunoscute”, cu motivul.
+        </p>
+      </li>
+    </ol>
+
+    <section class="legend">
+      <h2>Ce înseamnă marcajele</h2>
+      <dl>
+        <dt><span class="stamp">Verificat 20 oct. 2026</span></dt>
+        <dd>Exemplele au fost rulate și reproduse la data afișată.</dd>
+        <dt><span class="stamp stamp--old">Verificat 3 iun. 2026</span></dt>
+        <dd>Verificarea are peste 90 de zile și urmează să fie reluată.</dd>
+        <dt><span class="stamp stamp--failed">Nu a funcționat</span></dt>
+        <dd>Exemplul a fost încercat, dar nu a mers. Motivul e scris lângă el.</dd>
+      </dl>
+    </section>
+  </article>
+</Base>
+
+<style>
+  .intro {
+    padding: 3rem 0 2rem;
+  }
+
+  h1 {
+    font-size: var(--step-3);
+  }
+
+  .lede {
+    margin-top: 0.75rem;
+    font-size: var(--step-1);
+  }
+
+  .steps {
+    counter-reset: step;
+    border-top: 2px solid var(--ink);
+  }
+
+  .steps li {
+    counter-increment: step;
+    display: grid;
+    grid-template-columns: 2.5rem minmax(0, 1fr);
+    column-gap: 1rem;
+    padding: 1.5rem 0;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .steps li::before {
+    content: counter(step);
+    grid-row: span 2;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: var(--step-2);
+    line-height: 1;
+    color: var(--ink-soft);
+  }
+
+  .steps h2 {
+    font-size: var(--step-1);
+    margin-bottom: 0.4rem;
+  }
+
+  .legend {
+    margin-top: 3rem;
+  }
+
+  .legend h2 {
+    font-size: var(--step-2);
+    margin-bottom: 1rem;
+  }
+
+  .legend dl {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0.5rem;
+    max-width: var(--measure);
+  }
+
+  @media (min-width: 40rem) {
+    .legend dl {
+      grid-template-columns: 14rem minmax(0, 1fr);
+      gap: 0.75rem 1.5rem;
+      align-items: center;
+    }
+  }
+
+  .legend dd {
+    margin: 0 0 0.75rem;
+  }
+</style>

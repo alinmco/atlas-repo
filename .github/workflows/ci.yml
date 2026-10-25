@@ -1,0 +1,22 @@
+# Rulează la fiecare Pull Request și la fiecare push pe main.
+# Dacă validarea sau build-ul pică, PR-ul nu poate fi aprobat (după ce activezi
+# regula de protecție pentru main, vezi GHID-START.md, pasul 7).
+name: Validare și build
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  validate:
+    name: validate-and-build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run build

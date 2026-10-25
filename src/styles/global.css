@@ -1,0 +1,197 @@
+:root {
+  --paper: #eef1ec;
+  --paper-raised: #f8faf6;
+  --ink: #1b2a2f;
+  --ink-soft: #4f6066;
+  --rule: #cdd5cf;
+  --verified: #1f7a4d;
+  --verified-tint: #dcebe1;
+  --failed: #b4442c;
+  --failed-tint: #f3e0da;
+  --marker: #f2d64b;
+  --terminal: #17232a;
+  --terminal-ink: #d7e4dc;
+  --focus: #2b62d9;
+
+  --font-display: "Familjen Grotesk", system-ui, sans-serif;
+  --font-body: "Atkinson Hyperlegible", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+
+  --step--1: 0.875rem;
+  --step-0: 1.0625rem;
+  --step-1: 1.3125rem;
+  --step-2: 1.75rem;
+  --step-3: 2.5rem;
+  --step-4: clamp(2.5rem, 6vw, 4.25rem);
+
+  --measure: 68ch;
+  --gutter: clamp(1rem, 4vw, 2.5rem);
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --paper: #121b1f;
+    --paper-raised: #182429;
+    --ink: #e4ebe6;
+    --ink-soft: #9fb0ad;
+    --rule: #2c3b40;
+    --verified: #5cc08c;
+    --verified-tint: #17352a;
+    --failed: #e08a73;
+    --failed-tint: #3a211b;
+    --marker: #d9bd2f;
+    --terminal: #0c1418;
+    --terminal-ink: #d7e4dc;
+    --focus: #7fa6ff;
+    color-scheme: dark;
+  }
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+[hidden] {
+  display: none !important;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: var(--step-0);
+  line-height: 1.6;
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-display);
+  line-height: 1.15;
+  font-weight: 650;
+  letter-spacing: -0.01em;
+  margin: 0;
+}
+
+p {
+  margin: 0;
+}
+
+a {
+  color: inherit;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.2em;
+}
+
+a:hover {
+  text-decoration-thickness: 2px;
+}
+
+:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+code,
+pre {
+  font-family: var(--font-mono);
+  font-size: 0.875rem;
+}
+
+.wrap {
+  max-width: 72rem;
+  margin: 0 auto;
+  padding: 0 var(--gutter);
+}
+
+.prose {
+  max-width: var(--measure);
+}
+
+.soft {
+  color: var(--ink-soft);
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+/* Ștampila de verificare: singurul loc unde verdele apare puternic. */
+.stamp {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4em;
+  padding: 0.15em 0.6em;
+  border: 2px solid var(--verified);
+  border-radius: 4px;
+  color: var(--verified);
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: var(--step--1);
+  white-space: nowrap;
+}
+
+.stamp--failed {
+  border-color: var(--failed);
+  color: var(--failed);
+}
+
+.stamp--old {
+  border-style: dashed;
+}
+
+.terminal {
+  background: var(--terminal);
+  color: var(--terminal-ink);
+  border: 1px solid var(--rule);
+  border-radius: 6px;
+  padding: 1rem 1.1rem;
+  overflow-x: auto;
+  line-height: 1.5;
+  margin: 0;
+}
+
+.terminal--commands::before {
+  content: "Comenzi";
+  display: block;
+  font-family: var(--font-body);
+  font-size: var(--step--1);
+  color: #8fa59d;
+  margin-bottom: 0.5rem;
+}
+
+mark {
+  background: var(--marker);
+  color: #1b2a2f;
+  border-radius: 2px;
+  padding: 0 0.1em;
+}
+
+ul.plain {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}

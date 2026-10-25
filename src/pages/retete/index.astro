@@ -1,0 +1,83 @@
+---
+import Base from "../../layouts/Base.astro";
+import { recipes, repoBySlug, formatDate } from "../../lib/data.js";
+---
+
+<Base title="Rețete" description="Combinații de repo-uri care rezolvă împreună o problemă mai mare, testate cap-coadă.">
+  <section class="wrap intro">
+    <h1>Rețete</h1>
+    <p class="prose lede">
+      Unele probleme nu le rezolvă un singur repo. O rețetă leagă două până la patru unelte, astfel încât
+      rezultatul uneia devine materia primă a următoarei. Fiecare rețetă de aici a fost rulată cap-coadă.
+    </p>
+  </section>
+
+  <section class="wrap">
+    {recipes.length === 0 ? (
+      <p class="prose soft">
+        Nicio rețetă încă. Rețetele apar după ce atlasul are cel puțin cinci repo-uri și rulezi
+        <code>/retete</code> în Claude Code.
+      </p>
+    ) : (
+      <ul class="plain rows">
+        {recipes.map((r) => (
+          <li class="row">
+            <h2><a href={`/retete/${r.slug}/`}>{r.title}</a></h2>
+            <p>{r.one_liner}</p>
+            <p class="soft meta">
+              {r.steps.map((s) => repoBySlug(s.repo_slug)?.name ?? s.repo_slug).join(", apoi ")}
+              {typeof r.total_time_minutes === "number" && <>. Durează ~{r.total_time_minutes} min</>}.
+              Verificată {formatDate(r.verified_at)}.
+            </p>
+          </li>
+        ))}
+      </ul>
+    )}
+  </section>
+</Base>
+
+<style>
+  .intro {
+    padding-top: 3rem;
+    padding-bottom: 2rem;
+  }
+
+  h1 {
+    font-size: var(--step-3);
+  }
+
+  .lede {
+    margin-top: 0.75rem;
+    font-size: var(--step-1);
+  }
+
+  .rows {
+    border-top: 2px solid var(--ink);
+  }
+
+  .row {
+    padding: 1.25rem 0;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .row h2 {
+    font-size: var(--step-1);
+  }
+
+  .row h2 a {
+    text-decoration: none;
+  }
+
+  .row h2 a:hover {
+    text-decoration: underline;
+  }
+
+  .row p {
+    max-width: var(--measure);
+    margin-top: 0.25rem;
+  }
+
+  .meta {
+    font-size: var(--step--1);
+  }
+</style>

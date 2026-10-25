@@ -1,0 +1,122 @@
+---
+import "../styles/global.css";
+
+interface Props {
+  title: string;
+  description?: string;
+}
+
+const { title, description = "Repo-uri GitHub explicate simplu, cu exemple rulate și verificate." } = Astro.props;
+const path = Astro.url.pathname;
+const nav = [
+  { href: "/", label: "Repo-uri" },
+  { href: "/retete/", label: "Rețete" },
+  { href: "/idei/", label: "Idei de construit" },
+  { href: "/metodologie/", label: "Cum verificăm" },
+];
+const isActive = (href) => (href === "/" ? path === "/" || path.startsWith("/repo/") : path.startsWith(href));
+---
+
+<!doctype html>
+<html lang="ro">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title === "Atlas de repo-uri" ? title : `${title} – Atlas de repo-uri`}</title>
+    <meta name="description" content={description} />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Familjen+Grotesk:wght@500;650;700&family=JetBrains+Mono:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <a class="skip visually-hidden" href="#main">Sari la conținut</a>
+    <header class="site-header">
+      <div class="wrap bar">
+        <a class="brand" href="/">Atlas de repo-uri</a>
+        <nav aria-label="Principal">
+          <ul class="plain nav">
+            {nav.map((item) => (
+              <li>
+                <a href={item.href} aria-current={isActive(item.href) ? "page" : undefined}>{item.label}</a>
+              </li>
+            ))}
+          </ul>
+        </nav>
+      </div>
+    </header>
+    <main id="main">
+      <slot />
+    </main>
+    <footer class="site-footer">
+      <div class="wrap">
+        <p class="soft">
+          Fiecare exemplu de aici a fost rulat de un agent și reprodus independent de un al doilea.{" "}
+          <a href="/metodologie/">Vezi cum verificăm.</a>
+        </p>
+      </div>
+    </footer>
+  </body>
+</html>
+
+<style>
+  .skip:focus {
+    position: static;
+    width: auto;
+    height: auto;
+    clip: auto;
+    display: block;
+    padding: 0.5rem var(--gutter);
+  }
+
+  .site-header {
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .bar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 0.5rem 2rem;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+  }
+
+  .brand {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: var(--step-1);
+    text-decoration: none;
+  }
+
+  .nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.25rem 1.25rem;
+  }
+
+  .nav a {
+    text-decoration: none;
+    color: var(--ink-soft);
+  }
+
+  .nav a:hover,
+  .nav a[aria-current="page"] {
+    color: var(--ink);
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+  }
+
+  main {
+    padding-bottom: 4rem;
+  }
+
+  .site-footer {
+    border-top: 1px solid var(--rule);
+    padding: 2rem 0 3rem;
+    font-size: var(--step--1);
+  }
+</style>

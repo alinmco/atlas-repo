@@ -1,0 +1,46 @@
+{
+  "permissions": {
+    "allow": [
+      "WebSearch",
+      "WebFetch",
+      "Bash(git *)",
+      "Bash(gh pr *)",
+      "Bash(gh repo view *)",
+      "Bash(node *)",
+      "Bash(npm *)",
+      "Bash(npx *)",
+      "Bash(pnpm *)",
+      "Bash(yarn *)",
+      "Bash(pip *)",
+      "Bash(pip3 *)",
+      "Bash(uv *)",
+      "Bash(pipx *)",
+      "Bash(python *)",
+      "Bash(python3 *)",
+      "Bash(cargo *)",
+      "Bash(go *)",
+      "Bash(apt-get *)",
+      "Bash(sudo apt-get *)",
+      "Bash(docker *)"
+    ],
+    "deny": [
+      "Bash(npm publish *)",
+      "Bash(git push --force *)",
+      "Bash(git push -f *)",
+      "Bash(git push origin main*)"
+    ]
+  },
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Write|Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"$CLAUDE_PROJECT_DIR/scripts/validate.mjs\" --hook"
+          }
+        ]
+      }
+    ]
+  }
+}

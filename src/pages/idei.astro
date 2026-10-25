@@ -1,0 +1,106 @@
+---
+import Base from "../layouts/Base.astro";
+import { ideas } from "../lib/data.js";
+
+// Adresa repo-ului site-ului pe GitHub, pentru butonul „Vreau să lucrez la asta”.
+// Pune-o în variabila de mediu PUBLIC_SITE_REPO din Vercel, de exemplu: utilizator/atlas-repo
+const siteRepo = import.meta.env.PUBLIC_SITE_REPO;
+const issueUrl = (idea) =>
+  siteRepo
+    ? `https://github.com/${siteRepo}/issues/new?title=${encodeURIComponent("Idee: " + idea.title)}&body=${encodeURIComponent("Vreau să lucrez la: " + idea.title + "\n\n" + idea.problem)}`
+    : null;
+---
+
+<Base title="Idei de construit" description="Unelte care lipsesc din ecosistemul open-source, descoperite când rețetele s-au rupt.">
+  <section class="wrap intro">
+    <h1>Idei de construit</h1>
+    <p class="prose lede">
+      Când două unelte ar trebui să lucreze împreună și nu pot, rămâne un gol. Ideile de mai jos sunt golurile
+      găsite în timp ce construiam rețete, după ce am verificat că nu există deja un proiect care le rezolvă.
+    </p>
+  </section>
+
+  <section class="wrap">
+    {ideas.length === 0 ? (
+      <p class="prose soft">Nicio idee încă. Ideile apar odată cu primele rețete.</p>
+    ) : (
+      <ul class="plain">
+        {ideas.map((idea) => (
+          <li class="idea">
+            <h2>{idea.title}</h2>
+            <p class="soft meta">Dificultate: {idea.difficulty}</p>
+            <p class="prose">{idea.problem}</p>
+            {idea.where_chain_breaks && <p class="prose soft">Unde se rupe lanțul: {idea.where_chain_breaks}</p>}
+            {idea.mvp && (
+              <>
+                <h3>Prima versiune, într-un weekend</h3>
+                <p class="prose">{idea.mvp}</p>
+              </>
+            )}
+            {idea.first_steps?.length > 0 && (
+              <ol class="prose">
+                {idea.first_steps.map((s) => <li>{s}</li>)}
+              </ol>
+            )}
+            {idea.recommended_stack?.length > 0 && (
+              <p class="soft meta">Tehnologii recomandate: {idea.recommended_stack.join(", ")}</p>
+            )}
+            {idea.risks?.length > 0 && <p class="soft meta">Riscuri: {idea.risks.join("; ")}</p>}
+            {issueUrl(idea) && (
+              <a class="claim" href={issueUrl(idea)} rel="noopener">Vreau să lucrez la asta</a>
+            )}
+          </li>
+        ))}
+      </ul>
+    )}
+  </section>
+</Base>
+
+<style>
+  .intro {
+    padding-top: 3rem;
+    padding-bottom: 2rem;
+  }
+
+  h1 {
+    font-size: var(--step-3);
+  }
+
+  .lede {
+    margin-top: 0.75rem;
+    font-size: var(--step-1);
+  }
+
+  .idea {
+    padding: 1.75rem 0;
+    border-top: 1px solid var(--rule);
+  }
+
+  .idea > * + * {
+    margin-top: 0.6rem;
+  }
+
+  .idea h2 {
+    font-size: var(--step-2);
+  }
+
+  .idea h3 {
+    font-size: var(--step-1);
+    margin-top: 1.25rem;
+  }
+
+  .meta {
+    font-size: var(--step--1);
+  }
+
+  .claim {
+    display: inline-block;
+    margin-top: 1rem;
+    padding: 0.55rem 1rem;
+    background: var(--ink);
+    color: var(--paper);
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: 700;
+  }
+</style>
