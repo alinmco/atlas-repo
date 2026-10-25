@@ -103,6 +103,12 @@
         "name": "Anthropic Skills",
         "why": "Același format SKILL.md; folositor ca model dacă îți scrii propriile skill-uri lângă cele Android. Ultimul commit: 2026-10-09.",
         "in_catalog": false
+      },
+      {
+        "repo_url": "https://github.com/K-Dense-AI/scientific-agent-skills",
+        "name": "Scientific Agent Skills (K-Dense)",
+        "why": "Același format (foldere cu SKILL.md) pentru alt domeniu; poți instala ambele seturi în același agent, dar nu se leagă între ele științific, e relevant doar ca exemplu de cum arată skill-urile oficiale ale unei echipe.",
+        "in_catalog": true
       }
     ],
     "gaps_noticed": [
