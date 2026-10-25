@@ -223,7 +223,37 @@
       "https://github.com/mattpocock/skills",
       "https://github.com/obra/superpowers-marketplace",
       "https://github.com/prime-radiant-inc/superpowers-evals",
-      "https://github.com/obra/superpowers-lab"
+      "https://github.com/obra/superpowers-lab",
+      "https://github.com/affaan-m/ECC"
+    ],
+    "used_in_recipes": []
+  },
+  {
+    "slug": "ecc",
+    "name": "ECC (Everything Claude Code)",
+    "one_liner": "Pachet uriaș de agenți, skill-uri și reguli care disciplinează asistentul tău AI de programare.",
+    "categories": [
+      "Agenți AI și automatizare",
+      "Skill-uri pentru agenți AI",
+      "Unelte pentru programatori"
+    ],
+    "inputs": [
+      "Cod și repository-ul tău deschis în Claude Code (sau Codex, Kimi Code etc.)",
+      "Prompturi și comenzi slash precum `/ecc:plan \"...\"`, `/code-review`, `/build-fix`",
+      "Fișiere de configurare ale agentului (CLAUDE.md, settings.json, config MCP, hook-uri), pentru scanarea AgentShield",
+      "Istoricul git al proiectului, pentru `/skill-create`"
+    ],
+    "outputs": [
+      "Planuri de implementare ca artefacte editabile",
+      "Fișiere SKILL.md și colecții de „instincte” generate din istoricul tău",
+      "Rezumate de sesiune și memorie în fișiere Markdown (`.ecc/memory/` în proiect, `~/.ecc/memory/` pentru utilizator)",
+      "Raport AgentShield: terminal cu note A-F, JSON, Markdown sau HTML, cu cod de ieșire 2 la probleme critice (pentru CI)"
+    ],
+    "updated_at": "2026-10-25",
+    "pairs_well_with": [
+      "https://github.com/affaan-m/agentshield",
+      "https://github.com/github/spec-kit",
+      "https://github.com/obra/superpowers"
     ],
     "used_in_recipes": []
   }

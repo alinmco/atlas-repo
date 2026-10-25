@@ -183,5 +183,25 @@
     "gap": "README-ul descrie o telemetrie opțională la funcția „visual companion” (versiunea Superpowers trimisă prin încărcarea siglei); dezactivarea cere o variabilă de mediu setată manual.",
     "source_slug": "superpowers",
     "added_at": "2026-10-25"
+  },
+  {
+    "gap": "README-ul avertizează să nu suprapui metode de instalare (plugin + instalare manuală completă); utilizatorul trebuie să țină evidența manual",
+    "source_slug": "ecc",
+    "added_at": "2026-10-25"
+  },
+  {
+    "gap": "Plugin-urile Claude Code nu pot distribui „rules”: regulile se copiază manual în `~/.claude/rules/ecc/`",
+    "source_slug": "ecc",
+    "added_at": "2026-10-25"
+  },
+  {
+    "gap": "AgentShield nu vine cu un pin auditat: README-ul cere să verifici manual versiunea și integritatea pachetului înainte de utilizare",
+    "source_slug": "ecc",
+    "added_at": "2026-10-25"
+  },
+  {
+    "gap": "Suprafața e foarte mare (71 agenți, 311 skill-uri); alegerea componentelor potrivite rămâne un pas manual de curățare",
+    "source_slug": "ecc",
+    "added_at": "2026-10-25"
   }
 ]

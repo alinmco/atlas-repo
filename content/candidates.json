@@ -180,5 +180,19 @@
     "suggested_by": "superpowers",
     "why": "Repo al aceluiași autor, cu aceeași licență MIT, cu skill-uri experimentale; nu l-am citit în detaliu, deci rolul exact trebuie verificat în README-ul lui.",
     "added_at": "2026-10-25"
+  },
+  {
+    "repo_url": "https://github.com/affaan-m/agentshield",
+    "name": "AgentShield",
+    "suggested_by": "ecc",
+    "why": "Scanează configurația agentului (CLAUDE.md, hook-uri, MCP) după ce ai instalat ECC; ieșirea (raport JSON/Markdown) devine lista de lucruri de reparat sau poarta de control din CI.",
+    "added_at": "2026-10-25"
+  },
+  {
+    "repo_url": "https://github.com/github/spec-kit",
+    "name": "Spec Kit",
+    "suggested_by": "ecc",
+    "why": "Spec Kit scrie specificația funcției, iar planul și fluxul cu teste întâi din ECC o implementează; specificația în Markdown devine intrarea pentru `/ecc:plan`.",
+    "added_at": "2026-10-25"
   }
 ]

@@ -94,6 +94,12 @@
         "name": "superpowers-lab",
         "why": "Repo al aceluiași autor, cu aceeași licență MIT, cu skill-uri experimentale; nu l-am citit în detaliu, deci rolul exact trebuie verificat în README-ul lui.",
         "in_catalog": false
+      },
+      {
+        "repo_url": "https://github.com/affaan-m/ECC",
+        "name": "ECC (Everything Claude Code)",
+        "why": "Similar ca scop (skill-uri de proces pentru agenți); util ca termen de comparație sau pentru a prelua idei de flux, dar nu instala ambele fără să verifici suprapunerile de skill-uri și comenzi.",
+        "in_catalog": true
       }
     ],
     "gaps_noticed": [
