@@ -30,5 +30,32 @@
       "https://github.com/modelcontextprotocol/servers"
     ],
     "used_in_recipes": []
+  },
+  {
+    "slug": "android-skills",
+    "name": "Android skills (android/skills)",
+    "one_liner": "Instrucțiuni oficiale Google care învață asistenții AI să programeze corect aplicații Android.",
+    "categories": [
+      "Dezvoltare aplicații Android",
+      "Agenți AI pentru programare"
+    ],
+    "inputs": [
+      "Un proiect Android (cod Kotlin/Java, fișiere Gradle: build.gradle, build.gradle.kts, gradle.properties, libs.versions.toml, AndroidManifest.xml, layout-uri XML)",
+      "O cerere în limbaj natural dată agentului AI (ex: 'Make my app UI edge-to-edge.')"
+    ],
+    "outputs": [
+      "Modificări în codul proiectului Android făcute de agent (Kotlin/Compose, manifest, fișiere Gradle)",
+      "Rapoarte generate de unele skill-uri, de ex. r8-analyzer scrie tmp/keepradius/analysis_result.txt (din SKILL.md)",
+      "Skill-urile în sine: foldere cu SKILL.md în format Markdown cu antet YAML, plus scripts/ și references/"
+    ],
+    "updated_at": "2026-10-25",
+    "pairs_well_with": [
+      "https://github.com/android/nowinandroid",
+      "https://github.com/android/compose-samples",
+      "https://github.com/anthropics/claude-code",
+      "https://github.com/google-gemini/gemini-cli",
+      "https://github.com/anthropics/skills"
+    ],
+    "used_in_recipes": []
   }
 ]
