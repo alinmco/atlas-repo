@@ -13,15 +13,14 @@
     "categories",
     "search_intents",
     "audience",
+    "setup_difficulty",
     "replaces",
     "examples",
     "connectors",
     "when_not_to_use",
     "alternatives",
     "tech_sheet",
-    "verified_at",
-    "confidence_notes",
-    "verification_level"
+    "updated_at"
   ],
   "properties": {
     "slug": {
@@ -77,6 +76,13 @@
         "avansat"
       ]
     },
+    "setup_difficulty": {
+      "enum": [
+        "ușor",
+        "mediu",
+        "greu"
+      ]
+    },
     "replaces": {
       "type": "array",
       "items": {
@@ -122,7 +128,7 @@
           },
           "replacement_level": {
             "enum": [
-              "complet",
+              "aproape complet",
               "parțial",
               "doar pentru cazuri simple"
             ]
@@ -145,9 +151,6 @@
             "items": {
               "type": "string"
             }
-          },
-          "needs_recheck": {
-            "type": "boolean"
           }
         }
       }
@@ -162,10 +165,7 @@
           "scenario",
           "prerequisites",
           "commands",
-          "real_output",
-          "time_to_first_result_minutes",
-          "status",
-          "environment"
+          "source_url"
         ],
         "properties": {
           "title": {
@@ -194,58 +194,15 @@
               "null"
             ]
           },
-          "real_output": {
+          "output_from_docs": {
             "type": [
               "string",
               "null"
             ]
-          },
-          "evidence_file": {
-            "type": [
-              "string",
-              "null"
-            ]
-          },
-          "time_to_first_result_minutes": {
-            "type": [
-              "number",
-              "null"
-            ],
-            "minimum": 0
-          },
-          "status": {
-            "enum": [
-              "verificat",
-              "esuat",
-              "neverificat",
-              "din documentație"
-            ]
-          },
-          "failure_reason": {
-            "type": [
-              "string",
-              "null"
-            ]
-          },
-          "environment": {
-            "type": "object",
-            "properties": {
-              "os": {
-                "type": "string"
-              },
-              "runtime": {
-                "type": "string"
-              },
-              "versions": {
-                "type": "object"
-              }
-            }
           },
           "source_url": {
-            "type": [
-              "string",
-              "null"
-            ]
+            "type": "string",
+            "pattern": "^https?://"
           }
         }
       }
@@ -338,7 +295,6 @@
       "required": [
         "license",
         "language",
-        "tested_commit_sha",
         "last_commit_date",
         "stars",
         "requirements"
@@ -350,8 +306,11 @@
         "language": {
           "type": "string"
         },
-        "tested_commit_sha": {
-          "type": "string"
+        "commit_sha": {
+          "type": [
+            "string",
+            "null"
+          ]
         },
         "last_commit_date": {
           "type": "string"
@@ -514,17 +473,14 @@
         }
       }
     },
-    "verified_at": {
+    "updated_at": {
       "type": "string",
       "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
     },
-    "confidence_notes": {
-      "type": "string"
-    },
-    "verification_level": {
-      "enum": [
-        "rulat",
-        "documentație"
+    "notes": {
+      "type": [
+        "string",
+        "null"
       ]
     }
   }

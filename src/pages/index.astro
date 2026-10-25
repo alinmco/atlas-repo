@@ -1,9 +1,8 @@
 ---
 import Base from "../layouts/Base.astro";
-import { repos, categories, verifiedExamples, fastestMinutes, formatDate, daysSince, isDocMode } from "../lib/data.js";
+import { repos, categories, formatDate } from "../lib/data.js";
 
 const usedCategories = categories.filter((c) => repos.some((r) => r.categories.includes(c)));
-const exampleCount = repos.reduce((n, r) => n + verifiedExamples(r).length, 0);
 const services = new Set(repos.flatMap((r) => r.replaces.map((s) => s.service)));
 const suggestions = [...new Set(repos.flatMap((r) => r.search_intents))].slice(0, 4);
 
@@ -34,7 +33,7 @@ const plural = (n, one, many) => (n === 1 ? `${n} ${one}` : `${n} ${many}`);
     )}
     {repos.length > 0 && (
       <p id="summary" class="soft summary">
-        {plural(repos.length, "repo", "repo-uri")}, {plural(exampleCount, "exemplu rulat și reprodus", "exemple rulate și reproduse")}
+        {plural(repos.length, "repo explicat", "repo-uri explicate")}
         {services.size > 0 && <>, alternative la {plural(services.size, "serviciu plătit", "servicii plătite")}</>}.
       </p>
     )}
@@ -61,8 +60,6 @@ const plural = (n, one, many) => (n === 1 ? `${n} ${one}` : `${n} ${many}`);
         )}
         <ul class="plain rows" id="rows">
           {repos.map((r) => {
-            const fastest = fastestMinutes(r);
-            const old = daysSince(r.verified_at) > 90;
             return (
               <li class="row" data-search={searchText(r)} data-cats={r.categories.join("|")} data-intents={r.search_intents.join("|")}>
                 <div class="row-main">
@@ -71,15 +68,11 @@ const plural = (n, one, many) => (n === 1 ? `${n} ${one}` : `${n} ${many}`);
                   <p class="row-match soft" hidden></p>
                 </div>
                 <div class="row-meta">
-                  {isDocMode(r) ? (
-                    <span class="stamp stamp--doc">Din documentație, {formatDate(r.verified_at)}</span>
-                  ) : (
-                    <span class={`stamp ${old ? "stamp--old" : ""}`}>Verificat {formatDate(r.verified_at)}</span>
-                  )}
-                  {fastest !== null && <span class="soft">Primul rezultat în ~{fastest} min</span>}
+                  <span class="soft">Pornire: {r.setup_difficulty}</span>
                   {r.replaces.length > 0 && (
                     <span class="soft">În loc de {r.replaces.map((s) => s.service).join(", ")}</span>
                   )}
+                  <span class="soft">Actualizat {formatDate(r.updated_at)}</span>
                 </div>
               </li>
             );

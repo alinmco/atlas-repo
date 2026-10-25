@@ -9,20 +9,7 @@
       "Bash(gh repo view *)",
       "Bash(node *)",
       "Bash(npm *)",
-      "Bash(npx *)",
-      "Bash(pnpm *)",
-      "Bash(yarn *)",
-      "Bash(pip *)",
-      "Bash(pip3 *)",
-      "Bash(uv *)",
-      "Bash(pipx *)",
-      "Bash(python *)",
-      "Bash(python3 *)",
-      "Bash(cargo *)",
-      "Bash(go *)",
-      "Bash(apt-get *)",
-      "Bash(sudo apt-get *)",
-      "Bash(docker *)"
+      "Bash(npx *)"
     ],
     "deny": [
       "Bash(npm publish *)",
@@ -38,7 +25,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "node \"$CLAUDE_PROJECT_DIR/scripts/validate.mjs\" --hook"
+            "command": "node scripts/validate.mjs --hook"
           }
         ]
       }

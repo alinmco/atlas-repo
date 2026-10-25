@@ -1,46 +1,41 @@
 ---
 name: adauga-repo
-description: Adaugă pe site unul sau mai multe repo-uri GitHub, cap-coadă - cercetare, verificare independentă, publicare și Pull Request.
+description: Adaugă pe site unul sau mai multe repo-uri GitHub - cercetare din documentație, publicare în content/ și Pull Request.
 disable-model-invocation: true
 ---
 
 Repo-uri primite: $ARGUMENTS
 
-## Pasul 0: planul, pe scurt
-Înainte de orice altceva, prezintă planul în formatul din CLAUDE.md („Cum comunici cu
-utilizatorul”) și așteaptă confirmarea. Pentru această comandă, planul spune:
-- ce repo-uri vei analiza (numele lor, nu linkurile întregi) și dacă vreunul e deja în atlas;
-- ce înseamnă pentru site: câte pagini noi;
-- durata estimată (~15-60 min per repo) și că consumul e mare.
-Dacă variabila de mediu `GITHUB_ACTIONS` are valoarea `true`, sari peste confirmare.
-
 Dacă nu ai primit niciun URL GitHub, cere-mi linkurile și oprește-te.
 
-## Pregătire
+## Pasul 1: planul
+1. Verifică dacă vreun repo există deja în `content/index.json`. Dacă da, e o actualizare.
+2. Prezintă planul în formatul din CLAUDE.md („Cum comunici cu utilizatorul”):
+   - ce repo-uri vei analiza (numele lor) și care sunt actualizări;
+   - câte pagini noi apar pe site;
+   - durata estimată: ~5-15 min per repo, consum mediu.
+3. Așteaptă confirmarea.
+
+## Pasul 2: cercetare și publicare
 1. Asigură-te că ești pe `main`, actualizat (`git checkout main && git pull`), și că
    dependențele site-ului sunt instalate (`npm ci` dacă lipsește `node_modules`).
+   Dacă există modificări necomise, spune-mi înainte și întreabă dacă le includ în PR.
 2. Creează un branch nou: `continut/repo-<YYYY-MM-DD>-<slug-scurt>`.
-3. Pentru fiecare URL, verifică dacă repo-ul există deja în `content/index.json`. Dacă da,
-   spune-mi și tratează-l ca re-verificare (dă-i lui researcher și fișierul existent).
+3. Pentru fiecare repo (maximum 3 în paralel), lansează subagentul **researcher** cu URL-ul
+   (și cu fișierul existent, dacă e o actualizare).
+4. Când un researcher termină, lansează **editor** pentru draftul lui. Editorii rulează unul
+   câte unul (nu în paralel), pentru că modifică aceleași fișiere de catalog.
+5. Dacă un repo durează mult peste estimare sau researcher se blochează, te oprești pentru
+   acel repo și mă întrebi scurt ce faci (continui / renunți).
 
-## Pentru fiecare repo (maximum 3 în paralel)
-1. Lansează subagentul **researcher** cu URL-ul.
-2. Când termină, lansează subagentul **verifier** pe `drafts/<slug>.json`.
-3. Dacă verdictul e `"respins"`, trimite lista `"problems"` înapoi la researcher, apoi rulează
-   din nou verifier. Maximum 2 runde de corectură. Dacă tot e respins, renunță la acel repo
-   și reține motivul pentru raport.
-4. Dacă verdictul e `"aprobat"`, lansează subagentul **editor** pentru acel draft.
-   Editorii rulează unul câte unul (nu în paralel), pentru că modifică aceleași fișiere de catalog.
-
-## Publicare
+## Pasul 3: Pull Request
 1. Rulează `npm run validate` și `npm run build`. Dacă pică, cere editorului să repare.
 2. Commit cu mesajul `Adaugă: <nume repo-uri>` și push pe branch.
-3. Deschide un Pull Request cu `gh pr create`. Titlu: `Adaugă: <nume repo-uri>`.
-   Descrierea conține raportul editorului (cele 3 părți) și, pentru fiecare repo respins,
-   motivul.
+3. Deschide un Pull Request cu `gh pr create --base main`. Titlu: `Adaugă: <nume repo-uri>`.
+   Descrierea conține raportul editorului.
 
-## Raportul final către mine (scurt, în stilul din CLAUDE.md)
-- ✅ Publicate: lista repo-urilor
-- ❌ Respinse: repo + motivul într-o propoziție
+## Raportul final (scurt, în stilul din CLAUDE.md)
+- ✅ Publicate: repo + dificultatea de pornire
+- ❌ Probleme: repo + motivul într-o propoziție
 - ❓ Ce trebuie să decid eu
 - 🔗 Linkul PR-ului. Preview-ul Vercel apare automat în PR în 1-2 minute.

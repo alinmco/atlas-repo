@@ -16,8 +16,8 @@ const { recipe } = Astro.props;
       <h1>{recipe.title}</h1>
       <p class="lede">{recipe.one_liner}</p>
       <p class="head-meta">
-        <span class="stamp">Rulată cap-coadă {formatDate(recipe.verified_at)}</span>
-        {typeof recipe.total_time_minutes === "number" && <span class="soft">Durează ~{recipe.total_time_minutes} min</span>}
+        <span class="stamp stamp--doc">Rețetă propusă, netestată</span>
+        <span class="soft">Propusă {formatDate(recipe.created_at)}</span>
         <span class="soft">Pentru {recipe.audience}</span>
       </p>
     </header>
@@ -29,6 +29,10 @@ const { recipe } = Astro.props;
 
     <section>
       <h2>Pașii</h2>
+      <p class="prose soft note">
+        Fiecare pas folosește comenzi din documentația oficială a proiectului respectiv. Nu am rulat fluxul cap-coadă,
+        așa că e posibil să fie nevoie de mici ajustări.
+      </p>
       <ol class="plain steps">
         {recipe.steps.map((step, i) => {
           const repo = repoBySlug(step.repo_slug);
@@ -43,7 +47,11 @@ const { recipe } = Astro.props;
                   <pre class="terminal terminal--commands"><code>{step.commands.join("\n")}</code></pre>
                 )}
                 {step.code && <pre class="terminal"><code>{step.code}</code></pre>}
-                <pre class="terminal"><code>{step.real_output}</code></pre>
+                {step.source_url && (
+                  <p class="soft io">
+                    Sursa: <a href={step.source_url} rel="noopener">documentația oficială</a>
+                  </p>
+                )}
               </div>
             </li>
           );
@@ -52,21 +60,18 @@ const { recipe } = Astro.props;
     </section>
 
     <section>
-      <h2>Rezultatul final</h2>
-      <figure class="specimen">
-        <figcaption><span class="stamp">Rezultat real, reprodus independent</span></figcaption>
-        <pre class="terminal"><code>{recipe.final_result}</code></pre>
-      </figure>
+      <h2>Ce ar trebui să obții</h2>
+      <p class="prose">{recipe.expected_result}</p>
     </section>
 
     {recipe.replaces.length > 0 && (
       <section>
-        <h2>Ce înlocuiește întregul flux</h2>
+        <h2>Ce ar putea înlocui întregul flux</h2>
         <ul class="prose">
           {recipe.replaces.map((s) => (
             <li>
               <a href={s.service_url} rel="noopener">{s.service}</a>
-              {s.price && <> ({s.price}{s.price_source_url && <>, <a href={s.price_source_url} rel="noopener">verificat {formatDate(s.price_checked_at)}</a></>})</>}.
+              {s.price && <> ({s.price}{s.price_source_url && <>, <a href={s.price_source_url} rel="noopener">consultat {formatDate(s.price_checked_at)}</a></>})</>}.
               Ce pierzi: {s.what_you_lose.join(", ")}.
             </li>
           ))}
@@ -74,10 +79,10 @@ const { recipe } = Astro.props;
       </section>
     )}
 
-    {recipe.confidence_notes && (
+    {recipe.notes && (
       <section>
-        <h2>Note de verificare</h2>
-        <p class="prose soft">{recipe.confidence_notes}</p>
+        <h2>Note</h2>
+        <p class="prose soft">{recipe.notes}</p>
       </section>
     )}
   </article>
@@ -124,6 +129,11 @@ const { recipe } = Astro.props;
     margin-bottom: 1rem;
   }
 
+  .note {
+    font-size: var(--step--1);
+    margin-bottom: 1.5rem;
+  }
+
   .step {
     display: grid;
     grid-template-columns: 2.5rem minmax(0, 1fr);
@@ -149,21 +159,5 @@ const { recipe } = Astro.props;
 
   .io {
     font-size: var(--step--1);
-  }
-
-  .specimen {
-    margin: 0;
-    padding: 1rem;
-    border: 2px solid var(--verified);
-    border-radius: 8px;
-    background: var(--verified-tint);
-  }
-
-  .specimen figcaption {
-    margin-bottom: 0.75rem;
-  }
-
-  .specimen .stamp {
-    background: var(--paper-raised);
   }
 </style>

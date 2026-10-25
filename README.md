@@ -1,40 +1,41 @@
 # Atlas de repo-uri
 
-Un site care explică repo-uri GitHub pe înțelesul oricui, cu exemple rulate de un agent AI și
-reproduse independent de un al doilea. Construit cu Astro, publicat pe Vercel, întreținut de
-subagenți Claude Code.
+Un site care explică repo-uri GitHub pe înțelesul oricui, pe baza documentației lor oficiale:
+ce fac, ce servicii plătite pot înlocui, cum se combină și ce idei de afaceri permit.
+Construit cu Astro, publicat pe Vercel, întreținut cu subagenți Claude Code.
 
-**Începi de aici:** [GHID-START.md](GHID-START.md)
+**Începi de aici:** [GHID-START.md](GHID-START.md). Pentru prima sesiune: [PROMPT-START.md](PROMPT-START.md).
 
 ## Cum funcționează
 
 ```
 /adauga-repo <link>
       │
-researcher ──► verifier ──► editor ──► Pull Request ──► preview Vercel ──► Merge ──► live
- (rulează)    (re-rulează   (scrie în
-               de la zero)   content/)
+researcher ──► editor ──► Pull Request ──► preview Vercel ──► Merge ──► live
+(citește doc.)  (scrie în content/)
 ```
+
+Repo-urile nu sunt rulate sau testate. Exemplele vin din documentația oficială, cu link,
+iar rețetele sunt propuneri netestate.
 
 ## Ce e în proiect
 
 | Cale | Rol |
 |---|---|
 | `CLAUDE.md` | Regulile proiectului, citite de Claude la fiecare pornire |
-| `.claude/agents/` | Subagenții: `researcher`, `verifier`, `editor`, `recipe-architect` |
-| `.claude/skills/` | Comenzile: `/adauga-repo`, `/retete`, `/sanatate` |
-| `.claude/settings.json` | Permisiuni (instalări automate) și hook-ul de validare |
-| `.devcontainer/` | Mediul izolat în care rulează totul |
+| `.claude/agents/` | Subagenții: `researcher`, `editor`, `recipe-architect`, `site-dev` |
+| `.claude/skills/` | Comenzile: `/adauga-repo`, `/retete` |
+| `.claude/settings.json` | Model, permisiuni și verificarea automată a formatului |
 | `content/` | Tot conținutul site-ului, ca JSON. Doar `editor` scrie aici |
 | `content/schema/` | Formatul obligatoriu pentru repo-uri și rețete |
-| `scripts/validate.mjs` | Validarea automată a conținutului |
+| `scripts/validate.mjs` | Verifică formatul conținutului, ca build-ul să nu pice |
 | `src/` | Site-ul Astro |
-| `.github/workflows/` | Verificarea PR-urilor și re-verificarea de luni |
+| `.github/workflows/ci.yml` | Verificarea fiecărui Pull Request |
 
 ## Comenzi utile
 
 ```bash
 npm run dev        # site-ul local, la http://localhost:4321
-npm run validate   # verifică tot conținutul
-npm run build      # validare + build, exact ca pe Vercel
+npm run validate   # verifică formatul conținutului
+npm run build      # verificare + build, exact ca pe Vercel
 ```
