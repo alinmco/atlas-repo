@@ -141,7 +141,32 @@
       "https://github.com/sindresorhus/awesome-lint",
       "https://github.com/trackawesomelist/trackawesomelist",
       "https://github.com/awesome-selfhosted/awesome-selfhosted",
-      "https://github.com/hesreallyhim/awesome-claude-code"
+      "https://github.com/hesreallyhim/awesome-claude-code",
+      "https://github.com/codecrafters-io/build-your-own-x"
+    ],
+    "used_in_recipes": []
+  },
+  {
+    "slug": "build-your-own-x",
+    "name": "build-your-own-x",
+    "one_liner": "Listă de tutoriale care te învață să reconstruiești tehnologii celebre de la zero.",
+    "categories": [
+      "Învățare programare",
+      "Liste curatoriate"
+    ],
+    "inputs": [
+      "Fișier Markdown (README.md) cu un cuprins de teme și, sub fiecare temă, rânduri de forma „* [**Limbaj**: _Titlu_](URL)”",
+      "Propuneri de la contribuitori: Pull Request sau issue completat după ISSUE_TEMPLATE.md (limbaj principal, titlul tutorialului, URL, categorie)"
+    ],
+    "outputs": [
+      "Linkuri către tutoriale externe (articole web, repository-uri GitHub, videoclipuri marcate [video])",
+      "Nu produce fișiere, cod sau date; ieșirea este lista citită de om"
+    ],
+    "updated_at": "2026-10-25",
+    "pairs_well_with": [
+      "https://github.com/practical-tutorials/project-based-learning",
+      "https://github.com/rasbt/LLMs-from-scratch",
+      "https://github.com/sindresorhus/awesome"
     ],
     "used_in_recipes": []
   }

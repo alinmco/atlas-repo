@@ -108,5 +108,25 @@
     "gap": "Documentația nu explică cum se decide lipsa de activitate a unei liste după acceptare; nu am găsit o regulă publică despre scoaterea listelor învechite.",
     "source_slug": "awesome",
     "added_at": "2026-10-25"
+  },
+  {
+    "gap": "Lista nu are filtre sau căutare; singurul mod de a căuta este cuprinsul din README.md și căutarea în pagină a browserului",
+    "source_slug": "build-your-own-x",
+    "added_at": "2026-10-25"
+  },
+  {
+    "gap": "Nu există indicator de nivel (începător/avansat), durată sau data ultimei actualizări a unui tutorial",
+    "source_slug": "build-your-own-x",
+    "added_at": "2026-10-25"
+  },
+  {
+    "gap": "Linkurile nu sunt verificate automat în repo; unele pot muri sau pot duce la conținut învechit",
+    "source_slug": "build-your-own-x",
+    "added_at": "2026-10-25"
+  },
+  {
+    "gap": "Nu există feedback automat pentru codul scris de cititor",
+    "source_slug": "build-your-own-x",
+    "added_at": "2026-10-25"
   }
 ]
