@@ -96,6 +96,12 @@
         "name": "dictionary-of-ai-coding",
         "why": "Paginile de documentație ale skill-urilor trimit la acest dicționar pentru termeni ca „context window”, „subagent” sau „harness”; e util ca vocabular când citești documentația.",
         "in_catalog": false
+      },
+      {
+        "repo_url": "https://github.com/obra/superpowers",
+        "name": "Superpowers",
+        "why": "Același format SKILL.md, instalabil în același agent: Superpowers dă un flux complet (design, plan, execuție), iar skill-urile lui Pocock adaugă piese mici ca interviul /grill-me sau /handoff; nu am testat compatibilitatea.",
+        "in_catalog": true
       }
     ],
     "gaps_noticed": [

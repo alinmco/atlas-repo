@@ -159,5 +159,26 @@
     "suggested_by": "mattpocock-skills",
     "why": "Paginile de documentație ale skill-urilor trimit la acest dicționar pentru termeni ca „context window”, „subagent” sau „harness”; e util ca vocabular când citești documentația.",
     "added_at": "2026-10-25"
+  },
+  {
+    "repo_url": "https://github.com/obra/superpowers-marketplace",
+    "name": "superpowers-marketplace",
+    "suggested_by": "superpowers",
+    "why": "README-ul îl indică drept magazin alternativ de instalare pentru Claude Code și Copilot CLI: comanda `/plugin marketplace add obra/superpowers-marketplace` înregistrează magazinul, iar apoi instalezi pluginul din el.",
+    "added_at": "2026-10-25"
+  },
+  {
+    "repo_url": "https://github.com/prime-radiant-inc/superpowers-evals",
+    "name": "superpowers-evals",
+    "suggested_by": "superpowers",
+    "why": "README-ul spune că testele de comportament ale skill-urilor rulează cu harness-ul „drill” din acest repo, clonat în evals/; e util dacă vrei să verifici modificările făcute în skill-uri.",
+    "added_at": "2026-10-25"
+  },
+  {
+    "repo_url": "https://github.com/obra/superpowers-lab",
+    "name": "superpowers-lab",
+    "suggested_by": "superpowers",
+    "why": "Repo al aceluiași autor, cu aceeași licență MIT, cu skill-uri experimentale; nu l-am citit în detaliu, deci rolul exact trebuie verificat în README-ul lui.",
+    "added_at": "2026-10-25"
   }
 ]
