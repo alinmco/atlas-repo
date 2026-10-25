@@ -12,8 +12,8 @@
     "pas 4 (opțional): dacă ai un tutorial bun de adăugat, trimiți un Pull Request sau un issue; ISSUE_TEMPLATE.md cere limbajul, titlul, URL-ul și categoria"
   ],
   "categories": [
-    "Învățare programare",
-    "Liste curatoriate"
+    "Învățare și ghiduri",
+    "Colecții curatoriate"
   ],
   "search_intents": [
     "vreau să învăț cum funcționează Git pe dinăuntru",

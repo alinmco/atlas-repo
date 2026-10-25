@@ -11,8 +11,8 @@
     "Pas 3, ieșire: REA returnează constatări cu dovezile și limitările lor (module, importuri, pseudocod, asamblare, referințe), în JSON. Asistentul le folosește ca să-ți explice comportamentul, iar documentația spune că poate și să scrie și să testeze o implementare proprie, dar numai dacă ai dreptul să te bazezi pe țintă."
   ],
   "categories": [
-    "Inginerie inversă software",
-    "Analiză de securitate"
+    "Agenți AI și securitate",
+    "Unelte pentru programatori"
   ],
   "search_intents": [
     "vreau să înțeleg cum funcționează o aplicație fără codul sursă",

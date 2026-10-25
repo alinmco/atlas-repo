@@ -49,7 +49,7 @@ const { recipe } = Astro.props;
                 {step.code && <pre class="terminal"><code>{step.code}</code></pre>}
                 {step.source_url && (
                   <p class="soft io">
-                    Sursa: <a href={step.source_url} rel="noopener">documentația oficială</a>
+                    Sursa: <a href={step.source_url} target="_blank" rel="noopener noreferrer">documentația oficială</a>
                   </p>
                 )}
               </div>
@@ -70,8 +70,8 @@ const { recipe } = Astro.props;
         <ul class="prose">
           {recipe.replaces.map((s) => (
             <li>
-              <a href={s.service_url} rel="noopener">{s.service}</a>
-              {s.price && <> ({s.price}{s.price_source_url && <>, <a href={s.price_source_url} rel="noopener">consultat {formatDate(s.price_checked_at)}</a></>})</>}.
+              <a href={s.service_url} target="_blank" rel="noopener noreferrer">{s.service}</a>
+              {s.price && <> ({s.price}{s.price_source_url && <>, <a href={s.price_source_url} target="_blank" rel="noopener noreferrer">consultat {formatDate(s.price_checked_at)}</a></>})</>}.
               Ce pierzi: {s.what_you_lose.join(", ")}.
             </li>
           ))}
@@ -91,7 +91,7 @@ const { recipe } = Astro.props;
 <style>
   .head {
     padding: 2.5rem 0 2rem;
-    border-bottom: 2px solid var(--ink);
+    border-bottom: 1px solid var(--rule);
     margin-bottom: 2rem;
   }
 

@@ -84,7 +84,7 @@ const businesses = repos.flatMap((repo) =>
               </div>
             )}
             {issueUrl(idea) && (
-              <a class="claim" href={issueUrl(idea)} rel="noopener">Vreau să lucrez la asta</a>
+              <a class="claim" href={issueUrl(idea)} target="_blank" rel="noopener noreferrer">Vreau să lucrez la asta</a>
             )}
           </li>
         ))}
@@ -123,7 +123,7 @@ const businesses = repos.flatMap((repo) =>
   .part > h2 {
     font-size: var(--step-2);
     padding-top: 1rem;
-    border-top: 2px solid var(--ink);
+    border-top: 1px solid var(--rule);
   }
 
   .note {

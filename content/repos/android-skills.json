@@ -12,8 +12,8 @@
     "pas 4: agentul urmează pașii din SKILL.md (analiză, plan, modificări de cod, uneori scripturi din folderul skill-ului) și îți modifică proiectul Android"
   ],
   "categories": [
-    "Dezvoltare aplicații Android",
-    "Agenți AI pentru programare"
+    "Skill-uri pentru agenți AI",
+    "Unelte pentru programatori"
   ],
   "search_intents": [
     "vreau ca asistentul AI să scrie cod Android corect",

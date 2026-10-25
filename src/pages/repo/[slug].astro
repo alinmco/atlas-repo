@@ -16,12 +16,18 @@ const restricted = repo.monetization?.some((m) => ["interzis", "neclar"].include
 <Base title={repo.name} description={repo.one_liner}>
   <article class="wrap">
     <header class="head">
-      <p class="crumb soft"><a href="/">Toate repo-urile</a></p>
+      <nav class="crumb soft" aria-label="Navigare">
+        <ol class="plain">
+          <li><a href="/">Acasă</a></li>
+          <li><a href="/">Repo-uri</a></li>
+          <li aria-current="page">{repo.name}</li>
+        </ol>
+      </nav>
       <h1>{repo.name}</h1>
       <p class="lede">{repo.one_liner}</p>
       <p class="head-meta">
         <span class="stamp stamp--doc">Din documentația oficială, {formatDate(repo.updated_at)}</span>
-        <a href={repo.repo_url} rel="noopener">Vezi codul pe GitHub</a>
+        <a href={repo.repo_url} target="_blank" rel="noopener noreferrer">Vezi codul pe GitHub</a>
       </p>
     </header>
 
@@ -47,7 +53,7 @@ const restricted = repo.monetization?.some((m) => ["interzis", "neclar"].include
               {repo.replaces.map((s) => (
                 <div class="service">
                   <h3>
-                    <a href={s.service_url} rel="noopener">{s.service}</a>
+                    <a href={s.service_url} target="_blank" rel="noopener noreferrer">{s.service}</a>
                   </h3>
                   <p class="price">
                     {s.price ? (
@@ -55,7 +61,7 @@ const restricted = repo.monetization?.some((m) => ["interzis", "neclar"].include
                         {s.price}
                         {s.price_source_url && (
                           <span class="soft">
-                            {" "}(<a href={s.price_source_url} rel="noopener">consultat {formatDate(s.price_checked_at)}</a>)
+                            {" "}(<a href={s.price_source_url} target="_blank" rel="noopener noreferrer">consultat {formatDate(s.price_checked_at)}</a>)
                           </span>
                         )}
                       </>
@@ -111,7 +117,7 @@ const restricted = repo.monetization?.some((m) => ["interzis", "neclar"].include
                 </figure>
               )}
               <p class="soft source">
-                Sursa: <a href={ex.source_url} rel="noopener">documentația oficială</a>
+                Sursa: <a href={ex.source_url} target="_blank" rel="noopener noreferrer">documentația oficială</a>
               </p>
             </div>
           ))}
@@ -128,7 +134,7 @@ const restricted = repo.monetization?.some((m) => ["interzis", "neclar"].include
               <ul class="prose">
                 {repo.alternatives.map((a) => (
                   <li>
-                    <a href={a.url} rel="noopener">{a.name}</a>: {a.difference}
+                    <a href={a.url} target="_blank" rel="noopener noreferrer">{a.name}</a>: {a.difference}
                   </li>
                 ))}
               </ul>
@@ -144,7 +150,7 @@ const restricted = repo.monetization?.some((m) => ["interzis", "neclar"].include
                 const local = repoByUrl(p.repo_url);
                 return (
                   <li>
-                    {local ? <a href={`/repo/${local.slug}/`}>{p.name}</a> : <a href={p.repo_url} rel="noopener">{p.name}</a>}
+                    {local ? <a href={`/repo/${local.slug}/`}>{p.name}</a> : <a href={p.repo_url} target="_blank" rel="noopener noreferrer">{p.name}</a>}
                     {!local && <span class="soft"> (încă nu e în atlas)</span>}: {p.why}
                   </li>
                 );
@@ -227,12 +233,46 @@ const restricted = repo.monetization?.some((m) => ["interzis", "neclar"].include
 <style>
   .head {
     padding: 2.5rem 0 2rem;
-    border-bottom: 2px solid var(--ink);
+    border-bottom: 1px solid var(--rule);
   }
 
   .crumb {
     font-size: var(--step--1);
     margin-bottom: 1rem;
+  }
+
+  .crumb ol {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.25rem 0.4rem;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .crumb li {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+  }
+
+  .crumb li + li::before {
+    content: "›";
+    margin: 0 0.1rem 0 0;
+  }
+
+  .crumb a {
+    color: var(--ink-soft);
+    text-decoration: none;
+  }
+
+  .crumb a:hover {
+    text-decoration: underline;
+  }
+
+  .crumb [aria-current] {
+    color: var(--ink);
   }
 
   h1 {
@@ -385,7 +425,7 @@ const restricted = repo.monetization?.some((m) => ["interzis", "neclar"].include
     padding: 1.25rem;
     background: var(--paper-raised);
     border: 1px solid var(--rule);
-    border-radius: 8px;
+    border-radius: var(--radius);
     font-size: var(--step--1);
   }
 

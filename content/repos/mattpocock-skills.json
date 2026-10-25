@@ -13,9 +13,7 @@
     "pas 5: rezultatul sunt texte și cod în proiectul tău: GLOSSARY.md, ADR-uri (note despre decizii), specificații, tichete, modificări de cod, rapoarte de revizuire"
   ],
   "categories": [
-    "Agenți AI pentru programare",
-    "Planificare și specificații",
-    "Calitatea codului"
+    "Skill-uri pentru agenți AI"
   ],
   "search_intents": [
     "vreau ca asistentul AI să mă întrebe ce vreau de fapt înainte să scrie cod",

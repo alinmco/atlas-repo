@@ -4,9 +4,8 @@
     "name": "Ruflo (fost Claude Flow)",
     "one_liner": "Pune mai mulți asistenți AI să lucreze împreună, cu memorie, peste Claude Code și Codex.",
     "categories": [
-      "Agenți AI pentru programare",
-      "Coordonarea mai multor asistenți AI",
-      "Memorie pentru asistenți AI"
+      "Agenți AI și automatizare",
+      "Agenți AI și memorie"
     ],
     "inputs": [
       "Comenzi de terminal (`npx ruflo@latest ...`) și comenzi /plugin în Claude Code",
@@ -36,8 +35,8 @@
     "name": "Android skills (android/skills)",
     "one_liner": "Instrucțiuni oficiale Google care învață asistenții AI să programeze corect aplicații Android.",
     "categories": [
-      "Dezvoltare aplicații Android",
-      "Agenți AI pentru programare"
+      "Skill-uri pentru agenți AI",
+      "Unelte pentru programatori"
     ],
     "inputs": [
       "Un proiect Android (cod Kotlin/Java, fișiere Gradle: build.gradle, build.gradle.kts, gradle.properties, libs.versions.toml, AndroidManifest.xml, layout-uri XML)",
@@ -65,9 +64,8 @@
     "name": "Scientific Agent Skills (K-Dense)",
     "one_liner": "177 fișe de instrucțiuni care învață asistentul AI să facă știință corect.",
     "categories": [
-      "Cercetare științifică asistată de AI",
-      "Analiză de date biologice și chimice",
-      "Scriere științifică și literatură"
+      "Agenți AI și știință",
+      "Skill-uri pentru agenți AI"
     ],
     "inputs": [
       "prompt în limbaj natural scris de utilizator, către un agent AI compatibil",
@@ -96,8 +94,8 @@
     "name": "REA (Reverse Engineer Anything)",
     "one_liner": "Un asistent AI care analizează aplicații și programe compilate și explică cum funcționează.",
     "categories": [
-      "Inginerie inversă software",
-      "Analiză de securitate"
+      "Agenți AI și securitate",
+      "Unelte pentru programatori"
     ],
     "inputs": [
       "Folder de aplicație Electron/JavaScript extrasă sau fișier ASAR",
@@ -125,9 +123,7 @@
     "name": "Awesome (lista listelor)",
     "one_liner": "O listă de liste cu cele mai bune resurse, pe sute de subiecte.",
     "categories": [
-      "Descoperire de resurse",
-      "Liste curatoriate",
-      "Învățare programare"
+      "Colecții curatoriate"
     ],
     "inputs": [
       "Un repo GitHub cu o listă în format Markdown (fișierul readme.md), numit awesome-nume-subiect",
@@ -153,8 +149,8 @@
     "name": "build-your-own-x",
     "one_liner": "Listă de tutoriale care te învață să reconstruiești tehnologii celebre de la zero.",
     "categories": [
-      "Învățare programare",
-      "Liste curatoriate"
+      "Învățare și ghiduri",
+      "Colecții curatoriate"
     ],
     "inputs": [
       "Fișier Markdown (README.md) cu un cuprins de teme și, sub fiecare temă, rânduri de forma „* [**Limbaj**: _Titlu_](URL)”",
@@ -177,9 +173,7 @@
     "name": "Matt Pocock Skills (Skills For Real Engineers)",
     "one_liner": "Instrucțiuni gata făcute care îl învață asistentul AI de programare să lucreze disciplinat.",
     "categories": [
-      "Agenți AI pentru programare",
-      "Planificare și specificații",
-      "Calitatea codului"
+      "Skill-uri pentru agenți AI"
     ],
     "inputs": [
       "comenzi tastate în agent: `/grill-me`, `/grill-with-docs`, `/tdd`, `/to-spec`, `/to-tickets`, `/implement`, `/triage`, `/handoff` etc.",
