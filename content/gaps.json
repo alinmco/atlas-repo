@@ -203,5 +203,20 @@
     "gap": "Suprafața e foarte mare (71 agenți, 311 skill-uri); alegerea componentelor potrivite rămâne un pas manual de curățare",
     "source_slug": "ecc",
     "added_at": "2026-10-25"
+  },
+  {
+    "gap": "React singur nu include rutare (navigare între pagini), aducere de date sau build: trebuie ales separat un framework sau unelte (Next.js, React Router, Vite).",
+    "source_slug": "react",
+    "added_at": "2026-10-25"
+  },
+  {
+    "gap": "Create React App este depreciat; tutorialele vechi care îl folosesc trebuie adaptate la un framework recomandat.",
+    "source_slug": "react",
+    "added_at": "2026-10-25"
+  },
+  {
+    "gap": "Documentația de instalare nu precizează o versiune minimă de Node.js; fiecare unealtă aleasă (Vite, Next.js) are propria cerință.",
+    "source_slug": "react",
+    "added_at": "2026-10-25"
   }
 ]

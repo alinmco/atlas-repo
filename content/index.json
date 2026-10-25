@@ -256,5 +256,33 @@
       "https://github.com/obra/superpowers"
     ],
     "used_in_recipes": []
+  },
+  {
+    "slug": "react",
+    "name": "React",
+    "one_liner": "Bibliotecă pentru construit pagini web și aplicații interactive din piese reutilizabile.",
+    "categories": [
+      "Framework-uri și interfețe",
+      "Unelte pentru programatori"
+    ],
+    "inputs": [
+      "Cod JavaScript/TypeScript cu componente în sintaxă JSX (fișiere .js, .jsx, .tsx)",
+      "Date în JavaScript: obiecte și liste, de obicei JSON primit de la un API",
+      "Un element HTML din pagină (după id) în care se randează aplicația"
+    ],
+    "outputs": [
+      "Pagină web interactivă (DOM actualizat în browser)",
+      "HTML generat pe server (randare pe server în Node)",
+      "Interfață nativă pentru telefon, prin React Native"
+    ],
+    "updated_at": "2026-10-25",
+    "pairs_well_with": [
+      "https://github.com/vitejs/vite",
+      "https://github.com/vercel/next.js",
+      "https://github.com/remix-run/react-router",
+      "https://github.com/expo/expo",
+      "https://github.com/TanStack/query"
+    ],
+    "used_in_recipes": []
   }
 ]
