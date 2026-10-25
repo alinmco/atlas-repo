@@ -196,6 +196,20 @@
     "added_at": "2026-10-25"
   },
   {
+    "repo_url": "https://github.com/ollama/ollama",
+    "name": "Ollama",
+    "suggested_by": "opencode",
+    "why": "Rulează un model AI local; OpenCode îl descoperă singur la adresa 127.0.0.1:11434, deci codul nu pleacă din calculator.",
+    "added_at": "2026-10-25"
+  },
+  {
+    "repo_url": "https://github.com/anomalyco/models.dev",
+    "name": "models.dev",
+    "suggested_by": "opencode",
+    "why": "Catalogul public de furnizori și modele pe care OpenCode îl folosește pentru lista lui de modele.",
+    "added_at": "2026-10-25"
+  },
+  {
     "repo_url": "https://github.com/vitejs/vite",
     "name": "Vite",
     "suggested_by": "react",

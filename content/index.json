@@ -194,7 +194,8 @@
       "https://github.com/K-Dense-AI/scientific-agent-skills",
       "https://github.com/vercel-labs/skills",
       "https://github.com/mattpocock/dictionary-of-ai-coding",
-      "https://github.com/obra/superpowers"
+      "https://github.com/obra/superpowers",
+      "https://github.com/anomalyco/opencode"
     ],
     "used_in_recipes": []
   },
@@ -224,7 +225,8 @@
       "https://github.com/obra/superpowers-marketplace",
       "https://github.com/prime-radiant-inc/superpowers-evals",
       "https://github.com/obra/superpowers-lab",
-      "https://github.com/affaan-m/ECC"
+      "https://github.com/affaan-m/ECC",
+      "https://github.com/anomalyco/opencode"
     ],
     "used_in_recipes": []
   },
@@ -254,6 +256,34 @@
       "https://github.com/affaan-m/agentshield",
       "https://github.com/github/spec-kit",
       "https://github.com/obra/superpowers"
+    ],
+    "used_in_recipes": []
+  },
+  {
+    "slug": "opencode",
+    "name": "OpenCode",
+    "one_liner": "Un asistent AI de programare open source, care rulează în terminalul tău.",
+    "categories": [
+      "Unelte pentru programatori",
+      "Agenți AI și automatizare"
+    ],
+    "inputs": [
+      "Mesaje scrise în limbaj obișnuit, în interfața din terminal sau prin opencode run \"...\"",
+      "Folderul proiectului tău (fișiere de cod, plus fișiere AGENTS.md / reguli, dacă le ai)",
+      "Fișiere de configurare opencode.jsonc și fișiere Markdown pentru agenți (.opencode/agents/*.md) și comenzi (.opencode/commands/*.md)",
+      "Chei API sau autentificare pentru furnizorul de modele ales; servere MCP (ex: opencode mcp add)"
+    ],
+    "outputs": [
+      "Fișiere de cod modificate direct în proiect",
+      "Text în terminal; cu opencode run --format json, JSON pe linii noi (newline-delimited) pentru scripturi",
+      "Interfață web de unică folosință prin opencode pair (link valabil 5 minute)"
+    ],
+    "updated_at": "2026-10-25",
+    "pairs_well_with": [
+      "https://github.com/obra/superpowers",
+      "https://github.com/ollama/ollama",
+      "https://github.com/mattpocock/skills",
+      "https://github.com/anomalyco/models.dev"
     ],
     "used_in_recipes": []
   },
