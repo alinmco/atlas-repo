@@ -68,5 +68,25 @@
     "gap": "Rezultatele științifice nu sunt validate automat: testele repo-ului verifică contracte de date/API, nu validitatea biologică",
     "source_slug": "scientific-agent-skills",
     "added_at": "2026-10-25"
+  },
+  {
+    "gap": "Rezultatul complet al unei analize poate avea sute de MB; documentația cere să-l salvezi într-un fișier și să-l filtrezi manual cu `jq` și `inspect-analysis-view`.",
+    "source_slug": "rea",
+    "added_at": "2026-10-25"
+  },
+  {
+    "gap": "Pentru ținte native, motorul (Hopper, Ghidra sau IDA) trebuie instalat și licențiat separat; suportul Windows pentru Ghidra este descris ca experimental.",
+    "source_slug": "rea",
+    "added_at": "2026-10-25"
+  },
+  {
+    "gap": "Multe fluxuri (pcap, semnale logice, crash-uri Linux, firmware, captură de procese) sunt documentate ca necesitând Linux, uneori doar x64.",
+    "source_slug": "rea",
+    "added_at": "2026-10-25"
+  },
+  {
+    "gap": "Nu există o interfață grafică; totul trece prin agent sau terminal.",
+    "source_slug": "rea",
+    "added_at": "2026-10-25"
   }
 ]

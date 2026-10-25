@@ -75,5 +75,33 @@
     "suggested_by": "scientific-agent-skills",
     "why": "Agent biomedical separat, cu propriile unelte; poate fi folosit în paralel pentru a compara rezultatele pe aceeași întrebare științifică (nu se integrează direct, doar comparație de rezultate).",
     "added_at": "2026-10-25"
+  },
+  {
+    "repo_url": "https://github.com/NationalSecurityAgency/ghidra",
+    "name": "Ghidra",
+    "suggested_by": "rea",
+    "why": "Motorul gratuit de decompilare pe care REA îl poate folosi pentru binare native: Ghidra produce pseudocodul, REA îl împachetează ca dovezi pentru asistentul AI.",
+    "added_at": "2026-10-25"
+  },
+  {
+    "repo_url": "https://github.com/skylot/jadx",
+    "name": "JADX",
+    "suggested_by": "rea",
+    "why": "Documentația REA cere JADX în mod headless pentru analiza de APK-uri Android: JADX decompilează clasele, REA le expune asistentului.",
+    "added_at": "2026-10-25"
+  },
+  {
+    "repo_url": "https://github.com/mitmproxy/mitmproxy",
+    "name": "mitmproxy",
+    "suggested_by": "rea",
+    "why": "Documentația REA pomenește mitmdump pe Linux pentru capturi de rețea; un trafic salvat al propriei aplicații devine intrare pentru analiza de cereri și răspunsuri.",
+    "added_at": "2026-10-25"
+  },
+  {
+    "repo_url": "https://github.com/ReFirmLabs/binwalk",
+    "name": "binwalk",
+    "suggested_by": "rea",
+    "why": "Documentația REA folosește Binwalk sau Unblob pentru firmware: extrage regiunile, iar REA le trimite spre analiza nativă.",
+    "added_at": "2026-10-25"
   }
 ]
