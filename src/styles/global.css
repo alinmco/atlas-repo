@@ -1,20 +1,33 @@
+/* Tokeni de culoare. Varianta întunecată: automat (după sistem) sau din butonul din antet. */
 :root {
-  --paper: #eef1ec;
-  --paper-raised: #f8faf6;
-  --ink: #1b2a2f;
-  --ink-soft: #4f6066;
-  --rule: #cdd5cf;
-  --verified: #1f7a4d;
-  --verified-tint: #dcebe1;
-  --failed: #b4442c;
-  --failed-tint: #f3e0da;
-  --marker: #f2d64b;
-  --terminal: #17232a;
-  --terminal-ink: #d7e4dc;
-  --focus: #2b62d9;
+  --paper: #ffffff;
+  --paper-raised: #f8fafc;
+  --ink: #0f172a;
+  --ink-soft: #64748b;
+  --rule: #e5e7eb;
+  --verified: #15803d;
+  --verified-tint: #dcfce7;
+  --failed: #b91c1c;
+  --failed-tint: #fee2e2;
+  --marker: #fde68a;
+  --terminal: #0f172a;
+  --terminal-ink: #e2e8f0;
+  --focus: #0b6bcb;
+  --accent: #0b6bcb;
+  --accent-tint: #e6f0fb;
+  --on-ink: #ffffff;
+  --on-accent: #ffffff;
+  --star: #f59e0b;
+  --star-ink: #b45309;
+  --warn: #b45309;
+  --warn-tint: #fef3c7;
+  --gold: #f5c542;
+  --silver: #d5dae1;
+  --bronze: #e0a572;
+  --badge-ink: #0f172a;
 
-  --font-display: "Familjen Grotesk", system-ui, sans-serif;
-  --font-body: "Atkinson Hyperlegible", system-ui, sans-serif;
+  --font-display: "Inter Tight", "Inter", system-ui, sans-serif;
+  --font-body: "Inter", system-ui, sans-serif;
   --font-mono: "JetBrains Mono", ui-monospace, monospace;
 
   --step--1: 0.875rem;
@@ -24,26 +37,68 @@
   --step-3: 2.5rem;
   --step-4: clamp(2.5rem, 6vw, 4.25rem);
 
+  --radius: 14px;
   --measure: 68ch;
   --gutter: clamp(1rem, 4vw, 2.5rem);
   color-scheme: light;
 }
 
+:root[data-theme="dark"] {
+  --paper: #0b1120;
+  --paper-raised: #131c31;
+  --ink: #e2e8f0;
+  --ink-soft: #94a3b8;
+  --rule: #263148;
+  --verified: #4ade80;
+  --verified-tint: #12351f;
+  --failed: #f48a8a;
+  --failed-tint: #3b1c1c;
+  --marker: #b8962e;
+  --terminal: #060b16;
+  --terminal-ink: #e2e8f0;
+  --focus: #6cb2f5;
+  --accent: #6cb2f5;
+  --accent-tint: #12263f;
+  --on-ink: #0b1120;
+  --on-accent: #0b1120;
+  --star: #fbbf24;
+  --star-ink: #fbbf24;
+  --warn: #fbbf24;
+  --warn-tint: #3a2c0c;
+  --gold: #c9a227;
+  --silver: #8793a6;
+  --bronze: #b07a45;
+  --badge-ink: #0b1120;
+  color-scheme: dark;
+}
+
 @media (prefers-color-scheme: dark) {
-  :root {
-    --paper: #121b1f;
-    --paper-raised: #182429;
-    --ink: #e4ebe6;
-    --ink-soft: #9fb0ad;
-    --rule: #2c3b40;
-    --verified: #5cc08c;
-    --verified-tint: #17352a;
-    --failed: #e08a73;
-    --failed-tint: #3a211b;
-    --marker: #d9bd2f;
-    --terminal: #0c1418;
-    --terminal-ink: #d7e4dc;
-    --focus: #7fa6ff;
+  :root:not([data-theme="light"]) {
+    --paper: #0b1120;
+    --paper-raised: #131c31;
+    --ink: #e2e8f0;
+    --ink-soft: #94a3b8;
+    --rule: #263148;
+    --verified: #4ade80;
+    --verified-tint: #12351f;
+    --failed: #f48a8a;
+    --failed-tint: #3b1c1c;
+    --marker: #b8962e;
+    --terminal: #060b16;
+    --terminal-ink: #e2e8f0;
+    --focus: #6cb2f5;
+    --accent: #6cb2f5;
+    --accent-tint: #12263f;
+    --on-ink: #0b1120;
+    --on-accent: #0b1120;
+    --star: #fbbf24;
+    --star-ink: #fbbf24;
+    --warn: #fbbf24;
+    --warn-tint: #3a2c0c;
+    --gold: #c9a227;
+    --silver: #8793a6;
+    --bronze: #b07a45;
+    --badge-ink: #0b1120;
     color-scheme: dark;
   }
 }
@@ -77,8 +132,8 @@ h3,
 h4 {
   font-family: var(--font-display);
   line-height: 1.15;
-  font-weight: 650;
-  letter-spacing: -0.01em;
+  font-weight: 700;
+  letter-spacing: -0.02em;
   margin: 0;
 }
 
@@ -87,7 +142,7 @@ p {
 }
 
 a {
-  color: inherit;
+  color: var(--accent);
   text-decoration-thickness: 1px;
   text-underline-offset: 0.2em;
 }
@@ -165,7 +220,7 @@ pre {
   background: var(--terminal);
   color: var(--terminal-ink);
   border: 1px solid var(--rule);
-  border-radius: 6px;
+  border-radius: 10px;
   padding: 1rem 1.1rem;
   overflow-x: auto;
   line-height: 1.5;
@@ -177,13 +232,13 @@ pre {
   display: block;
   font-family: var(--font-body);
   font-size: var(--step--1);
-  color: #8fa59d;
+  color: #94a3b8;
   margin-bottom: 0.5rem;
 }
 
 mark {
   background: var(--marker);
-  color: #1b2a2f;
+  color: var(--ink);
   border-radius: 2px;
   padding: 0 0.1em;
 }

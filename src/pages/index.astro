@@ -1,42 +1,79 @@
 ---
 import Base from "../layouts/Base.astro";
-import { repos, categories, formatDate } from "../lib/data.js";
+import { repos, recipes, categories, formatDate } from "../lib/data.js";
 
 const usedCategories = categories.filter((c) => repos.some((r) => r.categories.includes(c)));
-const services = new Set(repos.flatMap((r) => r.replaces.map((s) => s.service)));
 const suggestions = [...new Set(repos.flatMap((r) => r.search_intents))].slice(0, 4);
+
+// Limbajul scurt: primul cuvânt înainte de spațiu, paranteză, punct și virgulă sau virgulă.
+function shortLang(r) {
+  const raw = r.tech_sheet?.language ?? "";
+  return raw.split(/[\s(;,]/)[0].replace(/\.+$/, "");
+}
+
+const stars = (r) => r.tech_sheet?.stars ?? 0;
+const group = (n) => String(n).replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+function compact(n) {
+  if (n >= 1e6) return `${(n / 1e6).toFixed(1).replace(".", ",")}M`;
+  if (n >= 1e5) return `${Math.round(n / 1e3)}k`;
+  if (n >= 1e3) return `${(n / 1e3).toFixed(1).replace(".", ",")}k`;
+  return String(n);
+}
+
+const items = repos.map((r) => ({ r, lang: shortLang(r), stars: stars(r) }));
+const ranked = [...items].sort((a, b) => b.stars - a.stars || a.r.name.localeCompare(b.r.name, "ro"));
+ranked.forEach((it, i) => (it.rank = i + 1));
+const languages = [...new Set(items.map((i) => i.lang).filter(Boolean))].sort((a, b) => a.localeCompare(b, "ro"));
+
+const totalStars = items.reduce((sum, i) => sum + i.stars, 0);
+const avgStars = items.length ? Math.round(totalStars / items.length) : 0;
+const latest = repos.map((r) => r.updated_at).filter(Boolean).sort().at(-1);
+const recent = [...repos]
+  .sort((a, b) => (b.updated_at ?? "").localeCompare(a.updated_at ?? "") || a.name.localeCompare(b.name, "ro"))
+  .slice(0, 5);
 
 function searchText(r) {
   return [r.name, r.one_liner, r.problem_solved, ...r.search_intents, ...r.categories, ...r.replaces.map((s) => s.service)].join(" ");
 }
-
-const plural = (n, one, many) => (n === 1 ? `${n} ${one}` : `${n} ${many}`);
 ---
 
 <Base title="Atlas de repo-uri">
   <section class="hero wrap">
-    <label for="q"><h1>Ce vrei să faci?</h1></label>
-    <div class="search">
-      <input
-        id="q"
-        type="search"
-        autocomplete="off"
-        placeholder="ex: să transcriu un podcast"
-        aria-describedby="summary"
-      />
-    </div>
-    {suggestions.length > 0 && (
-      <p class="suggestions">
-        <span class="soft">Încearcă:</span>
-        {suggestions.map((s) => <button type="button" class="suggestion" data-q={s}>{s}</button>)}
-      </p>
-    )}
-    {repos.length > 0 && (
-      <p id="summary" class="soft summary">
-        {plural(repos.length, "repo explicat", "repo-uri explicate")}
-        {services.size > 0 && <>, alternative la {plural(services.size, "serviciu plătit", "servicii plătite")}</>}.
-      </p>
-    )}
+    <h1>Ce vrei să faci?</h1>
+    <ul class="plain stats" aria-label="Cifre generale">
+      <li class="stat">
+        <p class="stat-label">
+          <svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true" focusable="false"><path d="M3 7a2 2 0 0 1 2-2h5l2 2h7a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" /></svg>
+          Repo-uri
+        </p>
+        <p class="stat-num">{repos.length}</p>
+        <p class="stat-sub">în {usedCategories.length} categorii</p>
+      </li>
+      <li class="stat">
+        <p class="stat-label">
+          <svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true" focusable="false"><path d="m12 2.5 2.9 6 6.6.9-4.8 4.6 1.2 6.5L12 17.4 6.1 20.5l1.2-6.5L2.5 9.4l6.6-.9z" fill="currentColor" /></svg>
+          Total stele
+        </p>
+        <p class="stat-num">{compact(totalStars)}</p>
+        <p class="stat-sub">în medie {compact(avgStars)} pe repo</p>
+      </li>
+      <li class="stat">
+        <p class="stat-label">
+          <svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true" focusable="false"><path d="M6 3h12v18l-6-4-6 4z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" /></svg>
+          Rețete
+        </p>
+        <p class="stat-num">{recipes.length}</p>
+        <p class="stat-sub">propuse, netestate</p>
+      </li>
+      <li class="stat">
+        <p class="stat-label">
+          <svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2" /><path d="M12 7v5l3 2" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" /></svg>
+          Actualizat
+        </p>
+        <p class="stat-num stat-num--date">{latest ? formatDate(latest) : "–"}</p>
+        <p class="stat-sub">ultima modificare</p>
+      </li>
+    </ul>
   </section>
 
   <section class="wrap catalog" aria-label="Repo-uri">
@@ -50,37 +87,118 @@ const plural = (n, one, many) => (n === 1 ? `${n} ${one}` : `${n} ${many}`);
       </div>
     ) : (
       <>
-        {usedCategories.length > 1 && (
-          <div class="filters" role="group" aria-label="Filtrează după categorie">
-            <button type="button" class="chip" data-cat="" aria-pressed="true">Toate</button>
-            {usedCategories.map((c) => (
-              <button type="button" class="chip" data-cat={c} aria-pressed="false">{c}</button>
-            ))}
+        <div class="finder">
+          <div class="finder-top">
+            <div class="search">
+              <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false"><circle cx="11" cy="11" r="7" fill="none" stroke="currentColor" stroke-width="2" /><path d="m20 20-3.5-3.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" /></svg>
+              <label for="q" class="visually-hidden">Ce vrei să faci?</label>
+              <input id="q" type="search" autocomplete="off" placeholder="ex: să transcriu un podcast" />
+            </div>
+            <div class="sort">
+              <label for="sort">⇅ Sortează:</label>
+              <select id="sort">
+                <option value="stars">Stele (cele mai multe)</option>
+                <option value="name">Nume (A-Z)</option>
+                <option value="recent">Adăugate recent</option>
+                <option value="easy">Pornire (cele mai ușoare întâi)</option>
+              </select>
+            </div>
           </div>
+          <hr />
+          {usedCategories.length > 1 && (
+            <div class="filter-row" role="group" aria-label="Filtrează după categorie">
+              <span class="filter-label" aria-hidden="true">Categorie:</span>
+              <button type="button" class="chip" data-cat="" aria-pressed="true">Toate</button>
+              {usedCategories.map((c) => (
+                <button type="button" class="chip" data-cat={c} aria-pressed="false">{c}</button>
+              ))}
+            </div>
+          )}
+          {languages.length > 1 && (
+            <div class="filter-row" role="group" aria-label="Filtrează după limbaj">
+              <span class="filter-label" aria-hidden="true">Limbaj:</span>
+              <button type="button" class="chip chip--lang" data-lang="" aria-pressed="true">Toate</button>
+              {languages.map((l) => (
+                <button type="button" class="chip chip--lang" data-lang={l} aria-pressed="false">{l}</button>
+              ))}
+            </div>
+          )}
+        </div>
+
+        {suggestions.length > 0 && (
+          <p class="suggestions">
+            <span class="soft">Încearcă:</span>
+            {suggestions.map((s) => <button type="button" class="suggestion" data-q={s}>{s}</button>)}
+          </p>
         )}
-        <ul class="plain rows" id="rows">
-          {repos.map((r) => {
-            return (
-              <li class="row" data-search={searchText(r)} data-cats={r.categories.join("|")} data-intents={r.search_intents.join("|")}>
-                <div class="row-main">
-                  <h2 class="row-title"><a href={`/repo/${r.slug}/`}>{r.name}</a></h2>
+
+        <p class="count soft" aria-live="polite">
+          Se afișează <strong id="shown">{repos.length}</strong> din <strong>{repos.length}</strong> repo-uri
+        </p>
+
+        <div class="table">
+          <div class="head-row" aria-hidden="true">
+            <span>Loc</span><span>Repo și detalii</span><span>Limbaj</span><span class="r">Stele</span><span>Pornire</span><span class="r">Acțiune</span>
+          </div>
+          <ul class="plain rows" id="rows">
+            {ranked.map(({ r, lang, rank }) => (
+              <li
+                class="row"
+                data-search={searchText(r)}
+                data-cats={r.categories.join("|")}
+                data-intents={r.search_intents.join("|")}
+                data-lang={lang}
+                data-stars={stars(r)}
+                data-name={r.name}
+                data-updated={r.updated_at ?? ""}
+                data-diff={r.setup_difficulty}
+              >
+                <div class="c-rank">
+                  <span class:list={["badge", rank <= 3 && `badge--${rank}`]}><span class="visually-hidden">Locul </span>#{rank}</span>
+                </div>
+                <div class="c-lang">{lang && <span class="lang">{lang}</span>}</div>
+                <div class="c-stars"><span class="star" aria-hidden="true">★</span> {group(stars(r))}<span class="visually-hidden"> de stele</span></div>
+                <div class="c-main">
+                  <h2 class="row-title"><a class="stretch" href={`/repo/${r.slug}/`}>{r.name}</a></h2>
+                  <p class="row-cat">{r.categories[0]}</p>
                   <p class="row-line">{r.one_liner}</p>
+                  {r.replaces.length > 0 && (
+                    <p class="free">Gratuit în loc de {r.replaces.map((s) => s.service).join(", ")}</p>
+                  )}
                   <p class="row-match soft" hidden></p>
                 </div>
-                <div class="row-meta">
-                  <span class="soft">Pornire: {r.setup_difficulty}</span>
-                  {r.replaces.length > 0 && (
-                    <span class="soft">În loc de {r.replaces.map((s) => s.service).join(", ")}</span>
-                  )}
-                  <span class="soft">Actualizat {formatDate(r.updated_at)}</span>
+                <div class="c-diff">
+                  <span class="diff-label">Pornire</span>
+                  <span class:list={["diff", `diff--${r.setup_difficulty}`]}>{r.setup_difficulty}</span>
+                </div>
+                <div class="c-act">
+                  <span class="btn" aria-hidden="true">Vezi explicația →</span>
+                  <a class="gh" href={r.repo_url} target="_blank" rel="noopener noreferrer" aria-label={`${r.name} pe GitHub (se deschide în tab nou)`} title="Vezi pe GitHub">
+                    <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false"><path fill="currentColor" d="M12 .5a11.5 11.5 0 0 0-3.6 22.4c.6.1.8-.3.8-.6v-2c-3.2.7-3.9-1.5-3.9-1.5-.5-1.3-1.3-1.7-1.3-1.7-1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.8-1.6-2.6-.3-5.3-1.3-5.3-5.7 0-1.3.5-2.3 1.2-3.1-.1-.3-.5-1.5.1-3.1 0 0 1-.3 3.2 1.2a11 11 0 0 1 5.8 0c2.2-1.5 3.2-1.2 3.2-1.2.6 1.6.2 2.8.1 3.1.8.8 1.2 1.8 1.2 3.1 0 4.4-2.7 5.4-5.3 5.7.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A11.5 11.5 0 0 0 12 .5z" /></svg>
+                  </a>
                 </div>
               </li>
-            );
-          })}
-        </ul>
+            ))}
+          </ul>
+        </div>
         <p class="no-results soft" id="no-results" hidden>
           Nimic nu se potrivește încă. Încearcă alte cuvinte sau alege „Toate”.
         </p>
+
+        <section class="recent" aria-labelledby="recent-h">
+          <h2 id="recent-h">Adăugate recent</h2>
+          <ul class="plain recent-list">
+            {recent.map((r) => (
+              <li>
+                <a class="recent-card" href={`/repo/${r.slug}/`}>
+                  <span class="recent-name">{r.name}</span>
+                  <span class="recent-line">{r.one_liner}</span>
+                  <span class="recent-date">{formatDate(r.updated_at)}</span>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </section>
       </>
     )}
   </section>
@@ -88,13 +206,19 @@ const plural = (n, one, many) => (n === 1 ? `${n} ${one}` : `${n} ${many}`);
 
 <script>
   const input = document.querySelector("#q");
+  const list = document.querySelector("#rows");
   const rows = [...document.querySelectorAll(".row")];
-  const chips = [...document.querySelectorAll(".chip")];
+  const catChips = [...document.querySelectorAll(".chip[data-cat]")];
+  const langChips = [...document.querySelectorAll(".chip[data-lang]")];
+  const sortSel = document.querySelector("#sort");
+  const shownEl = document.querySelector("#shown");
   const noResults = document.querySelector("#no-results");
   let category = "";
+  let language = "";
 
   const norm = (s) => s.toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "");
   const STOP = new Set(["sa", "vreau", "un", "o", "de", "la", "si", "cu", "in", "pe", "din", "ce", "ma", "mi", "imi", "a", "al", "ale"]);
+  const DIFF = { "ușor": 0, mediu: 1, greu: 2 };
 
   function apply() {
     const words = norm(input.value).split(/\s+/).filter((w) => w.length > 1 && !STOP.has(w));
@@ -102,8 +226,9 @@ const plural = (n, one, many) => (n === 1 ? `${n} ${one}` : `${n} ${many}`);
     for (const row of rows) {
       const text = norm(row.dataset.search);
       const inCat = !category || row.dataset.cats.split("|").includes(category);
+      const inLang = !language || row.dataset.lang === language;
       const matches = words.every((w) => text.includes(w));
-      const visible = inCat && matches;
+      const visible = inCat && inLang && matches;
       row.hidden = !visible;
       if (visible) shown++;
       const hint = row.querySelector(".row-match");
@@ -111,17 +236,37 @@ const plural = (n, one, many) => (n === 1 ? `${n} ${one}` : `${n} ${many}`);
       hint.hidden = !intent;
       hint.textContent = intent ? `Potrivit pentru: „${intent}”` : "";
     }
+    if (shownEl) shownEl.textContent = String(shown);
     if (noResults) noResults.hidden = shown > 0;
   }
 
+  function sortRows() {
+    const by = sortSel.value;
+    const d = (r) => r.dataset;
+    const byName = (a, b) => d(a).name.localeCompare(d(b).name, "ro");
+    const sorted = [...rows].sort((a, b) => {
+      if (by === "name") return byName(a, b);
+      if (by === "recent") return d(b).updated.localeCompare(d(a).updated) || byName(a, b);
+      if (by === "easy") return (DIFF[d(a).diff] ?? 9) - (DIFF[d(b).diff] ?? 9) || Number(d(b).stars) - Number(d(a).stars);
+      return Number(d(b).stars) - Number(d(a).stars) || byName(a, b);
+    });
+    sorted.forEach((r) => list.appendChild(r));
+  }
+
+  function bind(chips, set) {
+    chips.forEach((chip) =>
+      chip.addEventListener("click", () => {
+        set(chip.dataset.cat ?? chip.dataset.lang);
+        chips.forEach((c) => c.setAttribute("aria-pressed", String(c === chip)));
+        apply();
+      })
+    );
+  }
+
   input?.addEventListener("input", apply);
-  chips.forEach((chip) =>
-    chip.addEventListener("click", () => {
-      category = chip.dataset.cat;
-      chips.forEach((c) => c.setAttribute("aria-pressed", String(c === chip)));
-      apply();
-    })
-  );
+  sortSel?.addEventListener("change", sortRows);
+  bind(catChips, (v) => (category = v));
+  bind(langChips, (v) => (language = v));
   document.querySelectorAll(".suggestion").forEach((b) =>
     b.addEventListener("click", () => {
       input.value = b.dataset.q;
@@ -133,25 +278,101 @@ const plural = (n, one, many) => (n === 1 ? `${n} ${one}` : `${n} ${many}`);
 
 <style>
   .hero {
-    padding-top: clamp(3rem, 9vw, 6.5rem);
-    padding-bottom: 2.5rem;
+    padding-top: clamp(2rem, 6vw, 4rem);
+    padding-bottom: 1.5rem;
   }
 
   .hero h1 {
     font-size: var(--step-4);
-    font-weight: 700;
+    font-weight: 800;
+    letter-spacing: -0.04em;
+    margin-bottom: 1.5rem;
+  }
+
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.75rem;
+  }
+
+  @media (min-width: 52rem) {
+    .stats {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 1rem;
+    }
+  }
+
+  .stat {
+    padding: 1rem 1.1rem;
+    background: var(--paper);
+    border: 1px solid var(--rule);
+    border-radius: var(--radius);
+  }
+
+  .stat-label {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+  }
+
+  .stat-num {
+    font-family: var(--font-display);
+    font-size: clamp(1.75rem, 4vw, 2.5rem);
+    font-weight: 800;
     letter-spacing: -0.03em;
-    margin-bottom: 1.25rem;
+    line-height: 1.15;
+    margin-top: 0.35rem;
+  }
+
+  .stat-num--date {
+    font-size: clamp(1.25rem, 3vw, 1.75rem);
+    line-height: 1.45;
+  }
+
+  .stat-sub {
+    font-size: var(--step--1);
+    color: var(--ink-soft);
+  }
+
+  .finder {
+    background: var(--paper);
+    border: 1px solid var(--rule);
+    border-radius: var(--radius);
+    padding: 1rem;
+  }
+
+  .finder-top {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.75rem 1.25rem;
+  }
+
+  .search {
+    position: relative;
+    flex: 1 1 18rem;
+    color: var(--ink-soft);
+  }
+
+  .search svg {
+    position: absolute;
+    left: 0.9rem;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
   }
 
   .search input {
     width: 100%;
-    max-width: 44rem;
     font: inherit;
-    font-size: var(--step-1);
-    padding: 0.85rem 1rem;
-    border: 2px solid var(--ink);
-    border-radius: 6px;
+    padding: 0.7rem 1rem 0.7rem 2.75rem;
+    border: 1px solid var(--rule);
+    border-radius: 10px;
     background: var(--paper-raised);
     color: var(--ink);
   }
@@ -160,35 +381,58 @@ const plural = (n, one, many) => (n === 1 ? `${n} ${one}` : `${n} ${many}`);
     color: var(--ink-soft);
   }
 
-  .suggestions {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: baseline;
-    gap: 0.5rem;
-    margin-top: 1rem;
+  .search input:focus-visible,
+  .sort select:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 1px;
+    border-color: var(--accent);
   }
 
-  .suggestion {
+  .sort {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    color: var(--ink-soft);
+    max-width: 100%;
+  }
+
+  .sort select {
     font: inherit;
+    font-family: var(--font-body);
     font-size: var(--step--1);
-    background: none;
-    border: 0;
-    padding: 0;
+    padding: 0.55rem 0.7rem;
+    border: 1px solid var(--rule);
+    border-radius: 10px;
+    background: var(--paper);
     color: var(--ink);
-    text-decoration: underline;
-    text-underline-offset: 0.2em;
-    cursor: pointer;
+    max-width: 100%;
   }
 
-  .summary {
-    margin-top: 1.5rem;
+  hr {
+    border: 0;
+    border-top: 1px solid var(--rule);
+    margin: 1rem 0;
   }
 
-  .filters {
+  .filter-row {
     display: flex;
     flex-wrap: wrap;
-    gap: 0.5rem;
-    margin-bottom: 1.5rem;
+    align-items: center;
+    gap: 0.4rem;
+  }
+
+  .filter-row + .filter-row {
+    margin-top: 0.75rem;
+  }
+
+  .filter-label {
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    color: var(--ink-soft);
+    margin-right: 0.25rem;
+    min-width: 5.5rem;
   }
 
   .chip {
@@ -197,64 +441,337 @@ const plural = (n, one, many) => (n === 1 ? `${n} ${one}` : `${n} ${many}`);
     padding: 0.3rem 0.8rem;
     border: 1px solid var(--rule);
     border-radius: 999px;
-    background: transparent;
+    background: var(--paper);
     color: var(--ink);
     cursor: pointer;
   }
 
+  .chip:hover {
+    background: var(--paper-raised);
+  }
+
   .chip[aria-pressed="true"] {
     background: var(--ink);
-    color: var(--paper);
+    color: var(--on-ink);
     border-color: var(--ink);
   }
 
+  .chip--lang {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    padding: 0.2rem 0.6rem;
+  }
+
+  .chip--lang[aria-pressed="true"] {
+    background: var(--accent);
+    color: var(--on-accent);
+    border-color: var(--accent);
+  }
+
+  .suggestions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0.25rem 0.75rem;
+    margin-top: 0.9rem;
+    font-size: var(--step--1);
+  }
+
+  .suggestion {
+    font: inherit;
+    background: none;
+    border: 0;
+    padding: 0;
+    color: var(--accent);
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+    cursor: pointer;
+    text-align: left;
+  }
+
+  .count {
+    margin: 1.25rem 0 0.75rem;
+    font-size: var(--step--1);
+  }
+
+  .count strong {
+    color: var(--ink);
+  }
+
+  /* Cartonașe (telefon și tabletă) */
   .rows {
-    border-top: 2px solid var(--ink);
-  }
-
-  .row {
     display: grid;
-    grid-template-columns: 1fr;
-    gap: 0.6rem;
-    padding: 1.25rem 0;
-    border-bottom: 1px solid var(--rule);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.9rem;
   }
 
-  @media (min-width: 52rem) {
-    .row {
-      grid-template-columns: minmax(0, 1fr) 17rem;
-      gap: 2rem;
+  @media (max-width: 40rem) {
+    .rows {
+      grid-template-columns: minmax(0, 1fr);
     }
   }
 
+  .head-row {
+    display: none;
+  }
+
+  .row {
+    position: relative;
+    display: grid;
+    grid-template-columns: auto auto minmax(0, 1fr);
+    grid-template-areas:
+      "rank lang stars"
+      "main main main"
+      "diff diff act";
+    align-items: center;
+    column-gap: 0.5rem;
+    background: var(--paper);
+    border: 1px solid var(--rule);
+    border-radius: var(--radius);
+    padding: 1rem;
+  }
+
+  .row:hover {
+    border-color: var(--ink-soft);
+  }
+
+  .row:focus-within {
+    outline: 2px solid var(--focus);
+    outline-offset: 2px;
+  }
+
+  .c-rank { grid-area: rank; }
+  .c-lang { grid-area: lang; }
+  .c-main { grid-area: main; padding: 0.75rem 0 0.9rem; align-self: start; }
+  .c-stars { grid-area: stars; justify-self: end; }
+  .c-diff { grid-area: diff; border-top: 1px solid var(--rule); padding-top: 0.75rem; align-self: stretch; display: flex; align-items: center; gap: 0.5rem; }
+  .c-act { grid-area: act; border-top: 1px solid var(--rule); padding-top: 0.75rem; align-self: stretch; display: flex; align-items: center; justify-content: flex-end; gap: 0.5rem; }
+
+  .badge {
+    display: inline-block;
+    min-width: 2.4rem;
+    text-align: center;
+    padding: 0.15rem 0.5rem;
+    border-radius: 999px;
+    background: var(--paper-raised);
+    border: 1px solid var(--rule);
+    color: var(--ink-soft);
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    font-weight: 600;
+  }
+
+  .badge--1,
+  .badge--2,
+  .badge--3 {
+    color: var(--badge-ink);
+    border-color: transparent;
+  }
+
+  .badge--1 { background: var(--gold); }
+  .badge--2 { background: var(--silver); }
+  .badge--3 { background: var(--bronze); }
+
+  .lang {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    padding: 0.15rem 0.5rem;
+    border: 1px solid var(--rule);
+    border-radius: 6px;
+    background: var(--paper-raised);
+    color: var(--ink);
+  }
+
+  .c-stars {
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--star-ink);
+    white-space: nowrap;
+  }
+
+  .star {
+    color: var(--star);
+  }
+
   .row-title {
-    font-size: var(--step-1);
+    font-size: var(--step-0);
+    letter-spacing: -0.02em;
+    overflow-wrap: anywhere;
   }
 
   .row-title a {
+    color: var(--ink);
     text-decoration: none;
   }
 
-  .row-title a:hover {
-    text-decoration: underline;
+  .row:hover .row-title a {
+    color: var(--accent);
+  }
+
+  /* Tot rândul e clicabil: linkul din titlu se întinde peste el. */
+  .stretch::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: var(--radius);
+  }
+
+  .stretch:focus-visible {
+    outline: none;
+  }
+
+  .row-cat {
+    margin-top: 0.15rem;
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: var(--ink-soft);
   }
 
   .row-line {
-    margin-top: 0.25rem;
-    max-width: var(--measure);
+    margin-top: 0.4rem;
+    font-size: var(--step--1);
+    color: var(--ink-soft);
+  }
+
+  .free {
+    display: inline-block;
+    margin-top: 0.5rem;
+    padding: 0.1rem 0.55rem;
+    border-radius: 999px;
+    background: var(--verified-tint);
+    color: var(--verified);
+    font-size: 0.78rem;
+    font-weight: 600;
   }
 
   .row-match {
-    margin-top: 0.35rem;
-    font-size: var(--step--1);
+    margin-top: 0.4rem;
+    font-size: 0.8rem;
   }
 
-  .row-meta {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 0.35rem;
+  .diff-label {
+    font-size: 0.78rem;
+    color: var(--ink-soft);
+  }
+
+  .diff {
+    display: inline-block;
+    padding: 0.1rem 0.55rem;
+    border-radius: 999px;
+    font-size: 0.78rem;
+    font-weight: 600;
+    background: var(--paper-raised);
+    color: var(--ink);
+    border: 1px solid var(--rule);
+  }
+
+  .diff--ușor { background: var(--verified-tint); color: var(--verified); border-color: transparent; }
+  .diff--mediu { background: var(--warn-tint); color: var(--warn); border-color: transparent; }
+  .diff--greu { background: var(--failed-tint); color: var(--failed); border-color: transparent; }
+
+  .btn {
+    display: inline-block;
+    padding: 0.45rem 0.9rem;
+    border-radius: 10px;
+    background: var(--ink);
+    color: var(--on-ink);
     font-size: var(--step--1);
+    font-weight: 600;
+    white-space: nowrap;
+  }
+
+  .gh {
+    position: relative;
+    z-index: 1;
+    display: inline-grid;
+    place-items: center;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 8px;
+    color: var(--ink-soft);
+  }
+
+  .gh:hover {
+    color: var(--ink);
+    background: var(--paper-raised);
+  }
+
+  /* Tabel (desktop) */
+  @media (min-width: 56rem) {
+    .table {
+      border: 1px solid var(--rule);
+      border-radius: var(--radius);
+      background: var(--paper);
+      overflow: hidden;
+    }
+
+    .rows {
+      display: block;
+    }
+
+    .head-row,
+    .row {
+      display: grid;
+      grid-template-columns: 4rem minmax(0, 1fr) 7.5rem 7rem 5.5rem 12.5rem;
+      grid-template-areas: "rank main lang stars diff act";
+      column-gap: 1rem;
+      align-items: center;
+      padding: 0.9rem 1.1rem;
+    }
+
+    .head-row {
+      background: var(--paper-raised);
+      border-bottom: 1px solid var(--rule);
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--ink-soft);
+      padding-top: 0.6rem;
+      padding-bottom: 0.6rem;
+    }
+
+    .head-row .r {
+      text-align: right;
+    }
+
+    .row {
+      border: 0;
+      border-radius: 0;
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .row:last-child {
+      border-bottom: 0;
+    }
+
+    .row:hover {
+      background: var(--paper-raised);
+    }
+
+    .stretch::after {
+      border-radius: 0;
+    }
+
+    .c-main { padding: 0; }
+    .c-stars { justify-self: end; }
+    .c-diff,
+    .c-act { border-top: 0; padding-top: 0; align-self: center; }
+    .diff-label { display: none; }
+  }
+
+  /* Ecrane mijlocii: fără butonul negru, rămâne doar linkul GitHub (rândul rămâne clicabil). */
+  @media (min-width: 56rem) and (max-width: 66rem) {
+    .head-row,
+    .row {
+      grid-template-columns: 3.5rem minmax(0, 1fr) 6.5rem 6rem 5rem 3rem;
+    }
+
+    .btn {
+      display: none;
+    }
   }
 
   .no-results,
@@ -265,5 +782,57 @@ const plural = (n, one, many) => (n === 1 ? `${n} ${one}` : `${n} ${many}`);
   .empty h2 {
     font-size: var(--step-2);
     margin-bottom: 0.75rem;
+  }
+
+  .recent {
+    margin-top: 3rem;
+  }
+
+  .recent h2 {
+    font-size: var(--step-2);
+    letter-spacing: -0.03em;
+    margin-bottom: 1rem;
+  }
+
+  .recent-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 16rem), 1fr));
+    gap: 0.9rem;
+  }
+
+  .recent-card {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    height: 100%;
+    padding: 1rem;
+    border: 1px solid var(--rule);
+    border-radius: var(--radius);
+    background: var(--paper);
+    color: var(--ink);
+    text-decoration: none;
+  }
+
+  .recent-card:hover {
+    border-color: var(--ink-soft);
+  }
+
+  .recent-name {
+    font-family: var(--font-display);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    overflow-wrap: anywhere;
+  }
+
+  .recent-line {
+    font-size: var(--step--1);
+    color: var(--ink-soft);
+    flex: 1;
+  }
+
+  .recent-date {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: var(--ink-soft);
   }
 </style>

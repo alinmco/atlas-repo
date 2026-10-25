@@ -13,9 +13,8 @@
     "Pasul 5 – Ieșire: cod modificat și teste din partea modelului, plus date de stare (memorie, jurnale, costuri) vizibile în CLI, în consola /ruflo sau în terminal cu `npx ruflo tui`."
   ],
   "categories": [
-    "Agenți AI pentru programare",
-    "Coordonarea mai multor asistenți AI",
-    "Memorie pentru asistenți AI"
+    "Agenți AI și automatizare",
+    "Agenți AI și memorie"
   ],
   "search_intents": [
     "vreau să folosesc mai mulți agenți AI care lucrează împreună la același proiect",

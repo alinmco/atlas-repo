@@ -63,7 +63,7 @@ const buildOwn = idea.path === "construiești propria implementare";
       <ul class="plain evidence">
         {idea.demand_evidence.map((e) => (
           <li>
-            <a href={e.url} rel="noopener">{e.name}</a>
+            <a href={e.url} target="_blank" rel="noopener noreferrer">{e.name}</a>
             {e.price && <> vinde la {e.price}</>}
             {" "}(consultat {formatDate(e.checked_at)}). {e.what_it_proves}
           </li>

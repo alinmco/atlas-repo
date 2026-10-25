@@ -13,9 +13,8 @@
     "pas 5: rezultatul (cod, tabele, figuri, raport) vine de la agent, cu sursele și verificările cerute de skill; tu verifici concluziile științifice"
   ],
   "categories": [
-    "Cercetare științifică asistată de AI",
-    "Analiză de date biologice și chimice",
-    "Scriere științifică și literatură"
+    "Agenți AI și știință",
+    "Skill-uri pentru agenți AI"
   ],
   "search_intents": [
     "vreau să folosesc Claude Code pentru analize de bioinformatică",

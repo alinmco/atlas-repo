@@ -24,10 +24,16 @@ const isActive = (href) => (href === "/" ? path === "/" || path.startsWith("/rep
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title === "Atlas de repo-uri" ? title : `${title} – Atlas de repo-uri`}</title>
     <meta name="description" content={description} />
+    <script is:inline>
+      try {
+        var t = localStorage.getItem("theme");
+        if (t === "light" || t === "dark") document.documentElement.setAttribute("data-theme", t);
+      } catch (e) {}
+    </script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Familjen+Grotesk:wght@500;650;700&family=JetBrains+Mono:wght@400;600&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter+Tight:wght@600;700;800&family=JetBrains+Mono:wght@400;600&display=swap"
       rel="stylesheet"
     />
   </head>
@@ -35,7 +41,13 @@ const isActive = (href) => (href === "/" ? path === "/" || path.startsWith("/rep
     <a class="skip visually-hidden" href="#main">Sari la conținut</a>
     <header class="site-header">
       <div class="wrap bar">
-        <a class="brand" href="/">Atlas de repo-uri</a>
+        <a class="brand" href="/" aria-label="Atlas, prima pagină">
+          <svg class="logo" viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" focusable="false">
+            <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2" />
+            <path d="M3 12h18M12 3c3 3 3 15 0 18M12 3c-3 3-3 15 0 18" fill="none" stroke="currentColor" stroke-width="1.5" />
+          </svg>
+          Atlas
+        </a>
         <nav aria-label="Principal">
           <ul class="plain nav">
             {nav.map((item) => (
@@ -45,6 +57,10 @@ const isActive = (href) => (href === "/" ? path === "/" || path.startsWith("/rep
             ))}
           </ul>
         </nav>
+        <button type="button" class="theme-toggle" id="theme-toggle" aria-label="Schimbă între modul luminos și cel întunecat">
+          <svg class="icon-moon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z" fill="currentColor" /></svg>
+          <svg class="icon-sun" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="4" fill="currentColor" /><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M4.9 19.1L7 17M17 7l2.1-2.1" stroke="currentColor" stroke-width="2" stroke-linecap="round" /></svg>
+        </button>
       </div>
     </header>
     <main id="main">
@@ -58,6 +74,31 @@ const isActive = (href) => (href === "/" ? path === "/" || path.startsWith("/rep
         </p>
       </div>
     </footer>
+    <script is:inline>
+      (function () {
+        var root = document.documentElement;
+        var btn = document.getElementById("theme-toggle");
+        function isDark() {
+          var t = root.getAttribute("data-theme");
+          if (t) return t === "dark";
+          return window.matchMedia("(prefers-color-scheme: dark)").matches;
+        }
+        btn.addEventListener("click", function () {
+          var next = isDark() ? "light" : "dark";
+          root.setAttribute("data-theme", next);
+          try { localStorage.setItem("theme", next); } catch (e) {}
+        });
+        // Linkurile către alte site-uri se deschid în tab nou.
+        document.querySelectorAll("a[href^='http']").forEach(function (a) {
+          try {
+            if (new URL(a.href).origin !== location.origin) {
+              a.target = "_blank";
+              a.rel = "noopener noreferrer";
+            }
+          } catch (e) {}
+        });
+      })();
+    </script>
   </body>
 </html>
 
@@ -72,42 +113,125 @@ const isActive = (href) => (href === "/" ? path === "/" || path.startsWith("/rep
   }
 
   .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    background: var(--paper);
     border-bottom: 1px solid var(--rule);
   }
 
   .bar {
     display: flex;
     flex-wrap: wrap;
-    align-items: baseline;
+    align-items: center;
     justify-content: space-between;
-    gap: 0.5rem 2rem;
-    padding-top: 1rem;
-    padding-bottom: 1rem;
+    gap: 0.25rem 1rem;
+    min-height: 4rem;
   }
 
   .brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
     font-family: var(--font-display);
-    font-weight: 700;
+    font-weight: 800;
     font-size: var(--step-1);
+    letter-spacing: -0.03em;
+    color: var(--ink);
     text-decoration: none;
+  }
+
+  .logo {
+    color: var(--accent);
+    flex: none;
+  }
+
+  nav {
+    margin-left: auto;
   }
 
   .nav {
     display: flex;
     flex-wrap: wrap;
-    gap: 0.25rem 1.25rem;
+    gap: 0.1rem 0.25rem;
   }
 
   .nav a {
+    display: block;
+    padding: 0.35rem 0.7rem;
+    border-radius: 999px;
+    font-size: var(--step--1);
+    font-weight: 500;
     text-decoration: none;
     color: var(--ink-soft);
   }
 
-  .nav a:hover,
+  .nav a:hover {
+    color: var(--ink);
+    background: var(--paper-raised);
+  }
+
   .nav a[aria-current="page"] {
     color: var(--ink);
-    text-decoration: underline;
-    text-decoration-thickness: 2px;
+    background: var(--paper-raised);
+    font-weight: 700;
+  }
+
+  .theme-toggle {
+    display: inline-grid;
+    place-items: center;
+    width: 36px;
+    height: 36px;
+    padding: 0;
+    border: 1px solid var(--rule);
+    border-radius: 50%;
+    background: transparent;
+    color: var(--ink);
+    cursor: pointer;
+  }
+
+  .theme-toggle:hover {
+    background: var(--paper-raised);
+  }
+
+  .icon-sun {
+    display: none;
+  }
+
+  @media (max-width: 36rem) {
+    .bar {
+      padding-top: 0.5rem;
+      padding-bottom: 0.5rem;
+    }
+
+    nav {
+      order: 3;
+      width: 100%;
+      margin-left: 0;
+    }
+
+    .theme-toggle {
+      margin-left: auto;
+    }
+  }
+
+  /* culori pentru butonul de temă: soare în modul întunecat */
+  :global(:root[data-theme="dark"]) .icon-moon {
+    display: none;
+  }
+
+  :global(:root[data-theme="dark"]) .icon-sun {
+    display: block;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :global(:root:not([data-theme="light"])) .icon-moon {
+      display: none;
+    }
+
+    :global(:root:not([data-theme="light"])) .icon-sun {
+      display: block;
+    }
   }
 
   main {
