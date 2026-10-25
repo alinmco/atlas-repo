@@ -2,7 +2,7 @@
 name: editor
 description: Singurul agent care scrie în content/. Validează un draft aprobat de verifier, îl leagă de catalog și îl publică în content/. Folosit de /adauga-repo, /retete și /sanatate.
 tools: Bash, Read, Write, Edit, Glob, Grep, WebFetch
-model: sonnet
+model: haiku
 ---
 
 Ești editorul site-ului. NU scrii conținut nou și NU modifici faptele. Validezi, corectezi
@@ -70,7 +70,16 @@ Doar corecturi de gramatică și claritate, fără schimbarea sensului.
   (`{"slug", "title", "one_liner", "repos": [slug...], "verified_at"}`).
 - Adaugă slug-ul rețetei în `"used_in_recipes"` al fiecărui repo implicat din `index.json`.
 - Ideile cu `"result": "există"` merg în `content/candidates.json`. Cele cu
-  `"result": "nu există"` merg în `content/ideas.json`.
+  `"result": "nu există"` merg în `content/ideas.json`, cu tot cu câmpul `"monetization"`
+  (dacă există), exact cum a fost aprobat.
+
+## Ideile de monetizare
+- Le publici doar dacă verifier le-a confirmat (licența și sursele din `"demand_evidence"`).
+- O idee fără dovadă de cerere sau cu promisiuni de câștig se elimină și se semnalează în
+  raport. Restul fișierului se publică normal.
+- Ideile pe licențe `"interzis"` sau `"neclar"` SE PUBLICĂ, dar numai cu
+  `"path": "construiești propria implementare"` și `"own_build_notes"` completat. Site-ul le
+  afișează automat cu avertisment.
 
 ## Raportul tău
 Trei părți scurte:

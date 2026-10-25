@@ -1,6 +1,7 @@
 ---
 import Base from "../layouts/Base.astro";
-import { ideas } from "../lib/data.js";
+import Monetization from "../components/Monetization.astro";
+import { ideas, repos } from "../lib/data.js";
 
 // Adresa repo-ului site-ului pe GitHub, pentru butonul „Vreau să lucrez la asta”.
 // Pune-o în variabila de mediu PUBLIC_SITE_REPO din Vercel, de exemplu: utilizator/atlas-repo
@@ -9,31 +10,61 @@ const issueUrl = (idea) =>
   siteRepo
     ? `https://github.com/${siteRepo}/issues/new?title=${encodeURIComponent("Idee: " + idea.title)}&body=${encodeURIComponent("Vreau să lucrez la: " + idea.title + "\n\n" + idea.problem)}`
     : null;
+
+const businesses = repos.flatMap((repo) =>
+  (repo.monetization ?? []).map((idea) => ({ idea, repo }))
+);
 ---
 
-<Base title="Idei de construit" description="Unelte care lipsesc din ecosistemul open-source, descoperite când rețetele s-au rupt.">
+<Base title="Idei" description="Afaceri realiste construite pe repo-uri open-source și unelte care lipsesc din ecosistem.">
   <section class="wrap intro">
-    <h1>Idei de construit</h1>
+    <h1>Idei</h1>
     <p class="prose lede">
+      Două feluri de idei: cum poți câștiga bani cu repo-urile din atlas, și ce unelte lipsesc încă și merită
+      construite.
+    </p>
+    <ul class="plain jump">
+      <li><a href="#afaceri">Afaceri posibile ({businesses.length})</a></li>
+      <li><a href="#proiecte">Proiecte de construit ({ideas.length})</a></li>
+    </ul>
+  </section>
+
+  <section class="wrap part" id="afaceri" aria-labelledby="afaceri-titlu">
+    <h2 id="afaceri-titlu">Afaceri posibile</h2>
+    <p class="prose soft note">
+      Pentru fiecare idee am verificat licența repo-ului și cel puțin o afacere reală care vinde deja ceva
+      asemănător. Când licența nu permite uzul comercial, ideea apare cu un avertisment roșu: o poți face doar
+      construind propria implementare. Nu găsești aici estimări de venit, pentru că nu le putem verifica.
+      Găsești prețurile concurenței, costurile și riscurile. Nu e sfat juridic sau financiar.
+    </p>
+    {businesses.length === 0 ? (
+      <p class="prose soft empty">Încă nicio idee de afaceri. Apar odată cu repo-urile care le permit.</p>
+    ) : (
+      businesses.map(({ idea, repo }) => (
+        <Monetization idea={idea} repoName={repo.name} repoSlug={repo.slug} />
+      ))
+    )}
+  </section>
+
+  <section class="wrap part" id="proiecte" aria-labelledby="proiecte-titlu">
+    <h2 id="proiecte-titlu">Proiecte de construit</h2>
+    <p class="prose soft note">
       Când două unelte ar trebui să lucreze împreună și nu pot, rămâne un gol. Ideile de mai jos sunt golurile
       găsite în timp ce construiam rețete, după ce am verificat că nu există deja un proiect care le rezolvă.
     </p>
-  </section>
-
-  <section class="wrap">
     {ideas.length === 0 ? (
-      <p class="prose soft">Nicio idee încă. Ideile apar odată cu primele rețete.</p>
+      <p class="prose soft empty">Nicio idee încă. Ideile apar odată cu primele rețete.</p>
     ) : (
       <ul class="plain">
         {ideas.map((idea) => (
           <li class="idea">
-            <h2>{idea.title}</h2>
+            <h3>{idea.title}</h3>
             <p class="soft meta">Dificultate: {idea.difficulty}</p>
             <p class="prose">{idea.problem}</p>
             {idea.where_chain_breaks && <p class="prose soft">Unde se rupe lanțul: {idea.where_chain_breaks}</p>}
             {idea.mvp && (
               <>
-                <h3>Prima versiune, într-un weekend</h3>
+                <h4 class="sub-h">Prima versiune, într-un weekend</h4>
                 <p class="prose">{idea.mvp}</p>
               </>
             )}
@@ -46,6 +77,12 @@ const issueUrl = (idea) =>
               <p class="soft meta">Tehnologii recomandate: {idea.recommended_stack.join(", ")}</p>
             )}
             {idea.risks?.length > 0 && <p class="soft meta">Riscuri: {idea.risks.join("; ")}</p>}
+            {idea.monetization?.length > 0 && (
+              <div class="idea-money">
+                <h4 class="sub-h money-label">Cum ar putea aduce bani</h4>
+                {idea.monetization.map((m) => <Monetization idea={m} headingLevel="h4" />)}
+              </div>
+            )}
             {issueUrl(idea) && (
               <a class="claim" href={issueUrl(idea)} rel="noopener">Vreau să lucrez la asta</a>
             )}
@@ -59,7 +96,7 @@ const issueUrl = (idea) =>
 <style>
   .intro {
     padding-top: 3rem;
-    padding-bottom: 2rem;
+    padding-bottom: 1.5rem;
   }
 
   h1 {
@@ -71,22 +108,65 @@ const issueUrl = (idea) =>
     font-size: var(--step-1);
   }
 
+  .jump {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 1.5rem;
+    margin-top: 1.25rem;
+  }
+
+  .part {
+    padding-top: 2rem;
+    padding-bottom: 1rem;
+  }
+
+  .part > h2 {
+    font-size: var(--step-2);
+    padding-top: 1rem;
+    border-top: 2px solid var(--ink);
+  }
+
+  .note {
+    margin-top: 0.75rem;
+    margin-bottom: 0.5rem;
+    font-size: var(--step--1);
+  }
+
+  .empty {
+    padding: 1rem 0;
+  }
+
   .idea {
     padding: 1.75rem 0;
-    border-top: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
   }
 
   .idea > * + * {
     margin-top: 0.6rem;
   }
 
-  .idea h2 {
+  .idea h3 {
     font-size: var(--step-2);
   }
 
-  .idea h3 {
+  .idea .sub-h {
     font-size: var(--step-1);
-    margin-top: 1.25rem;
+    margin-top: 1.5rem;
+  }
+
+  .idea .money-label {
+    font-size: var(--step-0);
+    color: var(--ink-soft);
+    padding-bottom: 0.25rem;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .idea-money {
+    margin-top: 1rem;
+  }
+
+  .idea-money :global(.money) {
+    padding-top: 0.75rem;
   }
 
   .meta {

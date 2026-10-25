@@ -6,6 +6,14 @@ disable-model-invocation: true
 
 Repo-uri primite: $ARGUMENTS
 
+## Pasul 0: planul, pe scurt
+Înainte de orice altceva, prezintă planul în formatul din CLAUDE.md („Cum comunici cu
+utilizatorul”) și așteaptă confirmarea. Pentru această comandă, planul spune:
+- ce repo-uri vei analiza (numele lor, nu linkurile întregi) și dacă vreunul e deja în atlas;
+- ce înseamnă pentru site: câte pagini noi;
+- durata estimată (~15-60 min per repo) și că consumul e mare.
+Dacă variabila de mediu `GITHUB_ACTIONS` are valoarea `true`, sari peste confirmare.
+
 Dacă nu ai primit niciun URL GitHub, cere-mi linkurile și oprește-te.
 
 ## Pregătire
@@ -31,7 +39,7 @@ Dacă nu ai primit niciun URL GitHub, cere-mi linkurile și oprește-te.
    Descrierea conține raportul editorului (cele 3 părți) și, pentru fiecare repo respins,
    motivul.
 
-## Raportul final către mine (scurt)
+## Raportul final către mine (scurt, în stilul din CLAUDE.md)
 - ✅ Publicate: lista repo-urilor
 - ❌ Respinse: repo + motivul într-o propoziție
 - ❓ Ce trebuie să decid eu

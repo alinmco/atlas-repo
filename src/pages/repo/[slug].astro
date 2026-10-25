@@ -2,6 +2,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import Base from "../../layouts/Base.astro";
+import Monetization from "../../components/Monetization.astro";
 import {
   repos,
   repoByUrl,
@@ -180,6 +181,19 @@ const evidenceUrl = (file) => `/dovezi/${repo.slug}/${file}`;
                 .
               </p>
             )}
+          </section>
+        )}
+
+        {repo.monetization?.length > 0 && (
+          <section>
+            <h2>Cum poți câștiga bani cu el</h2>
+            <p class="prose soft money-note">
+              Idei verificate față de licență și față de afaceri care vând deja ceva asemănător. Nu sunt
+              promisiuni de venit și nici sfat juridic sau financiar.
+              {repo.monetization.some((m) => ["interzis", "neclar"].includes(m.license_check?.commercial_use)) &&
+                " Licența acestui repo nu permite uzul comercial, deci ideile de mai jos se pot face doar cu o implementare proprie."}
+            </p>
+            {repo.monetization.map((idea) => <Monetization idea={idea} />)}
           </section>
         )}
 
@@ -407,6 +421,10 @@ const evidenceUrl = (file) => `/dovezi/${repo.slug}/${file}`;
   .env {
     font-size: var(--step--1);
     margin-top: 0.75rem;
+  }
+
+  .money-note {
+    font-size: var(--step--1);
   }
 
   .recipes-line {

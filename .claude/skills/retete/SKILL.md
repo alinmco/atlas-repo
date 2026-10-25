@@ -6,6 +6,14 @@ disable-model-invocation: true
 
 Instrucțiuni suplimentare (opțional): $ARGUMENTS
 
+## Pasul 0: planul, pe scurt
+Înainte de orice altceva, prezintă planul în formatul din CLAUDE.md („Cum comunici cu
+utilizatorul”) și așteaptă confirmarea. Pentru această comandă, planul spune:
+- câte repo-uri sunt în catalog și ce fel de combinații vei căuta;
+- că rezultatul vine ca Pull Request, cu rețete și idei noi;
+- durata estimată și că consumul e mare.
+Dacă variabila de mediu `GITHUB_ACTIONS` are valoarea `true`, sari peste confirmare.
+
 1. Verifică `content/index.json`. Dacă sunt mai puțin de 5 repo-uri în catalog, spune-mi că
    e prea devreme pentru rețete utile și oprește-te, dacă nu ți-am cerut explicit altfel.
 2. Treci pe `main` actualizat și creează branch-ul `continut/retete-<YYYY-MM-DD>`.
