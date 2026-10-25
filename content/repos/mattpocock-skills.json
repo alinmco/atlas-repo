@@ -102,6 +102,12 @@
         "name": "Superpowers",
         "why": "Același format SKILL.md, instalabil în același agent: Superpowers dă un flux complet (design, plan, execuție), iar skill-urile lui Pocock adaugă piese mici ca interviul /grill-me sau /handoff; nu am testat compatibilitatea.",
         "in_catalog": true
+      },
+      {
+        "repo_url": "https://github.com/anomalyco/opencode",
+        "name": "OpenCode",
+        "why": "Skill-uri instalabile cu npx skills, care includ OpenCode printre asistenții suportați, ca să-i dai reguli de lucru gata făcute.",
+        "in_catalog": true
       }
     ],
     "gaps_noticed": [

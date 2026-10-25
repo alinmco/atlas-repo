@@ -203,5 +203,25 @@
     "gap": "Suprafața e foarte mare (71 agenți, 311 skill-uri); alegerea componentelor potrivite rămâne un pas manual de curățare",
     "source_slug": "ecc",
     "added_at": "2026-10-25"
+  },
+  {
+    "gap": "Există două generații (V1 și V2) cu aceeași comandă opencode; pachetele npm diferă (opencode-ai pentru V1, @opencode/cli pentru V2) și nu se pot instala în paralel.",
+    "source_slug": "opencode",
+    "added_at": "2026-10-25"
+  },
+  {
+    "gap": "Pe pagina GitHub, ultima versiune etichetată (v1.19.4) pare să fie V1, în timp ce README-ul și package.json (2.1.4) descriu V2.",
+    "source_slug": "opencode",
+    "added_at": "2026-10-25"
+  },
+  {
+    "gap": "Documentația V2 spune că managerii de pachete Windows nu sunt suportați; pe Windows rămân binarul .zip, aplicația desktop sau scriptul în bash.",
+    "source_slug": "opencode",
+    "added_at": "2026-10-25"
+  },
+  {
+    "gap": "Documentația V2 nu descrie conectarea cu un abonament Claude; pentru ChatGPT există explicit „Sign in with ChatGPT”.",
+    "source_slug": "opencode",
+    "added_at": "2026-10-25"
   }
 ]
