@@ -94,6 +94,12 @@
         "name": "superpowers-lab",
         "why": "Repo al aceluiași autor, cu aceeași licență MIT, cu skill-uri experimentale; nu l-am citit în detaliu, deci rolul exact trebuie verificat în README-ul lui.",
         "in_catalog": false
+      },
+      {
+        "repo_url": "https://github.com/anomalyco/opencode",
+        "name": "OpenCode",
+        "why": "Fișierele lui de instrucțiuni (skill-uri) învață agentul să lucreze metodic; devin intrare pentru OpenCode, unul dintre asistenții pe care îi suportă (conform paginii din catalog).",
+        "in_catalog": true
       }
     ],
     "gaps_noticed": [

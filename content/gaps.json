@@ -183,5 +183,40 @@
     "gap": "README-ul descrie o telemetrie opțională la funcția „visual companion” (versiunea Superpowers trimisă prin încărcarea siglei); dezactivarea cere o variabilă de mediu setată manual.",
     "source_slug": "superpowers",
     "added_at": "2026-10-25"
+  },
+  {
+    "gap": "React singur nu include rutare (navigare între pagini), aducere de date sau build: trebuie ales separat un framework sau unelte (Next.js, React Router, Vite).",
+    "source_slug": "react",
+    "added_at": "2026-10-25"
+  },
+  {
+    "gap": "Create React App este depreciat; tutorialele vechi care îl folosesc trebuie adaptate la un framework recomandat.",
+    "source_slug": "react",
+    "added_at": "2026-10-25"
+  },
+  {
+    "gap": "Documentația de instalare nu precizează o versiune minimă de Node.js; fiecare unealtă aleasă (Vite, Next.js) are propria cerință.",
+    "source_slug": "react",
+    "added_at": "2026-10-25"
+  },
+  {
+    "gap": "Există două generații (V1 și V2) cu aceeași comandă opencode; pachetele npm diferă (opencode-ai pentru V1, @opencode/cli pentru V2) și nu se pot instala în paralel.",
+    "source_slug": "opencode",
+    "added_at": "2026-10-25"
+  },
+  {
+    "gap": "Pe pagina GitHub, ultima versiune etichetată (v1.19.4) pare să fie V1, în timp ce README-ul și package.json (2.1.4) descriu V2.",
+    "source_slug": "opencode",
+    "added_at": "2026-10-25"
+  },
+  {
+    "gap": "Documentația V2 spune că managerii de pachete Windows nu sunt suportați; pe Windows rămân binarul .zip, aplicația desktop sau scriptul în bash.",
+    "source_slug": "opencode",
+    "added_at": "2026-10-25"
+  },
+  {
+    "gap": "Documentația V2 nu descrie conectarea cu un abonament Claude; pentru ChatGPT există explicit „Sign in with ChatGPT”.",
+    "source_slug": "opencode",
+    "added_at": "2026-10-25"
   }
 ]
