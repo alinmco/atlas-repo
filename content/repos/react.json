@@ -1,0 +1,236 @@
+{
+  "slug": "react",
+  "repo_url": "https://github.com/react/react",
+  "name": "React",
+  "one_liner": "Bibliotecă pentru construit pagini web și aplicații interactive din piese reutilizabile.",
+  "problem_solved": "Când o pagină web are multe elemente care se schimbă (liste, formulare, butoane, notificări), codul scris de mână devine greu de ținut minte și plin de greșeli. React te lasă să descrii cum arată ecranul pentru fiecare stare a datelor, iar când datele se schimbă, el actualizează singur doar bucățile de pagină care trebuie. Aceeași abordare merge și pe server (prin Node) și în aplicații de telefon (prin React Native), conform README-ului.",
+  "analogy": "Ca un set de piese LEGO: faci o dată o piesă (un buton, un card de produs, un meniu) și o refolosești oriunde; când se schimbă ceva, înlocuiești doar piesa respectivă, nu reconstruiești toată macheta.",
+  "how_it_works": [
+    "Pas 1, intrare: scrii componente, adică funcții JavaScript care primesc date (de ex. un nume) și returnează cum trebuie să arate o bucată de ecran, de obicei în sintaxa JSX, asemănătoare cu HTML.",
+    "Pas 2, proces: React ține minte starea datelor și, când ea se schimbă, calculează ce s-a modificat și actualizează doar acele părți din pagină.",
+    "Pas 3, ieșire: pagina web interactivă din browser (react-dom), HTML generat pe server (randare pe server cu Node) sau o aplicație nativă pe telefon (React Native).",
+    "Repo-ul în sine este monorepo-ul care conține nucleul React (packages/react), randatorul pentru web (react-dom), reconciliatorul, DevTools, scheduler, eslint-plugin-react-hooks și, într-un folder separat, React Compiler (compiler/)."
+  ],
+  "categories": [
+    "Framework-uri și interfețe",
+    "Unelte pentru programatori"
+  ],
+  "search_intents": [
+    "vreau să fac o pagină web interactivă",
+    "vreau să învăț React de la zero",
+    "vreau să adaug React într-un site existent",
+    "vreau să construiesc o aplicație web cu componente",
+    "vreau să fac o aplicație de telefon cu aceeași tehnologie ca site-ul"
+  ],
+  "audience": "intermediar",
+  "setup_difficulty": "mediu",
+  "replaces": [],
+  "examples": [
+    {
+      "title": "Primul exemplu din README: un mesaj de salut",
+      "scenario": "Vrei să afișezi pe pagină un mesaj personalizat, construit dintr-o componentă React reutilizabilă.",
+      "prerequisites": [
+        "Un proiect JavaScript cu un bundler care înțelege JSX, de ex. Vite (recomandat de documentație pentru proiecte fără setup existent)",
+        "Node.js instalat",
+        "Pachetele react și react-dom instalate, plus un element HTML cu id=\"container\" în pagină"
+      ],
+      "commands": [],
+      "code": "import { createRoot } from 'react-dom/client';\n\nfunction HelloMessage({ name }) {\n  return <div>Hello {name}</div>;\n}\n\nconst root = createRoot(document.getElementById('container'));\nroot.render(<HelloMessage name=\"Taylor\" />);",
+      "output_from_docs": "README-ul spune doar: This example will render \"Hello Taylor\" into a container on the page.",
+      "source_url": "https://github.com/react/react#examples"
+    },
+    {
+      "title": "Adaugă React într-un proiect existent",
+      "scenario": "Ai deja un site și vrei ca o singură zonă (de ex. meniul de navigare) să fie făcută cu React, fără să rescrii restul.",
+      "prerequisites": [
+        "Node.js instalat",
+        "Un mediu JavaScript modular (bundler) care permite JSX, import/export și pachete npm; documentația recomandă Vite dacă nu ai nimic configurat"
+      ],
+      "commands": [
+        "npm install react react-dom"
+      ],
+      "code": "<!-- ... somewhere in your html ... -->\n<nav id=\"navigation\"></nav>\n<!-- ... more html ... -->\n\nimport { createRoot } from 'react-dom/client';\n\nfunction NavigationBar() {\n  // TODO: Actually implement a navigation bar\n  return <h1>Hello from React!</h1>;\n}\n\nconst domNode = document.getElementById('navigation');\nconst root = createRoot(domNode);\nroot.render(<NavigationBar />);",
+      "output_from_docs": "Documentația spune: conținutul HTML original este păstrat, iar NavigationBar se randează în interiorul lui <nav id=\"navigation\">.",
+      "source_url": "https://react.dev/learn/add-react-to-an-existing-project"
+    }
+  ],
+  "connectors": {
+    "inputs": [
+      "Cod JavaScript/TypeScript cu componente în sintaxă JSX (fișiere .js, .jsx, .tsx)",
+      "Date în JavaScript: obiecte și liste, de obicei JSON primit de la un API",
+      "Un element HTML din pagină (după id) în care se randează aplicația"
+    ],
+    "outputs": [
+      "Pagină web interactivă (DOM actualizat în browser)",
+      "HTML generat pe server (randare pe server în Node)",
+      "Interfață nativă pentru telefon, prin React Native"
+    ],
+    "pairs_well_with": [
+      {
+        "repo_url": "https://github.com/vitejs/vite",
+        "name": "Vite",
+        "why": "Unealta de build pe care documentația React o recomandă pentru proiecte fără setup: ia fișierele tale JSX și produce site-ul pregătit pentru publicare.",
+        "in_catalog": false
+      },
+      {
+        "repo_url": "https://github.com/vercel/next.js",
+        "name": "Next.js",
+        "why": "Framework recomandat de react.dev pentru aplicații complete; adaugă pagini, rutare și server peste componentele React scrise de tine.",
+        "in_catalog": false
+      },
+      {
+        "repo_url": "https://github.com/remix-run/react-router",
+        "name": "React Router",
+        "why": "Recomandat de react.dev (v7, împreună cu Vite) pentru navigare între pagini și aplicații full-stack; primește componente React și le leagă de adrese URL.",
+        "in_catalog": false
+      },
+      {
+        "repo_url": "https://github.com/expo/expo",
+        "name": "Expo",
+        "why": "Recomandat de react.dev pentru aplicații native Android/iOS/web: aceeași logică de componente ajunge pe telefon.",
+        "in_catalog": false
+      },
+      {
+        "repo_url": "https://github.com/TanStack/query",
+        "name": "TanStack Query",
+        "why": "Aduce și ține în cache datele de la un API; rezultatul (JSON) devine datele pe care componentele React le afișează. Nu este recomandat explicit în documentația React, e o combinație uzuală.",
+        "in_catalog": false
+      }
+    ],
+    "gaps_noticed": [
+      "React singur nu include rutare (navigare între pagini), aducere de date sau build: trebuie ales separat un framework sau unelte (Next.js, React Router, Vite).",
+      "Create React App este depreciat; tutorialele vechi care îl folosesc trebuie adaptate la un framework recomandat.",
+      "Documentația de instalare nu precizează o versiune minimă de Node.js; fiecare unealtă aleasă (Vite, Next.js) are propria cerință."
+    ]
+  },
+  "when_not_to_use": [
+    "Pentru un site simplu de prezentare, cu text și imagini fără interacțiune, HTML și CSS simplu (sau un generator de site-uri statice) e mai ușor și mai rapid.",
+    "Dacă nu știi deloc JavaScript, începe întâi cu bazele limbajului: React presupune că scrii cod JavaScript.",
+    "React este doar biblioteca de interfață: pentru un produs complet ai nevoie și de rutare, server, bază de date; documentația recomandă un framework (Next.js, React Router, Expo) în loc de React \"gol\".",
+    "Nu folosi Create React App: documentația îl declară depreciat.",
+    "Dacă vrei să modifici React însuși (monorepo-ul), ai nevoie de Node.js, Yarn și un mediu de build complex; nu este un scenariu pentru începători."
+  ],
+  "alternatives": [
+    {
+      "name": "Vue",
+      "url": "https://github.com/vuejs/core",
+      "difference": "Folosește șabloane apropiate de HTML și o curbă de învățare considerată mai blândă; ecosistem mai mic decât React."
+    },
+    {
+      "name": "Svelte",
+      "url": "https://github.com/sveltejs/svelte",
+      "difference": "Compilează componentele la build, fără bibliotecă de rulare mare; comunitate și număr de joburi mai mici."
+    },
+    {
+      "name": "Angular",
+      "url": "https://github.com/angular/angular",
+      "difference": "Framework complet, cu rutare și formulare incluse și TypeScript obligatoriu; mai multe reguli de învățat."
+    },
+    {
+      "name": "Preact",
+      "url": "https://github.com/preactjs/preact",
+      "difference": "Alternativă mică, cu API apropiat de React; util când contează dimensiunea paginii."
+    },
+    {
+      "name": "SolidJS",
+      "url": "https://github.com/solidjs/solid",
+      "difference": "Sintaxă similară cu JSX, dar cu actualizări mai fine, fără virtual DOM; ecosistem mai mic."
+    }
+  ],
+  "tech_sheet": {
+    "license": "MIT",
+    "language": "JavaScript",
+    "commit_sha": "a6b912fbe77f698ad43c922f206db0d4f4ad7485",
+    "last_commit_date": "2026-10-23",
+    "stars": 251839,
+    "requirements": [
+      "Node.js (documentația nu indică o versiune minimă pentru folosirea React; repo-ul React însuși folosește Node v20.19.0 în .nvmrc pentru dezvoltarea lui)",
+      "npm (vine cu Node.js)",
+      "Un mediu JavaScript modular (bundler) cu suport JSX; pentru un proiect nou fără setup, documentația recomandă Vite",
+      "Pentru un proiect nou complet, documentația recomandă un framework: Next.js (npx create-next-app@latest), React Router v7 (npx create-react-router@latest) sau Expo pentru aplicații native (npx create-expo-app@latest)",
+      "Instalare în proiect existent: npm install react react-dom",
+      "Nu sunt necesare conturi sau chei API; nu este nevoie de GPU",
+      "Nu folosi Create React App (depreciat)"
+    ]
+  },
+  "monetization": [
+    {
+      "model": "consultanță și training",
+      "what_you_sell": "Cursuri sau ateliere de React în limba română pentru echipe mici și persoane care trec de la HTML/JavaScript simplu la React, cu exerciții pe proiecte reale ale cursanților.",
+      "for_whom": "Firme mici cu dezvoltatori juniori, persoane în recalificare, echipe care migrează un site vechi la React.",
+      "license_check": {
+        "license": "MIT",
+        "commercial_use": "permis",
+        "conditions": "Licența MIT permite folosirea comercială; păstrezi notița de copyright dacă redistribui codul React. Documentația de pe react.dev este un alt repo/site (reactjs/react.dev) cu licență proprie: nu copia materiale de acolo în cursul tău fără să verifici licența lor. Numele și logo-ul React aparțin Meta: nu le folosi ca și cum cursul ar fi oficial."
+      },
+      "path": "folosești repo-ul direct",
+      "own_build_notes": null,
+      "demand_evidence": [
+        {
+          "name": "eSolutions Academy (România), curs ReactJS",
+          "url": "https://academy.esolutions.ro/course/reactjs",
+          "price": "850 EUR/participant (clasă deschisă); 1800 EUR/zi (training personalizat)",
+          "what_it_proves": "O firmă din România vinde deja cursuri de ReactJS, cu preț public pe participant și pe zi pentru echipe.",
+          "checked_at": "2026-10-25"
+        },
+        {
+          "name": "Bitovi, React training",
+          "url": "https://www.bitovi.com/services/training/react",
+          "price": "5.000 USD (3-8 participanți) sau 10.000 USD (9-16 participanți), training de 5 zile în persoană",
+          "what_it_proves": "Training de React pentru echipe se vinde în piață cu preț forfetar public.",
+          "checked_at": "2026-10-25"
+        }
+      ],
+      "startup_cost": "Practic zero în bani (laptop, cont video, loc de găzduit materialele); costul real este timpul pentru pregătirea materialelor.",
+      "time_to_first_client": "Necunoscut; depinde de reputația și rețeaua ta. Nu estimăm.",
+      "difficulty": "mediu",
+      "risks": [
+        "Concurență gratuită foarte puternică: react.dev are tutorial oficial gratuit, plus nenumărate cursuri pe YouTube.",
+        "Ai nevoie de experiență reală cu React ca să răspunzi la întrebări în direct; React se schimbă (de ex. React Compiler, Server Components), deci materialele se învechesc.",
+        "Clienții din companii cer de obicei referințe și facturare formală; efortul de vânzare e mare."
+      ],
+      "first_steps": [
+        "Parcurgi tutorialul oficial și faci un mini-proiect complet (de ex. o listă de sarcini) ca model de curs.",
+        "Alegi o nișă clară (de ex. React pentru cei care vin din PHP/jQuery) în loc de curs generalist.",
+        "Ții o primă sesiune gratuită sau ieftină cu 3-5 persoane și ceri feedback.",
+        "Pe baza feedbackului, fixezi un preț raportat la cele publice din tabelul de mai sus."
+      ]
+    },
+    {
+      "model": "integrare pentru o nișă",
+      "what_you_sell": "Aplicații web făcute la comandă cu React (de ex. panou de rezervări, calculator de oferte, mic portal pentru clienți) pentru afaceri mici care depășesc ce pot face constructorii de site-uri.",
+      "for_whom": "Afaceri locale (clinici, saloane, firme de servicii) care au nevoie de o funcție interactivă pe care un constructor de site-uri nu o oferă.",
+      "license_check": {
+        "license": "MIT",
+        "commercial_use": "permis",
+        "conditions": "MIT permite construirea și vânzarea de aplicații bazate pe React. Frameworkurile alese (Next.js, Vite, React Router, Expo) au propriile licențe; la momentul verificării (GitHub API) toate apar ca MIT, dar le verifici înainte de proiect."
+      },
+      "path": "folosești repo-ul direct",
+      "own_build_notes": null,
+      "demand_evidence": [
+        {
+          "name": "Squarespace, planuri pentru site-uri",
+          "url": "https://www.squarespace.com/pricing",
+          "price": "Planurile Basic/Core/Advanced apar la 18,15 / 29,04 / 50,82 EUR pe lună, respectiv 13,31 / 20,57 / 35,09 EUR pe lună (pagina nu etichetează clar care e plata anuală, probabil cea mai mică)",
+          "what_it_proves": "Afacerile mici plătesc deja lunar pentru un site; arată prețul alternativei fără cod. NU dovedește direct cerere pentru aplicații React la comandă: este doar reperul de preț al soluției de bază, pe care munca ta ar trebui s-o depășească ca valoare.",
+          "checked_at": "2026-10-25"
+        }
+      ],
+      "startup_cost": "Practic zero în bani; costuri de găzduire și domeniu, de obicei suportate de client.",
+      "time_to_first_client": "Necunoscut; nu estimăm.",
+      "difficulty": "greu",
+      "risks": [
+        "Concurență puternică din partea constructorilor de site-uri fără cod și a freelancerilor; dovada de cerere de mai sus este indirectă.",
+        "Ai de oferit suport și mentenanță după livrare (actualizări de dependențe, securitate), ceea ce consumă timp.",
+        "Proiectele la comandă cer abilități de design, backend și comunicare cu clientul, nu doar React."
+      ],
+      "first_steps": [
+        "Construiești 1-2 proiecte demonstrative într-o nișă aleasă și le publici.",
+        "Alegi un framework recomandat de react.dev (de ex. Next.js sau React Router) și îl folosești constant.",
+        "Stabilești un contract simplu cu mentenanța inclusă sau separată, ca să nu rămâi cu suport nelimitat."
+      ]
+    }
+  ],
+  "updated_at": "2026-10-25",
+  "notes": "Repo-ul a fost analizat la commitul a6b912f (2026-10-23), release recent 19.3.1 (2026-10-14). README-ul spune doar că exemplul va randa \"Hello Taylor\"; nu arată alt output. Nu am găsit un serviciu plătit pe care React să-l înlocuiască realist (este o bibliotecă, nu un produs final), de aceea replaces este gol. Documentația de instalare nu indică o versiune minimă de Node.js pentru utilizatori; .nvmrc (v20.19.0) se referă la dezvoltarea repo-ului React. Repo-ul pare să fi fost mutat de la facebook/react la react/react; GitHub redirecționează numele vechi, iar react-native apare acum ca react/react-native. Prețul Squarespace: pagina nu spune clar care coloană e anuală și care lunară; am notat ambele. Prețul Epic React nu s-a putut verifica (pagina afișează \"Loading price\"), deci nu e folosit. Webflow și Upwork nu s-au putut deschide. Instrucțiunile din CLAUDE.md al repo-ului (lucru pe un Rust Compiler Port) nu sunt relevante pentru utilizatori și nu au fost urmate."
+}
