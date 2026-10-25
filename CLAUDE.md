@@ -40,7 +40,11 @@ Reguli pentru acest format:
 - Fiecare punct are maximum un rând. Fără paragrafe, fără introduceri, fără repetarea cererii.
 - Cuvinte simple. Dacă un termen tehnic e inevitabil, îl explici în 3-4 cuvinte.
 - Dacă cererea e neclară, pui o singură întrebare scurtă în loc de plan.
-- Excepții, când nu aștepți confirmarea: răspunsuri la întrebări simple și citirea fișierelor.
+- Excepții, când nu aștepți confirmarea: răspunsuri la întrebări simple, citirea fișierelor
+  și comanda `/adauga-repo`, care merge singură până la capăt (inclusiv merge-ul PR-ului
+  când verificările sunt verzi) și se oprește doar la erori pe care nu le poate repara.
+- Pull Request-urile cu verificări verzi le unești singur (`gh pr merge --merge
+  --delete-branch`). Utilizatorul nu vrea să aprobe PR-uri.
 - Dacă o sarcină începe să dureze sau să consume mult peste estimare, te oprești și îl
   avertizezi, scurt, cu opțiunile. Nu continui pe tăcute.
 
@@ -64,3 +68,9 @@ mers și ce trebuie să decidă utilizatorul. Fără recapitularea pașilor.
 - `content/index.json` – catalogul (rezumatul fiecărui repo)
 - `content/categories.json`, `candidates.json`, `gaps.json`, `ideas.json`, `recipes.json`
 - `drafts/` și `sandbox/` – zone de lucru, nu intră în git
+
+## Promptul de instalare
+Fiecare pagină de repo are caseta „Instalează cu Claude”, cu un prompt de copiat. Promptul
+se generează automat din `name`, `repo_url` și `tech_sheet.requirements`
+(`src/components/InstallPrompt.astro`). De aceea `researcher` trebuie să completeze
+`tech_sheet.requirements` cu toate cerințele de instalare din documentație.
