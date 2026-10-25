@@ -1,0 +1,285 @@
+{
+  "slug": "rea",
+  "repo_url": "https://github.com/morluto/rea",
+  "name": "REA (Reverse Engineer Anything)",
+  "one_liner": "Un asistent AI care analizează aplicații și programe compilate și explică cum funcționează.",
+  "problem_solved": "Când un program nu îți arată codul sursă (o aplicație desktop, un fișier executabil, un APK Android, un site), e greu să afli ce face de fapt. Munca asta se numește inginerie inversă și se face de obicei manual, cu unelte specializate (Hopper, Ghidra, IDA) și multă experiență. REA este un server MCP (un fel de „priză” prin care un asistent AI folosește unelte externe) și o linie de comandă care conectează asistentul tău AI la astfel de unelte. Asistentul poate inspecta ținta pe calculatorul tău, poate urmări o funcționalitate prin cod și îți returnează constatările împreună cu dovezile și cu limitările lor. Folosirea corectă ține strict de software pe care ai dreptul să-l analizezi (al tău, cu permisiune scrisă sau unde legea permite explicit, de exemplu pentru interoperabilitate, cercetare de securitate, analiză de malware, educație, conservare).",
+  "analogy": "E ca un mecanic-expert care deschide un motor sigilat, notează ce piesă pune în mișcare ce, și îți dă fotografiile ca dovadă. Tu stai la birou și doar pui întrebări.",
+  "how_it_works": [
+    "Pas 1, intrare: îi indici asistentului AI (Claude Code, Codex, Cursor, Gemini CLI etc.) o țintă locală: un folder de aplicație Electron, un fișier ASAR, un executabil nativ, un APK, un fișier HAR cu trafic salvat, un site și altele. Rulezi o dată `npx rea-agents setup`, care înregistrează REA la agenții aleși.",
+    "Pas 2, proces: asistentul apelează uneltele REA prin MCP (sau tu rulezi aceleași comenzi din terminal). Pentru JavaScript/Electron, .NET și mai multe formate, REA citește fișierele static, fără să execute aplicația. Pentru programe native REA se sprijină pe Hopper, Ghidra sau IDA, instalate separat.",
+    "Pas 3, ieșire: REA returnează constatări cu dovezile și limitările lor (module, importuri, pseudocod, asamblare, referințe), în JSON. Asistentul le folosește ca să-ți explice comportamentul, iar documentația spune că poate și să scrie și să testeze o implementare proprie, dar numai dacă ai dreptul să te bazezi pe țintă."
+  ],
+  "categories": [
+    "Inginerie inversă software",
+    "Analiză de securitate"
+  ],
+  "search_intents": [
+    "vreau să înțeleg cum funcționează o aplicație fără codul sursă",
+    "vreau să las un asistent AI să analizeze un fișier executabil",
+    "vreau să analizez o aplicație Electron sau un fișier ASAR",
+    "vreau să conectez Ghidra sau Hopper la un asistent AI",
+    "vreau un server MCP pentru inginerie inversă",
+    "vreau să analizez un APK Android sau un fișier .NET pe care am dreptul să-l analizez"
+  ],
+  "audience": "avansat",
+  "setup_difficulty": "mediu",
+  "replaces": [
+    {
+      "service": "Binary Ninja (licență Commercial)",
+      "service_url": "https://binary.ninja/",
+      "price": "1.799 USD (licență Commercial, plus taxe); Personal 199 USD (doar uz necomercial); Free 0 USD (fără plugin-uri)",
+      "price_source_url": "https://binary.ninja/purchase/",
+      "price_checked_at": "2026-10-25",
+      "replacement_level": "doar pentru cazuri simple",
+      "what_you_keep": [
+        "Analiză de binare native condusă de un asistent AI, cu Ghidra (gratuit, Apache-2.0) ca motor, pentru întrebări de tipul „ce face această funcție”",
+        "Analiză statică de aplicații JavaScript/Electron, .NET și mai multe formate, direct din linia de comandă",
+        "Rezultate în JSON cu dovezi, care pot fi salvate și scriptate"
+      ],
+      "what_you_lose": [
+        "Interfața grafică și fluxul de lucru propriu al unui produs comercial matur; REA nu e o interfață grafică de analiză, ci un strat pentru agenți",
+        "Suportul comercial și garanțiile unui furnizor; REA este oferit „AS IS”",
+        "Calitatea decompilării și acoperirea arhitecturilor sunt cele ale motorului ales (Ghidra, Hopper, IDA); nu am comparat nicio unealtă cu alta, iar documentația REA spune că rezultatele pot fi incomplete sau greșite"
+      ],
+      "hidden_costs": [
+        "Timp de configurare: Node.js 22+ plus un motor de analiză instalat separat pentru ținte native",
+        "Costul modelului AI folosit de agent (abonament sau API), neinclus în REA",
+        "Rezultatele complete pot ajunge la sute de MB pentru o aplicație reală (după documentație), deci și timp de filtrare",
+        "REA se schimbă rapid (versiunea 6.8.0 pe 2026-10-25; 5 versiuni între 2026-10-11 și 2026-10-25), deci actualizări frecvente"
+      ]
+    },
+    {
+      "service": "IDA Pro (Hex-Rays)",
+      "service_url": "https://hex-rays.com/ida-pro",
+      "price": "de la 1.099 EUR/an (Essential); 4.999 EUR/an (Expert); 8.599 EUR/an (Ultimate); IDA Home 365 USD/an (uz necomercial); IDA Free 0. Pagina amestecă EUR și USD.",
+      "price_source_url": "https://hex-rays.com/pricing",
+      "price_checked_at": "2026-10-25",
+      "replacement_level": "doar pentru cazuri simple",
+      "what_you_keep": [
+        "Întrebări în limbaj natural către un asistent AI, cu Ghidra ca motor gratuit",
+        "Analiză statică de aplicații JavaScript/Electron și .NET fără niciun motor nativ"
+      ],
+      "what_you_lose": [
+        "Decompilatorul și ecosistemul Hex-Rays; REA poate folosi IDA ca motor, dar nu îl înlocuiește (documentația cere o licență IDA legală pentru acest mod)",
+        "Suportul comercial al furnizorului",
+        "Nu am comparat profunzimea analizei dintre Ghidra și IDA; REA nu promite acuratețe sau completitudine"
+      ],
+      "hidden_costs": [
+        "Timp pentru a învăța fluxul de lucru cu agent și motor",
+        "Costul modelului AI",
+        "Dacă alegi IDA sau Hopper ca motor pentru REA, licența lor rămâne plătită și supusă termenilor furnizorului (utilizatori, automatizare, găzduire, partajarea rezultatelor)"
+      ]
+    }
+  ],
+  "examples": [
+    {
+      "title": "Conectezi REA la agent și pui o întrebare",
+      "scenario": "Rulezi o dată comanda de configurare, repornești agentul și îi ceri să investigheze o funcționalitate dintr-o aplicație pe care ai dreptul să o analizezi. Exemplul din README folosește aplicația Notes; înlocuiește-o cu ținta ta autorizată.",
+      "prerequisites": [
+        "Node.js 22.x (>=22.23.4), 24.x (>=24.22.1) sau 26.12.1+, plus npm",
+        "Un agent compatibil cu MCP local (Claude Code, Codex, Cursor, Gemini CLI, Grok Build și altele)",
+        "Pentru ținte native: Hopper, Ghidra sau IDA instalat separat (IDA, Hopper după trial, JEB sunt produse plătite; Ghidra este gratuit)",
+        "Un cont/abonament la modelul AI folosit de agent (de regulă plătit, nu face parte din REA)"
+      ],
+      "commands": [
+        "npx rea-agents setup"
+      ],
+      "code": "Understand how search works in the Notes app, show me the evidence, and build a\nsimilar feature for my project.",
+      "output_from_docs": null,
+      "source_url": "https://github.com/morluto/rea#quick-start"
+    },
+    {
+      "title": "Analizezi din terminal o aplicație JavaScript/Electron extrasă",
+      "scenario": "Ai un folder cu o aplicație Electron extrasă (sau un fișier ASAR) pe care ai dreptul să o analizezi, de exemplu propria aplicație. Rulezi analiza statică, fără să execuți aplicația, și primești modulele, importurile și limitele Electron cu dovezile lor.",
+      "prerequisites": [
+        "Node.js 22.x (>=22.23.4), 24.x (>=24.22.1) sau 26.12.1+, plus npm",
+        "Pe Linux: un `ps` compatibil procps în PATH",
+        "Nu e nevoie de Hopper, Ghidra, IDA, chei API sau GPU pentru acest mod, conform documentației"
+      ],
+      "commands": [
+        "npx -y rea-agents@latest analyze-javascript-application /absolute/path/to/app --json"
+      ],
+      "code": "",
+      "output_from_docs": null,
+      "source_url": "https://github.com/morluto/rea#use-the-terminal"
+    }
+  ],
+  "connectors": {
+    "inputs": [
+      "Folder de aplicație Electron/JavaScript extrasă sau fișier ASAR",
+      "Executabil nativ analizat prin Hopper, Ghidra sau IDA",
+      "Fișier APK Android (cu JADX și JDK), assembly .NET (.dll), fișier HAR sau Fiddler SAZ cu trafic salvat, pcap, firmware, URL de site (cu un browser de tip Chrome)",
+      "Instrucțiuni în limbaj natural date asistentului AI"
+    ],
+    "outputs": [
+      "JSON (Evidence) cu constatări, locații, limitări și necunoscute, pe stdout sau în fișier (`--json`)",
+      "JSON Lines pentru rezultate pe rânduri (`--format jsonl`)",
+      "Pseudocod și asamblare pentru ținte native, returnate asistentului prin MCP",
+      "Fișier de rezultate pentru CI (`analysis.json`, `analysis.stderr`, `exit-code.txt`), din exemplul GitHub Actions"
+    ],
+    "pairs_well_with": [
+      {
+        "repo_url": "https://github.com/NationalSecurityAgency/ghidra",
+        "name": "Ghidra",
+        "why": "Motorul gratuit de decompilare pe care REA îl poate folosi pentru binare native: Ghidra produce pseudocodul, REA îl împachetează ca dovezi pentru asistentul AI.",
+        "in_catalog": false
+      },
+      {
+        "repo_url": "https://github.com/skylot/jadx",
+        "name": "JADX",
+        "why": "Documentația REA cere JADX în mod headless pentru analiza de APK-uri Android: JADX decompilează clasele, REA le expune asistentului.",
+        "in_catalog": false
+      },
+      {
+        "repo_url": "https://github.com/mitmproxy/mitmproxy",
+        "name": "mitmproxy",
+        "why": "Documentația REA pomenește mitmdump pe Linux pentru capturi de rețea; un trafic salvat al propriei aplicații devine intrare pentru analiza de cereri și răspunsuri.",
+        "in_catalog": false
+      },
+      {
+        "repo_url": "https://github.com/ReFirmLabs/binwalk",
+        "name": "binwalk",
+        "why": "Documentația REA folosește Binwalk sau Unblob pentru firmware: extrage regiunile, iar REA le trimite spre analiza nativă.",
+        "in_catalog": false
+      }
+    ],
+    "gaps_noticed": [
+      "Rezultatul complet al unei analize poate avea sute de MB; documentația cere să-l salvezi într-un fișier și să-l filtrezi manual cu `jq` și `inspect-analysis-view`.",
+      "Pentru ținte native, motorul (Hopper, Ghidra sau IDA) trebuie instalat și licențiat separat; suportul Windows pentru Ghidra este descris ca experimental.",
+      "Multe fluxuri (pcap, semnale logice, crash-uri Linux, firmware, captură de procese) sunt documentate ca necesitând Linux, uneori doar x64.",
+      "Nu există o interfață grafică; totul trece prin agent sau terminal."
+    ]
+  },
+  "when_not_to_use": [
+    "Nu îl folosi pe software pe care nu ai dreptul să-l analizezi. Documentația REA (DISCLAIMER.md) spune că unealta e pentru cercetare legală: securitate, analiză de malware, vulnerabilități cu divulgare coordonată, CTF și educație, interoperabilitate, conservarea software-ului și depanarea sau auditarea software-ului pe care îl deții sau ești autorizat să-l examinezi.",
+    "Termenii și licențele multor aplicații (EULA, termeni de serviciu) interzic ingineria inversă, iar legea din țara ta o poate limita; disclaimerul spune explicit că ea „poate fi restricționată în jurisdicția ta sau prin licența software-ului analizat”. Faptul că un fișier e public sau că îl ai pe disc nu înseamnă permisiune. Dacă ai dubii, cere un aviz de la un jurist.",
+    "Proiectul declară că nu sprijină și nu ajută cu: ocolirea DRM, a verificărilor de licență sau a sistemelor anti-cheat; crearea de cheat-uri pentru jocuri; ocolirea autentificării sau a protecțiilor pe sisteme pe care nu ești autorizat să le testezi; copierea de software proprietar sau reproducerea codului și a resurselor protejate; reutilizarea de conturi sau acces API la modele AI. Cererile de acest tip sunt închise fără răspuns.",
+    "Faptul că obții cod sau un raport nu îți dă drepturi asupra programului original sau asupra rezultatului; verifică drepturile țintei înainte să publici sau să folosești rezultatele într-un alt produs.",
+    "Unele fluxuri execută sau interacționează cu ținta (captură de proces, rulare, atașare la un browser sau la dispozitive) cu permisiunile tale de utilizator; pentru ținte nesigure folosește un mediu izolat, nu calculatorul tău principal.",
+    "Rezultatele sunt analize euristice și asistate de AI și pot fi incomplete sau greșite (disclaimer); nu le folosi ca verdict de securitate fără să verifici dovezile.",
+    "Nu e pentru începători: cere Node.js, configurarea unui agent MCP și, pentru binare, un motor extern. Dacă vrei o interfață grafică clasică, folosește direct Ghidra sau Hopper.",
+    "Proiectul se schimbă foarte repede (zeci de versiuni în câteva luni, peste 1.000 de issue-uri deschise), deci contractele și comenzile se pot modifica."
+  ],
+  "alternatives": [
+    {
+      "name": "GhidraMCP",
+      "url": "https://github.com/LaurieWired/GhidraMCP",
+      "difference": "Server MCP doar pentru Ghidra (Apache-2.0); mai îngust, REA acoperă și JavaScript/Electron, .NET, APK, rețea și altele."
+    },
+    {
+      "name": "ida-pro-mcp",
+      "url": "https://github.com/mrexodia/ida-pro-mcp",
+      "difference": "Punte MCP (MIT) doar pentru IDA Pro, care cere IDA Pro licențiat; REA poate folosi și alte motoare."
+    },
+    {
+      "name": "Ghidra",
+      "url": "https://github.com/NationalSecurityAgency/ghidra",
+      "difference": "Unealta clasică, cu interfață grafică, fără asistent AI integrat; REA se așază deasupra ei."
+    },
+    {
+      "name": "JADX",
+      "url": "https://github.com/skylot/jadx",
+      "difference": "Decompilator specializat pentru Android (Apache-2.0), cu interfață grafică; REA îl poate folosi ca motor pentru APK-uri."
+    }
+  ],
+  "tech_sheet": {
+    "license": "MIT",
+    "language": "TypeScript",
+    "commit_sha": "5d428390996498bc4dcca4da934641557f9109bc",
+    "last_commit_date": "2026-10-25",
+    "stars": 382769,
+    "requirements": [
+      "Node.js 22.x (>=22.23.4), 24.x (>=24.22.1) sau 26.12.1+, plus npm",
+      "Un agent compatibil MCP (Claude Code, Codex, Cursor, Gemini CLI, Grok Build etc.) sau doar terminalul",
+      "Pentru analiză nativă: Hopper, Ghidra sau IDA instalat separat (Hopper, IDA, JEB sunt plătite)",
+      "Pentru APK: JADX headless și JDK complet; pentru site-uri: un browser de tip Chrome",
+      "Pe Linux: `ps` compatibil procps"
+    ]
+  },
+  "monetization": [
+    {
+      "model": "consultanță și training",
+      "what_you_sell": "Ateliere și consultanță pentru echipe de securitate sau de dezvoltare despre cum se folosește un asistent AI cu REA pe ținte autorizate: propriile aplicații, mostre de malware în laborator izolat, CTF-uri, interoperabilitate documentată. Doar ținte pentru care clientul sau tu aveți drepturi clare.",
+      "for_whom": "Echipe de securitate (AppSec, analiză de incidente) și firme care vor să înțeleagă ce conține propriul lor produs livrat.",
+      "license_check": {
+        "license": "MIT",
+        "commercial_use": "permis cu condiții",
+        "conditions": "MIT permite uzul comercial, cu păstrarea notei de copyright. Componentele terțe își păstrează licențele (THIRD_PARTY_NOTICES.md): Ghidra are părți sub GPLv3, Frida e sub LGPL-2.0 cu excepție wxWindows. Uneltele comerciale (IDA Pro, Hopper, JEB) trebuie licențiate legal; REA nu oferă licențe, iar termenii lor pot limita automatizarea, găzduirea sau partajarea rezultatelor (JEB restricționează dezvăluirea publică a codului decompilat). DISCLAIMER.md nu modifică licența MIT, dar spune că proiectul nu sprijină ocolirea protecțiilor sau a licențelor altora; nu vinde și nu preda așa ceva."
+      },
+      "path": "folosești repo-ul direct",
+      "own_build_notes": null,
+      "demand_evidence": [
+        {
+          "name": "SANS FOR610: Reverse-Engineering Malware",
+          "url": "https://www.sans.org/cyber-security-courses/reverse-engineering-malware-malware-analysis-tools-techniques/",
+          "price": "8.780 USD (variantă OnDemand, 4 luni acces); 8.230 EUR în Paris/Europa; alte prețuri pe pagină",
+          "what_it_proves": "Există cerere plătită pentru formare în inginerie inversă și analiză de malware. Pagina nu menționează REA; arată doar cererea pentru training de acest tip.",
+          "checked_at": "2026-10-25"
+        },
+        {
+          "name": "Binary Ninja (licențe Personal/Commercial)",
+          "url": "https://binary.ninja/purchase/",
+          "price": "199 USD Personal, 1.799 USD Commercial",
+          "what_it_proves": "Oamenii plătesc pentru unelte de inginerie inversă, deci piața de profesioniști există.",
+          "checked_at": "2026-10-25"
+        }
+      ],
+      "startup_cost": "Practic zero în bani pentru REA și Ghidra; plătești abonamentul la modelul AI și, dacă ai nevoie, licențele de IDA, Hopper sau JEB (vezi prețurile de mai sus). Timpul principal: câteva săptămâni ca să stăpânești fluxul și să pregătești material cu ținte proprii sau cu licență deschisă.",
+      "time_to_first_client": "Neconfirmat; depinde de reputația ta în securitate. Nu am o sursă pentru un ritm de vânzare.",
+      "difficulty": "greu",
+      "risks": [
+        "Concurență gratuită: documentația, ghidurile și studiile de caz de pe rea.tools sunt gratuite, iar repo-ul însuși e MIT.",
+        "Concurență puternică din partea trainingurilor consacrate (ex. SANS), cu reputație și certificări.",
+        "Risc legal: orice demonstrație sau exercițiu pe software al altora fără drept explicit poate încălca licența sau legea; folosește doar ținte proprii, cu permisiune scrisă sau create pentru învățare.",
+        "Proiectul se schimbă rapid (versiuni noi aproape săptămânal), deci materialele se învechesc.",
+        "Dependența de furnizori de modele AI, ale căror politici de utilizare pot limita sarcini de acest tip; DISCLAIMER.md avertizează explicit să nu eviți politicile lor."
+      ],
+      "first_steps": [
+        "Citește integral DISCLAIMER.md și THIRD_PARTY_NOTICES.md și hotărăște ce ținte vei folosi (software propriu, mostre cu licență deschisă, CTF).",
+        "Parcurge ghidurile de pe rea.tools și studiile de caz din README pe ținte permise.",
+        "Scrie un contract-tip cu clientul care precizează ținta, dreptul clientului asupra ei și limitele de utilizare; cere aviz juridic local.",
+        "Pregătește un atelier de câteva ore pe o aplicație proprie și testează-l cu o echipă prietenă."
+      ]
+    },
+    {
+      "model": "integrare pentru o nișă",
+      "what_you_sell": "O configurare de audit pentru echipe care își publică aplicații Electron/JavaScript: un workflow GitHub Actions care analizează static build-ul propriu la fiecare lansare și arhivează raportul (ce module, ce importuri, ce pachete ajung în installer). Pornești de la exemplul oficial din repo.",
+      "for_whom": "Echipe mici de produs care vor să știe ce se livrează efectiv în propriul installer, fără să construiască tooling intern.",
+      "license_check": {
+        "license": "MIT",
+        "commercial_use": "permis cu condiții",
+        "conditions": "MIT cu păstrarea notei de copyright; componentele terțe își păstrează licențele (vezi THIRD_PARTY_NOTICES.md). Pentru analiza JavaScript statică nu e nevoie de unelte plătite, conform documentației; dacă alegi IDA, Hopper sau JEB, licențele lor rămân ale clientului sau ale tale și pot restricționa serviciile oferite altora. Analizezi doar build-urile propriilor clienți, cu acordul lor scris, nu aplicațiile terților."
+      },
+      "path": "folosești repo-ul direct",
+      "own_build_notes": null,
+      "demand_evidence": [
+        {
+          "name": "Packetlabs: Penetration Testing of Electron-Based Applications",
+          "url": "https://www.packetlabs.net/posts/penetration-testing-electron-applications/",
+          "price": null,
+          "what_it_proves": "Firmele de securitate scriu despre testarea aplicațiilor Electron și oferă teste de penetrare (pagina nu afișează prețuri, se cere ofertă). Dovedește interesul pentru securitatea aplicațiilor Electron; nu dovedește cerere pentru exact acest serviciu.",
+          "checked_at": "2026-10-25"
+        }
+      ],
+      "startup_cost": "Zero pentru REA; rulezi pe runner-ul gratuit GitHub Actions al clientului (după documentație), plus timpul tău de integrare.",
+      "time_to_first_client": "Neconfirmat; nu am o sursă pentru acest ritm.",
+      "difficulty": "mediu",
+      "risks": [
+        "Concurență gratuită: exemplul de workflow e în repo, iar clientul îl poate copia direct.",
+        "Rapoartele pot conține căi, URL-uri și fapte derivate din sursă; ai nevoie de acord scris și de reguli clare de retenție și partajare.",
+        "Dacă ceri mai mult decât analiză statică (rulare, captură de proces), apar riscuri de execuție, descrise în documentație.",
+        "Efort de suport: versiuni noi frecvente și posibile modificări de contract între versiuni majore.",
+        "Piață îngustă: puține echipe au nevoie de acest raport și nu am o sursă pentru dimensiunea ei."
+      ],
+      "first_steps": [
+        "Copiază exemplul oficial `examples/github-actions/rea-analysis.yml` într-un repo de test propriu și rulează-l manual.",
+        "Înlocuiește pasul „Build a known artifact” cu un build propriu și ajustează `ARTIFACT_PATH`.",
+        "Scrie un raport-șablon din `analysis.json`, citind documentația despre `inspect-analysis-view`.",
+        "Pregătește un acord care limitează analiza la build-urile clientului și la raportul pe care ai voie să-l păstrezi."
+      ]
+    }
+  ],
+  "updated_at": "2026-10-25",
+  "notes": "Repo nou în catalog. Citit: README, DISCLAIMER.md, LICENSE (MIT, Copyright 2026 morluto), THIRD_PARTY_NOTICES.md, docs/installation.md, docs/cli.md, docs/ci-analysis.md, package.json. Nu am rulat nimic. STELE: GitHub raportează 382.769 stele și 95.759 fork-uri, pe un repo creat pe 2026-04-14 (cam șase luni), cu 5.455 de commit-uri, 1.060 issue-uri deschise și 1.399 watchers. README-ul însuși sărbătorește „300.000 de stele”. Numărul e neobișnuit de mare pentru vârsta repo-ului, iar raportul fork/stele (~25%) e ridicat, dar nu pot verifica creșterea: endpoint-ul API al stargazers returnează 404 pentru acest repo. Nu afirm că ar fi manipulat; spun doar că cifra nu am putut-o confirma independent, deci nu o lua drept dovadă de calitate. Proprietarul (morluto) e cont personal creat în 2020, cu ~10,6 mii de urmăritori. Ultima versiune: rea-agents 6.8.0 (2026-10-25). PREȚURI: Binary Ninja (binary.ninja/purchase) și IDA (hex-rays.com/pricing) verificate pe 2026-10-25, prețuri fără taxe; IDA amestecă EUR și USD pe pagină. Hopper: pagina oficială nu arată prețul licenței (doar trial cu limite: fără salvare/export, fără debugger, sesiuni de 30 de minute), deci prețul este neconfirmat. Neconfirmat și pe SANS: pagina listează 10 evenimente din 11 și programul încă se încărca. WebFetch pe vaadata.com/en/rates-pentest a dat 404 (link neutilizat în draft). OUTPUT: README și docs nu arată un exemplu literal de output pentru cele două comenzi, deci output_from_docs este null; docs/cli.md menționează doar că un fișier de Evidence de 334 MB pentru Obsidian dă o vedere-rezumat de ~10 KB. Folderul examples/ conține doar un workflow GitHub Actions. INGINERIE INVERSĂ: README și DISCLAIMER.md au secțiuni explicite despre utilizare legală, rezumate în when_not_to_use. Nu am găsit pe rea.tools o politică separată sau prețuri/planuri plătite; site-ul nu menționează oferte comerciale. Monetizarea exclude orice idee bazată pe ocolirea protecțiilor sau a licențelor; ambele idei se limitează la ținte autorizate. Licența repo-ului e MIT, dar componentele terțe (Ghidra GPLv3 pentru programele din GPL/, Frida LGPL cu excepție, unelte comerciale) au termeni proprii."
+}

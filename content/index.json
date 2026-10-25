@@ -88,5 +88,34 @@
       "https://github.com/android/skills"
     ],
     "used_in_recipes": []
+  },
+  {
+    "slug": "rea",
+    "name": "REA (Reverse Engineer Anything)",
+    "one_liner": "Un asistent AI care analizează aplicații și programe compilate și explică cum funcționează.",
+    "categories": [
+      "Inginerie inversă software",
+      "Analiză de securitate"
+    ],
+    "inputs": [
+      "Folder de aplicație Electron/JavaScript extrasă sau fișier ASAR",
+      "Executabil nativ analizat prin Hopper, Ghidra sau IDA",
+      "Fișier APK Android (cu JADX și JDK), assembly .NET (.dll), fișier HAR sau Fiddler SAZ cu trafic salvat, pcap, firmware, URL de site (cu un browser de tip Chrome)",
+      "Instrucțiuni în limbaj natural date asistentului AI"
+    ],
+    "outputs": [
+      "JSON (Evidence) cu constatări, locații, limitări și necunoscute, pe stdout sau în fișier (`--json`)",
+      "JSON Lines pentru rezultate pe rânduri (`--format jsonl`)",
+      "Pseudocod și asamblare pentru ținte native, returnate asistentului prin MCP",
+      "Fișier de rezultate pentru CI (`analysis.json`, `analysis.stderr`, `exit-code.txt`), din exemplul GitHub Actions"
+    ],
+    "updated_at": "2026-10-25",
+    "pairs_well_with": [
+      "https://github.com/NationalSecurityAgency/ghidra",
+      "https://github.com/skylot/jadx",
+      "https://github.com/mitmproxy/mitmproxy",
+      "https://github.com/ReFirmLabs/binwalk"
+    ],
+    "used_in_recipes": []
   }
 ]
