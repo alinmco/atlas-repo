@@ -103,5 +103,33 @@
     "suggested_by": "rea",
     "why": "Documentația REA folosește Binwalk sau Unblob pentru firmware: extrage regiunile, iar REA le trimite spre analiza nativă.",
     "added_at": "2026-10-25"
+  },
+  {
+    "repo_url": "https://github.com/sindresorhus/awesome-lint",
+    "name": "awesome-lint",
+    "suggested_by": "awesome",
+    "why": "Verificatorul oficial de reguli: îi dai linkul unei liste (sau îl rulezi în CI) și primești erorile de formatare înainte să propui lista în awesome. Ultimul push: 2026-07-05, licență MIT.",
+    "added_at": "2026-10-25"
+  },
+  {
+    "repo_url": "https://github.com/trackawesomelist/trackawesomelist",
+    "name": "Track Awesome List",
+    "suggested_by": "awesome",
+    "why": "Urmărește zilnic ce se schimbă în listele awesome, pe baza listelor din awesome; din ele iese un flux RSS și un digest săptămânal pe care îl poți citi. Repo activ (push 2026-10-25), licență MIT.",
+    "added_at": "2026-10-25"
+  },
+  {
+    "repo_url": "https://github.com/awesome-selfhosted/awesome-selfhosted",
+    "name": "awesome-selfhosted",
+    "suggested_by": "awesome",
+    "why": "Exemplu de listă mare și bine întreținută, bun ca model pentru structura propriei liste; listele din awesome sunt punctul de intrare spre astfel de colecții. Activ (push 2026-10-22). Eticheta de licență de pe GitHub este NOASSERTION, deci verifică înainte de reutilizare.",
+    "added_at": "2026-10-25"
+  },
+  {
+    "repo_url": "https://github.com/hesreallyhim/awesome-claude-code",
+    "name": "awesome-claude-code",
+    "suggested_by": "awesome",
+    "why": "Lista despre Claude Code apare chiar în categoria Miscellaneous din awesome; e un exemplu real de listă acceptată, din domeniul AI. Activ (push 2026-10-25); eticheta de licență de pe GitHub este NOASSERTION.",
+    "added_at": "2026-10-25"
   }
 ]
