@@ -89,6 +89,12 @@
         "name": "awesome-claude-code",
         "why": "Lista despre Claude Code apare chiar în categoria Miscellaneous din awesome; e un exemplu real de listă acceptată, din domeniul AI. Activ (push 2026-10-25); eticheta de licență de pe GitHub este NOASSERTION.",
         "in_catalog": false
+      },
+      {
+        "repo_url": "https://github.com/codecrafters-io/build-your-own-x",
+        "name": "build-your-own-x",
+        "why": "Colecție de liste „awesome” pe orice temă; după ce termini un tutorial din lista de aici, găsești acolo liste adiacente pe subiectul respectiv pentru a merge mai departe.",
+        "in_catalog": true
       }
     ],
     "gaps_noticed": [

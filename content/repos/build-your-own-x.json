@@ -1,0 +1,237 @@
+{
+  "slug": "build-your-own-x",
+  "repo_url": "https://github.com/codecrafters-io/build-your-own-x",
+  "name": "build-your-own-x",
+  "one_liner": "Listă de tutoriale care te învață să reconstruiești tehnologii celebre de la zero.",
+  "problem_solved": "Dacă vrei să înțelegi cu adevărat cum funcționează Git, Docker, o bază de date sau un browser, e greu să găsești ghiduri bune, pas cu pas. Repo-ul nu conține cod de rulat: este un catalog curatoriat (README.md) cu linkuri către tutoriale scrise de alți oameni, grupate pe 29 de teme (Git, Docker, Database, Operating System, Programming Language, Web Server etc.) și, în fiecare temă, pe limbaj de programare. Nu este un program, ci o listă de lectură și practică.",
+  "analogy": "Ca un raft de bibliotecă cu rețete de gătit: nu mănânci raftul, dar găsești rapid rețeta potrivită pentru felul pe care vrei să-l faci singur, în loc să-l cumperi gata făcut.",
+  "how_it_works": [
+    "pas 1: deschizi README.md și alegi o temă din cuprins (de exemplu „Build your own Git” sau „Docker”)",
+    "pas 2: în secțiunea temei alegi o intrare după limbajul de programare pe care îl cunoști (fiecare rând începe cu limbajul, ex. „Python”, urmat de titlul tutorialului)",
+    "pas 3: deschizi linkul spre tutorialul extern (articol, repository sau video marcat [video]) și îl urmezi pas cu pas, scriind codul tu însuți",
+    "pas 4 (opțional): dacă ai un tutorial bun de adăugat, trimiți un Pull Request sau un issue; ISSUE_TEMPLATE.md cere limbajul, titlul, URL-ul și categoria"
+  ],
+  "categories": [
+    "Învățare programare",
+    "Liste curatoriate"
+  ],
+  "search_intents": [
+    "vreau să învăț cum funcționează Git pe dinăuntru",
+    "vreau să construiesc propriul meu Docker de la zero",
+    "vreau proiecte practice ca să învăț programare mai bine",
+    "vreau tutoriale pas cu pas pentru a face o bază de date sau un limbaj de programare",
+    "vreau să înțeleg cum merge un sistem de operare scriind unul simplu"
+  ],
+  "audience": "începător",
+  "setup_difficulty": "ușor",
+  "replaces": [
+    {
+      "service": "CodeCrafters (provocări ghidate, plătite)",
+      "service_url": "https://codecrafters.io",
+      "price": null,
+      "price_source_url": "https://codecrafters.io/pricing",
+      "price_checked_at": "2026-10-25",
+      "replacement_level": "parțial",
+      "what_you_keep": [
+        "Subiecte similare (Git, Docker, Redis, baze de date etc.) ca tutoriale gratuite scrise de alții",
+        "Posibilitatea de a învăța prin construire, în ritmul tău"
+      ],
+      "what_you_lose": [
+        "Testele automate care verifică fiecare etapă (la CodeCrafters, conform paginii de prețuri: „Turbo tests: instant feedback”)",
+        "Un traseu unitar, cu aceeași structură și calitate; aici tutorialele au autori, stil și grad de întreținere diferite",
+        "Suport prioritar și funcțiile de echipă (clasament, analiză de utilizare) din planul Teams"
+      ],
+      "hidden_costs": [
+        "Timp pentru a alege tutorialul potrivit dintr-o listă foarte lungă",
+        "Unele linkuri pot fi moarte sau tutoriale învechite; nu există garanție de întreținere",
+        "Nu ai feedback automat: verifici singur dacă ce ai construit funcționează"
+      ]
+    }
+  ],
+  "examples": [
+    {
+      "title": "Secțiunea „Build your own Git” din listă",
+      "scenario": "Vrei să înveți cum funcționează Git pe dinăuntru, scriind o versiune mică. Deschizi README.md și te uiți în secțiunea Git, unde găsești tutoriale pe limbaje (Haskell, JavaScript, Python, Ruby).",
+      "prerequisites": [
+        "Un browser web (pentru a citi README.md sau tutorialele linkate)",
+        "Limbajul ales de tutorial instalat local (ex. Python) la momentul în care începi să scrii cod",
+        "Fără chei API, fără GPU, fără conturi pentru a citi lista; tutorialele linkate pot avea propriile cerințe"
+      ],
+      "commands": [],
+      "code": "#### Build your own `Git`\n\n* [**Haskell**: _Reimplementing “git clone” in Haskell from the bottom up_](http://stefan.saasen.me/articles/git-clone-in-haskell-from-the-bottom-up/)\n* [**JavaScript**: _Gitlet_](http://gitlet.maryrosecook.com/docs/gitlet.html)\n* [**JavaScript**: _Build GIT - Learn GIT_](https://kushagra.dev/blog/build-git-learn-git/)\n* [**Python**: _Just enough of a Git client to create a repo, commit, and push itself to GitHub_](https://benhoyt.com/writings/pygit/)\n* [**Python**: _Write yourself a Git!_](https://wyag.thb.lt/)\n* [**Python**: _ugit: Learn Git Internals by Building Git Yourself_](https://www.leshenko.net/p/ugit/)\n* [**Ruby**: _Rebuilding Git in Ruby_](https://robots.thoughtbot.com/rebuilding-git-in-ruby)",
+      "output_from_docs": null,
+      "source_url": "https://github.com/codecrafters-io/build-your-own-x#build-your-own-git"
+    },
+    {
+      "title": "Secțiunea „Build your own Docker” din listă",
+      "scenario": "Vrei să înțelegi cum izolează Docker procesele (containere). Alegi, de exemplu, varianta în Go sau Python din secțiunea Docker.",
+      "prerequisites": [
+        "Un browser web pentru citit lista",
+        "Pentru tutorialele despre containere Linux: de obicei un sistem Linux sau o mașină virtuală (cerință a tutorialelor linkate, nu a listei; verifică în fiecare tutorial)"
+      ],
+      "commands": [],
+      "code": "#### Build your own `Docker`\n\n* [**C**: _Linux containers in 500 lines of code_](https://blog.lizzie.io/linux-containers-in-500-loc.html)\n* [**Go**: _Build Your Own Container Using Less than 100 Lines of Go_](https://www.infoq.com/articles/build-a-container-golang)\n* [**Go**: _Building a container from scratch in Go_](https://www.youtube.com/watch?v=8fi7uSYlOdc) [video]\n* [**Python**: _A workshop on Linux containers: Rebuild Docker from Scratch_](https://github.com/Fewbytes/rubber-docker)\n* [**Python**: _A proof-of-concept imitation of Docker, written in 100% Python_](https://github.com/tonybaloney/mocker)\n* [**Shell**: _Docker implemented in around 100 lines of bash_](https://github.com/p8952/bocker)",
+      "output_from_docs": null,
+      "source_url": "https://github.com/codecrafters-io/build-your-own-x#build-your-own-docker"
+    }
+  ],
+  "connectors": {
+    "inputs": [
+      "Fișier Markdown (README.md) cu un cuprins de teme și, sub fiecare temă, rânduri de forma „* [**Limbaj**: _Titlu_](URL)”",
+      "Propuneri de la contribuitori: Pull Request sau issue completat după ISSUE_TEMPLATE.md (limbaj principal, titlul tutorialului, URL, categorie)"
+    ],
+    "outputs": [
+      "Linkuri către tutoriale externe (articole web, repository-uri GitHub, videoclipuri marcate [video])",
+      "Nu produce fișiere, cod sau date; ieșirea este lista citită de om"
+    ],
+    "pairs_well_with": [
+      {
+        "repo_url": "https://github.com/practical-tutorials/project-based-learning",
+        "name": "practical-tutorials/project-based-learning",
+        "why": "O altă listă curatoriată de tutoriale bazate pe proiecte, organizată pe limbaj; folosești lista de aici pentru „construiește X de la zero” și pe aceasta pentru proiecte de aplicații obișnuite (linkuri din listă devin tutoriale de urmat).",
+        "in_catalog": false
+      },
+      {
+        "repo_url": "https://github.com/rasbt/LLMs-from-scratch",
+        "name": "rasbt/LLMs-from-scratch",
+        "why": "Este chiar unul dintre tutorialele listate la „AI Model”; ajungi la el din lista de aici și îl urmezi ca pe un curs complet cu cod în Python.",
+        "in_catalog": false
+      },
+      {
+        "repo_url": "https://github.com/sindresorhus/awesome",
+        "name": "sindresorhus/awesome",
+        "why": "Colecție de liste „awesome” pe orice temă; după ce termini un tutorial din lista de aici, găsești acolo liste adiacente pe subiectul respectiv pentru a merge mai departe.",
+        "in_catalog": true
+      }
+    ],
+    "gaps_noticed": [
+      "Lista nu are filtre sau căutare; singurul mod de a căuta este cuprinsul din README.md și căutarea în pagină a browserului",
+      "Nu există indicator de nivel (începător/avansat), durată sau data ultimei actualizări a unui tutorial",
+      "Linkurile nu sunt verificate automat în repo; unele pot muri sau pot duce la conținut învechit",
+      "Nu există feedback automat pentru codul scris de cititor"
+    ]
+  },
+  "when_not_to_use": [
+    "Dacă vrei un program gata făcut: aici nu e nimic de instalat sau rulat, doar linkuri",
+    "Dacă ai nevoie de feedback automat la fiecare pas, tutorialele sunt separate și nu au teste unitare comune",
+    "Dacă vrei să înveți rapid o bibliotecă sau un framework: regulile de contribuție (ISSUE_TEMPLATE.md) exclud ghidurile pentru framework-uri sau biblioteci",
+    "Dacă ai nevoie de garanția că un tutorial e actualizat: au autori diferiți și unele pot fi vechi",
+    "Dacă nu citești engleză: lista și aproape toate tutorialele sunt în engleză"
+  ],
+  "alternatives": [
+    {
+      "name": "practical-tutorials/project-based-learning",
+      "url": "https://github.com/practical-tutorials/project-based-learning",
+      "difference": "Alt catalog de tutoriale bazate pe proiecte; mai orientat pe aplicații practice pe limbaj, mai puțin pe „reconstruiește o tehnologie cunoscută”."
+    },
+    {
+      "name": "CodeCrafters",
+      "url": "https://codecrafters.io",
+      "difference": "Serviciul comercial al firmei care întreține lista: provocări ghidate cu teste automate, parțial gratuite (conform documentației, primele 2 etape din orice provocare); abonamentul deblochează restul."
+    },
+    {
+      "name": "ossu/computer-science",
+      "url": "https://github.com/ossu/computer-science",
+      "difference": "Curriculum structurat de informatică din cursuri online gratuite; aici ai teorie și ordine, nu proiecte „construiește X”."
+    }
+  ],
+  "tech_sheet": {
+    "license": "CC0 1.0",
+    "language": "Markdown (fără cod executabil)",
+    "commit_sha": "aa17439b62f384511a5561ce308e9598b94d8989",
+    "last_commit_date": "2026-07-14",
+    "stars": 556180,
+    "requirements": [
+      "Un browser web pentru a citi README.md",
+      "Tutorialele linkate au cerințele lor (limbaj de programare, uneori Linux)"
+    ]
+  },
+  "monetization": [
+    {
+      "model": "conținut și cursuri",
+      "what_you_sell": "Traseu de învățare în română construit pe baza listei: selecție comentată de tutoriale, ordinea recomandată, explicații scurte în limba română și planuri de studiu (ex. „Git de la zero, în Python, în 2 weekenduri”). Nu copiezi textul tutorialelor externe, ci le linkezi și adaugi valoarea ta.",
+      "for_whom": "Studenți, juniori și persoane în reconversie profesională care vor să învețe programare practic, dar nu citesc ușor engleza tehnică.",
+      "license_check": {
+        "license": "CC0 1.0",
+        "commercial_use": "permis",
+        "conditions": "Licența CC0 este declarată în README.md (secțiunea „Origins & License”); nu există fișier LICENSE separat și API-ul GitHub nu raportează licență. CC0 acoperă doar lista (README.md), deci poți folosi liniile din ea comercial, fără atribuire obligatorie. Tutorialele linkate au autori și licențe proprii; nu le copia, nu le traduce și nu le revinde fără permisiunea sau licența lor (ex. LLMs-from-scratch apare cu licență neclară în API-ul GitHub). Nu folosi numele, logo-ul sau banner-ul CodeCrafters ca și cum ai fi afiliat (sunt mărci/imagini ale firmei; CC0 din README nu spune că acoperă asta)."
+      },
+      "path": "folosești repo-ul direct",
+      "own_build_notes": null,
+      "demand_evidence": [
+        {
+          "name": "Boot.dev",
+          "url": "https://boot.dev/pricing",
+          "price": "849 RON/an (plan anual, preț afișat cu reducere PPP; verificat pe pagina oficială)",
+          "what_it_proves": "Oamenii plătesc pentru traseuri structurate de învățat programare prin proiecte, cu progres și provocări.",
+          "checked_at": "2026-10-25"
+        },
+        {
+          "name": "CodeCrafters (Membership)",
+          "url": "https://codecrafters.io/pricing",
+          "price": null,
+          "what_it_proves": "Aceeași temă (construiești Git, Docker, Redis etc.) se vinde deja ca abonament (3 luni, 1 an sau permanent, conform paginii oficiale); prețurile nu sunt afișate pe pagina verificată.",
+          "checked_at": "2026-10-25"
+        }
+      ],
+      "startup_cost": "Practic zero în bani (un site sau blog gratuit); costul real e timpul de a parcurge tutorialele ca să le recomanzi onest.",
+      "time_to_first_client": "Necunoscut: depinde de audiență; nu există estimare verificabilă.",
+      "difficulty": "mediu",
+      "risks": [
+        "Concurență gratuită: chiar lista originală este gratuită și foarte populară; trebuie să oferi ceva în plus (limbă, ordine, mentorat)",
+        "Tutorialele externe pot dispărea sau se pot schimba, iar licențele lor te limitează la linkuri și rezumate originale",
+        "CodeCrafters vinde deja produse în același spațiu, cu teste automate pe care tu nu le ai",
+        "Efort de întreținere: trebuie să verifici periodic linkurile și actualitatea"
+      ],
+      "first_steps": [
+        "Alege o singură temă (ex. Git) și parcurge 2-3 tutoriale din secțiunea ei",
+        "Scrie un ghid în română cu ordinea recomandată, timpul estimat și greșelile frecvente",
+        "Publică un capitol gratuit ca demo și verifică dacă are interes înainte de a face un curs plătit"
+      ]
+    },
+    {
+      "model": "consultanță și training",
+      "what_you_sell": "Ateliere de grup sau mentorat „Construim împreună un mini-Git / mini-Docker / mini-bază de date”, folosind tutoriale din listă ca material de bază și oferind feedback pe codul participanților.",
+      "for_whom": "Bootcamp-uri, echipe de juniori din firme și comunități de programatori care vor să înțeleagă sistemele pe dinăuntru.",
+      "license_check": {
+        "license": "CC0 1.0",
+        "commercial_use": "permis",
+        "conditions": "Licența CC0 este declarată în README.md (secțiunea „Origins & License”); nu există fișier LICENSE separat și API-ul GitHub nu raportează licență. Poți folosi lista liber, inclusiv comercial. Tutorialele pe care le alegi ca material au licențele lor: verifică-le înainte să le distribui participanților (de exemplu rubber-docker este MIT, bocker este GPL-3.0 conform API-ului GitHub; articolele de blog pot fi sub drepturi rezervate). Cel mai sigur: trimite participanții la sursa originală."
+      },
+      "path": "folosești repo-ul direct",
+      "own_build_notes": null,
+      "demand_evidence": [
+        {
+          "name": "CodeCrafters Teams",
+          "url": "https://codecrafters.io/pricing",
+          "price": null,
+          "what_it_proves": "Există un plan pentru echipe de 5+ persoane (facturat anual) pentru învățarea prin construirea de software; prețul nu e afișat pe pagina verificată.",
+          "checked_at": "2026-10-25"
+        },
+        {
+          "name": "Boot.dev (planuri pentru organizații)",
+          "url": "https://boot.dev/pricing",
+          "price": null,
+          "what_it_proves": "Pagina oficială menționează că un manager poate plăti pentru membri, deci firmele cumpără instruire practică în programare; prețul planului de echipă nu apare în conținutul verificat.",
+          "checked_at": "2026-10-25"
+        }
+      ],
+      "startup_cost": "Fără costuri obligatorii; ai nevoie de experiență proprie cu subiectul predat și de o platformă de întâlniri.",
+      "time_to_first_client": "Necunoscut: depinde de rețeaua ta; nu există estimare verificabilă.",
+      "difficulty": "mediu",
+      "risks": [
+        "Trebuie să știi cu adevărat subiectul ca să oferi feedback util; nu poți doar să trimiți linkuri",
+        "Concurența gratuită (tutorialele însele) și plătită (CodeCrafters, Boot.dev) este puternică",
+        "Efort de suport și pregătire pentru fiecare sesiune",
+        "Licențele tutorialelor îți limitează dreptul de a distribui materialele lor"
+      ],
+      "first_steps": [
+        "Alege un subiect pe care îl stăpânești (ex. Git intern) și un tutorial cu licență clară",
+        "Rulează un atelier-pilot gratuit pentru 3-5 persoane și adună păreri",
+        "Dacă merge, stabilește un preț pe baza prețurilor concurenței și a duratei"
+      ]
+    }
+  ],
+  "updated_at": "2026-10-25",
+  "notes": "LICENȚĂ: API-ul GitHub nu raportează licență și nu există fișier LICENSE/CONTRIBUTING, dar README.md (secțiunea „Origins & License”) afișează insigna CC0 și spune că CodeCrafters, Inc. a renunțat la drepturile de autor pe cât legea permite. Am tratat-o ca CC0 1.0 pentru conținutul listei, nu pentru tutorialele linkate (autori și licențe proprii) și nu pentru mărcile CodeCrafters. Fără fișier LICENSE, asta rămâne o declarație din README; dacă o folosești comercial, citește-o tu direct. PRODUS PLĂTIT: README-ul are un banner care duce la codecrafters.io/github-banner (redirect 308 spre app.codecrafters.io/catalog); firma care întreține lista vinde CodeCrafters. Prețul nu e afișat pe pagina oficială de prețuri (https://codecrafters.io/pricing arată doar planurile Free, Membership 3 luni/1 an/permanent și Teams), deci price=null; o sursă terță menționa 30-39 USD/lună, nu am verificat-o și nu am folosit-o. Exemplele sunt secțiunile Git și Docker copiate exact din README; documentația nu arată niciun output, deci output_from_docs=null. Toate linkurile din cele două exemple au răspuns cu HTTP 200 la verificare (2026-10-25); niciun link nu a fost eliminat. Pentru stele: 556.180 la 2026-10-25, 616 commituri, creat 2018-05-09; nu am verificat creșterea stelelor. Ultimul commit: 2026-07-14. Tehnic nu înlocuiește un serviciu complet: CodeCrafters e doar o comparație parțială. Prețul Boot.dev (849 RON/an) a fost afișat în RON cu reducere PPP la data verificării și poate varia după țară. Educative: pagina de prețuri nu arăta cifre, deci nu e citată ca dovadă. Perechi: sindresorhus/awesome (CC0, push 2026-09-02), practical-tutorials/project-based-learning (MIT, push 2026-10-19), rasbt/LLMs-from-scratch (push 2026-10-02) sunt active în ultimele 12 luni."
+}
