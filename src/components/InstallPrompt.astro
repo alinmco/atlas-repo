@@ -7,12 +7,13 @@ const prompt = buildInstallPrompt(repo);
 
 <section class="install" aria-labelledby="install-title" data-install>
   <h2 id="install-title">Instalează cu Claude</h2>
-  <p class="soft">Copiază promptul și lipește-l în Claude Code. Claude citește documentația oficială și instalează totul.</p>
-  <div class="box">
+  <p class="soft">Claude verifică întâi securitatea repo-ului (Repo Radar), apoi îl instalează. Lipește promptul în Claude Code.</p>
+  <button type="button" class="copy" data-copy>Copiază promptul</button>
+  <details>
+    <summary>Vezi tot promptul</summary>
     <pre class="terminal" data-prompt tabindex="0"><code>{prompt}</code></pre>
-    <button type="button" class="copy" data-copy>Copiază</button>
-  </div>
-  <p class="soft note">Prompt generat automat din documentație, netestat.</p>
+  </details>
+  <p class="soft note">Prompt generat automat, netestat.</p>
 </section>
 
 <style>
@@ -21,7 +22,7 @@ const prompt = buildInstallPrompt(repo);
     background: var(--paper-raised);
     border: 1px solid var(--rule);
     border-radius: var(--radius);
-    margin: 2rem 0 3rem;
+    margin: 0 0 3rem;
   }
 
   .install h2 {
@@ -29,27 +30,11 @@ const prompt = buildInstallPrompt(repo);
     margin-bottom: 0.25rem;
   }
 
-  .box {
-    position: relative;
-    margin-top: 0.9rem;
-  }
-
-  .box .terminal {
-    white-space: pre-wrap;
-    overflow-wrap: anywhere;
-    overflow-x: hidden;
-    padding-top: 3rem;
-    font-size: var(--step--1);
-  }
-
   .copy {
-    position: absolute;
-    top: 0.5rem;
-    right: 0.5rem;
-    min-height: 2.25rem;
-    padding: 0.3rem 0.9rem;
+    margin-top: 0.9rem;
+    min-height: 2.75rem;
+    padding: 0.4rem 1.2rem;
     font: inherit;
-    font-size: var(--step--1);
     font-weight: 700;
     color: var(--on-accent);
     background: var(--accent);
@@ -67,6 +52,31 @@ const prompt = buildInstallPrompt(repo);
     outline-offset: 2px;
   }
 
+  details {
+    margin-top: 0.9rem;
+  }
+
+  summary {
+    cursor: pointer;
+    font-size: var(--step--1);
+    padding: 0.4rem 0;
+  }
+
+  summary:focus-visible {
+    outline: 3px solid var(--focus);
+    outline-offset: 2px;
+  }
+
+  details .terminal {
+    margin-top: 0.5rem;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+    overflow-x: hidden;
+    overflow-y: auto;
+    max-height: 24rem;
+    font-size: var(--step--1);
+  }
+
   .note {
     font-size: var(--step--1);
     margin-top: 0.6rem;
@@ -81,7 +91,7 @@ const prompt = buildInstallPrompt(repo);
     const done = () => {
       btn.textContent = "Copiat ✓";
       clearTimeout(timer);
-      timer = setTimeout(() => (btn.textContent = "Copiază"), 2000);
+      timer = setTimeout(() => (btn.textContent = "Copiază promptul"), 2000);
     };
     const select = () => {
       const range = document.createRange();
