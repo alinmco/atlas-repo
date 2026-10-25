@@ -38,5 +38,35 @@
     "gap": "Contribuțiile publice nu sunt acceptate momentan, doar issue-uri",
     "source_slug": "android-skills",
     "added_at": "2026-10-25"
+  },
+  {
+    "gap": "Instalarea skill-urilor nu instalează și dependențele Python; fiecare workflow cere mediu propriu, uneori cu versiuni de Python incompatibile între ele",
+    "source_slug": "scientific-agent-skills",
+    "added_at": "2026-10-25"
+  },
+  {
+    "gap": "README-ul indică macOS, Linux sau Windows cu WSL2; pe Windows nativ nu este documentat suportul",
+    "source_slug": "scientific-agent-skills",
+    "added_at": "2026-10-25"
+  },
+  {
+    "gap": "Documentația nu arată output-urile exemplelor din README (prompturile sunt «material de prompt, nu scripturi»), deci nu poți compara rezultatul tău cu unul de referință",
+    "source_slug": "scientific-agent-skills",
+    "added_at": "2026-10-25"
+  },
+  {
+    "gap": "Verificarea de securitate a fiecărui skill (citirea SKILL.md și scripts/) rămâne manuală, iar repo-ul recomandă să nu instalezi tot",
+    "source_slug": "scientific-agent-skills",
+    "added_at": "2026-10-25"
+  },
+  {
+    "gap": "Licențele diferă de la skill la skill; nu există un singur loc cu tabelul lor, trebuie citit câmpul license din fiecare SKILL.md",
+    "source_slug": "scientific-agent-skills",
+    "added_at": "2026-10-25"
+  },
+  {
+    "gap": "Rezultatele științifice nu sunt validate automat: testele repo-ului verifică contracte de date/API, nu validitatea biologică",
+    "source_slug": "scientific-agent-skills",
+    "added_at": "2026-10-25"
   }
 ]

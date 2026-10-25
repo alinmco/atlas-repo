@@ -54,5 +54,26 @@
     "suggested_by": "android-skills",
     "why": "Același format SKILL.md; folositor ca model dacă îți scrii propriile skill-uri lângă cele Android. Ultimul commit: 2026-10-09.",
     "added_at": "2026-10-25"
+  },
+  {
+    "repo_url": "https://github.com/K-Dense-AI/k-dense-byok",
+    "name": "K-Dense BYOK",
+    "suggested_by": "scientific-agent-skills",
+    "why": "Aplicație desktop gratuită, de la aceiași autori, care folosește aceste skill-uri ca motor: pui cheile tale API, iar ea oferă interfața, căutarea web și accesul la toate cele 177 de skill-uri (descris în README-ul repo-ului).",
+    "added_at": "2026-10-25"
+  },
+  {
+    "repo_url": "https://github.com/microsoft/markitdown",
+    "name": "MarkItDown",
+    "suggested_by": "scientific-agent-skills",
+    "why": "Convertește PDF-uri, Word și Excel în Markdown, ca agentul să poată citi articole și rapoarte; repo-ul are și un skill dedicat markitdown (folder skills/markitdown).",
+    "added_at": "2026-10-25"
+  },
+  {
+    "repo_url": "https://github.com/snap-stanford/Biomni",
+    "name": "Biomni",
+    "suggested_by": "scientific-agent-skills",
+    "why": "Agent biomedical separat, cu propriile unelte; poate fi folosit în paralel pentru a compara rezultatele pe aceeași întrebare științifică (nu se integrează direct, doar comparație de rezultate).",
+    "added_at": "2026-10-25"
   }
 ]

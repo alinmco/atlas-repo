@@ -54,7 +54,38 @@
       "https://github.com/android/compose-samples",
       "https://github.com/anthropics/claude-code",
       "https://github.com/google-gemini/gemini-cli",
-      "https://github.com/anthropics/skills"
+      "https://github.com/anthropics/skills",
+      "https://github.com/K-Dense-AI/scientific-agent-skills"
+    ],
+    "used_in_recipes": []
+  },
+  {
+    "slug": "scientific-agent-skills",
+    "name": "Scientific Agent Skills (K-Dense)",
+    "one_liner": "177 fișe de instrucțiuni care învață asistentul AI să facă știință corect.",
+    "categories": [
+      "Cercetare științifică asistată de AI",
+      "Analiză de date biologice și chimice",
+      "Scriere științifică și literatură"
+    ],
+    "inputs": [
+      "prompt în limbaj natural scris de utilizator, către un agent AI compatibil",
+      "fișiere de date științifice, în funcție de skill: FASTQ, VCF, BED/GFF/GTF, h5ad (AnnData), FCS (flow cytometry), DICOM, STEP, CSV",
+      "interogări către API-uri publice: PubChem, ChEMBL, UniProt, ClinicalTrials.gov, FRED, USPTO etc. (skill-ul database-lookup documentează 80 de baze)"
+    ],
+    "outputs": [
+      "cod Python generat și rulat de agent",
+      "tabele CSV/Markdown, figuri (matplotlib, seaborn), scheme, diapozitive PPTX, postere",
+      "rapoarte și recenzii de literatură în Markdown/PDF, cu citări verificate",
+      "fișiere h5ad, rezultate DESeq2 și altele, în funcție de skill"
+    ],
+    "updated_at": "2026-10-25",
+    "pairs_well_with": [
+      "https://github.com/K-Dense-AI/k-dense-byok",
+      "https://github.com/anthropics/skills",
+      "https://github.com/microsoft/markitdown",
+      "https://github.com/snap-stanford/Biomni",
+      "https://github.com/android/skills"
     ],
     "used_in_recipes": []
   }
