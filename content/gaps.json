@@ -153,5 +153,35 @@
     "gap": "README-ul și documentația sunt doar în engleză; nu există variantă în română.",
     "source_slug": "mattpocock-skills",
     "added_at": "2026-10-25"
+  },
+  {
+    "gap": "Superpowers nu include un agent de programare; funcționează doar peste un agent deja instalat și configurat (Claude Code, Codex, Gemini CLI etc.).",
+    "source_slug": "superpowers",
+    "added_at": "2026-10-25"
+  },
+  {
+    "gap": "Instalarea e separată pentru fiecare agent: README-ul spune explicit că, dacă folosești mai mulți, instalezi Superpowers pentru fiecare.",
+    "source_slug": "superpowers",
+    "added_at": "2026-10-25"
+  },
+  {
+    "gap": "Actualizarea depinde de agent: README-ul spune doar că este „deseori automată”, iar comenzile diferă (ex. `gemini extensions update`, `devin plugins update`).",
+    "source_slug": "superpowers",
+    "added_at": "2026-10-25"
+  },
+  {
+    "gap": "Pe Hermes, README-ul avertizează că o sesiune foarte lungă, care face compactare chiar în prima tură, pierde instrucțiunea de pornire.",
+    "source_slug": "superpowers",
+    "added_at": "2026-10-25"
+  },
+  {
+    "gap": "Documentația, skill-urile și mesajele agentului sunt în engleză; nu există variantă în română.",
+    "source_slug": "superpowers",
+    "added_at": "2026-10-25"
+  },
+  {
+    "gap": "README-ul descrie o telemetrie opțională la funcția „visual companion” (versiunea Superpowers trimisă prin încărcarea siglei); dezactivarea cere o variabilă de mediu setată manual.",
+    "source_slug": "superpowers",
+    "added_at": "2026-10-25"
   }
 ]

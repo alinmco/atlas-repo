@@ -193,7 +193,37 @@
       "https://github.com/android/skills",
       "https://github.com/K-Dense-AI/scientific-agent-skills",
       "https://github.com/vercel-labs/skills",
-      "https://github.com/mattpocock/dictionary-of-ai-coding"
+      "https://github.com/mattpocock/dictionary-of-ai-coding",
+      "https://github.com/obra/superpowers"
+    ],
+    "used_in_recipes": []
+  },
+  {
+    "slug": "superpowers",
+    "name": "Superpowers",
+    "one_liner": "Un set de reguli care îl face pe asistentul AI de programare să lucreze metodic.",
+    "categories": [
+      "Skill-uri pentru agenți AI",
+      "Agenți AI și automatizare",
+      "Unelte pentru programatori"
+    ],
+    "inputs": [
+      "cererile tale în limbaj natural către agent (de ex. „Let's make a react todo list”, fraza pe care README-ul o dă ca test de instalare pentru Muse)",
+      "codul proiectului tău (repo Git) și fișierele de instrucțiuni existente: CLAUDE.md, AGENTS.md, GEMINI.md, care au prioritate față de skill-uri",
+      "opțional: o specificație, un plan sau fișiere la care îl trimiți pe agent, pe care brainstorming le citește înainte de prima întrebare"
+    ],
+    "outputs": [
+      "documente Markdown în proiect: design (implicit în docs/superpowers/specs/) și plan (implicit în docs/superpowers/plans/YYYY-MM-DD-<nume>.md), conform skill-ului writing-plans",
+      "cod și teste scrise de agent, pe o ramură git separată (worktree)",
+      "rapoarte de revizuire de cod, cu probleme grupate pe severitate",
+      "la cerere, un raport despre ce a mers prost într-o sesiune și un pachet curățat pentru raport de bug, prin skill-ul diagnosing-superpowers"
+    ],
+    "updated_at": "2026-10-25",
+    "pairs_well_with": [
+      "https://github.com/mattpocock/skills",
+      "https://github.com/obra/superpowers-marketplace",
+      "https://github.com/prime-radiant-inc/superpowers-evals",
+      "https://github.com/obra/superpowers-lab"
     ],
     "used_in_recipes": []
   }
