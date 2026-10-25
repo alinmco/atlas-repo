@@ -29,7 +29,15 @@ export function verifiedExamples(repo) {
 }
 
 export function failedExamples(repo) {
-  return repo.examples.filter((e) => e.status !== "verificat");
+  return repo.examples.filter((e) => e.status === "esuat" || e.status === "neverificat");
+}
+
+export function isDocMode(repo) {
+  return repo.verification_level === "documentație";
+}
+
+export function docExamples(repo) {
+  return repo.examples.filter((e) => e.status === "din documentație");
 }
 
 export function fastestMinutes(repo) {

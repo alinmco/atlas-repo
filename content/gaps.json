@@ -1,1 +1,22 @@
-[]
+[
+  {
+    "gap": "Cifrele din documentație diferă între fișiere (de exemplu numărul de unelte MCP apare ca 314, 323, 333 și „380+”; versiunea din USERGUIDE e 3.7, în timp ce pachetul e la 3.63.0), deci un cititor nu poate ști ușor ce există efectiv în versiunea instalată.",
+    "source_slug": "ruflo",
+    "added_at": "2026-10-25"
+  },
+  {
+    "gap": "Două moduri de instalare (plugin Claude Code și `npx ruflo init`) dau suprafețe foarte diferite și nu se pot trece unul în altul printr-o singură comandă documentată.",
+    "source_slug": "ruflo",
+    "added_at": "2026-10-25"
+  },
+  {
+    "gap": "Numele apare în trei forme (ruflo, claude-flow, @claude-flow/*), iar unele comenzi din README folosesc încă `claude-flow`.",
+    "source_slug": "ruflo",
+    "added_at": "2026-10-25"
+  },
+  {
+    "gap": "Nu există în documentație un exemplu complet de la cap la coadă (sarcină dată, agenți porniți, rezultat obținut) cu output real; exemplele arată fragmente izolate.",
+    "source_slug": "ruflo",
+    "added_at": "2026-10-25"
+  }
+]

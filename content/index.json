@@ -1,1 +1,34 @@
-[]
+[
+  {
+    "slug": "ruflo",
+    "name": "Ruflo (fost Claude Flow)",
+    "one_liner": "Pune mai mulți asistenți AI să lucreze împreună, cu memorie, peste Claude Code și Codex.",
+    "categories": [
+      "Agenți AI pentru programare",
+      "Coordonarea mai multor asistenți AI",
+      "Memorie pentru asistenți AI"
+    ],
+    "inputs": [
+      "Comenzi de terminal (`npx ruflo@latest ...`) și comenzi /plugin în Claude Code",
+      "O descriere în text a sarcinii (ex. „refactor authentication to use JWT”)",
+      "Fișierele proiectului tău (cod, CLAUDE.md, configurații .claude/)",
+      "Chei API pentru furnizori de modele (ANTHROPIC_API_KEY, OPENAI_API_KEY etc.) sau cont Claude Code / Codex",
+      "Conexiune MCP din Claude Code, Codex, Claude Desktop, Grok Build (comanda `npx -y ruflo@latest mcp start`)"
+    ],
+    "outputs": [
+      "Răspunsuri și modificări de cod făcute de agenți prin clientul tău (Claude Code/Codex)",
+      "Tabele și mesaje în terminal (doctor, route, status daemon, tablou de revendicări „issues board”)",
+      "Memorie persistentă locală (AgentDB / fișiere .swarm și .claude-flow) căutabilă după sens",
+      "Consola /ruflo și interfața de terminal `npx ruflo tui` cu costuri, evenimente și misiuni",
+      "Jurnale de audit pentru acțiunile de federare între mașini"
+    ],
+    "verified_at": "2026-10-25",
+    "pairs_well_with": [
+      "https://github.com/ruvnet/RuVector",
+      "https://github.com/ruvnet/agentic-flow",
+      "https://github.com/anthropics/claude-code",
+      "https://github.com/modelcontextprotocol/servers"
+    ],
+    "used_in_recipes": []
+  }
+]

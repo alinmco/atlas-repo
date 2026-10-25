@@ -155,6 +155,12 @@ pre {
   border-style: dashed;
 }
 
+/* Pagini publicate fără rulare, pe baza documentației oficiale. */
+.stamp--doc {
+  border-color: var(--ink-soft);
+  color: var(--ink-soft);
+}
+
 .terminal {
   background: var(--terminal);
   color: var(--terminal-ink);

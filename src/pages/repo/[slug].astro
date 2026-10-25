@@ -11,6 +11,8 @@ import {
   recipesUsing,
   formatDate,
   daysSince,
+  isDocMode,
+  docExamples,
 } from "../../lib/data.js";
 
 export function getStaticPaths() {
@@ -20,6 +22,8 @@ export function getStaticPaths() {
 const { repo } = Astro.props;
 const verified = verifiedExamples(repo);
 const failed = failedExamples(repo);
+const docMode = isDocMode(repo);
+const fromDocs = docExamples(repo);
 const inRecipes = recipesUsing(repo.slug);
 const old = daysSince(repo.verified_at) > 90;
 const sha = repo.tech_sheet.tested_commit_sha;
@@ -34,7 +38,11 @@ const evidenceUrl = (file) => `/dovezi/${repo.slug}/${file}`;
       <h1>{repo.name}</h1>
       <p class="lede">{repo.one_liner}</p>
       <p class="head-meta">
-        <span class={`stamp ${old ? "stamp--old" : ""}`}>Verificat {formatDate(repo.verified_at)}</span>
+        {docMode ? (
+          <span class="stamp stamp--doc">Prezentare din documentație, {formatDate(repo.verified_at)}</span>
+        ) : (
+          <span class={`stamp ${old ? "stamp--old" : ""}`}>Verificat {formatDate(repo.verified_at)}</span>
+        )}
         <a href={repo.repo_url} rel="noopener">Vezi codul pe GitHub</a>
       </p>
     </header>
@@ -101,40 +109,79 @@ const evidenceUrl = (file) => `/dovezi/${repo.slug}/${file}`;
           </section>
         )}
 
-        <section>
-          <h2>{verified.length === 1 ? "Exemplu testat" : "Exemple testate"}</h2>
-          {verified.map((ex) => (
-            <div class="example">
-              <h3>{ex.title}</h3>
-              <p class="prose">{ex.scenario}</p>
-              {ex.prerequisites.length > 0 && (
-                <p class="soft prereq">Ai nevoie de: {ex.prerequisites.join(", ")}</p>
-              )}
-              {ex.commands.length > 0 && (
-                <pre class="terminal terminal--commands"><code>{ex.commands.join("\n")}</code></pre>
-              )}
-              {ex.code && <pre class="terminal"><code>{ex.code}</code></pre>}
-              <figure class="specimen">
-                <figcaption>
-                  <span class="stamp">Rezultat real, reprodus independent</span>
-                  {typeof ex.time_to_first_result_minutes === "number" && (
-                    <span class="soft">Primul rezultat în ~{ex.time_to_first_result_minutes} min</span>
-                  )}
-                </figcaption>
-                <pre class="terminal"><code>{ex.real_output}</code></pre>
-                <p class="soft env">
-                  Testat pe {[ex.environment?.os, ex.environment?.runtime].filter(Boolean).join(", ")}
-                  {sha && <>, commit <code>{sha.slice(0, 7)}</code></>}.
-                  {ex.evidence_file && (
-                    <>
-                      {" "}<a href={evidenceUrl(ex.evidence_file)}>Log-ul complet</a>
-                    </>
-                  )}
-                </p>
-              </figure>
+        {docMode && (
+          <section>
+            <h2>{fromDocs.length === 1 ? "Exemplu din documentația oficială" : "Exemple din documentația oficială"}</h2>
+            <div class="doc-note prose">
+              <p><strong>{fromDocs.length === 1 ? "Nu l-am rulat." : "Nu le-am rulat."}</strong> {fromDocs[0]?.failure_reason}</p>
+              <p>
+                {fromDocs.length === 1 ? "Exemplul e preluat" : "Exemplele sunt preluate"} exact din documentația
+                proiectului, iar un al doilea agent a verificat sursa. Nu putem garanta că funcționează pe versiunea
+                actuală.
+              </p>
             </div>
-          ))}
-        </section>
+            {fromDocs.map((ex) => (
+              <div class="example">
+                <h3>{ex.title}</h3>
+                <p class="prose">{ex.scenario}</p>
+                {ex.prerequisites.length > 0 && (
+                  <p class="soft prereq">Ai nevoie de: {ex.prerequisites.join(", ")}</p>
+                )}
+                {ex.commands.length > 0 && (
+                  <pre class="terminal terminal--commands"><code>{ex.commands.join("\n")}</code></pre>
+                )}
+                {ex.code && <pre class="terminal"><code>{ex.code}</code></pre>}
+                {ex.real_output && (
+                  <figure class="doc-output">
+                    <figcaption class="soft">Rezultatul arătat în documentație (nerulat de noi)</figcaption>
+                    <pre class="terminal"><code>{ex.real_output}</code></pre>
+                  </figure>
+                )}
+                <p class="soft env">
+                  Sursa: <a href={ex.source_url} rel="noopener">documentația oficială</a>
+                  {sha && <>, versiunea <code>{sha.slice(0, 7)}</code></>}.
+                </p>
+              </div>
+            ))}
+          </section>
+        )}
+
+        {!docMode && (
+          <section>
+            <h2>{verified.length === 1 ? "Exemplu testat" : "Exemple testate"}</h2>
+            {verified.map((ex) => (
+              <div class="example">
+                <h3>{ex.title}</h3>
+                <p class="prose">{ex.scenario}</p>
+                {ex.prerequisites.length > 0 && (
+                  <p class="soft prereq">Ai nevoie de: {ex.prerequisites.join(", ")}</p>
+                )}
+                {ex.commands.length > 0 && (
+                  <pre class="terminal terminal--commands"><code>{ex.commands.join("\n")}</code></pre>
+                )}
+                {ex.code && <pre class="terminal"><code>{ex.code}</code></pre>}
+                <figure class="specimen">
+                  <figcaption>
+                    <span class="stamp">Rezultat real, reprodus independent</span>
+                    {typeof ex.time_to_first_result_minutes === "number" && (
+                      <span class="soft">Primul rezultat în ~{ex.time_to_first_result_minutes} min</span>
+                    )}
+                  </figcaption>
+                  <pre class="terminal"><code>{ex.real_output}</code></pre>
+                  <p class="soft env">
+                    Testat pe {[ex.environment?.os, ex.environment?.runtime].filter(Boolean).join(", ")}
+                    {sha && <>, commit <code>{sha.slice(0, 7)}</code></>}.
+                    {ex.evidence_file && (
+                      <>
+                        {" "}<a href={evidenceUrl(ex.evidence_file)}>Log-ul complet</a>
+                      </>
+                    )}
+                  </p>
+                </figure>
+              </div>
+            ))}
+          </section>
+        )}
 
         <section>
           <h2>Când să nu-l folosești</h2>
@@ -231,7 +278,7 @@ const evidenceUrl = (file) => `/dovezi/${repo.slug}/${file}`;
           <dd>{repo.tech_sheet.language}</dd>
           {sha && (
             <>
-              <dt>Versiune testată</dt>
+              <dt>{docMode ? "Versiune citită" : "Versiune testată"}</dt>
               <dd><code>{sha.slice(0, 7)}</code></dd>
             </>
           )}
@@ -425,6 +472,27 @@ const evidenceUrl = (file) => `/dovezi/${repo.slug}/${file}`;
 
   .money-note {
     font-size: var(--step--1);
+  }
+
+  .doc-note {
+    padding: 0.9rem 1rem;
+    margin-bottom: 1.5rem;
+    border: 2px dashed var(--ink-soft);
+    border-radius: 8px;
+    font-size: var(--step--1);
+  }
+
+  .doc-note p + p {
+    margin-top: 0.4rem;
+  }
+
+  .doc-output {
+    margin: 0;
+  }
+
+  .doc-output figcaption {
+    font-size: var(--step--1);
+    margin-bottom: 0.4rem;
   }
 
   .recipes-line {
