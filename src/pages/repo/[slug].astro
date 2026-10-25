@@ -32,8 +32,6 @@ const restricted = repo.monetization?.some((m) => ["interzis", "neclar"].include
       </p>
     </header>
 
-    <InstallPrompt repo={repo} />
-
     <div class="layout">
       <div class="main">
         <section>
@@ -192,6 +190,8 @@ const restricted = repo.monetization?.some((m) => ["interzis", "neclar"].include
             <p class="prose soft">{repo.notes}</p>
           </section>
         )}
+
+        <InstallPrompt repo={repo} />
       </div>
 
       <aside class="sheet" aria-label="Fișa tehnică">
