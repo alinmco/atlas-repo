@@ -1,1 +1,30 @@
-[]
+[
+  {
+    "repo_url": "https://github.com/ruvnet/RuVector",
+    "name": "RuVector",
+    "suggested_by": "ruflo",
+    "why": "Motorul de memorie vectorială și grafuri pe care Ruflo îl folosește prin pluginul ruflo-ruvector: Ruflo trimite texte de memorat, RuVector întoarce rezultate de căutare după sens (activ, ultim commit 2026-10-25).",
+    "added_at": "2026-10-25"
+  },
+  {
+    "repo_url": "https://github.com/ruvnet/agentic-flow",
+    "name": "agentic-flow",
+    "suggested_by": "ruflo",
+    "why": "Proiect al aceluiași autor, pomenit în documentația Ruflo la secțiunea „Ecosystem”; oferă rutare și uneltele de agenți peste care Ruflo adaugă coordonare (ultim commit 2026-10-11; legătura exactă nu a fost verificată în cod).",
+    "added_at": "2026-10-25"
+  },
+  {
+    "repo_url": "https://github.com/anthropics/claude-code",
+    "name": "Claude Code",
+    "suggested_by": "ruflo",
+    "why": "Clientul în care rulează agenții: Ruflo îi adaugă unelte prin MCP și hook-uri, iar Claude Code execută efectiv editările de cod (activ, ultim commit 2026-10-24; produsul în sine nu este open-source MIT).",
+    "added_at": "2026-10-25"
+  },
+  {
+    "repo_url": "https://github.com/modelcontextprotocol/servers",
+    "name": "Servere MCP de referință",
+    "suggested_by": "ruflo",
+    "why": "Ruflo vorbește MCP, deci poate fi folosit alături de alte servere MCP (fișiere, git, baze de date), iar clientul tău le oferă agenților împreună cu uneltele Ruflo (activ, ultim commit 2026-10-25).",
+    "added_at": "2026-10-25"
+  }
+]

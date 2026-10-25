@@ -167,16 +167,37 @@ function validateRepo(data, where, { published }) {
       }
     });
 
-  if (published && verified.length === 0) {
-    errors.push(`${where}: niciun exemplu verificat. Nu se poate publica.`);
+  const docMode = data.verification_level === "documentație";
+  const fromDocs = data.examples.filter((e) => e.status === "din documentație");
+
+  if (docMode) {
+    // Modul „documentație”: fără rulare, dar fiecare exemplu are sursa oficială.
+    if (verified.length > 0) {
+      errors.push(`${where}: în modul „documentație” nu pot exista exemple „verificat”. Folosește modul „rulat”.`);
+    }
+    if (published && fromDocs.length === 0) {
+      errors.push(`${where}: în modul „documentație” trebuie cel puțin un exemplu „din documentație”.`);
+    }
+    fromDocs.forEach((e) => {
+      if (!nonEmpty(e.source_url) || !/^https?:\/\//.test(e.source_url)) {
+        errors.push(`${where}: exemplul „${e.title}” e „din documentație”, dar nu are source_url valid.`);
+      }
+    });
+  } else {
+    if (fromDocs.length > 0) {
+      errors.push(`${where}: exemplele „din documentație” sunt permise doar în modul „documentație”.`);
+    }
+    if (published && verified.length === 0) {
+      errors.push(`${where}: niciun exemplu verificat. Nu se poate publica în modul „rulat”.`);
+    }
   }
   if (verified.length > 0 && !nonEmpty(data.tech_sheet.tested_commit_sha)) {
     errors.push(`${where}: tech_sheet.tested_commit_sha lipsește.`);
   }
 
   const complet = data.replaces.some((r) => r.replacement_level === "complet");
-  if (complet && verified.length === 0) {
-    errors.push(`${where}: replacement_level „complet” fără niciun exemplu verificat.`);
+  if (complet && (verified.length === 0 || docMode)) {
+    errors.push(`${where}: replacement_level „complet” cere exemple rulate și verificate.`);
   }
 
   errors.push(...checkPrices(data.replaces, where));
@@ -265,7 +286,7 @@ function validateContent() {
     // dovezi
     const evDir = path.join(CONTENT, "evidence", data.slug || "");
     const evFiles = data.slug && fs.existsSync(evDir) ? fs.readdirSync(evDir) : [];
-    if (data.slug && evFiles.length === 0) errors.push(`${where}: lipsesc dovezile din content/evidence/${data.slug}/.`);
+    if (data.slug && data.verification_level !== "documentație" && evFiles.length === 0) errors.push(`${where}: lipsesc dovezile din content/evidence/${data.slug}/.`);
     (data.examples || []).forEach((e) => {
       if (nonEmpty(e.evidence_file) && !evFiles.includes(e.evidence_file)) {
         errors.push(`${where}: fișierul de dovadă „${e.evidence_file}” nu există în content/evidence/${data.slug}/.`);

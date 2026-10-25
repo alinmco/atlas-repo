@@ -20,7 +20,8 @@
     "alternatives",
     "tech_sheet",
     "verified_at",
-    "confidence_notes"
+    "confidence_notes",
+    "verification_level"
   ],
   "properties": {
     "slug": {
@@ -216,7 +217,8 @@
             "enum": [
               "verificat",
               "esuat",
-              "neverificat"
+              "neverificat",
+              "din documentație"
             ]
           },
           "failure_reason": {
@@ -238,6 +240,12 @@
                 "type": "object"
               }
             }
+          },
+          "source_url": {
+            "type": [
+              "string",
+              "null"
+            ]
           }
         }
       }
@@ -512,6 +520,12 @@
     },
     "confidence_notes": {
       "type": "string"
+    },
+    "verification_level": {
+      "enum": [
+        "rulat",
+        "documentație"
+      ]
     }
   }
 }

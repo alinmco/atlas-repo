@@ -46,6 +46,16 @@ import Base from "../layouts/Base.astro";
       </li>
     </ol>
 
+    <section class="modes">
+      <h2>Două feluri de pagini</h2>
+      <p class="prose">
+        Unele proiecte nu se pot rula fără conturi plătite, chei de acces sau plăci video puternice. Pentru ele
+        publicăm o <strong>prezentare din documentație</strong>: aceleași explicații, comparații și verificări de
+        prețuri, dar exemplele sunt preluate exact din documentația oficială, nu rulate de noi. Le marcăm separat,
+        ca să știi mereu ce a fost testat și ce nu.
+      </p>
+    </section>
+
     <section class="legend">
       <h2>Ce înseamnă marcajele</h2>
       <dl>
@@ -53,6 +63,8 @@ import Base from "../layouts/Base.astro";
         <dd>Exemplele au fost rulate și reproduse la data afișată.</dd>
         <dt><span class="stamp stamp--old">Verificat 3 iun. 2026</span></dt>
         <dd>Verificarea are peste 90 de zile și urmează să fie reluată.</dd>
+        <dt><span class="stamp stamp--doc">Prezentare din documentație</span></dt>
+        <dd>Exemplele vin din documentația oficială. Un agent a verificat că apar acolo, dar nu le-am rulat.</dd>
         <dt><span class="stamp stamp--failed">Nu a funcționat</span></dt>
         <dd>Exemplul a fost încercat, dar nu a mers. Motivul e scris lângă el.</dd>
       </dl>
@@ -103,8 +115,14 @@ import Base from "../layouts/Base.astro";
     margin-bottom: 0.4rem;
   }
 
+  .modes,
   .legend {
     margin-top: 3rem;
+  }
+
+  .modes h2 {
+    font-size: var(--step-2);
+    margin-bottom: 1rem;
   }
 
   .legend h2 {

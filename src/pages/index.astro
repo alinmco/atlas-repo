@@ -1,6 +1,6 @@
 ---
 import Base from "../layouts/Base.astro";
-import { repos, categories, verifiedExamples, fastestMinutes, formatDate, daysSince } from "../lib/data.js";
+import { repos, categories, verifiedExamples, fastestMinutes, formatDate, daysSince, isDocMode } from "../lib/data.js";
 
 const usedCategories = categories.filter((c) => repos.some((r) => r.categories.includes(c)));
 const exampleCount = repos.reduce((n, r) => n + verifiedExamples(r).length, 0);
@@ -71,7 +71,11 @@ const plural = (n, one, many) => (n === 1 ? `${n} ${one}` : `${n} ${many}`);
                   <p class="row-match soft" hidden></p>
                 </div>
                 <div class="row-meta">
-                  <span class={`stamp ${old ? "stamp--old" : ""}`}>Verificat {formatDate(r.verified_at)}</span>
+                  {isDocMode(r) ? (
+                    <span class="stamp stamp--doc">Din documentație, {formatDate(r.verified_at)}</span>
+                  ) : (
+                    <span class={`stamp ${old ? "stamp--old" : ""}`}>Verificat {formatDate(r.verified_at)}</span>
+                  )}
                   {fastest !== null && <span class="soft">Primul rezultat în ~{fastest} min</span>}
                   {r.replaces.length > 0 && (
                     <span class="soft">În loc de {r.replaces.map((s) => s.service).join(", ")}</span>
