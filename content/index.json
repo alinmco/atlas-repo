@@ -117,5 +117,32 @@
       "https://github.com/ReFirmLabs/binwalk"
     ],
     "used_in_recipes": []
+  },
+  {
+    "slug": "awesome",
+    "name": "Awesome (lista listelor)",
+    "one_liner": "O listă de liste cu cele mai bune resurse, pe sute de subiecte.",
+    "categories": [
+      "Descoperire de resurse",
+      "Liste curatoriate",
+      "Învățare programare"
+    ],
+    "inputs": [
+      "Un repo GitHub cu o listă în format Markdown (fișierul readme.md), numit awesome-nume-subiect",
+      "Un pull request care adaugă o linie în readme.md: „- [Nume](https://github.com/user/awesome-nume#readme) - Descriere scurtă.”"
+    ],
+    "outputs": [
+      "Fișierul readme.md cu liste grupate pe categorii, fiecare listă fiind un link care se termină în #readme",
+      "Insigne (badge) SVG „Awesome” și „Mentioned in Awesome”, în folderul media/ și pe awesome.re",
+      "Flux RSS cu modificările: https://github.com/sindresorhus/awesome/commits.atom (linkul apare în README)"
+    ],
+    "updated_at": "2026-10-25",
+    "pairs_well_with": [
+      "https://github.com/sindresorhus/awesome-lint",
+      "https://github.com/trackawesomelist/trackawesomelist",
+      "https://github.com/awesome-selfhosted/awesome-selfhosted",
+      "https://github.com/hesreallyhim/awesome-claude-code"
+    ],
+    "used_in_recipes": []
   }
 ]

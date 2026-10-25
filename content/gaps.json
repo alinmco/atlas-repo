@@ -88,5 +88,25 @@
     "gap": "Nu există o interfață grafică; totul trece prin agent sau terminal.",
     "source_slug": "rea",
     "added_at": "2026-10-25"
+  },
+  {
+    "gap": "Nu există o căutare în interiorul repo-ului: pentru a găsi o listă trebuie să parcurgi readme.md (866 de rânduri) sau să folosești Ctrl+F; căutarea „Awesome Search” (awesomelists.top) este un site extern, listat la secțiunea Related.",
+    "source_slug": "awesome",
+    "added_at": "2026-10-25"
+  },
+  {
+    "gap": "Linkurile din readme.md nu sunt verificate automat pentru listele deja acceptate; o listă poate rămâne în catalog și după ce autorul o abandonează (nu am găsit în repo un script care să verifice asta; workflow-ul din .github rulează doar awesome-lint pe lista nou adăugată).",
+    "source_slug": "awesome",
+    "added_at": "2026-10-25"
+  },
+  {
+    "gap": "Documentația nu oferă un format structurat (JSON/CSV) al catalogului, doar Markdown; cine vrea datele într-un tabel trebuie să le extragă din Markdown.",
+    "source_slug": "awesome",
+    "added_at": "2026-10-25"
+  },
+  {
+    "gap": "Documentația nu explică cum se decide lipsa de activitate a unei liste după acceptare; nu am găsit o regulă publică despre scoaterea listelor învechite.",
+    "source_slug": "awesome",
+    "added_at": "2026-10-25"
   }
 ]
