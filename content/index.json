@@ -55,7 +55,8 @@
       "https://github.com/anthropics/claude-code",
       "https://github.com/google-gemini/gemini-cli",
       "https://github.com/anthropics/skills",
-      "https://github.com/K-Dense-AI/scientific-agent-skills"
+      "https://github.com/K-Dense-AI/scientific-agent-skills",
+      "https://github.com/mattpocock/skills"
     ],
     "used_in_recipes": []
   },
@@ -85,7 +86,8 @@
       "https://github.com/anthropics/skills",
       "https://github.com/microsoft/markitdown",
       "https://github.com/snap-stanford/Biomni",
-      "https://github.com/android/skills"
+      "https://github.com/android/skills",
+      "https://github.com/mattpocock/skills"
     ],
     "used_in_recipes": []
   },
@@ -167,6 +169,37 @@
       "https://github.com/practical-tutorials/project-based-learning",
       "https://github.com/rasbt/LLMs-from-scratch",
       "https://github.com/sindresorhus/awesome"
+    ],
+    "used_in_recipes": []
+  },
+  {
+    "slug": "mattpocock-skills",
+    "name": "Matt Pocock Skills (Skills For Real Engineers)",
+    "one_liner": "Instrucțiuni gata făcute care îl învață asistentul AI de programare să lucreze disciplinat.",
+    "categories": [
+      "Agenți AI pentru programare",
+      "Planificare și specificații",
+      "Calitatea codului"
+    ],
+    "inputs": [
+      "comenzi tastate în agent: `/grill-me`, `/grill-with-docs`, `/tdd`, `/to-spec`, `/to-tickets`, `/implement`, `/triage`, `/handoff` etc.",
+      "conversația curentă cu agentul (de ex. `/to-spec` sintetizează ce ați discutat deja, fără interviu)",
+      "codul proiectului tău și, dacă există, GLOSSARY.md și ADR-urile din repo",
+      "tichetele din tracker-ul ales la configurare (GitHub, GitLab, fișiere markdown locale sau altul descris de tine)"
+    ],
+    "outputs": [
+      "fișiere Markdown în proiectul tău: GLOSSARY.md, ADR-uri, specificații, tichete locale, fișier de predare (handoff) salvat în directorul temporar al sistemului",
+      "tichete și specificații publicate în issue tracker-ul tău",
+      "modificări de cod și teste făcute de agent",
+      "raport de revizuire pe două axe (Standards și Spec) de la `/code-review`",
+      "raport HTML cu oportunități de îmbunătățire a arhitecturii (`/improve-codebase-architecture`)"
+    ],
+    "updated_at": "2026-10-25",
+    "pairs_well_with": [
+      "https://github.com/android/skills",
+      "https://github.com/K-Dense-AI/scientific-agent-skills",
+      "https://github.com/vercel-labs/skills",
+      "https://github.com/mattpocock/dictionary-of-ai-coding"
     ],
     "used_in_recipes": []
   }

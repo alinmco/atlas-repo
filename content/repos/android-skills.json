@@ -109,6 +109,12 @@
         "name": "Scientific Agent Skills (K-Dense)",
         "why": "Același format (foldere cu SKILL.md) pentru alt domeniu; poți instala ambele seturi în același agent, dar nu se leagă între ele științific, e relevant doar ca exemplu de cum arată skill-urile oficiale ale unei echipe.",
         "in_catalog": true
+      },
+      {
+        "repo_url": "https://github.com/mattpocock/skills",
+        "name": "Matt Pocock Skills (Skills For Real Engineers)",
+        "why": "Folosesc același format SKILL.md: skill-urile Android aduc cunoștințe de platformă, iar cele ale lui Pocock aduc procesul (interviu, teste, revizuire); ambele se instalează în același agent.",
+        "in_catalog": true
       }
     ],
     "gaps_noticed": [

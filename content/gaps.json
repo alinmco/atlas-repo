@@ -128,5 +128,30 @@
     "gap": "Nu există feedback automat pentru codul scris de cititor",
     "source_slug": "build-your-own-x",
     "added_at": "2026-10-25"
+  },
+  {
+    "gap": "Skill-urile nu funcționează fără un agent de programare deja instalat și configurat; repo-ul nu include agentul.",
+    "source_slug": "mattpocock-skills",
+    "added_at": "2026-10-25"
+  },
+  {
+    "gap": "Majoritatea skill-urilor de inginerie presupun un tracker de tichete configurat cu `/setup-matt-pocock-skills`; documentația spune că routerul `ask-matt` le recomandă chiar și înainte de configurare.",
+    "source_slug": "mattpocock-skills",
+    "added_at": "2026-10-25"
+  },
+  {
+    "gap": "Documentația pentru `ask-matt` recunoaște că routerul răspunde uneori din rezumatul unui skill, fără să deschidă fișierul SKILL.md, deci recomandările lui trebuie verificate.",
+    "source_slug": "mattpocock-skills",
+    "added_at": "2026-10-25"
+  },
+  {
+    "gap": "Modificările făcute direct în fișierele skill-urilor se pierd la `npx skills update`, iar instalarea ca plugin este doar pentru citire; ajustările proprii trebuie puse în CLAUDE.md/AGENTS.md.",
+    "source_slug": "mattpocock-skills",
+    "added_at": "2026-10-25"
+  },
+  {
+    "gap": "README-ul și documentația sunt doar în engleză; nu există variantă în română.",
+    "source_slug": "mattpocock-skills",
+    "added_at": "2026-10-25"
   }
 ]

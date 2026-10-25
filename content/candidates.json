@@ -145,5 +145,19 @@
     "suggested_by": "build-your-own-x",
     "why": "Este chiar unul dintre tutorialele listate la „AI Model”; ajungi la el din lista de aici și îl urmezi ca pe un curs complet cu cod în Python.",
     "added_at": "2026-10-25"
+  },
+  {
+    "repo_url": "https://github.com/vercel-labs/skills",
+    "name": "skills (npx skills)",
+    "suggested_by": "mattpocock-skills",
+    "why": "README-ul recomandă `npx skills@latest add mattpocock/skills` pentru agenții fără plugin; acest instrument copiază skill-urile din repo în proiectul tău.",
+    "added_at": "2026-10-25"
+  },
+  {
+    "repo_url": "https://github.com/mattpocock/dictionary-of-ai-coding",
+    "name": "dictionary-of-ai-coding",
+    "suggested_by": "mattpocock-skills",
+    "why": "Paginile de documentație ale skill-urilor trimit la acest dicționar pentru termeni ca „context window”, „subagent” sau „harness”; e util ca vocabular când citești documentația.",
+    "added_at": "2026-10-25"
   }
 ]
