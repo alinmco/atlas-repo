@@ -155,6 +155,12 @@
         "name": "Android skills (android/skills)",
         "why": "Același format (foldere cu SKILL.md) pentru alt domeniu; poți instala ambele seturi în același agent, dar nu se leagă între ele științific, e relevant doar ca exemplu de cum arată skill-urile oficiale ale unei echipe.",
         "in_catalog": true
+      },
+      {
+        "repo_url": "https://github.com/mattpocock/skills",
+        "name": "Matt Pocock Skills (Skills For Real Engineers)",
+        "why": "Același format SKILL.md; skill-urile științifice adaugă cunoștințe de domeniu, iar `/grill-me` sau `/tdd` pot fi folosite alături pentru a clarifica și valida munca de analiză.",
+        "in_catalog": true
       }
     ],
     "gaps_noticed": [

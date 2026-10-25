@@ -1,0 +1,244 @@
+{
+  "slug": "mattpocock-skills",
+  "repo_url": "https://github.com/mattpocock/skills",
+  "name": "Matt Pocock Skills (Skills For Real Engineers)",
+  "one_liner": "Instrucțiuni gata făcute care îl învață asistentul AI de programare să lucreze disciplinat.",
+  "problem_solved": "Asistenții AI de programare (Claude Code, Codex, Copilot, Gemini CLI etc.) greșesc des în aceleași feluri: nu înțeleg ce vrei de fapt, folosesc prea multe cuvinte, scriu cod care nu merge și complică treptat proiectul. Repo-ul adună peste 30 de „skill-uri” (fișiere SKILL.md cu instrucțiuni scrise în text simplu) care corectează aceste probleme: interviu de clarificare înainte de lucru (/grill-me, /grill-with-docs), dezvoltare cu teste scrise primele (/tdd), depanare pe faze (/diagnosing-bugs), transformarea ideilor în specificații și tichete (/to-spec, /to-tickets), revizuire de cod (/code-review). Autorul spune că sunt „mici, ușor de adaptat și combinabile”, în opoziție cu cadre care „dețin procesul” (GSD, BMAD, Spec-Kit).",
+  "analogy": "E ca un set de fișe de lucru lipite pe frigider pentru un bucătar nou: înainte să gătească, întreabă ce vrei; apoi gătește pas cu pas și își gustă mâncarea la fiecare pas. Bucătarul rămâne același, doar că lucrează după fișe bune.",
+  "how_it_works": [
+    "pas 1: instalezi pluginul sau copiezi fișierele în agentul tău (Claude Code, Codex, Copilot, Gemini CLI sau altul prin `npx skills`)",
+    "pas 2: rulezi o singură dată în fiecare proiect `/setup-matt-pocock-skills`, care te întreabă unde ții tichetele (GitHub, GitLab, fișiere locale), ce etichete folosești la triere și unde salvezi documentele",
+    "pas 3: scrii în agent o comandă cu bară oblică (ex. `/grill-me`, `/tdd`) sau agentul alege singur skill-urile marcate „model-invoked” când sarcina se potrivește",
+    "pas 4: agentul citește fișierul SKILL.md corespunzător și îți urmează instrucțiunile: pune întrebări în runde, scrie teste înainte de cod, face revizuire etc.",
+    "pas 5: rezultatul sunt texte și cod în proiectul tău: GLOSSARY.md, ADR-uri (note despre decizii), specificații, tichete, modificări de cod, rapoarte de revizuire"
+  ],
+  "categories": [
+    "Agenți AI pentru programare",
+    "Planificare și specificații",
+    "Calitatea codului"
+  ],
+  "search_intents": [
+    "vreau ca asistentul AI să mă întrebe ce vreau de fapt înainte să scrie cod",
+    "vreau skill-uri pentru Claude Code",
+    "vreau să fac asistentul AI să scrie teste înainte de cod",
+    "vreau să transform o idee în specificație și tichete cu ajutorul AI",
+    "vreau o metodă de depanare disciplinată cu AI",
+    "vreau să fac predări (handoff) între sesiuni de Claude Code"
+  ],
+  "audience": "intermediar",
+  "setup_difficulty": "ușor",
+  "replaces": [],
+  "examples": [
+    {
+      "title": "Instalare în Claude Code și configurare o singură dată",
+      "scenario": "Ai deja Claude Code și vrei skill-urile lui Matt Pocock într-un proiect. Instalezi pluginul, apoi rulezi comanda de configurare care te întreabă despre tichete și etichete.",
+      "prerequisites": [
+        "Claude Code instalat și autentificat (cont Claude sau cheie API, după cum ai configurat agentul; unele variante sunt plătite)",
+        "un proiect (repo Git) în care vrei să lucrezi"
+      ],
+      "commands": [
+        "claude plugin install mattpocock-skills@claude-plugins-official",
+        "/setup-matt-pocock-skills"
+      ],
+      "code": null,
+      "output_from_docs": null,
+      "source_url": "https://github.com/mattpocock/skills#installation-30-second-setup"
+    },
+    {
+      "title": "Instalare pentru alt agent (Cursor, OpenCode, Windsurf etc.) cu `npx skills`",
+      "scenario": "Folosești alt agent decât Claude Code și vrei fișiere editabile copiate în proiectul tău. README-ul cere să incluzi și skill-ul de configurare, iar actualizarea se face cu a doua comandă.",
+      "prerequisites": [
+        "Node.js (pentru npx)",
+        "unul dintre agenții listați în README: cursor, opencode, devin, windsurf, amp, pi"
+      ],
+      "commands": [
+        "npx skills@latest add mattpocock/skills -a <agent>  # cursor, opencode, devin, windsurf, amp, pi; omit -a to choose",
+        "npx skills@latest update"
+      ],
+      "code": null,
+      "output_from_docs": null,
+      "source_url": "https://github.com/mattpocock/skills#installation-30-second-setup"
+    }
+  ],
+  "connectors": {
+    "inputs": [
+      "comenzi tastate în agent: `/grill-me`, `/grill-with-docs`, `/tdd`, `/to-spec`, `/to-tickets`, `/implement`, `/triage`, `/handoff` etc.",
+      "conversația curentă cu agentul (de ex. `/to-spec` sintetizează ce ați discutat deja, fără interviu)",
+      "codul proiectului tău și, dacă există, GLOSSARY.md și ADR-urile din repo",
+      "tichetele din tracker-ul ales la configurare (GitHub, GitLab, fișiere markdown locale sau altul descris de tine)"
+    ],
+    "outputs": [
+      "fișiere Markdown în proiectul tău: GLOSSARY.md, ADR-uri, specificații, tichete locale, fișier de predare (handoff) salvat în directorul temporar al sistemului",
+      "tichete și specificații publicate în issue tracker-ul tău",
+      "modificări de cod și teste făcute de agent",
+      "raport de revizuire pe două axe (Standards și Spec) de la `/code-review`",
+      "raport HTML cu oportunități de îmbunătățire a arhitecturii (`/improve-codebase-architecture`)"
+    ],
+    "pairs_well_with": [
+      {
+        "repo_url": "https://github.com/android/skills",
+        "name": "android-skills",
+        "why": "Folosesc același format SKILL.md: skill-urile Android aduc cunoștințe de platformă, iar cele ale lui Pocock aduc procesul (interviu, teste, revizuire); ambele se instalează în același agent.",
+        "in_catalog": true
+      },
+      {
+        "repo_url": "https://github.com/K-Dense-AI/scientific-agent-skills",
+        "name": "scientific-agent-skills",
+        "why": "Același format SKILL.md; skill-urile științifice adaugă cunoștințe de domeniu, iar `/grill-me` sau `/tdd` pot fi folosite alături pentru a clarifica și valida munca de analiză.",
+        "in_catalog": true
+      },
+      {
+        "repo_url": "https://github.com/vercel-labs/skills",
+        "name": "skills (npx skills)",
+        "why": "README-ul recomandă `npx skills@latest add mattpocock/skills` pentru agenții fără plugin; acest instrument copiază skill-urile din repo în proiectul tău.",
+        "in_catalog": false
+      },
+      {
+        "repo_url": "https://github.com/mattpocock/dictionary-of-ai-coding",
+        "name": "dictionary-of-ai-coding",
+        "why": "Paginile de documentație ale skill-urilor trimit la acest dicționar pentru termeni ca „context window”, „subagent” sau „harness”; e util ca vocabular când citești documentația.",
+        "in_catalog": false
+      }
+    ],
+    "gaps_noticed": [
+      "Skill-urile nu funcționează fără un agent de programare deja instalat și configurat; repo-ul nu include agentul.",
+      "Majoritatea skill-urilor de inginerie presupun un tracker de tichete configurat cu `/setup-matt-pocock-skills`; documentația spune că routerul `ask-matt` le recomandă chiar și înainte de configurare.",
+      "Documentația pentru `ask-matt` recunoaște că routerul răspunde uneori din rezumatul unui skill, fără să deschidă fișierul SKILL.md, deci recomandările lui trebuie verificate.",
+      "Modificările făcute direct în fișierele skill-urilor se pierd la `npx skills update`, iar instalarea ca plugin este doar pentru citire; ajustările proprii trebuie puse în CLAUDE.md/AGENTS.md.",
+      "README-ul și documentația sunt doar în engleză; nu există variantă în română."
+    ]
+  },
+  "when_not_to_use": [
+    "Dacă nu folosești deja un agent AI de programare: skill-urile sunt instrucțiuni pentru un agent, nu un program de sine stătător.",
+    "Dacă vrei un cadru care să conducă tot procesul în locul tău: autorul spune explicit că nu asta urmărește (în opoziție cu GSD, BMAD, Spec-Kit).",
+    "Dacă ai nevoie de skill-uri noi sau de opțiuni de configurare: SCOPE.md și .out-of-scope/new-skills.md spun că propunerile și contribuțiile pentru skill-uri noi sunt închise, iar opțiunile de configurare sunt respinse; adaptările merg în CLAUDE.md sau într-un fork.",
+    "Dacă ai nevoie de ceva stabil la nivel de fișiere: repo-ul redenumește și retrage skill-uri (de ex. CONTEXT.md a devenit GLOSSARY.md, `to-prd` a devenit `to-spec`, mai multe skill-uri au fost retrase), conform CHANGELOG.md și documentației.",
+    "Folderul `misc/` este înghețat și nementenanțat, iar `in-progress/` și `deprecated/` nu sunt promovate; nu te baza pe ele.",
+    "Skill-urile ghidează agentul, dar nu garantează cod corect; documentația `tdd` recunoaște o limită deschisă (issue #746) și `ask-matt` o limită de rutare."
+  ],
+  "alternatives": [
+    {
+      "name": "GitHub Spec Kit",
+      "url": "https://github.com/github/spec-kit",
+      "difference": "Cadru care conduce procesul de la specificație la implementare (MIT); README-ul lui Pocock îl numește printre abordările care „dețin procesul”, pe când skill-urile lui sunt piese mici, separate."
+    },
+    {
+      "name": "BMAD-METHOD",
+      "url": "https://github.com/bmad-code-org/BMAD-METHOD",
+      "difference": "Metodologie completă cu roluri de agenți; menționat în README-ul lui Pocock ca exemplu de cadru care preia controlul procesului. API-ul GitHub nu raportează o licență standard (NOASSERTION), deci verifică fișierul de licență."
+    },
+    {
+      "name": "Superpowers",
+      "url": "https://github.com/obra/superpowers",
+      "difference": "Altă colecție de skill-uri pentru agenți de programare (MIT); autor și filozofie diferite, niciuna nu o include pe cealaltă. Nu am citit codul lui în detaliu."
+    },
+    {
+      "name": "Anthropic Skills",
+      "url": "https://github.com/anthropics/skills",
+      "difference": "Exemple oficiale Anthropic de skill-uri și specificația formatului; util ca punct de plecare dacă vrei să-ți scrii propriile skill-uri."
+    }
+  ],
+  "tech_sheet": {
+    "license": "MIT",
+    "language": "Markdown (fișiere SKILL.md); scripturi mici Node.js pentru versionare",
+    "commit_sha": "5beb35b040e3de97e54fa9e386d7e42d15c295c2",
+    "last_commit_date": "2026-10-19",
+    "stars": 303101,
+    "requirements": [
+      "un agent AI de programare compatibil: Claude Code, Codex, GitHub Copilot, Gemini CLI, Cursor, OpenCode, Devin, Windsurf, Amp sau Pi (din README)",
+      "Node.js doar pentru instalarea cu `npx skills@latest`",
+      "abonament sau chei API ale agentului ales (pot fi plătite; repo-ul în sine este gratuit)",
+      "recomandat: un proiect Git și un issue tracker (GitHub, GitLab sau fișiere locale)"
+    ]
+  },
+  "monetization": [
+    {
+      "model": "consultanță și training",
+      "what_you_sell": "Ateliere (o zi sau două) pentru echipe mici de programatori: cum își configurează agentul de programare, cum aplică un flux disciplinat (interviu de clarificare, teste scrise primele, revizuire) folosind skill-urile din repo ca bază și cum își scriu propriile reguli în CLAUDE.md/AGENTS.md. Vinzi explicația și adaptarea la proiectul clientului, nu codul.",
+      "for_whom": "Echipe mici și agenții de software care au început să folosească Claude Code sau Codex, dar obțin rezultate inconsecvente.",
+      "license_check": {
+        "license": "MIT",
+        "commercial_use": "permis",
+        "conditions": "MIT permite uz comercial, modificare și redistribuire cu condiția să păstrezi nota de copyright și textul licenței în copiile substanțiale. Numele „Matt Pocock”, AI Hero și Total TypeScript sunt ale autorului; nu sugera afilierea cu el și nu copia materialele plătite ale cursurilor lui, care nu sunt în repo. Paginile publicate pe aihero.dev nu fac parte din repo: verifică-le separat înainte de a reproduce text din ele."
+      },
+      "path": "folosești repo-ul direct",
+      "own_build_notes": null,
+      "demand_evidence": [
+        {
+          "name": "valantic: Claude Code for Developers (curs, Germania)",
+          "url": "https://www.valantic.com/en/training-center/claude-code-for-developers/",
+          "price": "€890 per persoană (plus TVA), curs de două zile",
+          "what_it_proves": "Companii plătesc deja pentru training de Claude Code pentru dezvoltatori.",
+          "checked_at": "2026-10-25"
+        },
+        {
+          "name": "Konigi: ateliere de echipă pentru Claude Code (echipe de design)",
+          "url": "https://konigi.com/answers/team-workshops/",
+          "price": "7.500 USD pe zi, pentru până la opt persoane; deplasarea se facturează separat",
+          "what_it_proves": "Există cerere pentru ateliere de echipă la tarif pe zi, deși pentru designeri, nu pentru programatori.",
+          "checked_at": "2026-10-25"
+        }
+      ],
+      "startup_cost": "Practic zero în bani; abonament la un agent de programare pentru pregătire (preț după planul ales, necitat aici). Timp: câteva zile ca să citești skill-urile și documentația și să pregătești un atelier.",
+      "time_to_first_client": "Nu pot estima din surse; depinde de rețeaua ta. Un atelier gratuit sau cu preț mic pentru o echipă cunoscută este de obicei primul pas.",
+      "difficulty": "mediu",
+      "risks": [
+        "Concurență gratuită: README-ul și paginile de documentație explică deja totul, iar autorul vinde propriile cohorte (vezi nota).",
+        "Skill-urile se schimbă des (redenumiri și retrageri, conform CHANGELOG.md), deci materialul tău se învechește repede.",
+        "Efort de suport: clienții vor întreba de erori ale agentului, care nu țin de repo.",
+        "Dependență de agenți și planuri de abonament a căror ofertă se schimbă."
+      ],
+      "first_steps": [
+        "Citește README-ul și paginile din docs/ pentru skill-urile `grill-with-docs`, `tdd` și `ask-matt`, apoi alege 3-4 pentru atelierul tău.",
+        "Pregătește un atelier de 2-3 ore pe un proiect mic de exemplu, cu ținta: configurare, o sesiune de întrebări, un ciclu de teste.",
+        "Oferă-l gratuit sau la preț mic unei echipe cunoscute și cere o recomandare scrisă.",
+        "Compară-ți oferta cu trainingurile din tabelul de cerere înainte de a stabili un preț."
+      ]
+    },
+    {
+      "model": "conținut și cursuri",
+      "what_you_sell": "Material în limba română (articole, video sau mini-curs) despre fluxul de lucru cu agenți de programare: ce fac skill-urile, în ce ordine se folosesc și cum le adaptezi. Scrii cu cuvintele tale și cu exemple proprii; citezi și trimiți la repo-ul original.",
+      "for_whom": "Programatori și studenți vorbitori de română care vor să învețe lucrul cu Claude Code sau Codex, dar găsesc resursele doar în engleză.",
+      "license_check": {
+        "license": "MIT",
+        "commercial_use": "permis",
+        "conditions": "Textele din repo (MIT) pot fi traduse și redistribuite cu păstrarea notei de copyright și a licenței. Materialele de pe aihero.dev (cursuri, cohorte, paginile publicate) nu sunt în repo și pot avea alt regim; nu le copia. Nu folosi numele sau logo-ul AI Hero/Total TypeScript ca și cum ar fi ale tale."
+      },
+      "path": "folosești repo-ul direct",
+      "own_build_notes": null,
+      "demand_evidence": [
+        {
+          "name": "AI Hero: AI Coding for Real Engineers (cohortă, autorul skill-urilor)",
+          "url": "https://www.aihero.dev/cohorts/claude-code-for-real-engineers-2026-04",
+          "price": null,
+          "what_it_proves": "Autorul însuși vinde o cohortă de 2 săptămâni pe aceeași temă (Claude Code, skill-uri, PRD-uri, bucle de feedback), deci există public dispus să plătească. Pagina oficială nu afișa prețul (șabloane nerandate); un rezultat de căutare indică 477 USD pentru ediția din martie 2026, dar nu l-am confirmat pe pagină.",
+          "checked_at": "2026-10-25"
+        },
+        {
+          "name": "Total TypeScript (cursuri plătite ale aceluiași autor)",
+          "url": "https://www.totaltypescript.com",
+          "price": null,
+          "what_it_proves": "Autorul vinde cursuri (TypeScript Pro Essentials, TypeScript Pro Complete); prețurile nu erau afișate la verificare („Loading price”).",
+          "checked_at": "2026-10-25"
+        }
+      ],
+      "startup_cost": "Zero în bani pentru texte; pentru video, microfon și program de editare, după alegerea ta.",
+      "time_to_first_client": "Nu pot estima din surse; publicul se construiește de obicei în luni, nu în zile.",
+      "difficulty": "mediu",
+      "risks": [
+        "Concurență gratuită și puternică: repo-ul însuși, newsletter-ul autorului (README spune că are circa 60.000 de abonați) și cohortele lui în engleză.",
+        "Conținutul se învechește rapid, deoarece skill-urile sunt redenumite și retrase.",
+        "Piața românească de nișă poate fi mică; nu am găsit date pentru ea.",
+        "Riscul de a copia prea aproape din paginile aihero.dev, care nu sunt acoperite de licența repo-ului."
+      ],
+      "first_steps": [
+        "Alege un singur skill (de ex. `grill-with-docs`) și scrie un tutorial scurt în română, cu exemple proprii.",
+        "Publică-l gratuit, cu link spre repo și mențiune de licență.",
+        "Măsoară interesul înainte să construiești ceva plătit (de ex. un mini-curs).",
+        "Verifică cu autorul sau cu paginile oficiale dacă poți folosi denumiri și imagini înainte de a le pune în materiale."
+      ]
+    }
+  ],
+  "updated_at": "2026-10-25",
+  "notes": "Repo nou. Licență: fișierul LICENSE este MIT (Copyright 2026 Matt Pocock), confirmat și în package.json și plugin.json; API-ul GitHub spune tot MIT. Nu am rulat nimic; am citit README, SCOPE.md, CHANGELOG.md, câteva SKILL.md (grill-me, grilling, tdd, handoff, setup) și paginile din docs/. Exemplele sunt comenzile din secțiunea Installation a README-ului, fără output (documentația nu arată output). Promovare comercială: README-ul trimite la newsletter-ul gratuit de la aihero.dev și plugin.json trimite la același site; README nu vinde direct cursuri și nu amintește Total TypeScript, dar domeniul aihero.dev și paginile publicate sunt ale lui Pocock, care vinde cohorte (vezi monetizarea). Prețul cohortelor NU l-am văzut pe pagina oficială (a afișat șabloane nerandate), iar totaltypescript.com afișa „Loading price”; de aceea price este null. Nu am verificat că newsletter-ul este gratuit în sens contractual, doar că README-ul îl prezintă ca invitație de înscriere. Repo-ul a avut peste 303.000 de stele și 25.000 de fork-uri la 3 luni de la creare (creat 2026-02-03); nu am putut verifica ritmul de creștere. Ultima versiune: v1.3.1 (2026-10-04). Înlocuiri de servicii plătite: nu am găsit niciun serviciu comercial pe care să-l înlocuiască realist, deci replaces e gol. Perechile cu android-skills și scientific-agent-skills se bazează doar pe formatul comun SKILL.md; nu am testat compatibilitatea. Nu am citit codul tuturor celor 30+ skill-uri; descrierile din tabelul README sunt rezumate din documentație. Valantic și Konigi sunt cursuri/ateliere pentru Claude Code în general, nu pentru acest repo."
+}
