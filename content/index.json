@@ -346,5 +346,30 @@
       "https://github.com/obra/superpowers"
     ],
     "used_in_recipes": []
+  },
+  {
+    "slug": "opencut",
+    "name": "OpenCut",
+    "one_liner": "Editor video gratuit și open source, în rescriere: pentru browser, desktop și mobil.",
+    "categories": [
+      "Editare video",
+      "Creare de conținut"
+    ],
+    "inputs": [
+      "Fișiere video (de ex. MP4), audio și imagini, importate în proiect (formatele exacte nu sunt enumerate în README)",
+      "Texte, fonturi (Google Fonts și fonturi de sistem) și stickere adăugate manual în editor"
+    ],
+    "outputs": [
+      "Fișier video exportat (MP4 este menționat în changelog 0.3.0)",
+      "Proiecte salvate în browser (stocare locală cu migrări de schemă, conform changelog)"
+    ],
+    "updated_at": "2026-10-26",
+    "pairs_well_with": [
+      "https://github.com/ggml-org/whisper.cpp",
+      "https://github.com/yt-dlp/yt-dlp",
+      "https://github.com/FFmpeg/FFmpeg",
+      "https://github.com/mifi/lossless-cut"
+    ],
+    "used_in_recipes": []
   }
 ]

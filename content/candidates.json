@@ -250,5 +250,33 @@
     "suggested_by": "paperclip",
     "why": "OpenClaw poate fi conectat ca agent extern prin webhook (README-ul îl listează între agenții compatibili); Paperclip îi dă sarcini și buget, iar el trimite înapoi rezultatele.",
     "added_at": "2026-10-26"
+  },
+  {
+    "repo_url": "https://github.com/ggml-org/whisper.cpp",
+    "name": "whisper.cpp",
+    "suggested_by": "opencut",
+    "why": "Transcrie vorbirea din video în subtitrări (fișier SRT), pe care le pui apoi manual ca text în editor; OpenCut nu are import SRT documentat.",
+    "added_at": "2026-10-26"
+  },
+  {
+    "repo_url": "https://github.com/yt-dlp/yt-dlp",
+    "name": "yt-dlp",
+    "suggested_by": "opencut",
+    "why": "Descarcă clipuri pe care ai dreptul să le folosești ca fișiere MP4, care devin materialul de intrare importat în OpenCut.",
+    "added_at": "2026-10-26"
+  },
+  {
+    "repo_url": "https://github.com/FFmpeg/FFmpeg",
+    "name": "FFmpeg",
+    "suggested_by": "opencut",
+    "why": "Convertește formate neobișnuite în MP4 înainte de import sau recodifică exportul final; repo-ul OpenCut își construiește singur propriile versiuni FFmpeg (.github/workflows/media-deps.yml).",
+    "added_at": "2026-10-26"
+  },
+  {
+    "repo_url": "https://github.com/mifi/lossless-cut",
+    "name": "LosslessCut",
+    "suggested_by": "opencut",
+    "why": "Taie rapid, fără recodare, fișiere lungi, iar bucățile rezultate (MP4) intră apoi în OpenCut pentru montajul final.",
+    "added_at": "2026-10-26"
   }
 ]

@@ -258,5 +258,25 @@
     "gap": "Documentația de instalare menționează explicit macOS, Linux și WSL2 pentru scriptul de instalare; pentru Windows nativ nu am găsit instrucțiuni dedicate.",
     "source_slug": "paperclip",
     "added_at": "2026-10-26"
+  },
+  {
+    "gap": "Rescrierea (repo-ul principal) nu are încă editor funcțional: pagina /editor afișează doar „Coming soon”",
+    "source_slug": "opencut",
+    "added_at": "2026-10-26"
+  },
+  {
+    "gap": "README-ul rescrierii promite un server MCP, mod headless și scripting, dar nu există documentație sau cod pentru ele în repo",
+    "source_slug": "opencut",
+    "added_at": "2026-10-26"
+  },
+  {
+    "gap": "Nu există import de subtitrări (SRT) documentat în materialele citite",
+    "source_slug": "opencut",
+    "added_at": "2026-10-26"
+  },
+  {
+    "gap": "Versiunea classic, singura utilizabilă, este arhivată, deci fără corecturi",
+    "source_slug": "opencut",
+    "added_at": "2026-10-26"
   }
 ]

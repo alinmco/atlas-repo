@@ -1,0 +1,249 @@
+{
+  "slug": "opencut",
+  "repo_url": "https://github.com/opencut-app/opencut",
+  "name": "OpenCut",
+  "one_liner": "Editor video gratuit și open source, în rescriere: pentru browser, desktop și mobil.",
+  "problem_solved": "Multe funcții de bază din editoarele video populare (de ex. CapCut) au ajuns să fie plătite, iar videoclipurile tale ajung pe serverele altcuiva. OpenCut vrea să fie un editor simplu, gratuit și privat, în care montezi clipuri pe o linie de timp (tăiere, text, animații, efecte, export). ATENȚIE: repo-ul indicat (opencut-app/opencut) este în acest moment doar începutul unei rescrieri de la zero: pagina de editor afișează „Coming soon”, iar aplicația desktop este doar o fereastră goală. Editorul care funcționează azi este versiunea veche, „classic”, în repo-ul separat opencut-app/opencut-classic, care este arhivat (nu mai primește actualizări).",
+  "analogy": "E ca o casă în care s-a demolat vechea clădire ca să se construiască una nouă: planurile și fundația sunt gata, dar locuiești încă în casa veche de alături, care nu se mai renovează.",
+  "how_it_works": [
+    "Pas 1, intrare: adaugi fișiere video, audio și imagini în proiect (în versiunea classic, procesarea rămâne în browserul tău, conform README-ului classic: „Your videos stay on your device”).",
+    "Pas 2, editare: aranjezi clipurile pe o linie de timp cu mai multe piste, aplici text, animații pe cadre cheie, efecte, măști și viteză (funcții listate în changelog-ul din folderul changelog/, versiunile 0.1.0-0.3.0).",
+    "Pas 3, randare: un compozitor scris în Rust (wgpu, compilat la WASM) desenează imaginea cadru cu cadru, conform changelog 0.3.0; în rescriere, același nucleu Rust ar urma să servească browserul, desktopul și mobilul.",
+    "Pas 4, ieșire: exporți videoclipul final (de ex. MP4, menționat în changelog 0.3.0). În rescrierea curentă (apps/web, apps/api, apps/desktop) nu există încă editor funcțional."
+  ],
+  "categories": [
+    "Editare video",
+    "Creare de conținut"
+  ],
+  "search_intents": [
+    "vreau un editor video gratuit fără filigran",
+    "vreau o alternativă open source la CapCut",
+    "vreau să editez video în browser fără să încarc fișierele pe un server",
+    "vreau să-mi găzduiesc singur un editor video",
+    "vreau un editor video privat care rulează local"
+  ],
+  "audience": "intermediar",
+  "setup_difficulty": "mediu",
+  "replaces": [
+    {
+      "service": "CapCut (planul Pro)",
+      "service_url": "https://www.capcut.com/",
+      "price": "Pro: 149,99 RON/lună sau 1.799,99 RON/an (pagina a afișat prețurile în RON, pentru locația României); există și plan Free, Ultra și Teams",
+      "price_source_url": "https://www.capcut.com/pricing",
+      "price_checked_at": "2026-10-26",
+      "replacement_level": "doar pentru cazuri simple",
+      "what_you_keep": [
+        "Montaj de bază pe linie de timp cu mai multe piste (versiunea classic)",
+        "Text cu peste 1.000 de fonturi, moduri de amestecare (blend), cadre cheie, măști, control de viteză și volum (conform changelog 0.1.0-0.3.0)",
+        "Fără cont obligatoriu pentru editare și fără plată pentru funcțiile de bază; fișierele rămân local (versiunea classic)"
+      ],
+      "what_you_lose": [
+        "Funcțiile AI și creditele lunare AI, generarea de video AI din planurile CapCut",
+        "Șabloane premium și bibliotecă mare de conținut inclusă",
+        "Spațiu de stocare în cloud (1 TB în planurile plătite) și aplicații mobile finisate",
+        "Colaborare în echipă și brand kit din planul Teams",
+        "Suport oficial și actualizări: classic e arhivat, iar rescrierea nu are încă editor"
+      ],
+      "hidden_costs": [
+        "Dacă vrei versiunea classic găzduită de tine: server cu Postgres 17 și Redis, plus timpul de configurare",
+        "Fără mentenanță din partea autorilor pentru classic (repo arhivat pe 2026-05-17): repari tu orice defect",
+        "Rescrierea nu poate fi folosită încă la editare, deci trebuie să aștepți sau să rămâi pe classic sau pe editorul găzduit la opencut.app"
+      ]
+    },
+    {
+      "service": "Kapwing (planul Pro)",
+      "service_url": "https://www.kapwing.com/",
+      "price": "Pro: 16 USD (pagina nu etichetează explicit perioada, apare în vizualizarea lunară); Business: 50 USD; Free: 0 USD cu filigran și export maxim 720p",
+      "price_source_url": "https://www.kapwing.com/pricing",
+      "price_checked_at": "2026-10-26",
+      "replacement_level": "doar pentru cazuri simple",
+      "what_you_keep": [
+        "Editor video în browser, fără filigran și fără limită de rezoluție impusă de un plan (limitele depind de browserul și calculatorul tău)",
+        "Controlul asupra fișierelor: totul se poate rula pe propriul calculator sau server (classic)"
+      ],
+      "what_you_lose": [
+        "Instrumentele AI și șabloanele din Kapwing",
+        "Spațiul de lucru în cloud și colaborarea în echipă",
+        "Suport comercial și garanții de funcționare"
+      ],
+      "hidden_costs": [
+        "Hosting propriu și timp de configurare pentru classic",
+        "Fără actualizări pentru classic (arhivat); rescrierea este încă la început"
+      ]
+    }
+  ],
+  "examples": [
+    {
+      "title": "Pornirea rescrierii OpenCut în modul de dezvoltare",
+      "scenario": "Vrei să vezi starea actuală a repo-ului (rescrierea) rulând local: serverul web pe localhost:5173, API-ul pe localhost:8787 sau aplicația desktop. Documentația spune că e încă în construcție.",
+      "prerequisites": [
+        "proto (managerul de unelte moonrepo), instalat cu comanda din README",
+        "Pe Windows: PowerShell; dacă scripturile (shims) nu pornesc, permisiune de scripturi locale pentru utilizatorul curent",
+        "Uneltele din .prototools (moon, bun, rust), instalate de proto",
+        "Pentru desktop: pe Linux, pachete de sistem (Vulkan, Wayland/X11, fontconfig, cmake, toolchain C); pe macOS, Xcode command line tools"
+      ],
+      "commands": [
+        "bash <(curl -fsSL https://moonrepo.dev/install/proto.sh)",
+        "proto use",
+        "moon run web:dev",
+        "moon run api:dev",
+        "moon run desktop:dev"
+      ],
+      "code": "",
+      "output_from_docs": null,
+      "source_url": "https://github.com/opencut-app/opencut/blob/e668010778568641babef2cc40be4703ae6916d6/README.md#development"
+    },
+    {
+      "title": "Autogăzduirea versiunii classic cu Docker",
+      "scenario": "Vrei editorul care chiar funcționează azi, rulat pe calculatorul sau serverul tău. README-ul din opencut-classic (repo arhivat) descrie rularea întregii aplicații, inclusiv baza de date, în Docker.",
+      "prerequisites": [
+        "Docker și Docker Compose",
+        "Fișierul de configurare copiat din apps/web/.env.example în apps/web/.env.local (valorile implicite sunt pentru dezvoltare locală; pentru producție înlocuiești BETTER_AUTH_SECRET cu o valoare proprie, ex: YOUR_SECRET)",
+        "Opțional: chei Freesound (FREESOUND_CLIENT_ID, FREESOUND_API_KEY), puse ca YOUR_API_KEY, pentru sunete; nu am verificat în cod ce se întâmplă fără ele"
+      ],
+      "commands": [
+        "cp apps/web/.env.example apps/web/.env.local",
+        "docker compose up -d"
+      ],
+      "code": "",
+      "output_from_docs": "README-ul classic spune doar: „The app will be available at http://localhost:3100.” (nu arată un output de terminal)",
+      "source_url": "https://github.com/opencut-app/opencut-classic/blob/cf5e79e919144200294fb9fed22a222592a0aeea/README.md#self-hosting-with-docker"
+    }
+  ],
+  "connectors": {
+    "inputs": [
+      "Fișiere video (de ex. MP4), audio și imagini, importate în proiect (formatele exacte nu sunt enumerate în README)",
+      "Texte, fonturi (Google Fonts și fonturi de sistem) și stickere adăugate manual în editor"
+    ],
+    "outputs": [
+      "Fișier video exportat (MP4 este menționat în changelog 0.3.0)",
+      "Proiecte salvate în browser (stocare locală cu migrări de schemă, conform changelog)"
+    ],
+    "pairs_well_with": [
+      {
+        "repo_url": "https://github.com/ggml-org/whisper.cpp",
+        "name": "whisper.cpp",
+        "why": "Transcrie vorbirea din video în subtitrări (fișier SRT), pe care le pui apoi manual ca text în editor; OpenCut nu are import SRT documentat.",
+        "in_catalog": false
+      },
+      {
+        "repo_url": "https://github.com/yt-dlp/yt-dlp",
+        "name": "yt-dlp",
+        "why": "Descarcă clipuri pe care ai dreptul să le folosești ca fișiere MP4, care devin materialul de intrare importat în OpenCut.",
+        "in_catalog": false
+      },
+      {
+        "repo_url": "https://github.com/FFmpeg/FFmpeg",
+        "name": "FFmpeg",
+        "why": "Convertește formate neobișnuite în MP4 înainte de import sau recodifică exportul final; repo-ul OpenCut își construiește singur propriile versiuni FFmpeg (.github/workflows/media-deps.yml).",
+        "in_catalog": false
+      },
+      {
+        "repo_url": "https://github.com/mifi/lossless-cut",
+        "name": "LosslessCut",
+        "why": "Taie rapid, fără recodare, fișiere lungi, iar bucățile rezultate (MP4) intră apoi în OpenCut pentru montajul final.",
+        "in_catalog": false
+      }
+    ],
+    "gaps_noticed": [
+      "Rescrierea (repo-ul principal) nu are încă editor funcțional: pagina /editor afișează doar „Coming soon”",
+      "README-ul rescrierii promite un server MCP, mod headless și scripting, dar nu există documentație sau cod pentru ele în repo",
+      "Nu există import de subtitrări (SRT) documentat în materialele citite",
+      "Versiunea classic, singura utilizabilă, este arhivată, deci fără corecturi"
+    ]
+  },
+  "when_not_to_use": [
+    "Dacă vrei un editor care să meargă azi din acest repo: nu merge, pagina de editor e „Coming soon”, iar aplicația desktop e doar o fereastră goală (conform README-ului desktop)",
+    "Dacă ai nevoie de funcții AI (subtitrări automate, eliminare fundal, generare de video): README-ul nu le listează",
+    "Dacă ai nevoie de suport sau de actualizări garantate: classic e arhivat, iar rescrierea nu primește contribuții externe deocamdată (conform README)",
+    "Dacă lucrezi în echipă pe aceleași proiecte în cloud: nu am găsit funcții de colaborare în documentație",
+    "Dacă ai nevoie de montaj profesional (corecție de culoare avansată, mixaj audio complex): alege un editor desktop matur, vezi alternativele"
+  ],
+  "alternatives": [
+    {
+      "name": "OpenCut Classic (opencut-app/opencut-classic)",
+      "url": "https://github.com/opencut-app/opencut-classic",
+      "difference": "Versiunea veche, care funcționează azi (Next.js, Postgres, Redis, Docker), dar arhivată din 2026-05-17"
+    },
+    {
+      "name": "Shotcut",
+      "url": "https://github.com/mltframework/shotcut",
+      "difference": "Editor desktop open source matur, activ, pentru Windows, macOS și Linux"
+    },
+    {
+      "name": "Kdenlive",
+      "url": "https://github.com/KDE/kdenlive",
+      "difference": "Editor desktop open source complet, cu multe piste și efecte, dezvoltat activ"
+    },
+    {
+      "name": "OpenShot",
+      "url": "https://github.com/OpenShot/openshot-qt",
+      "difference": "Editor desktop open source cu interfață simplă, potrivit pentru începători"
+    }
+  ],
+  "tech_sheet": {
+    "license": "MIT",
+    "language": "TypeScript (web, API) și Rust (desktop, nucleu)",
+    "commit_sha": "e668010778568641babef2cc40be4703ae6916d6",
+    "last_commit_date": "2026-09-24",
+    "stars": 96246,
+    "requirements": [
+      "Sistem de operare: Linux, macOS, Windows sau WSL (README-ul oferă comenzi de instalare pentru fiecare)",
+      "proto (moonrepo.dev/proto): Linux/macOS/WSL: bash <(curl -fsSL https://moonrepo.dev/install/proto.sh); Windows PowerShell: irm https://moonrepo.dev/install/proto.ps1 | iex",
+      "Pe Windows, dacă shims nu rulează: Set-ExecutionPolicy -Scope CurrentUser RemoteSigned",
+      "Din rădăcina repo-ului: proto use (instalează uneltele din .prototools: moon 2.3.3, bun 1.3.11, rust 1.97.0)",
+      "Pornire: moon run web:dev (localhost:5173), moon run api:dev (localhost:8787), moon run desktop:dev (vezi apps/desktop/README.md)",
+      "Desktop (GPUI): prima compilare durează mult, pentru că GPUI se compilează din sursă; macOS: Xcode command line tools; Windows: nimic în plus; Linux: libvulkan1 și drivere Vulkan funcționale, libwayland-dev, libx11-xcb-dev, libxkbcommon-x11-dev, libfontconfig-dev, un toolchain C și cmake; WSL2/WSLg: folosește XWayland",
+      "Atenție: la acest commit, editorul din apps/web este un placeholder, iar desktopul e o fereastră goală; pentru un editor funcțional vezi opencut-app/opencut-classic (arhivat)",
+      "Pentru classic (opțional): Bun, Docker și Docker Compose (Postgres 17, Redis 7), fișier .env.local copiat din apps/web/.env.example, secret propriu în loc de BETTER_AUTH_SECRET; chei Freesound opționale (placeholder YOUR_API_KEY); pentru dezvoltare WASM locală: Rust, wasm-pack, cargo-watch",
+      "Nu sunt necesare GPU dedicat, conturi plătite sau chei API plătite pentru pornirea de bază; nu am verificat cerințele de GPU/browser pentru randarea WASM (wgpu), pe care changelog-ul o menționează"
+    ]
+  },
+  "monetization": [
+    {
+      "model": "produs construit peste repo",
+      "what_you_sell": "Un editor video privat, cu marca ta, pe care o agenție sau o echipă mică îl rulează pe serverul propriu (fără încărcarea fișierelor la terți), construit pe un fork al versiunii classic, plus instalare și configurare a serverului.",
+      "for_whom": "Agenții mici, școli, instituții sau echipe de marketing cu reguli stricte despre unde pot ajunge fișierele video.",
+      "license_check": {
+        "license": "MIT",
+        "commercial_use": "permis",
+        "conditions": "MIT permite folosirea comercială, modificarea și vânzarea, cu condiția să păstrezi nota de copyright și textul licenței în copii. MIT nu dă drepturi asupra mărcii: redenumește produsul și nu folosi logo-ul OpenCut fără acord (există pe site o pagină Brand, nu am citit termenii ei). Verifică și licențele fonturilor, stickerelor și surselor externe (ex: Freesound), care pot fi diferite de MIT."
+      },
+      "path": "folosești repo-ul direct",
+      "own_build_notes": null,
+      "demand_evidence": [
+        {
+          "name": "Kapwing (Business)",
+          "url": "https://www.kapwing.com/pricing",
+          "price": "Pro 16 USD, Business 50 USD (perioada de facturare neetichetată pe pagină)",
+          "what_it_proves": "Echipele plătesc deja pentru un editor video în browser; nu dovedește cerere pentru varianta autogăzduită",
+          "checked_at": "2026-10-26"
+        },
+        {
+          "name": "CapCut (Teams)",
+          "url": "https://www.capcut.com/pricing",
+          "price": "Teams: 60-100 RON per loc (pagina afișată în RON), în funcție de numărul de locuri",
+          "what_it_proves": "Există un plan de echipă plătit pentru editare video cu brand kit, deci există buget pentru unelte de echipă",
+          "checked_at": "2026-10-26"
+        }
+      ],
+      "startup_cost": "Un server mic (cost lunar de hosting) și timpul tău; fără licențe de plătit pentru codul MIT.",
+      "time_to_first_client": "Nu pot estima onest: depinde de nișă și de cât de stabil rulează classic la tine.",
+      "difficulty": "greu",
+      "risks": [
+        "Baza (classic) este arhivată: tu devii singurul responsabil pentru corecturi și securitate",
+        "Concurență gratuită: chiar editorul găzduit la opencut.app și, în timp, rescrierea oficială",
+        "Rescrierea oficială are arhitectură diferită (Rust, plugin-uri), deci un fork classic poate deveni greu de menținut",
+        "Efort de suport pentru clienți și răspundere pentru pierderea de date",
+        "Cererea reală pentru un editor autogăzduit este neconfirmată: sursele de mai sus arată doar cererea pentru editoare comerciale"
+      ],
+      "first_steps": [
+        "Citește licența și termenii mărcii OpenCut (pagina Brand) înainte să alegi un nume",
+        "Urmează README-ul classic pentru autogăzduire cu Docker pe un server de test (propunere netestată)",
+        "Alege o nișă și discută cu 3-5 potențiali clienți dacă ar plăti pentru varianta privată, înainte să construiești"
+      ]
+    }
+  ],
+  "updated_at": "2026-10-26",
+  "notes": "Repo nou în catalog. Descoperire importantă: repo-ul opencut-app/opencut este în rescriere de la zero. La commit-ul e668010 (2026-09-24), apps/web are doar un placeholder (/editor: „Coming soon”, / : „hello world!”), apps/api are 3 rute demo (Elysia pe Cloudflare Workers), iar apps/desktop este, conform propriului README, „just a window that opens”. README-ul principal spune că versiunea classic este cea de folosit azi, dar opencut-classic este arhivat (ultimul commit 2026-05-17, SHA cf5e79e919144200294fb9fed22a222592a0aeea, 287 stele, README: „archived and no longer maintained”). Funcțiile descrise (cadre cheie, măști, efecte, export MP4) vin din changelog-ul 0.1.0-0.3.0 din repo și se referă la editorul classic; nu le-am putut verifica din cod funcțional în acest repo. Site-ul opencut.app afișa „70k+ stars”, iar API-ul GitHub arată 96.246 stele (neverificat de unde vine diferența). Prețurile CapCut au fost afișate în RON, pentru locația României, la 2026-10-26; la Kapwing perioada de facturare nu e etichetată pe pagină. Nu am verificat prețul Descript (pagina nu eticheta clar lunar/anual) și nu l-am inclus la comparație. Nu am rulat nimic din cod. Exemplele sunt copiate din README-uri, fără output de terminal în documentație."
+}
