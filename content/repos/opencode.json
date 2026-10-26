@@ -157,6 +157,12 @@
         "name": "models.dev",
         "why": "Catalogul public de furnizori și modele pe care OpenCode îl folosește pentru lista lui de modele.",
         "in_catalog": false
+      },
+      {
+        "repo_url": "https://github.com/paperclipai/paperclip",
+        "name": "Paperclip",
+        "why": "OpenCode este unul dintre agenții pe care Paperclip îi poate angaja (adaptor opencode_local); sarcina din Paperclip devine instrucțiunea agentului, iar codul lui revine ca rezultat în sarcină.",
+        "in_catalog": true
       }
     ],
     "gaps_noticed": [

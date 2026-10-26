@@ -226,7 +226,8 @@
       "https://github.com/prime-radiant-inc/superpowers-evals",
       "https://github.com/obra/superpowers-lab",
       "https://github.com/affaan-m/ECC",
-      "https://github.com/anomalyco/opencode"
+      "https://github.com/anomalyco/opencode",
+      "https://github.com/paperclipai/paperclip"
     ],
     "used_in_recipes": []
   },
@@ -283,7 +284,8 @@
       "https://github.com/obra/superpowers",
       "https://github.com/ollama/ollama",
       "https://github.com/mattpocock/skills",
-      "https://github.com/anomalyco/models.dev"
+      "https://github.com/anomalyco/models.dev",
+      "https://github.com/paperclipai/paperclip"
     ],
     "used_in_recipes": []
   },
@@ -312,6 +314,36 @@
       "https://github.com/remix-run/react-router",
       "https://github.com/expo/expo",
       "https://github.com/TanStack/query"
+    ],
+    "used_in_recipes": []
+  },
+  {
+    "slug": "paperclip",
+    "name": "Paperclip",
+    "one_liner": "Panou de control unde conduci o echipă de agenți AI ca pe o firmă.",
+    "categories": [
+      "Agenți AI și automatizare",
+      "Unelte pentru programatori"
+    ],
+    "inputs": [
+      "Obiective, proiecte și sarcini scrise de tine în interfața web (sau prin CLI/API)",
+      "Instrucțiuni (prompturi, AGENTS.md) și skill-uri pentru fiecare agent",
+      "Declanșatoare pentru rutine: program cron, webhook sau apel API",
+      "Chei API sau autentificare prin abonament pentru agenții conectați (Claude Code, Codex, OpenCode, Gemini CLI etc.)",
+      "Pachete de companie importate (organigramă, agenți, skill-uri)"
+    ],
+    "outputs": [
+      "Sarcini cu fire de comentarii, documente și fișiere produse de agenți (artefacte)",
+      "Jurnal de activitate și istoric de rulări",
+      "Rapoarte de cost pe companie, agent, proiect și model",
+      "Pachete de companie exportate (organigramă, agenți, skill-uri)",
+      "Interfață web la http://localhost:3100 și API HTTP; plugin-uri și conectori MCP"
+    ],
+    "updated_at": "2026-10-26",
+    "pairs_well_with": [
+      "https://github.com/anomalyco/opencode",
+      "https://github.com/openclaw/openclaw",
+      "https://github.com/obra/superpowers"
     ],
     "used_in_recipes": []
   }

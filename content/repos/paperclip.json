@@ -1,0 +1,292 @@
+{
+  "slug": "paperclip",
+  "repo_url": "https://github.com/paperclipai/paperclip",
+  "name": "Paperclip",
+  "one_liner": "Panou de control unde conduci o echipă de agenți AI ca pe o firmă.",
+  "problem_solved": "Dacă folosești mai mulți agenți AI de programare sau de lucru (Claude Code, Codex, OpenClaw etc.), ajungi cu zeci de ferestre deschise și nu mai știi cine ce face, cât costă și ce s-a pierdut la repornire. Paperclip pune totul într-un singur loc: sarcini (ca într-un task manager), organigramă cu roluri, obiective, bugete de cheltuieli și aprobări. Agenții tăi rămân aceiași; Paperclip doar îi organizează și îi ține sub control.",
+  "analogy": "Ca un birou de management pentru angajați care nu dorm niciodată: tu stabilești obiectivul și bugetul, iar tabla cu sarcini, șefii și regulile de aprobare le ține Paperclip. Angajații (agenții AI) sunt aduși de tine.",
+  "how_it_works": [
+    "Pasul 1: pornești serverul Paperclip pe calculatorul tău (un singur proces Node.js cu o bază de date Postgres încorporată) și deschizi interfața web pe localhost:3100.",
+    "Pasul 2: creezi o „companie”, îi dai un obiectiv, apoi „angajezi” agenți: alegi pentru fiecare un adaptor (Claude Code, Codex, OpenCode, Gemini CLI, un webhook HTTP etc.), un rol, o instrucțiune și un buget lunar.",
+    "Pasul 3: creezi sarcini și le atribui. Agenții se „trezesc” (heartbeat) când au de lucru sau după un program (rutine), preiau sarcina printr-un blocaj atomic ca doi agenți să nu facă același lucru și lucrează în propriile lor unelte.",
+    "Pasul 4: Paperclip ține evidența comentariilor, fișierelor produse, jurnalului de activitate și costurilor, aplică aprobările și oprește munca la limitele de buget; tu verifici rezultatele din panou."
+  ],
+  "categories": [
+    "Agenți AI și automatizare",
+    "Unelte pentru programatori"
+  ],
+  "search_intents": [
+    "vreau să conduc mai mulți agenți AI dintr-un singur loc",
+    "vreau să văd cât cheltuiesc agenții mei AI și să pun o limită de buget",
+    "vreau o listă de sarcini în care să atribui lucru direct unor agenți AI",
+    "vreau să nu mai am 20 de ferestre Claude Code deschise",
+    "vreau agenți AI care lucrează după un program, fără să-i pornesc de mână",
+    "vreau să aprob manual ce fac agenții AI înainte să se termine o sarcină"
+  ],
+  "audience": "intermediar",
+  "setup_difficulty": "mediu",
+  "replaces": [
+    {
+      "service": "Devin (Cognition) - agent autonom de programare în cloud",
+      "service_url": "https://devin.ai",
+      "price": "Pro 20 USD/lună, Max 200 USD/lună, Teams 80 USD/lună + 40 USD/lună per loc de dezvoltator, Enterprise la cerere (conform paginii de prețuri)",
+      "price_source_url": "https://devin.ai/pricing",
+      "price_checked_at": "2026-10-26",
+      "replacement_level": "doar pentru cazuri simple",
+      "what_you_keep": [
+        "Delegarea de sarcini de programare către agenți care lucrează în paralel, cu istoric și comentarii pe fiecare sarcină",
+        "Buget, urmărirea costurilor și porți de aprobare, pe care le controlezi tu",
+        "Date și cod pe propria mașină sau propriul server (self-hosted)"
+      ],
+      "what_you_lose": [
+        "Devin este un agent gata făcut; Paperclip nu are agent propriu și doar orchestrează agenții pe care îi aduci tu (Claude Code, Codex etc.)",
+        "Suport comercial, SLA, SSO/administrare enterprise gestionate de furnizor",
+        "Mediul de execuție în cloud pregătit; la Paperclip îl configurezi tu (Docker, sandbox-uri externe)"
+      ],
+      "hidden_costs": [
+        "Plătești separat abonamentele sau cheile API ale agenților conectați (Anthropic, OpenAI etc.), care pot depăși prețul unui plan Devin",
+        "Timp de configurare: adaptoare, instrucțiuni pentru agenți, bugete, reguli de aprobare",
+        "Server/VPS sau calculator pornit dacă vrei agenți 24/7, plus mentenanța și actualizările",
+        "Securitate: o instanță expusă pe internet trebuie configurată în modul authenticated"
+      ]
+    },
+    {
+      "service": "Lindy - angajați AI configurabili",
+      "service_url": "https://www.lindy.ai",
+      "price": "Free (50 USD credite pentru 7 zile), Team de la 29,99 USD/lună pentru 3.000 credite, Enterprise la cerere",
+      "price_source_url": "https://www.lindy.ai/pricing",
+      "price_checked_at": "2026-10-26",
+      "replacement_level": "parțial",
+      "what_you_keep": [
+        "Automatizări recurente cu program sau declanșare prin webhook/API (rutine în Paperclip)",
+        "Mai mulți agenți cu roluri diferite și delegare între ei",
+        "Controlul asupra datelor și al cheilor, pentru că rulează la tine"
+      ],
+      "what_you_lose": [
+        "Interfață no-code cu sute de integrări gata făcute; Paperclip are conectori (GitHub, Notion, Railway, MCP) mai puțini și mai tehnici",
+        "Agenții în sine: Lindy îi oferă pregătiți, Paperclip nu",
+        "Prețul fix pe credite, previzibil; la Paperclip costul depinde de modelele alese"
+      ],
+      "hidden_costs": [
+        "Cheile API sau abonamentele pentru modelele folosite de agenți",
+        "Timp de învățare: concepte precum adaptor, heartbeat, bugete, aprobări",
+        "Găzduire și actualizări proprii (README-ul amintește și de o listă de așteptare pentru Paperclip Cloud, fără prețuri publice)"
+      ]
+    }
+  ],
+  "examples": [
+    {
+      "title": "Pornire rapidă pe calculatorul tău",
+      "scenario": "Vrei să încerci Paperclip local, fără cont și fără să configurezi singur baza de date.",
+      "prerequisites": [
+        "Node.js 24.11 sau mai nou",
+        "Un agent instalat și autentificat pe aceeași mașină (ex: Claude Code sau Codex) ca să poți angaja primul agent; autentificarea cu abonament Claude/Codex cere și Python 3 plus CLI-ul furnizorului",
+        "Pentru agenți plătiți pe API: cheie API proprie (plătită per utilizare), ex: YOUR_API_KEY"
+      ],
+      "commands": [
+        "npx paperclipai@latest onboard --yes"
+      ],
+      "code": null,
+      "output_from_docs": null,
+      "source_url": "https://github.com/paperclipai/paperclip/blob/1fbbef45a8d399771add7a27a04b12f3a20e264c/README.md#quickstart"
+    },
+    {
+      "title": "Rulare în Docker cu Docker Compose",
+      "scenario": "Vrei să rulezi Paperclip fără să instalezi Node sau pnpm pe calculator.",
+      "prerequisites": [
+        "Docker cu Docker Compose",
+        "Repository-ul clonat (comanda se rulează din rădăcina lui)",
+        "Imaginea include CLI-urile claude, codex, opencode și gemini; pentru ele trebuie chei API proprii (plătite), ex: YOUR_API_KEY"
+      ],
+      "commands": [
+        "docker compose -f docker/docker-compose.quickstart.yml up --build"
+      ],
+      "code": null,
+      "output_from_docs": null,
+      "source_url": "https://github.com/paperclipai/paperclip/blob/1fbbef45a8d399771add7a27a04b12f3a20e264c/docs/deploy/docker.md"
+    }
+  ],
+  "connectors": {
+    "inputs": [
+      "Obiective, proiecte și sarcini scrise de tine în interfața web (sau prin CLI/API)",
+      "Instrucțiuni (prompturi, AGENTS.md) și skill-uri pentru fiecare agent",
+      "Declanșatoare pentru rutine: program cron, webhook sau apel API",
+      "Chei API sau autentificare prin abonament pentru agenții conectați (Claude Code, Codex, OpenCode, Gemini CLI etc.)",
+      "Pachete de companie importate (organigramă, agenți, skill-uri)"
+    ],
+    "outputs": [
+      "Sarcini cu fire de comentarii, documente și fișiere produse de agenți (artefacte)",
+      "Jurnal de activitate și istoric de rulări",
+      "Rapoarte de cost pe companie, agent, proiect și model",
+      "Pachete de companie exportate (organigramă, agenți, skill-uri)",
+      "Interfață web la http://localhost:3100 și API HTTP; plugin-uri și conectori MCP"
+    ],
+    "pairs_well_with": [
+      {
+        "repo_url": "https://github.com/anomalyco/opencode",
+        "name": "OpenCode",
+        "why": "OpenCode este unul dintre agenții pe care Paperclip îi poate angaja (adaptor opencode_local); sarcina din Paperclip devine instrucțiunea agentului, iar codul lui revine ca rezultat în sarcină.",
+        "in_catalog": true
+      },
+      {
+        "repo_url": "https://github.com/openclaw/openclaw",
+        "name": "OpenClaw",
+        "why": "OpenClaw poate fi conectat ca agent extern prin webhook (README-ul îl listează între agenții compatibili); Paperclip îi dă sarcini și buget, iar el trimite înapoi rezultatele.",
+        "in_catalog": false
+      },
+      {
+        "repo_url": "https://github.com/obra/superpowers",
+        "name": "Superpowers",
+        "why": "Skill-uri și metode de lucru pentru agenții de programare (planificare, teste, revizuire); le poți folosi în instrucțiunile agenților angajați în Paperclip ca să lucreze mai disciplinat.",
+        "in_catalog": true
+      }
+    ],
+    "gaps_noticed": [
+      "Nu poți folosi încă propriul sistem de tichete (Jira, Asana, Trello): README-ul trece „Bring-your-own-ticket-system” la Roadmap.",
+      "Agenții trebuie instalați și autentificați separat pe aceeași mașină; Paperclip nu îi oferă el însuși.",
+      "Modul implicit local_trusted nu cere autentificare; pentru acces de pe alte dispozitive trebuie ales manual modul authenticated.",
+      "Documentația de instalare menționează explicit macOS, Linux și WSL2 pentru scriptul de instalare; pentru Windows nativ nu am găsit instrucțiuni dedicate."
+    ]
+  },
+  "when_not_to_use": [
+    "Dacă folosești un singur agent pe o singură sarcină: un panou de control cu organigramă și bugete e mai mult decât ai nevoie.",
+    "Dacă vrei un agent gata făcut care „pur și simplu lucrează”: Paperclip nu are agent propriu, ci îi conduce pe ai tăi, deci tot trebuie să-i configurezi și să-i plătești separat.",
+    "Dacă nu vrei costuri imprevizibile: agenții autonomi consumă tokeni, iar README-ul precizează că limitele de buget se bazează pe cheltuielile raportate, deci oprirea poate întârzia cu lucrul aflat în desfășurare.",
+    "Dacă nu ai cunoștințe de bază de securitate: modul implicit local_trusted nu are login; nu expune instanța pe internet fără modul authenticated și un reverse proxy.",
+    "Dacă ai nevoie de un produs matur și stabil: proiectul e tânăr (creat în martie 2026) și publică versiuni foarte des (README-ul și lista de release-uri arată cicluri de câteva zile), deci interfața și setările se pot schimba repede.",
+    "Dacă vrei rezultate fără supraveghere: agenții autonomi pot greși; README-ul însuși pune accent pe verificare și aprobări."
+  ],
+  "alternatives": [
+    {
+      "name": "Vibe Kanban",
+      "url": "https://github.com/BloopAI/vibe-kanban",
+      "difference": "Tablă kanban pentru agenți de programare (Apache-2.0); mai simplă și centrată pe cod, fără organigramă, bugete și governance ca la Paperclip."
+    },
+    {
+      "name": "CrewAI",
+      "url": "https://github.com/crewAIInc/crewAI",
+      "difference": "Bibliotecă Python în care scrii cod pentru a construi echipe de agenți; Paperclip este o aplicație cu interfață care îi conduce pe agenții existenți, fără să scrii cod."
+    },
+    {
+      "name": "LangGraph",
+      "url": "https://github.com/langchain-ai/langgraph",
+      "difference": "Bibliotecă de flux de lucru pentru programatori care construiesc agenți; nu oferă panou de control, buget și aprobări gata făcute."
+    },
+    {
+      "name": "OpenClaw",
+      "url": "https://github.com/openclaw/openclaw",
+      "difference": "Este un agent personal de sine stătător; Paperclip îl poate coordona ca pe un angajat, deci nu sunt concurenți direcți."
+    }
+  ],
+  "tech_sheet": {
+    "license": "MIT",
+    "language": "TypeScript (server Node.js, interfață React); runner nativ în Rust",
+    "commit_sha": "1fbbef45a8d399771add7a27a04b12f3a20e264c",
+    "last_commit_date": "2026-10-25",
+    "stars": 107482,
+    "requirements": [
+      "Node.js 24.11 sau mai nou (package.json: engines node >=24.11.0)",
+      "Instalare rapidă: comanda npx paperclipai@latest onboard --yes (rulează din cache-ul npm, nu cere cont Paperclip)",
+      "Alternativ, instalare gestionată pe macOS, Linux sau WSL2 cu scriptul install.sh de la paperclip.ing (descărcat și verificat cu SHA-256)",
+      "Instalare din sursă: Git, pnpm 9.15 sau mai nou (packageManager pnpm@9.15.4), apoi pnpm install și pnpm dev (UI și API la http://localhost:3100)",
+      "La construirea din sursă, runner-ul nativ Paperclip Runner cere un toolchain Rust sau variabila PAPERCLIP_RUNNER_BINARY cu un runner precompilat",
+      "Baza de date: Postgres încorporat creat automat; pentru producție poți indica propriul Postgres",
+      "Opțional: Docker și Docker Compose (docker compose -f docker/docker-compose.quickstart.yml up --build); imaginea include CLI-urile claude, codex, opencode și gemini",
+      "Pentru agenți: cel puțin un agent compatibil instalat și autentificat (Claude Code, Codex, OpenCode, Gemini CLI, Cursor etc.)",
+      "Pentru autentificarea locală cu abonament Claude sau Codex: Python 3 și CLI-ul furnizorului pe gazdă",
+      "Chei API sau abonamente plătite ale furnizorilor de modele: ANTHROPIC_API_KEY, OPENAI_API_KEY sau OPENROUTER_API_KEY (conform comenzii test-drive); costurile modelelor sunt separate de Paperclip, care este gratuit",
+      "Pentru acces de pe alte dispozitive: modul authenticated (bind lan sau tailnet, de ex. Tailscale) sau Docker pe server"
+    ]
+  },
+  "monetization": [
+    {
+      "model": "serviciu de instalare și configurare",
+      "what_you_sell": "Instalarea și configurarea unei instanțe Paperclip pentru un client: mod authenticated, acces privat prin Tailscale sau Docker pe server, conectarea agenților, bugete, reguli de aprobare și o primă echipă de agenți pregătită pentru nevoile lui. Se vinde ca serviciu o singură dată sau cu abonament de mentenanță.",
+      "for_whom": "Fondatori solo, agenții mici și echipe de programatori care vor agenți AI organizați, dar nu au timp să învețe conceptele și configurările.",
+      "license_check": {
+        "license": "MIT",
+        "commercial_use": "permis",
+        "conditions": "MIT permite folosirea comercială; păstrezi nota de copyright și licența dacă redistribui codul. LICENSE-ul MIT acoperă codul, nu am găsit o politică separată pentru nume și logo; prudent, nu te prezenta ca serviciu oficial. Agenții și modelele conectate (Anthropic, OpenAI etc.) au propriii termeni, pe care clientul trebuie să-i accepte cu cont propriu."
+      },
+      "path": "folosești repo-ul direct",
+      "own_build_notes": null,
+      "demand_evidence": [
+        {
+          "name": "Hostinger Managed Paperclip",
+          "url": "https://www.hostinger.com/support/hostinger-managed-paperclip-overview-and-setup/",
+          "price": null,
+          "what_it_proves": "Un furnizor mare de hosting oferă deja Paperclip administrat din panoul lui, ceea ce arată că există cerere de instalare fără să-și configureze oamenii singuri serverul. Pagina nu afișează prețul; clientul își aduce propria cheie API.",
+          "checked_at": "2026-10-26"
+        },
+        {
+          "name": "Șabloane Railway pentru Paperclip (comunitate)",
+          "url": "https://railway.com/deploy/paperclip-agents",
+          "price": null,
+          "what_it_proves": "Mai multe șabloane comunitare de implementare într-un clic (cu Postgres și volum persistent) există deja, deci partea de găzduire simplă e acoperită gratuit; valoarea reală stă în configurarea pentru nevoile clientului.",
+          "checked_at": "2026-10-26"
+        }
+      ],
+      "startup_cost": "Aproape zero: un calculator sau VPS de test, iar cheile API de test le plătești tu. Costuri de cont plătite doar dacă folosești modele pe API.",
+      "time_to_first_client": "Nu știm; depinde de piață. Un portofoliu cu o instanță demonstrativă ajută la convingerea primilor clienți.",
+      "difficulty": "mediu",
+      "risks": [
+        "Concurență gratuită: Hostinger, șabloanele Railway și chiar scriptul oficial de instalare reduc nevoia de ajutor pentru partea tehnică de bază.",
+        "Proiect tânăr, cu versiuni foarte dese: configurările pot deveni depășite și suportul consumă timp.",
+        "Planul de cloud al autorilor (lista de așteptare Paperclip Cloud) poate înlocui serviciul tău dacă este lansat.",
+        "Răspunderea pentru securitate: o instanță publică prost configurată sau chei API scurse pot costa clientul bani.",
+        "Costurile modelelor aparțin clientului; poți fi tras la răspundere dacă un agent consumă bugetul."
+      ],
+      "first_steps": [
+        "Instalezi tu o instanță de test cu comanda din documentație și o rulezi 2-3 săptămâni pe propriile sarcini.",
+        "Notezi un checklist reproductibil (mod authenticated, Tailscale sau Docker, bugete, aprobări, copii de siguranță).",
+        "Pregătești o ofertă clară: instalare, o echipă de agenți de pornire și 1 oră de instruire.",
+        "Verifici licența fiecărui agent și model conectat înainte să le promiți clientului."
+      ]
+    },
+    {
+      "model": "consultanță și training",
+      "what_you_sell": "Ateliere și consultanță despre cum organizezi mai mulți agenți AI într-o echipă: roluri, bugete, porți de aprobare, rutine și măsurarea calității, cu Paperclip ca instrument de lucru în ateliere.",
+      "for_whom": "Echipe de dezvoltare și companii mici care deja folosesc agenți de programare (Claude Code, Codex) și vor procese, nu doar unelte.",
+      "license_check": {
+        "license": "MIT",
+        "commercial_use": "permis",
+        "conditions": "Folosirea unei unelte MIT într-un training este permisă. Dacă reproduci documentația oficială în materiale, păstrează sursa și nu folosi numele sau logo-ul ca și cum ai fi partener oficial."
+      },
+      "path": "folosești repo-ul direct",
+      "own_build_notes": null,
+      "demand_evidence": [
+        {
+          "name": "valantic - Claude Code pentru dezvoltatori",
+          "url": "https://www.valantic.com/en/training-center/claude-code-for-developers",
+          "price": "890 EUR/persoană + TVA, 2 zile",
+          "what_it_proves": "O firmă de consultanță vinde deja training pe agenți AI de programare cu preț public pe persoană.",
+          "checked_at": "2026-10-26"
+        },
+        {
+          "name": "Konigi - ateliere pentru echipe",
+          "url": "https://konigi.com/answers/team-workshops",
+          "price": "7.500 USD/zi, până la 8 persoane",
+          "what_it_proves": "Ateliere de o zi pentru echipe despre programare cu AI se vând deja la tarif zilnic public.",
+          "checked_at": "2026-10-26"
+        }
+      ],
+      "startup_cost": "Timp pentru pregătirea materialelor și o instanță demonstrativă; costuri API mici pentru demonstrații.",
+      "time_to_first_client": "Nu știm; vânzările de training depind de rețeaua ta.",
+      "difficulty": "mediu",
+      "risks": [
+        "Instrumentul se schimbă rapid, deci materialele se învechesc repede.",
+        "Concurență gratuită: documentația oficială, ghidul de pornire și comunitatea Discord.",
+        "Clienții pot cere dovezi de rezultat; agenții autonomi nu sunt mereu fiabili.",
+        "Furnizorii mari de training pe agenți AI au mărci mai cunoscute."
+      ],
+      "first_steps": [
+        "Parcurgi singur ghidul de pornire și creezi o companie demonstrativă cu 2-3 agenți.",
+        "Scrii un atelier de 2 ore cu un scenariu real (de ex. bugete și aprobări pentru un proiect de cod).",
+        "Îl oferi gratuit unei echipe mici ca să obții feedback și o mărturie.",
+        "Stabilești tarif după ce vezi ce cer clienții din aceeași zonă."
+      ]
+    }
+  ],
+  "updated_at": "2026-10-26",
+  "notes": "Repo nou, citit din clona de la commit 1fbbef45 (README, docs/, doc/INSTALLING.md, package.json, LICENSE MIT). Nu am rulat nimic. Exemplele sunt comenzi din README și din docs/deploy/docker.md; documentația nu arată output pentru ele, deci output_from_docs este null. Nu am verificat dacă site-ul docs.paperclip.ing e identic cu fișierele din repo, de aceea sursele sunt linkuri către fișierele din repo la SHA-ul citit. Prețurile Devin și Lindy sunt de pe paginile oficiale, citite la 2026-10-26 prin WebFetch; pagina Devin se poate schimba des, iar compararea cu Paperclip este doar aproximativă: Paperclip nu înlocuiește agenții, ci îi coordonează, de aceea nivelurile de înlocuire sunt prudente. Nu am găsit prețul Hostinger Managed Paperclip nici al Paperclip Cloud (doar listă de așteptare). Repo-ul are peste 107.000 de stele la ~7 luni de la creare; nu am putut verifica ritmul de creștere. Nu am verificat issue-urile deschise în detaliu. Recomandare de securitate preluată din docs/deploy/deployment-modes.md: modul implicit local_trusted nu cere login. Pachete de subfoldere (ex: fonturi) pot avea licențe proprii (există un NOTICE.md în packages/paperclip-runner/devtools/issue-thread/src/fonts), nu le-am inspectat."
+}
