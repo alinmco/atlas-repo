@@ -238,5 +238,25 @@
     "gap": "Documentația de instalare nu precizează o versiune minimă de Node.js; fiecare unealtă aleasă (Vite, Next.js) are propria cerință.",
     "source_slug": "react",
     "added_at": "2026-10-25"
+  },
+  {
+    "gap": "Nu poți folosi încă propriul sistem de tichete (Jira, Asana, Trello): README-ul trece „Bring-your-own-ticket-system” la Roadmap.",
+    "source_slug": "paperclip",
+    "added_at": "2026-10-26"
+  },
+  {
+    "gap": "Agenții trebuie instalați și autentificați separat pe aceeași mașină; Paperclip nu îi oferă el însuși.",
+    "source_slug": "paperclip",
+    "added_at": "2026-10-26"
+  },
+  {
+    "gap": "Modul implicit local_trusted nu cere autentificare; pentru acces de pe alte dispozitive trebuie ales manual modul authenticated.",
+    "source_slug": "paperclip",
+    "added_at": "2026-10-26"
+  },
+  {
+    "gap": "Documentația de instalare menționează explicit macOS, Linux și WSL2 pentru scriptul de instalare; pentru Windows nativ nu am găsit instrucțiuni dedicate.",
+    "source_slug": "paperclip",
+    "added_at": "2026-10-26"
   }
 ]

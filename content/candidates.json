@@ -243,5 +243,12 @@
     "suggested_by": "react",
     "why": "Aduce și ține în cache datele de la un API; rezultatul (JSON) devine datele pe care componentele React le afișează. Nu este recomandat explicit în documentația React, e o combinație uzuală.",
     "added_at": "2026-10-25"
+  },
+  {
+    "repo_url": "https://github.com/openclaw/openclaw",
+    "name": "OpenClaw",
+    "suggested_by": "paperclip",
+    "why": "OpenClaw poate fi conectat ca agent extern prin webhook (README-ul îl listează între agenții compatibili); Paperclip îi dă sarcini și buget, iar el trimite înapoi rezultatele.",
+    "added_at": "2026-10-26"
   }
 ]

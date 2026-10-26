@@ -106,6 +106,12 @@
         "name": "OpenCode",
         "why": "Fișierele lui de instrucțiuni (skill-uri) învață agentul să lucreze metodic; devin intrare pentru OpenCode, unul dintre asistenții pe care îi suportă (conform paginii din catalog).",
         "in_catalog": true
+      },
+      {
+        "repo_url": "https://github.com/paperclipai/paperclip",
+        "name": "Paperclip",
+        "why": "Skill-uri și metode de lucru pentru agenții de programare (planificare, teste, revizuire); le poți folosi în instrucțiunile agenților angajați în Paperclip ca să lucreze mai disciplinat.",
+        "in_catalog": true
       }
     ],
     "gaps_noticed": [
