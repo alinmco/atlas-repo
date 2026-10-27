@@ -158,6 +158,30 @@ function validateRecipe(data, where, knownSlugs) {
   return errors;
 }
 
+// ---------- glosar ----------
+
+function validateGlossary(data, where) {
+  const errors = [];
+  if (!Array.isArray(data)) return [`${where}: trebuie să fie o listă ([]).`];
+  const seen = new Map();
+  data.forEach((g, i) => {
+    const at = `${where}[${i}]`;
+    if (!g || typeof g !== "object" || Array.isArray(g)) return errors.push(`${at}: trebuie să fie un obiect.`);
+    if (!nonEmpty(g.term)) errors.push(`${at}: lipsește „term”.`);
+    if (!Array.isArray(g.aliases) || g.aliases.some((a) => !nonEmpty(a))) {
+      errors.push(`${at}: „aliases” trebuie să fie o listă de texte nevide (poate fi goală).`);
+    }
+    if (!nonEmpty(g.explanation)) errors.push(`${at}: „explanation” e gol.`);
+    for (const form of [g.term, ...(Array.isArray(g.aliases) ? g.aliases : [])]) {
+      if (!nonEmpty(form)) continue;
+      const key = form.trim().toLowerCase();
+      if (seen.has(key) && seen.get(key) !== i) errors.push(`${at}: „${form}” apare și la intrarea ${seen.get(key)} (termenii trebuie să fie unici).`);
+      else seen.set(key, i);
+    }
+  });
+  return errors;
+}
+
 // ---------- tot conținutul ----------
 
 function readList(name, errors) {
@@ -180,6 +204,11 @@ function validateContent() {
   const lists = {};
   for (const name of ["index", "categories", "candidates", "gaps", "ideas", "recipes"]) {
     lists[name] = readList(name, errors);
+  }
+  const glossaryFile = path.join(CONTENT, "glossary.json");
+  if (fs.existsSync(glossaryFile)) {
+    const g = tryReadJson(glossaryFile, errors);
+    if (g !== null) errors.push(...validateGlossary(g, "content/glossary.json"));
   }
   const categories = new Set(lists.categories);
   const indexSlugs = new Set(lists.index.map((e) => e.slug));
@@ -255,6 +284,7 @@ function validateSingleContentFile(abs) {
   const dir = path.basename(path.dirname(abs));
   if (dir === "repos") return validateRepo(data, where);
   if (dir === "recipes") return validateRecipe(data, where, null);
+  if (path.basename(abs) === "glossary.json") return validateGlossary(data, where);
   return Array.isArray(data) ? [] : [`${where}: trebuie să fie o listă ([]).`];
 }
 
