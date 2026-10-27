@@ -1,0 +1,295 @@
+{
+  "slug": "caveman",
+  "repo_url": "https://github.com/JuliusBrussee/caveman",
+  "name": "Caveman",
+  "one_liner": "Agentul AI de programare scrie și citește mai puțin, deci consumă mai puțini tokeni.",
+  "problem_solved": "Agenții AI de programare (Claude Code, Codex, Gemini CLI, Cursor etc.) se taxează în „tokeni”, adică bucăți de text citite sau scrise. Răspunsurile lor sunt adesea pline de introduceri și recapitulări, iar fișierele mari (loguri, JSON, CSV, rezultate de teste) sunt citite integral. Caveman instalează, dintr-o singură comandă, mai multe piese: un stil scurt de răspuns (/caveman), un compresor local pentru ce citește agentul, un selector automat de model (Auto, cere cont gratuit Caveman Cloud), scripturi reutilizabile (Blocks) și un mod de a citi pagini web comprimate. Scopul declarat este factură mai mică și răspunsuri mai rapide, cu codul și comenzile lăsate neschimbate. Autorul publică și o pagină cu cazurile în care Caveman pierde (HONEST-NUMBERS.md).",
+  "analogy": "E ca un mesaj telegrafic: în loc de „Dragă prietene, aș dori să îți spun că...”, scrii direct „Sosesc mâine. Adu cheia.”. Îl poți folosi și la citit: în loc să parcurgi 50 de pagini de jurnal, primești o foaie cu ce contează și dosarul complet rămâne în sertar, dacă ai nevoie.",
+  "how_it_works": [
+    "Pasul 1, intrare: rulezi o singură comandă de instalare; programul detectează agenții AI instalați pe calculatorul tău (Claude Code, Codex, Gemini CLI, OpenCode, Cursor și alții) și îți arată ce urmează să modifice.",
+    "Pasul 2, proces: adaugă în fiecare agent reguli de răspuns scurt (skill-urile /caveman, /ultracave, /megacave) prin plugin, extensie sau fișiere de reguli, plus cârlige (hooks) care le activează la începutul sesiunii.",
+    "Pasul 3, proces: componentele opționale lucrează local: compresorul scurtează logurile, JSON-ul, CSV-ul și rezultatele testelor înainte să le citească modelul, iar originalele rămân pe disc, ca agentul să le poată cere înapoi.",
+    "Pasul 4, ieșire: agentul răspunde mai scurt, cu cod, comenzi și mesaje de eroare neschimbate; comenzi ca `caveman status` și `caveman stats` arată ce e pornit și istoricul de tokeni."
+  ],
+  "categories": [
+    "Reducere costuri AI",
+    "Skill-uri pentru agenți AI"
+  ],
+  "search_intents": [
+    "vreau să consum mai puțini tokeni cu Claude Code",
+    "vreau ca agentul AI să răspundă mai scurt",
+    "vreau să reduc factura la agenți AI de programare",
+    "vreau să comprim fișierul CLAUDE.md ca să economisesc tokeni",
+    "vreau să instalez un skill pentru Claude Code, Codex și Gemini CLI dintr-o comandă"
+  ],
+  "audience": "intermediar",
+  "setup_difficulty": "ușor",
+  "replaces": [
+    {
+      "service": "Not Diamond (rutare automată a modelului AI)",
+      "service_url": "https://www.notdiamond.ai/pricing",
+      "price": "0,05 USD per milion de tokeni rutați (plan pay-as-you-go, acces prin listă de așteptare); Enterprise: preț nepublicat",
+      "price_source_url": "https://www.notdiamond.ai/pricing",
+      "price_checked_at": "2026-10-27",
+      "replacement_level": "doar pentru cazuri simple",
+      "what_you_keep": [
+        "alegerea automată a modelului și a efortului pentru fiecare cerere, direct în selectorul de modele al agentului (Claude Code, OpenCode, Codex), prin funcția Auto",
+        "posibilitatea de a adăuga alți furnizori pe cheile tale proprii (`caveman providers add openai`)",
+        "contul Free Caveman Cloud (0 USD/lună, conform caveman.so/pricing, verificat 2026-10-27) include 25.000 de decizii de rutare pe lună"
+      ],
+      "what_you_lose": [
+        "Auto NU rulează în repo: cere cont Caveman Cloud și trimite spre acel serviciu ultima cerere (plus ce atașează agentul: CLAUDE.md, fișiere menționate), conform secțiunii Privacy din README",
+        "Not Diamond e un serviciu de rutare pentru aplicații proprii, nu doar pentru agenți de programare; Caveman Auto vizează agenții de programare",
+        "benchmarkul Auto e declarat de autor ca „interim” (run pe jumătate terminat), pe 85 de sarcini; nu e verificat independent"
+      ],
+      "hidden_costs": [
+        "Plata pentru modelele în sine (cheie API sau abonament Claude Pro/Max sau ChatGPT) rămâne a ta",
+        "Peste cota gratuită, Caveman Cloud se taxează la tarife standard dacă adaugi un card (limită implicită 50 USD per produs, conform caveman.so/pricing); planul Team costă 300 USD/lună",
+        "Timp de verificat singur, pe sarcinile tale, dacă economia există"
+      ]
+    },
+    {
+      "service": "The Token Company (compresie de tokeni prin API)",
+      "service_url": "https://thetokencompany.com/pricing",
+      "price": null,
+      "price_source_url": "https://thetokencompany.com/pricing",
+      "price_checked_at": "2026-10-27",
+      "replacement_level": "parțial",
+      "what_you_keep": [
+        "compresia locală a ieșirilor zgomotoase (loguri, JSON, CSV, YAML, rezultate de teste) cu originalul păstrat pe disc",
+        "middleware pentru Vercel AI SDK, LangChain, OpenAI sau Anthropic (README, secțiunea „Smaller rocks”)",
+        "comanda `caveman shrink -- pnpm test` pentru ieșirea comenzilor"
+      ],
+      "what_you_lose": [
+        "serviciul comercial vinde modele de compresie proprii, personalizate, suport prioritar și canal Slack dedicat, pe care repo-ul nu le oferă",
+        "HTML nu are încă compresor în Caveman (README arată o sesiune cu 9,9% mai rea pe HTML)",
+        "garanții și SLA: SECURITY.md spune că țintele de răspuns sunt „policy targets for a small maintainer team, not a contractual SLA”"
+      ],
+      "hidden_costs": [
+        "Prețul serviciului comercial nu e publicat: pagina spune doar că plătești pentru tokenii eliminați, la ofertă; de aceea price este null",
+        "Hosting propriu dacă pui runtime-ul (container) pentru o echipă",
+        "Timp de configurare și mentenanță la fiecare versiune nouă (repo-ul se schimbă rapid, e la versiunea 4.0.1)"
+      ]
+    }
+  ],
+  "examples": [
+    {
+      "title": "Instalare cu o singură comandă",
+      "scenario": "Ai deja un agent AI de programare (de exemplu Claude Code sau Codex) și vrei să îl faci „caveman” pentru toți agenții de pe calculator. README-ul oferă o comandă care îți găsește agenții și îți arată ce modifică, înainte să apeși Enter.",
+      "prerequisites": [
+        "Node.js 22.13 sau mai nou",
+        "cel puțin un agent AI de programare deja instalat și conectat la un cont (abonament sau cheie API plătite, ale agentului; Caveman în sine e gratuit)",
+        "pe npm 12 sau mai nou, README adaugă pentru alte comenzi `--allow-git=root` (vezi README, secțiunea „Other ways in”)"
+      ],
+      "commands": [
+        "npx @caveman-ai/cli@latest"
+      ],
+      "code": null,
+      "output_from_docs": null,
+      "source_url": "https://github.com/JuliusBrussee/caveman/blob/9b68f7ed12b05e7efaff18e65c5a3fc2849fd0a4/README.md#install"
+    },
+    {
+      "title": "Doar skill-ul de răspuns scurt, fără restul instalării",
+      "scenario": "Vrei doar ca agentul să răspundă mai scurt, fără compresor, proxy sau cont. README-ul arată comanda pentru skill singur, apoi activarea cu /caveman și oprirea cu „stop caveman”.",
+      "prerequisites": [
+        "Node.js (pentru npx)",
+        "un agent AI de programare instalat, compatibil cu `npx skills` (lista agenților e în INSTALL.md)"
+      ],
+      "commands": [
+        "npx skills add JuliusBrussee/caveman -g"
+      ],
+      "code": "# În agent, dacă nu pornește singur:\n/caveman        # ($caveman în Codex)\n# Pentru a reveni la normal, scrii: stop caveman",
+      "output_from_docs": null,
+      "source_url": "https://github.com/JuliusBrussee/caveman/blob/9b68f7ed12b05e7efaff18e65c5a3fc2849fd0a4/README.md#say-less-the-caveman-voice"
+    }
+  ],
+  "connectors": {
+    "inputs": [
+      "textul cererilor din sesiunea unui agent AI de programare (Claude Code, Codex, Gemini CLI, OpenCode, Cursor și alții)",
+      "fișiere mari citite de agent: loguri, JSON, CSV, YAML, rezultate de teste (compresorul local)",
+      "fișiere de memorie în Markdown, de ex. CLAUDE.md, pentru /caveman-compress (cere Python 3.10+)",
+      "adrese de pagini web pentru `caveman browse <url>`"
+    ],
+    "outputs": [
+      "răspunsuri scurte ale agentului, cu cod, comenzi și erori neschimbate",
+      "fișiere comprimate (originalul rămâne într-un director de backup, cu cale în documentația /caveman-compress)",
+      "mesaje de commit într-o linie (/caveman-commit) și revizuiri de cod cu o observație pe rând, de forma `L42: ... null deref. Guard it.` (/caveman-review)",
+      "rapoarte din terminal: `caveman status`, `caveman stats`, `caveman learn`",
+      "fișiere de configurare JSON: `~/.config/caveman/config.json` sau `.caveman.json` în proiect, cu cheia `defaultMode`"
+    ],
+    "pairs_well_with": [
+      {
+        "repo_url": "https://github.com/vercel-labs/skills",
+        "name": "skills (npx skills)",
+        "why": "Instalatorul universal de skill-uri pe care Caveman îl folosește pentru majoritatea agenților: comanda `npx skills add JuliusBrussee/caveman -g` pune skill-ul în agentul tău.",
+        "in_catalog": false
+      },
+      {
+        "repo_url": "https://github.com/anomalyco/opencode",
+        "name": "OpenCode",
+        "why": "Agent de programare open-source, listat în README ca agent cu plugin nativ Caveman: răspunsurile lui devin scurte, iar logurile comprimate ajung la model.",
+        "in_catalog": true
+      },
+      {
+        "repo_url": "https://github.com/obra/superpowers",
+        "name": "Superpowers",
+        "why": "Superpowers dă agentului un flux de lucru (plan, teste, revizuire), iar Caveman scurtează răspunsurile din acel flux; ambele sunt skill-uri instalabile în aceiași agenți.",
+        "in_catalog": true
+      },
+      {
+        "repo_url": "https://github.com/caveman-ai/blocks",
+        "name": "Caveman Blocks",
+        "why": "Scripturi reutilizabile (json-peek, test-summary etc.) pe care agentul le rulează în loc să le rescrie de fiecare dată; ieșirea scurtă a unui script devine intrare pentru agent. Versiune pre-release (v0.1.0-rc.5), conform README.",
+        "in_catalog": false
+      }
+    ],
+    "gaps_noticed": [
+      "README spune că HTML nu are încă compresor, deci paginile HTML mari nu se scurtează în sesiunile de agent.",
+      "Pentru agenții fără sistem de cârlige (hooks), pornirea automată nu funcționează: tabelul din INSTALL.md arată „No” și trebuie invocat manual skill-ul.",
+      "Ratele de economisire din README sunt măsurate de autor pe versiuni diferite; nu există un singur raport care să acopere tot produsul, iar HONEST-NUMBERS.md spune că pentru agenții taxați pe cerere (de ex. GitHub Copilot) un răspuns mai scurt nu scade costul.",
+      "Comanda Auto și funcțiile cu cont duc spre Caveman Cloud (serviciu comercial separat); repo-ul nu conține codul acelui serviciu."
+    ]
+  },
+  "when_not_to_use": [
+    "Dacă agentul tău se taxează pe cerere sau pe credit (de exemplu GitHub Copilot, după HONEST-NUMBERS.md), un răspuns mai scurt nu scade factura.",
+    "Pentru întrebări scurte de programare: regulile adaugă aproximativ 1.160 de tokeni de intrare (README), iar câștigul poate fi mai mic decât acest cost; în issue-ul #145 un utilizator a măsurat pierdere netă.",
+    "Dacă ai deja o instrucțiune de tipul „răspunde concis”: README recunoaște că față de acea bază /caveman scoate doar ~3% în plus la mediană (35% pentru /ultracave), pe zece întrebări și o singură rulare.",
+    "Dacă nu vrei telemetrie: CLI-ul trimite implicit statistici de utilizare (comenzi rulate, număr de tokeni, ID aleatoriu de instalare, sistem de operare, IP). Se oprește cu `caveman telemetry off` sau `DO_NOT_TRACK=1`.",
+    "Dacă lucrezi cu cod confidențial și vrei totul local: funcția Auto trimite către Caveman Cloud ultima cerere și ce atașează agentul (de ex. CLAUDE.md, fișiere menționate).",
+    "Dacă vrei o instalare liniștită, fără modificări în setările agenților: instalatorul editează setările Claude Code (settings.json) și alte fișiere ale agenților; folosește mai întâi `--dry-run` sau doar skill-ul (`npx skills add ...`).",
+    "Proiectul se schimbă foarte repede (4.0.0 a apărut recent, funcții marcate „new” sau „pre-release” în README): nu e potrivit dacă ai nevoie de comportament stabil și garantat."
+  ],
+  "alternatives": [
+    {
+      "name": "Kompact",
+      "url": "https://pypi.org/project/kompact/",
+      "difference": "Proxy Python gratuit care promite reducerea tokenilor pentru agenți, fără modificări de cod; doar compresie de context, fără stil de răspuns, skill-uri sau selector de model. Descris după un rezultat de căutare web, neverificat în cod."
+    },
+    {
+      "name": "Compresr Context Gateway",
+      "url": "https://www.startuphub.ai/ai-news/claudes-corner/2026/claudes-corner-compresr-yc-w2026",
+      "difference": "Proxy open-source între agent și API, de la un startup (YC W2026), cu preț nepublicat; vizează doar contextul, nu stilul de răspuns. Informație dintr-un articol, neverificată în cod."
+    },
+    {
+      "name": "Instrucțiunea „Answer concisely.” în CLAUDE.md sau AGENTS.md",
+      "url": "https://github.com/JuliusBrussee/caveman/blob/9b68f7ed12b05e7efaff18e65c5a3fc2849fd0a4/docs/HONEST-NUMBERS.md",
+      "difference": "Cea mai simplă variantă, gratuită; README-ul lui Caveman o folosește ca bază de comparație și arată că pe model nou câștigul în plus al lui /caveman la mediană e mic."
+    }
+  ],
+  "tech_sheet": {
+    "license": "Apache-2.0",
+    "language": "TypeScript și JavaScript (CLI, instalator, hook-uri), Go (runtime: engine, proxy, browse, mcp, mem, shrink), Python (compresie memorie, evaluări), Markdown (skill-uri)",
+    "commit_sha": "9b68f7ed12b05e7efaff18e65c5a3fc2849fd0a4",
+    "last_commit_date": "2026-10-25",
+    "stars": 115477,
+    "requirements": [
+      "Node.js 22.13 sau mai nou, pentru CLI (`npx @caveman-ai/cli@latest`) și pentru instalatorul `install.sh` / `install.ps1`; pachetul `caveman-installer` declară `node >= 18` în package.json",
+      "Mac, Linux sau Windows (README: „Mac, Linux, Windows”); pe Windows, PowerShell 5.1 sau mai nou pentru `install.ps1`; pe Linux/macOS/WSL/Git Bash, `curl` și `bash` pentru varianta `curl ... | bash`",
+      "cel puțin un agent AI de programare deja instalat, dintre cele ~30+ din INSTALL.md (Claude Code, Codex CLI, Gemini CLI, OpenCode, Cursor, GitHub Copilot, Windsurf, Cline și altele)",
+      "accesul propriu la modele: Caveman rulează „cu cheile tale și cu autentificarea ta Claude Pro/Max”; abonamentul sau cheia API (plătite) sunt ale agentului, nu ale lui Caveman",
+      "Python 3.10 sau mai nou, doar pentru /caveman-compress (din CLAUDE.md-ul repo-ului)",
+      "pe npm 12 sau mai nou: `--allow-git=root` la comenzile `npx -y github:JuliusBrussee/caveman ...`; one-liner-ele din README îl adaugă singure de la v3.2.0",
+      "cont gratuit Caveman Cloud (`caveman login`), necesar doar pentru Auto (selectorul automat de model); celelalte componente nu cer cont",
+      "chei API ale altor furnizori (de ex. OpenAI), opționale, doar dacă rulezi `caveman providers add openai` pentru Auto"
+    ]
+  },
+  "monetization": [
+    {
+      "model": "consultanță și training",
+      "what_you_sell": "Audit și atelier de o zi pentru echipe care folosesc agenți AI de programare: unde se duc tokenii (loguri lungi, fișiere de memorie umflate, răspunsuri verbose), ce setări Caveman merită pornite (skill-ul, compresia, `defaultMode` în `.caveman.json`), cum se face un A/B pe factura reală, cu cifrele furnizorului. Vinzi măsurarea și configurarea pentru proiectul clientului, nu codul.",
+      "for_whom": "Echipe mici de programatori și agenții de software care plătesc deja abonamente sau API pentru Claude Code, Codex sau alți agenți și vor să știe dacă merită.",
+      "license_check": {
+        "license": "Apache-2.0",
+        "commercial_use": "permis",
+        "conditions": "LICENSING.md: tot repo-ul e Apache-2.0 de la versiunea 3.0.0 (fără restricție pentru servicii găzduite); păstrezi LICENSE și NOTICE dacă redistribui. Numele „Caveman” și logo-ul sunt mărci ale lui Julius Brussee: poți spune „funcționează cu Caveman” sau „powered by Caveman” (uz nominativ), dar nu îți numești firma sau produsul Caveman și nu sugerezi că ești afiliat (TRADEMARKS.md). Caveman Cloud este software comercial separat, în afara repo-ului."
+      },
+      "path": "folosești repo-ul direct",
+      "own_build_notes": null,
+      "demand_evidence": [
+        {
+          "name": "valantic: Claude Code for Developers (curs în persoană)",
+          "url": "https://www.valantic.com/en/training-center/claude-code-for-developers",
+          "price": "890 EUR per persoană (plus TVA), curs de două zile",
+          "what_it_proves": "Firme plătesc deja pentru training despre agenți AI de programare; un modul despre controlul costurilor ar fi o variantă apropiată.",
+          "checked_at": "2026-10-27"
+        },
+        {
+          "name": "Konigi: ateliere de echipă cu Claude Code",
+          "url": "https://www.konigi.com/answers/team-workshops",
+          "price": "7.500 USD pe zi (echipă de până la opt persoane), transport facturat separat",
+          "what_it_proves": "Ateliere de echipă pe unelte AI de programare se vând deja cu tarif pe zi.",
+          "checked_at": "2026-10-27"
+        }
+      ],
+      "startup_cost": "Practic zero în bani: contul tău la agentul AI folosit pentru măsurători și timp pentru pregătirea materialelor.",
+      "time_to_first_client": "Nu știu: nu am găsit date publice. Depinde de rețeaua ta; un atelier se pregătește în câteva zile, dar clienții vin greu fără referințe.",
+      "difficulty": "mediu",
+      "risks": [
+        "Concurență gratuită: README-ul lui Caveman, INSTALL.md și pagina HONEST-NUMBERS explică deja singure instalarea și limitele.",
+        "Economia nu e sigură: documentația spune că poate fi pierdere netă pentru unii agenți sau sarcini (de ex. facturare pe cerere), deci trebuie să măsori pe datele clientului și să fii gata să spui „nu merită”.",
+        "Produsul se schimbă repede (4.0.0 recent, funcții pre-release): materialele pot deveni învechite în luni.",
+        "Autorul vinde Caveman Cloud (observabilitate, evaluări, optimizare automată) și poate acoperi el nevoia clienților pe termen lung.",
+        "Telemetria implicită a CLI-ului poate fi o problemă de confidențialitate pentru unii clienți; trebuie explicată și dezactivată la cerere."
+      ],
+      "first_steps": [
+        "Citește docs/HONEST-NUMBERS.md și INSTALL.md și notează cazurile în care Caveman pierde.",
+        "Pe un proiect propriu, compară aceeași sarcină cu și fără Caveman, după factura furnizorului, și păstrează cifrele.",
+        "Pregătește o pagină cu metoda de măsurare și lista de verificare a setărilor (`defaultMode`, `caveman telemetry off`).",
+        "Oferă un audit pilot unei echipe mici, după ce ai verificat termenii de marcă din TRADEMARKS.md pentru numele serviciului tău."
+      ]
+    },
+    {
+      "model": "integrare pentru o nișă",
+      "what_you_sell": "Integrarea middleware-ului sau a compresiei locale în aplicația AI a unui client (de exemplu un chatbot sau un agent intern făcut cu Vercel AI SDK, LangChain, OpenAI sau Anthropic), ca rezultatele mari de unelte să fie scurtate înainte să ajungă la model, plus măsurarea economiei pe traficul lui.",
+      "for_whom": "Firme mici sau startup-uri cu o aplicație AI proprie, cu factură LLM vizibilă și fără timp să adapteze singure proxy-ul sau middleware-ul.",
+      "license_check": {
+        "license": "Apache-2.0",
+        "commercial_use": "permis",
+        "conditions": "LICENSING.md: Apache-2.0 pentru middleware, SDK-uri și runtime (engine, proxy, mcp, shrink), fără restricție de serviciu găzduit; păstrezi LICENSE și NOTICE și menționezi modificările dacă redistribui. Codul din engine/pixel include componente MIT și fonturi cu licențe proprii (NOTICE). Nu folosești numele sau logo-ul „Caveman” ca marcă proprie (TRADEMARKS.md)."
+      },
+      "path": "folosești repo-ul direct",
+      "own_build_notes": null,
+      "demand_evidence": [
+        {
+          "name": "The Token Company (compresie de tokeni prin API)",
+          "url": "https://thetokencompany.com/pricing",
+          "price": null,
+          "what_it_proves": "Există firme care vând compresie de tokeni; pagina spune că plătești doar pentru tokenii eliminați, la ofertă, prețul nefiind public.",
+          "checked_at": "2026-10-27"
+        },
+        {
+          "name": "Not Diamond (rutare de modele)",
+          "url": "https://www.notdiamond.ai/pricing",
+          "price": "0,05 USD per milion de tokeni rutați (pay-as-you-go, listă de așteptare)",
+          "what_it_proves": "Reducerea costului LLM prin alegerea modelului și prin gestionarea tokenilor e un produs plătit la prețuri publice.",
+          "checked_at": "2026-10-27"
+        },
+        {
+          "name": "Caveman Cloud, plan Team",
+          "url": "https://caveman.so/pricing",
+          "price": "300 USD/lună (include 300 USD de utilizare); plan Free: 0 USD",
+          "what_it_proves": "Chiar autorul vinde un strat comercial peste același domeniu (observabilitate, evaluări, optimizare); arată ce cere piața, dar și că el e concurent direct.",
+          "checked_at": "2026-10-27"
+        }
+      ],
+      "startup_cost": "Practic zero în bani pentru dezvoltare; costul apelurilor de test la modele rămâne al tău sau al clientului.",
+      "time_to_first_client": "Nu știu: nu am găsit date publice despre ritmul de vânzare al unor astfel de integrări.",
+      "difficulty": "greu",
+      "risks": [
+        "Concurență gratuită: middleware-ul și proxy-ul sunt open-source și documentate; clientul poate încerca singur.",
+        "Dependență de un proiect cu un singur autor principal care se schimbă rapid; README-ul spune că middleware-ul e „Not yet” măsurat.",
+        "Același autor oferă Caveman Cloud și poate absorbi serviciul tău.",
+        "Suport continuu: după integrare, clientul se așteaptă la reparații când se schimbă API-ul furnizorului sau al proxy-ului.",
+        "Rezultatele variază: README arată cazuri unde compresia pierde (HTML, formulare mici), deci economia depinde de datele clientului."
+      ],
+      "first_steps": [
+        "Citește packages/middleware/typescript/README.md sau packages/middleware/python/README.md din repo.",
+        "Alege o aplicație demo cu rezultate mari de unelte (loguri, JSON) și măsoară înainte și după, după cifrele furnizorului.",
+        "Scrie un studiu de caz cu metoda și limitele, pe baza măsurătorilor tale.",
+        "Verifică termenii de marcă (TRADEMARKS.md) înainte să îți numești oferta."
+      ]
+    }
+  ],
+  "updated_at": "2026-10-27",
+  "notes": "Repo nou, citit la commit 9b68f7e (2026-10-25). Licența verificată în LICENSE (text Apache-2.0), NOTICE și LICENSING.md: tot repo-ul e Apache-2.0 de la 3.0.0; versiunile mai vechi aveau MIT + Business Source License pe runtime, iar codul contribuit în fostele părți MIT rămâne disponibil și sub MIT (LICENSE-MIT). Caveman Cloud (serviciul gazduit) nu e în repo. Mărcile „Caveman” și logo-ul sunt ale autorului; aplicații de marcă în curs. Cifrele din README (33,2% mai puțini tokeni, 54% mai ieftin cu Auto, 63 la 20 tokeni) sunt ale autorului; benchmark-ul Auto e declarat „interim”, iar HONEST-NUMBERS.md recunoaște cazuri de pierdere netă. Nu am rulat nimic. Nu am verificat citările externe (Adobe, JetBrains, Elastic, HN). 115.477 stele la 2026-10-27, iar ultimul release e v4.0.1 din 2026-10-13. Prețuri verificate pe 2026-10-27: caveman.so/pricing (Free 0, Team 300 USD/lună, Enterprise nepublicat; SSO +750 USD/lună prin pachetul Scale), notdiamond.ai/pricing (0,05 USD per milion tokeni, listă de așteptare), thetokencompany.com/pricing (fără prețuri, doar ofertă), Helicone verificat dar neutilizat. Pagina valantic arată date de curs deja trecute (august/septembrie 2026), prețul de 890 EUR rămâne totuși public. Alternativele Kompact și Compresr vin din rezultate de căutare web, nu din cod citit. Categoria „Reducere costuri AI” e nouă în categories.json. Exemplul 2: comanda `/caveman` și „stop caveman” sunt din README; documentația nu arată output pentru niciuna dintre comenzi, deci output_from_docs e null."
+}

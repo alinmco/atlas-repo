@@ -112,6 +112,12 @@
         "name": "Paperclip",
         "why": "Skill-uri și metode de lucru pentru agenții de programare (planificare, teste, revizuire); le poți folosi în instrucțiunile agenților angajați în Paperclip ca să lucreze mai disciplinat.",
         "in_catalog": true
+      },
+      {
+        "repo_url": "https://github.com/JuliusBrussee/caveman",
+        "name": "Caveman",
+        "why": "Superpowers dă agentului un flux de lucru (plan, teste, revizuire), iar Caveman scurtează răspunsurile din acel flux; ambele sunt skill-uri instalabile în aceiași agenți.",
+        "in_catalog": true
       }
     ],
     "gaps_noticed": [

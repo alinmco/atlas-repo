@@ -163,6 +163,12 @@
         "name": "Paperclip",
         "why": "OpenCode este unul dintre agenții pe care Paperclip îi poate angaja (adaptor opencode_local); sarcina din Paperclip devine instrucțiunea agentului, iar codul lui revine ca rezultat în sarcină.",
         "in_catalog": true
+      },
+      {
+        "repo_url": "https://github.com/JuliusBrussee/caveman",
+        "name": "Caveman",
+        "why": "Agent de programare open-source, listat în README ca agent cu plugin nativ Caveman: răspunsurile lui devin scurte, iar logurile comprimate ajung la model.",
+        "in_catalog": true
       }
     ],
     "gaps_noticed": [

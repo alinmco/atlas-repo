@@ -278,5 +278,25 @@
     "gap": "Versiunea classic, singura utilizabilă, este arhivată, deci fără corecturi",
     "source_slug": "opencut",
     "added_at": "2026-10-26"
+  },
+  {
+    "gap": "README spune că HTML nu are încă compresor, deci paginile HTML mari nu se scurtează în sesiunile de agent.",
+    "source_slug": "caveman",
+    "added_at": "2026-10-27"
+  },
+  {
+    "gap": "Pentru agenții fără sistem de cârlige (hooks), pornirea automată nu funcționează: tabelul din INSTALL.md arată „No” și trebuie invocat manual skill-ul.",
+    "source_slug": "caveman",
+    "added_at": "2026-10-27"
+  },
+  {
+    "gap": "Ratele de economisire din README sunt măsurate de autor pe versiuni diferite; nu există un singur raport care să acopere tot produsul, iar HONEST-NUMBERS.md spune că pentru agenții taxați pe cerere (de ex. GitHub Copilot) un răspuns mai scurt nu scade costul.",
+    "source_slug": "caveman",
+    "added_at": "2026-10-27"
+  },
+  {
+    "gap": "Comanda Auto și funcțiile cu cont duc spre Caveman Cloud (serviciu comercial separat); repo-ul nu conține codul acelui serviciu.",
+    "source_slug": "caveman",
+    "added_at": "2026-10-27"
   }
 ]
