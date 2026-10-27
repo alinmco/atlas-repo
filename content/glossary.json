@@ -1,0 +1,359 @@
+[
+  {
+    "term": "skill",
+    "aliases": [
+      "skill-uri",
+      "skill-ul",
+      "skill-urile",
+      "skill-urilor",
+      "skill-ului"
+    ],
+    "explanation": "fișier cu instrucțiuni text pe care agentul AI le urmează"
+  },
+  {
+    "term": "SKILL.md",
+    "aliases": [
+      "fișiere SKILL.md"
+    ],
+    "explanation": "fișierul text în care e scris un skill"
+  },
+  {
+    "term": "agent AI de programare",
+    "aliases": [
+      "agent de programare",
+      "agenți AI de programare",
+      "agenți de programare",
+      "asistent AI de programare",
+      "asistenți AI de programare",
+      "agentul",
+      "agenți",
+      "agent"
+    ],
+    "explanation": "program AI care scrie și modifică cod la cererea ta"
+  },
+  {
+    "term": "subagent",
+    "aliases": [
+      "subagenți",
+      "subagenții",
+      "subagenților",
+      "subagent-driven-development"
+    ],
+    "explanation": "agent ajutător pornit de agentul principal pentru o sarcină"
+  },
+  {
+    "term": "plugin",
+    "aliases": [
+      "plugin-uri",
+      "plugin-ul",
+      "pluginul",
+      "plugin-urile",
+      "extensie",
+      "extensia"
+    ],
+    "explanation": "modul care adaugă funcții unui program existent"
+  },
+  {
+    "term": "hook",
+    "aliases": [
+      "hooks",
+      "hook-uri",
+      "hook-ul",
+      "hooks-urile",
+      "hooks-uri"
+    ],
+    "explanation": "mic script pornit automat la un anumit eveniment"
+  },
+  {
+    "term": "SessionStart",
+    "aliases": [
+      "hook de tip SessionStart"
+    ],
+    "explanation": "eveniment care se declanșează la începutul unei sesiuni"
+  },
+  {
+    "term": "git",
+    "aliases": [
+      "repo Git"
+    ],
+    "explanation": "program care ține istoricul modificărilor unui proiect"
+  },
+  {
+    "term": "git worktree",
+    "aliases": [
+      "worktree",
+      "worktree-uri",
+      "worktree-ul",
+      "worktrees"
+    ],
+    "explanation": "copie de lucru separată a proiectului, pe altă ramură"
+  },
+  {
+    "term": "ramură",
+    "aliases": [
+      "ramura",
+      "ramuri",
+      "ramurii",
+      "branch"
+    ],
+    "explanation": "linie separată de modificări într-un proiect git"
+  },
+  {
+    "term": "merge-ul",
+    "aliases": [
+      "face merge"
+    ],
+    "explanation": "unirea modificărilor dintr-o ramură în alta"
+  },
+  {
+    "term": "PR",
+    "aliases": [
+      "PR-uri",
+      "PR-ul",
+      "pull request"
+    ],
+    "explanation": "cerere de a include modificările tale în proiect"
+  },
+  {
+    "term": "commit",
+    "aliases": [
+      "commit-uri",
+      "commit-ul",
+      "commit-urile"
+    ],
+    "explanation": "salvare numită a modificărilor în istoricul git"
+  },
+  {
+    "term": "TDD",
+    "aliases": [
+      "test-driven-development",
+      "red/green TDD"
+    ],
+    "explanation": "metodă: scrii întâi testul, apoi codul care îl trece"
+  },
+  {
+    "term": "teste scrise primele",
+    "aliases": [
+      "teste primele"
+    ],
+    "explanation": "testele se scriu înaintea codului pe care îl verifică"
+  },
+  {
+    "term": "brainstorming",
+    "aliases": [
+      "brainstorming-ul",
+      "brainstorming-uri"
+    ],
+    "explanation": "discuție în care agentul află ce vrei, înainte de cod"
+  },
+  {
+    "term": "visual companion",
+    "aliases": [
+      "„visual companion”",
+      "visual companion-ul"
+    ],
+    "explanation": "pagină opțională din browser cu schițe și variante"
+  },
+  {
+    "term": "telemetrie",
+    "aliases": [
+      "telemetria",
+      "telemetrii"
+    ],
+    "explanation": "trimiterea automată a unor date de folosire către autori"
+  },
+  {
+    "term": "variabilă de mediu",
+    "aliases": [
+      "variabila de mediu",
+      "variabile de mediu"
+    ],
+    "explanation": "setare a calculatorului pe care o citesc programele"
+  },
+  {
+    "term": "CLAUDE.md",
+    "aliases": [
+      "AGENTS.md",
+      "GEMINI.md",
+      "CLAUDE.md/AGENTS.md",
+      "fișiere de instrucțiuni"
+    ],
+    "explanation": "fișier cu regulile proiectului, citit de agent"
+  },
+  {
+    "term": "Markdown",
+    "aliases": [
+      "fișiere Markdown",
+      "documente Markdown"
+    ],
+    "explanation": "format simplu de text cu titluri și liste"
+  },
+  {
+    "term": "CLI",
+    "aliases": [
+      "Claude Code CLI",
+      "Codex CLI",
+      "Gemini CLI",
+      "Copilot CLI"
+    ],
+    "explanation": "program folosit prin comenzi scrise în terminal"
+  },
+  {
+    "term": "terminal",
+    "aliases": [
+      "terminalul",
+      "linia de comandă"
+    ],
+    "explanation": "fereastră în care scrii comenzi text"
+  },
+  {
+    "term": "shell",
+    "aliases": [
+      "scripturi shell",
+      "script shell"
+    ],
+    "explanation": "program care rulează comenzile scrise în terminal"
+  },
+  {
+    "term": "Git Bash",
+    "aliases": [
+      "Git for Windows",
+      "bash"
+    ],
+    "explanation": "terminal de tip Linux pentru Windows, instalat cu Git"
+  },
+  {
+    "term": "token",
+    "aliases": [
+      "tokeni",
+      "tokenii",
+      "tokenilor"
+    ],
+    "explanation": "bucată mică de text pe care o citește sau scrie un AI"
+  },
+  {
+    "term": "compactare",
+    "aliases": [
+      "compactarea",
+      "compaction",
+      "compacteze"
+    ],
+    "explanation": "agentul scurtează conversația ca să încapă în memorie"
+  },
+  {
+    "term": "marketplace",
+    "aliases": [
+      "magazin de plugin-uri",
+      "magazinul oficial",
+      "magazin oficial"
+    ],
+    "explanation": "magazin online de unde instalezi plugin-uri"
+  },
+  {
+    "term": "harness",
+    "aliases": [
+      "harness-ul",
+      "harness-uri"
+    ],
+    "explanation": "programul care rulează agentul AI sau testele"
+  },
+  {
+    "term": "cheie API",
+    "aliases": [
+      "chei API",
+      "cheia API",
+      "API key",
+      "API keys"
+    ],
+    "explanation": "parolă care îți dă acces la un serviciu AI"
+  },
+  {
+    "term": "API",
+    "aliases": [
+      "API-ul",
+      "API-uri"
+    ],
+    "explanation": "mod prin care programele vorbesc între ele"
+  },
+  {
+    "term": "licență MIT",
+    "aliases": [
+      "MIT",
+      "licența MIT",
+      "licență permisivă"
+    ],
+    "explanation": "licență liberă: poți folosi codul, inclusiv comercial"
+  },
+  {
+    "term": "licență",
+    "aliases": [
+      "licența",
+      "licențe"
+    ],
+    "explanation": "document care spune ce ai voie să faci cu codul"
+  },
+  {
+    "term": "repo",
+    "aliases": [
+      "repo-ul",
+      "repo-uri",
+      "repository",
+      "repo-urile"
+    ],
+    "explanation": "folderul unui proiect cu tot istoricul lui, pe GitHub"
+  },
+  {
+    "term": "release notes",
+    "aliases": [
+      "notele de versiune"
+    ],
+    "explanation": "lista schimbărilor din fiecare versiune nouă"
+  },
+  {
+    "term": "bug",
+    "aliases": [
+      "bug-uri",
+      "raport de bug",
+      "erori ale agentului"
+    ],
+    "explanation": "greșeală într-un program"
+  },
+  {
+    "term": "YAGNI",
+    "aliases": [
+      "You Aren't Gonna Need It"
+    ],
+    "explanation": "principiu: nu adăuga nimic de care nu ai nevoie acum"
+  },
+  {
+    "term": "DRY",
+    "aliases": [
+      "Don't Repeat Yourself"
+    ],
+    "explanation": "principiu: nu repeta aceeași bucată de cod"
+  },
+  {
+    "term": "MCP",
+    "aliases": [
+      "servere MCP"
+    ],
+    "explanation": "standard prin care agenții AI folosesc unelte externe"
+  },
+  {
+    "term": "prompt",
+    "aliases": [
+      "prompt-ul",
+      "prompturi",
+      "promptul"
+    ],
+    "explanation": "mesajul text pe care îl trimiți unui AI"
+  },
+  {
+    "term": "tool",
+    "aliases": [
+      "tools",
+      "unelte ale agentului"
+    ],
+    "explanation": "acțiune pe care agentul o poate face, ca citirea unui fișier"
+  }
+]

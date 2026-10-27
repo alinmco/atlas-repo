@@ -203,6 +203,12 @@
           "source_url": {
             "type": "string",
             "pattern": "^https?://"
+          },
+          "kind": {
+            "enum": [
+              "instalare",
+              "folosire"
+            ]
           }
         }
       }
@@ -482,6 +488,185 @@
         "string",
         "null"
       ]
+    },
+    "at_a_glance": {
+      "type": "object",
+      "required": [
+        "for_you_if",
+        "not_for_you_if",
+        "verdict"
+      ],
+      "properties": {
+        "for_you_if": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 3,
+          "items": {
+            "type": "string"
+          }
+        },
+        "not_for_you_if": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 3,
+          "items": {
+            "type": "string"
+          }
+        },
+        "verdict": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "cost": {
+      "type": "object",
+      "required": [
+        "level",
+        "summary"
+      ],
+      "properties": {
+        "level": {
+          "enum": [
+            "gratuit complet",
+            "gratuit, dar cere servicii plătite",
+            "plătit",
+            "necunoscut"
+          ]
+        },
+        "summary": {
+          "type": "string",
+          "minLength": 1
+        },
+        "items": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "what",
+              "price",
+              "required",
+              "source_url"
+            ],
+            "properties": {
+              "what": {
+                "type": "string",
+                "minLength": 1
+              },
+              "price": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "required": {
+                "type": "boolean"
+              },
+              "source_url": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "platforms": {
+      "type": "object",
+      "required": [
+        "windows",
+        "mac",
+        "linux"
+      ],
+      "properties": {
+        "windows": {
+          "enum": [
+            "da",
+            "parțial",
+            "nu",
+            "necunoscut"
+          ]
+        },
+        "mac": {
+          "enum": [
+            "da",
+            "parțial",
+            "nu",
+            "necunoscut"
+          ]
+        },
+        "linux": {
+          "enum": [
+            "da",
+            "parțial",
+            "nu",
+            "necunoscut"
+          ]
+        },
+        "note": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "source_url": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "risk_flags": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "flag",
+          "detail"
+        ],
+        "properties": {
+          "flag": {
+            "enum": [
+              "trimite date în cloud",
+              "telemetrie",
+              "cere cont",
+              "modifică setările altor programe",
+              "proiect instabil",
+              "licență restrictivă",
+              "cere plată"
+            ]
+          },
+          "detail": {
+            "type": "string",
+            "minLength": 1
+          },
+          "source_url": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        }
+      }
+    },
+    "features": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string"
+      }
+    },
+    "audience_reason": {
+      "type": "string"
+    },
+    "setup_difficulty_reason": {
+      "type": "string"
+    },
+    "notes_summary": {
+      "type": "string"
     }
   }
 }

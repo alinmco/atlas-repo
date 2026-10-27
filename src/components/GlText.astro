@@ -1,0 +1,98 @@
+---
+// Text cu termeni din glosar. Prima apariție a fiecărui termen primește o explicație
+// (la hover, la focus cu tastatura și la atingere). Folosește-l doar pentru proză.
+interface Props {
+  text: string;
+  gl: { split: (t: string) => { text: string; explanation?: string; id?: string }[] };
+}
+const { text, gl } = Astro.props;
+const parts = gl.split(text);
+---
+{parts.map((p) =>
+  p.explanation ? (
+    <span class="gl">
+      <button type="button" class="gl-term" aria-expanded="false" aria-describedby={p.id}>{p.text}</button>
+      <span class="gl-tip" role="tooltip" id={p.id}>{p.explanation}</span>
+    </span>
+  ) : (
+    p.text
+  )
+)}
+
+<style is:global>
+  .gl {
+    position: relative;
+  }
+  .gl-term {
+    all: unset;
+    cursor: help;
+    text-decoration: underline dotted;
+    text-underline-offset: 3px;
+    border-radius: 2px;
+  }
+  .gl-term:focus-visible {
+    outline: 3px solid var(--focus);
+    outline-offset: 2px;
+  }
+  .gl-tip {
+    display: none;
+    position: absolute;
+    z-index: 20;
+    left: var(--gl-shift, 0);
+    top: 100%;
+    margin-top: 0.35rem;
+    width: max-content;
+    max-width: min(16rem, 80vw);
+    padding: 0.45rem 0.65rem;
+    background: var(--ink);
+    color: var(--paper);
+    border-radius: 8px;
+    font-size: var(--step--1);
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1.4;
+  }
+  .gl:hover .gl-tip,
+  .gl:has(.gl-term:focus-visible) .gl-tip,
+  .gl:has(.gl-term[aria-expanded="true"]) .gl-tip {
+    display: block;
+  }
+</style>
+
+<script>
+  // Atingere pe telefon: deschide/închide explicația. Escape o închide.
+  if (!(window as any).__glReady) {
+    (window as any).__glReady = true;
+    const all = () => document.querySelectorAll<HTMLElement>(".gl-term");
+    const place = (btn: HTMLElement) => {
+      const tip = btn.parentElement?.querySelector<HTMLElement>(".gl-tip");
+      if (!tip) return;
+      tip.style.removeProperty("--gl-shift");
+      const wrap = btn.parentElement as HTMLElement;
+      wrap.style.removeProperty("--gl-shift");
+      const r = tip.getBoundingClientRect();
+      const over = r.right - (window.innerWidth - 8);
+      if (over > 0) wrap.style.setProperty("--gl-shift", `-${Math.ceil(over)}px`);
+    };
+    document.addEventListener("click", (e) => {
+      const btn = (e.target as HTMLElement).closest<HTMLElement>(".gl-term");
+      all().forEach((b) => b !== btn && b.setAttribute("aria-expanded", "false"));
+      if (btn) {
+        const open = btn.getAttribute("aria-expanded") === "true";
+        btn.setAttribute("aria-expanded", open ? "false" : "true");
+        if (!open) place(btn);
+      }
+    });
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") all().forEach((b) => b.setAttribute("aria-expanded", "false"));
+    });
+    document.addEventListener("mouseover", (e) => {
+      const btn = (e.target as HTMLElement).closest?.(".gl")?.querySelector<HTMLElement>(".gl-term");
+      if (btn) place(btn);
+    });
+    document.addEventListener("focusin", (e) => {
+      const t = e.target as HTMLElement;
+      if (t.matches?.(".gl-term")) place(t);
+    });
+  }
+</script>

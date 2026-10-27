@@ -3,7 +3,7 @@
   "repo_url": "https://github.com/obra/superpowers",
   "name": "Superpowers",
   "one_liner": "Un set de reguli care îl face pe asistentul AI de programare să lucreze metodic.",
-  "problem_solved": "Asistenții AI de programare (Claude Code, Codex, Gemini CLI, Cursor etc.) se grăbesc des să scrie cod fără să înțeleagă ce vrei, sar peste teste și își declară munca terminată fără dovezi. Superpowers este o „metodologie” completă de dezvoltare software, împachetată ca 15 skill-uri (fișiere SKILL.md, adică instrucțiuni scrise în text simplu pe care agentul le citește) plus o instrucțiune de pornire care îl obligă să le folosească automat. Fluxul din README: brainstorming (agentul te întreabă ce vrei de fapt și scrie un document de design), spațiu de lucru izolat cu git worktree, plan de implementare cu pași mici, execuție cu subagenți (agenți ajutători) care verifică fiecare pas, teste scrise primele (TDD), revizuire de cod între pași și închiderea ramurii. Există și skill-uri pentru depanare sistematică, verificare înainte de a declara succesul și diagnosticarea sesiunilor în care ceva a mers prost.",
+  "problem_solved": "Asistenții AI de programare se grăbesc adesea să scrie cod fără să înțeleagă ce vrei. Sar peste teste și declară munca terminată fără dovezi.",
   "analogy": "E ca un caiet de proceduri pentru un coleg nou, foarte rapid dar grăbit: înainte să se apuce de treabă te întreabă ce vrei, desenează planul, lucrează pe pași mici, verifică după fiecare pas și abia apoi îți spune că a terminat.",
   "how_it_works": [
     "pas 1: instalezi pluginul în agentul tău de programare (README-ul are câte o secțiune pentru Claude Code, Codex, Cursor, Gemini CLI, Copilot CLI, OpenCode și altele)",
@@ -27,6 +27,81 @@
   ],
   "audience": "intermediar",
   "setup_difficulty": "ușor",
+  "at_a_glance": {
+    "for_you_if": [
+      "Folosești deja un agent AI de programare și vrei rezultate mai ordonate.",
+      "Vrei ca agentul să te întrebe și să facă un plan înainte să scrie cod.",
+      "Vrei ca agentul să scrie testele primele și să-și verifice munca."
+    ],
+    "not_for_you_if": [
+      "Nu ai un agent AI de programare: Superpowers nu merge singur.",
+      "Faci doar schimbări mici sau prototipuri aruncabile: fluxul complet e prea mult.",
+      "Vrei totul în română: documentația și skill-urile sunt în engleză."
+    ],
+    "verdict": "Merită dacă lucrezi serios cu un agent de programare și accepți reguli stricte; pentru sarcini mici e prea mult."
+  },
+  "cost": {
+    "level": "gratuit, dar cere servicii plătite",
+    "summary": "Superpowers în sine nu costă nimic; costul vine de la agentul de programare pe care îl folosești (de exemplu Claude Code, de la 17 USD/lună).",
+    "items": [
+      {
+        "what": "Superpowers (skill-urile și pluginul)",
+        "price": "gratuit, licență MIT",
+        "required": true,
+        "source_url": "https://github.com/obra/superpowers/blob/2ce8aa15d05bd57213e6f746f953aafb7ded7a8b/LICENSE"
+      },
+      {
+        "what": "Un agent AI de programare compatibil (Claude Code, Codex, Cursor, Gemini CLI etc.)",
+        "price": null,
+        "required": true,
+        "source_url": "https://github.com/obra/superpowers#installation"
+      },
+      {
+        "what": "Exemplu: Claude Code, planul Pro (Free nu include Claude Code)",
+        "price": "17 USD/lună cu abonament anual, 20 USD/lună plătit lunar (verificat 2026-10-27)",
+        "required": false,
+        "source_url": "https://claude.com/pricing"
+      },
+      {
+        "what": "Consum mai mare de mesaje și tokeni cu fluxul complet; README-ul numește execuția cu subagenți „cea mai amănunțită” și pe cea inline „cea mai ieftină”",
+        "price": null,
+        "required": false,
+        "source_url": "https://github.com/obra/superpowers#the-basic-workflow"
+      },
+      {
+        "what": "Suport comercial, unelte suplimentare și control al costurilor, oferite de Prime Radiant pentru companii",
+        "price": null,
+        "required": false,
+        "source_url": "https://github.com/obra/superpowers#commercial-services"
+      }
+    ]
+  },
+  "platforms": {
+    "windows": "parțial",
+    "mac": "da",
+    "linux": "da",
+    "note": "Depinde și de agentul ales. Pe Windows, pornirea automată cere Git for Windows (Git Bash); dacă lipsește, Claude Code arată un mesaj de instalare (verificat de autori pe Windows 11 cu și fără Git Bash, release notes v7.0.0). Instalarea în OpenCode pe Windows are probleme cunoscute descrise în docs/README.opencode.md. Pentru macOS nu există o declarație explicită de suport: „da” se bazează pe corecturi și teste pentru macOS din release notes, iar pentru Linux pe verificarea „end-to-end” din v7.0.0.",
+    "source_url": "https://github.com/obra/superpowers/blob/2ce8aa15d05bd57213e6f746f953aafb7ded7a8b/RELEASE-NOTES.md"
+  },
+  "risk_flags": [
+    {
+      "flag": "telemetrie",
+      "detail": "Dacă accepți funcția opțională „visual companion”, pagina din browser încarcă o siglă de pe primeradiant.com, cu versiunea Superpowers în adresă; se oprește cu variabila de mediu SUPERPOWERS_DISABLE_TELEMETRY (confirmat în cod; codul respectă și DISABLE_TELEMETRY și CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC).",
+      "source_url": "https://github.com/obra/superpowers/blob/2ce8aa15d05bd57213e6f746f953aafb7ded7a8b/skills/brainstorming/scripts/server.cjs#L106-L112"
+    }
+  ],
+  "features": [
+    "15 skill-uri (instrucțiuni scrise în text) pentru planificare, teste, depanare și revizuire de cod",
+    "Pornire automată: agentul verifică skill-urile disponibile înainte de orice sarcină",
+    "Brainstorming: agentul te întreabă ce vrei și scrie un document de design pe care îl aprobi",
+    "Plan cu sarcini mici (2-5 minute fiecare), executat de subagenți cu revizuire după fiecare sarcină",
+    "Teste scrise primele (ciclul roșu-verde-refactor) și verificare înainte de a declara succesul",
+    "Skill-ul diagnosing-superpowers analizează o sesiune care a mers prost și poate pregăti un raport de bug",
+    "Se instalează în peste 14 agenți AI de programare, câte o instalare pentru fiecare"
+  ],
+  "audience_reason": "trebuie să știi deja să lucrezi cu un agent de programare, cu git și cu teste",
+  "setup_difficulty_reason": "o comandă de instalare în agentul tău, dar agentul trebuie să fie deja configurat (și Git for Windows pe Windows)",
+  "notes_summary": "Citit din README, release notes și cod; nu am rulat nimic. Compatibilitatea cu macOS și Linux e dedusă din release notes, iar prețurile agenților lipsesc, cu excepția Claude Code.",
   "replaces": [],
   "examples": [
     {
@@ -41,7 +116,8 @@
       ],
       "code": null,
       "output_from_docs": null,
-      "source_url": "https://github.com/obra/superpowers#official-marketplace"
+      "source_url": "https://github.com/obra/superpowers#official-marketplace",
+      "kind": "instalare"
     },
     {
       "title": "Instalare și actualizare în Gemini CLI",
@@ -55,7 +131,21 @@
       ],
       "code": null,
       "output_from_docs": null,
-      "source_url": "https://github.com/obra/superpowers#gemini-cli"
+      "source_url": "https://github.com/obra/superpowers#gemini-cli",
+      "kind": "instalare"
+    },
+    {
+      "title": "Prima sesiune după instalare: mesajul de test din README",
+      "scenario": "După instalare, deschizi o sesiune nouă a agentului și trimiți mesajul de test din documentație. Documentația spune că o instalare care funcționează pornește singură skill-ul brainstorming înainte să se scrie orice cod: agentul începe prin a te întreba ce vrei, nu prin a scrie.",
+      "prerequisites": [
+        "Superpowers instalat în agentul tău (vezi exemplele de instalare de mai sus)",
+        "o sesiune nouă, curată (README-ul cere repornirea sesiunilor active după instalare)"
+      ],
+      "commands": [],
+      "code": "Let's make a react todo list",
+      "output_from_docs": null,
+      "source_url": "https://github.com/obra/superpowers#muse",
+      "kind": "folosire"
     }
   ],
   "connectors": {
@@ -255,6 +345,6 @@
       ]
     }
   ],
-  "updated_at": "2026-10-25",
-  "notes": "Repo nou. Citit: README, LICENSE (MIT, Copyright (c) 2025 Jesse Vincent), package.json, .claude-plugin/plugin.json (versiune 7.0.1, licență MIT), RELEASE-NOTES.md (v7.0.0 și v7.0.1), skill-urile using-superpowers, brainstorming, test-driven-development, writing-plans (parțial). Nu am citit integral toate cele 15 skill-uri, nici scripturile din hooks/ sau testele. Nu am rulat nimic. Toate exemplele sunt comenzile din secțiunile de instalare ale README-ului, fără output (documentația nu arată output pentru ele). Înlocuiri de servicii plătite: nu am găsit niciun serviciu comercial pe care să-l înlocuiască realist (sunt instrucțiuni pentru agenți, nu un produs echivalent), deci replaces e gol. Date: 304.988 stele și 27.166 fork-uri (API GitHub, 2026-10-25), repo creat 2025-10-09, 686 commit-uri; nu am verificat ritmul de creștere al stelelor. Ultimul release: v7.0.1 (2026-10-21), ultimul commit pe ramura implicită: 2026-10-21. Nu am găsit prețuri publice pentru asistența comercială Prime Radiant; pagina primeradiant.com/superpowers nu menționează suport sau prețuri (README-ul menționează doar adresa sales@primeradiant.com). Prețurile valantic (890 EUR) și Konigi (7.500 USD/zi) sunt pentru training Claude Code în general, nu pentru Superpowers, verificate pe 2026-10-25. Perechea cu superpowers-lab se bazează doar pe existența repo-ului (433 stele, ultim commit 2026-06-01, MIT); nu i-am citit conținutul. superpowers-evals (138 stele, activ în 2026-10) nu are licență raportată de API, ceea ce contează doar dacă l-ai reutiliza. Telemetria: README-ul declară o telemetrie opțională la logo-ul din funcția „visual companion” (include versiunea Superpowers, fără detalii despre proiect) și o variabilă de mediu pentru dezactivare; nu am verificat în cod. Skill-urile repo-ului au toate aceeași licență MIT (nu există alte licențe pe componente, verificat prin grep după `license:` în skills/, fără rezultate)."
+  "updated_at": "2026-10-27",
+  "notes": "Repo nou. Citit: README, LICENSE (MIT, Copyright (c) 2025 Jesse Vincent), package.json, .claude-plugin/plugin.json (versiune 7.0.1, licență MIT), RELEASE-NOTES.md (v7.0.0 și v7.0.1), skill-urile using-superpowers, brainstorming, test-driven-development, writing-plans (parțial). Nu am citit integral toate cele 15 skill-uri, nici scripturile din hooks/ sau testele. Nu am rulat nimic. Toate exemplele sunt comenzile din secțiunile de instalare ale README-ului, fără output (documentația nu arată output pentru ele). Înlocuiri de servicii plătite: nu am găsit niciun serviciu comercial pe care să-l înlocuiască realist (sunt instrucțiuni pentru agenți, nu un produs echivalent), deci replaces e gol. Date: 304.988 stele și 27.166 fork-uri (API GitHub, 2026-10-25), repo creat 2025-10-09, 686 commit-uri; nu am verificat ritmul de creștere al stelelor. Ultimul release: v7.0.1 (2026-10-21), ultimul commit pe ramura implicită: 2026-10-21. Nu am găsit prețuri publice pentru asistența comercială Prime Radiant; pagina primeradiant.com/superpowers nu menționează suport sau prețuri (README-ul menționează doar adresa sales@primeradiant.com). Prețurile valantic (890 EUR) și Konigi (7.500 USD/zi) sunt pentru training Claude Code în general, nu pentru Superpowers, verificate pe 2026-10-25. Perechea cu superpowers-lab se bazează doar pe existența repo-ului (433 stele, ultim commit 2026-06-01, MIT); nu i-am citit conținutul. superpowers-evals (138 stele, activ în 2026-10) nu are licență raportată de API, ceea ce contează doar dacă l-ai reutiliza. Telemetria: README-ul declară o telemetrie opțională la logo-ul din funcția „visual companion” (include versiunea Superpowers, fără detalii despre proiect) și o variabilă de mediu pentru dezactivare; nu am verificat în cod. Skill-urile repo-ului au toate aceeași licență MIT (nu există alte licențe pe componente, verificat prin grep după `license:` în skills/, fără rezultate). Pilot format nou (2026-10-27): adăugate Pe scurt, cost, platforme, riscuri, funcții, exemplu de folosire; problem_solved scurtat."
 }

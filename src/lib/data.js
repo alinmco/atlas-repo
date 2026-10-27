@@ -14,6 +14,7 @@ export const recipes = Object.values(recipeModules).sort((a, b) => a.title.local
 export const categories = list("categories");
 export const ideas = list("ideas");
 export const index = list("index");
+export const glossary = list("glossary");
 
 export function repoBySlug(slug) {
   return repos.find((r) => r.slug === slug);

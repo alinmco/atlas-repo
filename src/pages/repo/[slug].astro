@@ -2,7 +2,9 @@
 import Base from "../../layouts/Base.astro";
 import Monetization from "../../components/Monetization.astro";
 import InstallPrompt from "../../components/InstallPrompt.astro";
+import GlText from "../../components/GlText.astro";
 import { repos, repoByUrl, recipesUsing, formatDate } from "../../lib/data.js";
+import { createGlossary } from "../../lib/glossary.js";
 
 export function getStaticPaths() {
   return repos.map((repo) => ({ params: { slug: repo.slug }, props: { repo } }));
@@ -11,6 +13,18 @@ export function getStaticPaths() {
 const { repo } = Astro.props;
 const inRecipes = recipesUsing(repo.slug);
 const sha = repo.tech_sheet.commit_sha;
+const gl = createGlossary();
+const glance = repo.at_a_glance;
+const cost = repo.cost;
+const platforms = repo.platforms;
+const flags = repo.risk_flags ?? [];
+const features = repo.features ?? [];
+const showGlance = Boolean(glance || cost || platforms || flags.length);
+const OS = [["windows", "Windows"], ["mac", "Mac"], ["linux", "Linux"]];
+const kindLabel = { instalare: "Instalare", folosire: "Folosire" };
+const compared = repos.filter(
+  (r) => r.slug !== repo.slug && r.categories.some((c) => repo.categories.includes(c))
+);
 const restricted = repo.monetization?.some((m) => ["interzis", "neclar"].includes(m.license_check?.commercial_use));
 ---
 
@@ -25,6 +39,16 @@ const restricted = repo.monetization?.some((m) => ["interzis", "neclar"].include
         </ol>
       </nav>
       <h1>{repo.name}</h1>
+      {flags.length > 0 && (
+        <ul class="flags" aria-label="Atenție">
+          {flags.map((f) => (
+            <li class="flag" title={f.detail}>
+              {f.flag}
+              <span class="visually-hidden">: {f.detail}</span>
+            </li>
+          ))}
+        </ul>
+      )}
       <p class="lede">{repo.one_liner}</p>
       <p class="head-meta">
         <span class="stamp stamp--doc">Din documentația oficială, {formatDate(repo.updated_at)}</span>
@@ -32,18 +56,107 @@ const restricted = repo.monetization?.some((m) => ["interzis", "neclar"].include
       </p>
     </header>
 
+
+    {showGlance && (
+      <section class="glance" aria-labelledby="glance-title">
+        <h2 id="glance-title">Pe scurt</h2>
+        {glance?.verdict && <p class="verdict"><GlText text={glance.verdict} gl={gl} /></p>}
+        {(glance?.for_you_if?.length > 0 || glance?.not_for_you_if?.length > 0) && (
+          <div class="fit">
+            {glance.for_you_if?.length > 0 && (
+              <div>
+                <h3>Merită dacă</h3>
+                <ul>{glance.for_you_if.map((t) => <li><GlText text={t} gl={gl} /></li>)}</ul>
+              </div>
+            )}
+            {glance.not_for_you_if?.length > 0 && (
+              <div>
+                <h3>Nu merită dacă</h3>
+                <ul>{glance.not_for_you_if.map((t) => <li><GlText text={t} gl={gl} /></li>)}</ul>
+              </div>
+            )}
+          </div>
+        )}
+        <dl class="facts">
+          {cost && (
+            <>
+              <dt>Cost</dt>
+              <dd>
+                <strong>{cost.level}.</strong> {cost.summary && <GlText text={cost.summary} gl={gl} />}
+                {cost.items?.length > 0 && (
+                  <details class="fold fold--small">
+                    <summary>Ce poate costa</summary>
+                    <ul>
+                      {cost.items.map((i) => (
+                        <li>
+                          {i.what}: {i.price ?? "preț nepublicat"} ({i.required ? "necesar" : "opțional"})
+                          {i.source_url && (
+                            <> · <a href={i.source_url} target="_blank" rel="noopener noreferrer">sursa</a></>
+                          )}
+                        </li>
+                      ))}
+                    </ul>
+                  </details>
+                )}
+              </dd>
+            </>
+          )}
+          {platforms && (
+            <>
+              <dt>Platforme</dt>
+              <dd>
+                {OS.map(([k, label], i) => (
+                  <>{i > 0 && " · "}{label}: <strong>{platforms[k] ?? "necunoscut"}</strong></>
+                ))}
+                {platforms.note && <span class="soft"> ({platforms.note})</span>}
+                {platforms.source_url && (
+                  <> · <a href={platforms.source_url} target="_blank" rel="noopener noreferrer">sursa</a></>
+                )}
+              </dd>
+            </>
+          )}
+          {flags.length > 0 && (
+            <>
+              <dt>Atenție</dt>
+              <dd>
+                <ul class="flag-detail">
+                  {flags.map((f) => (
+                    <li>
+                      <strong>{f.flag}.</strong> {f.detail}
+                      {f.source_url && (
+                        <> <a href={f.source_url} target="_blank" rel="noopener noreferrer">sursa</a></>
+                      )}
+                    </li>
+                  ))}
+                </ul>
+              </dd>
+            </>
+          )}
+        </dl>
+      </section>
+    )}
+
     <div class="layout">
       <div class="main">
         <section>
           <h2>Ce problemă rezolvă</h2>
-          <p class="prose">{repo.problem_solved}</p>
-          <p class="analogy prose">{repo.analogy}</p>
+          <p class="prose"><GlText text={repo.problem_solved} gl={gl} /></p>
+          <p class="analogy prose"><GlText text={repo.analogy} gl={gl} /></p>
         </section>
+
+        {features.length > 0 && (
+          <section>
+            <h2>Ce primești</h2>
+            <ul class="prose">
+              {features.map((f) => <li><GlText text={f} gl={gl} /></li>)}
+            </ul>
+          </section>
+        )}
 
         <section>
           <h2>Cum funcționează</h2>
           <ol class="flow">
-            {repo.how_it_works.map((step) => <li>{step}</li>)}
+            {repo.how_it_works.map((step) => <li><GlText text={step} gl={gl} /></li>)}
           </ol>
         </section>
 
@@ -102,8 +215,11 @@ const restricted = repo.monetization?.some((m) => ["interzis", "neclar"].include
           </p>
           {repo.examples.map((ex) => (
             <div class="example">
-              <h3>{ex.title}</h3>
-              <p class="prose">{ex.scenario}</p>
+              <h3>
+                {ex.title}
+                {ex.kind && kindLabel[ex.kind] && <span class="kind">{kindLabel[ex.kind]}</span>}
+              </h3>
+              <p class="prose"><GlText text={ex.scenario} gl={gl} /></p>
               {ex.prerequisites.length > 0 && (
                 <p class="soft prereq">Ai nevoie de: {ex.prerequisites.join(", ")}</p>
               )}
@@ -127,7 +243,7 @@ const restricted = repo.monetization?.some((m) => ["interzis", "neclar"].include
         <section>
           <h2>Când să nu-l folosești</h2>
           <ul class="prose">
-            {repo.when_not_to_use.map((w) => <li>{w}</li>)}
+            {repo.when_not_to_use.map((w) => <li><GlText text={w} gl={gl} /></li>)}
           </ul>
           {repo.alternatives.length > 0 && (
             <>
@@ -135,13 +251,47 @@ const restricted = repo.monetization?.some((m) => ["interzis", "neclar"].include
               <ul class="prose">
                 {repo.alternatives.map((a) => (
                   <li>
-                    <a href={a.url} target="_blank" rel="noopener noreferrer">{a.name}</a>: {a.difference}
+                    <a href={a.url} target="_blank" rel="noopener noreferrer">{a.name}</a>: <GlText text={a.difference} gl={gl} />
                   </li>
                 ))}
               </ul>
             </>
           )}
         </section>
+
+        {compared.length > 0 && (
+          <section>
+            <h2>Cum se compară cu alte repo-uri din atlas</h2>
+            <div class="table-scroll" role="region" aria-label="Tabel de comparație, se poate derula lateral" tabindex="0">
+              <table class="compare">
+                <thead>
+                  <tr>
+                    <th scope="col">Repo</th>
+                    <th scope="col">Pe scurt</th>
+                    <th scope="col">Pentru</th>
+                    <th scope="col">Pornire</th>
+                    <th scope="col">Licență</th>
+                    <th scope="col">Cost</th>
+                    <th scope="col">Windows</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {compared.map((r) => (
+                    <tr>
+                      <th scope="row"><a href={`/repo/${r.slug}/`}>{r.name}</a></th>
+                      <td>{r.one_liner}</td>
+                      <td>{r.audience}</td>
+                      <td>{r.setup_difficulty}</td>
+                      <td>{r.tech_sheet.license || "—"}</td>
+                      <td>{r.cost?.level ?? "—"}</td>
+                      <td>{r.platforms?.windows ?? "—"}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </section>
+        )}
 
         {(repo.connectors.pairs_well_with.length > 0 || inRecipes.length > 0) && (
           <section>
@@ -152,7 +302,7 @@ const restricted = repo.monetization?.some((m) => ["interzis", "neclar"].include
                 return (
                   <li>
                     {local ? <a href={`/repo/${local.slug}/`}>{p.name}</a> : <a href={p.repo_url} target="_blank" rel="noopener noreferrer">{p.name}</a>}
-                    {!local && <span class="soft"> (încă nu e în atlas)</span>}: {p.why}
+                    {!local && <span class="soft"> (încă nu e în atlas)</span>}: <GlText text={p.why} gl={gl} />
                   </li>
                 );
               })}
@@ -172,35 +322,52 @@ const restricted = repo.monetization?.some((m) => ["interzis", "neclar"].include
           </section>
         )}
 
+        {repo.notes && (
+          <section>
+            {repo.notes_summary && (
+              <>
+                <h2>Note</h2>
+                <p class="prose soft"><GlText text={repo.notes_summary} gl={gl} /></p>
+              </>
+            )}
+            <details class="fold fold--small">
+              <summary>Cum am verificat</summary>
+              <p class="prose soft">{repo.notes}</p>
+            </details>
+          </section>
+        )}
+
+        <InstallPrompt repo={repo} />
+
         {repo.monetization?.length > 0 && (
           <section>
-            <h2>Cum poți câștiga bani cu el</h2>
+            <details class="fold fold--big">
+            <summary><h2>Cum poți câștiga bani cu el</h2></summary>
             <p class="prose soft money-note">
               Idei pornite de la licență și de la afaceri care vând deja ceva asemănător. Nu sunt promisiuni de venit
               și nici sfat juridic sau financiar.
               {restricted && " Licența acestui repo nu permite uzul comercial, deci ideile se pot face doar cu o implementare proprie."}
             </p>
             {repo.monetization.map((idea) => <Monetization idea={idea} />)}
+            </details>
           </section>
         )}
 
-        {repo.notes && (
-          <section>
-            <h2>Note</h2>
-            <p class="prose soft">{repo.notes}</p>
-          </section>
-        )}
-
-        <InstallPrompt repo={repo} />
       </div>
 
       <aside class="sheet" aria-label="Fișa tehnică">
         <h2>Fișa tehnică</h2>
         <dl>
           <dt>Pentru</dt>
-          <dd>{repo.audience}</dd>
+          <dd>
+            {repo.audience}
+            {repo.audience_reason && <span class="soft reason">{repo.audience_reason}</span>}
+          </dd>
           <dt>Pornire</dt>
-          <dd>{repo.setup_difficulty}</dd>
+          <dd>
+            {repo.setup_difficulty}
+            {repo.setup_difficulty_reason && <span class="soft reason">{repo.setup_difficulty_reason}</span>}
+          </dd>
           <dt>Licență</dt>
           <dd>{repo.tech_sheet.license}</dd>
           <dt>Limbaj</dt>
@@ -222,7 +389,11 @@ const restricted = repo.monetization?.some((m) => ["interzis", "neclar"].include
           {repo.tech_sheet.requirements.length > 0 && (
             <>
               <dt>Cerințe</dt>
-              <dd>{repo.tech_sheet.requirements.join(", ")}</dd>
+              <dd>
+                <ul class="reqs">
+                  {repo.tech_sheet.requirements.map((q) => <li>{q}</li>)}
+                </ul>
+              </dd>
             </>
           )}
           <dt>Categorii</dt>
@@ -422,6 +593,167 @@ const restricted = repo.monetization?.some((m) => ["interzis", "neclar"].include
 
   .recipes-line {
     margin-top: 1rem;
+  }
+
+
+  .flags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin: 0.75rem 0 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .flag {
+    padding: 0.15rem 0.6rem;
+    border: 1px solid var(--warn);
+    border-radius: 999px;
+    background: var(--warn-tint);
+    color: var(--ink);
+    font-size: var(--step--1);
+    cursor: help;
+  }
+
+  .glance {
+    margin-top: 2rem;
+    margin-bottom: 0;
+    padding: 1.25rem 1.5rem;
+    background: var(--accent-tint);
+    border: 1px solid var(--accent);
+    border-left-width: 6px;
+    border-radius: var(--radius);
+  }
+
+  .glance h2 {
+    font-size: var(--step-1);
+    margin-bottom: 0.75rem;
+  }
+
+  .glance h3 {
+    font-size: var(--step-0);
+    margin-bottom: 0.25rem;
+  }
+
+  .verdict {
+    font-weight: 600;
+    max-width: var(--measure);
+    margin-bottom: 1rem;
+  }
+
+  .fit {
+    display: grid;
+    gap: 1rem 2rem;
+    margin-bottom: 1rem;
+  }
+
+  @media (min-width: 40rem) {
+    .fit {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  .fit ul,
+  .flag-detail,
+  .reqs {
+    margin: 0;
+    padding-left: 1.2rem;
+  }
+
+  .flag-detail {
+    padding-left: 0;
+    list-style: none;
+  }
+
+  .facts {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0.1rem;
+    margin: 0;
+    font-size: var(--step--1);
+  }
+
+  @media (min-width: 40rem) {
+    .facts {
+      grid-template-columns: 6rem minmax(0, 1fr);
+      gap: 0.5rem 1rem;
+    }
+  }
+
+  .facts dt {
+    font-weight: 700;
+  }
+
+  .facts dd {
+    margin: 0 0 0.4rem;
+  }
+
+  .fold summary {
+    cursor: pointer;
+  }
+
+  .fold--small summary {
+    font-weight: 600;
+    color: var(--accent);
+  }
+
+  .fold--small > :not(summary) {
+    margin-top: 0.5rem;
+  }
+
+  .fold--big summary h2 {
+    display: inline;
+    font-size: var(--step-2);
+  }
+
+  .fold--big[open] > summary {
+    margin-bottom: 1rem;
+  }
+
+  .kind {
+    margin-left: 0.5rem;
+    padding: 0.1rem 0.5rem;
+    border: 1px solid var(--rule);
+    border-radius: 999px;
+    color: var(--ink-soft);
+    font-family: var(--font-body);
+    font-size: var(--step--1);
+    font-weight: 400;
+    vertical-align: middle;
+  }
+
+  .table-scroll {
+    max-width: 100%;
+    overflow-x: auto;
+    border: 1px solid var(--rule);
+    border-radius: var(--radius);
+  }
+
+  .compare {
+    border-collapse: collapse;
+    width: 100%;
+    min-width: 46rem;
+    font-size: var(--step--1);
+  }
+
+  .compare th,
+  .compare td {
+    padding: 0.6rem 0.75rem;
+    border-bottom: 1px solid var(--rule);
+    text-align: left;
+    vertical-align: top;
+  }
+
+  .compare thead th {
+    background: var(--paper-raised);
+  }
+
+  .compare tbody tr:last-child > * {
+    border-bottom: 0;
+  }
+
+  .reason {
+    display: block;
   }
 
   .sheet {
