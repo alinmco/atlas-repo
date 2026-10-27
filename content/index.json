@@ -227,7 +227,8 @@
       "https://github.com/obra/superpowers-lab",
       "https://github.com/affaan-m/ECC",
       "https://github.com/anomalyco/opencode",
-      "https://github.com/paperclipai/paperclip"
+      "https://github.com/paperclipai/paperclip",
+      "https://github.com/JuliusBrussee/caveman"
     ],
     "used_in_recipes": []
   },
@@ -285,7 +286,8 @@
       "https://github.com/ollama/ollama",
       "https://github.com/mattpocock/skills",
       "https://github.com/anomalyco/models.dev",
-      "https://github.com/paperclipai/paperclip"
+      "https://github.com/paperclipai/paperclip",
+      "https://github.com/JuliusBrussee/caveman"
     ],
     "used_in_recipes": []
   },
@@ -369,6 +371,36 @@
       "https://github.com/yt-dlp/yt-dlp",
       "https://github.com/FFmpeg/FFmpeg",
       "https://github.com/mifi/lossless-cut"
+    ],
+    "used_in_recipes": []
+  },
+  {
+    "slug": "caveman",
+    "name": "Caveman",
+    "one_liner": "Agentul AI de programare scrie și citește mai puțin, deci consumă mai puțini tokeni.",
+    "categories": [
+      "Reducere costuri AI",
+      "Skill-uri pentru agenți AI"
+    ],
+    "inputs": [
+      "textul cererilor din sesiunea unui agent AI de programare (Claude Code, Codex, Gemini CLI, OpenCode, Cursor și alții)",
+      "fișiere mari citite de agent: loguri, JSON, CSV, YAML, rezultate de teste (compresorul local)",
+      "fișiere de memorie în Markdown, de ex. CLAUDE.md, pentru /caveman-compress (cere Python 3.10+)",
+      "adrese de pagini web pentru `caveman browse <url>`"
+    ],
+    "outputs": [
+      "răspunsuri scurte ale agentului, cu cod, comenzi și erori neschimbate",
+      "fișiere comprimate (originalul rămâne într-un director de backup, cu cale în documentația /caveman-compress)",
+      "mesaje de commit într-o linie (/caveman-commit) și revizuiri de cod cu o observație pe rând, de forma `L42: ... null deref. Guard it.` (/caveman-review)",
+      "rapoarte din terminal: `caveman status`, `caveman stats`, `caveman learn`",
+      "fișiere de configurare JSON: `~/.config/caveman/config.json` sau `.caveman.json` în proiect, cu cheia `defaultMode`"
+    ],
+    "updated_at": "2026-10-27",
+    "pairs_well_with": [
+      "https://github.com/vercel-labs/skills",
+      "https://github.com/anomalyco/opencode",
+      "https://github.com/obra/superpowers",
+      "https://github.com/caveman-ai/blocks"
     ],
     "used_in_recipes": []
   }

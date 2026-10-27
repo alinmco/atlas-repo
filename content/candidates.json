@@ -278,5 +278,12 @@
     "suggested_by": "opencut",
     "why": "Taie rapid, fără recodare, fișiere lungi, iar bucățile rezultate (MP4) intră apoi în OpenCut pentru montajul final.",
     "added_at": "2026-10-26"
+  },
+  {
+    "repo_url": "https://github.com/caveman-ai/blocks",
+    "name": "Caveman Blocks",
+    "suggested_by": "caveman",
+    "why": "Scripturi reutilizabile (json-peek, test-summary etc.) pe care agentul le rulează în loc să le rescrie de fiecare dată; ieșirea scurtă a unui script devine intrare pentru agent. Versiune pre-release (v0.1.0-rc.5), conform README.",
+    "added_at": "2026-10-27"
   }
 ]
