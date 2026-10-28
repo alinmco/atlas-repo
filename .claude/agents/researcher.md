@@ -156,7 +156,8 @@ inventezi un scenariu.
    insista.
 2. Alege O poveste: concretă (un proiect real, pași clari), care arată utilitatea, credibilă
    (detalii, nu laudă generică) și ușor de înțeles de un începător. Trebuie să fi citit textul
-   complet, nu doar fragmentul din căutare.
+   complet, nu doar fragmentul din căutare. Povestea e scrisă de un OM: nu de un agent AI, nu
+   de autorul repo-ului și nu de firma care vinde produsul.
 3. Rezumi cu cuvintele tale, în 3-7 pași (`you_do` = ce a făcut omul, `what_happens` = ce a
    făcut unealta, după poveste). Cel mult un citat scurt, sub 15 cuvinte. Fără nume de
    utilizator. Nu adaugi detalii care nu sunt în poveste. Ce afirmă omul rămâne afirmația lui.

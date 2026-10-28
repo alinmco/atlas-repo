@@ -3,7 +3,7 @@
   "repo_url": "https://github.com/anomalyco/opencode",
   "name": "OpenCode",
   "one_liner": "Un asistent AI de programare open source, care rulează în terminalul tău.",
-  "problem_solved": "Programatorii vor un asistent AI care citește proiectul, scrie și modifică cod, rulează comenzi și explică ce face. Cele mai cunoscute variante sunt programe plătite, legate de un singur furnizor de modele AI. OpenCode este un astfel de asistent, gratuit și cu cod deschis, la care îți conectezi singur modelul AI dorit (de la mulți furnizori, sau chiar unul local, pe calculatorul tău). Se folosește din terminal, dintr-o aplicație desktop sau din browser.",
+  "problem_solved": "Programatorii vor un asistent AI care citește proiectul, scrie și modifică cod și rulează comenzi, dar cele mai cunoscute variante sunt plătite și legate de un singur furnizor de modele AI. OpenCode e un asemenea asistent, gratuit și cu cod deschis, la care îți conectezi singur modelul AI.",
   "analogy": "E ca un telefon deblocat: aparatul (OpenCode) e al tău și gratuit, iar cartela (modelul AI) o alegi tu, de la orice operator, în loc să fii legat de un singur abonament.",
   "how_it_works": [
     "Pasul 1, intrare: pornești OpenCode în folderul unui proiect (comanda opencode) și îi scrii în limbaj obișnuit ce vrei, de exemplu „explică acest repository”.",
@@ -11,6 +11,42 @@
     "Pasul 3, lucru: un agent (implicit „build”) citește fișierele, propune modificări și folosește unelte (editare de fișiere, comenzi în terminal, servere MCP). Permisiunile controlează ce are voie să facă fără să te întrebe.",
     "Pasul 4, ieșire: modificările apar direct în fișierele proiectului tău. Pentru automatizări, opencode run printr-un singur mesaj tipărește răspunsul, inclusiv ca JSON, ca să-l poți folosi în scripturi sau în CI."
   ],
+  "first_steps": {
+    "origin": "experiență utilizator",
+    "story_url": "https://nango.dev/blog/learned-building-200-api-integrations-with-opencode/",
+    "story_platform": "blog",
+    "story_date": "2026-04-01",
+    "title": "Un agent OpenCode per sarcină: integrări cu API-uri generate automat",
+    "intro": "Cofondatorul unei firme care vinde infrastructură pentru integrări cu API-uri a vrut să vadă cât de departe poate ajunge un agent de programare autonom în construirea de integrări cu Google Calendar, Drive, Sheets, HubSpot și Slack.",
+    "steps": [
+      {
+        "you_do": "Descrii fiecare funcție dorită (de exemplu „create-event”) într-o fișă scurtă: nume, descriere și un prompt.",
+        "what_happens": "Fișele sunt sarcinile agenților; echipa a dat instrucțiuni de nivel înalt și a lăsat agentul să afle singur parametrii și formatele.",
+        "source_url": "https://nango.dev/blog/learned-building-200-api-integrations-with-opencode/"
+      },
+      {
+        "you_do": "Un script simplu (orchestrator) creează câte un spațiu de lucru pentru fiecare funcție, pregătit cu CLI-ul firmei.",
+        "what_happens": "Fiecare sarcină primește propriul folder, ca agenții să nu se încurce între ei.",
+        "source_url": "https://nango.dev/blog/learned-building-200-api-integrations-with-opencode/"
+      },
+      {
+        "you_do": "Pornești câte un agent OpenCode pentru fiecare funcție, cu un prompt care include identificatori de conexiune și linkul spre documentația API-ului.",
+        "what_happens": "Agentul scrie funcția și o testează pe API-ul real, cu un cont de test, repetând până merge; știința despre integrări e împachetată în skill-uri.",
+        "source_url": "https://nango.dev/blog/learned-building-200-api-integrations-with-opencode/"
+      },
+      {
+        "you_do": "După rulare, nu ai încredere în agenți: refaci testele, compilezi, rulezi linter-ul și verifici că fișierele de test n-au fost modificate.",
+        "what_happens": "Echipa a văzut agenți care copiau date de test sau pretindeau că au terminat; OpenCode păstrează mesajele într-o bază SQLite, ceea ce a ușurat verificările automate.",
+        "source_url": "https://nango.dev/blog/learned-building-200-api-integrations-with-opencode/"
+      },
+      {
+        "you_do": "Ștergi rulările eșuate, le repornești de la zero și combini funcțiile într-o integrare pentru fiecare API.",
+        "what_happens": "Rezultatul sunt integrări gata de revizuit, nu produse finale livrate fără om.",
+        "source_url": "https://nango.dev/blog/learned-building-200-api-integrations-with-opencode/"
+      }
+    ],
+    "takeaway": "Autorul raportează aproximativ 200 de integrări pentru 5 API-uri, în circa 15 minute de generare și sub 20 USD costuri de tokeni, față de o săptămână de lucru a unui inginer (estimarea lui); concluzia lui: agenții „nu sunt gata să livreze autonom” orice integrare. Povestea vine de la o firmă care își vinde propriul produs și nu e un tutorial pentru începători."
+  },
   "categories": [
     "Unelte pentru programatori",
     "Agenți AI și automatizare"
@@ -105,7 +141,8 @@
       ],
       "code": null,
       "output_from_docs": null,
-      "source_url": "https://github.com/anomalyco/opencode/blob/28907e89c067fe1148758366929b43fa294ebcc3/services/www/src/docs/content/index.mdx"
+      "source_url": "https://github.com/anomalyco/opencode/blob/28907e89c067fe1148758366929b43fa294ebcc3/services/www/src/docs/content/index.mdx",
+      "kind": "instalare"
     },
     {
       "title": "O comandă proprie /review",
@@ -118,7 +155,8 @@
       ],
       "code": "# .opencode/commands/review.md\nReview $ARGUMENTS for bugs and missing tests.",
       "output_from_docs": "OpenCode submits `Review src/auth.ts for bugs and missing tests.` as a user prompt.",
-      "source_url": "https://github.com/anomalyco/opencode/blob/28907e89c067fe1148758366929b43fa294ebcc3/services/www/src/docs/content/commands.mdx"
+      "source_url": "https://github.com/anomalyco/opencode/blob/28907e89c067fe1148758366929b43fa294ebcc3/services/www/src/docs/content/commands.mdx",
+      "kind": "folosire"
     }
   ],
   "connectors": {
@@ -304,6 +342,117 @@
       ]
     }
   ],
-  "updated_at": "2026-10-25",
-  "notes": "Repo nou, analizat doar prin citire (README, documentația din services/www/src/docs/content, SECURITY.md, LICENSE MIT). Am clonat cu --depth 1, deci nu am număr de commit-uri. Atenție la V1/V2: README-ul și package.json (2.1.4) descriu V2 (pachet @opencode/cli, install la opencode.ai/v2/install), dar ultima versiune etichetată pe GitHub e v1.19.4 (2026-10-22); documentația V1 e în packages/web, cea V2 în services/www. Documentația V2 menționează nume de modele (de exemplu în pagina OpenCode Go) pe care nu le-am putut verifica independent; nu le-am copiat în exemple. Nu am rulat nimic. Prețurile: Claude Pro 20 USD/lună (17 USD/lună anual), Max de la 100 USD; Cursor și GitHub Copilot din paginile oficiale citite pe 2026-10-25 prin WebFetch; denumirile planurilor Cursor sunt cele afișate la acea dată. Pentru Copilot Business/Enterprise prețul nu e publicat. OpenCode Go (10 și 40 USD/lună) e produsul propriu al autorilor, descris în documentație, nu un serviciu înlocuit. Exemplul 1 nu are output, pentru că documentația nu arată unul pentru instalare și /connect. Exemplul 2 are ca output_from_docs fraza din documentație care descrie ce trimite OpenCode. Stelele (221.459) sunt de la verificarea cu GitHub API; nu am verificat creșterea lor. SECURITY.md cere să nu fie trimise rapoarte de securitate generate de AI."
+  "at_a_glance": {
+    "for_you_if": [
+      "Ești programator și vrei un asistent AI de terminal, fără legare de un singur furnizor.",
+      "Ai deja un abonament ChatGPT Plus/Pro sau GitHub Copilot și vrei să-l folosești într-o unealtă deschisă."
+    ],
+    "not_for_you_if": [
+      "Vrei să folosești abonamentul Claude Pro/Max: documentația OpenCode nu mai oferă această conectare.",
+      "Ești complet începător și nu vrei terminal, chei API sau configurări."
+    ],
+    "verdict": "Unealtă gratuită și flexibilă pentru programatori, dar modelul AI îl plătești separat și proiectul e în schimbare rapidă (V1 și V2)."
+  },
+  "cost": {
+    "level": "gratuit, dar cere servicii plătite",
+    "summary": "OpenCode e gratuit (MIT), dar ai nevoie de un model AI: abonament ChatGPT Plus/Pro sau GitHub Copilot (din 10 USD/lună), OpenCode Go (10 USD/lună), cheie API plătită pe consum ori un model local gratuit. Abonamentul Claude Pro/Max nu se poate conecta.",
+    "ai_access": {
+      "mode": "abonament sau API",
+      "detail": "Documentația V2 permite conectarea cu abonament ChatGPT Plus/Pro (Sign in with ChatGPT), cu GitHub Copilot (autentificare prin cont) și cu abonamentul propriu OpenCode Go, plus chei API de la furnizori; pentru Claude Pro/Max nu există conectare (doar cheie API Anthropic), iar documentația V1 spune că Anthropic interzice acest lucru.",
+      "source_url": "https://github.com/anomalyco/opencode/blob/fa1260d6ca484fe0fd868aa992ad81ab85343cf3/services/www/src/docs/content/providers.mdx"
+    },
+    "items": [
+      {
+        "what": "Un model AI, într-una din variantele de mai jos (obligatoriu cel puțin una: abonament, cheie API, OpenCode Go sau model local)",
+        "price": null,
+        "required": true,
+        "source_url": "https://github.com/anomalyco/opencode/blob/fa1260d6ca484fe0fd868aa992ad81ab85343cf3/services/www/src/docs/content/providers.mdx"
+      },
+      {
+        "what": "ChatGPT Plus sau Pro (conectare prin Sign in with ChatGPT; consumul intră în planul tău)",
+        "price": "Plus 20 USD/lună; Pro de la 100 USD/lună",
+        "required": false,
+        "source_url": "https://learn.chatgpt.com/docs/pricing"
+      },
+      {
+        "what": "GitHub Copilot (conectare prin autentificare cu contul GitHub; cere acces la Copilot Chat, inclusiv planul Free)",
+        "price": "Free 0 USD/lună; Pro 10 USD/lună; Pro+ 39 USD/lună; Max 100 USD/lună; Business și Enterprise: preț nepublicat pe pagină",
+        "required": false,
+        "source_url": "https://github.com/features/copilot/plans"
+      },
+      {
+        "what": "OpenCode Go / Go Plus (abonament propriu al autorilor, cu modele deschise testate de ei; opțional)",
+        "price": "Go 10 USD/lună; Go Plus 40 USD/lună",
+        "required": false,
+        "source_url": "https://opencode.ai/go"
+      },
+      {
+        "what": "OpenCode Console, modele plătite pe consum (credite; opțional)",
+        "price": "Credite de 10, 50 sau 100 USD, plus taxă de procesare 4,6% + 0,31 USD; prețul per model nu l-am verificat",
+        "required": false,
+        "source_url": "https://github.com/anomalyco/opencode/blob/fa1260d6ca484fe0fd868aa992ad81ab85343cf3/services/www/src/docs/content/console/billing.mdx"
+      },
+      {
+        "what": "Cheie API de la un furnizor de modele (OpenAI, Anthropic și altele), plătită pe consum",
+        "price": null,
+        "required": false,
+        "source_url": "https://github.com/anomalyco/opencode/blob/fa1260d6ca484fe0fd868aa992ad81ab85343cf3/services/www/src/docs/content/providers.mdx"
+      },
+      {
+        "what": "Ollama (model local, descoperit automat la 127.0.0.1:11434); programul e gratuit, dar modelele cer un calculator suficient de puternic",
+        "price": "gratuit (open-source, MIT); cerințele de hardware nu sunt specificate în documentația OpenCode",
+        "required": false,
+        "source_url": "https://github.com/ollama/ollama"
+      },
+      {
+        "what": "Node.js (doar dacă instalezi cu npm)",
+        "price": "gratuit (open-source, MIT)",
+        "required": false,
+        "source_url": "https://github.com/nodejs/node/blob/main/LICENSE"
+      },
+      {
+        "what": "Git (și Git Bash pe Windows, pentru scriptul de instalare curl | bash)",
+        "price": "gratuit (open-source)",
+        "required": false,
+        "source_url": "https://git-scm.com/"
+      }
+    ]
+  },
+  "platforms": {
+    "windows": "da",
+    "mac": "da",
+    "linux": "da",
+    "note": "Documentația V2 oferă binar CLI și aplicație desktop pentru Windows, macOS și Linux; spune însă că managerii de pachete Windows nu sunt suportați, iar scriptul curl are nevoie de bash.",
+    "source_url": "https://github.com/anomalyco/opencode/blob/fa1260d6ca484fe0fd868aa992ad81ab85343cf3/services/www/src/docs/content/index.mdx"
+  },
+  "risk_flags": [
+    {
+      "flag": "trimite date în cloud",
+      "detail": "Mesajele și fragmentele de cod ajung la furnizorul de model ales (la modelul local din Ollama rămân pe calculator); pentru OpenCode Go documentația listează antrenarea și păstrarea datelor per model.",
+      "source_url": "https://github.com/anomalyco/opencode/blob/fa1260d6ca484fe0fd868aa992ad81ab85343cf3/services/www/src/docs/content/console/go.mdx"
+    },
+    {
+      "flag": "cere cont",
+      "detail": "Ai nevoie de un cont sau o cheie la un furnizor de modele (sau de un model local); contul OpenCode Console e opțional.",
+      "source_url": "https://github.com/anomalyco/opencode/blob/fa1260d6ca484fe0fd868aa992ad81ab85343cf3/services/www/src/docs/content/console/index.mdx"
+    },
+    {
+      "flag": "proiect instabil",
+      "detail": "Trecerea de la V1 la V2 aduce schimbări incompatibile (plugin-uri, API de server, configurare), iar aplicația desktop e marcată beta în README.",
+      "source_url": "https://github.com/anomalyco/opencode/blob/fa1260d6ca484fe0fd868aa992ad81ab85343cf3/services/www/src/docs/content/migrate-v1.mdx"
+    }
+  ],
+  "features": [
+    "Asistent AI în terminal: citește proiectul, editează fișiere și rulează comenzi",
+    "Îți alegi modelul: cheie API, abonament ChatGPT Plus/Pro sau GitHub Copilot, OpenCode Go ori un model local (Ollama)",
+    "Agenți, comenzi proprii și servere MCP, definite prin fișiere Markdown și JSON din proiect",
+    "Permisiuni: te întreabă înainte de acțiuni (dar nu e un sandbox)",
+    "Merge din terminal, din aplicația desktop (beta) sau din browser (opencode pair)",
+    "opencode run trimite un singur mesaj și tipărește răspunsul, bun pentru scripturi și CI"
+  ],
+  "audience_reason": "se folosește din terminal și cere alegerea unui furnizor de model, a permisiunilor și a fișierelor de configurare",
+  "setup_difficulty_reason": "instalarea e o comandă, dar ai nevoie de un cont sau cheie la un model AI și de configurare",
+  "notes_summary": "Am citit documentația V2 și codul din repo la commit fa1260d; n-am rulat nimic, iar detaliile despre breșa din Console (octombrie 2026) vin doar din discuția de pe Hacker News.",
+  "updated_at": "2026-10-28",
+  "notes": "Repo nou, analizat doar prin citire (README, documentația din services/www/src/docs/content, SECURITY.md, LICENSE MIT). Am clonat cu --depth 1, deci nu am număr de commit-uri. Atenție la V1/V2: README-ul și package.json (2.1.4) descriu V2 (pachet @opencode/cli, install la opencode.ai/v2/install), dar ultima versiune etichetată pe GitHub e v1.19.4 (2026-10-22); documentația V1 e în packages/web, cea V2 în services/www. Documentația V2 menționează nume de modele (de exemplu în pagina OpenCode Go) pe care nu le-am putut verifica independent; nu le-am copiat în exemple. Nu am rulat nimic. Prețurile: Claude Pro 20 USD/lună (17 USD/lună anual), Max de la 100 USD; Cursor și GitHub Copilot din paginile oficiale citite pe 2026-10-25 prin WebFetch; denumirile planurilor Cursor sunt cele afișate la acea dată. Pentru Copilot Business/Enterprise prețul nu e publicat. OpenCode Go (10 și 40 USD/lună) e produsul propriu al autorilor, descris în documentație, nu un serviciu înlocuit. Exemplul 1 nu are output, pentru că documentația nu arată unul pentru instalare și /connect. Exemplul 2 are ca output_from_docs fraza din documentație care descrie ce trimite OpenCode. Stelele (221.459) sunt de la verificarea cu GitHub API; nu am verificat creșterea lor. SECURITY.md cere să nu fie trimise rapoarte de securitate generate de AI. Migrare 2026-10-28: am recitit documentația V2 din repo la commit fa1260d6 (pachet @opencode/cli 2.2.0, ultima etichetă GitHub v1.19.5, 222.494 stele, MIT) și am reverificat prețurile (Claude Pro/Max, ChatGPT, Copilot, OpenCode Go). Abonamente: ChatGPT Plus/Pro și GitHub Copilot sunt descrise în docs V2 (providers.mdx), la fel OpenCode Go (10 și 40 USD/lună); „Zen” apare doar în pagina Hermes, iar documentația V2 numește oferta pe consum „Console”. Claude Pro/Max: PR #18186 (îmbinat 2026-03-19) a scos opțiunea din interfață și documentație, docs V1 (packages/web) spun că Anthropic o interzice, iar docs V2 mai descriu doar cheia API Anthropic. Pe Hacker News (item 50133401, 2026-10-17) apare un anunț al echipei despre acces neautorizat la un sistem vechi, cu chei de furnizori salvate în OpenCode Console posibil expuse; comentatorii spun că CLI-ul nu e afectat, dar eu n-am verificat anunțul original (e pe X). Primii pași: Nango (blog, 2026-04-01), citit integral; nu e o poveste de începător, dar e concretă, cu cifre. N-am rulat nimic."
 }
