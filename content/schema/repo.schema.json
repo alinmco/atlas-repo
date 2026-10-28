@@ -102,6 +102,31 @@
         "takeaway": {
           "type": "string",
           "minLength": 1
+        },
+        "origin": {
+          "enum": [
+            "propus",
+            "experiență utilizator"
+          ]
+        },
+        "story_url": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "story_platform": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "story_date": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
         }
       }
     },
