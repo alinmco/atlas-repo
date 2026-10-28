@@ -3,7 +3,113 @@
   "repo_url": "https://github.com/mattpocock/skills",
   "name": "Matt Pocock Skills (Skills For Real Engineers)",
   "one_liner": "Instrucțiuni gata făcute care îl învață asistentul AI de programare să lucreze disciplinat.",
-  "problem_solved": "Asistenții AI de programare (Claude Code, Codex, Copilot, Gemini CLI etc.) greșesc des în aceleași feluri: nu înțeleg ce vrei de fapt, folosesc prea multe cuvinte, scriu cod care nu merge și complică treptat proiectul. Repo-ul adună peste 30 de „skill-uri” (fișiere SKILL.md cu instrucțiuni scrise în text simplu) care corectează aceste probleme: interviu de clarificare înainte de lucru (/grill-me, /grill-with-docs), dezvoltare cu teste scrise primele (/tdd), depanare pe faze (/diagnosing-bugs), transformarea ideilor în specificații și tichete (/to-spec, /to-tickets), revizuire de cod (/code-review). Autorul spune că sunt „mici, ușor de adaptat și combinabile”, în opoziție cu cadre care „dețin procesul” (GSD, BMAD, Spec-Kit).",
+  "problem_solved": "Asistenții AI de programare înțeleg greșit ce vrei, scriu prea mult, produc cod care nu merge și complică treptat proiectul. Repo-ul oferă instrucțiuni gata făcute care îi fac să lucreze mai disciplinat.",
+  "features": [
+    "Peste 25 de skill-uri (fișiere SKILL.md) pentru inginerie și productivitate, în folderele engineering și productivity",
+    "Interviu de clarificare înainte de lucru: /grill-me și /grill-with-docs",
+    "Dezvoltare cu teste scrise primele (/tdd) și depanare pe faze (/diagnosing-bugs)",
+    "Din idee în specificație și tichete: /to-spec, /to-tickets, apoi /implement și /code-review",
+    "Plugin pentru Claude Code, Codex și GitHub Copilot sau fișiere copiate cu npx skills",
+    "Licență MIT; configurare o singură dată pe proiect cu /setup-matt-pocock-skills"
+  ],
+  "at_a_glance": {
+    "for_you_if": [
+      "Folosești deja un agent AI de programare și vrei să lucreze mai metodic.",
+      "Vrei piese mici, pe care le poți adapta, nu un cadru care conduce tot procesul."
+    ],
+    "not_for_you_if": [
+      "Nu folosești niciun agent AI de programare: aici sunt doar fișiere text.",
+      "Ai nevoie de ceva stabil: skill-urile sunt redenumite și retrase des."
+    ],
+    "verdict": "Colecție gratuită de reguli de lucru pentru agenți, utilă dacă o adaptezi la proiectul tău."
+  },
+  "cost": {
+    "level": "gratuit, dar cere servicii plătite",
+    "summary": "Skill-urile sunt gratuite (MIT); plătești doar agentul AI, care merge cu abonamentul (Claude Pro/Max, ChatGPT Plus pentru Codex, GitHub Copilot) sau cu cheie API pe consum.",
+    "ai_access": {
+      "mode": "abonament sau API",
+      "detail": "Repo-ul nu cere cheie API; Claude Code se autentifică cu Claude Pro/Max sau cu cont Console/cheie API, iar README-ul listează și Codex, Copilot, Gemini CLI, Cursor și alții, fiecare cu propria autentificare.",
+      "source_url": "https://code.claude.com/docs/en/authentication"
+    },
+    "items": [
+      {
+        "what": "Skill-urile din repo (licență MIT)",
+        "price": "gratuit",
+        "required": true,
+        "source_url": "https://github.com/mattpocock/skills/blob/59db609eb1e18aaf59b63284d0e52255aff0c63c/LICENSE"
+      },
+      {
+        "what": "Un agent AI de programare compatibil (obligatoriu: unul dintre cei listați în README)",
+        "price": null,
+        "required": true,
+        "source_url": "https://github.com/mattpocock/skills/blob/59db609eb1e18aaf59b63284d0e52255aff0c63c/README.md"
+      },
+      {
+        "what": "Claude Pro (abonament care include Claude Code)",
+        "price": "17 USD/lună cu plata anuală, 20 USD/lună lunar",
+        "required": false,
+        "source_url": "https://claude.com/pricing"
+      },
+      {
+        "what": "Claude Max (limite mai mari pentru Claude Code)",
+        "price": "de la 100 USD/lună",
+        "required": false,
+        "source_url": "https://claude.com/pricing"
+      },
+      {
+        "what": "ChatGPT Plus (include Codex)",
+        "price": "20 USD/lună",
+        "required": false,
+        "source_url": "https://learn.chatgpt.com/docs/pricing"
+      },
+      {
+        "what": "GitHub Copilot Pro (pentru varianta Copilot CLI / VS Code)",
+        "price": "10 USD/lună",
+        "required": false,
+        "source_url": "https://github.com/features/copilot/plans"
+      },
+      {
+        "what": "Cheie API Anthropic (alternativă la abonament, plată pe consum)",
+        "price": null,
+        "required": false,
+        "source_url": "https://code.claude.com/docs/en/authentication"
+      },
+      {
+        "what": "Node.js (doar pentru instalarea cu npx skills@latest)",
+        "price": "gratuit (open-source)",
+        "required": false,
+        "source_url": "https://github.com/mattpocock/skills/blob/59db609eb1e18aaf59b63284d0e52255aff0c63c/README.md"
+      },
+      {
+        "what": "Git (pentru proiectul în care lucrezi; open-source)",
+        "price": "gratuit",
+        "required": false,
+        "source_url": "https://git-scm.com/"
+      }
+    ]
+  },
+  "platforms": {
+    "windows": "da",
+    "mac": "da",
+    "linux": "da",
+    "note": "Dedus: skill-urile sunt fișiere Markdown, README-ul nu listează sisteme de operare. Documentația pentru /handoff amintește calea temporară %TEMP% pe Windows; singurul script shell livrat (la /diagnosing-bugs) e un șablon opțional.",
+    "source_url": "https://github.com/mattpocock/skills/blob/59db609eb1e18aaf59b63284d0e52255aff0c63c/docs/productivity/handoff.md"
+  },
+  "risk_flags": [
+    {
+      "flag": "proiect instabil",
+      "detail": "CHANGELOG.md arată skill-uri redenumite sau retrase (de ex. CONTEXT.md a devenit GLOSSARY.md, resolving-merge-conflicts a fost scos), iar folderele misc și in-progress nu sunt întreținute.",
+      "source_url": "https://github.com/mattpocock/skills/blob/59db609eb1e18aaf59b63284d0e52255aff0c63c/CHANGELOG.md"
+    },
+    {
+      "flag": "modifică setările altor programe",
+      "detail": "/setup-matt-pocock-skills scrie fișiere în docs/agents/ și adaugă un bloc în CLAUDE.md sau AGENTS.md din proiectul tău, după ce îți cere confirmarea.",
+      "source_url": "https://github.com/mattpocock/skills/blob/59db609eb1e18aaf59b63284d0e52255aff0c63c/docs/engineering/setup-matt-pocock-skills.md"
+    }
+  ],
+  "audience_reason": "presupune că folosești deja un agent AI de programare și știi noțiuni de bază despre proiecte Git și tichete",
+  "setup_difficulty_reason": "o comandă de instalare și o rulare de configurare, fără chei cerute de repo",
+  "notes_summary": "Am citit README-ul, documentația și changelog-ul și am găsit o experiență reală publicată pe blogul Scott Logic; n-am rulat nimic, iar sistemele de operare sunt deduse.",
   "analogy": "E ca un set de fișe de lucru lipite pe frigider pentru un bucătar nou: înainte să gătească, întreabă ce vrei; apoi gătește pas cu pas și își gustă mâncarea la fiecare pas. Bucătarul rămâne același, doar că lucrează după fișe bune.",
   "how_it_works": [
     "pas 1: instalezi pluginul sau copiezi fișierele în agentul tău (Claude Code, Codex, Copilot, Gemini CLI sau altul prin `npx skills`)",
@@ -12,6 +118,42 @@
     "pas 4: agentul citește fișierul SKILL.md corespunzător și îți urmează instrucțiunile: pune întrebări în runde, scrie teste înainte de cod, face revizuire etc.",
     "pas 5: rezultatul sunt texte și cod în proiectul tău: GLOSSARY.md, ADR-uri (note despre decizii), specificații, tichete, modificări de cod, rapoarte de revizuire"
   ],
+  "first_steps": {
+    "origin": "experiență utilizator",
+    "story_url": "https://blog.scottlogic.com/2026/10/19/an-honest-review-of-matt-pococks-skills.html",
+    "story_platform": "blog",
+    "story_date": "2026-10-19",
+    "title": "O aplicație mică construită cap-coadă cu skill-urile, în ordinea recomandată",
+    "intro": "Un director tehnic a reconstruit de la zero o aplicație web mică pentru jurnalul sesiunilor de karting, ca test pentru lucrul cu agenți AI, folosind skill-urile pe rând.",
+    "steps": [
+      {
+        "you_do": "Îi spui lui /ask-matt de unde să începi, cu o idee la nivel înalt.",
+        "what_happens": "Routerul recomandă /grill-with-docs ca primă piesă.",
+        "source_url": "https://blog.scottlogic.com/2026/10/19/an-honest-review-of-matt-pococks-skills.html"
+      },
+      {
+        "you_do": "Rulezi /grill-with-docs și răspunzi la întrebări aproximativ 5 minute.",
+        "what_happens": "Agentul scrie un fișier de glosar de circa 45 de linii și o decizie de arhitectură (ADR) care separă șasiul, motorul și setul de cauciucuri ca piese independente.",
+        "source_url": "https://blog.scottlogic.com/2026/10/19/an-honest-review-of-matt-pococks-skills.html"
+      },
+      {
+        "you_do": "Rulezi /to-spec, apoi /to-tickets.",
+        "what_happens": "Rezultă o specificație de circa 80 de linii, care propune un strat de abstractizare peste serviciul de stocare ca punct de testare, și opt tichete scurte.",
+        "source_url": "https://blog.scottlogic.com/2026/10/19/an-honest-review-of-matt-pococks-skills.html"
+      },
+      {
+        "you_do": "Rulezi /implement.",
+        "what_happens": "Agentul lucrează cu teste scrise primele și apelează /code-review; autorul spune că revizuirea a prins mai multe bug-uri, reparate în buclă.",
+        "source_url": "https://blog.scottlogic.com/2026/10/19/an-honest-review-of-matt-pococks-skills.html"
+      },
+      {
+        "you_do": "Încerci /wizard pentru configurarea serviciului de backend.",
+        "what_happens": "Scriptul generat a eșuat repede, pentru că pașii se refereau la pagini și butoane care nu mai existau.",
+        "source_url": "https://blog.scottlogic.com/2026/10/19/an-honest-review-of-matt-pococks-skills.html"
+      }
+    ],
+    "takeaway": "Autorul vede în skill-uri un punct de plecare bun, ușor de adaptat, nu ceva de folosit neschimbat: \"Skills can help encode tasks and guide agents.\" Notează și limite: specificație prea lungă, teste care verifică mai ales simulările. Nu compară cu lucrul fără skill-uri."
+  },
   "categories": [
     "Skill-uri pentru agenți AI"
   ],
@@ -40,7 +182,8 @@
       ],
       "code": null,
       "output_from_docs": null,
-      "source_url": "https://github.com/mattpocock/skills#installation-30-second-setup"
+      "source_url": "https://github.com/mattpocock/skills#installation-30-second-setup",
+      "kind": "instalare"
     },
     {
       "title": "Instalare pentru alt agent (Cursor, OpenCode, Windsurf etc.) cu `npx skills`",
@@ -55,7 +198,23 @@
       ],
       "code": null,
       "output_from_docs": null,
-      "source_url": "https://github.com/mattpocock/skills#installation-30-second-setup"
+      "source_url": "https://github.com/mattpocock/skills#installation-30-second-setup",
+      "kind": "instalare"
+    },
+    {
+      "title": "Folosire zilnică: /grill-me, cu o întrebare pe rând",
+      "scenario": "Ai o idee vagă (o funcție, o decizie, un text) și vrei să fii intervievat până o clarifici. Documentația spune că pornești sesiunea tastând /grill-me într-o conversație nouă, iar dacă preferi o întrebare pe rând, adaugi această linie în CLAUDE.md global.",
+      "prerequisites": [
+        "skill-urile instalate în agentul tău (vezi exemplele de instalare)",
+        "o conversație nouă cu agentul"
+      ],
+      "commands": [
+        "/grill-me"
+      ],
+      "code": "When grilling, ask one question at a time.",
+      "output_from_docs": null,
+      "source_url": "https://github.com/mattpocock/skills/blob/59db609eb1e18aaf59b63284d0e52255aff0c63c/docs/productivity/grill-me.md",
+      "kind": "folosire"
     }
   ],
   "connectors": {
@@ -249,6 +408,6 @@
       ]
     }
   ],
-  "updated_at": "2026-10-25",
-  "notes": "Repo nou. Licență: fișierul LICENSE este MIT (Copyright 2026 Matt Pocock), confirmat și în package.json și plugin.json; API-ul GitHub spune tot MIT. Nu am rulat nimic; am citit README, SCOPE.md, CHANGELOG.md, câteva SKILL.md (grill-me, grilling, tdd, handoff, setup) și paginile din docs/. Exemplele sunt comenzile din secțiunea Installation a README-ului, fără output (documentația nu arată output). Promovare comercială: README-ul trimite la newsletter-ul gratuit de la aihero.dev și plugin.json trimite la același site; README nu vinde direct cursuri și nu amintește Total TypeScript, dar domeniul aihero.dev și paginile publicate sunt ale lui Pocock, care vinde cohorte (vezi monetizarea). Prețul cohortelor NU l-am văzut pe pagina oficială (a afișat șabloane nerandate), iar totaltypescript.com afișa „Loading price”; de aceea price este null. Nu am verificat că newsletter-ul este gratuit în sens contractual, doar că README-ul îl prezintă ca invitație de înscriere. Repo-ul a avut peste 303.000 de stele și 25.000 de fork-uri la 3 luni de la creare (creat 2026-02-03); nu am putut verifica ritmul de creștere. Ultima versiune: v1.3.1 (2026-10-04). Înlocuiri de servicii plătite: nu am găsit niciun serviciu comercial pe care să-l înlocuiască realist, deci replaces e gol. Perechile cu android-skills și scientific-agent-skills se bazează doar pe formatul comun SKILL.md; nu am testat compatibilitatea. Nu am citit codul tuturor celor 30+ skill-uri; descrierile din tabelul README sunt rezumate din documentație. Valantic și Konigi sunt cursuri/ateliere pentru Claude Code în general, nu pentru acest repo."
+  "updated_at": "2026-10-28",
+  "notes": "Repo nou. Licență: fișierul LICENSE este MIT (Copyright 2026 Matt Pocock), confirmat și în package.json și plugin.json; API-ul GitHub spune tot MIT. Nu am rulat nimic; am citit README, SCOPE.md, CHANGELOG.md, câteva SKILL.md (grill-me, grilling, tdd, handoff, setup) și paginile din docs/. Exemplele sunt comenzile din secțiunea Installation a README-ului, fără output (documentația nu arată output). Promovare comercială: README-ul trimite la newsletter-ul gratuit de la aihero.dev și plugin.json trimite la același site; README nu vinde direct cursuri și nu amintește Total TypeScript, dar domeniul aihero.dev și paginile publicate sunt ale lui Pocock, care vinde cohorte (vezi monetizarea). Prețul cohortelor NU l-am văzut pe pagina oficială (a afișat șabloane nerandate), iar totaltypescript.com afișa „Loading price”; de aceea price este null. Nu am verificat că newsletter-ul este gratuit în sens contractual, doar că README-ul îl prezintă ca invitație de înscriere. Repo-ul a avut peste 303.000 de stele și 25.000 de fork-uri la 3 luni de la creare (creat 2026-02-03); nu am putut verifica ritmul de creștere. Ultima versiune: v1.3.1 (2026-10-04). Înlocuiri de servicii plătite: nu am găsit niciun serviciu comercial pe care să-l înlocuiască realist, deci replaces e gol. Perechile cu android-skills și scientific-agent-skills se bazează doar pe formatul comun SKILL.md; nu am testat compatibilitatea. Nu am citit codul tuturor celor 30+ skill-uri; descrierile din tabelul README sunt rezumate din documentație. Valantic și Konigi sunt cursuri/ateliere pentru Claude Code în general, nu pentru acest repo. Migrare 2026-10-28: am recitit README, docs/ (grill-me, handoff, setup-matt-pocock-skills, to-spec), CHANGELOG, plugin.json și LICENSE (MIT) la commit-ul 59db609 (2026-10-27, față de 5beb35b din prima analiză); ultima versiune rămâne v1.3.1, iar stelele au ajuns la ~305.100. Prețurile Claude Pro/Max, ChatGPT Plus și GitHub Copilot au fost verificate azi pe paginile oficiale; prețul cheii API Anthropic rămâne null (pe consum). Platformele sunt deduse (README nu le listează). Primii pași: povestea e de pe blogul Scott Logic (2026-10-19, text citit complet); autorul nu spune ce agent a folosit, iar glosarul se numea în poveste CONTEXT.md, nume înlocuit între timp cu GLOSSARY.md conform CHANGELOG. Căutarea pe Hacker News a dat doar linkuri către repo și proiecte derivate; articolele Medium au dat 403."
 }
