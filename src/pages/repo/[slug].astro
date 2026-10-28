@@ -157,9 +157,15 @@ const kindLabel = { instalare: "Instalare", folosire: "Folosire" };
         {repo.first_steps && (
           <section class="first-steps">
             <h2>Primii pași</h2>
-            <p><span class="stamp stamp--doc">Exemplu propus, netestat</span></p>
+            <p><span class="stamp stamp--doc">{repo.first_steps.origin === "experiență utilizator" ? "Experiență povestită de un utilizator, nereverificată" : "Exemplu propus, netestat"}</span></p>
             <h3>{repo.first_steps.title}</h3>
             <p class="prose"><GlText text={repo.first_steps.intro} gl={gl} /></p>
+            {repo.first_steps.origin === "experiență utilizator" && repo.first_steps.story_url && (
+              <p class="soft">
+                Povestea originală: <a href={repo.first_steps.story_url} target="_blank" rel="noopener noreferrer">{repo.first_steps.story_platform || "link"}</a>
+                {repo.first_steps.story_date && <>, {formatDate(repo.first_steps.story_date)}</>}
+              </p>
+            )}
             <ol class="steps">
               {repo.first_steps.steps.map((st) => (
                 <li>
