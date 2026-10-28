@@ -55,7 +55,7 @@
       }
     },
     "first_steps": {
-      "type": "object",
+      "type": ["object", "null"],
       "required": [
         "title",
         "intro",

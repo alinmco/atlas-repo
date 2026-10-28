@@ -105,6 +105,58 @@ Zero idei e un răspuns valid și onest; nu forța.
 4. **Costuri, timp și riscuri, cinstit.** Cel puțin un risc real: concurență gratuită (chiar
    repo-ul!), schimbări de licență, dependența de un API, efortul de suport.
 
+## Partea pentru cititorul începător (obligatorie la repo-urile noi)
+Pagina începe cu ce îl ajută pe cititor să decidă repede. `node scripts/validate.mjs --draft`
+dă eroare dacă lipsește ceva de aici.
+
+- `"problem_solved"`: maximum 2 fraze, doar PROBLEMA. Lista de funcții merge în `"features"`.
+- `"features"`: „Ce primești”, 3-7 puncte, maximum un rând fiecare.
+- `"at_a_glance"`: caseta „Pe scurt”. `"for_you_if"` și `"not_for_you_if"` au 1-3 fraze scurte
+  (~15 cuvinte), iar `"verdict"` e o singură frază, fără hype.
+- `"cost"`: `"level"` (`"gratuit complet"`, `"gratuit, dar cere servicii plătite"`, `"plătit"`
+  sau `"necunoscut"`), `"summary"` (o frază: ce plătești realist, în total) și `"items"` (tot ce
+  poate costa: `what`, `price` sau `null`, `required`, `source_url`). Prețurile se verifică azi
+  pe site-ul oficial, altfel sunt `null`.
+- `"platforms"`: `windows` / `mac` / `linux` = `"da"` | `"parțial"` | `"nu"` | `"necunoscut"`,
+  plus `note` și `source_url`. Doar ce scrie în documentație sau în cod; dacă e dedus, spui în
+  `note`.
+- `"risk_flags"`: doar ce e CONFIRMAT în documentație sau în cod, cu `detail` (o frază) și
+  `source_url`. Valori posibile: `"trimite date în cloud"`, `"telemetrie"`, `"cere cont"`,
+  `"modifică setările altor programe"`, `"proiect instabil"`, `"licență restrictivă"`,
+  `"cere plată"`. Dacă nu e nimic, pune listă goală.
+- `"audience_reason"` și `"setup_difficulty_reason"`: o jumătate de frază despre de ce ai ales
+  acel nivel.
+- `"notes_summary"`: o frază pentru cititor (ce ai citit, ce n-ai rulat, ce a rămas
+  necunoscut). `"notes"` rămâne jurnalul complet.
+- `"examples"`: fiecare are `"kind"`: `"instalare"` sau `"folosire"`. Cel puțin un exemplu e
+  de tip `"folosire"`, adică arată cum se folosește de zi cu zi după instalare, tot exact din
+  documentație.
+- `"glossary_terms"`: termenii tehnici care apar în textul tău, fiecare cu `term`, `aliases`
+  (formele flexionate: „skill-uri”, „skill-urile”) și `explanation` (3-12 cuvinte, fără
+  jargon). Nu pune cuvinte care sunt și cuvinte românești obișnuite (ex: „merge”, „tool” ca
+  „unealtă” e în regulă doar ca alias exact). Editorul le adaugă în glosarul comun.
+
+## „Primii pași”: o experiență reală
+`"first_steps"` arată cum a început un om REAL să lucreze cu repo-ul și ce a câștigat. Nu
+inventezi un scenariu.
+
+1. Caută povești concrete pe Hacker News (cu API-ul `hn.algolia.com/api/v1/search?query=...`
+   și `.../items/<id>` pentru textul complet), în GitHub Discussions și issues, pe bloguri
+   personale și pe dev.to. Reddit blochează de obicei citirea automată; încearcă, dar nu
+   insista.
+2. Alege O poveste: concretă (un proiect real, pași clari), care arată utilitatea, credibilă
+   (detalii, nu laudă generică) și ușor de înțeles de un începător. Trebuie să fi citit textul
+   complet, nu doar fragmentul din căutare.
+3. Rezumi cu cuvintele tale, în 3-7 pași (`you_do` = ce a făcut omul, `what_happens` = ce a
+   făcut unealta, după poveste). Cel mult un citat scurt, sub 15 cuvinte. Fără nume de
+   utilizator. Nu adaugi detalii care nu sunt în poveste. Ce afirmă omul rămâne afirmația lui.
+   Dacă nu compară cu lucrul fără repo, spui asta în `takeaway`.
+4. `"origin": "experiență utilizator"`, cu `story_url` (linkul exact), `story_platform`,
+   `story_date`. Fiecare pas are `source_url`: povestea sau documentația care confirmă
+   comportamentul.
+5. Dacă nu găsești nicio poveste suficient de bună, pui `"first_steps": null` și scrii în
+   `"notes"` „Primii pași: nu am găsit o experiență reală potrivită” plus unde ai căutat.
+
 ## Formatul draftului
 `drafts/<slug>.json` respectă `content/schema/repo.schema.json`:
 
@@ -114,9 +166,30 @@ Zero idei e un răspuns valid și onest; nu forța.
   "repo_url": "",
   "name": "",
   "one_liner": "",
-  "problem_solved": "",
+  "problem_solved": "maximum 2 fraze, doar problema",
+  "features": ["ce primești, câte un rând"],
+  "at_a_glance": {"for_you_if": [], "not_for_you_if": [], "verdict": ""},
+  "cost": {
+    "level": "gratuit complet | gratuit, dar cere servicii plătite | plătit | necunoscut",
+    "summary": "",
+    "items": [{"what": "", "price": "sau null", "required": true, "source_url": "sau null"}]
+  },
+  "platforms": {"windows": "da | parțial | nu | necunoscut", "mac": "", "linux": "", "note": null, "source_url": null},
+  "risk_flags": [{"flag": "", "detail": "", "source_url": ""}],
+  "audience_reason": "",
+  "setup_difficulty_reason": "",
   "analogy": "",
   "how_it_works": ["pas 1: intrare", "pas 2: proces", "pas 3: ieșire"],
+  "first_steps": {
+    "origin": "experiență utilizator",
+    "story_url": "",
+    "story_platform": "Hacker News | GitHub | Reddit | blog",
+    "story_date": "YYYY-MM-DD",
+    "title": "",
+    "intro": "1-2 fraze: cine (fără nume) și ce a vrut să facă",
+    "steps": [{"you_do": "", "what_happens": "", "source_url": ""}],
+    "takeaway": "ce a câștigat, după spusele lui"
+  },
   "categories": [],
   "search_intents": ["fraze de tip 'vreau să...'"],
   "audience": "începător | intermediar | avansat",
@@ -142,9 +215,11 @@ Zero idei e un răspuns valid și onest; nu forța.
       "commands": [],
       "code": "",
       "output_from_docs": "doar dacă documentația îl arată, altfel null",
-      "source_url": ""
+      "source_url": "",
+      "kind": "instalare | folosire"
     }
   ],
+  "glossary_terms": [{"term": "", "aliases": [], "explanation": "3-12 cuvinte"}],
   "connectors": {
     "inputs": [],
     "outputs": [],
@@ -184,6 +259,7 @@ Zero idei e un răspuns valid și onest; nu forța.
     }
   ],
   "updated_at": "YYYY-MM-DD",
+  "notes_summary": "o frază pentru cititor",
   "notes": "orice incertitudine, spusă deschis"
 }
 ```
