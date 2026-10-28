@@ -3,7 +3,7 @@
   "repo_url": "https://github.com/sindresorhus/awesome",
   "name": "Awesome (lista listelor)",
   "one_liner": "O listă de liste cu cele mai bune resurse, pe sute de subiecte.",
-  "problem_solved": "Când vrei să înveți ceva sau să alegi o unealtă, internetul îți dă mii de rezultate de calitate foarte diferită. Pe GitHub, oamenii au creat „liste awesome”: pagini în care cineva a ales de mână cele mai bune linkuri despre un subiect (Python, Raspberry Pi, Regex etc.). Repo-ul „awesome” este catalogul acestor liste: nu conține un program, ci un fișier mare (readme.md) cu liste grupate pe categorii (Platforme, Limbaje de programare, Baze de date, Securitate, Jocuri etc.), plus regulile după care o listă este acceptată (manifestul, ghidul de contribuție, șablonul de pull request). În fișierul readme.md am numărat 671 de linkuri către liste (rânduri care se termină în „#readme)”). Atenție: descrierea repo-ului spune că pull request-urile sunt temporar dezactivate până autorul prinde din urmă cu cele existente, iar discuția „Incubate” (#2242) este locul unde se prezintă listele în pregătire.",
+  "problem_solved": "Când cauți cele mai bune resurse despre un subiect, internetul îți dă mii de rezultate de calitate foarte diferită. Repo-ul „awesome” strânge într-un singur loc listele de linkuri alese de mână de oameni, pe sute de teme.",
   "analogy": "E ca indexul unei biblioteci mari: nu citești cărțile din el, dar găsești repede raftul potrivit, iar bibliotecarul a refuzat să pună pe raft orice carte mediocră.",
   "how_it_works": [
     "Pas 1, intrare: cineva scrie și întreține o listă curatoriată pe un subiect, într-un repo propriu cu numele awesome-nume-subiect, și o verifică cu awesome-lint.",
@@ -11,6 +11,7 @@
     "Pas 3, ieșire: dacă lista e acceptată, apare ca o linie în readme.md, în categoria potrivită: un link care se termină în #readme, plus o scurtă descriere obiectivă.",
     "Pas 4, folosire: cititorii răsfoiesc readme.md (sau awesome.re) ca să găsească lista bună pentru subiectul lor, apoi merg în lista respectivă."
   ],
+  "first_steps": null,
   "categories": [
     "Colecții curatoriate"
   ],
@@ -23,20 +24,98 @@
   ],
   "audience": "începător",
   "setup_difficulty": "ușor",
+  "at_a_glance": {
+    "for_you_if": [
+      "Vrei să găsești repede o listă bună de resurse pe un subiect.",
+      "Vrei să-ți faci propria listă și să afli ce reguli trebuie respectate."
+    ],
+    "not_for_you_if": [
+      "Cauți un program de rulat: aici sunt doar linkuri și reguli.",
+      "Vrei să trimiți acum o listă: pull request-urile sunt temporar dezactivate."
+    ],
+    "verdict": "Un index gratuit și bine ordonat al listelor de resurse, util pentru căutat, nu pentru instalat."
+  },
+  "cost": {
+    "level": "gratuit complet",
+    "summary": "Totul este gratuit: citești catalogul într-un browser și nu folosește AI, deci nu ai nevoie nici de abonament, nici de cheie API.",
+    "ai_access": {
+      "mode": "nu folosește AI",
+      "detail": "Repo-ul este un fișier Markdown cu linkuri și reguli, fără cod AI; șablonul de pull request cere chiar ca lista și pull request-ul să nu fie generate integral cu AI.",
+      "source_url": "https://github.com/sindresorhus/awesome/blob/bc98e517ddca672f55f9857d714fc3ea3c3540b2/pull_request_template.md"
+    },
+    "items": [
+      {
+        "what": "Catalogul awesome (readme.md și ghidurile), licență CC0 1.0",
+        "price": "gratuit",
+        "required": true,
+        "source_url": "https://github.com/sindresorhus/awesome/blob/bc98e517ddca672f55f9857d714fc3ea3c3540b2/license"
+      },
+      {
+        "what": "Cont GitHub, doar dacă vrei să propui o listă (pentru citit nu ai nevoie de cont)",
+        "price": "Free: 0 USD/lună (verificat 2026-10-28)",
+        "required": false,
+        "source_url": "https://github.com/pricing"
+      },
+      {
+        "what": "awesome-lint, verificatorul de reguli pentru propria listă (licență MIT)",
+        "price": "gratuit",
+        "required": false,
+        "source_url": "https://github.com/sindresorhus/awesome-lint"
+      },
+      {
+        "what": "Node.js și Git, cerute de awesome-lint („The CLI requires Node.js and Git”)",
+        "price": null,
+        "required": false,
+        "source_url": "https://github.com/sindresorhus/awesome-lint#readme"
+      }
+    ]
+  },
+  "platforms": {
+    "windows": "da",
+    "mac": "da",
+    "linux": "da",
+    "note": "Catalogul e un fișier Markdown, care se citește în orice browser (dedus, documentația nu listează sisteme de operare). Pentru awesome-lint documentația cere doar Node.js și Git.",
+    "source_url": "https://github.com/sindresorhus/awesome-lint#readme"
+  },
+  "risk_flags": [],
+  "features": [
+    "Un catalog de peste 600 de liste curatoriate, grupate în categorii (limbaje, baze de date, securitate, jocuri etc.)",
+    "Fiecare listă are o scurtă descriere obiectivă și un link direct spre ea",
+    "Reguli clare după care o listă e acceptată (manifest, ghid, șablon de pull request)",
+    "Insigne „Awesome” gata de folosit pe propria listă",
+    "Flux RSS cu modificările din catalog",
+    "Licență CC0: textul catalogului poate fi reutilizat liber"
+  ],
+  "audience_reason": "se citește într-un browser, fără nicio instalare",
+  "setup_difficulty_reason": "nu are nimic de instalat; doar deschizi readme.md",
+  "notes_summary": "Am citit readme.md, ghidurile și șablonul din repo, dar n-am rulat nimic și n-am verificat linkurile; nu am găsit o experiență reală potrivită pentru Primii pași.",
   "replaces": [],
   "examples": [
+    {
+      "title": "Găsești lista potrivită în catalog",
+      "scenario": "Deschizi readme.md, alegi categoria care te interesează din cuprins (aici „Platforms”) și parcurgi liniile: fiecare listă are un nume, un link care se termină în #readme și, de obicei, o descriere scurtă. Căutarea mai rapidă o găsești în secțiunea „Related” a aceluiași fișier (de exemplu Awesome Search, awesomelists.top), iar ghidul create-list.md spune: „Search this list before making a new one”.",
+      "prerequisites": [
+        "Un browser (nu e nevoie de cont)"
+      ],
+      "commands": [],
+      "code": "## Platforms\n\n- [Node.js](https://github.com/sindresorhus/awesome-nodejs#readme) - Async non-blocking event-driven JavaScript runtime built on Chrome's V8 JavaScript engine.\n\t- [Cross-Platform](https://github.com/bcoe/awesome-cross-platform-nodejs#readme) - Writing cross-platform code on Node.js.\n- [Frontend Development](https://github.com/dypsilon/frontend-dev-bookmarks#readme)\n- [iOS](https://github.com/vsouza/awesome-ios#readme) - Mobile operating system for Apple phones and tablets.",
+      "output_from_docs": null,
+      "source_url": "https://github.com/sindresorhus/awesome/blob/bc98e517ddca672f55f9857d714fc3ea3c3540b2/readme.md",
+      "kind": "folosire"
+    },
     {
       "title": "Cum arată o intrare corectă în listă",
       "scenario": "Vrei să propui lista ta. Șablonul de pull request cere un titlu de forma „Add Nume Listă” și o linie în readme.md cu linkul care se termină în #readme, urmat de o descriere scurtă, obiectivă, cu majusculă la început și punct la final. Exemplul de mai jos este copiat exact din șablon.",
       "prerequisites": [
         "Cont GitHub (gratuit)",
         "O listă proprie, existentă de cel puțin 30 de zile, cu licență Creative Commons (se recomandă CC0)",
-        "Atenție: la momentul analizei (2026-10-25), descrierea repo-ului spune că pull request-urile sunt temporar dezactivate"
+        "Atenție: la momentul analizei (2026-10-28), descrierea repo-ului spune că pull request-urile sunt temporar dezactivate"
       ],
       "commands": [],
       "code": "- [Software Architecture](https://github.com/simskij/awesome-software-architecture#readme) - The discipline of designing and building software.",
       "output_from_docs": null,
-      "source_url": "https://github.com/sindresorhus/awesome/blob/main/pull_request_template.md"
+      "source_url": "https://github.com/sindresorhus/awesome/blob/main/pull_request_template.md",
+      "kind": "folosire"
     },
     {
       "title": "Verifici lista cu awesome-lint, înainte de a o propune",
@@ -50,7 +129,8 @@
       ],
       "code": null,
       "output_from_docs": "❯ npx awesome-lint https://github.com/sindresorhus/awesome-something\n\n  readme.md:1:1\n  ✖    1:1  Missing Awesome badge after the main heading      awesome-badge\n  ✖   12:1  Marker style should be -                          unordered-list-marker-style\n  ✖  199:3  Remove trailing slash (https://sindresorhus.com)  trailing-slash\n\n  3 errors",
-      "source_url": "https://github.com/sindresorhus/awesome-lint#readme"
+      "source_url": "https://github.com/sindresorhus/awesome-lint#readme",
+      "kind": "folosire"
     }
   ],
   "connectors": {
@@ -226,6 +306,6 @@
       ]
     }
   ],
-  "updated_at": "2026-10-25",
-  "notes": "Repo-ul nu este un program: câmpurile pentru comenzi și cod au fost adaptate. Exemplul 1 vine din pull_request_template.md; exemplul 2 vine din README-ul awesome-lint (repo separat, MIT, linkat din șablon). Nu am rulat nimic. Licența: am citit fișierul license (CC0 1.0 Universal), nu doar eticheta GitHub. Descrierea repo-ului (verificată cu API-ul GitHub) spune că pull request-urile sunt temporar dezactivate; discuția #2242 „Incubate” este deschisă, iar un rezumat al paginii spune că pull request-urile sunt limitate la colaboratori (sursă secundară). Nu am găsit prețuri publice pentru Console.dev și TLDR (price: null). Prețurile TAAFT au fost citite de pe pagina oficială la 2026-10-25, cu avertismentul că pagina e inconsecventă. Câmpul „replaces” este gol: nu există un serviciu plătit pe care repo-ul să-l înlocuiască realist. Numărul de 671 de liste este un număr de linii care conțin „#readme)”, nu o cifră oficială. Nu am verificat linkurile din readme.md unul câte unul."
+  "updated_at": "2026-10-28",
+  "notes": "Repo-ul nu este un program: câmpurile pentru comenzi și cod au fost adaptate. Exemplul 1 vine din pull_request_template.md; exemplul 2 vine din README-ul awesome-lint (repo separat, MIT, linkat din șablon). Nu am rulat nimic. Licența: am citit fișierul license (CC0 1.0 Universal), nu doar eticheta GitHub. Descrierea repo-ului (verificată cu API-ul GitHub) spune că pull request-urile sunt temporar dezactivate; discuția #2242 „Incubate” este deschisă, iar un rezumat al paginii spune că pull request-urile sunt limitate la colaboratori (sursă secundară). Nu am găsit prețuri publice pentru Console.dev și TLDR (price: null). Prețurile TAAFT au fost citite de pe pagina oficială la 2026-10-25, cu avertismentul că pagina e inconsecventă. Câmpul „replaces” este gol: nu există un serviciu plătit pe care repo-ul să-l înlocuiască realist. Numărul de 671 de liste este un număr de linii care conțin „#readme)”, nu o cifră oficială. Nu am verificat linkurile din readme.md unul câte unul. Migrare la formatul nou (2026-10-28): am recitit readme.md, create-list.md, șablonul de pull request și fișierul license la commit-ul bc98e517 (ultimul commit 2026-09-02, 525.886 stele, descrierea repo-ului spune încă că pull request-urile sunt temporar dezactivate). Am adăugat un exemplu „folosire” nou din readme.md și am marcat toate exemplele ca „folosire”. Primii pași: nu am găsit o experiență reală potrivită; am căutat pe Hacker News (discuțiile 31376193, 9604840, 27315950 conțin doar glume sau feedback despre un instrument extern), pe dev.to (articol general, fără poveste concretă) și în pull request-urile #2949 și #3022 din repo (descrieri de listă, fără rezultat povestit)."
 }

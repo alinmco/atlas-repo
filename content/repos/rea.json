@@ -3,13 +3,54 @@
   "repo_url": "https://github.com/morluto/rea",
   "name": "REA (Reverse Engineer Anything)",
   "one_liner": "Un asistent AI care analizează aplicații și programe compilate și explică cum funcționează.",
-  "problem_solved": "Când un program nu îți arată codul sursă (o aplicație desktop, un fișier executabil, un APK Android, un site), e greu să afli ce face de fapt. Munca asta se numește inginerie inversă și se face de obicei manual, cu unelte specializate (Hopper, Ghidra, IDA) și multă experiență. REA este un server MCP (un fel de „priză” prin care un asistent AI folosește unelte externe) și o linie de comandă care conectează asistentul tău AI la astfel de unelte. Asistentul poate inspecta ținta pe calculatorul tău, poate urmări o funcționalitate prin cod și îți returnează constatările împreună cu dovezile și cu limitările lor. Folosirea corectă ține strict de software pe care ai dreptul să-l analizezi (al tău, cu permisiune scrisă sau unde legea permite explicit, de exemplu pentru interoperabilitate, cercetare de securitate, analiză de malware, educație, conservare).",
+  "problem_solved": "Când un program nu îți arată codul sursă, e greu să afli ce face de fapt. Munca asta (inginerie inversă) se face de obicei manual, cu unelte specializate și multă experiență.",
   "analogy": "E ca un mecanic-expert care deschide un motor sigilat, notează ce piesă pune în mișcare ce, și îți dă fotografiile ca dovadă. Tu stai la birou și doar pui întrebări.",
   "how_it_works": [
     "Pas 1, intrare: îi indici asistentului AI (Claude Code, Codex, Cursor, Gemini CLI etc.) o țintă locală: un folder de aplicație Electron, un fișier ASAR, un executabil nativ, un APK, un fișier HAR cu trafic salvat, un site și altele. Rulezi o dată `npx rea-agents setup`, care înregistrează REA la agenții aleși.",
     "Pas 2, proces: asistentul apelează uneltele REA prin MCP (sau tu rulezi aceleași comenzi din terminal). Pentru JavaScript/Electron, .NET și mai multe formate, REA citește fișierele static, fără să execute aplicația. Pentru programe native REA se sprijină pe Hopper, Ghidra sau IDA, instalate separat.",
     "Pas 3, ieșire: REA returnează constatări cu dovezile și limitările lor (module, importuri, pseudocod, asamblare, referințe), în JSON. Asistentul le folosește ca să-ți explice comportamentul, iar documentația spune că poate și să scrie și să testeze o implementare proprie, dar numai dacă ai dreptul să te bazezi pe țintă."
   ],
+  "first_steps": {
+    "origin": "experiență utilizator",
+    "story_url": "https://jacar.es/rea-ingenieria-inversa-agentes-mcp/",
+    "story_platform": "blog",
+    "story_date": "2026-10-19",
+    "title": "Analiză statică a unei aplicații Electron (Hyper), într-un container",
+    "intro": "Un autor de blog a testat REA într-un container Docker, pe aplicația open-source Hyper, ca să vadă ce poate scoate REA din ea fără să o ruleze.",
+    "steps": [
+      {
+        "you_do": "Pornești un container Node.js 24, instalezi `procps`, `curl` și `jq`, apoi instalezi REA global cu npm (versiunea 6.7.0).",
+        "what_happens": "Comanda `rea --version` confirmă instalarea; pe Linux, REA are nevoie de un `ps` compatibil procps pentru verificările de proces.",
+        "source_url": "https://jacar.es/rea-ingenieria-inversa-agentes-mcp/"
+      },
+      {
+        "you_do": "Descarci pachetul `.deb` al aplicației Hyper 3.4.1 și îl extragi cu `dpkg-deb -x`, ca să ajungi la fișierul `app.asar`.",
+        "what_happens": "Rămâi cu aplicația nepornită, doar fișiere pe disc, gata de analizat.",
+        "source_url": "https://jacar.es/rea-ingenieria-inversa-agentes-mcp/"
+      },
+      {
+        "you_do": "Rulezi `rea analyze-javascript-application` pe `app.asar` și salvezi rezultatul JSON.",
+        "what_happens": "Analiza se termină în aproximativ 4 minute: 2.236 de fișiere, 18 canale IPC, 5 handlere și 6 add-on-uri native, într-un JSON de 253 MB.",
+        "source_url": "https://jacar.es/rea-ingenieria-inversa-agentes-mcp/"
+      },
+      {
+        "you_do": "Transformi JSON-ul mare într-o vedere-rezumat cu `jq` și `rea inspect-analysis-view`.",
+        "what_happens": "Primești un rezumat de aproximativ 22 KB, ușor de dat unui agent.",
+        "source_url": "https://jacar.es/rea-ingenieria-inversa-agentes-mcp/"
+      },
+      {
+        "you_do": "Rulezi `inspect-electron-fuses` pe executabilul Hyper.",
+        "what_happens": "REA citește setările de securitate (fuses) fără să pornească aplicația: două erau active, iar `OnlyLoadAppFromAsar` era oprit.",
+        "source_url": "https://jacar.es/rea-ingenieria-inversa-agentes-mcp/"
+      },
+      {
+        "you_do": "Notezi limitele raportate de REA.",
+        "what_happens": "Aproape 2.000 de fișiere, mai ales din `node_modules`, au fost marcate ca incomplete pentru depășirea limitei de memorie, iar 14 operații IPC cu nume dinamic au rămas nerezolvate, nu ghicite.",
+        "source_url": "https://jacar.es/rea-ingenieria-inversa-agentes-mcp/"
+      }
+    ],
+    "takeaway": "Autorul a verificat că analiza statică merge pe o aplicație reală și arată clar ce nu a putut rezolva; articolul nu raportează o sesiune cu agent și nu compară cu analiza făcută manual."
+  },
   "categories": [
     "Agenți AI și securitate",
     "Unelte pentru programatori"
@@ -24,6 +65,154 @@
   ],
   "audience": "avansat",
   "setup_difficulty": "mediu",
+  "at_a_glance": {
+    "for_you_if": [
+      "Vrei să înțelegi cum funcționează o aplicație pe care ai dreptul să o analizezi.",
+      "Ești programator sau cercetător în securitate și folosești deja un asistent AI cu MCP."
+    ],
+    "not_for_you_if": [
+      "Nu ai drept clar asupra programului analizat sau vrei să ocolești licențe și protecții.",
+      "Cauți o interfață grafică simplă, fără terminal, Node.js și configurări."
+    ],
+    "verdict": "Unealtă puternică pentru ingineri, gratuită în sine, dar cere un asistent AI și, pentru programe native, un motor de analiză separat."
+  },
+  "cost": {
+    "level": "gratuit, dar cere servicii plătite",
+    "summary": "REA e gratuit (MIT); pentru modul cu asistent ai nevoie de un client AI, care merge cu abonament (de exemplu Claude Pro sau ChatGPT Plus) sau cu cheie API, iar motoarele native comerciale (Hopper, IDA, JEB) sunt opționale, Ghidra fiind gratuit.",
+    "ai_access": {
+      "mode": "abonament sau API",
+      "detail": "REA e doar un server MCP local, iar modelul vine de la clientul tău: Claude Code se autentifică cu abonament Pro/Max sau cu cheie API, Codex merge cu ChatGPT Plus/Pro sau cu cheie API; pentru celelalte clienți din listă depinde de fiecare. Comenzile din terminal nu folosesc AI.",
+      "source_url": "https://code.claude.com/docs/en/authentication"
+    },
+    "items": [
+      {
+        "what": "Claude Pro (abonament pentru Claude Code, client MCP compatibil cu REA)",
+        "price": "17 USD/lună plătit anual (200 USD/an) sau 20 USD/lună plătit lunar; Max de la 100 USD/lună",
+        "required": false,
+        "source_url": "https://claude.com/pricing"
+      },
+      {
+        "what": "ChatGPT Plus (include Codex, client compatibil cu REA); alternativ, Codex cu cheie API plătită pe consum",
+        "price": "20 USD/lună (Plus); Pro de la 100 USD/lună; cheia API se plătește pe consum, preț neverificat",
+        "required": false,
+        "source_url": "https://learn.chatgpt.com/docs/pricing"
+      },
+      {
+        "what": "Cheie API Anthropic (alternativă la abonamentul Claude, plată pe consum)",
+        "price": null,
+        "required": false,
+        "source_url": "https://code.claude.com/docs/en/authentication"
+      },
+      {
+        "what": "Hopper Disassembler (motor nativ; demo gratuit cu sesiuni de 30 de minute, fără salvare/export și fără debugger)",
+        "price": "Licență Personal 99 EUR sau Computer 129 EUR, include un an de actualizări",
+        "required": false,
+        "source_url": "https://sites.fastspring.com/hopperapp/product/hopperdisassemblerv4?referrer=webstore"
+      },
+      {
+        "what": "Ghidra (motor nativ gratuit, Apache-2.0; cere un JDK complet instalat separat)",
+        "price": "gratuit (open-source, Apache-2.0)",
+        "required": false,
+        "source_url": "https://github.com/NationalSecurityAgency/ghidra"
+      },
+      {
+        "what": "IDA (motor nativ): IDA Pro, IDA Home sau IDA Free; REA nu instalează și nu licențiază IDA",
+        "price": "IDA Pro de la 1.099 EUR/an (Essential), 4.999 EUR/an (Expert), 8.599 EUR/an (Ultimate); IDA Home 365 USD/an; IDA Free 0",
+        "required": false,
+        "source_url": "https://hex-rays.com/pricing"
+      },
+      {
+        "what": "ida-pro-mcp (punte MCP pentru IDA Pro, folosită de profilurile IDA Pro)",
+        "price": "gratuit (open-source, MIT)",
+        "required": false,
+        "source_url": "https://github.com/mrexodia/ida-pro-mcp"
+      },
+      {
+        "what": "JEB (decompilator comercial, opțional); există și ediție Community gratuită",
+        "price": "JEB Pro 2.000 USD/an; JEB Android 1.200 USD/an sau 140 USD/lună; Community Edition gratuită, fără preț afișat",
+        "required": false,
+        "source_url": "https://www.pnfsoftware.com/jeb/buy"
+      },
+      {
+        "what": "Kuna (decompilator static, opțional, furnizat de utilizator)",
+        "price": "gratuit (open-source, Apache-2.0)",
+        "required": false,
+        "source_url": "https://github.com/Noelo-Lab/kuna"
+      },
+      {
+        "what": "Frida (urmărire în timpul rulării; dependență opțională a pachetului npm)",
+        "price": "gratuit (software liber, LGPL-2.0 cu excepție wxWindows)",
+        "required": false,
+        "source_url": "https://github.com/morluto/rea/blob/a0a1962e06e47b641d1cf6afbeb60d1d00da2b70/THIRD_PARTY_NOTICES.md"
+      },
+      {
+        "what": "adb (Android platform-tools, pentru telefoane sau emulatoare Android; furnizat de utilizator)",
+        "price": "fără taxă de licență, cu acceptarea Android SDK License Agreement",
+        "required": false,
+        "source_url": "https://developer.android.com/tools/releases/platform-tools"
+      },
+      {
+        "what": "JADX (decompilator Android, necesar pentru analiza de APK-uri) și JDK complet",
+        "price": "JADX gratuit (Apache-2.0); JDK de exemplu Eclipse Temurin, gratuit",
+        "required": false,
+        "source_url": "https://adoptium.net/"
+      },
+      {
+        "what": "Rizin și Cutter (analiză nativă offline și punte Cutter; furnizate de utilizator)",
+        "price": "gratuit (open-source: Rizin LGPL-3.0, Cutter GPL-3.0)",
+        "required": false,
+        "source_url": "https://github.com/rizinorg/rizin"
+      },
+      {
+        "what": "Apktool (resurse Android, opțional; furnizat de utilizator)",
+        "price": "gratuit (open-source, Apache-2.0)",
+        "required": false,
+        "source_url": "https://github.com/iBotPeaches/Apktool"
+      },
+      {
+        "what": "Fiddler Everywhere (opțional, pentru fișiere SAZ cu trafic salvat)",
+        "price": null,
+        "required": false,
+        "source_url": "https://github.com/morluto/rea/blob/a0a1962e06e47b641d1cf6afbeb60d1d00da2b70/docs/web-network-captures.md"
+      },
+      {
+        "what": "Alte unelte opționale pentru formate speciale: GNU objdump, GDB, tshark, Binwalk/Unblob, sigrok-cli, pwntools, WABT, browser Chrome, Docker cu AgentEnv",
+        "price": null,
+        "required": false,
+        "source_url": "https://github.com/morluto/rea/blob/a0a1962e06e47b641d1cf6afbeb60d1d00da2b70/README.md#what-you-can-analyze"
+      }
+    ]
+  },
+  "platforms": {
+    "windows": "parțial",
+    "mac": "da",
+    "linux": "da",
+    "note": "Configurarea agenților merge și pe Windows, dar suportul Ghidra pe Windows e descris ca experimental, iar multe fluxuri (pcap, firmware, captură de procese, crash-uri) sunt documentate doar pentru Linux sau macOS. Hopper se instalează automat doar pe macOS 12+ și pe unele distribuții Linux x86_64. Nivelurile sunt deduse din tabelele de cerințe din documentație.",
+    "source_url": "https://github.com/morluto/rea/blob/a0a1962e06e47b641d1cf6afbeb60d1d00da2b70/docs/windows-ghidra-p0.md"
+  },
+  "risk_flags": [
+    {
+      "flag": "trimite date în cloud",
+      "detail": "REA rulează local, dar clientul AI primește rezultatele analizei (pseudocod, șiruri, căi) și le trimite furnizorului modelului, care are propria politică de date.",
+      "source_url": "https://github.com/morluto/rea#faq"
+    },
+    {
+      "flag": "modifică setările altor programe",
+      "detail": "`rea setup` scrie în fișierele de configurare ale agenților aleși (cu previzualizare, aprobare și copie de siguranță) și poate instala Hopper, tot cu aprobare.",
+      "source_url": "https://github.com/morluto/rea/blob/a0a1962e06e47b641d1cf6afbeb60d1d00da2b70/docs/installation.md#review-setup-changes"
+    }
+  ],
+  "features": [
+    "Un asistent AI poate investiga o aplicație sau un executabil și îți arată dovezile",
+    "Analiză statică (fără să pornești programul) pentru aplicații Electron/JavaScript și .NET",
+    "Pentru programe native folosește motoare existente: Hopper, Ghidra sau IDA",
+    "Acoperă și APK-uri Android, site-uri, trafic salvat (HAR), firmware și altele",
+    "Aceleași analize merg și direct din terminal, cu rezultat JSON",
+    "Rulează local; un fișier de configurare se modifică doar după aprobarea ta"
+  ],
+  "audience_reason": "cere Node.js, un client MCP configurat și cunoștințe de bază despre binare și aplicații",
+  "setup_difficulty_reason": "câteva comenzi pentru analiza JavaScript, dar pentru programe native cere un motor instalat separat, JDK și, de regulă, un abonament AI",
+  "notes_summary": "Am citit README-ul, documentația de instalare și a motoarelor (commit a0a1962), am verificat azi prețurile publice și am ales o experiență reală dintr-un blog; nu am rulat nimic, iar prețul Fiddler Everywhere a rămas necunoscut.",
   "replaces": [
     {
       "service": "Binary Ninja (licență Commercial)",
@@ -87,7 +276,8 @@
       ],
       "code": "Understand how search works in the Notes app, show me the evidence, and build a\nsimilar feature for my project.",
       "output_from_docs": null,
-      "source_url": "https://github.com/morluto/rea#quick-start"
+      "source_url": "https://github.com/morluto/rea#quick-start",
+      "kind": "instalare"
     },
     {
       "title": "Analizezi din terminal o aplicație JavaScript/Electron extrasă",
@@ -102,7 +292,8 @@
       ],
       "code": "",
       "output_from_docs": null,
-      "source_url": "https://github.com/morluto/rea#use-the-terminal"
+      "source_url": "https://github.com/morluto/rea#use-the-terminal",
+      "kind": "folosire"
     }
   ],
   "connectors": {
@@ -280,6 +471,6 @@
       ]
     }
   ],
-  "updated_at": "2026-10-25",
-  "notes": "Repo nou în catalog. Citit: README, DISCLAIMER.md, LICENSE (MIT, Copyright 2026 morluto), THIRD_PARTY_NOTICES.md, docs/installation.md, docs/cli.md, docs/ci-analysis.md, package.json. Nu am rulat nimic. STELE: GitHub raportează 382.769 stele și 95.759 fork-uri, pe un repo creat pe 2026-04-14 (cam șase luni), cu 5.455 de commit-uri, 1.060 issue-uri deschise și 1.399 watchers. README-ul însuși sărbătorește „300.000 de stele”. Numărul e neobișnuit de mare pentru vârsta repo-ului, iar raportul fork/stele (~25%) e ridicat, dar nu pot verifica creșterea: endpoint-ul API al stargazers returnează 404 pentru acest repo. Nu afirm că ar fi manipulat; spun doar că cifra nu am putut-o confirma independent, deci nu o lua drept dovadă de calitate. Proprietarul (morluto) e cont personal creat în 2020, cu ~10,6 mii de urmăritori. Ultima versiune: rea-agents 6.8.0 (2026-10-25). PREȚURI: Binary Ninja (binary.ninja/purchase) și IDA (hex-rays.com/pricing) verificate pe 2026-10-25, prețuri fără taxe; IDA amestecă EUR și USD pe pagină. Hopper: pagina oficială nu arată prețul licenței (doar trial cu limite: fără salvare/export, fără debugger, sesiuni de 30 de minute), deci prețul este neconfirmat. Neconfirmat și pe SANS: pagina listează 10 evenimente din 11 și programul încă se încărca. WebFetch pe vaadata.com/en/rates-pentest a dat 404 (link neutilizat în draft). OUTPUT: README și docs nu arată un exemplu literal de output pentru cele două comenzi, deci output_from_docs este null; docs/cli.md menționează doar că un fișier de Evidence de 334 MB pentru Obsidian dă o vedere-rezumat de ~10 KB. Folderul examples/ conține doar un workflow GitHub Actions. INGINERIE INVERSĂ: README și DISCLAIMER.md au secțiuni explicite despre utilizare legală, rezumate în when_not_to_use. Nu am găsit pe rea.tools o politică separată sau prețuri/planuri plătite; site-ul nu menționează oferte comerciale. Monetizarea exclude orice idee bazată pe ocolirea protecțiilor sau a licențelor; ambele idei se limitează la ținte autorizate. Licența repo-ului e MIT, dar componentele terțe (Ghidra GPLv3 pentru programele din GPL/, Frida LGPL cu excepție, unelte comerciale) au termeni proprii."
+  "updated_at": "2026-10-28",
+  "notes": "Repo nou în catalog. Citit: README, DISCLAIMER.md, LICENSE (MIT, Copyright 2026 morluto), THIRD_PARTY_NOTICES.md, docs/installation.md, docs/cli.md, docs/ci-analysis.md, package.json. Nu am rulat nimic. STELE: GitHub raportează 382.769 stele și 95.759 fork-uri, pe un repo creat pe 2026-04-14 (cam șase luni), cu 5.455 de commit-uri, 1.060 issue-uri deschise și 1.399 watchers. README-ul însuși sărbătorește „300.000 de stele”. Numărul e neobișnuit de mare pentru vârsta repo-ului, iar raportul fork/stele (~25%) e ridicat, dar nu pot verifica creșterea: endpoint-ul API al stargazers returnează 404 pentru acest repo. Nu afirm că ar fi manipulat; spun doar că cifra nu am putut-o confirma independent, deci nu o lua drept dovadă de calitate. Proprietarul (morluto) e cont personal creat în 2020, cu ~10,6 mii de urmăritori. Ultima versiune: rea-agents 6.8.0 (2026-10-25). PREȚURI: Binary Ninja (binary.ninja/purchase) și IDA (hex-rays.com/pricing) verificate pe 2026-10-25, prețuri fără taxe; IDA amestecă EUR și USD pe pagină. Hopper: pagina oficială nu arată prețul licenței (doar trial cu limite: fără salvare/export, fără debugger, sesiuni de 30 de minute), deci prețul este neconfirmat. Neconfirmat și pe SANS: pagina listează 10 evenimente din 11 și programul încă se încărca. WebFetch pe vaadata.com/en/rates-pentest a dat 404 (link neutilizat în draft). OUTPUT: README și docs nu arată un exemplu literal de output pentru cele două comenzi, deci output_from_docs este null; docs/cli.md menționează doar că un fișier de Evidence de 334 MB pentru Obsidian dă o vedere-rezumat de ~10 KB. Folderul examples/ conține doar un workflow GitHub Actions. INGINERIE INVERSĂ: README și DISCLAIMER.md au secțiuni explicite despre utilizare legală, rezumate în when_not_to_use. Nu am găsit pe rea.tools o politică separată sau prețuri/planuri plătite; site-ul nu menționează oferte comerciale. Monetizarea exclude orice idee bazată pe ocolirea protecțiilor sau a licențelor; ambele idei se limitează la ținte autorizate. Licența repo-ului e MIT, dar componentele terțe (Ghidra GPLv3 pentru programele din GPL/, Frida LGPL cu excepție, unelte comerciale) au termeni proprii. Migrare la formatul nou, 2026-10-28: am recitit README-ul, docs/installation.md, documentația motoarelor (IDA, JEB, Kuna, Frida, Rizin, adb) și THIRD_PARTY_NOTICES.md pe commit-ul a0a1962e (ultimul commit în clonă: 2026-10-28). Prețuri verificate azi pe site-urile oficiale: IDA (hex-rays.com/pricing), Hopper (magazinul FastSpring: Personal 99 EUR, Computer 129 EUR; pagina hopperapp.com nu arată prețuri), JEB (pnfsoftware.com/jeb/buy), Claude (claude.com/pricing), ChatGPT Plus (learn.chatgpt.com/docs/pricing). Prețul Fiddler Everywhere a rămas necunoscut (pagina oficială a dat 404), iar cheia API Anthropic și cea OpenAI nu au preț verificat. Binary Ninja nu apare în documentația REA, de aceea nu e în cost.items, ci doar ca serviciu comparat în replaces. ai_access: documentația Claude Code confirmă autentificarea cu abonament Pro/Max sau cu cheie API și spune că serverele MCP locale merg; pentru celelalte clienți din lista REA nu am verificat modul de autentificare. DISCLAIMER.md spune că proiectul nu sprijină revânzarea sau partajarea conturilor AI ori a accesului API. Nu am găsit cod de telemetrie în src/ (doar fixturi de test); SECURITY.md precizează că REA nu e un sandbox. Primii pași: sursa este articolul de blog de pe jacar.es (publicat 2026-10-19, versiunea 6.7.0); firul Hacker News 50058850 (39 de comentarii) conține doar discuții generale, nu o experiență concretă; alte articole găsite (Hackernoon, Cyrus) pe care nu le-am ales. Nu am rulat nimic."
 }

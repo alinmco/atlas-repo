@@ -355,5 +355,303 @@
       "unelte ale agentului"
     ],
     "explanation": "acțiune pe care agentul o poate face, ca citirea unui fișier"
+  },
+  {
+    "term": "inginerie inversă",
+    "aliases": [
+      "ingineria inversă"
+    ],
+    "explanation": "aflarea modului de funcționare a unui program fără codul sursă"
+  },
+  {
+    "term": "cod sursă",
+    "aliases": [
+      "codul sursă",
+      "codului sursă"
+    ],
+    "explanation": "textul scris de programatori, din care se face programul"
+  },
+  {
+    "term": "Electron",
+    "aliases": [
+      "aplicații Electron",
+      "aplicație Electron",
+      "aplicații Electron/JavaScript"
+    ],
+    "explanation": "tehnologie pentru aplicații desktop făcute cu tehnici web"
+  },
+  {
+    "term": "ASAR",
+    "aliases": [
+      "fișier ASAR",
+      "fișiere ASAR",
+      "app.asar"
+    ],
+    "explanation": "arhivă în care o aplicație Electron își ține codul"
+  },
+  {
+    "term": "APK",
+    "aliases": [
+      "APK-uri",
+      "APK-ul",
+      "fișiere APK"
+    ],
+    "explanation": "fișierul de instalare al unei aplicații Android"
+  },
+  {
+    "term": "executabil",
+    "aliases": [
+      "executabile",
+      "executabilul",
+      "fișier executabil"
+    ],
+    "explanation": "fișier program care poate fi pornit direct"
+  },
+  {
+    "term": "binar nativ",
+    "aliases": [
+      "binare native",
+      "programe native",
+      "ținte native",
+      "binarul"
+    ],
+    "explanation": "program compilat direct pentru procesorul calculatorului"
+  },
+  {
+    "term": "decompilator",
+    "aliases": [
+      "decompilatoare",
+      "decompilare",
+      "decompilatorul"
+    ],
+    "explanation": "unealtă care reface cod citibil dintr-un program compilat"
+  },
+  {
+    "term": "pseudocod",
+    "aliases": [
+      "pseudocodul"
+    ],
+    "explanation": "cod aproximativ, citibil, refăcut dintr-un program compilat"
+  },
+  {
+    "term": "analiză statică",
+    "aliases": [
+      "analiza statică",
+      "inspecție statică"
+    ],
+    "explanation": "citirea fișierelor fără a porni programul"
+  },
+  {
+    "term": "motor de analiză",
+    "aliases": [
+      "motoare de analiză",
+      "motorul de analiză",
+      "motor nativ",
+      "motoare native"
+    ],
+    "explanation": "program separat care descompune un executabil pentru REA"
+  },
+  {
+    "term": "Hopper",
+    "aliases": [
+      "Hopper Disassembler"
+    ],
+    "explanation": "program comercial pentru analiza executabilelor"
+  },
+  {
+    "term": "Ghidra",
+    "aliases": [
+      "Ghidra 12"
+    ],
+    "explanation": "program gratuit de analiză a executabilelor, cu decompilator"
+  },
+  {
+    "term": "IDA",
+    "aliases": [
+      "IDA Pro",
+      "IDA Free",
+      "IDA Home"
+    ],
+    "explanation": "program de analiză a executabilelor, plătit în versiunea Pro"
+  },
+  {
+    "term": "JDK",
+    "aliases": [
+      "JDK complet"
+    ],
+    "explanation": "kit Java complet, cerut de unele unelte de analiză"
+  },
+  {
+    "term": "Frida",
+    "aliases": [
+      "Frida server"
+    ],
+    "explanation": "unealtă care urmărește un program în timp ce rulează"
+  },
+  {
+    "term": "adb",
+    "aliases": [
+      "adb (Android Debug Bridge)"
+    ],
+    "explanation": "unealtă pentru a vorbi cu telefoane sau emulatoare Android"
+  },
+  {
+    "term": "fișier HAR",
+    "aliases": [
+      "fișiere HAR"
+    ],
+    "explanation": "fișier cu cererile de rețea salvate din browser"
+  },
+  {
+    "term": "firmware",
+    "aliases": [
+      "firmware-ul"
+    ],
+    "explanation": "programul din interiorul unui dispozitiv"
+  },
+  {
+    "term": "Node.js",
+    "aliases": [
+      "Node"
+    ],
+    "explanation": "mediu care rulează programe JavaScript în afara browserului"
+  },
+  {
+    "term": "npx",
+    "aliases": [
+      "npx -y"
+    ],
+    "explanation": "comandă care rulează un pachet npm fără instalare permanentă"
+  },
+  {
+    "term": "Evidence",
+    "aliases": [
+      "dovezi REA",
+      "rezultat Evidence"
+    ],
+    "explanation": "rezultat REA cu constatări, dovezi și limite"
+  },
+  {
+    "term": "Android CLI",
+    "aliases": [
+      "Android CLI-ul",
+      "comanda android"
+    ],
+    "explanation": "program Google în terminal pentru proiecte și skill-uri Android"
+  },
+  {
+    "term": "Jetpack Compose",
+    "aliases": [
+      "Compose"
+    ],
+    "explanation": "metoda modernă Google de a desena interfețe Android din cod"
+  },
+  {
+    "term": "XML Views",
+    "aliases": [
+      "layout-uri XML",
+      "XML"
+    ],
+    "explanation": "metoda veche de a descrie ecranele Android în fișiere XML"
+  },
+  {
+    "term": "AGP",
+    "aliases": [
+      "AGP 9",
+      "Android Gradle Plugin"
+    ],
+    "explanation": "componenta care construiește aplicația Android din cod"
+  },
+  {
+    "term": "Gradle",
+    "aliases": [
+      "fișiere Gradle"
+    ],
+    "explanation": "sistemul care compilează și împachetează proiectul Android"
+  },
+  {
+    "term": "R8",
+    "aliases": [
+      "reguli R8"
+    ],
+    "explanation": "unealta care micșorează și protejează codul aplicației"
+  },
+  {
+    "term": "edge-to-edge",
+    "aliases": [],
+    "explanation": "aplicație care umple tot ecranul, inclusiv sub barele sistemului"
+  },
+  {
+    "term": "Android Studio",
+    "aliases": [],
+    "explanation": "programul oficial Google în care se scriu aplicații Android"
+  },
+  {
+    "term": "Navigation 3",
+    "aliases": [],
+    "explanation": "biblioteca Google pentru mutarea între ecranele aplicației"
+  },
+  {
+    "term": "listă awesome",
+    "aliases": [
+      "liste awesome",
+      "listele awesome",
+      "lista awesome",
+      "listă „awesome”",
+      "liste „awesome”"
+    ],
+    "explanation": "pagină cu cele mai bune linkuri despre un subiect"
+  },
+  {
+    "term": "curatoriat",
+    "aliases": [
+      "curatoriate",
+      "curatoriatul",
+      "curatoriere",
+      "curatoriată"
+    ],
+    "explanation": "ales de mână de cineva, nu adunat automat"
+  },
+  {
+    "term": "awesome-lint",
+    "aliases": [],
+    "explanation": "program care verifică dacă lista respectă regulile"
+  },
+  {
+    "term": "RSS",
+    "aliases": [
+      "flux RSS",
+      "fluxul RSS"
+    ],
+    "explanation": "flux de noutăți pe care îl citești într-un cititor"
+  },
+  {
+    "term": "CC0",
+    "aliases": [
+      "licența CC0",
+      "licență CC0",
+      "CC0 1.0"
+    ],
+    "explanation": "licență prin care autorul renunță la drepturi, reutilizare liberă"
+  },
+  {
+    "term": "GitHub",
+    "aliases": [],
+    "explanation": "site unde se găzduiesc proiecte și liste de linkuri"
+  },
+  {
+    "term": "badge",
+    "aliases": [
+      "insignă",
+      "insigne",
+      "badge-uri",
+      "insigna"
+    ],
+    "explanation": "mică imagine pusă pe pagină ca semn de calitate"
+  },
+  {
+    "term": "Docker",
+    "aliases": [],
+    "explanation": "program care rulează aplicații în cutii izolate, numite containere"
   }
 ]

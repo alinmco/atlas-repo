@@ -3,7 +3,7 @@
   "repo_url": "https://github.com/android/skills",
   "name": "Android skills (android/skills)",
   "one_liner": "Instrucțiuni oficiale Google care învață asistenții AI să programeze corect aplicații Android.",
-  "problem_solved": "Asistenții AI (Claude Code, Gemini, Codex etc.) greșesc des la sarcini Android specifice: migrarea de la XML la Jetpack Compose, trecerea la AGP 9, aplicații edge-to-edge, reguli R8, Navigation 3, Play Billing. Repo-ul conține 'skills' (fișiere SKILL.md) scrise de echipa Android, cu pași clari și cod de referință, pe care agentul le citește singur când sarcina se potrivește. Astfel agentul urmează ghidurile oficiale în loc să ghicească din memorie. Conform README-ului, se concentrează pe cazurile în care evaluările arată că modelele AI se descurcă slab.",
+  "problem_solved": "Asistenții AI greșesc des la sarcini Android specifice, cum sunt migrarea de la XML la Jetpack Compose sau trecerea la AGP 9, pentru că ghicesc din memorie. Repo-ul oferă instrucțiuni oficiale Google pe care agentul le urmează pas cu pas.",
   "analogy": "Ca o fișă de rețetă lăsată în bucătărie de un bucătar-șef: bucătarul-ajutor (agentul AI) o deschide doar când are de gătit exact acel fel de mâncare și o urmează pas cu pas.",
   "how_it_works": [
     "pas 1: instalezi skill-urile (cu Android CLI, ca plugin în Claude Code/Codex, sau copiind folderele) în proiectul tău sau în directoarele agentului",
@@ -11,6 +11,42 @@
     "pas 3: agentul compară cererea cu descrierea fiecărui skill (câmpul 'description' din SKILL.md) și îl activează pe cel potrivit",
     "pas 4: agentul urmează pașii din SKILL.md (analiză, plan, modificări de cod, uneori scripturi din folderul skill-ului) și îți modifică proiectul Android"
   ],
+  "first_steps": {
+    "origin": "experiență utilizator",
+    "story_url": "https://dev.classmethod.jp/en/articles/android-cli-skill-xml-to-compose/",
+    "story_platform": "blog",
+    "story_date": "2026-08-21",
+    "title": "Migrarea ecranelor XML la Jetpack Compose cu skill-ul oficial",
+    "intro": "Un dezvoltator Android a vrut să încerce skill-ul oficial de migrare de la XML Views la Jetpack Compose, pe o aplicație de test cu mai multe ecrane.",
+    "steps": [
+      {
+        "you_do": "A instalat skill-ul pentru Claude Code cu Android CLI, indicând agentul.",
+        "what_happens": "Skill-ul a fost adăugat în directorul ~/.claude/skills.",
+        "source_url": "https://dev.classmethod.jp/en/articles/android-cli-skill-xml-to-compose/"
+      },
+      {
+        "you_do": "A citit SKILL.md și a notat cei zece pași ai fluxului: de la analiza proiectului și un plan, la capturi de ecran, teme, migrarea layout-urilor și ștergerea codului XML.",
+        "what_happens": "Autorul a văzut dinainte ce are de gând să facă agentul.",
+        "source_url": "https://dev.classmethod.jp/en/articles/android-cli-skill-xml-to-compose/"
+      },
+      {
+        "you_do": "A făcut o aplicație de test cu mai multe ecrane în XML și a pornit migrarea; la întrebarea agentului ce ecran migrează primul, a răspuns „toate”.",
+        "what_happens": "Agentul a urmat fluxul din skill și a făcut capturi ale ecranelor XML pentru comparație.",
+        "source_url": "https://dev.classmethod.jp/en/articles/android-cli-skill-xml-to-compose/"
+      },
+      {
+        "you_do": "A așteptat finalul și a comparat înainte/după.",
+        "what_happens": "Migrarea a durat 35 min 31 s pentru cinci ecrane, cu Sonnet 5; autorul spune că tranzițiile și atingerile s-au comportat ca înainte.",
+        "source_url": "https://dev.classmethod.jp/en/articles/android-cli-skill-xml-to-compose/"
+      },
+      {
+        "you_do": "A notat ce nu a ieșit bine.",
+        "what_happens": "Unele culori s-au schimbat ușor, unele elemente au fost trecute automat la componente Material 3 și bucla de ajustare după capturi a fost mai slabă decât se aștepta autorul.",
+        "source_url": "https://dev.classmethod.jp/en/articles/android-cli-skill-xml-to-compose/"
+      }
+    ],
+    "takeaway": "Autorul spune că skill-ul a funcționat în mare parte cum scrie în documentație și că rezultatul e un punct de plecare util, dar nu perfect. Pentru o aplicație reală recomandă migrarea ecran cu ecran, nu totul odată. Articolul nu compară cu migrarea făcută fără skill."
+  },
   "categories": [
     "Skill-uri pentru agenți AI",
     "Unelte pentru programatori"
@@ -25,6 +61,111 @@
   ],
   "audience": "intermediar",
   "setup_difficulty": "mediu",
+  "at_a_glance": {
+    "for_you_if": [
+      "Dezvolți aplicații Android și folosești deja un agent AI de programare.",
+      "Vrei ca agentul să urmeze ghidurile oficiale Google, nu ce își amintește el."
+    ],
+    "not_for_you_if": [
+      "Nu lucrezi cu Android sau nu folosești niciun agent AI.",
+      "Cauți o aplicație de sine stătătoare: aici sunt doar fișiere text pentru agent."
+    ],
+    "verdict": "Utile pentru echipele Android care folosesc deja un agent AI, dar rezultatul tot trebuie verificat de un om."
+  },
+  "cost": {
+    "level": "gratuit, dar cere servicii plătite",
+    "summary": "Skill-urile sunt gratuite (Apache-2.0); plătești doar agentul AI: merge cu abonamentul (Claude Pro/Max, ChatGPT Plus/Pro, Google AI Pro) sau cu cheie API, iar Gemini din Android Studio are și un plan gratuit limitat.",
+    "ai_access": {
+      "mode": "abonament sau API",
+      "detail": "Repo-ul nu cere cheie API; Claude Code acceptă cont Pro/Max sau cont Console cu cheie API, Codex vine cu planurile ChatGPT, iar Gemini în Android Studio are plan gratuit, cheie API sau Google AI Pro/Ultra.",
+      "source_url": "https://code.claude.com/docs/en/setup"
+    },
+    "items": [
+      {
+        "what": "Skill-urile din repo (Apache-2.0)",
+        "price": "gratuit (licență Apache-2.0)",
+        "required": true,
+        "source_url": "https://github.com/android/skills/blob/45fd1739a4dbca5452c3e936570797f7f6261cd7/LICENSE.txt"
+      },
+      {
+        "what": "Android CLI (recomandat pentru instalare; poți instala și manual)",
+        "price": null,
+        "required": false,
+        "source_url": "https://developer.android.com/tools/agents/android-cli"
+      },
+      {
+        "what": "Android Studio (pentru build și testare; pagina nu afișează un preț)",
+        "price": null,
+        "required": false,
+        "source_url": "https://developer.android.com/studio"
+      },
+      {
+        "what": "Claude Pro (abonament care include Claude Code)",
+        "price": "17 USD/lună cu plata anuală, 20 USD/lună lunar",
+        "required": false,
+        "source_url": "https://claude.com/pricing"
+      },
+      {
+        "what": "ChatGPT Plus (include Codex)",
+        "price": "20 USD/lună",
+        "required": false,
+        "source_url": "https://learn.chatgpt.com/docs/pricing"
+      },
+      {
+        "what": "Google AI Pro (Gemini în Android Studio, rate limits mai mari)",
+        "price": "19,99 USD/lună",
+        "required": false,
+        "source_url": "https://one.google.com/intl/en_us/about/google-ai-plans/"
+      },
+      {
+        "what": "Gemini în Android Studio, plan gratuit (limite mici; datele pot fi folosite la antrenare)",
+        "price": "gratuit",
+        "required": false,
+        "source_url": "https://developer.android.com/studio/gemini/feature-comparison"
+      },
+      {
+        "what": "Cheie API pentru Gemini sau Claude (plată pe consum)",
+        "price": null,
+        "required": false,
+        "source_url": "https://developer.android.com/studio/gemini/feature-comparison"
+      }
+    ]
+  },
+  "platforms": {
+    "windows": "da",
+    "mac": "da",
+    "linux": "da",
+    "note": "Skill-urile sunt fișiere Markdown, deci nu depind de sistem. Android CLI are instalare documentată pentru Linux, Mac (Apple și Intel) și Windows (curl sau winget). Dacă folosești Windows, verifică pagina oficială Android CLI pentru limitări.",
+    "source_url": "https://developer.android.com/tools/agents/android-cli/download"
+  },
+  "risk_flags": [
+    {
+      "flag": "telemetrie",
+      "detail": "Android CLI colectează date de utilizare de bază (comenzi rulate, erori anonimizate); se dezactivează cu flagul --no-metrics.",
+      "source_url": "https://developer.android.com/tools/agents/android-cli"
+    },
+    {
+      "flag": "trimite date în cloud",
+      "detail": "Codul proiectului ajunge la furnizorul agentului ales; în planul gratuit Gemini din Android Studio datele sunt folosite la antrenare.",
+      "source_url": "https://developer.android.com/studio/gemini/feature-comparison"
+    },
+    {
+      "flag": "cere cont",
+      "detail": "Agentul are nevoie de cont: Claude Code cere Pro, Max, Team, Enterprise sau Console; repo-ul în sine nu cere cont.",
+      "source_url": "https://code.claude.com/docs/en/setup"
+    }
+  ],
+  "features": [
+    "36 de skill-uri oficiale Android (fișiere SKILL.md), grupate pe domenii: Compose, build, Play, Wear, TV, XR, securitate",
+    "Instalare cu Android CLI, ca plugin în Claude Code și Codex sau copiind folderele",
+    "Agentul alege singur skill-ul potrivit, după descrierea lui, când îi ceri o sarcină",
+    "Skill-uri pentru migrări: XML la Compose, AGP 9, edge-to-edge, Navigation 3, Play Billing, reguli R8",
+    "Unele skill-uri vin cu scripturi și fișiere de referință lângă SKILL.md",
+    "Licență Apache-2.0, fără chei API cerute de repo"
+  ],
+  "audience_reason": "ai nevoie de un proiect Android și de un agent AI de programare deja configurat",
+  "setup_difficulty_reason": "instalarea are câteva comenzi, dar presupune un agent AI cu cont și un proiect Android existent",
+  "notes_summary": "Am citit README-ul, manifestele de plugin, SKILL.md-urile și paginile oficiale Android; nu am rulat nimic. Prețul Android CLI și al Android Studio nu apare pe paginile verificate.",
   "replaces": [],
   "examples": [
     {
@@ -43,7 +184,8 @@
       ],
       "code": null,
       "output_from_docs": null,
-      "source_url": "https://github.com/android/skills#install-android-skills"
+      "source_url": "https://github.com/android/skills#install-android-skills",
+      "kind": "instalare"
     },
     {
       "title": "Instalare ca plugin în Claude Code sau Codex și activare cu o cerere obișnuită",
@@ -60,7 +202,24 @@
       ],
       "code": "Prompt de activare dat în documentație ca exemplu: \"Make my app UI edge-to-edge.\"",
       "output_from_docs": null,
-      "source_url": "https://github.com/android/skills#install-as-an-agent-plugin"
+      "source_url": "https://github.com/android/skills#install-as-an-agent-plugin",
+      "kind": "instalare"
+    },
+    {
+      "title": "Folosire de zi cu zi: vezi skill-urile și cere o sarcină",
+      "scenario": "După instalare, vezi ce skill-uri există, adaugi unul și îi ceri agentului o sarcină legată de el; agentul îl activează singur.",
+      "prerequisites": [
+        "Android CLI instalat",
+        "Un agent AI cu suport pentru skill-uri, deschis în proiectul Android"
+      ],
+      "commands": [
+        "android skills list",
+        "android skills add skill-name"
+      ],
+      "code": "Prompt dat în documentație ca exemplu: \"Make my app UI edge-to-edge.\" Documentația precizează și că, dacă personalizezi un skill, îl redenumești, altfel e suprascris la actualizarea cu skills add.",
+      "output_from_docs": null,
+      "source_url": "https://developer.android.com/tools/agents/android-skills",
+      "kind": "folosire"
     }
   ],
   "connectors": {
@@ -229,6 +388,6 @@
       ]
     }
   ],
-  "updated_at": "2026-10-25",
-  "notes": "Repo nou. Citit: README, LICENSE.txt (Apache-2.0 complet), manifestele .claude-plugin și .codex-plugin, SKILL.md pentru edge-to-edge, r8-analyzer, android-cli și migrate-xml-views, plus paginile oficiale developer.android.com/tools/agents/android-skills și /android-cli. Nu am rulat nimic. Repo-ul conține 33 de skill-uri (SKILL.md) grupate pe domenii. Release-uri GitHub: neverificate (gh lipsește, API-ul de releases nu a fost interogat). Documentația nu arată niciun output pentru comenzile de instalare, deci output_from_docs e null. Câmpul replaces e gol: nu am găsit un serviciu plătit pe care să-l înlocuiască realist (sunt instrucțiuni gratuite pentru agenți). Prețurile din monetizare nu au putut fi confirmate pe paginile sursă și nu sunt publicate; linkurile sunt păstrate ca punct de plecare. Pagina UpStack răspunde cu eroare 502 la verificare. Stars și data commit-ului din API-ul GitHub, verificate la 2026-10-25. Android CLI colectează date de utilizare (dezactivabil cu --no-metrics) și are limitări pe Windows (emulator dezactivat, descărcarea din PowerShell nesuportată), conform paginii oficiale."
+  "updated_at": "2026-10-28",
+  "notes": "Repo nou. Citit: README, LICENSE.txt (Apache-2.0 complet), manifestele .claude-plugin și .codex-plugin, SKILL.md pentru edge-to-edge, r8-analyzer, android-cli și migrate-xml-views, plus paginile oficiale developer.android.com/tools/agents/android-skills și /android-cli. Nu am rulat nimic. Repo-ul conține 33 de skill-uri (SKILL.md) grupate pe domenii. Release-uri GitHub: neverificate (gh lipsește, API-ul de releases nu a fost interogat). Documentația nu arată niciun output pentru comenzile de instalare, deci output_from_docs e null. Câmpul replaces e gol: nu am găsit un serviciu plătit pe care să-l înlocuiască realist (sunt instrucțiuni gratuite pentru agenți). Prețurile din monetizare nu au putut fi confirmate pe paginile sursă și nu sunt publicate; linkurile sunt păstrate ca punct de plecare. Pagina UpStack răspunde cu eroare 502 la verificare. Stars și data commit-ului din API-ul GitHub, verificate la 2026-10-25. Android CLI colectează date de utilizare (dezactivabil cu --no-metrics) și are limitări pe Windows (emulator dezactivat, descărcarea din PowerShell nesuportată), conform paginii oficiale. Migrat la formatul nou la 2026-10-28: re-verificate README-ul, versiunea de plugin (1.0.18 în .codex-plugin), numărul de skill-uri (36 de SKILL.md la commit 45fd173 din 2026-10-26), stars (9936) și existența releases (v1.0.18 pe GitHub), plus paginile oficiale Android CLI, instalare, skills în Android Studio și compararea nivelurilor Gemini. Prețuri verificate azi: Claude Pro (claude.com/pricing), ChatGPT Plus (learn.chatgpt.com/docs/pricing), Google AI Pro (one.google.com); prețul Android CLI și al Android Studio nu apare pe paginile oficiale, deci null. Primii pași: articolul Classmethod (2026-08-21), citit integral în traducerea în engleză; autorul compară doar cu documentația, nu cu lucrul fără skill. Căutarea pe Hacker News (hn.algolia.com) nu a returnat rezultate utile (API-ul a răspuns cu HTML). Rămas necunoscut: limitările Android CLI pe Windows din nota veche (emulator, descărcare PowerShell) nu s-au regăsit pe pagina de descărcare, deci nu sunt reconfirmate."
 }

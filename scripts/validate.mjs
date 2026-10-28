@@ -132,8 +132,8 @@ function checkMonetization(list, where, { repoLicense } = {}) {
 // Repo-uri din formatul vechi, scutite de regulile formatului nou.
 // Se scot din listă când sunt completate în formatul nou.
 const LEGACY_FORMAT_SLUGS = new Set([
-  "android-skills", "awesome", "build-your-own-x", "caveman", "ecc", "mattpocock-skills",
-  "opencode", "opencut", "paperclip", "react", "rea", "ruflo", "scientific-agent-skills",
+  "caveman", "ecc", "mattpocock-skills",
+  "opencode", "opencut", "paperclip", "react", "ruflo", "scientific-agent-skills",
 ]);
 
 const REQUIRED_NEW_KEYS = [
