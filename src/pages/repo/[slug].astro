@@ -14,6 +14,13 @@ const sha = repo.tech_sheet.commit_sha;
 const gl = createGlossary();
 const glance = repo.at_a_glance;
 const cost = repo.cost;
+const AI_MODE = {
+  "abonament sau API": "merge cu abonamentul tău sau cu cheie API",
+  "doar API": "doar cu cheie API (plătești separat, pe consum; abonamentul nu ajunge)",
+  "doar abonament": "doar cu abonament",
+  "nu folosește AI": "nu folosește servicii AI",
+  "necunoscut": "documentația nu spune",
+};
 const platforms = repo.platforms;
 const flags = repo.risk_flags ?? [];
 const features = repo.features ?? [];
@@ -77,13 +84,22 @@ const kindLabel = { instalare: "Instalare", folosire: "Folosire" };
               <dt>Cost</dt>
               <dd>
                 <strong>{cost.level}.</strong> {cost.summary && <GlText text={cost.summary} gl={gl} />}
+                {cost.ai_access && (
+                  <p class="ai-access">
+                    <strong>Servicii AI: {AI_MODE[cost.ai_access.mode] ?? "documentația nu spune"}.</strong>
+                    {cost.ai_access.detail && <> {cost.ai_access.detail}</>}
+                    {cost.ai_access.source_url && (
+                      <> <a class="small-link" href={cost.ai_access.source_url} target="_blank" rel="noopener noreferrer">sursa</a></>
+                    )}
+                  </p>
+                )}
                 {cost.items?.length > 0 && (
                   <details class="fold fold--small">
                     <summary>Ce poate costa</summary>
                     <ul>
                       {cost.items.map((i) => (
                         <li>
-                          {i.what}: {i.price ?? "preț nepublicat"} ({i.required ? "necesar" : "opțional"})
+                          {i.what}: {i.price ?? "preț nepublicat"} · <strong>{i.required ? "obligatoriu" : "opțional"}</strong>
                           {i.source_url && (
                             <> · <a href={i.source_url} target="_blank" rel="noopener noreferrer">sursa</a></>
                           )}
@@ -350,6 +366,8 @@ const kindLabel = { instalare: "Instalare", folosire: "Folosire" };
 </Base>
 
 <style>
+  .ai-access { margin: 0.5rem 0 0; padding: 0.4rem 0.6rem; border-left: 3px solid var(--ink-soft); overflow-wrap: anywhere; }
+  .ai-access .small-link { font-size: 0.85em; }
   .head {
     padding: 2.5rem 0 2rem;
     border-bottom: 1px solid var(--rule);
