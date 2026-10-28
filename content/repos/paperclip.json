@@ -3,7 +3,7 @@
   "repo_url": "https://github.com/paperclipai/paperclip",
   "name": "Paperclip",
   "one_liner": "Panou de control unde conduci o echipă de agenți AI ca pe o firmă.",
-  "problem_solved": "Dacă folosești mai mulți agenți AI de programare sau de lucru (Claude Code, Codex, OpenClaw etc.), ajungi cu zeci de ferestre deschise și nu mai știi cine ce face, cât costă și ce s-a pierdut la repornire. Paperclip pune totul într-un singur loc: sarcini (ca într-un task manager), organigramă cu roluri, obiective, bugete de cheltuieli și aprobări. Agenții tăi rămân aceiași; Paperclip doar îi organizează și îi ține sub control.",
+  "problem_solved": "Când lucrezi cu mai mulți agenți AI de programare, ajungi cu zeci de ferestre deschise și nu mai știi cine ce face, cât costă și ce s-a pierdut la repornire. Paperclip adună sarcinile, rolurile, bugetele și aprobările într-un singur panou.",
   "analogy": "Ca un birou de management pentru angajați care nu dorm niciodată: tu stabilești obiectivul și bugetul, iar tabla cu sarcini, șefii și regulile de aprobare le ține Paperclip. Angajații (agenții AI) sunt aduși de tine.",
   "how_it_works": [
     "Pasul 1: pornești serverul Paperclip pe calculatorul tău (un singur proces Node.js cu o bază de date Postgres încorporată) și deschizi interfața web pe localhost:3100.",
@@ -11,6 +11,7 @@
     "Pasul 3: creezi sarcini și le atribui. Agenții se „trezesc” (heartbeat) când au de lucru sau după un program (rutine), preiau sarcina printr-un blocaj atomic ca doi agenți să nu facă același lucru și lucrează în propriile lor unelte.",
     "Pasul 4: Paperclip ține evidența comentariilor, fișierelor produse, jurnalului de activitate și costurilor, aplică aprobările și oprește munca la limitele de buget; tu verifici rezultatele din panou."
   ],
+  "first_steps": null,
   "categories": [
     "Agenți AI și automatizare",
     "Unelte pentru programatori"
@@ -88,7 +89,8 @@
       ],
       "code": null,
       "output_from_docs": null,
-      "source_url": "https://github.com/paperclipai/paperclip/blob/1fbbef45a8d399771add7a27a04b12f3a20e264c/README.md#quickstart"
+      "source_url": "https://github.com/paperclipai/paperclip/blob/1fbbef45a8d399771add7a27a04b12f3a20e264c/README.md#quickstart",
+      "kind": "instalare"
     },
     {
       "title": "Rulare în Docker cu Docker Compose",
@@ -103,7 +105,25 @@
       ],
       "code": null,
       "output_from_docs": null,
-      "source_url": "https://github.com/paperclipai/paperclip/blob/1fbbef45a8d399771add7a27a04b12f3a20e264c/docs/deploy/docker.md"
+      "source_url": "https://github.com/paperclipai/paperclip/blob/1fbbef45a8d399771add7a27a04b12f3a20e264c/docs/deploy/docker.md",
+      "kind": "instalare"
+    },
+    {
+      "title": "Creezi și urmărești sarcini din terminal",
+      "scenario": "După ce Paperclip rulează, vrei să adaugi o sarcină, să vezi ce e de făcut și să lași un comentariu, fără să deschizi interfața web.",
+      "prerequisites": [
+        "Paperclip pornit (vezi exemplul de pornire rapidă)",
+        "Un ID de sarcină (issue-id) luat din lista de sarcini"
+      ],
+      "commands": [
+        "npx paperclipai issue list [--status todo,in_progress] [--assignee-agent-id <id>] [--match text]",
+        "npx paperclipai issue create --title \"...\" [--description \"...\"] [--status todo] [--priority high]",
+        "npx paperclipai issue comment <issue-id> --body \"...\" [--reopen]"
+      ],
+      "code": null,
+      "output_from_docs": null,
+      "source_url": "https://github.com/paperclipai/paperclip/blob/cff331f6ca0a652b5e41641c68dfa5fa584c22ae/docs/cli/control-plane-commands.md",
+      "kind": "folosire"
     }
   ],
   "connectors": {
@@ -287,6 +307,113 @@
       ]
     }
   ],
-  "updated_at": "2026-10-26",
-  "notes": "Repo nou, citit din clona de la commit 1fbbef45 (README, docs/, doc/INSTALLING.md, package.json, LICENSE MIT). Nu am rulat nimic. Exemplele sunt comenzi din README și din docs/deploy/docker.md; documentația nu arată output pentru ele, deci output_from_docs este null. Nu am verificat dacă site-ul docs.paperclip.ing e identic cu fișierele din repo, de aceea sursele sunt linkuri către fișierele din repo la SHA-ul citit. Prețurile Devin și Lindy sunt de pe paginile oficiale, citite la 2026-10-26 prin WebFetch; pagina Devin se poate schimba des, iar compararea cu Paperclip este doar aproximativă: Paperclip nu înlocuiește agenții, ci îi coordonează, de aceea nivelurile de înlocuire sunt prudente. Nu am găsit prețul Hostinger Managed Paperclip nici al Paperclip Cloud (doar listă de așteptare). Repo-ul are peste 107.000 de stele la ~7 luni de la creare; nu am putut verifica ritmul de creștere. Nu am verificat issue-urile deschise în detaliu. Recomandare de securitate preluată din docs/deploy/deployment-modes.md: modul implicit local_trusted nu cere login. Pachete de subfoldere (ex: fonturi) pot avea licențe proprii (există un NOTICE.md în packages/paperclip-runner/devtools/issue-thread/src/fonts), nu le-am inspectat."
+  "at_a_glance": {
+    "for_you_if": [
+      "Folosești deja mai mulți agenți AI de programare și vrei să-i ții sub control dintr-un singur loc.",
+      "Vrei bugete, aprobări și istoric clar pentru munca făcută de agenți."
+    ],
+    "not_for_you_if": [
+      "Ai un singur agent sau vrei un agent gata făcut, care lucrează singur, fără configurare.",
+      "Nu te simți confortabil cu terminalul, Node.js și cu setări de securitate."
+    ],
+    "verdict": "Panou gratuit și bine documentat pentru echipe de agenți, dar nu include agenți: îi aduci și îi plătești tu, iar telemetria e pornită implicit."
+  },
+  "cost": {
+    "level": "gratuit, dar cere servicii plătite",
+    "summary": "Paperclip e gratuit (MIT), dar agenții pe care îi conduci se plătesc separat: merge cu abonamentul tău Claude Pro/Max sau ChatGPT Plus/Pro (prin Claude Code și Codex) sau cu chei API plătite pe consum.",
+    "ai_access": {
+      "mode": "abonament sau API",
+      "detail": "Paperclip pornește CLI-urile agenților pe mașina ta: Claude Code merge cu autentificare prin abonament (login claude.ai) sau cu ANTHROPIC_API_KEY, iar Codex merge cu login ChatGPT sau cu OPENAI_API_KEY; pentru alți agenți depinde de fiecare.",
+      "source_url": "https://github.com/paperclipai/paperclip/blob/cff331f6ca0a652b5e41641c68dfa5fa584c22ae/docs/adapters/claude-local.md"
+    },
+    "items": [
+      {
+        "what": "Claude Pro sau Max (abonament pentru Claude Code, agentul implicit recomandat în ghid)",
+        "price": "Pro: 17 USD/lună plătit anual (200 USD/an) sau 20 USD/lună plătit lunar; Max de la 100 USD/lună",
+        "required": false,
+        "source_url": "https://claude.com/pricing"
+      },
+      {
+        "what": "ChatGPT Plus sau Pro (include Codex, alt agent compatibil)",
+        "price": "Plus: 20 USD/lună; Pro: de la 100 USD/lună (100, 200 sau 500 USD)",
+        "required": false,
+        "source_url": "https://learn.chatgpt.com/docs/pricing"
+      },
+      {
+        "what": "Chei API pentru modele (Anthropic, OpenAI, Gemini sau OpenRouter), plătite pe consum, ca alternativă la abonament",
+        "price": null,
+        "required": false,
+        "source_url": "https://github.com/paperclipai/paperclip/blob/cff331f6ca0a652b5e41641c68dfa5fa584c22ae/README.md#quickstart"
+      },
+      {
+        "what": "Alți agenți compatibili (Cursor, Gemini CLI, OpenCode, Kimi Code, Grok Build, Hermes, Pi): fiecare are propria politică de preț",
+        "price": null,
+        "required": false,
+        "source_url": "https://github.com/paperclipai/paperclip/blob/cff331f6ca0a652b5e41641c68dfa5fa584c22ae/docs/adapters/overview.md"
+      },
+      {
+        "what": "Server sau VPS dacă vrei agenți care lucrează 24/7 (calculatorul tău merge pentru încercări)",
+        "price": null,
+        "required": false,
+        "source_url": "https://github.com/paperclipai/paperclip/blob/cff331f6ca0a652b5e41641c68dfa5fa584c22ae/docs/deploy/overview.md"
+      },
+      {
+        "what": "Docker și Docker Compose (doar pentru varianta cu container)",
+        "price": null,
+        "required": false,
+        "source_url": "https://github.com/paperclipai/paperclip/blob/cff331f6ca0a652b5e41641c68dfa5fa584c22ae/docs/deploy/docker.md"
+      },
+      {
+        "what": "Node.js 24.11 sau mai nou (open-source, licență MIT)",
+        "price": "gratuit",
+        "required": true,
+        "source_url": "https://github.com/nodejs/node/blob/main/LICENSE"
+      },
+      {
+        "what": "Git, necesar doar la instalarea din sursă (open-source)",
+        "price": "gratuit",
+        "required": false,
+        "source_url": "https://git-scm.com/"
+      },
+      {
+        "what": "Paperclip Cloud (versiune găzduită de autori; README-ul oferă doar o listă de așteptare)",
+        "price": null,
+        "required": false,
+        "source_url": "https://github.com/paperclipai/paperclip/blob/cff331f6ca0a652b5e41641c68dfa5fa584c22ae/README.md"
+      }
+    ]
+  },
+  "platforms": {
+    "windows": "parțial",
+    "mac": "da",
+    "linux": "da",
+    "note": "Scriptul de instalare gestionată e documentat pentru macOS, Linux și WSL2; pentru Windows nativ nu am găsit instrucțiuni dedicate, deși comanda npx cere doar Node.js (dedus, netestat). Varianta Docker e o alternativă pe orice sistem cu Docker.",
+    "source_url": "https://github.com/paperclipai/paperclip/blob/cff331f6ca0a652b5e41641c68dfa5fa584c22ae/doc/INSTALLING.md"
+  },
+  "risk_flags": [
+    {
+      "flag": "telemetrie",
+      "detail": "Telemetria anonimă de utilizare e pornită implicit; se oprește cu PAPERCLIP_TELEMETRY_DISABLED=1, DO_NOT_TRACK=1 sau telemetry.enabled: false în configurare.",
+      "source_url": "https://github.com/paperclipai/paperclip/blob/cff331f6ca0a652b5e41641c68dfa5fa584c22ae/README.md#telemetry"
+    },
+    {
+      "flag": "modifică setările altor programe",
+      "detail": "Adaptorul Codex leagă skill-urile Paperclip în folderul global ~/.codex/skills, iar agenții Claude Code rulează implicit cu dangerouslySkipPermissions (fără cereri de permisiune).",
+      "source_url": "https://github.com/paperclipai/paperclip/blob/cff331f6ca0a652b5e41641c68dfa5fa584c22ae/docs/adapters/codex-local.md"
+    }
+  ],
+  "features": [
+    "Panou web cu sarcini (ca într-un task manager), comentarii, fișiere și istoric pentru fiecare agent",
+    "Organigramă: fiecare agent are rol, șef, descriere de post și buget propriu",
+    "Bugete lunare pe companie, agent și proiect, cu alertă la 80% și pauză automată la 100%",
+    "Aprobări și revizuiri făcute de tine înainte ca o sarcină sau o angajare să fie acceptată",
+    "Rutine care creează sarcini singure, după program, prin webhook sau prin API",
+    "Își conectează agenții pe care îi ai deja: Claude Code, Codex, Cursor, Gemini CLI, OpenCode și alții",
+    "Rulează pe calculatorul tău, fără cont Paperclip, cu bază de date încorporată"
+  ],
+  "audience_reason": "cere terminal, Node.js și agenți AI deja instalați și autentificați",
+  "setup_difficulty_reason": "o comandă npx pornește serverul, dar agenții și autentificarea lor se configurează separat",
+  "notes_summary": "Am citit README-ul, documentația din repo și codul de configurare la commitul cff331f6; nu am rulat nimic. Prețurile Hostinger și Paperclip Cloud nu sunt publice, iar suportul pentru Windows nativ nu e documentat.",
+  "updated_at": "2026-10-28",
+  "notes": "Repo nou, citit din clona de la commit 1fbbef45 (README, docs/, doc/INSTALLING.md, package.json, LICENSE MIT). Nu am rulat nimic. Exemplele sunt comenzi din README și din docs/deploy/docker.md; documentația nu arată output pentru ele, deci output_from_docs este null. Nu am verificat dacă site-ul docs.paperclip.ing e identic cu fișierele din repo, de aceea sursele sunt linkuri către fișierele din repo la SHA-ul citit. Prețurile Devin și Lindy sunt de pe paginile oficiale, citite la 2026-10-26 prin WebFetch; pagina Devin se poate schimba des, iar compararea cu Paperclip este doar aproximativă: Paperclip nu înlocuiește agenții, ci îi coordonează, de aceea nivelurile de înlocuire sunt prudente. Nu am găsit prețul Hostinger Managed Paperclip nici al Paperclip Cloud (doar listă de așteptare). Repo-ul are peste 107.000 de stele la ~7 luni de la creare; nu am putut verifica ritmul de creștere. Nu am verificat issue-urile deschise în detaliu. Recomandare de securitate preluată din docs/deploy/deployment-modes.md: modul implicit local_trusted nu cere login. Pachete de subfoldere (ex: fonturi) pot avea licențe proprii (există un NOTICE.md în packages/paperclip-runner/devtools/issue-thread/src/fonts), nu le-am inspectat. Migrare la formatul nou, 2026-10-28: am recitit README-ul și documentele docs/ la commitul cff331f6 (MIT neschimbat, Node.js >= 24.11, cca 108.100 de stele). Am adăugat cost.ai_access (Claude Code și Codex merg cu abonament sau cu cheie API, conform docs/adapters), telemetria implicită (README, secțiunea Telemetry), exemplul de folosire din docs/cli/control-plane-commands.md și prețurile Claude și ChatGPT verificate azi. Primii pași: singura poveste găsită (dev.to, 2026-04-05) e scrisă de un agent AI al firmei descrise, nu de un om, deci nu a fost folosită. Alte povești nu am putut citi (Medium dă 403, recenzia fast.io e sinteză, nu experiență proprie)."
 }

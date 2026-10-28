@@ -759,7 +759,9 @@
     "term": "CI",
     "aliases": [
       "pipeline CI",
-      "poarta de control din CI"
+      "poarta de control din CI",
+      "pipeline de CI",
+      "CI-ul"
     ],
     "explanation": "verificări automate pornite la fiecare modificare de cod"
   },
@@ -843,5 +845,180 @@
       "document de predare"
     ],
     "explanation": "fișier cu starea lucrului, pentru un alt agent"
+  },
+  {
+    "term": "Ollama",
+    "aliases": [
+      "Ollama-ul"
+    ],
+    "explanation": "program gratuit care rulează modele AI pe calculatorul tău"
+  },
+  {
+    "term": "sandbox",
+    "aliases": [
+      "sandbox-ul"
+    ],
+    "explanation": "spațiu izolat în care un program nu poate strica restul"
+  },
+  {
+    "term": "JSON",
+    "aliases": [
+      "JSON-ul"
+    ],
+    "explanation": "format text pentru date, ușor de citit de programe"
+  },
+  {
+    "term": "OpenCode Go",
+    "aliases": [
+      "Go Plus"
+    ],
+    "explanation": "abonament lunar al autorilor, cu modele deschise pentru programare"
+  },
+  {
+    "term": "OpenCode Console",
+    "aliases": [
+      "Console"
+    ],
+    "explanation": "serviciu online opțional al autorilor, cu modele pe credite"
+  },
+  {
+    "term": "Docker Compose",
+    "aliases": [
+      "docker compose"
+    ],
+    "explanation": "pornește mai multe containere Docker cu o singură comandă"
+  },
+  {
+    "term": "Docker Desktop",
+    "aliases": [],
+    "explanation": "aplicația Docker pentru Windows și macOS, cu licență proprie"
+  },
+  {
+    "term": "proto",
+    "aliases": [
+      "moon",
+      "moonrepo"
+    ],
+    "explanation": "unelte care instalează versiunile potrivite de programe"
+  },
+  {
+    "term": "Rust",
+    "aliases": [
+      "nucleul Rust",
+      "nucleu Rust"
+    ],
+    "explanation": "limbaj de programare folosit pentru partea rapidă a editorului"
+  },
+  {
+    "term": "WASM",
+    "aliases": [
+      "WebAssembly"
+    ],
+    "explanation": "cod rapid care rulează direct în browser"
+  },
+  {
+    "term": "GPUI",
+    "aliases": [],
+    "explanation": "bibliotecă pentru ferestre desktop rapide, scrisă în Rust"
+  },
+  {
+    "term": "Postgres",
+    "aliases": [
+      "PostgreSQL"
+    ],
+    "explanation": "program de baze de date"
+  },
+  {
+    "term": "Redis",
+    "aliases": [],
+    "explanation": "bază de date rapidă, ținută în memorie"
+  },
+  {
+    "term": "Whisper",
+    "aliases": [
+      "modele Whisper"
+    ],
+    "explanation": "model AI deschis care transformă vorbirea în text"
+  },
+  {
+    "term": "cadre cheie",
+    "aliases": [
+      "cadre-cheie",
+      "keyframes"
+    ],
+    "explanation": "puncte din timp unde setezi o valoare care se animează"
+  },
+  {
+    "term": "linie de timp",
+    "aliases": [
+      "linia de timp",
+      "timeline"
+    ],
+    "explanation": "zona unde aranjezi clipurile unul după altul"
+  },
+  {
+    "term": "autogăzduire",
+    "aliases": [
+      "autogăzduirea",
+      "autogăzduit",
+      "autogăzduiești",
+      "self-hosting"
+    ],
+    "explanation": "rulezi programul pe calculatorul sau serverul tău"
+  },
+  {
+    "term": "repo arhivat",
+    "aliases": [],
+    "explanation": "repo blocat: nu mai primește modificări"
+  },
+  {
+    "term": "heartbeat",
+    "aliases": [
+      "heartbeats",
+      "heartbeat-uri",
+      "heartbeat-ul",
+      "heartbeat-urile"
+    ],
+    "explanation": "scurtă trezire a unui agent, când are de lucru"
+  },
+  {
+    "term": "webhook",
+    "aliases": [
+      "webhook-uri",
+      "webhook-ul"
+    ],
+    "explanation": "adresă web care pornește o acțiune când primește un semnal"
+  },
+  {
+    "term": "cron",
+    "aliases": [
+      "program cron",
+      "cron job"
+    ],
+    "explanation": "program fix de rulare, de exemplu în fiecare oră"
+  },
+  {
+    "term": "self-hosted",
+    "aliases": [
+      "găzduit pe propriul server"
+    ],
+    "explanation": "rulează pe calculatorul sau serverul tău, nu la furnizor"
+  },
+  {
+    "term": "VPS",
+    "aliases": [
+      "server virtual"
+    ],
+    "explanation": "server închiriat, pornit non-stop"
+  },
+  {
+    "term": "OpenClaw",
+    "aliases": [],
+    "explanation": "agent AI personal open-source, coordonabil prin webhook"
+  },
+  {
+    "term": "Tailscale",
+    "aliases": [],
+    "explanation": "rețea privată prin care accesezi serverul de oriunde"
   }
 ]
