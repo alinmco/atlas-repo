@@ -12,6 +12,38 @@
     "pas 4: skill-urile `writing-plans` și apoi `subagent-driven-development` (sau `executing-plans`) transformă designul într-un plan cu sarcini mici și îl execută, cu teste scrise primele și revizuire după fiecare sarcină",
     "pas 5: rezultatul este cod și teste în proiectul tău, un document de design și un plan salvate ca fișiere Markdown în proiect, iar la final agentul îți propune să facă merge, să deschidă un PR, să păstreze sau să renunțe la ramură"
   ],
+  "first_steps": {
+    "title": "Un generator de scuze absurde pentru când întârzii",
+    "intro": "Ceri ceva mărunt și amuzant: un program care inventează scuze pentru întârzieri. Fără Superpowers, agentul ar scrie direct codul. Cu Superpowers, vezi pe un exemplu de joacă cum te întreabă, face un plan și scrie teste înainte de cod.",
+    "steps": [
+      {
+        "you_do": "După instalare, deschizi o sesiune nouă a agentului și scrii: „Fă-mi un generator de scuze pentru când întârzii la serviciu.”",
+        "what_happens": "Agentul nu scrie încă niciun rând de cod. Pornește singur skill-ul brainstorming și îți pune o singură întrebare despre ce lipsește cel mai mult din cerere. De exemplu, dacă scuzele trebuie să fie credibile sau absurde, ca să râdă colegii. Îți oferă și varianta să treacă direct la treabă.",
+        "source_url": "https://github.com/obra/superpowers/blob/2ce8aa15d05bd57213e6f746f953aafb7ded7a8b/skills/brainstorming/SKILL.md"
+      },
+      {
+        "you_do": "Răspunzi: „Absurde, gen «m-a reținut un pinguin la semafor». Și să nu se repete.”",
+        "what_happens": "Agentul îți propune 2-3 moduri de a-l construi, de exemplu o pagină web cu un buton sau o comandă în terminal. Spune ce câștigi și ce pierzi cu fiecare, îți recomandă una și te lasă pe tine să alegi.",
+        "source_url": "https://github.com/obra/superpowers/blob/2ce8aa15d05bd57213e6f746f953aafb7ded7a8b/skills/brainstorming/SKILL.md"
+      },
+      {
+        "you_do": "Alegi pagina web cu un buton.",
+        "what_happens": "Fiindcă proiectul e mic, agentul scrie un document de design scurt, cu ce ați stabilit împreună, și ți-l arată. Abia după ce îl aprobi, face un plan cu sarcini mici, de 2-5 minute fiecare.",
+        "source_url": "https://github.com/obra/superpowers/blob/2ce8aa15d05bd57213e6f746f953aafb7ded7a8b/README.md#the-basic-workflow"
+      },
+      {
+        "you_do": "Îi spui să înceapă și te uiți la ce face.",
+        "what_happens": "La fiecare sarcină, agentul scrie întâi un test care pică, de exemplu „aceeași scuză nu apare de două ori la rând”. Abia apoi scrie codul care îl face să treacă. Între sarcini, își verifică munca față de plan.",
+        "source_url": "https://github.com/obra/superpowers/blob/2ce8aa15d05bd57213e6f746f953aafb7ded7a8b/README.md#the-basic-workflow"
+      },
+      {
+        "you_do": "Când termină, alegi ce faci cu rezultatul.",
+        "what_happens": "Agentul verifică testele și îți dă de ales: unești codul, deschizi o cerere de includere (PR), îl păstrezi deoparte sau renunți la el.",
+        "source_url": "https://github.com/obra/superpowers/blob/2ce8aa15d05bd57213e6f746f953aafb7ded7a8b/README.md#the-basic-workflow"
+      }
+    ],
+    "takeaway": "Pentru un joc de 5 minute, fluxul e mult. Dar arată la ce folosește Superpowers: agentul face exact ce ai vrut tu (scuze absurde care nu se repetă), nu ce a ghicit, și are teste care o dovedesc."
+  },
   "categories": [
     "Skill-uri pentru agenți AI",
     "Agenți AI și automatizare",
@@ -345,6 +377,6 @@
       ]
     }
   ],
-  "updated_at": "2026-10-27",
+  "updated_at": "2026-10-28",
   "notes": "Repo nou. Citit: README, LICENSE (MIT, Copyright (c) 2025 Jesse Vincent), package.json, .claude-plugin/plugin.json (versiune 7.0.1, licență MIT), RELEASE-NOTES.md (v7.0.0 și v7.0.1), skill-urile using-superpowers, brainstorming, test-driven-development, writing-plans (parțial). Nu am citit integral toate cele 15 skill-uri, nici scripturile din hooks/ sau testele. Nu am rulat nimic. Toate exemplele sunt comenzile din secțiunile de instalare ale README-ului, fără output (documentația nu arată output pentru ele). Înlocuiri de servicii plătite: nu am găsit niciun serviciu comercial pe care să-l înlocuiască realist (sunt instrucțiuni pentru agenți, nu un produs echivalent), deci replaces e gol. Date: 304.988 stele și 27.166 fork-uri (API GitHub, 2026-10-25), repo creat 2025-10-09, 686 commit-uri; nu am verificat ritmul de creștere al stelelor. Ultimul release: v7.0.1 (2026-10-21), ultimul commit pe ramura implicită: 2026-10-21. Nu am găsit prețuri publice pentru asistența comercială Prime Radiant; pagina primeradiant.com/superpowers nu menționează suport sau prețuri (README-ul menționează doar adresa sales@primeradiant.com). Prețurile valantic (890 EUR) și Konigi (7.500 USD/zi) sunt pentru training Claude Code în general, nu pentru Superpowers, verificate pe 2026-10-25. Perechea cu superpowers-lab se bazează doar pe existența repo-ului (433 stele, ultim commit 2026-06-01, MIT); nu i-am citit conținutul. superpowers-evals (138 stele, activ în 2026-10) nu are licență raportată de API, ceea ce contează doar dacă l-ai reutiliza. Telemetria: README-ul declară o telemetrie opțională la logo-ul din funcția „visual companion” (include versiunea Superpowers, fără detalii despre proiect) și o variabilă de mediu pentru dezactivare; nu am verificat în cod. Skill-urile repo-ului au toate aceeași licență MIT (nu există alte licențe pe componente, verificat prin grep după `license:` în skills/, fără rezultate). Pilot format nou (2026-10-27): adăugate Pe scurt, cost, platforme, riscuri, funcții, exemplu de folosire; problem_solved scurtat."
 }
