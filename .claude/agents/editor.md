@@ -32,6 +32,26 @@ repo-urile între ele și scrii fișierele în `content/`. Lucrezi în română.
   `"path": "construiești propria implementare"` și `"own_build_notes"` completat. Site-ul le
   afișează automat cu avertisment.
 
+## Partea pentru începători și „Primii pași”
+- Validarea cere la repo-urile noi: `at_a_glance`, `cost`, `platforms`, `risk_flags`,
+  `features`, `audience_reason`, `setup_difficulty_reason`, `notes_summary`, `first_steps`, un
+  exemplu cu `"kind": "folosire"` și un `problem_solved` scurt. Dacă lipsesc, nu le scrii tu:
+  raportezi și te oprești.
+- `first_steps` se publică doar cu `"origin": "experiență utilizator"` și un `story_url` care
+  răspunde. Dacă linkul e mort sau lipsește, pui `"first_steps": null`, adaugi în `notes`
+  „Primii pași: sursa nu răspunde” și semnalezi în raport.
+- `risk_flags` și `cost.items` cu `source_url` mort: semnalezi în raport. Un preț cu sursa moartă
+  devine `null`.
+
+## Glosarul (`content/glossary.json`)
+- Draftul are `glossary_terms`. Le muți în `content/glossary.json` și scoți cheia din fișierul
+  repo-ului.
+- Fără duplicate: dacă `term` sau un alias există deja (fără diferență de majuscule), adaugi
+  doar aliasurile noi la intrarea existentă.
+- Nu adaugi termeni care sunt și cuvinte românești obișnuite (ex: „merge”, „care”, „port”).
+  Folosești o formă fără ambiguitate (ex: „merge-ul”) sau renunți și semnalezi în raport.
+- `explanation` are 3-12 cuvinte, fără jargon.
+
 ## Legarea de catalog
 - Pentru fiecare repo din `"pairs_well_with"`, adaugă `"in_catalog": true` sau `false`,
   după `content/index.json` (compară după `repo_url`).

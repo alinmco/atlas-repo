@@ -127,12 +127,60 @@ function checkMonetization(list, where, { repoLicense } = {}) {
   return errors;
 }
 
+// ---------- formatul nou de pagină de repo ----------
+
+// Repo-uri din formatul vechi, scutite de regulile formatului nou.
+// Se scot din listă când sunt completate în formatul nou.
+const LEGACY_FORMAT_SLUGS = new Set([
+  "android-skills", "awesome", "build-your-own-x", "caveman", "ecc", "mattpocock-skills",
+  "opencode", "opencut", "paperclip", "react", "rea", "ruflo", "scientific-agent-skills",
+]);
+
+const REQUIRED_NEW_KEYS = [
+  "at_a_glance", "cost", "platforms", "risk_flags", "features",
+  "audience_reason", "setup_difficulty_reason", "notes_summary",
+];
+
+function sentenceCount(text) {
+  return (String(text ?? "").trim().match(/[.!?]+(?=\s|$)/g) || []).length;
+}
+
+function checkNewFormat(data, where) {
+  if (LEGACY_FORMAT_SLUGS.has(data?.slug)) return [];
+  const errors = [];
+  for (const key of REQUIRED_NEW_KEYS) {
+    if (data[key] === undefined || data[key] === null) {
+      errors.push(`${where}: lipsește câmpul „${key}” (obligatoriu în formatul nou de pagină${key === "risk_flags" ? "; poate fi listă goală" : ""}).`);
+    }
+  }
+  if (data.first_steps === undefined) {
+    errors.push(`${where}: lipsește „first_steps” (Primii pași). Dacă nu s-a găsit o experiență reală, pune null și explică în notes, cu textul „Primii pași”.`);
+  } else if (data.first_steps === null) {
+    if (!String(data.notes ?? "").includes("Primii pași")) {
+      errors.push(`${where}: first_steps este null, dar notes nu conține textul „Primii pași” cu explicația.`);
+    }
+  } else if (data.first_steps.origin !== "experiență utilizator" || !nonEmpty(data.first_steps.story_url)) {
+    errors.push(`${where}: first_steps trebuie să aibă origin „experiență utilizator” și un story_url (exemplele inventate nu mai sunt permise).`);
+  }
+  const examples = Array.isArray(data.examples) ? data.examples : [];
+  if (!examples.some((e) => e?.kind === "folosire")) {
+    errors.push(`${where}: niciun exemplu din „examples” nu are kind „folosire”.`);
+  }
+  const sentences = sentenceCount(data.problem_solved);
+  const words = wordCount(data.problem_solved);
+  if (sentences > 2 || words > 60) {
+    errors.push(`${where}: problem_solved are ${sentences} propoziții și ${words} cuvinte (maximum 2 propoziții și 60 de cuvinte).`);
+  }
+  return errors;
+}
+
 // ---------- un repo / o rețetă ----------
 
 function validateRepo(data, where) {
   return [
     ...schemaErrors(checkRepo, data, where),
     ...checkOneLiner(data.one_liner, where),
+    ...checkNewFormat(data, where),
     ...checkPrices(data.replaces, where),
     ...checkMonetization(data.monetization, where, { repoLicense: data.tech_sheet?.license }),
     ...notInFuture(data.updated_at, "updated_at", where),
