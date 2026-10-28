@@ -78,7 +78,12 @@
   },
   "cost": {
     "level": "gratuit, dar cere servicii plătite",
-    "summary": "Superpowers în sine nu costă nimic; costul vine de la agentul de programare pe care îl folosești (de exemplu Claude Code, de la 17 USD/lună).",
+    "summary": "Superpowers e gratuit; plătești doar agentul AI în care îl folosești. De obicei merge cu abonamentul pe care îl ai deja, fără cheie API.",
+    "ai_access": {
+      "mode": "abonament sau API",
+      "detail": "Superpowers nu folosește singur AI, ci agentul ales. Merge cu abonament la Claude Code (Claude Pro/Max), Codex (ChatGPT Plus/Pro), GitHub Copilot CLI, Cursor și Grok Build (cont grok.com). Gemini CLI cere cheie API din iunie 2026. Detalii pentru fiecare agent la „Ce poate costa”.",
+      "source_url": "https://code.claude.com/docs/en/authentication"
+    },
     "items": [
       {
         "what": "Superpowers (skill-urile și pluginul)",
@@ -87,16 +92,124 @@
         "source_url": "https://github.com/obra/superpowers/blob/2ce8aa15d05bd57213e6f746f953aafb7ded7a8b/LICENSE"
       },
       {
-        "what": "Un agent AI de programare compatibil (Claude Code, Codex, Cursor, Gemini CLI etc.)",
+        "what": "Un agent AI de programare compatibil (README-ul listează: Claude Code, Antigravity, Codex, Cursor, Devin CLI, Factory Droid, Gemini CLI, GitHub Copilot CLI, Grok Build CLI, Kimi Code, OpenCode, Pi, Qwen Code, Hermes Agent, Muse); fiecare are propriul cont și propria taxă, vezi mai jos",
         "price": null,
         "required": true,
         "source_url": "https://github.com/obra/superpowers#installation"
       },
       {
-        "what": "Exemplu: Claude Code, planul Pro (Free nu include Claude Code)",
-        "price": "17 USD/lună cu abonament anual, 20 USD/lună plătit lunar (verificat 2026-10-27)",
+        "what": "Claude Code cu abonament Claude Pro (Free nu include Claude Code). Documentația permite autentificarea cu Pro/Max, cu Teams/Enterprise, cu cont Claude Console (API) sau cu Bedrock/Vertex/Foundry",
+        "price": "17 USD/lună cu abonament anual, 20 USD/lună plătit lunar (verificat 2026-10-28)",
         "required": false,
         "source_url": "https://claude.com/pricing"
+      },
+      {
+        "what": "Claude Code cu abonament Claude Max (mai multă utilizare, 5x sau 20x față de Pro; facturare lunară)",
+        "price": "de la 100 USD/lună (verificat 2026-10-28)",
+        "required": false,
+        "source_url": "https://claude.com/pricing"
+      },
+      {
+        "what": "Claude Code cu cheie API plătită pe consum (variabila ANTHROPIC_API_KEY, din Claude Console), alternativă la abonament; dacă ai ambele, Claude Code folosește cheia după ce o aprobi",
+        "price": null,
+        "required": false,
+        "source_url": "https://code.claude.com/docs/en/authentication"
+      },
+      {
+        "what": "Codex (aplicație și CLI) cu abonament ChatGPT: plan Plus include Codex pe web, în CLI, în extensia IDE și pe iOS; paginile oficiale listează și Free, Go, Pro, Business, Edu, Enterprise",
+        "price": "Plus 20 USD/lună; Go 8 USD/lună; Pro de la 100 USD/lună (100, 200 sau 500 USD); Free 0 USD (verificat 2026-10-28)",
+        "required": false,
+        "source_url": "https://learn.chatgpt.com/docs/pricing"
+      },
+      {
+        "what": "Codex cu cheie API OpenAI (CLI, SDK sau extensie IDE), plătit pe consum la tarifele API; nu include funcțiile din cloud, ca revizuirea de cod pe GitHub sau Slack",
+        "price": null,
+        "required": false,
+        "source_url": "https://learn.chatgpt.com/docs/pricing"
+      },
+      {
+        "what": "Gemini CLI: din 18 iunie 2026 nu mai servește conturile gratuite și Google AI Pro/Ultra; rămâne pentru licențe Code Assist Standard/Enterprise și pentru chei API plătite Gemini sau Vertex AI. Conturile gratuite, AI Pro și AI Ultra au fost mutate la Antigravity CLI",
+        "price": null,
+        "required": false,
+        "source_url": "https://github.com/google-gemini/gemini-cli"
+      },
+      {
+        "what": "Antigravity (agy, CLI-ul Google): pagina de documentație listează autentificare cu cont Google personal (Free, Pro, Ultra), cheie API Gemini, Gemini Enterprise sau Agent Platform. Pe pagina de prețuri: gratuit cu limite săptămânale, AI Pro și AI Ultra fără preț afișat acolo, plan Business de la 30 USD/utilizator/lună, API pe consum",
+        "price": "Free 0 USD/lună; Business de la 30 USD/utilizator/lună (verificat 2026-10-28); AI Pro și AI Ultra: nu am găsit prețul pe pagina Antigravity",
+        "required": false,
+        "source_url": "https://antigravity.google/pricing"
+      },
+      {
+        "what": "GitHub Copilot CLI: terminalul Copilot e inclus în planurile Free, Pro, Pro+ și Max; autentificare prin cont GitHub (OAuth) sau token; cu chei API proprii (BYOK) nu cere cont GitHub",
+        "price": "Free 0 USD; Pro 10 USD/lună; Pro+ 39 USD/lună; Max 100 USD/lună (verificat 2026-10-28); Business și Enterprise: preț nepublicat, doar contact vânzări",
+        "required": false,
+        "source_url": "https://github.com/features/copilot/plans"
+      },
+      {
+        "what": "Cursor: agentul și CLI-ul sunt incluse în planurile plătite, cu un coș de utilizare pentru modelele Cursor; modelele terțe (Claude, GPT, Gemini) se taxează la prețul API de pe credit prepaid, de la planul Premium în sus; planul Plus nu permite chei API proprii",
+        "price": "Free 0 USD; Plus 8 USD/lună; Premium 30 USD/lună; Super 100 USD/lună; Ultra 200 USD/lună; Teams de la 30 USD/utilizator/lună (verificat 2026-10-28)",
+        "required": false,
+        "source_url": "https://cursor.com/docs/account/pricing"
+      },
+      {
+        "what": "Grok Build CLI: autentificare implicită prin cont grok.com (browser), cu cheie API xAI (XAI_API_KEY) ca alternativă pentru CI sau fără browser. Postul de lansare (25 mai 2026) spunea că beta e pentru abonații SuperGrok și X Premium Plus; condițiile și prețurile actuale nu le-am putut citi (paginile x.ai/pricing și x.ai/build au dat 403)",
+        "price": null,
+        "required": false,
+        "source_url": "https://github.com/xai-org/grok-build/blob/main/crates/codegen/xai-grok-pager/docs/user-guide/02-authentication.md"
+      },
+      {
+        "what": "Devin CLI (comanda devin auth login): documentația găsită descrie doar autentificarea pentru conturi enterprise (Devin sau Windsurf legacy); nu am găsit pe site-ul oficial condițiile pentru conturi individuale sau o cheie API proprie",
+        "price": null,
+        "required": false,
+        "source_url": "https://docs.devin.ai/cli/enterprise/devin-auth"
+      },
+      {
+        "what": "Factory Droid: planuri individuale plătite; documentația spune că BYOK (chei proprii) e gratuit până la o limită pe toate planurile Individual și nu listează un plan gratuit",
+        "price": "Pro 20 USD/lună; Plus 100 USD/lună; Max 200 USD/lună (verificat 2026-10-28)",
+        "required": false,
+        "source_url": "https://docs.factory.com/pricing.md"
+      },
+      {
+        "what": "Kimi Code: se conectează cu /login la contul Kimi (abonament); modelele depind de nivelul abonamentului (de exemplu K3 de la Moderato/Plus în sus); cheia API din consola Kimi Code e doar pentru unelte terțe. Pagina de ghid nu afișează prețuri",
+        "price": null,
+        "required": false,
+        "source_url": "https://www.kimi.com/help/kimi-code/membership-guide"
+      },
+      {
+        "what": "OpenCode: unealtă gratuită; folosește furnizori cu chei API, ChatGPT Plus/Pro (login din browser), GitHub Copilot sau abonamentul OpenCode Go. Documentația avertizează că Anthropic interzice folosirea abonamentului Claude Pro/Max în OpenCode",
+        "price": "OpenCode Go 10 USD/lună, Go Plus 40 USD/lună (verificat 2026-10-28); Zen e plată pe consum, tarife neafișate pe pagina verificată",
+        "required": false,
+        "source_url": "https://opencode.ai/docs/providers/"
+      },
+      {
+        "what": "Qwen Code: nivelul gratuit Qwen OAuth a fost oprit la 2026-04-15; acum merge cu QwenCloud (Token Plan sau cheie API pe consum), Alibaba ModelStudio (Coding Plan cu taxă lunară fixă, Token Plan, cheie API), furnizori terți sau endpoint propriu",
+        "price": null,
+        "required": false,
+        "source_url": "https://qwenlm.github.io/qwen-code-docs/en/users/configuration/auth/"
+      },
+      {
+        "what": "Hermes Agent (licență MIT): îl conectezi la Nous Portal (abonament Nous), OpenRouter sau chei API; sunt documentate și login cu abonament ChatGPT/Codex și SuperGrok/X Premium+. Claude Pro nu merge, Claude Max doar cu credite extra cumpărate; pentru Gemini consumer nu există login cu abonament",
+        "price": null,
+        "required": false,
+        "source_url": "https://hermes-agent.nousresearch.com/docs/integrations/providers"
+      },
+      {
+        "what": "Pi (licență MIT): se autentifică prin chei API sau OAuth la furnizori ca Anthropic, OpenAI, Google; pagina nu spune care abonamente (Claude Pro/Max, ChatGPT Plus/Pro) sunt acceptate",
+        "price": null,
+        "required": false,
+        "source_url": "https://pi.dev/"
+      },
+      {
+        "what": "Muse (README-ul lui Superpowers nu explică ce este; singurul produs cu acest nume și cu comanda muse plugins pe care l-am găsit e Muse Code de la Meta, deci asocierea e presupusă): abonamente lunare sau API pe consum; există și un nivel contributor, folosit pentru îmbunătățirea produselor Meta",
+        "price": "Everyday 5 USD/lună; High 15 USD/lună; Power 50 USD/lună; Maximum 200 USD/lună (verificat 2026-10-28)",
+        "required": false,
+        "source_url": "https://dev.meta.ai/products/muse-code/"
+      },
+      {
+        "what": "Git, pentru skill-ul de lucru pe ramuri separate (worktree-uri)",
+        "price": "gratuit",
+        "required": false,
+        "source_url": "https://github.com/obra/superpowers/tree/2ce8aa15d05bd57213e6f746f953aafb7ded7a8b/skills/using-git-worktrees"
       },
       {
         "what": "Consum mai mare de mesaje și tokeni cu fluxul complet; README-ul numește execuția cu subagenți „cea mai amănunțită” și pe cea inline „cea mai ieftină”",

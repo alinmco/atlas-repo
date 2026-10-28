@@ -614,6 +614,34 @@
           "type": "string",
           "minLength": 1
         },
+        "ai_access": {
+          "type": "object",
+          "required": [
+            "mode",
+            "detail"
+          ],
+          "properties": {
+            "mode": {
+              "enum": [
+                "abonament sau API",
+                "doar API",
+                "doar abonament",
+                "nu folosește AI",
+                "necunoscut"
+              ]
+            },
+            "detail": {
+              "type": "string",
+              "minLength": 1
+            },
+            "source_url": {
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          }
+        },
         "items": {
           "type": "array",
           "items": {

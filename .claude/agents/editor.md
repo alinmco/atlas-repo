@@ -40,6 +40,8 @@ repo-urile între ele și scrii fișierele în `content/`. Lucrezi în română.
 - `first_steps` se publică doar cu `"origin": "experiență utilizator"` și un `story_url` care
   răspunde. Dacă linkul e mort sau lipsește, pui `"first_steps": null`, adaugi în `notes`
   „Primii pași: sursa nu răspunde” și semnalezi în raport.
+- `cost.ai_access` (abonament sau API) e obligatoriu. Dacă `mode` nu e `"necunoscut"`, trebuie
+  să aibă `source_url` care răspunde; altfel `mode` devine `"necunoscut"` și semnalezi în raport.
 - `risk_flags` și `cost.items` cu `source_url` mort: semnalezi în raport. Un preț cu sursa moartă
   devine `null`.
 

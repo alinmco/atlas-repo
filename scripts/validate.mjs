@@ -162,6 +162,14 @@ function checkNewFormat(data, where) {
   } else if (data.first_steps.origin !== "experiență utilizator" || !nonEmpty(data.first_steps.story_url)) {
     errors.push(`${where}: first_steps trebuie să aibă origin „experiență utilizator” și un story_url (exemplele inventate nu mai sunt permise).`);
   }
+  const ai = data.cost?.ai_access;
+  if (!ai || typeof ai !== "object") {
+    errors.push(`${where}: lipsește „cost.ai_access” (ce servicii AI merg: abonament, cheie API etc.).`);
+  } else {
+    if (!nonEmpty(ai.mode)) errors.push(`${where}: lipsește „cost.ai_access.mode”.`);
+    else if (!["abonament sau API", "doar API", "doar abonament", "nu folosește AI", "necunoscut"].includes(ai.mode)) errors.push(`${where}: „cost.ai_access.mode” are o valoare nepermisă („${ai.mode}”).`);
+    if (!nonEmpty(ai.detail)) errors.push(`${where}: lipsește „cost.ai_access.detail” (o frază).`);
+  }
   const examples = Array.isArray(data.examples) ? data.examples : [];
   if (!examples.some((e) => e?.kind === "folosire")) {
     errors.push(`${where}: niciun exemplu din „examples” nu are kind „folosire”.`);

@@ -117,6 +117,16 @@ dă eroare dacă lipsește ceva de aici.
   sau `"necunoscut"`), `"summary"` (o frază: ce plătești realist, în total) și `"items"` (tot ce
   poate costa: `what`, `price` sau `null`, `required`, `source_url`). Prețurile se verifică azi
   pe site-ul oficial, altfel sunt `null`.
+  - `"cost.ai_access"` (obligatoriu): `mode` = `"abonament sau API"` | `"doar API"` |
+    `"doar abonament"` | `"nu folosește AI"` | `"necunoscut"`, `detail` (o frază) și
+    `source_url`. Răspunde clar: poate cititorul să folosească abonamentul lui (Claude Pro/Max,
+    ChatGPT Plus/Pro, SuperGrok, Google AI Pro / Gemini) sau îi trebuie o cheie API plătită pe
+    consum? Verifici în documentația repo-ului și, când repo-ul rulează printr-un agent sau
+    SDK, în documentația oficială a acelui agent. `summary` spune și el asta, în cuvinte simple.
+  - `"cost.items"` include TOATE dependențele care pot costa, obligatorii sau opționale:
+    servicii AI, programe (ex: IDA Pro, Hopper, Binary Ninja pentru un repo de reverse
+    engineering), servicii online, hardware (GPU). Pentru fiecare: preț verificat azi sau
+    `null`, `required` și `source_url`.
 - `"platforms"`: `windows` / `mac` / `linux` = `"da"` | `"parțial"` | `"nu"` | `"necunoscut"`,
   plus `note` și `source_url`. Doar ce scrie în documentație sau în cod; dacă e dedus, spui în
   `note`.
@@ -171,8 +181,9 @@ inventezi un scenariu.
   "at_a_glance": {"for_you_if": [], "not_for_you_if": [], "verdict": ""},
   "cost": {
     "level": "gratuit complet | gratuit, dar cere servicii plătite | plătit | necunoscut",
-    "summary": "",
-    "items": [{"what": "", "price": "sau null", "required": true, "source_url": "sau null"}]
+    "summary": "spune și dacă merge cu abonamentul AI sau doar cu API",
+    "ai_access": {"mode": "abonament sau API | doar API | doar abonament | nu folosește AI | necunoscut", "detail": "", "source_url": null},
+    "items": [{"what": "inclusiv programe și servicii de care depinde", "price": "sau null", "required": true, "source_url": "sau null"}]
   },
   "platforms": {"windows": "da | parțial | nu | necunoscut", "mac": "", "linux": "", "note": null, "source_url": null},
   "risk_flags": [{"flag": "", "detail": "", "source_url": ""}],
