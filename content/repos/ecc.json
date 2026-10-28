@@ -3,7 +3,118 @@
   "repo_url": "https://github.com/affaan-m/ECC",
   "name": "ECC (Everything Claude Code)",
   "one_liner": "Pachet uriaș de agenți, skill-uri și reguli care disciplinează asistentul tău AI de programare.",
-  "problem_solved": "Un asistent AI de programare (Claude Code, Codex etc.) scrie cod, dar de la o sesiune la alta uită cum vrei să lucreze: nu face mereu plan, nu scrie testele întâi, își verifică singur codul în același context și pierde ce a învățat. ECC pune la pachet un sistem gata făcut: 71 de agenți specializați, 311 de skill-uri (instrucțiuni reutilizabile), 97 de comenzi-scurtătură, reguli, hook-uri (mici scripturi care pornesc automat la anumite evenimente) și memorie între sesiuni, plus AgentShield, un scaner de securitate pentru configurația agentului. Le instalezi o dată, în loc să refaci procesul în fiecare prompt. Documentația oficială îl descrie ca flux: plan -> test -> implementare -> review -> verificare -> memorare -> îmbunătățire.",
+  "problem_solved": "Un asistent AI de programare scrie cod, dar de la o sesiune la alta uită cum vrei să lucreze: nu face mereu plan, nu scrie testele întâi și își verifică singur codul în același context. ECC pune la un loc agenți, instrucțiuni și reguli gata făcute, ca asistentul să urmeze aceeași procedură de fiecare dată.",
+  "features": [
+    "71 de agenți specializați, 311 skill-uri și 97 de comenzi-scurtătură (cifre din README)",
+    "Flux dat: plan, test scris întâi, implementare, review într-un context proaspăt",
+    "Hook-uri opționale care pot opri comenzi distructive înainte să ruleze",
+    "Memorie între sesiuni și „instincte”: tipare învățate din munca ta",
+    "AgentShield: scanează configurația agentului și dă raport cu note A-F",
+    "Instalare ghidată pentru Claude Code, Codex și Kimi Code, cu profil minimal fără hook-uri"
+  ],
+  "at_a_glance": {
+    "for_you_if": [
+      "Folosești deja Claude Code și vrei un proces fix: plan, teste, review.",
+      "Vrei o colecție mare de skill-uri din care să alegi doar ce ți se potrivește."
+    ],
+    "not_for_you_if": [
+      "Ești la primele încercări cu asistenți AI: catalogul poate copleși.",
+      "Nu vrei scripturi (hook-uri) care rulează automat în configurația ta."
+    ],
+    "verdict": "Pachet gratuit și foarte mare, bun dacă îl instalezi selectiv, cu abonamentul sau cheia ta pentru Claude Code."
+  },
+  "cost": {
+    "level": "gratuit, dar cere servicii plătite",
+    "summary": "ECC e gratuit (MIT) și nu cere cheie API proprie; folosește asistentul tău, de exemplu Claude Code cu abonament Pro/Max sau cu cheie API, plătit separat. Doar scanarea AgentShield cu flag-ul --opus cere cheie API Anthropic.",
+    "ai_access": {
+      "mode": "abonament sau API",
+      "detail": "ECC rulează în interiorul asistentului tău: Claude Code se poate autentifica cu abonament Pro/Max sau cu cheie API, iar README-ul ECC are o setare pentru utilizatorii cu abonament; doar `agentshield scan --opus` cere ANTHROPIC_API_KEY, iar /astra-review folosește un login ChatGPT, fără cheie OpenAI.",
+      "source_url": "https://code.claude.com/docs/en/authentication"
+    },
+    "items": [
+      {
+        "what": "Claude Code (asistentul în care rulează pluginul ECC), prin abonament Claude Pro sau Max",
+        "price": "Pro: 17 USD/lună plătit anual (200 USD/an) sau 20 USD/lună plătit lunar; Max de la 100 USD/lună",
+        "required": true,
+        "source_url": "https://claude.com/pricing"
+      },
+      {
+        "what": "Cheie API Anthropic (alternativă la abonament, plată pe consum; necesară pentru `agentshield scan --opus`)",
+        "price": null,
+        "required": false,
+        "source_url": "https://github.com/affaan-m/agentshield/blob/main/README.md"
+      },
+      {
+        "what": "ChatGPT Plus cu Codex (pentru ECC în Codex sau pentru comanda /astra-review, care folosește login ChatGPT)",
+        "price": "Plus: 20 USD/lună; Pro de la 100 USD/lună",
+        "required": false,
+        "source_url": "https://learn.chatgpt.com/docs/pricing"
+      },
+      {
+        "what": "ECC Pro, aplicația GitHub oficială (audit și analize pe repo-uri private)",
+        "price": "19 USD/utilizator/lună sau 190 USD/utilizator/an; plan Free 0 USD pentru repo-uri publice; Enterprise la cerere",
+        "required": false,
+        "source_url": "https://ecc.tools/pricing"
+      },
+      {
+        "what": "Node.js 18 sau mai nou (rulează instalatorul `npx ecc-universal`)",
+        "price": "gratuit (open-source)",
+        "required": true,
+        "source_url": "https://nodejs.org/"
+      },
+      {
+        "what": "Git (cerut pentru instalarea pluginului în Claude Code)",
+        "price": "gratuit (open-source)",
+        "required": true,
+        "source_url": "https://git-scm.com/"
+      },
+      {
+        "what": "Python (cerut doar de unele funcții opționale: învățare continuă, GAN, orchestrare)",
+        "price": "gratuit (open-source)",
+        "required": false,
+        "source_url": "https://www.python.org/"
+      },
+      {
+        "what": "Cheie API Kimi (Moonshot AI) sau GPU propriu, doar dacă folosești Kimi Code cu ECC",
+        "price": null,
+        "required": false,
+        "source_url": "https://github.com/affaan-m/ECC#self-hosted-models-and-custom-endpoints"
+      },
+      {
+        "what": "Runtime-ul ccg-workflow (instalat separat), necesar doar pentru comenzile /multi-plan, /multi-execute și celelalte /multi-*",
+        "price": null,
+        "required": false,
+        "source_url": "https://github.com/affaan-m/ECC#configure-mcps"
+      }
+    ]
+  },
+  "platforms": {
+    "windows": "parțial",
+    "mac": "da",
+    "linux": "da",
+    "note": "README-ul spune că nucleul (Node.js) merge pe Windows, macOS și Linux, dar pe Windows nativ are defecte deschise la învățarea continuă și memorie, iar funcțiile care cer Bash sau Python cer Git Bash sau WSL; pe macOS apare un defect la un script GAN opțional.",
+    "source_url": "https://github.com/affaan-m/ECC/blob/25278e7d7b6cf6e6a4e7a6c8e10f14ff22f0eb5b/README.md#platform-support"
+  },
+  "risk_flags": [
+    {
+      "flag": "modifică setările altor programe",
+      "detail": "Instalatorul adaugă sau mută pluginul `ecc@ecc` în configurația Claude Code (scope global, de proiect sau local) și poate activa hook-uri care rulează comenzi de shell automat.",
+      "source_url": "https://github.com/affaan-m/ECC/blob/25278e7d7b6cf6e6a4e7a6c8e10f14ff22f0eb5b/README.md#recommended-universal-guided-setup"
+    },
+    {
+      "flag": "trimite date în cloud",
+      "detail": "Doar dacă le pornești tu: comanda /astra-review trimite diff-ul tău către OpenAI, iar `agentshield scan --opus` rulează agenți Claude Opus; README-ul spune că ECC nu încarcă diagnostice automat.",
+      "source_url": "https://github.com/affaan-m/ECC/blob/25278e7d7b6cf6e6a4e7a6c8e10f14ff22f0eb5b/README.md#important-hooks-auto-loading-behavior"
+    },
+    {
+      "flag": "proiect instabil",
+      "detail": "README-ul listează defecte deschise pe Windows nativ și pe macOS, iar proiectul sare des între versiuni, așa că comportamentul se poate schimba între actualizări.",
+      "source_url": "https://github.com/affaan-m/ECC/blob/25278e7d7b6cf6e6a4e7a6c8e10f14ff22f0eb5b/README.md#platform-support"
+    }
+  ],
+  "audience_reason": "cere un asistent AI de programare deja instalat și alegeri între multe componente",
+  "setup_difficulty_reason": "instalarea ghidată e doar `npx ... setup`, dar necesită Node.js, Git, Claude Code și decizii despre hook-uri și profil",
+  "notes_summary": "Am recitit README-ul la commit-ul 25278e7 din 2026-10-26, am verificat azi prețurile (Claude, ChatGPT, ECC Pro) și nu am găsit o experiență reală potrivită pentru Primii pași; nu am rulat nimic.",
   "analogy": "E ca un manual de procedură și o echipă de specialiști angajată pentru un meșter foarte talentat dar uituc: meșterul (AI-ul) lucrează la fel, dar acum are un ghid care îi spune mereu să facă schița întâi, să testeze și să lase pe altcineva să verifice lucrarea.",
   "how_it_works": [
     "Pasul 1, intrare: ai deja un asistent AI de programare instalat (în principal Claude Code 2.1+) și rulezi asistentul de instalare `npx ecc-universal@2.2.3 setup` sau comenzile native de plugin `/plugin marketplace add` și `/plugin install ecc@ecc`.",
@@ -11,6 +122,7 @@
     "Pasul 3, lucru: dai sarcini precum `/ecc:plan \"Add authentication\"`, skill-ul `tdd-workflow` (test întâi), `/code-review` (review într-un context proaspăt), `/build-fix` sau `/security-scan`. Hook-urile pot bloca comenzi distructive și pot salva rezumate de sesiune.",
     "Pasul 4, ieșire: planuri editabile, teste, cod revizuit, rezumate de sesiune și „instincte” (tipare învățate din sesiunile tale, cu scor de încredere) care pot fi grupate în skill-uri noi. Poți scana configurația cu `agentshield scan --path .` (raport în terminal, JSON, Markdown sau HTML)."
   ],
+  "first_steps": null,
   "categories": [
     "Agenți AI și automatizare",
     "Skill-uri pentru agenți AI",
@@ -69,7 +181,8 @@
       ],
       "code": "# Din documentație: după rularea comenzii, alege „Global user”, hook-uri „Standard” și confirmă.\n# Apoi, într-o sesiune nouă Claude Code, verifică plugin-ul:\n/plugin list",
       "output_from_docs": null,
-      "source_url": "https://github.com/affaan-m/ECC#windows-first-time-walkthrough"
+      "source_url": "https://github.com/affaan-m/ECC#windows-first-time-walkthrough",
+      "kind": "instalare"
     },
     {
       "title": "Prima funcție nouă: plan, test întâi, review",
@@ -84,7 +197,8 @@
       ],
       "code": "/ecc:plan \"Add user authentication with OAuth\"\n                                              -> planner creates implementation blueprint\ntdd-workflow skill                            -> tdd-guide enforces write-tests-first\n/code-review                                  -> code-reviewer checks your work",
       "output_from_docs": null,
-      "source_url": "https://github.com/affaan-m/ECC#start-using-ecc"
+      "source_url": "https://github.com/affaan-m/ECC#start-using-ecc",
+      "kind": "folosire"
     }
   ],
   "connectors": {
@@ -263,6 +377,6 @@
       ]
     }
   ],
-  "updated_at": "2026-10-25",
-  "notes": "Repo nou în catalog. Analiză făcută din README, CHANGELOG, package.json, hooks/hooks.json, plugin.json și fișierele SKILL.md; nu am rulat nimic. Versiune citită: 2.2.3 (release 2026-10-01), commit pe main din 2026-10-25. Fosta denumire a proiectului: everything-claude-code (menționată în README). Exemplele sunt copiate din README; documentația nu arată output pentru ele, deci output_from_docs este null. Prețuri: CodeRabbit verificat pe pagina oficială la 2026-10-25 (pagina nu afișează clar prețul lunar Advanced); ECC Pro verificat pe ecc.tools/pricing. Nu am verificat prețurile altor servicii de review (de ex. Greptile), de aceea lista replaces conține un singur serviciu. Licență: LICENSE este MIT (Copyright 2026 Affaan Mustafa); skill-urile au licențe proprii în antet (MIT, Apache-2.0, un CC-BY-SA-4.0). Pentru AgentShield am verificat doar eticheta GitHub (MIT), nu fișierul LICENSE. Popularitate: GitHub arată 288.748 de stele și 42.815 fork-uri la un repo creat la 2026-01-18, cu ~4.032 de commit-uri; nu am putut verifica independent creșterea stelelor, deci cifrele sunt luate de pe API-ul GitHub fără altă confirmare. README-ul conține bannere de sponsori și linkuri de afiliere (de ex. Kimi, Greptile, SerpApi) și promovează produsul plătit ECC Pro; am notat asta ca context, nu ca problemă. Hook-urile rulează scripturi Node la apeluri de unelte și unele fișiere din scripts/ pornesc servere locale sau fac cereri HTTP (de ex. mcp-health-check, plan canvas); nu am analizat în detaliu ce trimit în afară, iar utilizatorul ar trebui să le revizuiască înainte de instalare. Număr de agenți/skill-uri/comenzi (71/311/97) luat din README și confirmat aproximativ cu directoarele din repo. Recomandare: promptul de instalare să sugereze profilul minimal sau fără hook-uri pentru începători."
+  "updated_at": "2026-10-28",
+  "notes": "Repo nou în catalog. Analiză făcută din README, CHANGELOG, package.json, hooks/hooks.json, plugin.json și fișierele SKILL.md; nu am rulat nimic. Versiune citită: 2.2.3 (release 2026-10-01), commit pe main din 2026-10-25. Fosta denumire a proiectului: everything-claude-code (menționată în README). Exemplele sunt copiate din README; documentația nu arată output pentru ele, deci output_from_docs este null. Prețuri: CodeRabbit verificat pe pagina oficială la 2026-10-25 (pagina nu afișează clar prețul lunar Advanced); ECC Pro verificat pe ecc.tools/pricing. Nu am verificat prețurile altor servicii de review (de ex. Greptile), de aceea lista replaces conține un singur serviciu. Licență: LICENSE este MIT (Copyright 2026 Affaan Mustafa); skill-urile au licențe proprii în antet (MIT, Apache-2.0, un CC-BY-SA-4.0). Pentru AgentShield am verificat doar eticheta GitHub (MIT), nu fișierul LICENSE. Popularitate: GitHub arată 288.748 de stele și 42.815 fork-uri la un repo creat la 2026-01-18, cu ~4.032 de commit-uri; nu am putut verifica independent creșterea stelelor, deci cifrele sunt luate de pe API-ul GitHub fără altă confirmare. README-ul conține bannere de sponsori și linkuri de afiliere (de ex. Kimi, Greptile, SerpApi) și promovează produsul plătit ECC Pro; am notat asta ca context, nu ca problemă. Hook-urile rulează scripturi Node la apeluri de unelte și unele fișiere din scripts/ pornesc servere locale sau fac cereri HTTP (de ex. mcp-health-check, plan canvas); nu am analizat în detaliu ce trimit în afară, iar utilizatorul ar trebui să le revizuiască înainte de instalare. Număr de agenți/skill-uri/comenzi (71/311/97) luat din README și confirmat aproximativ cu directoarele din repo. Recomandare: promptul de instalare să sugereze profilul minimal sau fără hook-uri pentru începători. Migrare la formatul nou (2026-10-28): am recitit README-ul la commit-ul 25278e7 (2026-10-26, v2.2.3) și am reverificat prețurile Claude Pro/Max (claude.com/pricing), ChatGPT Plus/Pro (learn.chatgpt.com/docs/pricing) și ECC Pro (ecc.tools/pricing); cifrele 71/311/97 sunt neschimbate, iar README-ul declară acum 291.133 de stele pe API. Primii pași: nu am găsit o experiență reală potrivită; am căutat pe Hacker News (algolia: povești și comentarii, doar opinii scurte sau postări de produs), pe bloguri (Zenn, DataCamp, Medium, SitePoint, unele cu 403) și prin căutare web, dar rezultatele sunt ghiduri generale sau opinii, fără un proiect concret cu pași și rezultat. Cheia API pentru `agentshield --opus` e confirmată din README-ul repo-ului agentshield (nu l-am clonat), iar prețul ei nu l-am verificat."
 }

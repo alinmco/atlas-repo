@@ -653,5 +653,195 @@
     "term": "Docker",
     "aliases": [],
     "explanation": "program care rulează aplicații în cutii izolate, numite containere"
+  },
+  {
+    "term": "proxy",
+    "aliases": [
+      "proxy-ul",
+      "proxy-uri"
+    ],
+    "explanation": "program intermediar între agent și serviciul de modele"
+  },
+  {
+    "term": "middleware",
+    "aliases": [
+      "middleware-ul"
+    ],
+    "explanation": "strat de cod care prelucrează cererile din aplicația ta"
+  },
+  {
+    "term": "PowerShell",
+    "aliases": [
+      "PowerShell 5.1",
+      "PowerShell-ul"
+    ],
+    "explanation": "terminalul de comenzi din Windows"
+  },
+  {
+    "term": "Python",
+    "aliases": [
+      "Python 3.10"
+    ],
+    "explanation": "limbaj de programare folosit pentru scripturi"
+  },
+  {
+    "term": "rutare",
+    "aliases": [
+      "rutarea",
+      "rutare automată",
+      "rutate"
+    ],
+    "explanation": "alegerea automată a modelului pentru fiecare cerere"
+  },
+  {
+    "term": "benchmark",
+    "aliases": [
+      "benchmarkul",
+      "benchmark-ul",
+      "benchmark-uri"
+    ],
+    "explanation": "test de măsurare repetabil, cu cifre comparabile"
+  },
+  {
+    "term": "dry-run",
+    "aliases": [
+      "--dry-run"
+    ],
+    "explanation": "rulare de probă care arată ce s-ar schimba"
+  },
+  {
+    "term": "Claude Code",
+    "aliases": [
+      "Claude Code-ul"
+    ],
+    "explanation": "asistent AI de programare de la Anthropic, folosit din terminal"
+  },
+  {
+    "term": "Codex",
+    "aliases": [
+      "Codex App"
+    ],
+    "explanation": "asistentul AI de programare de la OpenAI"
+  },
+  {
+    "term": "AgentShield",
+    "aliases": [
+      "ecc-agentshield"
+    ],
+    "explanation": "scaner de securitate pentru configurația agenților AI"
+  },
+  {
+    "term": "GateGuard",
+    "aliases": [],
+    "explanation": "hook care oprește comenzi distructive înainte să ruleze"
+  },
+  {
+    "term": "comandă slash",
+    "aliases": [
+      "comenzi slash",
+      "slash command",
+      "comenzi-scurtătură",
+      "comanda-scurtătură"
+    ],
+    "explanation": "comandă care începe cu / și se scrie în agent"
+  },
+  {
+    "term": "fereastră de context",
+    "aliases": [
+      "ferestrei de context",
+      "context proaspăt",
+      "context window",
+      "fereastra de context"
+    ],
+    "explanation": "memoria de lucru limitată a unui agent AI"
+  },
+  {
+    "term": "CI",
+    "aliases": [
+      "pipeline CI",
+      "poarta de control din CI"
+    ],
+    "explanation": "verificări automate pornite la fiecare modificare de cod"
+  },
+  {
+    "term": "npm",
+    "aliases": [
+      "pachete npm",
+      "pachetul npm"
+    ],
+    "explanation": "magazin de pachete JavaScript, folosit cu Node.js"
+  },
+  {
+    "term": "WSL",
+    "aliases": [
+      "Windows + WSL"
+    ],
+    "explanation": "Linux rulat în interiorul Windows"
+  },
+  {
+    "term": "PATH",
+    "aliases": [
+      "în PATH"
+    ],
+    "explanation": "lista folderelor în care sistemul caută programe"
+  },
+  {
+    "term": "aplicație GitHub",
+    "aliases": [
+      "GitHub App",
+      "aplicația GitHub",
+      "ECC Pro"
+    ],
+    "explanation": "aplicație legată de contul GitHub, care lucrează pe repo-uri"
+  },
+  {
+    "term": "ADR",
+    "aliases": [
+      "ADR-uri",
+      "ADR-urile"
+    ],
+    "explanation": "notă scurtă care explică de ce s-a luat o decizie"
+  },
+  {
+    "term": "GLOSSARY.md",
+    "aliases": [
+      "GLOSSARY-MAP.md",
+      "glosar de proiect"
+    ],
+    "explanation": "fișier cu termenii proiectului, citit de agent"
+  },
+  {
+    "term": "issue tracker",
+    "aliases": [
+      "issue tracker-ul",
+      "tracker",
+      "tracker-ul"
+    ],
+    "explanation": "loc unde ții lista de sarcini și probleme"
+  },
+  {
+    "term": "grilling",
+    "aliases": [
+      "grilling session",
+      "sesiune de grilling",
+      "/grill-me",
+      "/grill-with-docs"
+    ],
+    "explanation": "agentul te intervievează până clarifici o idee"
+  },
+  {
+    "term": "red-green-refactor",
+    "aliases": [
+      "red-green-refactor loop"
+    ],
+    "explanation": "test care pică, cod care îl trece, apoi curățenie"
+  },
+  {
+    "term": "handoff",
+    "aliases": [
+      "/handoff",
+      "document de predare"
+    ],
+    "explanation": "fișier cu starea lucrului, pentru un alt agent"
   }
 ]
