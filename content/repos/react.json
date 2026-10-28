@@ -3,7 +3,7 @@
   "repo_url": "https://github.com/react/react",
   "name": "React",
   "one_liner": "Bibliotecă pentru construit pagini web și aplicații interactive din piese reutilizabile.",
-  "problem_solved": "Când o pagină web are multe elemente care se schimbă (liste, formulare, butoane, notificări), codul scris de mână devine greu de ținut minte și plin de greșeli. React te lasă să descrii cum arată ecranul pentru fiecare stare a datelor, iar când datele se schimbă, el actualizează singur doar bucățile de pagină care trebuie. Aceeași abordare merge și pe server (prin Node) și în aplicații de telefon (prin React Native), conform README-ului.",
+  "problem_solved": "Când o pagină web are multe elemente care se schimbă (liste, formulare, butoane), codul scris de mână devine greu de ținut minte și plin de greșeli. React te lasă să descrii cum arată ecranul pentru fiecare stare a datelor și actualizează singur doar ce s-a schimbat.",
   "analogy": "Ca un set de piese LEGO: faci o dată o piesă (un buton, un card de produs, un meniu) și o refolosești oriunde; când se schimbă ceva, înlocuiești doar piesa respectivă, nu reconstruiești toată macheta.",
   "how_it_works": [
     "Pas 1, intrare: scrii componente, adică funcții JavaScript care primesc date (de ex. un nume) și returnează cum trebuie să arate o bucată de ecran, de obicei în sintaxa JSX, asemănătoare cu HTML.",
@@ -11,6 +11,42 @@
     "Pas 3, ieșire: pagina web interactivă din browser (react-dom), HTML generat pe server (randare pe server cu Node) sau o aplicație nativă pe telefon (React Native).",
     "Repo-ul în sine este monorepo-ul care conține nucleul React (packages/react), randatorul pentru web (react-dom), reconciliatorul, DevTools, scheduler, eslint-plugin-react-hooks și, într-un folder separat, React Compiler (compiler/)."
   ],
+  "first_steps": {
+    "origin": "experiență utilizator",
+    "story_url": "https://dev.to/danielfilemon/how-i-built-my-first-portfolio-with-react-and-vite-147",
+    "story_platform": "dev.to",
+    "story_date": "2025-07-03",
+    "title": "Primul portofoliu personal cu React și Vite",
+    "intro": "Un dezvoltator a vrut un site personal în care să-și arate proiectele și prin care recrutorii să-l poată contacta, și l-a făcut cu React și Vite.",
+    "steps": [
+      {
+        "you_do": "Planifici înainte de cod: alegi secțiunile (Home, About, Projects, Contact), tehnologiile (React, Vite, Vercel) și faci o schiță pe hârtie.",
+        "what_happens": "Autorul spune că a luat idei de design de pe Dribbble și Behance și a desenat un wireframe rapid pe hârtie, ca să aibă un ghid.",
+        "source_url": "https://dev.to/danielfilemon/how-i-built-my-first-portfolio-with-react-and-vite-147"
+      },
+      {
+        "you_do": "Creezi proiectul cu npm create vite@latest my-portfolio --template react.",
+        "what_happens": "Vite pregătește un proiect React cu mediu de dezvoltare rapid; autorul îl alege pentru build rapid și reîncărcare automată în timpul lucrului.",
+        "source_url": "https://dev.to/danielfilemon/how-i-built-my-first-portfolio-with-react-and-vite-147"
+      },
+      {
+        "you_do": "Adaugi Tailwind CSS după documentația oficială și organizezi codul în foldere: src/components, src/pages, public.",
+        "what_happens": "Stilizarea merge mai repede, spune autorul, iar componentele reutilizabile (navbar, footer, carduri de proiect) stau separat de pagini.",
+        "source_url": "https://dev.to/danielfilemon/how-i-built-my-first-portfolio-with-react-and-vite-147"
+      },
+      {
+        "you_do": "Împarți fișierele prea mari în componente mai mici și muți lista de proiecte într-un fișier JSON.",
+        "what_happens": "Autorul spune că a putut actualiza proiectele fără să umble direct în codul de layout.",
+        "source_url": "https://dev.to/danielfilemon/how-i-built-my-first-portfolio-with-react-and-vite-147"
+      },
+      {
+        "you_do": "Conectezi repository-ul GitHub la Vercel și adaugi un domeniu propriu.",
+        "what_happens": "Vercel construiește și publică site-ul automat, conform autorului.",
+        "source_url": "https://dev.to/danielfilemon/how-i-built-my-first-portfolio-with-react-and-vite-147"
+      }
+    ],
+    "takeaway": "Autorul spune că a învățat să-și organizeze mai bine codul și că a lansat site-ul în doar câteva zile. Nu compară cu varianta fără React, iar povestea e despre un portofoliu, nu un blog."
+  },
   "categories": [
     "Framework-uri și interfețe",
     "Unelte pentru programatori"
@@ -37,7 +73,8 @@
       "commands": [],
       "code": "import { createRoot } from 'react-dom/client';\n\nfunction HelloMessage({ name }) {\n  return <div>Hello {name}</div>;\n}\n\nconst root = createRoot(document.getElementById('container'));\nroot.render(<HelloMessage name=\"Taylor\" />);",
       "output_from_docs": "README-ul spune doar: This example will render \"Hello Taylor\" into a container on the page.",
-      "source_url": "https://github.com/react/react#examples"
+      "source_url": "https://github.com/react/react#examples",
+      "kind": "folosire"
     },
     {
       "title": "Adaugă React într-un proiect existent",
@@ -51,7 +88,21 @@
       ],
       "code": "<!-- ... somewhere in your html ... -->\n<nav id=\"navigation\"></nav>\n<!-- ... more html ... -->\n\nimport { createRoot } from 'react-dom/client';\n\nfunction NavigationBar() {\n  // TODO: Actually implement a navigation bar\n  return <h1>Hello from React!</h1>;\n}\n\nconst domNode = document.getElementById('navigation');\nconst root = createRoot(domNode);\nroot.render(<NavigationBar />);",
       "output_from_docs": "Documentația spune: conținutul HTML original este păstrat, iar NavigationBar se randează în interiorul lui <nav id=\"navigation\">.",
-      "source_url": "https://react.dev/learn/add-react-to-an-existing-project"
+      "source_url": "https://react.dev/learn/add-react-to-an-existing-project",
+      "kind": "instalare"
+    },
+    {
+      "title": "Stare în componentă: două contoare independente",
+      "scenario": "Vrei ca un buton să țină minte de câte ori a fost apăsat, iar două butoane identice să-și țină fiecare propriul număr.",
+      "prerequisites": [
+        "Un proiect React (de ex. creat cu un framework recomandat) sau sandbox-ul online de pe react.dev/learn",
+        "Cunoștințe de bază de JavaScript"
+      ],
+      "commands": [],
+      "code": "import { useState } from 'react';\n\nexport default function MyApp() {\n  return (\n    <div>\n      <h1>Counters that update separately</h1>\n      <MyButton />\n      <MyButton />\n    </div>\n  );\n}\n\nfunction MyButton() {\n  const [count, setCount] = useState(0);\n\n  function handleClick() {\n    setCount(count + 1);\n  }\n\n  return (\n    <button onClick={handleClick}>\n      Clicked {count} times\n    </button>\n  );\n}",
+      "output_from_docs": "Documentația spune: la prima afișare count este 0, fiecare apăsare îl crește, iar fiecare buton „își amintește” propria valoare și nu le influențează pe celelalte.",
+      "source_url": "https://react.dev/learn",
+      "kind": "folosire"
     }
   ],
   "connectors": {
@@ -231,6 +282,84 @@
       ]
     }
   ],
-  "updated_at": "2026-10-25",
-  "notes": "Repo-ul a fost analizat la commitul a6b912f (2026-10-23), release recent 19.3.1 (2026-10-14). README-ul spune doar că exemplul va randa \"Hello Taylor\"; nu arată alt output. Nu am găsit un serviciu plătit pe care React să-l înlocuiască realist (este o bibliotecă, nu un produs final), de aceea replaces este gol. Documentația de instalare nu indică o versiune minimă de Node.js pentru utilizatori; .nvmrc (v20.19.0) se referă la dezvoltarea repo-ului React. Repo-ul pare să fi fost mutat de la facebook/react la react/react; GitHub redirecționează numele vechi, iar react-native apare acum ca react/react-native. Prețul Squarespace: pagina nu spune clar care coloană e anuală și care lunară; am notat ambele. Prețul Epic React nu s-a putut verifica (pagina afișează \"Loading price\"), deci nu e folosit. Webflow și Upwork nu s-au putut deschide. Instrucțiunile din CLAUDE.md al repo-ului (lucru pe un Rust Compiler Port) nu sunt relevante pentru utilizatori și nu au fost urmate."
+  "features": [
+    "Componente: bucăți de interfață (buton, meniu, card) scrise o dată ca funcții JavaScript și refolosite oriunde",
+    "Sintaxă JSX, asemănătoare cu HTML, scrisă direct în codul JavaScript",
+    "Când datele se schimbă, React actualizează singur doar părțile de pagină afectate",
+    "Aceleași idei merg în browser, pe server (prin Node) și în aplicații de telefon (React Native)",
+    "Hook-uri precum useState, pentru ca o componentă să „țină minte” date, de exemplu un contor",
+    "Repo-ul mai conține React DevTools (depanare) și React Compiler, într-un folder separat (compiler/)",
+    "Licență MIT, deci liber de folosit, inclusiv în proiecte comerciale"
+  ],
+  "at_a_glance": {
+    "for_you_if": [
+      "Știi puțin JavaScript și vrei să construiești o pagină sau o aplicație cu multe părți care se schimbă.",
+      "Vrei aceeași tehnologie pentru site, server și aplicație de telefon."
+    ],
+    "not_for_you_if": [
+      "Vrei un site simplu de prezentare, cu text și imagini: HTML și CSS ajung.",
+      "Nu ai scris niciodată JavaScript: începe cu bazele limbajului."
+    ],
+    "verdict": "Standardul pentru interfețe web interactive, gratuit și bine documentat, dar singur nu e un produs complet: îți trebuie și un framework sau un build tool."
+  },
+  "cost": {
+    "level": "gratuit complet",
+    "summary": "Gratuit complet: React, Node.js și npm sunt open-source, iar React nu folosește AI, deci nu ai nevoie de abonament sau cheie API; poți plăti doar găzduirea site-ului tău, dacă o alegi plătită.",
+    "ai_access": {
+      "mode": "nu folosește AI",
+      "detail": "React este o bibliotecă de interfață; README-ul și documentația nu cer niciun serviciu AI, abonament sau cheie API.",
+      "source_url": "https://github.com/react/react/blob/dc9aed364252a34966f4f2c4a98272317fdddb60/README.md"
+    },
+    "items": [
+      {
+        "what": "React (pachetele react și react-dom), licență MIT",
+        "price": "gratuit",
+        "required": true,
+        "source_url": "https://github.com/react/react/blob/dc9aed364252a34966f4f2c4a98272317fdddb60/LICENSE"
+      },
+      {
+        "what": "Node.js (rulează uneltele de build și instalează pachetele npm), licență open-source",
+        "price": "gratuit (licență MIT, conform fișierului LICENSE din repo-ul Node.js)",
+        "required": true,
+        "source_url": "https://github.com/nodejs/node/blob/main/LICENSE"
+      },
+      {
+        "what": "npm (vine cu Node.js; comanda npm install react react-dom), licență Artistic 2.0",
+        "price": "gratuit",
+        "required": true,
+        "source_url": "https://github.com/npm/cli/blob/latest/LICENSE"
+      },
+      {
+        "what": "O unealtă de build sau un framework recomandat de react.dev (de exemplu Vite, Next.js, React Router sau Expo); toate apar ca MIT pe GitHub",
+        "price": "gratuit",
+        "required": true,
+        "source_url": "https://react.dev/learn/start-a-new-react-project"
+      },
+      {
+        "what": "Serviciile cloud opționale Expo (pentru aplicații native); aplicațiile se pot construi și publica în magazine gratuit",
+        "price": null,
+        "required": false,
+        "source_url": "https://react.dev/learn/start-a-new-react-project"
+      },
+      {
+        "what": "Găzduirea site-ului tău gata făcut (CDN sau hosting static, sau un server Node pentru randare pe server); prețul depinde de furnizorul ales",
+        "price": null,
+        "required": false,
+        "source_url": "https://react.dev/learn/start-a-new-react-project"
+      }
+    ]
+  },
+  "platforms": {
+    "windows": "da",
+    "mac": "da",
+    "linux": "da",
+    "note": "Documentația React nu enumeră sistemele de operare; concluzia e dedusă, fiindcă React rulează în browser și în Node.js, iar pagina de descărcare Node.js oferă versiuni pentru Windows, macOS și Linux.",
+    "source_url": "https://nodejs.org/en/download"
+  },
+  "risk_flags": [],
+  "audience_reason": "ai nevoie de bazele JavaScript, de terminal și de alegerea unui build tool sau framework",
+  "setup_difficulty_reason": "trebuie instalat Node.js și ales un framework sau un bundler, nu doar o singură comandă",
+  "notes_summary": "Am citit README-ul, fișierele din repo și paginile react.dev; n-am rulat nimic, iar experiența de „Primii pași” e a unui om care și-a făcut un portofoliu, nu un blog.",
+  "updated_at": "2026-10-28",
+  "notes": "Repo-ul a fost analizat la commitul a6b912f (2026-10-23), release recent 19.3.1 (2026-10-14). README-ul spune doar că exemplul va randa \"Hello Taylor\"; nu arată alt output. Nu am găsit un serviciu plătit pe care React să-l înlocuiască realist (este o bibliotecă, nu un produs final), de aceea replaces este gol. Documentația de instalare nu indică o versiune minimă de Node.js pentru utilizatori; .nvmrc (v20.19.0) se referă la dezvoltarea repo-ului React. Repo-ul pare să fi fost mutat de la facebook/react la react/react; GitHub redirecționează numele vechi, iar react-native apare acum ca react/react-native. Prețul Squarespace: pagina nu spune clar care coloană e anuală și care lunară; am notat ambele. Prețul Epic React nu s-a putut verifica (pagina afișează \"Loading price\"), deci nu e folosit. Webflow și Upwork nu s-au putut deschide. Instrucțiunile din CLAUDE.md al repo-ului (lucru pe un Rust Compiler Port) nu sunt relevante pentru utilizatori și nu au fost urmate. Migrare la formatul nou, verificat 2026-10-28: repo-ul a avansat de la a6b912f la dc9aed3 (ultimul commit 2026-10-27), release 19.3.1 (2026-10-14), licență MIT (LICENSE citit), aproximativ 251.800 stele. React nu folosește AI: README-ul și pachetele nu cer servicii AI; în repo există doar pachetul experimental react-devtools-cdt-mcp (se leagă de chrome-devtools-mcp pentru depanare, opțional, nu e parte din React de bază). Nu am găsit telemetrie sau cerere de cont în React; unealtele recomandate (Next.js etc.) au politici proprii, neverificate aici. Costurile Node.js, npm și Vite verificate din fișierele LICENSE de pe GitHub; prețuri de găzduire și Expo cloud rămân null. Primii pași: sursa este un post pe dev.to (2025-07-03) despre un portofoliu personal făcut cu React și Vite, nu un blog; am căutat și pe Hacker News (povești cu \"first react app\" sunt vechi, din era Create React App, sau postări de produs fără pași), iar postarea alesă are stil de blog personal, dar nu pot confirma 100% că nu a fost asistată de AI."
 }

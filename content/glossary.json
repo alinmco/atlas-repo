@@ -1020,5 +1020,211 @@
     "term": "Tailscale",
     "aliases": [],
     "explanation": "rețea privată prin care accesezi serverul de oriunde"
+  },
+  {
+    "term": "JavaScript",
+    "aliases": [
+      "JS"
+    ],
+    "explanation": "limbajul de programare care rulează în browser"
+  },
+  {
+    "term": "JSX",
+    "aliases": [
+      "sintaxă JSX"
+    ],
+    "explanation": "sintaxă asemănătoare HTML, scrisă în cod JavaScript"
+  },
+  {
+    "term": "componentă",
+    "aliases": [
+      "componente",
+      "componenta",
+      "componentele",
+      "componentă React"
+    ],
+    "explanation": "bucată de interfață reutilizabilă, scrisă ca funcție"
+  },
+  {
+    "term": "bundler",
+    "aliases": [
+      "bundlere",
+      "unealtă de build",
+      "build tool"
+    ],
+    "explanation": "unealtă care împachetează codul într-un site gata de publicat"
+  },
+  {
+    "term": "Vite",
+    "aliases": [],
+    "explanation": "unealtă rapidă de build pentru proiecte web"
+  },
+  {
+    "term": "framework",
+    "aliases": [
+      "frameworkuri",
+      "frameworkul",
+      "framework-uri",
+      "framework-ul"
+    ],
+    "explanation": "set de unelte gata făcut peste o bibliotecă"
+  },
+  {
+    "term": "Next.js",
+    "aliases": [
+      "Next"
+    ],
+    "explanation": "framework care adaugă pagini și server peste React"
+  },
+  {
+    "term": "React Router",
+    "aliases": [],
+    "explanation": "bibliotecă pentru navigarea între pagini în React"
+  },
+  {
+    "term": "React Native",
+    "aliases": [],
+    "explanation": "React pentru aplicații native de telefon"
+  },
+  {
+    "term": "randare pe server",
+    "aliases": [
+      "randarea pe server",
+      "randare pe partea de server"
+    ],
+    "explanation": "pagina HTML e generată pe server, nu în browser"
+  },
+  {
+    "term": "useState",
+    "aliases": [
+      "hook-ul useState"
+    ],
+    "explanation": "hook care ține minte o valoare într-o componentă"
+  },
+  {
+    "term": "React DevTools",
+    "aliases": [
+      "DevTools"
+    ],
+    "explanation": "unealtă pentru inspectarea componentelor React la depanare"
+  },
+  {
+    "term": "React Compiler",
+    "aliases": [],
+    "explanation": "unealtă care optimizează automat codul componentelor React"
+  },
+  {
+    "term": "Create React App",
+    "aliases": [
+      "CRA"
+    ],
+    "explanation": "unealtă veche de pornire a proiectelor, acum depreciată"
+  },
+  {
+    "term": "monorepo",
+    "aliases": [
+      "monorepo-ul"
+    ],
+    "explanation": "un singur repo care conține mai multe pachete"
+  },
+  {
+    "term": "swarm",
+    "aliases": [
+      "swarm-uri",
+      "swarm-ul",
+      "swarm-urile"
+    ],
+    "explanation": "grup de agenți AI care își împart o sarcină"
+  },
+  {
+    "term": "AgentDB",
+    "aliases": [
+      "memorie AgentDB"
+    ],
+    "explanation": "memoria locală a lui Ruflo, căutabilă după sens"
+  },
+  {
+    "term": "bază de date vectorială",
+    "aliases": [
+      "baza de date vectorială",
+      "baze de date vectoriale",
+      "memorie vectorială"
+    ],
+    "explanation": "memorie care caută după sensul textului, nu după cuvinte exacte"
+  },
+  {
+    "term": "CVE",
+    "aliases": [
+      "CVE-2026-59726"
+    ],
+    "explanation": "număr public de identificare pentru o vulnerabilitate de securitate"
+  },
+  {
+    "term": "TUI",
+    "aliases": [
+      "consola din terminal",
+      "interfața de terminal"
+    ],
+    "explanation": "ecran interactiv desenat cu text, în terminal"
+  },
+  {
+    "term": "uv",
+    "aliases": [],
+    "explanation": "program care instalează pachete Python rapid, în medii separate"
+  },
+  {
+    "term": "GPU",
+    "aliases": [
+      "GPU-ul",
+      "GPU-uri"
+    ],
+    "explanation": "placă grafică, folosită pentru calcule grele de AI"
+  },
+  {
+    "term": "GitHub CLI",
+    "aliases": [
+      "gh skill"
+    ],
+    "explanation": "program de terminal pentru lucrul cu GitHub"
+  },
+  {
+    "term": "Agent Skills",
+    "aliases": [
+      "standardul Agent Skills"
+    ],
+    "explanation": "format comun de foldere cu instrucțiuni pentru agenți AI"
+  },
+  {
+    "term": "RDKit",
+    "aliases": [],
+    "explanation": "bibliotecă Python pentru lucrul cu molecule chimice"
+  },
+  {
+    "term": "Scanpy",
+    "aliases": [],
+    "explanation": "bibliotecă Python pentru analiza datelor de celule individuale"
+  },
+  {
+    "term": "ChEMBL",
+    "aliases": [],
+    "explanation": "bază de date publică cu molecule și efectul lor biologic"
+  },
+  {
+    "term": "WSL2",
+    "aliases": [],
+    "explanation": "Linux rulat în interiorul Windows"
+  },
+  {
+    "term": "OpenRouter",
+    "aliases": [],
+    "explanation": "serviciu care oferă acces la multe modele AI cu o singură cheie"
+  },
+  {
+    "term": "copyleft",
+    "aliases": [
+      "GPL",
+      "GPLv3"
+    ],
+    "explanation": "licență care cere publicarea codului derivat sub aceeași licență"
   }
 ]

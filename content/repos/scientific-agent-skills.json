@@ -3,7 +3,7 @@
   "repo_url": "https://github.com/K-Dense-AI/scientific-agent-skills",
   "name": "Scientific Agent Skills (K-Dense)",
   "one_liner": "177 fișe de instrucțiuni care învață asistentul AI să facă știință corect.",
-  "problem_solved": "Un asistent AI (Claude Code, Codex, Cursor, Gemini CLI etc.) știe multe, dar în științe greșește ușor: folosește greșit biblioteci specializate (RDKit, Scanpy, PyDESeq2), nu știe exact cum se interoghează bazele de date publice (PubChem, ChEMBL, UniProt, ClinicalTrials.gov) și uită verificările științifice (unități, versiuni de genom, surse citate). Repo-ul conține 177 de „skills”: foldere cu un fișier SKILL.md (instrucțiuni pas cu pas, versiuni, verificări de calitate) plus, uneori, exemple de cod, scripturi și teste. Agentul le citește doar când are nevoie și lucrează mai fiabil. Acoperă biologie, chimie, medicină (doar cercetare), fizică, inginerie, geospațial, statistică și scriere științifică. Nu este un program care rulează singur: este „manualul” pe care îl primește agentul AI.",
+  "problem_solved": "Un asistent AI știe multe, dar în științe greșește ușor: folosește prost bibliotecile specializate, nu știe exact cum se interoghează bazele de date publice și uită verificările de bază (unități, versiuni, surse). Repo-ul îi dă „fișe de protocol” gata scrise, ca să lucreze mai fiabil.",
   "analogy": "Ca un raft de manuale de laborator: asistentul AI e un student isteț, iar fiecare skill e fișa de protocol pe care o scoate de pe raft exact când are nevoie.",
   "how_it_works": [
     "pas 1: instalezi skill-urile în agentul tău AI (de ex. cu o singură comandă npx sau gh skill); sunt doar foldere cu fișiere SKILL.md",
@@ -12,6 +12,7 @@
     "pas 4: agentul urmează instrucțiunile din skill (și folosește scripturile/referințele lui); dependențele Python se instalează separat, de obicei cu uv, după indicațiile fiecărui SKILL.md",
     "pas 5: rezultatul (cod, tabele, figuri, raport) vine de la agent, cu sursele și verificările cerute de skill; tu verifici concluziile științifice"
   ],
+  "first_steps": null,
   "categories": [
     "Agenți AI și știință",
     "Skill-uri pentru agenți AI"
@@ -95,7 +96,8 @@
       ],
       "code": "",
       "output_from_docs": null,
-      "source_url": "https://github.com/K-Dense-AI/scientific-agent-skills#-getting-started"
+      "source_url": "https://github.com/K-Dense-AI/scientific-agent-skills#-getting-started",
+      "kind": "instalare"
     },
     {
       "title": "Cerere către agent: pipeline de descoperire de medicamente (exemplu din README)",
@@ -109,7 +111,8 @@
       "commands": [],
       "code": "Use available skills you have access to whenever possible. Query ChEMBL for EGFR inhibitors (IC50 < 50nM), analyze structure-activity relationships \nwith RDKit, generate improved analogs with datamol, perform virtual screening with DiffDock \nagainst AlphaFold EGFR structure, search PubMed for resistance mechanisms, check COSMIC for \nmutations, and create visualizations and a comprehensive report.",
       "output_from_docs": null,
-      "source_url": "https://github.com/K-Dense-AI/scientific-agent-skills#-quick-examples"
+      "source_url": "https://github.com/K-Dense-AI/scientific-agent-skills#-quick-examples",
+      "kind": "folosire"
     }
   ],
   "connectors": {
@@ -305,6 +308,200 @@
       ]
     }
   ],
-  "updated_at": "2026-10-25",
-  "notes": "Repo nou analizat la 2026-10-25, commit 593377bb. Licența repo: MIT (LICENSE.md citit, Copyright 2025 K-Dense Inc.; README spune 2026). Atenție: README și FAQ avertizează că fiecare skill are propria licență; din cele 177 de SKILL.md am numărat în câmpul license: majoritatea MIT/BSD/Apache, dar și GPL (bioservices, cobrapy, etetoolkit), PolyForm-Noncommercial (deepspot-m), CC BY-NC-SA 4.0 (what-if-oracle), Proprietary (rowan), Unknown (glycoengineering, phylogenetics, primekg). Nu am verificat licența fiecărui skill în detaliu, nici dependențele lor. Nu am rulat nimic. Exemplele sunt copiate din README (secțiunile Getting Started și Quick Examples); documentația nu arată output pentru ele, deci output_from_docs este null. README-ul indică numărul de skill-uri 177 (în folderul skills/ am numărat 177 foldere); docs/examples.md menționează 167, o inconsistență minoră a documentației. Prețurile K-Dense Web (https://www.k-dense.ai/pricing) și Elicit (https://elicit.com/pricing) le-am văzut la 2026-10-25 pe paginile oficiale (Elicit: sumele afișate corespund facturării anuale, prețul lunar fără angajament nu apare). Tarifele orare Pitt (76 USD/oră și 70 USD/oră) le-am văzut pe https://advancedgenomics.pitt.edu/pricing; o altă pagină a Pitt (singlecell.pitt.edu) a dat eroare de certificat, linkul nu este folosit. Costurile agentului AI (abonament/chei API) nu le-am verificat: sunt neconfirmate. Pentru DiffDock și alte skill-uri cu modele mari nu am verificat dacă GPU-ul e obligatoriu. Perechi: k-dense-byok (MIT, ultim commit 2026-10-16), anthropics/skills (ultim commit 2026-10-09; repo cu licențe multiple pe skill-uri, nu am citit LICENSE), markitdown (2026-10-23), Biomni (Apache-2.0, 2026-10-19), android/skills (deja în catalog, slug android-skills). Relevanța android/skills este doar de format, nu de domeniu. Nu am găsit o pagină publică cu prețul serviciului de onboarding Enterprise al K-Dense (preț personalizat). Arhiva repo-ului descrie 250.000+ utilizatori în descrierea GitHub; nu am verificat această cifră."
+  "features": [
+    "177 de skill-uri (fișe de instrucțiuni) pentru biologie, chimie, medicină (doar cercetare), fizică, inginerie, statistică și scriere științifică",
+    "Ghiduri pentru peste 70 de pachete Python (de ex. RDKit, Scanpy) și pentru 80 de baze de date publice (PubChem, ChEMBL, UniProt)",
+    "Instalare dintr-o comandă (npx sau GitHub CLI), pentru Claude Code, Codex, Gemini CLI, Cursor și alți agenți compatibili",
+    "Poți instala doar skill-urile de care ai nevoie, nu tot setul",
+    "Scanare de securitate săptămânală a skill-urilor, cu raport publicat în repo",
+    "Prompturi-exemplu în README (descoperire de medicamente, single-cell RNA-seq)"
+  ],
+  "at_a_glance": {
+    "for_you_if": [
+      "Ești cercetător sau student și folosești deja un agent AI (Claude Code, Codex, Gemini CLI) pentru analize.",
+      "Vrei ca agentul să urmeze pași verificați pentru baze de date și pachete științifice."
+    ],
+    "not_for_you_if": [
+      "Nu ai un agent AI compatibil: repo-ul nu aduce niciun model, doar instrucțiuni.",
+      "Vrei o aplicație care face singură analiza, sau decizii clinice pe pacienți reali."
+    ],
+    "verdict": "Util dacă ai deja un agent AI și instalezi doar skill-urile necesare; verifici tu rezultatele științifice, iar unele skill-uri cer servicii plătite sau au licențe restrictive."
+  },
+  "cost": {
+    "level": "gratuit, dar cere servicii plătite",
+    "summary": "Repo-ul e gratuit (MIT), dar ai nevoie de un agent AI, pe care îl plătești fie cu abonamentul tău (Claude Pro/Max, ChatGPT Plus), fie cu cheie API pe consum; unele skill-uri cer în plus servicii sau baze de date plătite.",
+    "ai_access": {
+      "mode": "abonament sau API",
+      "detail": "Skill-urile rulează în agentul tău; documentația Claude Code arată că te poți autentifica cu abonament Claude Pro/Max sau cu cheie API, iar README-ul repo-ului nu cere o cheie anume pentru agent.",
+      "source_url": "https://code.claude.com/docs/en/authentication"
+    },
+    "items": [
+      {
+        "what": "Scientific Agent Skills (skill-urile în sine), licență MIT",
+        "price": "gratuit (licență MIT; unele skill-uri au licențe proprii)",
+        "required": true,
+        "source_url": "https://github.com/K-Dense-AI/scientific-agent-skills/blob/5f2bc0341354fd5590aef76a533ada1e1e5b4e62/LICENSE.md"
+      },
+      {
+        "what": "Node.js (pentru comanda npx; program open-source)",
+        "price": "gratuit (open-source, licență MIT)",
+        "required": false,
+        "source_url": "https://github.com/nodejs/node/blob/main/LICENSE"
+      },
+      {
+        "what": "GitHub CLI v2.90.0+ (alternativa la npx, pentru comanda gh skill; program open-source)",
+        "price": "gratuit (open-source)",
+        "required": false,
+        "source_url": "https://cli.github.com/"
+      },
+      {
+        "what": "Git (pentru instalarea manuală prin clonare; program open-source)",
+        "price": "gratuit (open-source)",
+        "required": false,
+        "source_url": "https://git-scm.com/"
+      },
+      {
+        "what": "Python 3.13+ pentru uneltele repo-ului (program open-source)",
+        "price": "gratuit (licență PSF, open-source)",
+        "required": true,
+        "source_url": "https://docs.python.org/3/license.html"
+      },
+      {
+        "what": "uv (manager de pachete Python, cerut pentru dependențele skill-urilor)",
+        "price": "gratuit (open-source, licență Apache-2.0 conform GitHub)",
+        "required": true,
+        "source_url": "https://github.com/astral-sh/uv"
+      },
+      {
+        "what": "Un agent AI compatibil cu Agent Skills (Claude Code, Codex, Gemini CLI, Cursor etc.), plus acces la modele: abonament sau cheie API",
+        "price": null,
+        "required": true,
+        "source_url": "https://github.com/K-Dense-AI/scientific-agent-skills/blob/5f2bc0341354fd5590aef76a533ada1e1e5b4e62/README.md#-prerequisites"
+      },
+      {
+        "what": "Claude Pro (abonament care include Claude Code)",
+        "price": "17 USD/lună cu plata anuală, 20 USD/lună lunar",
+        "required": false,
+        "source_url": "https://claude.com/pricing"
+      },
+      {
+        "what": "Claude Max (abonament mai mare, include Claude Code)",
+        "price": "de la 100 USD/lună",
+        "required": false,
+        "source_url": "https://claude.com/pricing"
+      },
+      {
+        "what": "ChatGPT Plus (include Codex)",
+        "price": "20 USD/lună",
+        "required": false,
+        "source_url": "https://learn.chatgpt.com/docs/pricing"
+      },
+      {
+        "what": "Parallel (căutare web și cercetare; cheie API sau login CLI, pentru skill-urile research-lookup și parallel-web)",
+        "price": "Search 1 USD la 1.000 de cereri (Turbo/Fast), 5 USD (Basic/Advanced); Extract 1 USD la 1.000 de rezultate; gratuit până la 5.000 de cereri/lună",
+        "required": false,
+        "source_url": "https://parallel.ai/pricing"
+      },
+      {
+        "what": "Exa (căutare web, cheie API obligatorie pentru skill-ul exa-search)",
+        "price": "pay-as-you-go: 4 USD la 1.000 de căutări (lite), 7 USD (auto/fast); credit gratuit 10 USD/lună, fără card",
+        "required": false,
+        "source_url": "https://exa.ai/pricing"
+      },
+      {
+        "what": "OpenRouter (cheie API cerută de skill-urile de generare de scheme, imagini și diapozitive, și opțional pentru Perplexity)",
+        "price": "pay-as-you-go: modelele la prețul furnizorului, taxă de platformă 5,5% la cumpărarea de credite (plan Standard); există și modele gratuite, limitate",
+        "required": false,
+        "source_url": "https://openrouter.ai/pricing"
+      },
+      {
+        "what": "Rowan (chimie computațională în cloud; skill sub licență Proprietary, cheie API obligatorie)",
+        "price": "plan Free: 500 de credite la înscriere + 20 pe săptămână; credite suplimentare 0,04 USD bucata",
+        "required": false,
+        "source_url": "https://rowansci.com/pricing"
+      },
+      {
+        "what": "Tamarind Bio (modele de structură proteică prin API, cheie API)",
+        "price": null,
+        "required": false,
+        "source_url": "https://www.tamarind.bio/pricing"
+      },
+      {
+        "what": "Modal (calcul GPU în cloud pentru sarcini grele; GPU-ul cere card, chiar cu credit rămas)",
+        "price": "plan Starter: 0 USD/lună + consum, cu 30 USD credit lunar; A100 80 GB: 0,000694 USD/secundă",
+        "required": false,
+        "source_url": "https://modal.com/pricing"
+      },
+      {
+        "what": "GPU propriu (de ex. pentru DiffDock; skill-ul menționează CUDA pentru calea de folding de secvențe)",
+        "price": null,
+        "required": false,
+        "source_url": "https://github.com/K-Dense-AI/scientific-agent-skills/blob/5f2bc0341354fd5590aef76a533ada1e1e5b4e62/skills/diffdock/SKILL.md"
+      },
+      {
+        "what": "COSMIC (baza de mutații din cancer; licență comercială pentru firme)",
+        "price": "gratuit pentru uz academic; licență comercială la cerere, preț nepublicat",
+        "required": false,
+        "source_url": "https://www.cosmickb.org/licensing/"
+      },
+      {
+        "what": "KEGG (baza de căi metabolice; licență comercială pentru uz non-academic)",
+        "price": "gratuit pentru uz academic; licență comercială la cerere, preț nepublicat",
+        "required": false,
+        "source_url": "https://www.kegg.jp/kegg/legal.html"
+      },
+      {
+        "what": "DisGeNET (asocieri gene-boli; acces complet la API cere abonament)",
+        "price": null,
+        "required": false,
+        "source_url": "https://github.com/K-Dense-AI/scientific-agent-skills/blob/5f2bc0341354fd5590aef76a533ada1e1e5b4e62/skills/database-lookup/references/disgenet.md"
+      },
+      {
+        "what": "DrugBank (skill-ul database-lookup o listează ca bază cu licență API plătită și recomandă alternative gratuite)",
+        "price": null,
+        "required": false,
+        "source_url": "https://github.com/K-Dense-AI/scientific-agent-skills/blob/5f2bc0341354fd5590aef76a533ada1e1e5b4e62/skills/database-lookup/SKILL.md"
+      },
+      {
+        "what": "Platforme și laboratoare comerciale cu skill dedicat (Adaptyv Foundry, Benchling, Ginkgo Cloud Lab): comenzi de experimente sau cont de firmă",
+        "price": null,
+        "required": false,
+        "source_url": "https://github.com/K-Dense-AI/scientific-agent-skills/blob/5f2bc0341354fd5590aef76a533ada1e1e5b4e62/skills/adaptyv/SKILL.md"
+      }
+    ]
+  },
+  "platforms": {
+    "windows": "parțial",
+    "mac": "da",
+    "linux": "da",
+    "note": "README: „macOS, Linux, or Windows with WSL2”. Windows nativ nu e menționat ca suportat; comanda de instalare uv pentru PowerShell apare totuși în README.",
+    "source_url": "https://github.com/K-Dense-AI/scientific-agent-skills/blob/5f2bc0341354fd5590aef76a533ada1e1e5b4e62/README.md#-prerequisites"
+  },
+  "risk_flags": [
+    {
+      "flag": "trimite date în cloud",
+      "detail": "Unele skill-uri trimit textul cererii către servicii externe (de ex. research-lookup trimite interogarea la Parallel și, dacă e ales, la OpenRouter); skill-ul avertizează să nu-l folosești pentru material privat sau nepublicat.",
+      "source_url": "https://github.com/K-Dense-AI/scientific-agent-skills/blob/5f2bc0341354fd5590aef76a533ada1e1e5b4e62/skills/research-lookup/SKILL.md"
+    },
+    {
+      "flag": "cere cont",
+      "detail": "Mai multe skill-uri cer conturi sau chei API la servicii terțe (de ex. rowan are ROWAN_API_KEY marcat obligatoriu, exa-search cere EXA_API_KEY).",
+      "source_url": "https://github.com/K-Dense-AI/scientific-agent-skills/blob/5f2bc0341354fd5590aef76a533ada1e1e5b4e62/skills/rowan/SKILL.md"
+    },
+    {
+      "flag": "cere plată",
+      "detail": "Skill-ul modal avertizează că GPU-ul cere o metodă de plată chiar dacă mai ai credit, iar Rowan vinde credite peste planul gratuit.",
+      "source_url": "https://github.com/K-Dense-AI/scientific-agent-skills/blob/5f2bc0341354fd5590aef76a533ada1e1e5b4e62/skills/modal/SKILL.md"
+    },
+    {
+      "flag": "licență restrictivă",
+      "detail": "Repo-ul e MIT, dar skill-urile deepspot-m (PolyForm-Noncommercial-1.0.0) și what-if-oracle (CC BY-NC-SA 4.0) sunt non-comerciale, iar rowan e „Proprietary”.",
+      "source_url": "https://github.com/K-Dense-AI/scientific-agent-skills/blob/5f2bc0341354fd5590aef76a533ada1e1e5b4e62/README.md#individual-skill-licenses"
+    }
+  ],
+  "audience_reason": "pentru că presupune un agent AI deja configurat și cunoștințe de bază despre mediile Python",
+  "setup_difficulty_reason": "instalarea skill-urilor e o comandă, dar dependențele Python se instalează separat, câte un mediu pe flux de lucru",
+  "notes_summary": "Am citit README-ul, documentația, structura skill-urilor, licențele din SKILL.md și paginile de preț ale serviciilor; n-am rulat nimic și n-am găsit o poveste reală potrivită pentru „Primii pași”.",
+  "updated_at": "2026-10-28",
+  "notes": "Repo nou analizat la 2026-10-25, commit 593377bb. Licența repo: MIT (LICENSE.md citit, Copyright 2025 K-Dense Inc.; README spune 2026). Atenție: README și FAQ avertizează că fiecare skill are propria licență; din cele 177 de SKILL.md am numărat în câmpul license: majoritatea MIT/BSD/Apache, dar și GPL (bioservices, cobrapy, etetoolkit), PolyForm-Noncommercial (deepspot-m), CC BY-NC-SA 4.0 (what-if-oracle), Proprietary (rowan), Unknown (glycoengineering, phylogenetics, primekg). Nu am verificat licența fiecărui skill în detaliu, nici dependențele lor. Nu am rulat nimic. Exemplele sunt copiate din README (secțiunile Getting Started și Quick Examples); documentația nu arată output pentru ele, deci output_from_docs este null. README-ul indică numărul de skill-uri 177 (în folderul skills/ am numărat 177 foldere); docs/examples.md menționează 167, o inconsistență minoră a documentației. Prețurile K-Dense Web (https://www.k-dense.ai/pricing) și Elicit (https://elicit.com/pricing) le-am văzut la 2026-10-25 pe paginile oficiale (Elicit: sumele afișate corespund facturării anuale, prețul lunar fără angajament nu apare). Tarifele orare Pitt (76 USD/oră și 70 USD/oră) le-am văzut pe https://advancedgenomics.pitt.edu/pricing; o altă pagină a Pitt (singlecell.pitt.edu) a dat eroare de certificat, linkul nu este folosit. Costurile agentului AI (abonament/chei API) nu le-am verificat: sunt neconfirmate. Pentru DiffDock și alte skill-uri cu modele mari nu am verificat dacă GPU-ul e obligatoriu. Perechi: k-dense-byok (MIT, ultim commit 2026-10-16), anthropics/skills (ultim commit 2026-10-09; repo cu licențe multiple pe skill-uri, nu am citit LICENSE), markitdown (2026-10-23), Biomni (Apache-2.0, 2026-10-19), android/skills (deja în catalog, slug android-skills). Relevanța android/skills este doar de format, nu de domeniu. Nu am găsit o pagină publică cu prețul serviciului de onboarding Enterprise al K-Dense (preț personalizat). Arhiva repo-ului descrie 250.000+ utilizatori în descrierea GitHub; nu am verificat această cifră. Migrare la formatul nou, 2026-10-28: am recitit README-ul și docs la commitul 5f2bc034 (2026-10-26, v2.72.0, 55.005 stele; repo-ul s-a mișcat de la 593377bb din 2026-10-25), am recitit licențele din SKILL.md (neschimbate ca structură) și am verificat azi prețurile: Claude Pro/Max (claude.com/pricing), ChatGPT Plus (learn.chatgpt.com/docs/pricing), Parallel, Exa, OpenRouter, Rowan (rowansci.com/pricing; prețul planului Team nu se afișa), Modal; Tamarind, COSMIC și KEGG nu publică prețuri, DisGeNET nu a returnat conținut, deci null. Cheile API cerute de skill-uri le-am numărat din SKILL.md (OPENROUTER_API_KEY apare în 36 de fișiere), iar lista costurilor nu e exhaustivă: repo-ul acoperă 100+ baze de date și multe API-uri, deci verifică SKILL.md-ul fiecărui skill folosit. Platforme: README cere macOS, Linux sau Windows cu WSL2. Din issues am notat că în aprilie 2026 un skill de promovare K-Dense Web a fost raportat (issue 127) și eliminat; azi nu mai găsesc mențiuni K-Dense Web în skills/. Primii pași: nu am găsit o experiență reală potrivită. Am căutat pe Hacker News (hn.algolia.com: doar linkul arXiv Scientific Agent Skills, fără povești de folosire), în issues-urile repo-ului (cereri și rapoarte de securitate, nu povești de lucru; discuțiile sunt dezactivate) și pe web: dev.to (itxtayab), mrtechking, labcritics și knightli sunt prezentări generale sau scanări, nu relatări la persoana întâi; povestea cu 450 de fișiere de la claudeskills.info e relatată la mâna a doua, fără sursă; blogurile k-dense.ai sunt ale firmei care vinde produsul, deci excluse. Reddit nu am putut verifica. Necunoscut: prețul abonamentelor DisGeNET, Tamarind Premium și Rowan Team, dacă DiffDock cere obligatoriu GPU la folosirea prin skill, și costul real al agentului pentru un flux științific tipic."
 }

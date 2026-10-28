@@ -3,7 +3,7 @@
   "repo_url": "https://github.com/ruvnet/ruflo",
   "name": "Ruflo (fost Claude Flow)",
   "one_liner": "Pune mai mulți asistenți AI să lucreze împreună, cu memorie, peste Claude Code și Codex.",
-  "problem_solved": "Un asistent AI de programat (Claude Code, Codex) lucrează de obicei singur și uită ce a făcut într-o sesiune anterioară. Ruflo este un „strat de coordonare” pus peste el: împarte munca între mai mulți agenți specializați (programator, tester, verificator de securitate etc.), le dă o memorie comună care rămâne între sesiuni, urmărește costul și poate conecta agenți de pe mai multe calculatoare. Nu este un model AI: are nevoie în continuare de Claude, GPT, Gemini sau un model local ca să „gândească”. Se adresează programatorilor care folosesc deja un asistent AI în terminal și vor să-l organizeze pentru proiecte mari.",
+  "problem_solved": "Un asistent AI de programare (Claude Code, Codex) lucrează de obicei singur și uită ce a făcut în sesiunile trecute. La proiecte mari, nu are cine să împartă munca și să țină minte deciziile.",
   "analogy": "Ca un șef de șantier pentru o echipă de meseriași: meseriașii (modelele AI) știu să muncească, dar șeful împarte sarcinile, ține un caiet comun cu ce s-a decis și verifică ce s-a terminat.",
   "how_it_works": [
     "Pasul 1 – Intrare: instalezi Ruflo ca plugin în Claude Code (comenzi /plugin) sau rulezi `npx ruflo@latest init` într-un proiect; apoi clientul tău (Claude Code, Codex etc.) se conectează la serverul MCP al Ruflo (un „meniu de unelte” standard pe care asistentul îl poate apela).",
@@ -12,6 +12,7 @@
     "Pasul 4 – Memorie: rezultatele și deciziile se salvează în AgentDB (bază de date vectorială locală, căutare după sens) și pot fi reîncărcate în sesiunile următoare; documentația spune că partea de învățare locală nu cere un LLM, dar execuția agenților da.",
     "Pasul 5 – Ieșire: cod modificat și teste din partea modelului, plus date de stare (memorie, jurnale, costuri) vizibile în CLI, în consola /ruflo sau în terminal cu `npx ruflo tui`."
   ],
+  "first_steps": null,
   "categories": [
     "Agenți AI și automatizare",
     "Agenți AI și memorie"
@@ -99,7 +100,8 @@
         "os": "nu a fost rulat (mod documentație)",
         "runtime": "Node.js 20+ (cerință din documentație)",
         "versions": {}
-      }
+      },
+      "kind": "instalare"
     },
     {
       "title": "Întrebi routerul ce agent e potrivit pentru o sarcină",
@@ -121,7 +123,8 @@
         "os": "nu a fost rulat (mod documentație)",
         "runtime": "Node.js 20+ (cerință din documentație)",
         "versions": {}
-      }
+      },
+      "kind": "folosire"
     }
   ],
   "connectors": {
@@ -260,6 +263,118 @@
       ]
     }
   ],
-  "updated_at": "2026-10-25",
-  "confidence_notes": "Mod documentație: NU am instalat și NU am rulat nimic. Am clonat repo-ul cu --depth 1 doar ca să citesc codul (commit d7fcaf3b2580c13852a6ee1ef4613a5bda58d1c4, ultimul commit 2026-10-25) și am citit README.md, docs/USERGUIDE.md, docs/STATUS.md și docs/ruflo-explained.md. Cele două exemple sunt copiate exact din docs/USERGUIDE.md (linii 2966-2982 și 4497-4518), iar outputul este cel din documentație; unde documentația arată numere (încredere 94%, 9/10 verificări) ele sunt ilustrative. Fișierul de triaj (drafts/ruflo.triage.json) a recomandat modul documentație: cere chei LLM/cont Claude Code, monorepo mare. Aspecte neclare: (1) documentația nu e consecventă (USERGUIDE descrie v3.7, pachetul e 3.63.0; numărul de unelte MCP apare ca 314/323/333/380+); (2) cifrele de performanță și numărul de descărcări din README sunt afirmații ale autorului, neverificate; badge-ul de descărcări este marcat chiar de autor ca „ilustrativ”; (3) existența comenzii `route` am confirmat-o doar în cod (route.ts), nu prin rulare. Prețuri verificate la 2026-10-25: Devin (devin.ai/pricing – pagina afișa planuri Free/Pro/Max/Teams/Enterprise), CrewAI (crewai.com/pricing – Basic gratuit cu 50 de execuții/lună, Enterprise nepublicat). Niciunul nu e un înlocuitor „complet”: Ruflo este un strat peste modele plătite, nu un produs echivalent. Stele GitHub: 79175 la 2026-10-25 conform API-ului GitHub. Licența MIT confirmată din fișierul LICENSE (Copyright 2024-2026 ruvnet). Cele 4 repo-uri din „pairs_well_with” au commit în ultimele 12 luni (verificat prin API GitHub), dar legătura cu agentic-flow nu a fost verificată în cod. Cererea pentru monetizare: doar prețurile concurenței, fără estimări de venit."
+  "features": [
+    "Plugin-uri pentru Claude Code (core, console, mods), instalate cu comenzi /plugin",
+    "Grupuri de agenți specializați (swarm) care își împart o sarcină",
+    "Memorie locală (AgentDB) care rămâne între sesiuni, căutabilă după sens",
+    "Routerul `ruflo route task` sugerează ce tip de agent se potrivește unei sarcini",
+    "Consolă în terminal (`npx ruflo tui`) cu costuri, evenimente și misiuni",
+    "Server MCP pentru Codex și alți clienți compatibili",
+    "Comanda `doctor` verifică Node.js, Git, configurația și cheile"
+  ],
+  "at_a_glance": {
+    "for_you_if": [
+      "Folosești deja Claude Code sau Codex și lucrezi la proiecte mari, cu mai mulți agenți.",
+      "Vrei memorie între sesiuni și ești dispus să înveți un sistem cu multe piese."
+    ],
+    "not_for_you_if": [
+      "Ești la început cu asistenții AI sau lucrezi singur la un proiect mic.",
+      "Nu vrei o unealtă care se schimbă aproape zilnic și are sute de comenzi."
+    ],
+    "verdict": "Gratuit și open-source, dar nu include un model AI; merită doar dacă ai deja un asistent de programare și proiecte care depășesc un singur agent."
+  },
+  "cost": {
+    "level": "gratuit, dar cere servicii plătite",
+    "summary": "Ruflo în sine e gratuit (licență MIT), dar agenții au nevoie de un model plătit: merge cu abonamentul tău Claude Pro/Max prin Claude Code sau cu chei API plătite pe consum.",
+    "ai_access": {
+      "mode": "abonament sau API",
+      "detail": "Calea principală e plugin în Claude Code, care se poate autentifica cu Claude Pro/Max sau cu cheie API; ghidul cere ANTHROPIC_API_KEY în configurările MCP, iar funcțiile Managed Agents merg doar cu cheie.",
+      "source_url": "https://github.com/ruvnet/ruflo/blob/bd19b6f984fb0b4465e333c5e24cc5333784f410/docs/USERGUIDE.md#L1572-L1580"
+    },
+    "items": [
+      {
+        "what": "Ruflo (CLI, plugin-uri, server MCP), licență MIT",
+        "price": "gratuit (licență MIT)",
+        "required": true,
+        "source_url": "https://github.com/ruvnet/ruflo/blob/bd19b6f984fb0b4465e333c5e24cc5333784f410/LICENSE"
+      },
+      {
+        "what": "Node.js 20 sau mai nou (program open-source)",
+        "price": "gratuit (open-source, licență MIT)",
+        "required": true,
+        "source_url": "https://github.com/nodejs/node/blob/main/LICENSE"
+      },
+      {
+        "what": "Git (program open-source)",
+        "price": "gratuit (open-source)",
+        "required": true,
+        "source_url": "https://git-scm.com/"
+      },
+      {
+        "what": "Acces la un model AI printr-un client: Claude Code (2.1.287 sau mai nou), Codex sau alt client MCP, cu abonament sau cheie API",
+        "price": null,
+        "required": true,
+        "source_url": "https://github.com/ruvnet/ruflo/blob/bd19b6f984fb0b4465e333c5e24cc5333784f410/README.md#L27-L29"
+      },
+      {
+        "what": "Claude Pro (include Claude Code), dacă folosești abonamentul",
+        "price": "17 USD/lună cu plata anuală (200 USD o dată), sau 20 USD/lună cu plata lunară",
+        "required": false,
+        "source_url": "https://claude.com/pricing"
+      },
+      {
+        "what": "Claude Max (include Claude Code), pentru folosire intensă",
+        "price": "de la 100 USD/lună",
+        "required": false,
+        "source_url": "https://claude.com/pricing"
+      },
+      {
+        "what": "ChatGPT Plus (include Codex), dacă folosești Codex în loc de Claude Code",
+        "price": "20 USD/lună (Go 8 USD/lună; Pro de la 100 USD/lună)",
+        "required": false,
+        "source_url": "https://learn.chatgpt.com/docs/pricing"
+      },
+      {
+        "what": "Chei API pe consum: Anthropic (obligatorie în configurările MCP din ghid), OpenAI și Google (opționale)",
+        "price": null,
+        "required": false,
+        "source_url": "https://github.com/ruvnet/ruflo/blob/bd19b6f984fb0b4465e333c5e24cc5333784f410/docs/USERGUIDE.md#L1572-L1580"
+      },
+      {
+        "what": "Cont gratuit Cognitum (opțional; Ruflo se bazează pe tehnologia Cognitum)",
+        "price": "gratuit (conform codului de înrolare)",
+        "required": false,
+        "source_url": "https://github.com/ruvnet/ruflo/blob/bd19b6f984fb0b4465e333c5e24cc5333784f410/v3/@claude-flow/cli/src/funnel/enrollment.ts#L43"
+      }
+    ]
+  },
+  "platforms": {
+    "windows": "parțial",
+    "mac": "da",
+    "linux": "da",
+    "note": "README: instalarea cu `curl ... | bash` cere un shell POSIX (Git-Bash, WSL), dar `npx ruflo@latest init wizard` merge nativ în PowerShell. Ghidul spune că consola `tui` a fost testată doar pe Linux; Windows și macOS sunt netestate.",
+    "source_url": "https://github.com/ruvnet/ruflo/blob/bd19b6f984fb0b4465e333c5e24cc5333784f410/README.md#L291-L313"
+  },
+  "risk_flags": [
+    {
+      "flag": "telemetrie",
+      "detail": "Funcția „funnel” e activă implicit: aduce periodic mesaje de la funnel.ruv.io; evenimentele de utilizare se trimit doar cu acord separat și se opresc cu RUFLO_FUNNEL=0.",
+      "source_url": "https://github.com/ruvnet/ruflo/blob/bd19b6f984fb0b4465e333c5e24cc5333784f410/v3/@claude-flow/cli/src/funnel/precedence.ts#L55-L76"
+    },
+    {
+      "flag": "proiect instabil",
+      "detail": "Apar versiuni noi aproape zilnic, iar în 2026 o vulnerabilitate critică (CVE-2026-59726, execuție de comenzi prin puntea MCP din docker-compose) a fost reparată în versiunea 3.16.3.",
+      "source_url": "https://github.com/ruvnet/ruflo/security/advisories/GHSA-c4hm-4h84-2cf3"
+    },
+    {
+      "flag": "modifică setările altor programe",
+      "detail": "`npx ruflo init` generează .claude/settings.json și scripturi în .claude/helpers/ în proiectul tău.",
+      "source_url": "https://github.com/ruvnet/ruflo/blob/bd19b6f984fb0b4465e333c5e24cc5333784f410/docs/USERGUIDE.md#L2700-L2702"
+    }
+  ],
+  "audience_reason": "e un sistem larg, cu zeci de comenzi, peste un asistent AI pe care trebuie să-l stăpânești deja",
+  "setup_difficulty_reason": "câteva comenzi pentru plugin sau `npx init`, dar cere un client AI cu abonament sau chei și instalarea completă are ~340 MB",
+  "notes_summary": "Am citit README-ul, ghidul de utilizare și codul din commit-ul bd19b6f, fără să rulez nimic; costul real depinde de modelul AI folosit, iar la Primii pași nu am găsit o poveste sigură scrisă de un om.",
+  "updated_at": "2026-10-28",
+  "notes": "Mod documentație: NU am instalat și NU am rulat nimic. Am clonat repo-ul cu --depth 1 doar ca să citesc codul (commit d7fcaf3b2580c13852a6ee1ef4613a5bda58d1c4, ultimul commit 2026-10-25) și am citit README.md, docs/USERGUIDE.md, docs/STATUS.md și docs/ruflo-explained.md. Cele două exemple sunt copiate exact din docs/USERGUIDE.md (linii 2966-2982 și 4497-4518), iar outputul este cel din documentație; unde documentația arată numere (încredere 94%, 9/10 verificări) ele sunt ilustrative. Fișierul de triaj (drafts/ruflo.triage.json) a recomandat modul documentație: cere chei LLM/cont Claude Code, monorepo mare. Aspecte neclare: (1) documentația nu e consecventă (USERGUIDE descrie v3.7, pachetul e 3.63.0; numărul de unelte MCP apare ca 314/323/333/380+); (2) cifrele de performanță și numărul de descărcări din README sunt afirmații ale autorului, neverificate; badge-ul de descărcări este marcat chiar de autor ca „ilustrativ”; (3) existența comenzii `route` am confirmat-o doar în cod (route.ts), nu prin rulare. Prețuri verificate la 2026-10-25: Devin (devin.ai/pricing – pagina afișa planuri Free/Pro/Max/Teams/Enterprise), CrewAI (crewai.com/pricing – Basic gratuit cu 50 de execuții/lună, Enterprise nepublicat). Niciunul nu e un înlocuitor „complet”: Ruflo este un strat peste modele plătite, nu un produs echivalent. Stele GitHub: 79175 la 2026-10-25 conform API-ului GitHub. Licența MIT confirmată din fișierul LICENSE (Copyright 2024-2026 ruvnet). Cele 4 repo-uri din „pairs_well_with” au commit în ultimele 12 luni (verificat prin API GitHub), dar legătura cu agentic-flow nu a fost verificată în cod. Cererea pentru monetizare: doar prețurile concurenței, fără estimări de venit. Migrare la formatul nou, 2026-10-28: am reverificat repo-ul la commit-ul bd19b6f984fb0b4465e333c5e24cc5333784f410 (ultimul commit 2026-10-27, 79840 stele, versiunea 3.63.6, licență MIT confirmată în LICENSE). Am verificat în cod: funcția „funnel” (mesaje de la funnel.ruv.io) e activă implicit, iar trimiterea evenimentelor cere consimțământ separat (consent.ts, event-transport.ts); avizul GHSA-c4hm-4h84-2cf3 (CVE-2026-59726) confirmă o vulnerabilitate critică în docker-compose, reparată în 3.16.3. Prețuri verificate azi: claude.com/pricing (Pro 17/20 USD, Max de la 100 USD) și learn.chatgpt.com/docs/pricing (Go 8, Plus 20, Pro de la 100 USD); documentația Claude Code (code.claude.com/docs/en/authentication) confirmă autentificarea cu Pro/Max; nu am găsit prețuri pentru cheile API. Primii pași: nu am găsit o experiență reală potrivită. Am căutat pe Hacker News (fire pe «ruflo»/«claude-flow», doar opinii scurte), dev.to (articolul din 2026-04-26 e un rezumat, nu o experiență proprie) și pe bloguri: postarea lui Jared Smith (sublimecoding.com, 2026-05-07) pare personală, dar menționează un fișier ruflo.toml și comanda `ruflo watch` pe care nu le-am găsit în cod, așa că n-am putut-o folosi; postarea lui Adrian Cockcroft de pe Medium (403) n-a putut fi citită integral. Dacă dorești, o poveste se poate adăuga ulterior."
 }
