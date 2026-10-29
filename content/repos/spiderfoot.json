@@ -1,0 +1,442 @@
+{
+  "slug": "spiderfoot",
+  "repo_url": "https://github.com/smicallef/spiderfoot",
+  "name": "SpiderFoot",
+  "one_liner": "Adună automat informații publice despre un domeniu, IP sau persoană, într-o singură interfață.",
+  "problem_solved": "Ca să afli ce informații publice există despre un domeniu, o adresă IP, un e-mail sau un nume, ar trebui să cauți manual în zeci de servicii. SpiderFoot le interoghează automat și le adună într-un singur loc, cu legături între rezultate.",
+  "features": [
+    "Peste 200 de module care caută în surse publice (DNS, certificate, liste de reputație, rețele sociale, scurgeri de date)",
+    "Interfață web locală sau linie de comandă, cu scanări pe domeniu, IP, subrețea, e-mail, telefon, nume sau utilizator",
+    "37 de reguli de corelare (YAML) care scot în față rezultatele interesante, de exemplu o bază de date expusă",
+    "Export CSV, JSON și GEXF; rezultatele stau într-o bază de date SQLite pe care o poți interoga",
+    "Poate porni și alte programe (Nmap, DNSTwist, Nuclei, WhatWeb), dacă le ai instalate"
+  ],
+  "at_a_glance": {
+    "for_you_if": [
+      "Vrei să vezi ce informații publice despre domeniul sau firma ta pot fi găsite de oricine.",
+      "Faci teste de securitate autorizate și vrei o primă hartă a țintei, fără să plătești o platformă."
+    ],
+    "not_for_you_if": [
+      "Vrei un serviciu gata făcut, găzduit, cu suport și monitorizare continuă.",
+      "Ai în vedere ținte pentru care nu ai acordul proprietarului: scanările active pot fi ilegale."
+    ],
+    "verdict": "Unealtă OSINT matură și gratuită, dar cu dezvoltare aproape oprită din 2023, deci verifică din timp dacă pornește pe sistemul tău."
+  },
+  "cost": {
+    "level": "gratuit complet",
+    "summary": "Programul e gratuit (MIT) și nu folosește AI, deci nu ai nevoie de abonament sau cheie AI; unele surse de date cer chei API, multe cu plan gratuit, altele plătite.",
+    "ai_access": {
+      "mode": "nu folosește AI",
+      "detail": "Modulele sunt interogări către surse de date și reguli YAML; în cod nu apare niciun serviciu AI (OpenAI, Anthropic etc.).",
+      "source_url": "https://github.com/smicallef/spiderfoot/blob/0f815a203afebf05c98b605dba5cf0475a0ee5fd/README.md"
+    },
+    "items": [
+      {
+        "what": "Python 3.7 sau mai nou (limbajul în care e scris)",
+        "price": "gratuit (licență PSF, uz comercial permis)",
+        "required": true,
+        "source_url": "https://docs.python.org/3/license.html"
+      },
+      {
+        "what": "Docker (opțional, pentru instalare în container)",
+        "price": null,
+        "required": false,
+        "source_url": null
+      },
+      {
+        "what": "Chei API pentru surse cu plan gratuit sau gratuite (ex: GreyNoise, SecurityTrails, abuse.ch)",
+        "price": "variază: README marchează 98 de module ca „Free API” și 67 ca „Tiered API”",
+        "required": false,
+        "source_url": "https://github.com/smicallef/spiderfoot/blob/0f815a203afebf05c98b605dba5cf0475a0ee5fd/README.md"
+      },
+      {
+        "what": "Shodan (sursă folosită de modulul SHODAN, plan „Tiered API”): membership",
+        "price": "49 USD o singură dată (Membership); abonamentele lunare încep de la 69 USD/lună (Freelancer)",
+        "required": false,
+        "source_url": "https://account.shodan.io/billing"
+      },
+      {
+        "what": "HaveIBeenPwned și Dehashed (module marcate „Commercial API” în README)",
+        "price": null,
+        "required": false,
+        "source_url": "https://haveibeenpwned.com/API/Key"
+      },
+      {
+        "what": "Programe externe (Nmap, DNSTwist, Nuclei, WhatWeb etc.) pentru modulele „Tool”",
+        "price": null,
+        "required": false,
+        "source_url": "https://github.com/smicallef/spiderfoot/blob/0f815a203afebf05c98b605dba5cf0475a0ee5fd/README.md"
+      },
+      {
+        "what": "SpiderFoot HX (versiunea cloud, plătită, vândută de Intel 471)",
+        "price": null,
+        "required": false,
+        "source_url": "https://github.com/smicallef/spiderfoot/blob/0f815a203afebf05c98b605dba5cf0475a0ee5fd/README.md"
+      }
+    ]
+  },
+  "platforms": {
+    "windows": "necunoscut",
+    "mac": "da",
+    "linux": "da",
+    "note": "README cere doar Python 3.7+ și nu discută sistemele de operare. Testele automate (CI) rulează pe Ubuntu și macOS cu Python 3.7-3.10, deci Linux și Mac sunt deduse din asta. Windows nu e menționat nicăieri; Dockerfile există, dar nu spune nimic despre Windows.",
+    "source_url": "https://github.com/smicallef/spiderfoot/blob/0f815a203afebf05c98b605dba5cf0475a0ee5fd/.github/workflows/tests.yaml"
+  },
+  "risk_flags": [
+    {
+      "flag": "trimite date în cloud",
+      "detail": "Țintele și datele găsite (domenii, IP-uri, e-mailuri) sunt trimise către serviciile terțe interogate de module, în funcție de modulele pornite.",
+      "source_url": "https://github.com/smicallef/spiderfoot/blob/0f815a203afebf05c98b605dba5cf0475a0ee5fd/README.md"
+    },
+    {
+      "flag": "proiect instabil",
+      "detail": "Ultimul commit pe ramura master este din 2023-11-05, ultima versiune stabilă (v4.0) din aprilie 2022, iar requirements.txt fixează versiuni vechi de biblioteci.",
+      "source_url": "https://github.com/smicallef/spiderfoot/blob/0f815a203afebf05c98b605dba5cf0475a0ee5fd/requirements.txt"
+    }
+  ],
+  "audience_reason": "ai nevoie să înțelegi noțiuni de rețea (DNS, IP) și limitele legale ale scanării",
+  "setup_difficulty_reason": "instalare cu pip și Python, dar versiuni vechi fixate și chei API de configurat pentru rezultate bune",
+  "analogy": "Ca un detectiv cu 200 de asistenți: îi dai un nume sau un domeniu, fiecare asistent întreabă într-o arhivă publică diferită, iar tu primești un dosar cu toate piesele puse laolaltă.",
+  "how_it_works": [
+    "Pas 1, intrare: alegi o țintă (domeniu, IP, subrețea CIDR, ASN, e-mail, telefon, utilizator, nume sau adresă Bitcoin) și modulele care să ruleze.",
+    "Pas 2, procesare: modulele se pasează rezultatele între ele (un modul găsește un subdomeniu, altul îl rezolvă în IP, altul îi caută reputația) în model publicare/abonare.",
+    "Pas 3, corelare: regulile YAML din folderul correlations caută tipare în date și raportează ce pare important.",
+    "Pas 4, ieșire: vezi rezultatele în interfața web sau în terminal, le exporți ca CSV, JSON sau GEXF, sau le interoghezi direct din baza de date SQLite."
+  ],
+  "first_steps": {
+    "origin": "experiență utilizator",
+    "story_url": "https://hakluke.com/how-to-achieve-enterprise-grade-attack-surface-monitoring-with-open-source-software",
+    "story_platform": "blog",
+    "story_date": "2021-07-21",
+    "title": "Monitorizarea subdomeniilor noi cu SpiderFoot, scripturi și Discord",
+    "intro": "Un specialist în securitate a vrut să obțină gratuit, cu SpiderFoot open-source, ceva apropiat de monitorizarea suprafeței de atac din versiunea plătită HX.",
+    "steps": [
+      {
+        "you_do": "Rulezi scanările SpiderFoot; rezultatele ajung în fișierul spiderfoot.db din folderul programului.",
+        "what_happens": "SpiderFoot salvează tot într-o bază de date SQLite locală.",
+        "source_url": "https://hakluke.com/how-to-achieve-enterprise-grade-attack-surface-monitoring-with-open-source-software"
+      },
+      {
+        "you_do": "Instalezi Datasette și porești datasette serve ./spiderfoot.db, apoi deschizi 127.0.0.1:8001.",
+        "what_happens": "Datasette arată baza de date într-o interfață web și o expune ca API JSON; autorul avertizează că nu are autentificare, deci o ții doar pe calculatorul tău.",
+        "source_url": "https://hakluke.com/how-to-achieve-enterprise-grade-attack-surface-monitoring-with-open-source-software"
+      },
+      {
+        "you_do": "Scrii un script (gethosts.sh) care cere din API doar rezultatele unui modul, de exemplu module=sfp_whois, și extrage numele de gazde cu curl și jq.",
+        "what_happens": "Rezultă o listă curată de nume de gazde, fără dubluri.",
+        "source_url": "https://hakluke.com/how-to-achieve-enterprise-grade-attack-surface-monitoring-with-open-source-software"
+      },
+      {
+        "you_do": "Dai lista programului Aquatone (cu Chromium instalat) ca să facă capturi de ecran.",
+        "what_happens": "Apar un folder cu capturi și un raport HTML.",
+        "source_url": "https://hakluke.com/how-to-achieve-enterprise-grade-attack-surface-monitoring-with-open-source-software"
+      },
+      {
+        "you_do": "Adaugi în crontab o rulare zilnică la ora 2: sf.py -s ținta-ta.com.",
+        "what_happens": "SpiderFoot rescanează automat ținta în fiecare zi.",
+        "source_url": "https://hakluke.com/how-to-achieve-enterprise-grade-attack-surface-monitoring-with-open-source-software"
+      },
+      {
+        "you_do": "Adaugi un script orar (appendhosts.sh) care trece gazdele noi într-un fișier, și un al doilea (sendnotification.sh) care le trimite pe un webhook Discord.",
+        "what_happens": "Primești un mesaj în Discord de fiecare dată când apare un subdomeniu nou.",
+        "source_url": "https://hakluke.com/how-to-achieve-enterprise-grade-attack-surface-monitoring-with-open-source-software"
+      }
+    ],
+    "takeaway": "După autor, varianta gratuită imită o parte din funcțiile HX, dar HX rămâne mai rapid și vine cu suport, găzduire și scanări pe mai multe ținte; articolul nu compară cu rularea manuală și se concentrează doar pe subdomenii noi."
+  },
+  "categories": [
+    "Securitate și OSINT",
+    "Monitorizare și audit"
+  ],
+  "search_intents": [
+    "vreau să aflu ce informații publice există despre domeniul meu",
+    "vreau să găsesc subdomeniile și serverele expuse ale unui site",
+    "vreau o alternativă gratuită la Maltego",
+    "vreau să fac recunoaștere (OSINT) înainte de un test de penetrare autorizat",
+    "vreau să verific dacă e-mailurile firmei mele apar în scurgeri de date",
+    "vreau să primesc alertă când apare un subdomeniu nou"
+  ],
+  "audience": "intermediar",
+  "setup_difficulty": "mediu",
+  "replaces": [
+    {
+      "service": "Maltego",
+      "service_url": "https://www.maltego.com/",
+      "price": "Entry 3.000 EUR/an; Professional 7.500 EUR/an (per loc, până la 5 utilizatori); Basic gratuit, cu 200 de credite/lună",
+      "price_source_url": "https://www.maltego.com/pricing-plans/",
+      "price_checked_at": "2026-10-29",
+      "replacement_level": "parțial",
+      "what_you_keep": [
+        "Colectarea automată din zeci de surse publice, fără limită de credite",
+        "Rezultatele rămân local, în baza ta SQLite, și le poți exporta"
+      ],
+      "what_you_lose": [
+        "Graful interactiv de investigație din Maltego Graph",
+        "Accesul la date comerciale incluse prin credite, conform paginii de prețuri",
+        "Suport comercial și variantele pentru echipe"
+      ],
+      "hidden_costs": [
+        "Cheile API plătite pentru sursele bune sunt pe contul tău",
+        "Timp de configurare și curățare a rezultatelor (pot fi multe false pozitive)",
+        "Mentenanță: dezvoltarea oficială e aproape oprită"
+      ]
+    },
+    {
+      "service": "Detectify (Surface Monitoring)",
+      "service_url": "https://detectify.com/",
+      "price": "Plan Standard de la 2.500 EUR/an, Professional de la 5.000 EUR/an; Surface Monitoring costă în plus per domeniu (preț nelistat)",
+      "price_source_url": "https://detectify.com/pricing",
+      "price_checked_at": "2026-10-29",
+      "replacement_level": "doar pentru cazuri simple",
+      "what_you_keep": [
+        "Descoperirea de subdomenii, certificate, porturi deschise și servicii expuse pentru un domeniu"
+      ],
+      "what_you_lose": [
+        "Serviciul gestionat în cloud, cu suport și onboarding",
+        "Monitorizarea continuă făcută pentru tine: la SpiderFoot open-source trebuie să programezi singur scanările (de ex. cu cron)"
+      ],
+      "hidden_costs": [
+        "Un server sau calculator care rămâne pornit pentru scanări programate",
+        "Timp pentru scripturi de notificare și pentru verificarea rezultatelor"
+      ]
+    },
+    {
+      "service": "SpiderFoot HX (versiunea plătită, cloud)",
+      "service_url": "https://github.com/smicallef/spiderfoot/blob/0f815a203afebf05c98b605dba5cf0475a0ee5fd/README.md",
+      "price": null,
+      "price_source_url": "https://github.com/smicallef/spiderfoot/blob/0f815a203afebf05c98b605dba5cf0475a0ee5fd/README.md",
+      "price_checked_at": "2026-10-29",
+      "replacement_level": "parțial",
+      "what_you_keep": [
+        "Motorul de module și regulile de corelare, aceleași ca în varianta comercială",
+        "Interfața web locală și linia de comandă"
+      ],
+      "what_you_lose": [
+        "Conform README: găzduire gestionată, monitorizarea suprafeței de atac cu notificări prin e-mail, REST și Slack",
+        "Mai multe ținte într-o scanare, colaborare multi-utilizator, autentificare cu 2FA, capturi de ecran, API REST și suport"
+      ],
+      "hidden_costs": [
+        "Prețul HX nu e publicat în sursele găsite; se cere ofertă",
+        "Singur trebuie să instalezi și să întreții programele externe (Nmap etc.)"
+      ]
+    }
+  ],
+  "examples": [
+    {
+      "title": "Instalare din versiunea stabilă și pornirea interfeței web",
+      "scenario": "Descarci arhiva versiunii 4.0, instalezi bibliotecile Python și pornești serverul local; apoi deschizi 127.0.0.1:5001 în browser.",
+      "prerequisites": [
+        "Python 3.7 sau mai nou",
+        "pip3",
+        "wget și tar (sau Git pentru varianta din master)"
+      ],
+      "commands": [
+        "wget https://github.com/smicallef/spiderfoot/archive/v4.0.tar.gz",
+        "tar zxvf v4.0.tar.gz",
+        "cd spiderfoot-4.0",
+        "pip3 install -r requirements.txt",
+        "python3 ./sf.py -l 127.0.0.1:5001"
+      ],
+      "code": "",
+      "output_from_docs": null,
+      "source_url": "https://github.com/smicallef/spiderfoot/blob/0f815a203afebf05c98b605dba5cf0475a0ee5fd/README.md",
+      "kind": "instalare"
+    },
+    {
+      "title": "Scanare din linia de comandă, cu o regulă de corelare",
+      "scenario": "Pornești o scanare cu două module (rezolvare DNS și scanare de porturi TCP) și vezi cum regula open_port_version raportează o versiune de software găsită pe un port deschis. Exemplul din documentație folosește site-ul autorului; tu rulezi doar pe ținte proprii sau pentru care ai acord scris. Scanarea de porturi e un modul activ, marcat în cod „invasive”: atinge direct ținta.",
+      "prerequisites": [
+        "SpiderFoot instalat, cu Python (documentația folosește python3.9)",
+        "O țintă pe care ai voie să o scanezi"
+      ],
+      "commands": [
+        "python3.9 ./sf.py -s www.binarypool.com -m sfp_dnsresolve,sfp_portscan_tcp"
+      ],
+      "code": "",
+      "output_from_docs": "2022-04-06 08:14:58,476 [INFO] sflib : Scan [94EB5F0B] for 'www.binarypool.com' initiated.\n...\nsfp_portscan_tcp    Open TCP Port Banner    SSH-2.0-OpenSSH_7.2p2 Ubuntu-4ubuntu2.10\n...\n2022-04-06 08:15:23,110 [INFO] correlation : New correlation [open_port_version]: Software version revealed on open port: SSH-2.0-OpenSSH_7.2p2 Ubuntu-4ubuntu2.10\n2022-04-06 08:15:23,244 [INFO] sflib : Scan [94EB5F0B] completed.",
+      "source_url": "https://github.com/smicallef/spiderfoot/blob/0f815a203afebf05c98b605dba5cf0475a0ee5fd/correlations/README.md",
+      "kind": "folosire"
+    }
+  ],
+  "connectors": {
+    "inputs": [
+      "O țintă ca text: nume de domeniu, adresă IP, subrețea CIDR, ASN, adresă de e-mail, număr de telefon, nume de utilizator, nume de persoană sau adresă Bitcoin",
+      "Opțional: chei API puse în setările programului (interfață web sau fișier de configurare exportat/importat)",
+      "Opțional: fișiere de reguli de corelare .yaml scrise de tine, în folderul correlations"
+    ],
+    "outputs": [
+      "Rezultate în interfața web și în terminal (format tab, CSV sau JSON, ales cu -o)",
+      "Export CSV, JSON sau GEXF (graf)",
+      "Fișier spiderfoot.db (SQLite) cu toate evenimentele scanării"
+    ],
+    "pairs_well_with": [
+      {
+        "repo_url": "https://github.com/simonw/datasette",
+        "name": "Datasette",
+        "why": "Deschide baza spiderfoot.db (SQLite) într-o interfață web cu filtre și API JSON, cum face autorul poveștii din Primii pași.",
+        "in_catalog": false
+      },
+      {
+        "repo_url": "https://github.com/projectdiscovery/httpx",
+        "name": "httpx",
+        "why": "Primește lista de nume de gazde găsite de SpiderFoot (exportată ca CSV sau JSON) și verifică care răspund efectiv pe web.",
+        "in_catalog": false
+      },
+      {
+        "repo_url": "https://github.com/projectdiscovery/nuclei",
+        "name": "Nuclei",
+        "why": "Hosturile descoperite de SpiderFoot devin ținte pentru verificări de vulnerabilități; SpiderFoot are și un modul care îl poate porni (sfp_tool_nuclei).",
+        "in_catalog": false
+      },
+      {
+        "repo_url": "https://github.com/sherlock-project/sherlock",
+        "name": "Sherlock",
+        "why": "Pentru un nume de utilizator găsit de SpiderFoot, caută conturile de pe alte rețele sociale, ca verificare suplimentară.",
+        "in_catalog": false
+      }
+    ],
+    "gaps_noticed": [
+      "Nu există alertare încorporată în versiunea open-source: pentru scanări programate și notificări trebuie scrise scripturi proprii (cron, Discord/Slack).",
+      "Rezultatele mari (zeci de mii de evenimente) trebuie filtrate manual; README nu descrie un format de raport gata de dat unui client.",
+      "Cheile API trebuie obținute și introduse una câte una pentru fiecare serviciu."
+    ]
+  },
+  "when_not_to_use": [
+    "Pe ținte pentru care nu ai autorizare: modulele active (scanare de porturi, ghicire de nume DNS) contactează direct ținta și pot încălca legea sau termenii serviciilor; README descrie utilizări ofensive (red team, test de penetrare) și defensive, nu oferă sfaturi juridice.",
+    "Când ai nevoie de monitorizare continuă, alerte și suport din partea unui furnizor: pentru asta README trimite spre versiunea plătită HX.",
+    "Când vrei o unealtă activ întreținută: ultimul commit pe master este din noiembrie 2023, iar în discuțiile publice cineva a raportat că nu pornește, deși altcineva spune că îl folosește fără probleme.",
+    "Pentru informații personale despre persoane fizice: chiar și datele publice pot ridica probleme de confidențialitate (de exemplu GDPR în UE), iar rezultatele pot conține multe false pozitive.",
+    "Când vrei acoperire largă a lumii reale: sursele sunt în mare parte despre domenii, IP-uri, e-mailuri și conturi online, cum au observat și comentatorii pe Hacker News."
+  ],
+  "alternatives": [
+    {
+      "name": "BBOT",
+      "url": "https://github.com/blacklanternsecurity/bbot",
+      "difference": "Alt cadru OSINT/recunoaștere, activ în 2026, dar sub licență AGPL-3.0, mai restrictivă pentru servicii comerciale."
+    },
+    {
+      "name": "theHarvester",
+      "url": "https://github.com/laramies/theHarvester",
+      "difference": "Mai simplu și mai ușor: colectează e-mailuri, subdomenii și IP-uri; licență GPL-2.0."
+    },
+    {
+      "name": "recon-ng",
+      "url": "https://github.com/lanmaster53/recon-ng",
+      "difference": "Cadru în terminal, în stilul Metasploit, cu module; licență GPL-3.0."
+    },
+    {
+      "name": "subfinder",
+      "url": "https://github.com/projectdiscovery/subfinder",
+      "difference": "Face un singur lucru, găsirea pasivă de subdomenii, mai rapid și cu licență MIT."
+    },
+    {
+      "name": "spiderfoot-ng",
+      "url": "https://github.com/sammothxc/spiderfoot-ng",
+      "difference": "Fork comunitar al SpiderFoot, MIT, cu foarte puține stele (3) și cu push mai recent decât master-ul original; nu l-am citit în detaliu."
+    },
+    {
+      "name": "Maltego",
+      "url": "https://www.maltego.com/",
+      "difference": "Program comercial cu graf interactiv, date comerciale pe bază de credite și plan Basic gratuit cu limite."
+    }
+  ],
+  "tech_sheet": {
+    "license": "MIT",
+    "language": "Python",
+    "commit_sha": "0f815a203afebf05c98b605dba5cf0475a0ee5fd",
+    "last_commit_date": "2023-11-05",
+    "stars": 24024,
+    "requirements": [
+      "Python 3.7 sau mai nou (README); testele CI rulează cu Python 3.7-3.10",
+      "pip3, pentru instalarea bibliotecilor din requirements.txt (CherryPy, Mako, requests, dnspython, lxml, beautifulsoup4, pyOpenSSL, networkx și altele, cu versiuni fixate)",
+      "wget și tar pentru arhiva versiunii stabile v4.0, sau Git pentru varianta din master",
+      "Un browser web pentru interfața locală (python3 ./sf.py -l 127.0.0.1:5001, apoi deschizi adresa în browser)",
+      "Acces la internet de la calculator, pentru că modulele interoghează surse externe",
+      "Opțional: chei API pentru modulele care le cer (multe au plan gratuit, unele sunt plătite)",
+      "Opțional: Docker (Dockerfile și docker-compose.yml, port 5001) pentru rulare în container",
+      "Opțional: programe externe instalate separat (Nmap, DNSTwist, Nuclei, WhatWeb și altele) pentru modulele „Tool”",
+      "Autorizarea scrisă a proprietarului țintei, înainte de orice scanare activă (cerință de bună practică, nu e verificată de program)"
+    ]
+  },
+  "monetization": [
+    {
+      "model": "serviciu de instalare și configurare",
+      "what_you_sell": "Un raport de expunere externă pentru firme mici: rulezi SpiderFoot pe domeniile clientului, curăți rezultatele (subdomenii uitate, servicii expuse, e-mailuri în scurgeri) și livrezi un raport scurt cu ce trebuie reparat.",
+      "for_whom": "IMM-uri și agenții web care au site-uri și servere, dar nu au echipă de securitate și nu își permit o platformă comercială.",
+      "license_check": {
+        "license": "MIT",
+        "commercial_use": "permis",
+        "conditions": "MIT permite uz comercial, modificare și revânzare; trebuie să păstrezi nota de copyright și textul licenței. Cheile API și datele sursă au termenii proprii ai fiecărui furnizor, pe care îi verifici separat. Lucrezi numai pe domenii ale clientului, pe baza unui acord scris."
+      },
+      "path": "folosești repo-ul direct",
+      "own_build_notes": null,
+      "demand_evidence": [
+        {
+          "name": "Detectify",
+          "url": "https://detectify.com/pricing",
+          "price": "Standard de la 2.500 EUR/an, Professional de la 5.000 EUR/an; Surface Monitoring cu cost suplimentar per domeniu; onboarding suplimentar de 5 ore: 2.500 EUR",
+          "what_it_proves": "Firmele plătesc deja pentru monitorizarea suprafeței de atac externe, iar onboardingul asistat se vinde separat.",
+          "checked_at": "2026-10-29"
+        },
+        {
+          "name": "Maltego",
+          "url": "https://www.maltego.com/pricing-plans/",
+          "price": "Entry 3.000 EUR/an; Professional 7.500 EUR/an",
+          "what_it_proves": "Instrumentele de investigație OSINT se vând comercial, la prețuri de ordinul miilor de euro pe an.",
+          "checked_at": "2026-10-29"
+        }
+      ],
+      "startup_cost": "Un laptop sau un VPS mic și timp pentru chei API gratuite; fără licențe, dar cu un acord scris-model pentru clienți.",
+      "time_to_first_client": "Variază mult; depinde de rețeaua ta în zona IT locală.",
+      "difficulty": "mediu",
+      "risks": [
+        "Concurență gratuită: unealta însăși, plus BBOT, theHarvester și recon-ng pe care clientul le poate rula singur.",
+        "Răspundere juridică: scanarea fără acord scris sau în afara domeniului convenit poate încălca legea; ai nevoie de contract clar.",
+        "Mentenanță: dezvoltarea din master e oprită din 2023, iar dependențele vechi pot da erori pe sisteme noi.",
+        "Rezultate zgomotoase: trebuie să triezi manual false pozitive, ceea ce consumă timp."
+      ],
+      "first_steps": [
+        "Instalezi SpiderFoot pe propriul domeniu și pe unul de test și compari rezultatele cu cele din Nmap sau subfinder.",
+        "Scrii un șablon de contract și un raport-model de 2-3 pagini, fără date reale ale altor firme.",
+        "Oferi unui prieten cu o firmă mică un audit gratuit, cu acord scris, ca să afli ce se așteaptă de la raport."
+      ]
+    },
+    {
+      "model": "consultanță și training",
+      "what_you_sell": "Un atelier practic de OSINT defensiv: cum își verifică o echipă IT propria expunere publică, folosind SpiderFoot pe domeniul firmei participantului.",
+      "for_whom": "Echipe IT, departamente de securitate sau studenți în securitate informatică.",
+      "license_check": {
+        "license": "MIT",
+        "commercial_use": "permis",
+        "conditions": "MIT permite folosirea în cursuri comerciale cu păstrarea notei de copyright; textul și imaginile din documentația oficială (spiderfoot.net, capturi de ecran) nu sunt acoperite de licența codului, deci îți scrii propriile materiale."
+      },
+      "path": "folosești repo-ul direct",
+      "own_build_notes": null,
+      "demand_evidence": [
+        {
+          "name": "SANS SEC497: Practical Open-Source Intelligence (OSINT)",
+          "url": "https://www.sans.org/cyber-security-courses/practical-open-source-intelligence",
+          "price": "8.780 USD (online la cerere și sesiuni live); 8.230 EUR la Paris/Amsterdam",
+          "what_it_proves": "Pregătirea în OSINT se vinde la prețuri mari, deci există cerere pentru training pe această temă.",
+          "checked_at": "2026-10-29"
+        }
+      ],
+      "startup_cost": "Material propriu și un mediu de laborator (domenii proprii pentru exerciții); fără licențe.",
+      "time_to_first_client": "Variază; depinde de reputația și de contactele tale în comunitatea de securitate.",
+      "difficulty": "mediu",
+      "risks": [
+        "Concurență puternică: cursuri consacrate (SANS) și tutoriale gratuite pe YouTube și bloguri.",
+        "Participanții pot fi tentați să scaneze ținte neautorizate; trebuie regulament clar și laborator controlat.",
+        "Unealta se învechește: dacă dezvoltarea nu se reia, materialul trebuie ținut la zi sau mutat pe alt instrument."
+      ],
+      "first_steps": [
+        "Construiești un laborator cu 1-2 domenii proprii și parcurgi o scanare completă, notând ce date apar și de unde.",
+        "Scrii un ghid de 10 pagini despre limite legale și etice (autorizare, GDPR) alături de ghidul tehnic.",
+        "Ții o sesiune gratuită într-o comunitate locală de IT pentru feedback înainte să pui un preț."
+      ]
+    }
+  ],
+  "updated_at": "2026-10-29",
+  "notes_summary": "Am citit README-ul, codul (sf.py, requirements, Dockerfile, CI), regulile de corelare și surse externe, fără să rulez nimic; documentația oficială nu are o secțiune de utilizare legală, deci avertismentele vin din README și din bunul simț.",
+  "notes": "Cercetat 2026-10-29 pe clona sandbox/spiderfoot (shallow), commit 0f815a203afebf05c98b605dba5cf0475a0ee5fd. Nu am instalat și nu am rulat nimic. Metadate GitHub (API): 24.024 stele, licență MIT (LICENSE: Copyright 2022 Steve Micallef, text MIT standard), ramura implicită master, ultimul commit pe master 2023-11-05, ultima versiune v4.0 (2022-04-07). pushed_at 2026-04-13 vine din ramuri secundare (dependabot, fix-install-error), nu din master; aproximativ 372 de issue-uri deschise (multe recente sunt spam, cu titluri de tip nume de utilizator) și 47 de PR-uri deschise. Pe Hacker News (item 40867574, 2024-07-03) un comentator a susținut că nu e în stare de funcționare din cauza lipsei de mentenanță, iar altul a răspuns că îl folosește frecvent și merge; nu am putut verifica nici una dintre afirmații. Recomandarea README este să folosești o versiune împachetată (v4.0), nu master. Site-ul spiderfoot.net redirecționează acum spre intel471.com (Intel 471 a cumpărat SpiderFoot în noiembrie 2022, conform comunicatelor găsite); paginile /documentation, /pricing și /open-source-vs-hx de acolo au dat 404, deci nu am putut citi documentația oficială de pe site și prețul HX este null (căutarea a găsit doar un reseller japonez cu trei planuri anuale, Freelancer, Business, Enterprise, fără sume). Documentația din repo (README, correlations/README.md) nu conține nicio secțiune de utilizare legală sau etică; README spune doar că poate fi folosit ofensiv (red team, test de penetrare) sau defensiv. Avertismentele despre autorizare din pagină sunt prudență generală, nu citate din documentație. Platforme: CI rulează doar pe ubuntu-latest și macos-latest (Python 3.7-3.10); Windows nu e menționat, iar Docker (alpine) e o variantă dedusă. Dockerfile-ul folosește Alpine 3.12/3.13 vechi; există un PR deschis pentru actualizare la Alpine 3.18. Costuri: Python verificat pe docs.python.org (licență PSF); Shodan Membership 49 USD o dată și Freelancer 69 USD/lună de pe account.shodan.io/billing (alte planuri: Small Business 359 USD/lună, Corporate 1099 USD/lună); HaveIBeenPwned: pagina de chei API nu arată prețuri, deci null; Dehashed și C99 sunt „Commercial API” în README, fără preț verificat. Maltego (pricing-plans, în EUR): Basic 0, Entry 3.000, Professional 7.500 per an; o căutare web a găsit și alte valori la agregatori (5.000 EUR, 6.600 USD, 999 USD), deci le-am ignorat. Detectify: de pe detectify.com/pricing. SANS SEC497: de pe pagina cursului. Nu am putut verifica dacă planul Basic Maltego permite uz comercial. Numărul de module: 234 fișiere în modules/ (include șabloane), README spune peste 200. Cele 98 „Free API” și 67 „Tiered API” sunt numărătoarea liniilor din tabelul README, nu o cifră oficială. Primii pași: povestea este articolul lui hakluke (2021-07-21), un om real, nu autorul repo-ului și nu firma care vinde produsul. Am citit-o prin WebFetch (rezumat generat de un model, nu textul brut), deci pașii urmăresc rezumatul; articolul folosește Aquatone, care este arhivat din 2022 (nu am verificat dacă încă merge cu un Chromium recent). Alte povești găsite: Medium (403), golinuxcloud (403), spiderfoot.net/intel471 (scrise de furnizor, excluse). Categoriile „Securitate și OSINT” și „Monitorizare și audit” au fost adăugate în content/categories.json la publicare. Glosar la publicare: au fost adăugați OSINT, subdomeniu, DNS, WHOIS, ASN, CIDR, SQLite, CSV, YAML, pip și suprafață de atac; „port” a devenit „port de rețea” (cuvânt românesc obișnuit), iar Tor nu apare în pagină și nu a fost adăugat; „cron” exista deja. Parteneri verificați la 2026-10-29: datasette (Apache-2.0, push 2026-10-23), httpx (MIT, 2026-10-28), nuclei (MIT, 2026-10-29), sherlock (MIT, 2026-10-29). Nu am cercetat Aquatone ca partener (arhivat). Alternative verificate: bbot (AGPL-3.0, 2026-10-29), theHarvester (GPL-2.0, 2026-10-22), recon-ng (GPL-3.0, 2026-10-05), subfinder (MIT, 2026-10-28), spiderfoot-ng (MIT, push 2026-06-03, 3 stele). Nu am citit spiderfoot-ng și nu pot spune dacă e fiabil. Nicio estimare de câștig: ideile arată doar prețurile concurenței."
+}

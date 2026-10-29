@@ -993,7 +993,8 @@
     "term": "cron",
     "aliases": [
       "program cron",
-      "cron job"
+      "cron job",
+      "crontab"
     ],
     "explanation": "program fix de rulare, de exemplu în fiecare oră"
   },
@@ -1226,5 +1227,82 @@
       "GPLv3"
     ],
     "explanation": "licență care cere publicarea codului derivat sub aceeași licență"
+  },
+  {
+    "term": "OSINT",
+    "aliases": [
+      "OSINT-ul"
+    ],
+    "explanation": "informații adunate din surse publice, accesibile oricui"
+  },
+  {
+    "term": "subdomeniu",
+    "aliases": [
+      "subdomenii",
+      "subdomeniile",
+      "sub-domenii"
+    ],
+    "explanation": "adresă ca blog.exemplu.ro, parte a unui site mai mare"
+  },
+  {
+    "term": "DNS",
+    "aliases": [],
+    "explanation": "agendă care leagă numele site-urilor de adrese IP"
+  },
+  {
+    "term": "WHOIS",
+    "aliases": [],
+    "explanation": "registru public cu datele de înregistrare ale unui domeniu"
+  },
+  {
+    "term": "ASN",
+    "aliases": [],
+    "explanation": "numărul unic al unei rețele mari de pe internet"
+  },
+  {
+    "term": "CIDR",
+    "aliases": [
+      "subrețea",
+      "subrețele"
+    ],
+    "explanation": "mod de a scrie un bloc întreg de adrese IP"
+  },
+  {
+    "term": "SQLite",
+    "aliases": [],
+    "explanation": "bază de date mică, ținută într-un singur fișier"
+  },
+  {
+    "term": "CSV",
+    "aliases": [],
+    "explanation": "tabel simplu în fișier text, deschis în Excel"
+  },
+  {
+    "term": "YAML",
+    "aliases": [],
+    "explanation": "format de text pentru reguli și setări, ușor de citit"
+  },
+  {
+    "term": "pip",
+    "aliases": [
+      "pip3"
+    ],
+    "explanation": "programul care instalează bibliotecile Python"
+  },
+  {
+    "term": "suprafață de atac",
+    "aliases": [
+      "suprafața de atac",
+      "attack surface"
+    ],
+    "explanation": "tot ce e expus pe internet și poate fi atacat"
+  },
+  {
+    "term": "port de rețea",
+    "aliases": [
+      "porturi de rețea",
+      "port deschis"
+    ],
+    "explanation": "număr prin care un server primește un anumit serviciu"
   }
 ]

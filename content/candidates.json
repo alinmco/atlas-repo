@@ -285,5 +285,33 @@
     "suggested_by": "caveman",
     "why": "Scripturi reutilizabile (json-peek, test-summary etc.) pe care agentul le rulează în loc să le rescrie de fiecare dată; ieșirea scurtă a unui script devine intrare pentru agent. Versiune pre-release (v0.1.0-rc.5), conform README.",
     "added_at": "2026-10-27"
+  },
+  {
+    "repo_url": "https://github.com/simonw/datasette",
+    "name": "Datasette",
+    "suggested_by": "spiderfoot",
+    "why": "Deschide baza spiderfoot.db (SQLite) într-o interfață web cu filtre și API JSON, cum face autorul poveștii din Primii pași.",
+    "added_at": "2026-10-29"
+  },
+  {
+    "repo_url": "https://github.com/projectdiscovery/httpx",
+    "name": "httpx",
+    "suggested_by": "spiderfoot",
+    "why": "Primește lista de nume de gazde găsite de SpiderFoot (exportată ca CSV sau JSON) și verifică care răspund efectiv pe web.",
+    "added_at": "2026-10-29"
+  },
+  {
+    "repo_url": "https://github.com/projectdiscovery/nuclei",
+    "name": "Nuclei",
+    "suggested_by": "spiderfoot",
+    "why": "Hosturile descoperite de SpiderFoot devin ținte pentru verificări de vulnerabilități; SpiderFoot are și un modul care îl poate porni (sfp_tool_nuclei).",
+    "added_at": "2026-10-29"
+  },
+  {
+    "repo_url": "https://github.com/sherlock-project/sherlock",
+    "name": "Sherlock",
+    "suggested_by": "spiderfoot",
+    "why": "Pentru un nume de utilizator găsit de SpiderFoot, caută conturile de pe alte rețele sociale, ca verificare suplimentară.",
+    "added_at": "2026-10-29"
   }
 ]
