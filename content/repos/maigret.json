@@ -1,0 +1,447 @@
+{
+  "slug": "maigret",
+  "repo_url": "https://github.com/soxoj/maigret",
+  "name": "Maigret",
+  "one_liner": "Caută un nume de utilizator pe mii de site-uri și adună conturile găsite.",
+  "problem_solved": "Ca să afli pe ce site-uri există conturi sub același nume de utilizator (de exemplu ale tale, ca să-ți verifici expunerea online), ar trebui să cauți manual pe mii de pagini. Maigret verifică automat site-urile și strânge într-un raport ce informații publice apar pe profilurile găsite.",
+  "features": [
+    "Verifică un nume de utilizator pe mii de site-uri (README: 5.900); implicit rulează pe cele mai vizitate 500",
+    "Extrage din profilurile găsite date publice (nume afișat, bio, locație, linkuri spre alte conturi)",
+    "Căutare recursivă: pornește singur noi căutări cu numele și ID-urile descoperite",
+    "Rapoarte HTML, PDF, XMind, JSON, CSV, TXT, graf interactiv și script Neo4j",
+    "Rulează din terminal, dintr-o interfață web locală, ca .exe pe Windows, în Docker sau ca bibliotecă Python",
+    "Poate trece prin proxy, Tor sau I2P; modul opțional --ai scrie un rezumat prin API compatibil OpenAI"
+  ],
+  "at_a_glance": {
+    "for_you_if": [
+      "Vrei să vezi ce conturi publice se leagă de pseudonimul tău sau al firmei tale.",
+      "Faci investigații OSINT autorizate (jurnalism, securitate, verificări cu consimțământ) și vrei un dosar automat."
+    ],
+    "not_for_you_if": [
+      "Vrei să cauți sau să urmărești o persoană fără știrea ei: documentația permite doar uz legal.",
+      "Ai nevoie de rezultate sigure: apar conturi ale unor omonimi și site-uri ratate."
+    ],
+    "verdict": "Unealtă OSINT gratuită, activă și ușor de pornit, dar rezultatele cer verificare manuală și folosirea pe numele altcuiva cere prudență legală."
+  },
+  "cost": {
+    "level": "gratuit complet",
+    "summary": "Programul e gratuit (MIT) și nu are nevoie de chei API; rezumatul --ai e opțional și merge doar cu cheie API plătită pe consum, nu cu abonament ChatGPT sau Claude.",
+    "ai_access": {
+      "mode": "doar API",
+      "detail": "Funcția opțională --ai trimite raportul la un endpoint compatibil OpenAI și cere o cheie API (OPENAI_API_KEY); documentația nu menționează abonamente, iar fără cheie funcția rămâne inactivă.",
+      "source_url": "https://github.com/soxoj/maigret/blob/467ce79812756d6c4d5864a223479e6cb89a775f/docs/source/privacy.rst"
+    },
+    "items": [
+      {
+        "what": "Python 3.10 sau mai nou (limbajul în care e scris), necesar doar la instalarea cu pip; .exe, Snap și Docker nu îl cer",
+        "price": "gratuit (licență PSF, uz comercial permis)",
+        "required": false,
+        "source_url": "https://docs.python.org/3/license.html"
+      },
+      {
+        "what": "Docker (opțional, pentru imaginile soxoj/maigret:latest și soxoj/maigret:web)",
+        "price": "plan Personal: 0 USD/lună",
+        "required": false,
+        "source_url": "https://www.docker.com/pricing/"
+      },
+      {
+        "what": "Cheie API OpenAI sau compatibilă (opțional, doar pentru rezumatul --ai; endpointul poate fi și un server local sau OpenRouter)",
+        "price": null,
+        "required": false,
+        "source_url": "https://github.com/soxoj/maigret/blob/467ce79812756d6c4d5864a223479e6cb89a775f/README.md"
+      },
+      {
+        "what": "Proxy rezidențial (opțional, recomandat de documentație când rulezi de pe un server/VPS și apar multe erori 403); exemplu: RapidProxy, sponsor în README",
+        "price": "de la 0,55 USD/GB, proxy rotativ (pagina principală, 2026-10-29)",
+        "required": false,
+        "source_url": "https://www.rapidproxy.io/"
+      },
+      {
+        "what": "FlareSolverr în Docker (opțional, pentru site-urile protejate de Cloudflare; funcție experimentală)",
+        "price": null,
+        "required": false,
+        "source_url": "https://github.com/soxoj/maigret/blob/467ce79812756d6c4d5864a223479e6cb89a775f/README.md"
+      },
+      {
+        "what": "Baza de site-uri actualizată zilnic și API de verificare username, oferite de autor pe bază de contact (e-mail)",
+        "price": null,
+        "required": false,
+        "source_url": "https://github.com/soxoj/maigret/blob/467ce79812756d6c4d5864a223479e6cb89a775f/README.md"
+      }
+    ]
+  },
+  "platforms": {
+    "windows": "da",
+    "mac": "da",
+    "linux": "da",
+    "note": "Windows: maigret_standalone.exe din Releases; Linux: Snap (amd64 și arm64) sau pip; macOS apare în instrucțiunile de instalare (Homebrew) pentru dependențele de PDF. Docker e documentat fără restricții de sistem de operare. Nu am găsit o declarație explicită „macOS suportat”, deci macOS e dedus din pip și din pașii Homebrew.",
+    "source_url": "https://github.com/soxoj/maigret/blob/467ce79812756d6c4d5864a223479e6cb89a775f/docs/source/installation.rst"
+  },
+  "risk_flags": [
+    {
+      "flag": "trimite date în cloud",
+      "detail": "Numele căutat e trimis către site-urile verificate (cererile sunt vizibile pentru ele), iar cu --ai raportul întreg pleacă la API-ul OpenAI sau la endpointul ales; documentația spune că nu există telemetrie.",
+      "source_url": "https://github.com/soxoj/maigret/blob/467ce79812756d6c4d5864a223479e6cb89a775f/docs/source/privacy.rst"
+    }
+  ],
+  "audience_reason": "pornește ușor, dar rezultatele cer verificare manuală și judecată legală și etică despre ce ai voie să cauți",
+  "setup_difficulty_reason": "o comandă pip sau un .exe pe Windows, fără chei API și fără hardware special",
+  "analogy": "Ca un detectiv care are un singur indiciu, un pseudonim, și bate la ușa a mii de site-uri întrebând „stai aici cineva cu numele ăsta?”, apoi notează ce se vede pe fiecare ușă deschisă.",
+  "how_it_works": [
+    "Pas 1, intrare: dai unul sau mai multe nume de utilizator (sau un link de profil cu --parse, sau alt tip de ID cu --id-type).",
+    "Pas 2, verificare: Maigret cere pe rând paginile de profil de pe site-urile din baza lui de date (implicit primele 500 după trafic, toate cu -a) și decide dacă contul există.",
+    "Pas 3, extragere: din paginile găsite scoate date publice cu biblioteca socid-extractor (nume, bio, locație, linkuri spre alte conturi).",
+    "Pas 4, recursivitate: dacă găsește alte nume sau ID-uri, pornește căutări noi cu ele (se poate opri cu --no-recursion).",
+    "Pas 5, ieșire: scrie rapoarte în folderul reports (HTML, PDF, JSON, CSV, graf și altele) și, opțional, un rezumat scris de un model AI."
+  ],
+  "first_steps": {
+    "origin": "experiență utilizator",
+    "story_url": "https://www.it-connect.tech/what-accounts-do-you-really-have-online-three-osint-tools-to-find-out/",
+    "story_platform": "blog",
+    "story_date": "2026-08-10",
+    "title": "Verificarea propriei expuneri online cu Maigret, în Docker",
+    "intro": "Un inginer de sisteme și rețele a vrut să vadă câte conturi se pot lega de propria identitate și a testat Maigret doar pe datele lui: „I am running the demonstrations only on my own identity.”",
+    "steps": [
+      {
+        "you_do": "Creează un folder și un fișier docker-compose.yml cu două servicii: interfața web (imaginea soxoj/maigret:web, port 5000) și linia de comandă (soxoj/maigret:latest), aceasta din urmă pornită doar la cerere.",
+        "what_happens": "Docker pregătește Maigret fără instalare de Python; imaginile sunt cele publicate de proiect.",
+        "source_url": "https://github.com/soxoj/maigret/blob/467ce79812756d6c4d5864a223479e6cb89a775f/README.md"
+      },
+      {
+        "you_do": "Rulează docker compose up -d în folderul Maigret și deschide http://localhost:5000.",
+        "what_happens": "Apare interfața web locală, unde se introduc unul sau mai multe nume separate prin spațiu.",
+        "source_url": "https://www.it-connect.tech/what-accounts-do-you-really-have-online-three-osint-tools-to-find-out/"
+      },
+      {
+        "you_do": "Introduce propriul nume și alege dacă bifează „Search All Sites”; fără bifă se caută doar în primele 500 de site-uri.",
+        "what_happens": "Maigret verifică site-urile din baza lui de date (peste 3.000, după autor).",
+        "source_url": "https://www.it-connect.tech/what-accounts-do-you-really-have-online-three-osint-tools-to-find-out/"
+      },
+      {
+        "you_do": "Așteaptă câteva minute și citește rezultatele.",
+        "what_happens": "Primește un graf care leagă conturile de nume, o listă cu linkurile găsite și opțiuni de export PDF sau HTML.",
+        "source_url": "https://www.it-connect.tech/what-accounts-do-you-really-have-online-three-osint-tools-to-find-out/"
+      },
+      {
+        "you_do": "Verifică manual fiecare cont găsit.",
+        "what_happens": "Unele conturi aparțin altor persoane cu același nume, uneori evident din poza de profil; autorul avertizează că pot apărea și fals pozitive.",
+        "source_url": "https://www.it-connect.tech/what-accounts-do-you-really-have-online-three-osint-tools-to-find-out/"
+      },
+      {
+        "you_do": "Folosește lista ca punct de plecare și urmează sfaturile din articol: nume de utilizator diferit pe fiecare site, alias de e-mail pentru fiecare serviciu, ștergerea conturilor nefolosite.",
+        "what_happens": "Articolul prezintă aceste sfaturi în secțiunea „Reduce Your Own Digital Footprint”.",
+        "source_url": "https://www.it-connect.tech/what-accounts-do-you-really-have-online-three-osint-tools-to-find-out/"
+      }
+    ],
+    "takeaway": "După autor, ideea utilă e defensivă: vezi ce se poate reconstrui despre tine și acționezi. Articolul nu compară cu căutarea manuală și nu dă numere de conturi găsite."
+  },
+  "categories": [
+    "Securitate și OSINT",
+    "Monitorizare și audit"
+  ],
+  "search_intents": [
+    "vreau să aflu pe ce site-uri există conturi cu același nume de utilizator",
+    "vreau să văd ce informații publice se leagă de pseudonimul meu",
+    "vreau să-mi verific amprenta digitală după username",
+    "vreau o unealtă OSINT gratuită pentru căutare după nume de utilizator",
+    "vreau să generez un raport HTML sau PDF cu conturile găsite pentru un username"
+  ],
+  "audience": "intermediar",
+  "setup_difficulty": "ușor",
+  "replaces": [
+    {
+      "service": "OSINT Industries",
+      "service_url": "https://www.osint.industries/",
+      "price": "plan Basic £19/lună (30 de credite), Intermediate £49/lună (100), Advanced £99/lună (300), cu căutări după e-mail, telefon și username",
+      "price_source_url": "https://www.osint.industries/pricing",
+      "price_checked_at": "2026-10-29",
+      "replacement_level": "doar pentru cazuri simple",
+      "what_you_keep": [
+        "căutarea după nume de utilizator pe mii de site-uri",
+        "date publice extrase din profiluri și conturi legate",
+        "rapoarte exportabile (HTML, PDF, JSON, CSV)"
+      ],
+      "what_you_lose": [
+        "căutarea după e-mail și telefon (Maigret acceptă doar username și câteva tipuri de ID, e-mailul e în afara domeniului lui)",
+        "acces API gata făcut, suport și o interfață găzduită",
+        "baza de surse a serviciului, întreținută de o echipă"
+      ],
+      "hidden_costs": [
+        "timp de verificare manuală a conturilor omonime",
+        "uneori proxy rezidențial, dacă rulezi de pe server",
+        "actualizările bazei de site-uri vin din comunitate, fără contract"
+      ]
+    },
+    {
+      "service": "Maigret găzduit pe Apify (actor „Maigret Username OSINT”, al unei terțe părți)",
+      "service_url": "https://apify.com/bovi/maigret-username-osint",
+      "price": "19 USD per 1.000 de profiluri găsite (pay-per-event)",
+      "price_source_url": "https://apify.com/bovi/maigret-username-osint",
+      "price_checked_at": "2026-10-29",
+      "replacement_level": "aproape complet",
+      "what_you_keep": [
+        "același motor Maigret, rulat de tine, cu aceleași filtre (tag-uri, top N site-uri)",
+        "rezultate pe profil: URL, site, categorii, linkuri externe"
+      ],
+      "what_you_lose": [
+        "nimic din motor, dar pierzi rularea în cloud, programarea și exportul gata făcut al platformei",
+        "adresele IP ale platformei, care pot trece mai bine de blocaje decât IP-ul tău"
+      ],
+      "hidden_costs": [
+        "timpul de instalare și actualizare",
+        "mulți factori de blocare dacă rulezi de pe un VPS (proxy rezidențial, cost variabil)"
+      ]
+    },
+    {
+      "service": "Maltego (analiză de legături între identități)",
+      "service_url": "https://www.maltego.com/",
+      "price": "Basic 0 EUR (credite limitate), Entry 3.000 EUR/an, Professional 7.500 EUR/an",
+      "price_source_url": "https://www.maltego.com/pricing-plans/",
+      "price_checked_at": "2026-10-29",
+      "replacement_level": "doar pentru cazuri simple",
+      "what_you_keep": [
+        "pasul „dintr-un username aflu conturile legate de el”",
+        "graful interactiv al rezultatelor (--graph) și exportul pentru Neo4j"
+      ],
+      "what_you_lose": [
+        "platforma completă de investigații cu zeci de surse de date și transformări",
+        "lucru în echipă, istoric al investigațiilor și suport comercial"
+      ],
+      "hidden_costs": [
+        "Maltego e o platformă largă; Maigret acoperă doar o felie din ea",
+        "timp pentru a lega singur rezultatele din Maigret cu alte surse"
+      ]
+    }
+  ],
+  "examples": [
+    {
+      "title": "Instalare cu pip și prima căutare",
+      "scenario": "Instalezi pachetul cu pip și rulezi Maigret pe un nume de utilizator. README-ul spune „YOUR_USERNAME”: folosește propriul tău nume de utilizator sau al unei persoane care și-a dat acordul. Pe Windows poți descărca în schimb maigret_standalone.exe din Releases și rula maigret_standalone.exe USERNAME.",
+      "prerequisites": [
+        "Python 3.10 sau mai nou și pip",
+        "conexiune la internet"
+      ],
+      "commands": [
+        "pip install maigret",
+        "maigret YOUR_USERNAME"
+      ],
+      "code": "",
+      "output_from_docs": null,
+      "source_url": "https://github.com/soxoj/maigret/blob/467ce79812756d6c4d5864a223479e6cb89a775f/README.md",
+      "kind": "instalare"
+    },
+    {
+      "title": "Căutare filtrată pe categorii și rapoarte HTML și PDF",
+      "scenario": "După instalare, restrângi căutarea la site-uri de programare cu o etichetă (tag) sau cauți pe toate site-urile și salvezi un raport HTML și unul PDF în folderul reports. Documentația folosește numele de probă machine42; tu pui numele pe care ai voie să-l cauți. Raportul PDF cere extra-ul maigret[pdf]. Documentația arată și un exemplu de ieșire pe contul real al autorului; l-am omis ca să nu reproducem date personale.",
+      "prerequisites": [
+        "Maigret instalat",
+        "pentru --pdf: pip install 'maigret[pdf]' (pe Linux/macOS și bibliotecile de sistem cairo și pkg-config)"
+      ],
+      "commands": [
+        "maigret machine42 --tags coding",
+        "maigret machine42 -a --html --pdf"
+      ],
+      "code": "",
+      "output_from_docs": null,
+      "source_url": "https://github.com/soxoj/maigret/blob/467ce79812756d6c4d5864a223479e6cb89a775f/docs/source/usage-examples.rst",
+      "kind": "folosire"
+    }
+  ],
+  "connectors": {
+    "inputs": [
+      "unul sau mai multe nume de utilizator (text), pe linia de comandă sau în interfața web",
+      "URL de profil, cu --parse, din care se extrag ID-urile și numele",
+      "alt tip de identificator (de exemplu qq_id sau bilibili_id), cu --id-type",
+      "fișier text cu un identificator pe rând, cu --input-file (apare în CHANGELOG, versiunea 0.6.6)"
+    ],
+    "outputs": [
+      "rapoarte HTML, PDF și XMind în folderul reports",
+      "JSON (--json simple sau ndjson), CSV și TXT",
+      "graf interactiv D3 în HTML (--graph)",
+      "script Cypher pentru Neo4j (--neo4j), cu importul prin cypher-shell",
+      "rezumat text în terminal, cu --ai (prin API compatibil OpenAI)"
+    ],
+    "pairs_well_with": [
+      {
+        "repo_url": "https://github.com/sherlock-project/sherlock",
+        "name": "Sherlock",
+        "why": "Instrument cu aceeași idee (MIT, activ în 2026); rulezi ambele pe același nume și compari listele ca să prinzi fals pozitive.",
+        "in_catalog": true
+      },
+      {
+        "repo_url": "https://github.com/soxoj/socid-extractor",
+        "name": "socid-extractor",
+        "why": "Biblioteca pe care Maigret o folosește la extragerea datelor din profil; o poți rula separat pe o pagină salvată ca să scoată ID-uri și linkuri în JSON.",
+        "in_catalog": false
+      },
+      {
+        "repo_url": "https://github.com/neo4j/neo4j",
+        "name": "Neo4j",
+        "why": "Fișierul .cypher generat de Maigret cu --neo4j se importă în Neo4j și devine un graf de conturi pe care poți face interogări.",
+        "in_catalog": false
+      },
+      {
+        "repo_url": "https://github.com/kaifcodec/user-scanner",
+        "name": "user-scanner",
+        "why": "FAQ-ul Maigret îl recomandă pentru e-mail: adresele de e-mail extrase de Maigret din profiluri devin intrarea pentru user-scanner.",
+        "in_catalog": false
+      },
+      {
+        "repo_url": "https://github.com/sharsil/mailcat",
+        "name": "mailcat",
+        "why": "Tot din FAQ-ul Maigret: verifică în ce servicii de e-mail există o adresă găsită de Maigret într-un profil.",
+        "in_catalog": false
+      }
+    ],
+    "gaps_noticed": [
+      "Căutarea după e-mail sau telefon nu face parte din Maigret; ce găsește el în profiluri trebuie copiat manual în alte unelte.",
+      "Rezultatele nu spun dacă un cont aparține persoanei căutate sau unui omonim; verificarea rămâne manuală.",
+      "Rapoartele sunt fișiere pe o singură rulare; în documentație nu am găsit comparație automată între rulări sau monitorizare periodică.",
+      "Rezumatul --ai cere o cheie API pe consum; nu există o cale documentată prin abonament."
+    ]
+  },
+  "when_not_to_use": [
+    "Pentru a căuta, urmări sau aduna un dosar despre o persoană fără acordul ei: documentația cere uz legal și lasă răspunderea pe utilizator (GDPR, CCPA).",
+    "Prudență din partea atlasului, nu din documentație: chiar date publice, adunate într-un dosar despre o persoană, pot fi tratate ca date personale; pentru cazuri profesionale cere un temei legal clar sau sfatul unui jurist.",
+    "Când ai nevoie de certitudine: documentația și autorul articolului de pe it-connect avertizează de conturi ale omonimilor, de fals pozitive și de site-uri ratate din cauza blocajelor.",
+    "De pe un server sau VPS: ghidul de depanare spune că adresele de datacenter sunt blocate de multe site-uri, deci apar multe erori 403.",
+    "Dacă pui interfața web online: instanța de pe Render nu are autentificare, deci oricine are linkul o poate folosi.",
+    "Dacă ai nevoie de suport sau de o bază de site-uri actualizată zilnic cu contract: aceasta o oferă autorul separat, pe bază de contact."
+  ],
+  "alternatives": [
+    {
+      "name": "Sherlock",
+      "url": "https://github.com/sherlock-project/sherlock",
+      "difference": "Documentația Maigret (docs/source/philosophy.rst) spune că a pornit ca fork al lui Sherlock. Sherlock e mai simplu: verifică doar dacă numele e ocupat pe peste 400 de site-uri și scrie adresele găsite în txt, CSV sau Excel, fără date din profil."
+    },
+    {
+      "name": "WhatsMyName",
+      "url": "https://github.com/WebBreacher/WhatsMyName",
+      "difference": "Listă comunitară de site-uri pentru verificarea username-urilor, cu o bază diferită; completează căutările, nu le înlocuiește (după un articol dev.to; nu o verificăm în codul Maigret)."
+    },
+    {
+      "name": "SpiderFoot",
+      "url": "https://github.com/smicallef/spiderfoot",
+      "difference": "Colectează informații despre domenii, IP-uri, e-mailuri și nume prin sute de module, nu doar nume de utilizator; dezvoltarea pe ramura principală e oprită din 2023."
+    },
+    {
+      "name": "user-scanner",
+      "url": "https://github.com/kaifcodec/user-scanner",
+      "difference": "Verifică atât e-mail, cât și username; FAQ-ul Maigret îl recomandă pentru partea de e-mail."
+    }
+  ],
+  "tech_sheet": {
+    "license": "MIT",
+    "language": "Python",
+    "commit_sha": "467ce79812756d6c4d5864a223479e6cb89a775f",
+    "last_commit_date": "2026-10-27",
+    "stars": 39498,
+    "requirements": [
+      "Instalare cu pip: Python 3.10 sau mai nou (recomandat 3.11) și pip; comenzi: pip3 install maigret, apoi maigret username",
+      "Alternativ pe Windows: fișierul maigret_standalone.exe din pagina Releases a proiectului, fără Python",
+      "Alternativ pe Linux: sudo snap install maigret (amd64 și arm64, fără Python), rulat dintr-un director din home",
+      "Alternativ cu Docker: imaginea soxoj/maigret:latest (linia de comandă) sau soxoj/maigret:web (interfața web pe portul 5000)",
+      "Pe distribuții Linux recente (Debian, Ubuntu, Fedora) pip poate da eroarea externally-managed-environment: se recomandă pipx install maigret sau uv tool install maigret",
+      "Doar pentru rapoarte PDF: pip3 install 'maigret[pdf]'; pe Linux și macOS cere și bibliotecile de sistem cairo, pkg-config și un compilator C (pe Windows nu cere nimic în plus)",
+      "Conexiune la internet; pentru rezultate bune rulează dintr-o rețea de acasă sau mobilă, nu de pe un server (erori 403)",
+      "Nu cere conturi sau chei API pentru funcționarea de bază",
+      "Opțional: demon Tor sau I2P pornit separat (pentru site-uri .onion și .i2p), FlareSolverr în Docker (pentru --cloudflare-bypass) și OPENAI_API_KEY pentru --ai"
+    ]
+  },
+  "monetization": [
+    {
+      "model": "consultanță și training",
+      "what_you_sell": "Un audit al expunerii online făcut cu acordul scris al persoanei sau firmei auditate: rulezi Maigret pe pseudonimele ei, verifici manual conturile și predai un raport cu ce se vede public și ce se poate șterge sau restrânge. Poți vinde și un atelier scurt despre igiena numelor de utilizator.",
+      "for_whom": "Persoane publice, creatori de conținut, firme mici și echipe care vor să știe ce poate afla un străin din pseudonimele lor.",
+      "license_check": {
+        "license": "MIT",
+        "commercial_use": "permis",
+        "conditions": "MIT permite uzul comercial; păstrezi nota de drepturi de autor dacă redistribui codul. README-ul spune explicit că versiunea open-source e gratuită pentru uz comercial. Datele rămân sub legile de protecție a datelor (GDPR): lucrezi doar cu consimțământ scris și păstrezi raportul securizat."
+      },
+      "path": "folosești repo-ul direct",
+      "own_build_notes": null,
+      "demand_evidence": [
+        {
+          "name": "OSINT Industries",
+          "url": "https://www.osint.industries/pricing",
+          "price": "£19/lună (Basic), £49/lună (Intermediate), £99/lună (Advanced)",
+          "what_it_proves": "Există clienți care plătesc lunar pentru căutări de identitate după username, e-mail și telefon.",
+          "checked_at": "2026-10-29"
+        },
+        {
+          "name": "DeleteMe",
+          "url": "https://joindeleteme.com/pricing/",
+          "price": null,
+          "what_it_proves": "Există un serviciu plătit anual care reduce expunerea datelor personale (planuri pentru 1, 2 sau 4 persoane); pagina nu arăta prețul la verificare.",
+          "checked_at": "2026-10-29"
+        },
+        {
+          "name": "SANS SEC497: Practical OSINT",
+          "url": "https://www.sans.org/cyber-security-courses/practical-open-source-intelligence",
+          "price": "8.780 USD (variantă OnDemand)",
+          "what_it_proves": "Training-ul OSINT, inclusiv căutarea după username, se vinde profesioniștilor la prețuri mari.",
+          "checked_at": "2026-10-29"
+        }
+      ],
+      "startup_cost": "Practic zero pentru software; timp de învățare a legislației de protecție a datelor și un contract-model de consimțământ.",
+      "time_to_first_client": "Necunoscut; depinde de rețeaua ta și de încrederea pe care o poți arăta.",
+      "difficulty": "mediu",
+      "risks": [
+        "Dacă tratezi date despre alte persoane fără consimțământ, poți încălca GDPR și legile locale; răspunderea e a ta, nu a autorilor.",
+        "Concurență gratuită: oricine poate rula chiar Maigret și poate citi singur raportul.",
+        "Rezultatele includ omonimi și pierd site-uri, deci un raport greșit îți poate strica reputația.",
+        "Serviciile plătite (OSINT Industries, DeleteMe) au echipe, suport și surse proprii."
+      ],
+      "first_steps": [
+        "Rulează Maigret pe propriul tău nume de utilizator și verifică manual rezultatele ca să vezi cât de mult zgomot apare.",
+        "Scrie un contract-model de consimțământ și o listă de verificare a raportului (unde ai găsit contul, cum ai confirmat că e al persoanei).",
+        "Propune întâi un audit gratuit sau mic unui cunoscut care ți-a dat acordul scris, ca să ai un raport-model."
+      ]
+    },
+    {
+      "model": "găzduire gestionată",
+      "what_you_sell": "O instanță privată de Maigret (interfață web sau API intern) pentru o echipă mică de investigatori sau o firmă de securitate, cu autentificare, actualizări și proxy-uri configurate, în locul instanței publice fără login din README.",
+      "for_whom": "Echipe mici de OSINT, jurnaliști de investigație și firme de securitate care nu vor să-și întrețină singure uneltele.",
+      "license_check": {
+        "license": "MIT",
+        "commercial_use": "permis",
+        "conditions": "MIT permite uzul comercial și revânzarea; README-ul spune că versiunea open-source este gratuită pentru uz comercial fără restricții. Autorul vinde separat o bază privată de site-uri, actualizată zilnic, și un API, ceea ce te face concurent direct al lui."
+      },
+      "path": "folosești repo-ul direct",
+      "own_build_notes": null,
+      "demand_evidence": [
+        {
+          "name": "Apify, actor „Maigret Username OSINT” (terță parte)",
+          "url": "https://apify.com/bovi/maigret-username-osint",
+          "price": "19 USD per 1.000 de profiluri găsite",
+          "what_it_proves": "Cineva vinde deja Maigret găzduit, cu plata pe profil găsit.",
+          "checked_at": "2026-10-29"
+        },
+        {
+          "name": "Social Links Crimewall (produs comercial care folosește Maigret, conform README)",
+          "url": "https://sociallinks.io/products/sl-crimewall",
+          "price": null,
+          "what_it_proves": "README-ul îl listează ca produs comercial construit pe Maigret, deci există cumpărători pentru investigații pe bază de username.",
+          "checked_at": "2026-10-29"
+        }
+      ],
+      "startup_cost": "Un server mic sau un cont cloud, domeniu și proxy rezidențial; costurile reale nu le-am verificat.",
+      "time_to_first_client": "Necunoscut.",
+      "difficulty": "greu",
+      "risks": [
+        "Răspundere pe date personale: găzduiești căutări despre oameni, deci GDPR, jurnale de acces și o politică de utilizare clară.",
+        "Ghidul de depanare spune că adresele de datacenter sunt blocate, deci ai nevoie de proxy rezidențial, cu cost variabil.",
+        "Baza de site-uri se strică în timp; autorul vinde separat o bază actualizată zilnic, iar varianta publică se actualizează din comunitate.",
+        "Concurență gratuită: botul Telegram al comunității, instanța Render și oricine rulează Docker singur."
+      ],
+      "first_steps": [
+        "Pornește imaginea soxoj/maigret:web într-un mediu de test, în spatele unei autentificări, și observă ce se blochează.",
+        "Scrie o politică de utilizare (doar scopuri legale, jurnalizare) înainte să oferi accesul cuiva.",
+        "Citește condițiile de pe pagina autorului pentru baza privată și API, ca să știi unde te suprapui."
+      ]
+    }
+  ],
+  "updated_at": "2026-10-29",
+  "notes_summary": "Am citit README-ul, documentația și codul de la commit-ul 467ce79 și n-am rulat nimic; numărul exact de site-uri variază între README (5.900) și CHANGELOG (5.203).",
+  "notes": "Draft nou, 2026-10-29. Citit: README.md, docs/source (installation, settings, privacy, faq, features, usage-examples, philosophy, library-usage, index), TROUBLESHOOTING.md, CHANGELOG.md, LICENSE (MIT, Soxoj, 2020-2026), pyproject.toml, Dockerfile, db_updater.py, ai.py. Nu am rulat codul. Stele: 39.498 (API GitHub, 2026-10-29); ultimul commit pe main 2026-10-27; ultima versiune 0.6.6 (2026-09-18); există și o versiune nightly-main. Divergență: README spune 5.900 de site-uri, CHANGELOG 0.6.6 spune 2.611 active în 0.6.5 și 5.203 acum, iar documentația și articolele folosesc „3.000+”; am citat README-ul și am pus cifra între paranteze. Confidențialitate: docs/source/privacy.rst spune că Maigret nu are telemetrie și nu trimite nimic dezvoltatorilor; baza de date se descarcă periodic din GitHub (o cerere de ~200 de octeți o dată la 24 de ore, dezactivabilă cu --no-autoupdate), conform settings.rst. Nu am marcat asta ca telemetrie, pentru că documentația o descrie ca descărcare de bază de date. Uz legal și etic: din documentație vine doar avertismentul „educational and lawful purposes only”, cu GDPR/CCPA menționate (README, docs/index.rst); frazele despre date publice adunate într-un dosar și despre consimțământ sunt prudența atlasului, marcate astfel în text. Contextul etic: un comentariu din discuția Hacker News din 2022 (item 33061058) observa că pagina Philosophy nu amintea etica; documentația actuală are acum avertismentul în index.rst și README. Exemple: nu am copiat ieșirea din features.rst, fiindcă folosește profilul real al autorului (nume, locație, bio); am pus output_from_docs null. Exemplele folosesc placeholdere din documentație (YOUR_USERNAME, machine42). Primii pași: povestea e de pe it-connect.tech (Florian Burnel, 2026-08-10, versiune în engleză a articolului francez), prima persoană, rulat doar pe propria identitate; am citit-o prin WebFetch, deci pașii vin dintr-un rezumat automat al paginii, nu din textul brut, iar citatul din intro e din concluzia articolului (11 cuvinte). Nu dă numere de conturi găsite. Alte povești căutate: dev.to (articolul Flowork e recenzie generică, scrisă după citirea README-ului; „Username Pivoting” e ghid general), HN (fără poveste first-hand), Maltego (pagina blogului dă 404). Prețuri verificate azi: osint.industries/pricing (monede £ pe carduri lunare; cardurile anuale arată USD cu text-marcaj, nefolosite), maltego.com/pricing-plans (EUR, Entry 3.000, Professional 7.500, pe an), apify.com/bovi/maigret-username-osint (19 USD / 1.000 de profiluri), docker.com/pricing (Personal 0), rapidproxy.io (de la 0,55 USD/GB; README-ul zice 0,65 USD/GB, am folosit pagina oficială), sans.org SEC497 (8.780 USD OnDemand). joindeleteme.com/pricing nu arăta suma (null). UserSearch.ai: 403 la WebFetch și nimic în căutare, deci n-am pus preț. Noimosiny, ThorData: sponsori în README (reclame); nu le-am verificat prețurile. Social Links Crimewall: produs menționat în README la „Used by”; pagina lui nu a fost deschisă. Apify actorul bovi e al unei terțe părți, ne-oficial. Legături: socid-extractor (commit 2026-10-26), mailcat (2026-09-05), user-scanner (2026-10-28), Neo4j (2026-10-20), WhatsMyName (2026-10-27), Sherlock (2026-10-29) — toate cu commit în ultimele 12 luni; holehe exclus (ultimul push 2024-09). SpiderFoot pus doar la alternative (master oprit din 2023). Sherlock cercetat în paralel; nu există încă drafts/sherlock.json la momentul scrierii, deci diferența e formulată prudent. Nu am verificat FlareSolverr și instanța Render; sunt doar din README. Categorii: ambele existente în content/categories.json (Securitate și OSINT; Monitorizare și audit). Nu am estimat câștiguri. Autorul vinde separat o bază de site-uri privată și un API (README, „Commercial Use”)."
+}

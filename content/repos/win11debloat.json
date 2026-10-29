@@ -1,0 +1,394 @@
+{
+  "slug": "win11debloat",
+  "repo_url": "https://github.com/Raphire/Win11Debloat",
+  "name": "Win11Debloat",
+  "one_liner": "Curăță Windows de aplicații inutile, reclame și urmărire, dintr-un singur script.",
+  "problem_solved": "Windows vine cu aplicații preinstalate, reclame, sugestii și colectare de date pe care le oprești greu, setare cu setare. Win11Debloat le dezactivează sau le elimină dintr-o singură rulare, după alegerea ta.",
+  "features": [
+    "Elimină aplicații preinstalate (Microsoft, producătorul PC-ului, jocuri și altele) din lista din Apps.json",
+    "Dezactivează telemetria, istoricul de activitate, reclamele și sugestiile din Windows, ecranul de blocare și Edge",
+    "Oprește Copilot, Recall și Click to Do, plus funcții AI din Edge, Chrome, Paint și Notepad",
+    "Ajustări de aspect: meniul clasic, bara de activități, Start, File Explorer, mod întunecat",
+    "Copie de siguranță a setărilor din registrul Windows înainte de modificări, cu restaurare din meniu",
+    "Interfață grafică, meniu în linia de comandă sau parametri pentru automatizare; config exportabil și importabil"
+  ],
+  "at_a_glance": {
+    "for_you_if": [
+      "Ai un PC Windows nou, plin de reclame și aplicații pe care nu le folosești.",
+      "Vrei să oprești urmărirea și funcțiile AI din Windows fără să cauți fiecare setare."
+    ],
+    "not_for_you_if": [
+      "Folosești un PC administrat de angajator sau școală, cu reguli stabilite de IT.",
+      "Nu vrei să rulezi un script descărcat de pe internet cu drepturi de administrator."
+    ],
+    "verdict": "Unealtă gratuită, populară și bine documentată pentru un Windows mai curat, dar modifică adânc sistemul: fă înainte punct de restaurare și copie a datelor."
+  },
+  "cost": {
+    "level": "gratuit complet",
+    "summary": "Scriptul e gratuit (licență MIT) și nu folosește AI, deci nu ai nevoie de abonament sau cheie AI; ai nevoie doar de un Windows 10 sau 11 pe care îl ai deja.",
+    "ai_access": {
+      "mode": "nu folosește AI",
+      "detail": "Sunt scripturi PowerShell, fișiere de setări și liste de aplicații; în cod și în documentație nu apare niciun serviciu AI.",
+      "source_url": "https://github.com/Raphire/Win11Debloat/blob/d2cb97a4ef8631e8cfa3307e89280e0b0326f540/README.md"
+    },
+    "items": [
+      {
+        "what": "Windows 10 sau Windows 11 (licența Windows pe care o ai deja pe PC)",
+        "price": null,
+        "required": true,
+        "source_url": "https://github.com/Raphire/Win11Debloat/wiki"
+      },
+      {
+        "what": "WinGet (instalatorul de aplicații Windows, folosit la eliminarea unor aplicații)",
+        "price": "gratuit (licență MIT)",
+        "required": false,
+        "source_url": "https://github.com/microsoft/winget-cli"
+      },
+      {
+        "what": "Donație voluntară pe Ko-fi pentru autor",
+        "price": null,
+        "required": false,
+        "source_url": "https://github.com/Raphire/Win11Debloat/blob/d2cb97a4ef8631e8cfa3307e89280e0b0326f540/README.md"
+      }
+    ]
+  },
+  "platforms": {
+    "windows": "da",
+    "mac": "nu",
+    "linux": "nu",
+    "note": "Funcționează pe Windows 10 și 11, dar unele funcții sunt doar pentru Windows 11, iar modul Sysprep nu merge pe Windows 10 (din cod). Cere Windows PowerShell 5.1: în PowerShell 7 (pwsh) se oprește singur. Mac și Linux: „nu” este dedus din faptul că scriptul modifică registrul Windows, nu e scris explicit.",
+    "source_url": "https://github.com/Raphire/Win11Debloat/blob/d2cb97a4ef8631e8cfa3307e89280e0b0326f540/Win11Debloat.ps1"
+  },
+  "risk_flags": [
+    {
+      "flag": "modifică setările altor programe",
+      "detail": "Schimbă setări din Windows și politici locale pentru Edge, Chrome, Brave, Paint și Notepad; Windows poate afișa apoi „managed by your organization”, deși PC-ul nu e administrat de nimeni.",
+      "source_url": "https://github.com/Raphire/Win11Debloat/wiki"
+    }
+  ],
+  "audience_reason": "pornirea e simplă, dar trebuie să știi ce aplicații și setări poți elimina fără să strici ceva",
+  "setup_difficulty_reason": "o singură comandă sau un fișier .bat, fără chei și fără hardware special",
+  "analogy": "Ca o curățenie generală într-o casă nou mobilată: arunci cutiile și reclamele din cutia poștală, dar tu alegi ce pleacă, iar unele lucruri aruncate se pot cumpăra la loc doar cu efort.",
+  "how_it_works": [
+    "Pas 1, intrare: pornești scriptul ca administrator și alegi în interfață aplicațiile de eliminat și setările de schimbat; poți folosi și parametri în linia de comandă sau un fișier de configurare exportat.",
+    "Pas 2, plasa de siguranță: scriptul face o copie a setărilor din registrul Windows pe care urmează să le schimbe (de la versiunea 2026.05.10) și, dacă o ceri sau o dai prin setările implicite, un punct de restaurare.",
+    "Pas 3, modificările: elimină aplicațiile prin instrumentele Windows (Appx și WinGet) și schimbă setările prin intrări în registru și politici locale.",
+    "Pas 4, ieșire: repornește Explorer ca să se vadă schimbările (unele cer deconectare sau repornire), apoi poți restaura din meniul „Restore backup”, rulând din nou scriptul sau cu fișierele din folderul Regfiles/Undo."
+  ],
+  "first_steps": {
+    "origin": "experiență utilizator",
+    "story_url": "https://www.thurrott.com/windows/windows-11/307557/hands-on-with-win11debloat",
+    "story_platform": "blog",
+    "story_date": "2024-08-26",
+    "title": "Un jurnalist de tehnologie curăță un PC Windows 11 cu Win11Debloat",
+    "intro": "Un jurnalist de tehnologie a vrut să scape de aplicații, reclame și urmărire în Windows 11, dar să păstreze aplicațiile pe care le folosește. Textul e din 2024, când scriptul avea meniu în text; acum are interfață grafică.",
+    "steps": [
+      {
+        "you_do": "A descărcat arhiva ZIP a scriptului, a extras-o și a deschis un terminal ca administrator.",
+        "what_happens": "Scriptul nu se instalează; e un set de fișiere PowerShell care rulează direct din folderul extras.",
+        "source_url": "https://github.com/Raphire/Win11Debloat/blob/d2cb97a4ef8631e8cfa3307e89280e0b0326f540/README.md"
+      },
+      {
+        "you_do": "A permis rularea de scripturi doar pentru fereastra curentă și a pornit Win11Debloat.ps1; la avertismentul de securitate a răspuns „R”.",
+        "what_happens": "Scriptul a pornit; permisiunea dată expiră la închiderea ferestrei.",
+        "source_url": "https://www.thurrott.com/windows/windows-11/307557/hands-on-with-win11debloat"
+      },
+      {
+        "you_do": "A ieșit din modul implicit (Default Mode) și a repornit scriptul în modul personalizat.",
+        "what_happens": "Modul implicit elimină aplicații și dezactivează funcții pe care el le folosea, deci a ales să decidă singur ce se schimbă.",
+        "source_url": "https://www.thurrott.com/windows/windows-11/307557/hands-on-with-win11debloat"
+      },
+      {
+        "you_do": "A scos din lista de aplicații de eliminat cele pe care le păstra (printre ele Clipchamp și Skype).",
+        "what_happens": "Aplicațiile rămase pe listă au fost eliminate; lista era atunci un fișier text, azi e Config/Apps.json și selecția din interfață.",
+        "source_url": "https://www.thurrott.com/windows/windows-11/307557/hands-on-with-win11debloat"
+      },
+      {
+        "you_do": "A răspuns la întrebări: da la telemetrie și reclame; nu la Copilot, Recall, meniul clasic, bara de activități și File Explorer.",
+        "what_happens": "Scriptul a aplicat doar modificările alese și a rulat fără erori, după spusele lui.",
+        "source_url": "https://www.thurrott.com/windows/windows-11/307557/hands-on-with-win11debloat"
+      },
+      {
+        "you_do": "A deschis în Notepad un fișier .reg din folderul Regfiles, ca să vadă ce schimbă, și apoi l-a rulat pentru unitățile externe duplicate din File Explorer.",
+        "what_happens": "Unitățile externe nu mai apăreau de două ori în panoul din stânga; au rămas doar sub „This PC”.",
+        "source_url": "https://www.thurrott.com/windows/windows-11/307557/hands-on-with-win11debloat"
+      }
+    ],
+    "takeaway": "După el, scriptul a rulat fără erori, iar cea mai vizibilă schimbare a fost în Căutare; se temea că actualizările Microsoft ar putea anula modificările și ar trebui rulat din nou. Nu compară cu situația fără script."
+  },
+  "categories": [
+    "Curățare și setări Windows"
+  ],
+  "search_intents": [
+    "vreau să scap de aplicațiile inutile din Windows 11",
+    "vreau să opresc reclamele și sugestiile din Windows",
+    "vreau să dezactivez Copilot și Recall din Windows",
+    "vreau să opresc telemetria Windows",
+    "vreau să curăț un PC nou de bloatware"
+  ],
+  "audience": "intermediar",
+  "setup_difficulty": "ușor",
+  "replaces": [
+    {
+      "service": "IObit Advanced SystemCare Pro",
+      "service_url": "https://www.iobit.com/en/advancedsystemcarepro.php",
+      "price": "16,77 USD/an pentru 1 PC (preț promoțional; 29,99 USD/an preț obișnuit, după pagină)",
+      "price_source_url": "https://www.iobit.com/en/advancedsystemcarepro.php",
+      "price_checked_at": "2026-10-29",
+      "replacement_level": "doar pentru cazuri simple",
+      "what_you_keep": [
+        "Oprirea reclamelor și a urmăririi din Windows și a sugestiilor, prin setări de sistem",
+        "Eliminarea aplicațiilor preinstalate din Windows"
+      ],
+      "what_you_lose": [
+        "Funcții listate pe pagina produsului: ștergerea istoricului din browsere (Anti-Tracking) și mascarea identității digitale",
+        "Optimizarea programelor care pornesc cu Windows, prezentată ca funcție a produsului",
+        "Interfață cu o singură apăsare de buton și suport comercial"
+      ],
+      "hidden_costs": [
+        "Timpul de a citi ce face fiecare opțiune înainte să o aplici",
+        "Fără suport comercial; ajutor doar prin issues și discuții GitHub",
+        "Un punct de restaurare ocupă spațiu pe disc"
+      ]
+    },
+    {
+      "service": "CCleaner Professional",
+      "service_url": "https://www.ccleaner.com/ccleaner/plans",
+      "price": null,
+      "price_source_url": "https://www.ccleaner.com/ccleaner/plans",
+      "price_checked_at": "2026-10-29",
+      "replacement_level": "doar pentru cazuri simple",
+      "what_you_keep": [
+        "Dezactivarea unor funcții de urmărire și de reclame din Windows",
+        "Eliminarea aplicațiilor preinstalate"
+      ],
+      "what_you_lose": [
+        "Funcțiile exacte ale planului Professional nu au putut fi verificate (pagina oficială a refuzat accesul automat)",
+        "Interfață simplă și suport comercial"
+      ],
+      "hidden_costs": [
+        "Prețul nu a putut fi verificat: pagina oficială a refuzat accesul automat",
+        "Trebuie să înțelegi singur ce înseamnă fiecare modificare din registru"
+      ]
+    }
+  ],
+  "examples": [
+    {
+      "title": "Pornirea rapidă din PowerShell",
+      "scenario": "Deschizi PowerShell sau Terminal, lipești comanda și scriptul se descarcă singur și pornește; urmezi instrucțiunile de pe ecran. Documentația spune că fișierele merg în %temp%/Win11Debloat și se șterg la final.",
+      "prerequisites": [
+        "Windows 10 sau 11",
+        "PowerShell sau Terminal (de preferat deschis ca administrator)",
+        "Conexiune la internet"
+      ],
+      "commands": [
+        "& ([scriptblock]::Create((irm \"https://debloat.raphi.re/\")))"
+      ],
+      "code": "",
+      "output_from_docs": null,
+      "source_url": "https://github.com/Raphire/Win11Debloat/blob/d2cb97a4ef8631e8cfa3307e89280e0b0326f540/README.md",
+      "kind": "instalare"
+    },
+    {
+      "title": "Rulare automată, cu punct de restaurare",
+      "scenario": "Exemplul din documentație: scriptul rulează fără întrebări (-Silent), creează un punct de restaurare, elimină setul implicit de aplicații și dezactivează telemetria. Atenție: -Silent sare peste confirmările de siguranță, iar punctul de restaurare nu se creează dacă există unul mai nou de 24 de ore.",
+      "prerequisites": [
+        "Windows 10 sau 11",
+        "PowerShell deschis ca administrator",
+        "Sistem de restaurare activ (altfel scriptul cere să-l activeze)"
+      ],
+      "commands": [
+        "& ([scriptblock]::Create((irm \"https://debloat.raphi.re/\"))) -Silent -CreateRestorePoint -RemoveApps -DisableTelemetry"
+      ],
+      "code": "",
+      "output_from_docs": null,
+      "source_url": "https://github.com/Raphire/Win11Debloat/wiki/Automation",
+      "kind": "folosire"
+    }
+  ],
+  "connectors": {
+    "inputs": [
+      "Alegeri făcute în interfața grafică sau în meniul din linia de comandă",
+      "Parametri în linia de comandă, de exemplu -RunDefaults, -DisableTelemetry, -RemoveApps -Apps \"Microsoft.OneDrive,Microsoft.Whiteboard\"",
+      "Fișier de configurare JSON exportat dintr-un alt PC cu Win11Debloat",
+      "Fișier start2.bin cu aranjarea dorită a aplicațiilor fixate în Start (opțional)"
+    ],
+    "outputs": [
+      "Windows modificat: aplicații eliminate, setări schimbate în registru și în politici locale",
+      "Copie de siguranță a registrului, fișier JSON numit Win11Debloat-RegistryBackup-<dată>.json",
+      "Punct de restaurare Windows (opțional)",
+      "Fișier jurnal (Win11Debloat.log) cu ce s-a întâmplat"
+    ],
+    "pairs_well_with": [
+      {
+        "repo_url": "https://github.com/microsoft/winget-cli",
+        "name": "WinGet (Windows Package Manager)",
+        "why": "După curățare, cu comenzi winget reinstalezi rapid aplicațiile dorite; wiki-ul Win11Debloat îl menționează ca modalitate de reinstalare a aplicațiilor eliminate.",
+        "in_catalog": false
+      },
+      {
+        "repo_url": "https://github.com/zoicware/RemoveWindowsAI",
+        "name": "RemoveWindowsAI",
+        "why": "Scoate funcțiile AI din Windows mai în profunzime decât Win11Debloat; îl rulezi după Win11Debloat, pe același PC.",
+        "in_catalog": false
+      },
+      {
+        "repo_url": "https://github.com/ChrisTitusTech/winutil",
+        "name": "Chris Titus Tech's Windows Utility",
+        "why": "După curățare, instalează programele tale și ajustează Windows Update; poate fi folosit în aceeași sesiune pe un PC nou.",
+        "in_catalog": false
+      },
+      {
+        "repo_url": "https://github.com/valinet/ExplorerPatcher",
+        "name": "ExplorerPatcher",
+        "why": "Poate aduce bara de activități, Start și Alt+Tab în stil Windows 10, după README-ul său; îl instalezi după curățare, dacă vrei un aspect mai clasic.",
+        "in_catalog": false
+      },
+      {
+        "repo_url": "https://github.com/Lissy93/personal-security-checklist",
+        "name": "Personal Security Checklist",
+        "why": "Sfaturile despre Cortana, datele de utilizare trimise în cloud și aplicațiile inutile se pot aplica pe Windows cu scriptul acesta, în loc de click-uri manuale.",
+        "in_catalog": true
+      }
+    ],
+    "gaps_noticed": [
+      "Wiki-ul spune că exportul configurației nu se poate face din linia de comandă, doar din interfața grafică.",
+      "Copia de siguranță a registrului nu readuce aplicațiile dezinstalate; acelea se reinstalează manual din Microsoft Store sau cu WinGet.",
+      "Anularea cere pași diferiți după ce ai schimbat: restaurarea copiei registrului, rularea din nou cu opțiuni debifate sau fișiere .reg din Regfiles/Undo; aplicațiile eliminate se reinstalează separat."
+    ]
+  },
+  "when_not_to_use": [
+    "Dacă nu ai făcut o copie a datelor importante: scriptul poate elimina aplicații și schimba setări de sistem. Punctul de restaurare nu atinge fișierele personale, dar scoate aplicațiile, driverele și actualizările instalate după el.",
+    "Ce NU se poate anula ușor: Microsoft Store și XboxSpeechToTextOverlay, dacă sunt eliminate, nu se pot reinstala ușor (wiki App Removal și Reverting Changes). Copia registrului nu readuce aplicațiile dezinstalate.",
+    "Ce se poate anula: aplicațiile eliminate se reinstalează aproape toate din Microsoft Store sau WinGet; setările se anulează din „Restore backup”, rulând scriptul din nou cu opțiuni debifate sau cu fișierele din Regfiles/Undo; Widgets cere reinstalarea a trei aplicații.",
+    "Opțiunea -ForceRemoveEdge (elimină forțat Microsoft Edge) e marcată de documentație „NOT RECOMMENDED!”. Eliminarea aplicației Get Help poate strica unele depanatoare Windows.",
+    "Metoda rapidă descarcă și rulează cod direct de pe internet, cu drepturi de administrator. Dacă vrei să verifici codul înainte, folosește metoda tradițională (arhiva ZIP din Releases) și citește scripturile.",
+    "Nu merge în PowerShell 7 (pwsh): scriptul se oprește singur. Folosește Windows PowerShell 5.1.",
+    "Pe un PC administrat de angajator sau școală (dedus, nu scris în documentație): politicile locale pot intra în conflict cu regulile IT.",
+    "Scopul declarat al proiectului e curățarea și personalizarea Windows, nu un salt mare de viteză; nu te baza pe asta."
+  ],
+  "alternatives": [
+    {
+      "name": "Chris Titus Tech's Windows Utility (winutil)",
+      "url": "https://github.com/ChrisTitusTech/winutil",
+      "difference": "Licență MIT; combină instalarea programelor, ajustări Windows și depanare într-o interfață; are mai multe funcții, dar și mai multe setări de revizuit."
+    },
+    {
+      "name": "Sophia Script for Windows",
+      "url": "https://github.com/farag2/Sophia-Script-for-Windows",
+      "difference": "Licență MIT; colecție mare de funcții PowerShell pentru setări Windows, pentru utilizatori care vor control fin."
+    },
+    {
+      "name": "RemoveWindowsAI",
+      "url": "https://github.com/zoicware/RemoveWindowsAI",
+      "difference": "Licență MIT; face doar un lucru, scoate funcțiile AI din Windows, mai în profunzime decât Win11Debloat."
+    },
+    {
+      "name": "O&O ShutUp10++",
+      "url": "https://www.oo-software.com/en/shutup10",
+      "difference": "Program gratuit, dar cu cod închis, doar pentru confidențialitate; nu elimină aplicații; versiunea Premium are preț nepublicat pe pagină."
+    }
+  ],
+  "tech_sheet": {
+    "license": "MIT",
+    "language": "PowerShell",
+    "commit_sha": "d2cb97a4ef8631e8cfa3307e89280e0b0326f540",
+    "last_commit_date": "2026-10-28",
+    "stars": 61176,
+    "requirements": [
+      "Windows 10 sau Windows 11 (unele funcții doar pe Windows 11; modul Sysprep nu merge pe Windows 10)",
+      "Windows PowerShell 5.1 (powershell.exe); PowerShell 7 (pwsh) nu este acceptat",
+      "Cont cu drepturi de administrator; scriptul cere confirmarea ferestrei UAC",
+      "Metoda rapidă: conexiune la internet, ca să descarce scriptul din GitHub (comanda: & ([scriptblock]::Create((irm \"https://debloat.raphi.re/\"))))",
+      "Metoda tradițională: arhiva ZIP din Releases, extrasă pe disc, apoi dublu clic pe Run.bat (sau Set-ExecutionPolicy Bypass -Scope Process -Force și .\\Win11Debloat.ps1 din PowerShell ca administrator)",
+      "Recomandat: WinGet instalat (altfel unele aplicații nu pot fi eliminate; scriptul avertizează)",
+      "Recomandat: System Restore activ pentru punctul de restaurare (scriptul poate cere să-l activeze) și o copie a datelor importante",
+      "Nu sunt necesare chei API, cont sau programe plătite"
+    ]
+  },
+  "monetization": [
+    {
+      "model": "serviciu de instalare și configurare",
+      "what_you_sell": "Pregătirea unui PC Windows nou sau încărcat de fabrică: copie a datelor, punct de restaurare, rularea scriptului cu setările alese de client și o foaie cu ce s-a schimbat și cum se anulează.",
+      "for_whom": "Persoane fizice și birouri mici, fără departament IT, cu PC-uri noi pline de aplicații și reclame.",
+      "license_check": {
+        "license": "MIT",
+        "commercial_use": "permis",
+        "conditions": "Licența MIT permite uzul comercial; păstrezi nota de copyright și textul licenței dacă redistribui codul. Nu prezenta serviciul ca fiind oficial al autorului. Scriptul rulează cu drepturi de administrator pe PC-urile clienților, deci răspunderea pentru rezultat e a ta, nu a autorului."
+      },
+      "path": "folosești repo-ul direct",
+      "own_build_notes": null,
+      "demand_evidence": [
+        {
+          "name": "Best Buy Canada (Geek Squad), ghid pentru serviciile de reparare și configurare",
+          "url": "https://blog.bestbuy.ca/computers-laptops-tablets/computer-repair-services",
+          "price": "de la 99,99 pentru configurarea unui calculator nou (moneda nu e scrisă pe pagină); include și eliminarea programelor nedorite",
+          "what_it_proves": "Un retailer mare vinde deja configurarea unui PC nou, inclusiv curățarea programelor inutile.",
+          "checked_at": "2026-10-29"
+        },
+        {
+          "name": "IObit Advanced SystemCare Pro",
+          "url": "https://www.iobit.com/en/advancedsystemcarepro.php",
+          "price": "16,77 USD/an pentru 1 PC (promoție; 29,99 USD preț obișnuit)",
+          "what_it_proves": "Oamenii plătesc pentru programe de curățare și protecție a confidențialității pe PC.",
+          "checked_at": "2026-10-29"
+        }
+      ],
+      "startup_cost": "Software gratuit (MIT); costul real e timpul tău și un acord scris simplu cu clientul despre ce modifici.",
+      "time_to_first_client": "Variază; depinde de cum găsești clienți (cunoscuți, anunțuri locale).",
+      "difficulty": "ușor",
+      "risks": [
+        "Concurență gratuită: clientul poate rula singur același script, după documentație.",
+        "Răspundere: dacă un PC nu mai pornește sau o aplicație lipsește, clientul se uită la tine; fă copie, punct de restaurare și cere acord scris.",
+        "Windows se schimbă; după actualizări poate fi nevoie să rulezi din nou scriptul sau să-l adaptezi.",
+        "Antivirusul poate bloca scriptul: unele versiuni au fost marcate greșit de Windows Defender și Bitdefender, după notele versiunii 2026.06.14.",
+        "Proiectul are un autor principal; ritmul schimbărilor și parametrii se pot modifica (de exemplu, redenumirea -NoRestartExplorer)."
+      ],
+      "first_steps": [
+        "Citește wiki-ul „Reverting Changes” și „Default Settings” ca să știi exact ce se poate anula și ce nu.",
+        "Scrie o listă de verificare pentru client: copie a datelor, punct de restaurare, aplicații de păstrat, ce se elimină.",
+        "Exportă din interfață un fișier de configurare pentru fiecare tip de client și reutilizează-l.",
+        "Compară prețul cu serviciile de configurare ale retailerilor din zona ta înainte să-l fixezi."
+      ]
+    },
+    {
+      "model": "integrare pentru o nișă",
+      "what_you_sell": "O configurație standard (fișier de config exportat și, pe Windows 11, imagine pregătită cu modul Sysprep/Audit) pentru firme mici, cu aplicațiile și setările stabilite o singură dată.",
+      "for_whom": "Firme mici și ateliere cu 5-50 de PC-uri, care vor aceleași setări curate pe fiecare calculator nou.",
+      "license_check": {
+        "license": "MIT",
+        "commercial_use": "permis",
+        "conditions": "Licența MIT permite uzul comercial; păstrezi nota de copyright și textul licenței dacă redistribui codul. Modul Sysprep și parametrii sunt descriși în wiki-ul proiectului. Condițiile Microsoft pentru imagini Windows personalizate nu au fost verificate aici."
+      },
+      "path": "folosești repo-ul direct",
+      "own_build_notes": null,
+      "demand_evidence": [
+        {
+          "name": "SmartDeploy (imagini și instalare Windows pentru companii)",
+          "url": "https://www.smartdeploy.com/pricing/",
+          "price": "de la 1.100 USD/an, după pagină",
+          "what_it_proves": "Firmele plătesc pentru imagini Windows standard și instalare automată pe mai multe PC-uri.",
+          "checked_at": "2026-10-29"
+        }
+      ],
+      "startup_cost": "Software gratuit; ai nevoie de un PC sau mașină virtuală de test și de timp pentru documentația livrată clientului.",
+      "time_to_first_client": "Variază; depinde de rețeaua ta de contacte în firme mici.",
+      "difficulty": "mediu",
+      "risks": [
+        "Concurență gratuită: repo-ul însuși, plus alternative precum winutil și Sophia Script.",
+        "Instrumente comerciale de imagini oferă suport, drivere și actualizări pe care un script nu le dă.",
+        "Eșuează dacă politicile firmei sau Windows Update schimbă ulterior setările.",
+        "Efort de suport pe termen lung dacă promiți mentenanță."
+      ],
+      "first_steps": [
+        "Citește secțiunea „Sysprep Mode” din wiki-ul „Advanced Features”.",
+        "Definește un profil de setări pentru firme mici și exportă-l ca fișier de configurare.",
+        "Documentează procedura de anulare pentru client.",
+        "Oferă-ți serviciul întâi unei firme cunoscute, ca să afli ce întrebări apar."
+      ]
+    }
+  ],
+  "updated_at": "2026-10-29",
+  "notes_summary": "Am citit README-ul, wiki-ul și codul scriptului, dar nu am rulat nimic; prețul CCleaner nu a putut fi verificat, iar povestea „Primii pași” e din 2024, de la o versiune mai veche a scriptului.",
+  "notes": "Cercetat din codul clonat (commit d2cb97a4, 2026-10-28, ultima versiune 2026.08.24) și din wiki-ul oficial (clonat din Win11Debloat.wiki.git). Nu am rulat nimic. Licența: fișierul LICENSE este MIT (Copyright 2020 Raphire). Riscuri și anulare, exact din documentație: README spune „use at your own risk”; wiki-ul „Reverting Changes” spune că aproape toate aplicațiile se reinstalează din Microsoft Store sau WinGet, cu excepția Microsoft Store și XboxSpeechToTextOverlay; de la versiunea 2026.05.10 scriptul face copie a registrului (Backups, JSON) și o poți restaura din meniu, dar copia nu readuce aplicațiile; punctul de restaurare este opțional (-CreateRestorePoint sau bifat în interfață; în DefaultSettings.json apare CreateRestorePoint: true) și nu se creează dacă există unul din ultimele 24 de ore (Invoke-SystemRestorePoint.ps1); parametrul -SkipRegistryBackup poate dezactiva copia. Metoda rapidă (Get.ps1) descarcă ultima versiune din GitHub și verifică suma SHA-256 când release-ul publică SHA256SUMS; altfel avertizează. Nu am găsit în cod trimitere de date către autor (căutat telemetrie, webhook, Invoke-WebRequest); singurele cereri de rețea văzute sunt descărcarea din GitHub în Get.ps1. Versiunea 2026.06.14 menționează false pozitive la Windows Defender și Bitdefender. Prețuri: IObit Advanced SystemCare Pro verificat azi pe pagina oficială (preț promoțional, perioadă „per an”); CCleaner (ccleaner.com/ccleaner/plans) a întors 403 la acces automat, deci prețul e null; un rezultat de căutare indica 44,95 USD fără perioadă clară, neverificat. O&O ShutUp10 e gratuit, cu Premium fără preț pe pagină. SmartDeploy: 1.100 USD/an de la pagina oficială (smartdeploy.com/pricing). Best Buy Canada: 99,99 pentru configurare PC nou, moneda nu e scrisă, probabil CAD. Primii pași: povestea aleasă e a lui Paul Thurrott (blog de tehnologie, 2024-08-26), un om, nu autorul repo-ului; descrie versiunea veche cu meniu text și AppsList.txt, deci pașii concreți nu se mai potrivesc interfeței de azi (azi scriptul are interfață grafică și Config/Apps.json). Pe Hacker News am găsit doar comentarii scurte (de ex. cineva care îl rulează pe fiecare instalare Windows 11 nouă și spune că nu a trebuit să-l reruleze după actualizări) și discuții de opinie, fără pași detaliați; articolul Thurrott din 2026-02-16 era trunchiat. Platforme: Mac/Linux sunt „nu” prin deducție (modifică registrul Windows). Categorii noi, de adăugat în categories.json de editor: „Curățare și setări Windows”, „Confidențialitate pe calculator”. Termeni noi pentru glosar: registru Windows, bloatware, punct de restaurare, WinGet, UAC, Sysprep, Copilot, Recall, fișier .reg, politici locale (PowerShell, telemetrie și licență MIT există deja). Perechi verificate active (commit în ultimele 12 luni, 2026-10-29): winget-cli (MIT), RemoveWindowsAI (MIT), winutil (MIT), ExplorerPatcher (GPL-2.0). Nu am verificat dacă versiunea mai veche cu AppsList.txt mai există."
+}

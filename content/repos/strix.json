@@ -1,0 +1,468 @@
+{
+  "slug": "strix",
+  "repo_url": "https://github.com/usestrix/strix",
+  "name": "Strix",
+  "one_liner": "Agenți AI testează securitatea aplicației tale și îți arată ce se poate sparge.",
+  "problem_solved": "Aplicațiile web și API-urile au găuri de securitate pe care le găsești de obicei abia după un test manual scump sau după un incident. Strix lasă o echipă de agenți AI să încerce să-ți „spargă” propria aplicație și să dovedească fiecare problemă găsită.",
+  "features": [
+    "Agenți AI care atacă o țintă: cod local, repo GitHub, site, API sau IP",
+    "Pentru fiecare problemă găsită, încearcă o dovadă de concept (PoC), nu doar o alertă",
+    "Rulează într-un container Docker cu unelte de securitate gata instalate (Nmap, Nuclei, SQLMap, ZAP, Semgrep)",
+    "Trei moduri de scanare: quick (minute), standard (30-60 min), deep (1-4 ore)",
+    "Rapoarte în Markdown, JSON și SARIF, plus panou local de vizualizare (`strix view`)",
+    "Mod fără interfață pentru GitHub Actions, cu cod de ieșire 2 când găsește vulnerabilități",
+    "Plafon de cheltuieli pentru model (`--max-budget`) și limită de pași per agent (`--max-turns`)"
+  ],
+  "at_a_glance": {
+    "for_you_if": [
+      "Ai o aplicație sau un API propriu (sau al unui client, cu acord scris) și vrei un prim test de securitate.",
+      "Vrei un scan automat la fiecare pull request și ești OK să plătești consumul modelului AI."
+    ],
+    "not_for_you_if": [
+      "Vrei să testezi un site care nu e al tău și pentru care n-ai permisiune scrisă.",
+      "Nu vrei să configurezi Docker și o cheie API plătită pe consum."
+    ],
+    "verdict": "Unealtă serioasă pentru teste pe ținte proprii sau autorizate, dar costul modelului AI și calitatea rezultatelor variază mult, iar proiectul e încă marcat „Alpha”."
+  },
+  "cost": {
+    "level": "gratuit, dar cere servicii plătite",
+    "summary": "Programul e gratuit (Apache-2.0), dar plătești modelul AI pe consum (cheie API) și ai nevoie de Docker; abonamentul ChatGPT Plus/Pro merge doar printr-o cale neoficială, iar pentru Claude documentația descrie doar cheia API.",
+    "ai_access": {
+      "mode": "abonament sau API",
+      "detail": "Funcționează cu o cheie API de la aproape orice furnizor (LiteLLM) sau, opțional, cu login ChatGPT (`strix auth login chatgpt`); codul notează că OpenAI nu acceptă oficial folosirea abonamentului în afara produselor sale, iar pentru Claude documentația oferă doar cheie API.",
+      "source_url": "https://github.com/usestrix/strix/blob/6b7ae2ebe4d47037a927aade23265ff4e4f27e84/README.md"
+    },
+    "items": [
+      {
+        "what": "Model AI prin cheie API, plătit pe consum (OpenRouter, Vercel AI Gateway, OpenAI, Anthropic, Vertex, Bedrock, DeepSeek etc.)",
+        "price": "variază după model și durata scanării; într-o poveste de utilizator (versiunea 0.7-0.8, model GPT-5.3 Codex): 2,66-8,44 USD per țintă ușoară de laborator",
+        "required": true,
+        "source_url": "https://theaq.blog/2026/02/28/strix-first-impressions.html"
+      },
+      {
+        "what": "Docker (rulat în fundal; Strix descarcă imaginea sandbox la prima rulare)",
+        "price": "Docker Desktop: Personal 0 USD; Pro 11 USD/lună (9 USD/lună anual); Team 15-16 USD/utilizator/lună; Business 24 USD/utilizator/lună (verificat 2026-10-29)",
+        "required": true,
+        "source_url": "https://www.docker.com/pricing/"
+      },
+      {
+        "what": "Acces la programe de securitate cerute de modelele de top: Daybreak (OpenAI), Cyber Verification Program (Anthropic), Fairwind (Gemini)",
+        "price": null,
+        "required": false,
+        "source_url": "https://github.com/usestrix/strix/blob/6b7ae2ebe4d47037a927aade23265ff4e4f27e84/docs/llm-providers/overview.mdx"
+      },
+      {
+        "what": "Abonament ChatGPT Plus (cale alternativă la cheia API, neoficială pentru OpenAI)",
+        "price": "20 USD/lună (Plus; Go 8 USD/lună; Pro de la 100 USD/lună), verificat 2026-10-29",
+        "required": false,
+        "source_url": "https://learn.chatgpt.com/docs/pricing"
+      },
+      {
+        "what": "Model local prin Ollama sau LM Studio (documentația avertizează că modelele mici se descurcă slab și că e nevoie de GPU)",
+        "price": null,
+        "required": false,
+        "source_url": "https://github.com/usestrix/strix/blob/6b7ae2ebe4d47037a927aade23265ff4e4f27e84/docs/llm-providers/local.mdx"
+      },
+      {
+        "what": "Chei opționale pentru căutare web în timpul scanării: Exa sau Perplexity (și Postman, pentru colecții după id)",
+        "price": null,
+        "required": false,
+        "source_url": "https://github.com/usestrix/strix/blob/6b7ae2ebe4d47037a927aade23265ff4e4f27e84/docs/advanced/configuration.mdx"
+      },
+      {
+        "what": "Strix Cloud (varianta găzduită a autorilor): plan Platform Pro, pentesturile se taxează separat, per test",
+        "price": "29 USD/utilizator/lună (7 zile de probă); pentesturile separat, fără preț afișat; Enterprise la cerere (verificat 2026-10-29)",
+        "required": false,
+        "source_url": "https://strix.ai/pricing"
+      }
+    ]
+  },
+  "platforms": {
+    "windows": "parțial",
+    "mac": "da",
+    "linux": "da",
+    "note": "Scriptul de instalare are variante pentru Linux, macOS (Intel și Apple Silicon) și Windows x86_64, dar e un script bash (pe Windows presupune un shell tip Git Bash, cu `unzip`), iar documentația nu are o secțiune dedicată Windows; deducția e a mea din script. Docker trebuie să ruleze pe orice sistem.",
+    "source_url": "https://github.com/usestrix/strix/blob/6b7ae2ebe4d47037a927aade23265ff4e4f27e84/scripts/install.sh"
+  },
+  "risk_flags": [
+    {
+      "flag": "trimite date în cloud",
+      "detail": "Cu un model din cloud, ce vede agentul (cod, răspunsuri ale țintei, rezultate) ajunge la furnizorul modelului; documentația spune explicit că la modelele locale datele rămân pe mașina ta.",
+      "source_url": "https://github.com/usestrix/strix/blob/6b7ae2ebe4d47037a927aade23265ff4e4f27e84/docs/llm-providers/local.mdx"
+    },
+    {
+      "flag": "telemetrie",
+      "detail": "Telemetria (PostHog, Scarf, OTEL) e pornită implicit (`STRIX_TELEMETRY=1`); se oprește cu `STRIX_TELEMETRY=0`, iar autorii spun că nu colectează ținte, cod sau rezultate.",
+      "source_url": "https://github.com/usestrix/strix/blob/6b7ae2ebe4d47037a927aade23265ff4e4f27e84/docs/advanced/configuration.mdx"
+    },
+    {
+      "flag": "cere plată",
+      "detail": "Modelele din cloud se plătesc pe token, iar un scan deep poate dura ore; documentația oferă `--max-budget` ca plafon, dar spune că depășirea mică e posibilă.",
+      "source_url": "https://github.com/usestrix/strix/blob/6b7ae2ebe4d47037a927aade23265ff4e4f27e84/docs/usage/cli.mdx"
+    },
+    {
+      "flag": "proiect instabil",
+      "detail": "Pachetul se declară „Development Status :: 3 - Alpha”, iar un comentariu din pyproject.toml menționează o versiune LiteLLM compromisă (2026-10-21), motiv pentru care dependențele noi sunt întârziate 5 zile.",
+      "source_url": "https://github.com/usestrix/strix/blob/6b7ae2ebe4d47037a927aade23265ff4e4f27e84/pyproject.toml"
+    }
+  ],
+  "audience_reason": "comenzile sunt puține, dar trebuie să alegi un model, să înțelegi rapoartele și să răspunzi legal pentru ținte",
+  "setup_difficulty_reason": "Docker pornit, cheie API plătită pe consum și, pentru modelele de top, programe de acces separate",
+  "analogy": "E ca o echipă de hackeri angajată de tine să încerce, cu acordul tău, ușile și ferestrele casei, și care îți aduce poze cu fiecare lacăt pe care l-a deschis.",
+  "how_it_works": [
+    "Pasul 1, intrare: îi dai o țintă proprie sau autorizată: folder de cod, repo GitHub, URL, domeniu, IP sau specificație OpenAPI/Postman, plus instrucțiuni opționale (de exemplu conturi de test).",
+    "Pasul 2, proces: un agent rădăcină pornește agenți specializați care rulează în containerul Docker (proxy Caido, browser, terminal, scannere) și încearcă să valideze fiecare problemă cu un exploit sau PoC.",
+    "Pasul 3, ieșire: în `strix_runs/<run-name>` găsești raportul Markdown, vulnerabilitățile ca JSON/CSV și SARIF, iar în modul fără interfață codul de ieșire arată dacă s-a găsit ceva."
+  ],
+  "first_steps": {
+    "origin": "experiență utilizator",
+    "story_url": "https://theaq.blog/2026/02/28/strix-first-impressions.html",
+    "story_platform": "blog",
+    "story_date": "2026-02-28",
+    "title": "O săptămână de teste cu Strix pe mașini de antrenament Hack The Box",
+    "intro": "Un pasionat de securitate a vrut să vadă cât de departe ajunge Strix (versiunile 0.7.0-0.8.2, mai vechi decât cea de acum) pe trei mașini „Easy” retrase de pe Hack The Box, adică ținte de antrenament făcute pentru exerciții autorizate.",
+    "steps": [
+      {
+        "you_do": "A instalat Strix cu o singură comandă și a setat variabilele pentru numele modelului AI și cheia API.",
+        "what_happens": "Autorul spune că a avut nevoie de foarte puțină configurare față de alte cadre de agenți.",
+        "source_url": "https://theaq.blog/2026/02/28/strix-first-impressions.html"
+      },
+      {
+        "you_do": "A scris un fișier `instructions.md` cu gazdele țintei adăugate în `/etc/hosts`, eventualele conturi de start, o notă că ținta e o mașină de laborator autorizată și o regulă strictă pentru căutarea CVE-urilor.",
+        "what_happens": "Spune că nota despre laborator autorizat a oprit refuzurile modelului, iar regula de căutare a evitat exploit-uri vechi și irelevante.",
+        "source_url": "https://theaq.blog/2026/02/28/strix-first-impressions.html"
+      },
+      {
+        "you_do": "A lansat `strix --target <ip_address> --instruction-file ./instructions.md` pe fiecare mașină.",
+        "what_happens": "Agenții au explorat ținta în sandbox-ul Docker și au încercat să ajungă la fișierele-țintă user.txt și root.txt; instrucțiunile se dau cu `--instruction-file`, ca în documentație.",
+        "source_url": "https://github.com/usestrix/strix/blob/6b7ae2ebe4d47037a927aade23265ff4e4f27e84/docs/usage/instructions.mdx"
+      },
+      {
+        "you_do": "A comparat mai multe modele AI și l-a ales pe GPT-5.3 Codex.",
+        "what_happens": "După el, modelele mici sau locale au dat rezultate haotice și multe false pozitive, iar un alt model a consumat foarte mulți tokeni; cu GPT-5.3 Codex, Strix a rezolvat toate cele trei mașini din prima încercare, în 14, 21 și 40 de minute.",
+        "source_url": "https://theaq.blog/2026/02/28/strix-first-impressions.html"
+      },
+      {
+        "you_do": "A urmărit costurile și a reluat manual când apăreau limite de rată.",
+        "what_happens": "Cele trei rulări au costat aproximativ 2,66, 2,96 și 8,44 USD (circa 14 USD în total), iar săptămâna întreagă de teste cam 200 USD; la limitele de rată i-a scris agentului „Try again”.",
+        "source_url": "https://theaq.blog/2026/02/28/strix-first-impressions.html"
+      }
+    ],
+    "takeaway": "Autorul a rezolvat trei mașini de antrenament într-un timp scurt și cu cheltuieli mici pe rulare, dar spune că rezultatele sunt anecdotice (modelele ar fi putut vedea soluțiile online), că verificarea prin reverse shell nu funcționa din Docker și că a cheltuit cam 200 USD în săptămâna de încercări. Nu compară cu munca fără Strix."
+  },
+  "categories": [
+    "Agenți AI și securitate",
+    "Securitate și OSINT",
+    "Monitorizare și audit"
+  ],
+  "search_intents": [
+    "vreau să testez securitatea propriei aplicații web cu AI",
+    "vreau să găsesc vulnerabilități în codul meu înainte de producție",
+    "vreau un scan de securitate automat la fiecare pull request",
+    "vreau un pentest ieftin pentru un API propriu",
+    "vreau o alternativă open-source la un pentest AI plătit"
+  ],
+  "audience": "intermediar",
+  "setup_difficulty": "greu",
+  "replaces": [
+    {
+      "service": "Cobalt (Autonomous Pentest și pentest ca serviciu)",
+      "service_url": "https://www.cobalt.io/pricing",
+      "price": "3.500 USD per test pentru „Autonomous Pentest” (ofertă limitată, test început și terminat înainte de 31 decembrie 2026); nivelurile anuale Standard/Premium/Enterprise: fără preț afișat (la cerere)",
+      "price_source_url": "https://www.cobalt.io/pricing",
+      "price_checked_at": "2026-10-29",
+      "replacement_level": "parțial",
+      "what_you_keep": [
+        "Teste repetabile pe ținte proprii, oricând vrei, fără programare cu o firmă",
+        "Dovezi de concept și rapoarte în Markdown/SARIF",
+        "Control complet asupra datelor dacă folosești un model local"
+      ],
+      "what_you_lose": [
+        "Raportul semnat de o firmă terță, cerut uneori de auditori sau clienți (Strix oferă rapoarte pentru conformitate doar în planul Enterprise)",
+        "Pentesteri umani pentru logică de business complicată și încadrare juridică",
+        "Suport și răspundere contractuală"
+      ],
+      "hidden_costs": [
+        "Cheltuieli cu modelul AI pe consum, greu de prezis la scanări deep",
+        "Timp pentru Docker, chei, instrucțiuni și triere a false pozitive",
+        "Acces la programe de securitate pentru modelele de top"
+      ]
+    },
+    {
+      "service": "Burp Suite Professional (PortSwigger)",
+      "service_url": "https://portswigger.net/burp/pro",
+      "price": "499 USD (butonul „BUY” de pe pagină; perioada de licențiere nu e afișată în text)",
+      "price_source_url": "https://portswigger.net/burp/pro",
+      "price_checked_at": "2026-10-29",
+      "replacement_level": "doar pentru cazuri simple",
+      "what_you_keep": [
+        "Interceptarea și reluarea cererilor HTTP (prin Caido în sandbox)",
+        "Automatizare de la recon la validare, fără să tastezi fiecare pas"
+      ],
+      "what_you_lose": [
+        "Interfața cu care un specialist controlează manual fiecare cerere",
+        "Ecosistemul de extensii Burp și experiența comunității"
+      ],
+      "hidden_costs": [
+        "Model AI plătit pe consum",
+        "Nevoia de cunoștințe de securitate ca să judeci dacă rezultatele sunt corecte"
+      ]
+    },
+    {
+      "service": "Detectify (scanare de suprafață și aplicații web)",
+      "service_url": "https://detectify.com/pricing",
+      "price": "Standard de la 2.500 EUR/an; Professional de la 5.000 EUR/an; Enterprise de la 15.000 EUR/an; Starter de la 0 EUR/an (prețurile sunt „de la”)",
+      "price_source_url": "https://detectify.com/pricing",
+      "price_checked_at": "2026-10-29",
+      "replacement_level": "parțial",
+      "what_you_keep": [
+        "Scanare pe aplicația ta, inclusiv în CI",
+        "Test dinamic autentificat cu conturi de test"
+      ],
+      "what_you_lose": [
+        "Monitorizare continuă gestionată și tablou de bord pentru echipă (apar doar în Strix Cloud)",
+        "Bază de reguli întreținută de un furnizor, cu suport"
+      ],
+      "hidden_costs": [
+        "Cost variabil cu modelul AI, spre deosebire de un abonament fix",
+        "Mentenanță: versiuni noi, imagine Docker, chei API"
+      ]
+    }
+  ],
+  "examples": [
+    {
+      "title": "Instalare și primul scan al unui folder de cod",
+      "scenario": "Instalezi Strix, alegi un model AI prin cheie API și scanezi codul propriu dintr-un folder.",
+      "prerequisites": [
+        "Docker pornit",
+        "O cheie API de la un furnizor de modele AI suportat (pe consum, plătită)",
+        "Un folder cu codul propriei aplicații"
+      ],
+      "commands": [
+        "curl -sSL https://strix.ai/install | bash",
+        "export STRIX_LLM=\"vercel_ai_gateway/zai/glm-5.3\"",
+        "export LLM_API_KEY=\"your-api-key\"",
+        "strix --target ./app-directory"
+      ],
+      "code": "# Install Strix\ncurl -sSL https://strix.ai/install | bash\n\n# Configure your AI provider\nexport STRIX_LLM=\"vercel_ai_gateway/zai/glm-5.3\"   # Vercel AI Gateway\n# export STRIX_LLM=\"openrouter/z-ai/glm-5.3\"       # OpenRouter\nexport LLM_API_KEY=\"your-api-key\"\n\n# Run your first security assessment\nstrix --target ./app-directory",
+      "output_from_docs": "Documentația spune: „First run automatically pulls the sandbox Docker image. Results are saved to `strix_runs/<run-name>`”.",
+      "source_url": "https://github.com/usestrix/strix/blob/6b7ae2ebe4d47037a927aade23265ff4e4f27e84/README.md",
+      "kind": "instalare"
+    },
+    {
+      "title": "Test al unei aplicații web proprii, în mod fără interfață",
+      "scenario": "După instalare, rulezi Strix împotriva propriei aplicații web (staging), fără interfață interactivă, ca să-l poți pune într-un script sau în CI.",
+      "prerequisites": [
+        "Strix instalat și configurat (STRIX_LLM, LLM_API_KEY)",
+        "Docker pornit",
+        "O aplicație web a ta (de preferat de test), pentru care ai dreptul să rulezi teste"
+      ],
+      "commands": [
+        "strix --target https://your-app.com",
+        "strix -n --target https://your-app.com"
+      ],
+      "code": "# Black-box web application assessment\nstrix --target https://your-app.com\n\n# Headless mode\nstrix -n --target https://your-app.com",
+      "output_from_docs": "Documentația spune despre modul fără interfață: „The CLI prints real-time vulnerability findings and the final report before exiting. Exits with non-zero code when vulnerabilities are found.”",
+      "source_url": "https://github.com/usestrix/strix/blob/6b7ae2ebe4d47037a927aade23265ff4e4f27e84/README.md",
+      "kind": "folosire"
+    }
+  ],
+  "connectors": {
+    "inputs": [
+      "Folder local cu cod sursă (montat în sandbox, cu drept de scriere)",
+      "URL de repo GitHub sau URL de aplicație web (ex: https://your-app.com)",
+      "Domeniu sau adresă IP",
+      "Specificație API: fișier OpenAPI/Swagger (.json/.yaml), export Postman sau colecție Postman după id (cu POSTMAN_API_KEY)",
+      "Lista de ținte într-un fișier text, o țintă pe linie (`--target-list`)",
+      "Instrucțiuni text sau fișier (`--instruction`, `--instruction-file`), de exemplu conturi de test"
+    ],
+    "outputs": [
+      "penetration_test_report.md (raportul final)",
+      "vulnerabilities/*.md și vulnerabilities.json (cu vulnerabilities.csv)",
+      "findings.sarif (SARIF 2.1.0)",
+      "run.json cu starea și costul rulării",
+      "events.jsonl cu telemetria locală a rulării",
+      "Cod de ieșire în modul fără interfață: 0 curat, 1 eroare, 2 vulnerabilități găsite"
+    ],
+    "pairs_well_with": [
+      {
+        "repo_url": "https://github.com/ollama/ollama",
+        "name": "Ollama",
+        "why": "Pornește un model local, iar adresa lui (`LLM_API_BASE`) devine intrarea modelului din Strix, pentru teste care nu trimit date în cloud (modelele mici se descurcă însă slab).",
+        "in_catalog": false
+      },
+      {
+        "repo_url": "https://github.com/zaproxy/zaproxy",
+        "name": "OWASP ZAP",
+        "why": "ZAP e deja în imaginea sandbox, iar un scan ZAP clasic pe aceeași țintă poate fi comparat cu rezultatele agenților Strix.",
+        "in_catalog": false
+      },
+      {
+        "repo_url": "https://github.com/projectdiscovery/nuclei",
+        "name": "Nuclei",
+        "why": "Scanner cu șabloane inclus în sandbox; rulat separat în CI îți dă o a doua opinie pe aceeași țintă.",
+        "in_catalog": false
+      },
+      {
+        "repo_url": "https://github.com/semgrep/semgrep",
+        "name": "Semgrep",
+        "why": "Analiza statică Semgrep (inclusă în Strix la scanările white-box) completează testele dinamice, iar rezultatele ambelor se pot citi ca SARIF.",
+        "in_catalog": false
+      },
+      {
+        "repo_url": "https://github.com/smicallef/spiderfoot",
+        "name": "SpiderFoot",
+        "why": "SpiderFoot adună informații publice despre un domeniu sau un IP, iar Strix acceptă domeniu sau IP ca țintă: ce găsești despre o țintă proprie sau autorizată poate deveni ținta unui test Strix, cu acord scris.",
+        "in_catalog": true
+      },
+      {
+        "repo_url": "https://github.com/chaitin/SafeLine",
+        "name": "SafeLine",
+        "why": "Strix atacă o aplicație proprie și produce un raport cu problemele găsite; îl rulezi pe o copie de test, fără WAF, apoi verifici dacă SafeLine oprește acele tipuri de cereri (doar pe ținte proprii sau autorizate).",
+        "in_catalog": true
+      }
+    ],
+    "gaps_noticed": [
+      "Verificarea prin reverse shell nu funcționa din containerul Docker în povestea citită; documentația oficială nu descrie o soluție.",
+      "Documentația de modele (providers) menționează încă versiuni vechi de modele în câteva pagini, iar lista recomandată se schimbă des, deci trebuie reverificată.",
+      "Fără o secțiune pentru Windows în documentație; pe Windows trebuie să rulezi scriptul de instalare dintr-un shell bash."
+    ]
+  },
+  "when_not_to_use": [
+    "Pe orice sistem pe care nu îl deții sau pentru care nu ai permisiune explicită, scrisă. README-ul avertizează că testarea neautorizată e ilegală în majoritatea jurisdicțiilor și că răspunderea e a ta.",
+    "Direct pe producție, fără copie de test: agenții rulează exploit-uri reale, iar un folder local e montat în sandbox cu drept de scriere (comite sau stochează înainte).",
+    "Dacă ai nevoie de un raport semnat de o firmă terță, pentru audit sau conformitate: raportul de conformitate e oferit în planul Enterprise al autorilor.",
+    "Dacă nu vrei costuri variabile: un scan deep poate dura ore și consumă tokeni, iar plafonul `--max-budget` poate fi depășit ușor.",
+    "Dacă vrei totul local pe un laptop obișnuit: documentația spune că modelele locale sub 70B se descurcă slab la sarcini de tip agent.",
+    "Dacă ai nevoie de rezultate liniștite și complete: în povestea citită modelele au dat false pozitive, iar un comentator pe HN scrie că nu a reușit să-l ducă la capăt pe un test (anecdotă, nu verificată)."
+  ],
+  "alternatives": [
+    {
+      "name": "Shannon (KeygraphHQ)",
+      "url": "https://github.com/KeygraphHQ/shannon",
+      "difference": "Alt pentester AI open-source pentru aplicații web și API-uri, cu licență AGPL-3.0 (după API-ul GitHub), mai restrictivă decât Apache-2.0 pentru servicii oferite online; nu l-am citit în detaliu."
+    },
+    {
+      "name": "OWASP ZAP",
+      "url": "https://github.com/zaproxy/zaproxy",
+      "difference": "Scanner clasic fără agenți AI: previzibil și fără cost de model, dar fără validare prin PoC și cu mai multe false pozitive."
+    },
+    {
+      "name": "Nuclei",
+      "url": "https://github.com/projectdiscovery/nuclei",
+      "difference": "Scanner cu șabloane YAML, rapid și ieftin, dar caută doar probleme deja descrise în șabloane."
+    },
+    {
+      "name": "Strix Cloud (autorii)",
+      "url": "https://app.strix.ai",
+      "difference": "Aceeași unealtă găzduită de autori, fără Docker și fără cheie LLM, dar cu cont și plată (platformă 29 USD/utilizator/lună, pentesturi separate)."
+    }
+  ],
+  "tech_sheet": {
+    "license": "Apache-2.0",
+    "language": "Python",
+    "commit_sha": "6b7ae2ebe4d47037a927aade23265ff4e4f27e84",
+    "last_commit_date": "2026-10-29",
+    "stars": 72626,
+    "requirements": [
+      "Docker pornit (README: „Docker (running)”); la prima rulare se descarcă imaginea sandbox ghcr.io/usestrix/strix-sandbox",
+      "O cheie API de la un furnizor de modele AI suportat prin LiteLLM (OpenAI, Anthropic, Google, OpenRouter, Vercel AI Gateway etc.), setată cu STRIX_LLM și LLM_API_KEY; alternativ model local (Ollama, LM Studio, cu LLM_API_BASE) sau login ChatGPT (`strix auth login chatgpt`, neoficial)",
+      "Pentru modelele OpenAI, Anthropic și Gemini de top: acces la programele de securitate (Daybreak, Cyber Verification Program, Fairwind), altfel modelele refuză sarcinile ofensive",
+      "Instalare: `curl -sSL https://strix.ai/install | bash` (Linux, macOS, Windows x86_64 printr-un shell bash; are nevoie de curl și tar sau unzip) sau `pipx install strix-agent` (Python >= 3.12)",
+      "Opțional: EXA_API_KEY sau PERPLEXITY_API_KEY pentru căutare web, POSTMAN_API_KEY pentru colecții Postman după id",
+      "Opțional: Node.js cu `npx skills add usestrix/strix` pentru skill-urile agenților de programare",
+      "Doar ținte proprii sau cu permisiune explicită, scrisă (avertisment din README)"
+    ]
+  },
+  "monetization": [
+    {
+      "model": "serviciu de instalare și configurare",
+      "what_you_sell": "Configurarea unui scan de securitate la fiecare pull request pentru o echipă mică: workflow GitHub Actions cu Strix în modul quick, secrete, plafon de buget, prag `--fail-on` și un ghid scurt pentru citirea rezultatelor SARIF.",
+      "for_whom": "Agenții web și startup-uri mici cu cod pe GitHub, fără inginer de securitate.",
+      "license_check": {
+        "license": "Apache-2.0",
+        "commercial_use": "permis",
+        "conditions": "Apache-2.0 permite uz comercial, modificare și redistribuire, cu păstrarea licenței și a notelor; nu primești drepturi asupra numelui și logoului Strix (secțiunea 6 din licență). Imaginea sandbox include unelte terțe cu licențele lor proprii, pe care nu le-am verificat una câte una. Termenii modelelor AI (ex: programele de acces pentru securitate) și cei ai furnizorului de LLM decid ce ai voie să faci cu un client. Calea ChatGPT Plus/Pro nu e potrivită pentru un serviciu comercial, fiindcă codul spune că OpenAI nu o acceptă oficial."
+      },
+      "path": "folosești repo-ul direct",
+      "own_build_notes": null,
+      "demand_evidence": [
+        {
+          "name": "Strix Cloud, planul Platform Pro (autorii)",
+          "url": "https://strix.ai/pricing",
+          "price": "29 USD/utilizator/lună; include revizuiri de securitate la pull request-uri, autofix, pentesturi programate; pentesturile se taxează separat",
+          "what_it_proves": "Scanarea de securitate la pull request e un produs vândut deja de autori; setarea ei pentru echipe care nu vor găzduire externă e o variantă de serviciu.",
+          "checked_at": "2026-10-29"
+        },
+        {
+          "name": "Detectify",
+          "url": "https://detectify.com/pricing",
+          "price": "de la 2.500 EUR/an (Standard); onboarding suplimentar de 5 ore: 2.500 EUR (o singură dată)",
+          "what_it_proves": "Firmele plătesc deja pentru scanare de securitate recurentă, iar onboardingul asistat se vinde separat.",
+          "checked_at": "2026-10-29"
+        }
+      ],
+      "startup_cost": "Un cont GitHub de test, un cont la un furnizor de modele AI cu un plafon mic de cheltuieli și timp pentru a încerca fluxul pe propriile repo-uri; fără licențe.",
+      "time_to_first_client": "Variază mult; depinde de rețeaua ta în zona dev și agenții web.",
+      "difficulty": "mediu",
+      "risks": [
+        "Concurență gratuită: README-ul și documentația ghidează pas cu pas un workflow GitHub Actions, iar clientul îl poate copia singur.",
+        "Cost variabil cu modelul AI: o scanare mai lungă consumă tokeni, iar rezultatele depind de model.",
+        "Dependență de proiect: este marcat „Alpha”, iar opțiunile CLI și modelele recomandate se schimbă des.",
+        "Răspundere: scanezi doar repo-uri și aplicații ale clientului, cu acord scris; false pozitive duc la timp de suport."
+      ],
+      "first_steps": [
+        "Rulează workflow-ul din documentația oficială pe 2-3 repo-uri proprii, în modul quick, cu un plafon mic de buget.",
+        "Notează timpul, costul modelului și zgomotul rezultatelor (false pozitive).",
+        "Scrie o ofertă cu preț fix pentru configurare și o clauză clară despre autorizare și răspundere.",
+        "Adaugă `--fail-on` și un ghid de triere ca livrabil inclus."
+      ]
+    },
+    {
+      "model": "consultanță și training",
+      "what_you_sell": "Un audit de securitate pe staging-ul clientului: rulezi Strix (deep, cu conturi de test), verifici manual constatările, elimini false pozitive și livrezi un raport scurt cu priorități de reparat și cu pașii de reproducere.",
+      "for_whom": "IMM-uri și agenții web care vor un prim test de securitate al propriei aplicații, dar nu își permit un pentest complet.",
+      "license_check": {
+        "license": "Apache-2.0",
+        "commercial_use": "permis",
+        "conditions": "Apache-2.0 permite uz comercial; păstrezi nota de licență și nu folosești numele Strix ca marcă proprie. Imaginea sandbox și modelele AI au termeni separați. Lucrezi numai cu acord scris, pe ținte din scopul convenit; fără acord, riști răspundere penală sau civilă, după legea locală."
+      },
+      "path": "folosești repo-ul direct",
+      "own_build_notes": null,
+      "demand_evidence": [
+        {
+          "name": "Cobalt, Autonomous Pentest",
+          "url": "https://www.cobalt.io/pricing",
+          "price": "3.500 USD per test (ofertă limitată, valabilă pentru teste începute și terminate înainte de 31 decembrie 2026)",
+          "what_it_proves": "Un pentest automatizat sau asistat de AI se vinde deja la preț fix, per test, către firme.",
+          "checked_at": "2026-10-29"
+        },
+        {
+          "name": "Burp Suite Professional (PortSwigger)",
+          "url": "https://portswigger.net/burp/pro",
+          "price": "499 USD (butonul „BUY” de pe pagină; perioada nu e afișată)",
+          "what_it_proves": "Specialiștii plătesc pentru unelte de testare web, deci există o piață pentru servicii și unelte de testare.",
+          "checked_at": "2026-10-29"
+        }
+      ],
+      "startup_cost": "Un laptop cu Docker, buget pentru modelul AI (variază pe scanare) și un contract-model cu clauză de autorizare scrisă; asigurare de răspundere profesională, dacă o ceri.",
+      "time_to_first_client": "Variază mult; depinde de reputația și rețeaua ta în securitate și de încrederea clienților.",
+      "difficulty": "greu",
+      "risks": [
+        "Concurență gratuită: Strix însuși, plus Strix Cloud al autorilor, care vinde exact acest tip de test.",
+        "Răspundere juridică și de reputație: un scan făcut fără acord clar sau în afara scopului convenit, sau o vulnerabilitate ratată.",
+        "Calitatea rezultatelor variază după model; trierea manuală de false pozitive înseamnă timp și expertiză de securitate.",
+        "Dependență de furnizorii de modele: unele modele cer programe de acces pentru securitate, iar prețurile pe token se schimbă."
+      ],
+      "first_steps": [
+        "Exersează pe ținte de antrenament legale (de exemplu mașini retrase de pe Hack The Box) și pe aplicațiile tale.",
+        "Scrie un șablon de raport și un acord de autorizare cu clientul, verificat de un jurist.",
+        "Pilotează cu o aplicație prietenă, cu prețul în funcție de efort, ca să calibrezi costul modelului.",
+        "Compară rezultatele cu ZAP sau Nuclei ca să știi ce rată de false pozitive îi explici clientului."
+      ]
+    }
+  ],
+  "updated_at": "2026-10-29",
+  "notes_summary": "Am citit README-ul, documentația din repo, pyproject.toml, scriptul de instalare și codul de autentificare ChatGPT; nu am rulat nimic, iar costul real al modelului și calitatea rezultatelor n-am putut să le verific.",
+  "notes": "Repo nou (draft 2026-10-29). Clonat la SHA 6b7ae2ebe4d47037a927aade23265ff4e4f27e84 (commit din 2026-10-29), ultima versiune v1.7.0 (2026-10-05), 72.626 stele, 8.140 forkuri, circa 961 commit-uri (din antetul Link al API-ului GitHub). Licența: Apache-2.0 (LICENSE citit; copyright 2025 OmniSecure Inc.). Avertismentul de uz autorizat vine din README (secțiunea WARNING) și AGENTS.md („Only scan targets the user is authorized to test”); la `when_not_to_use` am adăugat prudențe ale mele (nu pe producție, plafon de buget) care NU sunt toate în documentație, cu excepția notei despre folderul local montat cu drept de scriere (docs/usage/cli.mdx). Prețuri verificate 2026-10-29: strix.ai/pricing (Platform Pro 29 USD/utilizator/lună, pentesturi separate, rezumat produs de unealta de citire a paginii), cobalt.io/pricing (Autonomous Pentest 3.500 USD/test), portswigger.net/burp/pro (buton BUY 499 USD, fără perioadă), detectify.com/pricing (de la 2.500 EUR/an), docker.com/pricing, learn.chatgpt.com/docs/pricing. Prețul modelelor AI (OpenRouter etc.) n-a fost găsit sigur; l-am lăsat null, iar costul din poveste e doar anecdotă pentru versiuni vechi (0.7-0.8). ai_access: README arată login ChatGPT (`strix auth login chatgpt`), iar strix/config/codex.py spune că folosirea abonamentului ChatGPT în afara produselor OpenAI nu e acceptată oficial; pentru Claude și Gemini documentația arată doar chei API sau Vertex. Documentația de modele conține nume de modele pe care nu le-am putut verifica independent (GLM-5.3, GPT-6.1 Sol, Claude Opus 5.5 etc.); le-am copiat ca atare din documentație. Primii pași: poveste dintr-un blog personal (theaq.blog, 2026-02-28), scrisă la persoana întâi de un utilizator; rezumatul meu vine din pagina fetchată prin unealta de citire (rezumat automat), nu dintr-o citire integrală a textului, deci detaliile (comenzi, timpi, costuri) sunt ale autorului și nu le-am verificat. Versiunile testate (0.7.0-0.8.2) sunt vechi. Alte surse găsite: postarea aceluiași autor cu 18 modele (theaq.blog, 2026-04-14) și un comentariu HN (item 48016224) care spune că nu a reușit să ducă Strix la capăt, dar a avut succes cu Shannon; nu le-am folosit ca poveste. Telemetrie: confirmată în docs/advanced/configuration.mdx și strix/telemetry/README.md; README-ul de telemetrie spune că nu colectează ținte, cod sau rezultate. Sandbox: Kali Linux, cu zeci de unelte terțe (licențele lor n-au fost verificate). Pairs: Ollama, ZAP, Nuclei, Semgrep verificate active (pushed_at oct. 2026); Legătură cu SpiderFoot (din catalog) adăugată de editor, la cererea ta; ramura master a SpiderFoot e inactivă din 2023, vezi spiderfoot. Categorii: am folosit existente din content/categories.json („Agenți AI și securitate”, „Securitate și OSINT”, „Monitorizare și audit”); „Testare de securitate” ar putea fi o categorie nouă mai exactă, la decizia editorului. Alternativa Shannon (AGPL-3.0 după API-ul GitHub) n-a fost citită în detaliu. Windows marcat „parțial”: dedus din scriptul de instalare, fără secțiune dedicată în documentație. Pentru dezvoltarea ideilor de monetizare: nicio estimare de venit; riscul legal de autorizare este central."
+}

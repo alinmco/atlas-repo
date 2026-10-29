@@ -427,7 +427,186 @@
       "https://github.com/simonw/datasette",
       "https://github.com/projectdiscovery/httpx",
       "https://github.com/projectdiscovery/nuclei",
-      "https://github.com/sherlock-project/sherlock"
+      "https://github.com/sherlock-project/sherlock",
+      "https://github.com/usestrix/strix"
+    ],
+    "used_in_recipes": []
+  },
+  {
+    "slug": "strix",
+    "name": "Strix",
+    "one_liner": "Agenți AI testează securitatea aplicației tale și îți arată ce se poate sparge.",
+    "categories": [
+      "Agenți AI și securitate",
+      "Securitate și OSINT",
+      "Monitorizare și audit"
+    ],
+    "inputs": [
+      "Folder local cu cod sursă (montat în sandbox, cu drept de scriere)",
+      "URL de repo GitHub sau URL de aplicație web (ex: https://your-app.com)",
+      "Domeniu sau adresă IP",
+      "Specificație API: fișier OpenAPI/Swagger (.json/.yaml), export Postman sau colecție Postman după id (cu POSTMAN_API_KEY)",
+      "Lista de ținte într-un fișier text, o țintă pe linie (`--target-list`)",
+      "Instrucțiuni text sau fișier (`--instruction`, `--instruction-file`), de exemplu conturi de test"
+    ],
+    "outputs": [
+      "penetration_test_report.md (raportul final)",
+      "vulnerabilities/*.md și vulnerabilities.json (cu vulnerabilities.csv)",
+      "findings.sarif (SARIF 2.1.0)",
+      "run.json cu starea și costul rulării",
+      "events.jsonl cu telemetria locală a rulării",
+      "Cod de ieșire în modul fără interfață: 0 curat, 1 eroare, 2 vulnerabilități găsite"
+    ],
+    "updated_at": "2026-10-29",
+    "pairs_well_with": [
+      "https://github.com/ollama/ollama",
+      "https://github.com/zaproxy/zaproxy",
+      "https://github.com/projectdiscovery/nuclei",
+      "https://github.com/semgrep/semgrep",
+      "https://github.com/smicallef/spiderfoot",
+      "https://github.com/chaitin/SafeLine"
+    ],
+    "used_in_recipes": []
+  },
+  {
+    "slug": "win11debloat",
+    "name": "Win11Debloat",
+    "one_liner": "Curăță Windows de aplicații inutile, reclame și urmărire, dintr-un singur script.",
+    "categories": [
+      "Curățare și setări Windows"
+    ],
+    "inputs": [
+      "Alegeri făcute în interfața grafică sau în meniul din linia de comandă",
+      "Parametri în linia de comandă, de exemplu -RunDefaults, -DisableTelemetry, -RemoveApps -Apps \"Microsoft.OneDrive,Microsoft.Whiteboard\"",
+      "Fișier de configurare JSON exportat dintr-un alt PC cu Win11Debloat",
+      "Fișier start2.bin cu aranjarea dorită a aplicațiilor fixate în Start (opțional)"
+    ],
+    "outputs": [
+      "Windows modificat: aplicații eliminate, setări schimbate în registru și în politici locale",
+      "Copie de siguranță a registrului, fișier JSON numit Win11Debloat-RegistryBackup-<dată>.json",
+      "Punct de restaurare Windows (opțional)",
+      "Fișier jurnal (Win11Debloat.log) cu ce s-a întâmplat"
+    ],
+    "updated_at": "2026-10-29",
+    "pairs_well_with": [
+      "https://github.com/microsoft/winget-cli",
+      "https://github.com/zoicware/RemoveWindowsAI",
+      "https://github.com/ChrisTitusTech/winutil",
+      "https://github.com/valinet/ExplorerPatcher",
+      "https://github.com/Lissy93/personal-security-checklist"
+    ],
+    "used_in_recipes": []
+  },
+  {
+    "slug": "sherlock",
+    "name": "Sherlock",
+    "one_liner": "Caută un nume de utilizator pe sute de rețele sociale deodată.",
+    "categories": [
+      "Securitate și OSINT",
+      "Monitorizare și audit"
+    ],
+    "inputs": [
+      "Unul sau mai multe nume de utilizator, scrise în terminal (cu {?} pentru variante cu _, - sau .)",
+      "Opțional: un fișier JSON propriu cu lista de site-uri (--json) sau doar numele unor site-uri (--site)"
+    ],
+    "outputs": [
+      "Linii în terminal cu adresa profilului găsit pe fiecare site",
+      "Fișier text <nume>.txt cu adresele găsite (după cod, cu opțiunea --txt)",
+      "Fișier CSV <nume>.csv cu coloanele username, name, url_main, url_user, exists, http_status, response_time_s",
+      "Fișier Excel .xlsx (opțiunea --xlsx)"
+    ],
+    "updated_at": "2026-10-29",
+    "pairs_well_with": [
+      "https://github.com/smicallef/spiderfoot",
+      "https://github.com/soxoj/maigret",
+      "https://github.com/simonw/datasette",
+      "https://github.com/Lissy93/personal-security-checklist"
+    ],
+    "used_in_recipes": []
+  },
+  {
+    "slug": "maigret",
+    "name": "Maigret",
+    "one_liner": "Caută un nume de utilizator pe mii de site-uri și adună conturile găsite.",
+    "categories": [
+      "Securitate și OSINT",
+      "Monitorizare și audit"
+    ],
+    "inputs": [
+      "unul sau mai multe nume de utilizator (text), pe linia de comandă sau în interfața web",
+      "URL de profil, cu --parse, din care se extrag ID-urile și numele",
+      "alt tip de identificator (de exemplu qq_id sau bilibili_id), cu --id-type",
+      "fișier text cu un identificator pe rând, cu --input-file (apare în CHANGELOG, versiunea 0.6.6)"
+    ],
+    "outputs": [
+      "rapoarte HTML, PDF și XMind în folderul reports",
+      "JSON (--json simple sau ndjson), CSV și TXT",
+      "graf interactiv D3 în HTML (--graph)",
+      "script Cypher pentru Neo4j (--neo4j), cu importul prin cypher-shell",
+      "rezumat text în terminal, cu --ai (prin API compatibil OpenAI)"
+    ],
+    "updated_at": "2026-10-29",
+    "pairs_well_with": [
+      "https://github.com/sherlock-project/sherlock",
+      "https://github.com/soxoj/socid-extractor",
+      "https://github.com/neo4j/neo4j",
+      "https://github.com/kaifcodec/user-scanner",
+      "https://github.com/sharsil/mailcat"
+    ],
+    "used_in_recipes": []
+  },
+  {
+    "slug": "personal-security-checklist",
+    "name": "Personal Security Checklist",
+    "one_liner": "Listă de peste 250 de sfaturi pentru a-ți proteja conturile, telefonul și datele.",
+    "categories": [
+      "Securitate personală",
+      "Învățare și ghiduri",
+      "Colecții curatoriate"
+    ],
+    "inputs": [
+      "Fișierul personal-security-checklist.yml (titlu, prioritate Essential/Optional/Advanced și detalii pentru fiecare sfat) din rădăcina repo-ului",
+      "Pentru citit, nimic: deschizi CHECKLIST.md pe GitHub sau site-ul digital-defense.io"
+    ],
+    "outputs": [
+      "Pagina Markdown CHECKLIST.md, generată din YAML",
+      "Site static (folder dist/ după yarn build.ssg) sau imagine Docker care servește site-ul pe portul 8080",
+      "Progresul bifat pe site, afișat ca grafice (modul de salvare nu e descris în documentație)"
+    ],
+    "updated_at": "2026-10-29",
+    "pairs_well_with": [
+      "https://github.com/Lissy93/awesome-privacy",
+      "https://github.com/Raphire/Win11Debloat",
+      "https://github.com/sherlock-project/sherlock",
+      "https://github.com/privacyguides/privacyguides.org"
+    ],
+    "used_in_recipes": []
+  },
+  {
+    "slug": "safeline",
+    "name": "SafeLine",
+    "one_liner": "Firewall instalat de tine, care oprește atacurile web înainte să ajungă la site.",
+    "categories": [
+      "Securitate și OSINT",
+      "Monitorizare și audit"
+    ],
+    "inputs": [
+      "Trafic HTTP/HTTPS către domeniile tale (domeniul indică spre serverul SafeLine)",
+      "Setările introduse în consola web: domeniu, port, adresa serverului real (upstream), certificat SSL",
+      "Fișier .env cu parola Postgres și setările de instalare (în varianta manuală)"
+    ],
+    "outputs": [
+      "Cereri curate trimise mai departe la aplicația ta (upstream)",
+      "Pagină de blocare (de exemplu 403 pentru atac, 429 pentru limitare de cereri) pentru vizitatorii opriți",
+      "Evenimente de atac în consolă (IP, tip de atac, cerere completă) și loguri nginx în folderul de loguri al instalării",
+      "Răspuns JSON de la serverul MCP (instrumentul get_attack_events), doar citire"
+    ],
+    "updated_at": "2026-10-29",
+    "pairs_well_with": [
+      "https://github.com/crowdsecurity/crowdsec",
+      "https://github.com/louislam/uptime-kuma",
+      "https://github.com/usestrix/strix",
+      "https://github.com/Kong/kong"
     ],
     "used_in_recipes": []
   }

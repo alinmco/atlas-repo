@@ -291,8 +291,14 @@
       {
         "repo_url": "https://github.com/sherlock-project/sherlock",
         "name": "Sherlock",
-        "why": "Pentru un nume de utilizator găsit de SpiderFoot, caută conturile de pe alte rețele sociale, ca verificare suplimentară.",
-        "in_catalog": false
+        "why": "Un nume de utilizator găsit de SpiderFoot (în rezultatele scanării) devine intrare pentru Sherlock, care caută conturile de pe alte rețele.",
+        "in_catalog": true
+      },
+      {
+        "repo_url": "https://github.com/usestrix/strix",
+        "name": "Strix",
+        "why": "Strix testează securitatea unei ținte proprii sau autorizate; gazdele și IP-urile găsite de SpiderFoot pot deveni ținte pentru el, doar cu acord scris.",
+        "in_catalog": true
       }
     ],
     "gaps_noticed": [

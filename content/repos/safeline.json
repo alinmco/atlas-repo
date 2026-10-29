@@ -1,0 +1,441 @@
+{
+  "slug": "safeline",
+  "repo_url": "https://github.com/chaitin/SafeLine",
+  "name": "SafeLine",
+  "one_liner": "Firewall instalat de tine, care oprește atacurile web înainte să ajungă la site.",
+  "problem_solved": "Un site sau o aplicație web expusă pe internet primește zilnic cereri făcute special să o spargă (injecții SQL, XSS, roboți, valuri de cereri). SafeLine stă în fața aplicației și respinge aceste cereri înainte să o atingă.",
+  "features": [
+    "Blochează atacuri web clasice: SQL injection, XSS, injecție de cod și de comenzi, path traversal, XXE, SSRF",
+    "Limitare de cereri pe IP, împotriva forței brute și a valurilor de trafic",
+    "Test anti-bot (CAPTCHA) și parolă de acces la site, activabile separat pentru fiecare aplicație",
+    "Criptare dinamică a HTML și JavaScript, ca să încurce roboții care citesc pagina",
+    "Consolă web de administrare (port 9443): adaugi aplicații și vezi atacurile blocate, cu detalii",
+    "Plugin-uri pentru Kong și Ingress-NGINX și un server MCP, doar pentru citire, ca un asistent AI să vadă evenimentele de atac"
+  ],
+  "at_a_glance": {
+    "for_you_if": [
+      "Ai un site sau o aplicație pe un server Linux propriu și vrei un firewall web fără abonament lunar.",
+      "Vrei să vezi ce atacuri primește aplicația ta și să le oprești din consolă, fără să scrii reguli."
+    ],
+    "not_for_you_if": [
+      "Nu ai un server Linux și nu vrei să te ocupi de Docker, DNS și certificate.",
+      "Cauți protecție împotriva atacurilor mari de rețea sau un CDN: SafeLine rulează pe serverul tău."
+    ],
+    "verdict": "Firewall web gratuit și ușor de pornit pentru până la 10 aplicații, dar este „open core”: motorul de detecție vine ca imagini Docker, iar funcțiile avansate sunt în planurile plătite."
+  },
+  "cost": {
+    "level": "gratuit complet",
+    "summary": "Ediția Personal e gratuită, fără limită de timp, pentru până la 10 aplicații; plătești doar serverul tău Linux. Nu folosește AI cu cheie sau abonament; planurile Lite (10 USD/lună) și Pro (100 USD/lună) sunt opționale.",
+    "ai_access": {
+      "mode": "nu folosește AI",
+      "detail": "Instalarea nu cere nicio cheie API sau abonament AI: motorul de detecție rulează local, în containere; doar serverul MCP opțional se conectează la un asistent AI pe care îl alegi tu.",
+      "source_url": "https://docs.waf.chaitin.com/en/GetStarted/Deploy"
+    },
+    "items": [
+      {
+        "what": "Server Linux propriu sau VPS (minimum 1 nucleu CPU, 1 GB RAM, 5 GB disc)",
+        "price": null,
+        "required": true,
+        "source_url": "https://docs.waf.chaitin.com/en/GetStarted/Deploy"
+      },
+      {
+        "what": "Docker 20.10.14+ și Docker Compose 2.0.0+ (scriptul din documentație instalează Docker dacă lipsește)",
+        "price": null,
+        "required": true,
+        "source_url": "https://docs.waf.chaitin.com/en/GetStarted/Deploy"
+      },
+      {
+        "what": "Domeniu pentru aplicația protejată, cu acces la DNS (domeniul trebuie să indice spre serverul SafeLine)",
+        "price": null,
+        "required": true,
+        "source_url": "https://docs.waf.chaitin.com/en/GetStarted/AddApplication"
+      },
+      {
+        "what": "SafeLine Personal (ediția gratuită, până la 10 aplicații)",
+        "price": "0 USD, „forever” (verificat 2026-10-29)",
+        "required": true,
+        "source_url": "https://cyberserval.tech/landing/safeline"
+      },
+      {
+        "what": "SafeLine Lite: până la 20 de aplicații, blocare pe țări, notificări Discord/Telegram, export de loguri",
+        "price": "10 USD/lună sau 100 USD/an (verificat 2026-10-29)",
+        "required": false,
+        "source_url": "https://cyberserval.tech/landing/safeline"
+      },
+      {
+        "what": "SafeLine Pro: aplicații nelimitate, detecție mai puternică, pagină de blocare personalizată, load balancing, sincronizare între noduri; obligatoriu pe servere ARM",
+        "price": "100 USD/lună sau 1.000 USD/an; probă de 7 zile (verificat 2026-10-29)",
+        "required": false,
+        "source_url": "https://cyberserval.tech/landing/safeline"
+      },
+      {
+        "what": "SafeLine Ultimate: tot ce are Pro, plus suport dedicat și dezvoltare de funcții la cerere",
+        "price": "la cerere, facturat anual (verificat 2026-10-29)",
+        "required": false,
+        "source_url": "https://cyberserval.tech/landing/safeline"
+      }
+    ]
+  },
+  "platforms": {
+    "windows": "nu",
+    "mac": "nu",
+    "linux": "da",
+    "note": "Documentația de instalare listează doar Linux (x86_64 sau arm64). Faptul că nu merge direct pe Windows sau macOS e deducția mea: lista de cerințe nu le menționează, iar compose.yaml folosește rețeaua gazdei (network_mode: host) pentru proxy.",
+    "source_url": "https://docs.waf.chaitin.com/en/GetStarted/Deploy"
+  },
+  "risk_flags": [
+    {
+      "flag": "telemetrie",
+      "detail": "Codul trimite o notificare de instalare (id de mașină și versiune) și, când apeși „raportează fals pozitiv”, logul cererii, la o adresă de telemetrie; nu am găsit în cod o setare de oprire, iar adresa implicită (rivers-telemetry:10086) nu e definită în compose.yaml.",
+      "source_url": "https://github.com/chaitin/SafeLine/blob/9b72ba6ad4d7e042e7a79ee2e062305179312c98/management/webserver/model/option.go#L46"
+    },
+    {
+      "flag": "cere plată",
+      "detail": "Pe servere ARM ediția Personal nu e suportată și e nevoie de licență Pro; la fel, peste 10 aplicații sau pentru funcții precum blocarea pe țări treci la un plan plătit.",
+      "source_url": "https://docs.waf.chaitin.com/en/GetStarted/Deploy"
+    }
+  ],
+  "audience_reason": "trebuie să administrezi un server Linux, Docker, DNS și certificate, dar interfața web face restul simplu",
+  "setup_difficulty_reason": "mai mulți pași: server Linux cu drepturi root, Docker, opt containere descărcate și mutarea domeniului spre WAF",
+  "analogy": "E ca un paznic la intrarea blocului: toți vizitatorii trec pe lângă el, îi lasă să urce doar pe cei fără unelte de spart ușa și notează într-un registru pe cine a oprit.",
+  "how_it_works": [
+    "Pasul 1, intrare: orice vizitator care deschide site-ul tău ajunge mai întâi la SafeLine, pentru că domeniul indică spre serverul unde rulează.",
+    "Pasul 2, proces: SafeLine funcționează ca proxy invers (bazat pe nginx) și trece fiecare cerere HTTP/HTTPS prin motorul de detecție; ce pare atac sau abuz este oprit.",
+    "Pasul 3, ieșire: cererile curate sunt trimise mai departe la aplicația ta reală (upstream), iar cele oprite primesc o pagină de blocare și apar ca evenimente în consolă."
+  ],
+  "first_steps": {
+    "origin": "experiență utilizator",
+    "story_url": "https://akashrajpurohit.com/blog/safeline-waf-protecting-your-web-applications-with-selfhosted-security/",
+    "story_platform": "blog",
+    "story_date": "2025-08-11",
+    "title": "SafeLine în fața serviciilor unui homelab, după câteva luni de folosire",
+    "intro": "Un dezvoltator care își administrează singur serverul de acasă, protejat deja la SSH cu fail2ban, a vrut să protejeze și serviciile web (blog, parole, filme, poze) împotriva atacurilor.",
+    "steps": [
+      {
+        "you_do": "A pregătit un Ubuntu 24.04 cu Docker și Docker Compose, cu minimum 1 GB RAM și 5 GB disc.",
+        "what_happens": "Omul spune că a ales instalarea manuală, nu scriptul automat, pentru un control mai bun pe producție.",
+        "source_url": "https://akashrajpurohit.com/blog/safeline-waf-protecting-your-web-applications-with-selfhosted-security/"
+      },
+      {
+        "you_do": "A creat folderul /data/safeline, a descărcat compose.yaml, a scris un fișier .env (cu parolă pentru Postgres) și a rulat `docker compose up -d`.",
+        "what_happens": "Au pornit mai multe containere (consolă, motor de detecție, proxy bazat pe Tengine/nginx, bază de date Postgres și alte servicii), iar el le-a verificat cu `docker compose ps` și `docker compose logs`.",
+        "source_url": "https://akashrajpurohit.com/blog/safeline-waf-protecting-your-web-applications-with-selfhosted-security/"
+      },
+      {
+        "you_do": "A deschis consola la https://adresa-serverului:9443 și și-a creat contul de administrator.",
+        "what_happens": "Autorul spune că a primit interfața web de administrare; parola se poate reseta cu `docker exec safeline-mgt resetadmin`, comandă care apare și în documentația oficială.",
+        "source_url": "https://docs.waf.chaitin.com/en/GetStarted/Deploy"
+      },
+      {
+        "you_do": "A adăugat blogul personal ca aplicație: domeniu, adresa serverului real, mod de protecție „Balanced” și certificat Let's Encrypt automat.",
+        "what_happens": "Omul descrie și modurile Monitor (doar înregistrează), Balanced și Strict, și recomandă să începi cu Monitor.",
+        "source_url": "https://akashrajpurohit.com/blog/safeline-waf-protecting-your-web-applications-with-selfhosted-security/"
+      },
+      {
+        "you_do": "A trimis cu curl cereri de test cu SQL injection, XSS și path traversal.",
+        "what_happens": "Spune că cererile rău intenționate au fost blocate și înregistrate detaliat, iar traficul normal a trecut fără probleme.",
+        "source_url": "https://akashrajpurohit.com/blog/safeline-waf-protecting-your-web-applications-with-selfhosted-security/"
+      },
+      {
+        "you_do": "A adăugat în același fel și alte servicii (Vaultwarden, Jellyfin, Immich), plus o regulă pentru unelte de scanare și o limită de 100 de cereri pe minut pe IP.",
+        "what_happens": "Autorul spune că de acum SafeLine protejează toate serviciile din homelab dintr-un singur loc.",
+        "source_url": "https://akashrajpurohit.com/blog/safeline-waf-protecting-your-web-applications-with-selfhosted-security/"
+      }
+    ],
+    "takeaway": "Autorul spune că a avut primul serviciu protejat în sub 10 minute și că SafeLine a devenit o parte esențială a securității lui, mai ușor de administrat decât ModSecurity. Nu compară cu un site fără WAF; cifrele de detecție din text sunt dintr-un test public, nu măsurate de el."
+  },
+  "categories": [
+    "Securitate și OSINT",
+    "Monitorizare și audit"
+  ],
+  "search_intents": [
+    "vreau să protejez un site de atacuri SQL injection și XSS",
+    "vreau un firewall pentru aplicații web pe propriul server",
+    "vreau o alternativă gratuită la Cloudflare WAF",
+    "vreau să blochez roboții și atacurile de forță brută pe site",
+    "vreau să văd ce atacuri primește aplicația mea web"
+  ],
+  "audience": "intermediar",
+  "setup_difficulty": "mediu",
+  "replaces": [
+    {
+      "service": "Cloudflare (planurile Pro și Business, cu WAF)",
+      "service_url": "https://www.cloudflare.com/plans/",
+      "price": "Pro: 20 USD/lună plătit anual sau 25 USD/lună lunar; Business: 200 USD/lună anual sau 250 USD/lună lunar; Free: 0 USD",
+      "price_source_url": "https://www.cloudflare.com/plans/network-cdn.md",
+      "price_checked_at": "2026-10-29",
+      "replacement_level": "parțial",
+      "what_you_keep": [
+        "Filtrarea atacurilor web (SQL injection, XSS etc.) în fața aplicației",
+        "Limitare de cereri și test anti-bot pe fiecare aplicație",
+        "Datele și logurile rămân pe serverul tău, fără abonament pe domeniu"
+      ],
+      "what_you_lose": [
+        "Rețeaua globală Cloudflare (CDN, cache, absorbția atacurilor mari de rețea)",
+        "Ascunderea IP-ului serverului tău: cu SafeLine, vizitatorii ajung direct la el",
+        "Suport și SLA de la un furnizor mare"
+      ],
+      "hidden_costs": [
+        "Serverul Linux pe care rulează (VPS sau hardware propriu)",
+        "Timp de instalare, de reglat modurile de protecție și de actualizat versiunile",
+        "Banda serverului tău plătește pentru tot traficul, inclusiv cel rău"
+      ]
+    },
+    {
+      "service": "AWS WAF",
+      "service_url": "https://aws.amazon.com/waf/",
+      "price": "exemplele din pagina de prețuri folosesc 5,00 USD/web ACL/lună, 1,00 USD/regulă/lună și 0,60 USD per milion de cereri; Bot Control 10 USD/lună per web ACL",
+      "price_source_url": "https://aws.amazon.com/waf/pricing/",
+      "price_checked_at": "2026-10-29",
+      "replacement_level": "doar pentru cazuri simple",
+      "what_you_keep": [
+        "Filtrare de bază a atacurilor web și limitare de cereri",
+        "Fără plată pe milion de cereri, indiferent de trafic"
+      ],
+      "what_you_lose": [
+        "Integrarea nativă cu CloudFront, Application Load Balancer și restul AWS",
+        "Grupuri de reguli gestionate de AWS și de vânzători terți",
+        "Bot Control și Fraud Control, ca servicii gestionate"
+      ],
+      "hidden_costs": [
+        "Serverul sau mașina virtuală pe care rulează SafeLine",
+        "Timp de administrare și actualizare",
+        "Dacă rămâi pe AWS, trebuie să muți traficul prin serverul SafeLine"
+      ]
+    },
+    {
+      "service": "Sucuri Firewall (WAF în cloud)",
+      "service_url": "https://sucuri.net/website-security-platform/signup/",
+      "price": "Basic Firewall 9,99 USD/lună; Pro Firewall 19,98 USD/lună (facturat lunar)",
+      "price_source_url": "https://sucuri.net/website-security-platform/signup/",
+      "price_checked_at": "2026-10-29",
+      "replacement_level": "parțial",
+      "what_you_keep": [
+        "Un firewall web care blochează traficul rău înainte de site",
+        "Control complet asupra datelor și a configurării"
+      ],
+      "what_you_lose": [
+        "Serviciu gestionat: filtrare în cloud, fără server de administrat",
+        "Suport comercial și celelalte servicii din platformă (nu am verificat lista completă)"
+      ],
+      "hidden_costs": [
+        "Serverul Linux și administrarea lui",
+        "Timp pentru reglarea falselor pozitive"
+      ]
+    }
+  ],
+  "examples": [
+    {
+      "title": "Instalare automată și parola de administrator",
+      "scenario": "Pe un server Linux cu drepturi root, rulezi comanda de instalare din documentația oficială, apoi obții contul de administrator pentru consola web. Atenție: `-k` din `curl` oprește verificarea certificatului la descărcare, iar scriptul descărcat rulează cu drepturi root; comanda e copiată exact din documentație.",
+      "prerequisites": [
+        "Linux x86_64 sau arm64, cu procesor cu SSSE3",
+        "Docker 20.10.14+ și Docker Compose 2.0.0+ (scriptul poate instala Docker)",
+        "Minimum 1 nucleu CPU, 1 GB RAM, 5 GB disc",
+        "Drepturi root"
+      ],
+      "commands": [
+        "bash -c \"$(curl -fsSLk https://waf.chaitin.com/release/latest/manager.sh)\" -- --en",
+        "docker exec safeline-mgt resetadmin"
+      ],
+      "code": null,
+      "output_from_docs": "Please must remember this content\n[SafeLine] Initial username：admin\n[SafeLine] Initial password：**********\n[SafeLine] Done",
+      "source_url": "https://docs.waf.chaitin.com/en/GetStarted/Deploy",
+      "kind": "instalare"
+    },
+    {
+      "title": "Protejezi o aplicație și o testezi cu atacuri simple",
+      "scenario": "În consola SafeLine mergi la „Applications”, apeși „Add Application” și completezi Domain (domeniul aplicației), Port (80 sau 443; pentru HTTPS bifezi SSL) și Upstream (adresa reală a aplicației). Apoi muți domeniul să indice spre IP-ul serverului SafeLine și încerci adresele de test de mai jos, înlocuind chaitin.com cu domeniul tău; atacurile apar în lista din consolă.",
+      "prerequisites": [
+        "SafeLine instalat și autentificat în consolă",
+        "O aplicație proprie, pe care ai voie să o testezi",
+        "Acces la DNS pentru domeniul aplicației"
+      ],
+      "commands": [],
+      "code": "SQL Injection: https://chaitin.com/?id=1+and+1=2+union+select+1\nXSS: https://chaitin.com/?id=<img+src=x+onerror=alert()>\nPath Traversal: https://chaitin.com/?id=../../../../etc/passwd\nCode Injection: https://chaitin.com/?id=phpinfo();system('id')\nXXE: https://chaitin.com/?id=<?xml+version=\"1.0\"?><!DOCTYPE+foo+SYSTEM+\"\">",
+      "output_from_docs": null,
+      "source_url": "https://docs.waf.chaitin.com/en/GetStarted/AddApplication",
+      "kind": "folosire"
+    }
+  ],
+  "connectors": {
+    "inputs": [
+      "Trafic HTTP/HTTPS către domeniile tale (domeniul indică spre serverul SafeLine)",
+      "Setările introduse în consola web: domeniu, port, adresa serverului real (upstream), certificat SSL",
+      "Fișier .env cu parola Postgres și setările de instalare (în varianta manuală)"
+    ],
+    "outputs": [
+      "Cereri curate trimise mai departe la aplicația ta (upstream)",
+      "Pagină de blocare (de exemplu 403 pentru atac, 429 pentru limitare de cereri) pentru vizitatorii opriți",
+      "Evenimente de atac în consolă (IP, tip de atac, cerere completă) și loguri nginx în folderul de loguri al instalării",
+      "Răspuns JSON de la serverul MCP (instrumentul get_attack_events), doar citire"
+    ],
+    "pairs_well_with": [
+      {
+        "repo_url": "https://github.com/crowdsecurity/crowdsec",
+        "name": "CrowdSec",
+        "why": "SafeLine oprește atacurile la nivel de cerere web, iar CrowdSec poate citi loguri (SafeLine le scrie în folderul logs/nginx din compose.yaml) și interzice IP-urile repetate; compatibilitatea exactă cu formatul logurilor nu am verificat-o.",
+        "in_catalog": false
+      },
+      {
+        "repo_url": "https://github.com/louislam/uptime-kuma",
+        "name": "Uptime Kuma",
+        "why": "După ce pui SafeLine în fața unui site, Uptime Kuma verifică periodic adresa lui publică și te anunță dacă firewall-ul blochează din greșeală cereri legitime sau dacă site-ul cade.",
+        "in_catalog": false
+      },
+      {
+        "repo_url": "https://github.com/usestrix/strix",
+        "name": "Strix",
+        "why": "Strix atacă o aplicație proprie și produce un raport cu problemele găsite; îl rulezi pe o copie de test, fără WAF, apoi verifici dacă SafeLine oprește acele tipuri de cereri (doar pe ținte proprii sau autorizate).",
+        "in_catalog": true
+      },
+      {
+        "repo_url": "https://github.com/Kong/kong",
+        "name": "Kong Gateway",
+        "why": "Repo-ul SafeLine include un plugin Kong (sdk/kong) care trimite fiecare cerere către motorul de detecție, deci protejezi API-urile din Kong fără să muți traficul prin consola SafeLine.",
+        "in_catalog": false
+      }
+    ],
+    "gaps_noticed": [
+      "Pluginul ingress-nginx din repo se adresează Kubernetes ingress-nginx, iar repo-ul kubernetes/ingress-nginx este arhivat (ultim commit 2026-03-23).",
+      "Pluginul Traefik e un submodul (chaitin/traefik-safeline), cu ultimul commit pe 2025-01-22; BlazeHTTP, unealta de test din repo, are ultimul commit pe 2024-07-01.",
+      "Pentru plugin-urile Kong și Ingress-NGINX, motorul de detecție trebuie mutat manual de pe socket Unix pe TCP (editezi detector.yml și compose.yaml), apoi repornești stiva.",
+      "Serverul MCP expune un singur instrument (get_attack_events); crearea site-urilor sau a listelor de blocare se face doar din consolă.",
+      "Versiunea afișată în version.json din repo (v9.2.7) nu coincide cu ultima lansare de pe GitHub (v9.4.3)."
+    ]
+  },
+  "when_not_to_use": [
+    "Dacă nu ai un server Linux și nu vrei să administrezi Docker, DNS și certificate, un serviciu în cloud (Cloudflare, Sucuri) e mai simplu de pornit.",
+    "Dacă te temi de atacuri DDoS mari: documentația vorbește de limitare de cereri, nu de absorbția atacurilor de rețea, iar traficul ajunge direct pe serverul tău (deducția e a mea).",
+    "Dacă ai nevoie de cod sursă complet pe care să-l compilezi: repo-ul conține partea de management, iar motorul de detecție și proxy-ul vin ca imagini Docker; README-ul webserver-ului cere librării FVM descărcate de pe un server intern al firmei.",
+    "Dacă ai nevoie de mai mult de 10 aplicații, de blocare pe țări sau de servere ARM: trebuie un plan plătit (Lite sau Pro).",
+    "Nu te baza pe un singur strat: testul public de detecție (71,65% în modul Balance) e făcut de autori pe un set ales de ei, iar un WAF nu înlocuiește corectarea codului."
+  ],
+  "alternatives": [
+    {
+      "name": "OWASP Coraza",
+      "url": "https://github.com/corazawaf/coraza",
+      "difference": "Motor WAF cu licență Apache-2.0, compatibil cu regulile ModSecurity; e o bibliotecă, fără consolă web gata făcută."
+    },
+    {
+      "name": "ModSecurity cu OWASP CRS",
+      "url": "https://github.com/owasp-modsecurity/ModSecurity-nginx",
+      "difference": "WAF clasic bazat pe reguli (Apache-2.0), cu setul OWASP Core Rule Set; necesită mai mult reglaj, iar testul publicat de SafeLine îi atribuie mai multe false pozitive."
+    },
+    {
+      "name": "BunkerWeb",
+      "url": "https://github.com/bunkerity/bunkerweb",
+      "difference": "WAF open-source pe nginx cu interfață web, licență AGPL-3.0 (cu condiții dacă îl oferi ca serviciu)."
+    }
+  ],
+  "tech_sheet": {
+    "license": "GPL-3.0",
+    "language": "Go",
+    "commit_sha": "9b72ba6ad4d7e042e7a79ee2e062305179312c98",
+    "last_commit_date": "2026-10-22",
+    "stars": 23082,
+    "requirements": [
+      "Sistem de operare: Linux (documentația de instalare nu listează Windows sau macOS)",
+      "Arhitectură: x86_64 (procesor cu setul de instrucțiuni SSSE3) sau arm64; pe ARM ediția Personal nu e suportată și e nevoie de licență Pro",
+      "Docker 20.10.14 sau mai nou",
+      "Docker Compose 2.0.0 sau mai nou",
+      "Resurse minime: 1 nucleu CPU, 1 GB memorie RAM, 5 GB spațiu pe disc",
+      "Drepturi root pentru comanda de instalare automată (descarcă și rulează scriptul manager.sh de pe waf.chaitin.com)",
+      "Python 3.5 sau mai nou, cerut de scriptul de instalare din repo (scripts/manage.py); nu apare în documentație",
+      "Acces la internet pentru a descărca scriptul și imaginile Docker; README-ul avertizează că utilizatorii din China continentală pot avea probleme de conectare dacă instalează versiunea internațională",
+      "Port 9443 liber pentru consola web (valoarea implicită MGT_PORT)",
+      "Un domeniu (sau IP) și adresa reală a aplicației de protejat (upstream); domeniul trebuie să indice spre serverul unde rulează SafeLine",
+      "Nu sunt necesare chei API sau conturi pentru ediția Personal; planurile Lite, Pro și Ultimate sunt opționale"
+    ]
+  },
+  "monetization": [
+    {
+      "model": "serviciu de instalare și configurare",
+      "what_you_sell": "Instalarea SafeLine pe serverul Linux al clientului, în fața unui site (de exemplu WordPress sau WooCommerce): o săptămână în modul Monitor, analiza evenimentelor, trecerea la protecție activă, limitare de cereri, certificate, backup pentru fișierul .env și un document scurt de predare.",
+      "for_whom": "Agenții web mici și magazine online cu un VPS propriu, fără administrator de sistem.",
+      "license_check": {
+        "license": "GPL-3.0",
+        "commercial_use": "permis cu condiții",
+        "conditions": "GPL-3.0 permite folosirea în orice scop, inclusiv vânzarea de servicii în jurul programului; dacă livrezi clienților o versiune modificată, trebuie să oferi codul ei sub GPL (nu există clauză de rețea ca la AGPL, deci simpla instalare nu o declanșează). Atenție: repo-ul e „open core”, iar motorul de detecție și proxy-ul vin ca imagini Docker fără text de licență în repo; un issue deschis (nr. 1285) susține că distribuția nu respectă GPL-3.0. Nu redistribui imaginile tu; clientul le descarcă din sursa oficială, iar tu citești termenii CyberServal înainte de a vinde. Ediția Personal e limitată la 10 aplicații."
+      },
+      "path": "folosești repo-ul direct",
+      "own_build_notes": null,
+      "demand_evidence": [
+        {
+          "name": "SiteGuarding (securitate gestionată pentru site-uri mici)",
+          "url": "https://www.siteguarding.com/security-blog/the-small-business-guide-to-affordable-managed-website-security/",
+          "price": "intervale de referință din articol: 49-79 EUR/lună (Starter, WAF de bază), 99-149 EUR/lună (Growth), 199-299 EUR/lună (Pro, cu reglaj WAF)",
+          "what_it_proves": "Firmele mici plătesc deja lunar pentru securitate de site cu WAF, iar reglajul WAF e vândut ca serviciu (intervalele sunt estimări dintr-un articol al unui vânzător, nu prețuri de listă).",
+          "checked_at": "2026-10-29"
+        },
+        {
+          "name": "AppTrana WAAP (Indusface)",
+          "url": "https://www.indusface.com/pricing/apptrana-waap/",
+          "price": "Advanced: 99 USD per FQDN (pagina nu spune dacă e lunar sau anual); Premium și Enterprise la cerere",
+          "what_it_proves": "Un WAF gestionat, cu administrare de experți non-stop și reguli personalizate, se vinde deja în mod public.",
+          "checked_at": "2026-10-29"
+        }
+      ],
+      "startup_cost": "Un VPS Linux de test (preț neverificat), un domeniu și o aplicație vulnerabilă pe care ai voie s-o ataci pentru demonstrații; fără licențe.",
+      "time_to_first_client": "Variază mult; depinde de rețeaua ta printre agenții și magazinele cu server propriu.",
+      "difficulty": "mediu",
+      "risks": [
+        "Concurență gratuită: documentația oficială și multe ghiduri publice explică instalarea pas cu pas, iar clientul o poate face singur sau poate alege Cloudflare Free.",
+        "Dacă un atac trece de WAF, clientul poate da vina pe tine; testul public al autorilor arată o detecție de 71,65% în modul Balance, deci nu promite protecție completă.",
+        "Actualizările pot strica instalarea: ultima versiune (9.4.3) are un bug deschis (issue 1346) la compilarea regulilor, care nu apărea în 9.4.2.",
+        "Dependență de un singur furnizor: un recenzent (appsecsanta.com) notează că operatorul comercial a trecut de la SafePoint la CyberServal; prețurile și limitele ediției gratuite pot fi schimbate de ei."
+      ],
+      "first_steps": [
+        "Instalezi SafeLine pe un VPS de test după documentația oficială, în fața unei aplicații vulnerabile proprii.",
+        "Scrii o listă de verificare: mod Monitor, revizuirea evenimentelor, trecerea la protecție activă, certificate, backup.",
+        "Testezi cu adresele de atac din documentația AddApplication și documentezi falsele pozitive găsite.",
+        "Alegi un preț raportat la intervalele publice ale concurenței și îl propui unui prim client cunoscut."
+      ]
+    },
+    {
+      "model": "găzduire gestionată",
+      "what_you_sell": "Un serviciu de firewall web pe abonament, în care clientul își mută DNS-ul spre serverele tale, iar tu rulezi un proxy invers cu reguli OWASP și o pagină simplă cu atacurile blocate, pentru site-uri mici (de exemplu WordPress).",
+      "for_whom": "Proprietari de site-uri mici care vor protecție fără să administreze un server și nu vor să lase tot traficul prin Cloudflare.",
+      "license_check": {
+        "license": "GPL-3.0",
+        "commercial_use": "neclar",
+        "conditions": "Pentru găzduire pentru terți, termenii imaginilor Docker SafeLine (motor de detecție, proxy) și ai ediției Personal nu sunt scriși în repo, iar un issue deschis (nr. 1285) contestă conformitatea cu GPL-3.0; de aceea nu propun să le folosești. GPL-3.0 în sine nu cere publicarea codului pentru un serviciu găzduit, dar nu acoperă ce nu e publicat în repo."
+      },
+      "path": "construiești propria implementare",
+      "own_build_notes": "Construiești funcționalitatea (proxy invers cu WAF multi-client, panou cu atacuri blocate, profiluri gata făcute pentru WordPress și API-uri), nu codul SafeLine. Poți fi mai bun la onboarding (un asistent care schimbă DNS-ul, preseturi pe tipul de site) și la raportul lunar în limbaj simplu. Punct de plecare legal: OWASP Coraza și setul de reguli OWASP CRS (ambele Apache-2.0), sau BunkerWeb (AGPL-3.0, cu obligația de a publica codul modificat dacă îl oferi ca serviciu). NU preiei de la SafeLine: codul, imaginile Docker, binarele și regulile motorului de detecție, numele, logoul, designul consolei și paginile de blocare.",
+      "demand_evidence": [
+        {
+          "name": "Sucuri Firewall",
+          "url": "https://sucuri.net/website-security-platform/signup/",
+          "price": "Basic Firewall 9,99 USD/lună; Pro Firewall 19,98 USD/lună",
+          "what_it_proves": "Un WAF în cloud pentru site-uri mici se vinde deja public, la abonament lunar.",
+          "checked_at": "2026-10-29"
+        },
+        {
+          "name": "Cloudflare Pro",
+          "url": "https://www.cloudflare.com/plans/network-cdn.md",
+          "price": "20 USD/lună plătit anual sau 25 USD/lună lunar; există și un plan gratuit",
+          "what_it_proves": "Piața are deja un concurent mare, cu plan gratuit, ceea ce limitează prețul pe care îl poți cere.",
+          "checked_at": "2026-10-29"
+        }
+      ],
+      "startup_cost": "Servere în mai multe locații, domenii de test și timp mult de dezvoltare; costurile exacte de hosting nu le-am verificat.",
+      "time_to_first_client": "Mult mai mare decât la un serviciu de instalare, pentru că trebuie mai întâi să construiești și să testezi produsul.",
+      "difficulty": "greu",
+      "risks": [
+        "Concurență puternică și gratuită: Cloudflare are plan Free, iar Sucuri începe de la 9,99 USD/lună.",
+        "Răspundere mare: tu găzduiești traficul clienților, deci o pană sau un atac asupra ta lovește toți clienții.",
+        "Fără rețea globală (CDN) nu poți concura la viteză și la absorbția atacurilor mari de rețea.",
+        "Efort de suport permanent pentru falsele pozitive ale fiecărui client."
+      ],
+      "first_steps": [
+        "Construiești un prototip pe un singur server cu Coraza și OWASP CRS în fața unui site de test.",
+        "Măsori falsele pozitive pe site-uri reale, cu acordul proprietarilor, înainte de orice ofertă.",
+        "Pornești cu un grup mic de clienți pilot și un preț la nivelul planurilor publice ale concurenței."
+      ]
+    }
+  ],
+  "updated_at": "2026-10-29",
+  "notes_summary": "Am citit README-ul, codul de management, documentația oficială și pagina de prețuri; n-am rulat nimic. Motorul de detecție nu e în repo (vine ca imagini Docker), deci nu am putut verifica cum detectează; telemetria are o adresă implicită pe care n-am putut-o confirma.",
+  "notes": "Repo nou. Clonat la commit 9b72ba6ad4d7e042e7a79ee2e062305179312c98 (2026-10-22). Stele 23082, licență GPL-3.0 (LICENSE.md este textul standard GPL v3, fără clauze suplimentare), ultima lansare v9.4.3 (2026-10-21) pe GitHub; version.json din repo spune v9.2.7, deci e vechi. Documentația oficială (docs.waf.chaitin.com, Wiki.js) nu se citește prin WebFetch (întoarce doar titlul); am descărcat HTML-ul cu curl și am extras textul paginilor Deploy și AddApplication. Cerințele (Linux, x86_64/arm64, Docker 20.10.14+, Compose 2.0.0+, 1 CPU / 1 GB / 5 GB, SSSE3) și comanda de instalare vin din pagina Deploy; Python 3.5+ vine din scripts/manage.py. Documentația notează și că varianta LTS nu mai e întreținută de la 9.1.0-LTS (2025-08-14). Prețurile ediției SafeLine (Personal 0, Lite 10 USD/lună sau 100/an, Pro 100/lună sau 1000/an, Ultimate la cerere) sunt de pe cyberserval.tech/landing/safeline, verificate 2026-10-29, în două fetch-uri independente (WebFetch și HTML descărcat); README-ul vorbește de probă de 7 zile pentru Pro. Cloudflare: pagina /plans/network-cdn.md arată Pro 20/25 USD, Business 200/250 USD (anual/lunar); pagina /plans/ în sine nu arată planurile. AWS WAF: valorile (5 USD/web ACL, 1 USD/regulă, 0,60 USD/milion cereri) apar în exemplele de calcul ale paginii, nu într-un tabel; recomand reverificare. Sucuri Firewall: 9,99 și 19,98 USD/lună. AppTrana: 99 USD per FQDN, perioada nu e specificată pe pagină. SiteGuarding: intervalele sunt „reference ranges” dintr-un articol al unui vânzător. Prețurile pentru server/VPS și Docker Engine sunt null (nu le-am verificat; Docker Desktop are prețuri separate, irelevante pe un server Linux). Telemetrie: în cod, NotifyInstallation (model/option.go L46) trimite id de mașină și versiune la adresa de telemetrie configurată, implicit rivers-telemetry:10086, care nu apare în compose.yaml; imaginea oficială poate configura altceva, neverificat. Feedback-ul de fals pozitiv (api/detectlog.go) trimite logul cererii la aceeași adresă, doar când apeși butonul. Consola verifică și versiunea la https://waf-ce.chaitin.cn/release/latest/version.json (GET, fără date trimise). README-ul avertizează că utilizatorii din China continentală pot avea probleme de conectare la serviciile cloud cu versiunea internațională. Un recenzent (appsecsanta.com) scrie că „nimic nu părăsește infrastructura ta”, ceea ce nu am putut confirma sau infirma din cod. Open core: management/webserver/README.md cere librării FVM descărcate dintr-un GitLab intern al firmei; în compose.yaml, serviciile detect, tengine, luigi, fvm și chaos sunt imagini precompilate; sursele lor nu sunt în repo. Issue 1285 (deschis din 2026-04-12, scris de un utilizator) susține că distribuția încalcă GPL-3.0 din acest motiv; n-am văzut răspuns de la autori și nu iau poziție juridică, doar raportez. Alte probleme deschise relevante: 1346 (regresie în v9.4.3, motorul respinge cereri interne cu 401 la instalări noi, nu apare în 9.4.2), 1347 (limita de 1000 de intrări pe grup de IP în ediția Personal). Benchmark-ul din README (detecție 71,65% și fals pozitiv 0,07% în modul Balance pe 33.669 de probe) este făcut de autori; un recenzent observă că pagina de produs anunță alt procent (99,995%) și că cifrele de instalări diferă între README și site. README-ul actual spune 700.000+ instalări, 2.000.000+ site-uri protejate; sunt afirmații ale autorilor, neverificate. „Folosește AI” = nu: nicio cheie, niciun abonament; în materialele de promovare se vorbește de „analiză semantică”, dar în repo nu există apeluri către furnizori AI. Serverul MCP (mcp_server/) expune un singur instrument, get_attack_events (doar citire), cu autentificare bearer implicit. Primii pași: povestea e un blog personal (akashrajpurohit.com, 2025-08-11), scris la persoana întâi de un autor independent, care nu e autorul repo-ului; textul complet l-am citit atât prin WebFetch cât și prin HTML descărcat. Pagina conține un bloc de promovare pentru produsul propriu al autorului (nu SafeLine), iar cifrele de detecție din text sunt copiate din testul public, nu măsurate de el; nu pot exclude că textul a fost redactat cu ajutor AI. Am evitat articolele dev.to pe tema SafeLine publicate în serie de câteva conturi cu aspect de marketing și articolul it-connect.tech, care declară explicit că a fost sponsorizat de vânzătorul SafeLine. HN: există doar postări fără comentarii utile despre SafeLine. Perechi verificate active (ultim commit în ultimele 12 luni): crowdsecurity/crowdsec (MIT, 2026-10-28), louislam/uptime-kuma (MIT, 2026-10-29), usestrix/strix (Apache-2.0, 2026-10-29), Kong/kong (Apache-2.0, 2026-10-19); chaitin/traefik-safeline (2025-01-22) și chaitin/blazehttp (2024-07-01) nu sunt active, deci nu le-am pus ca perechi. Alternative verificate: corazawaf/coraza (Apache-2.0, 2026-10-29), owasp-modsecurity/ModSecurity-nginx (Apache-2.0, 2026-10-25), bunkerity/bunkerweb (AGPL-3.0, 2026-10-27). Categoriile „Securitate și OSINT” și „Monitorizare și audit” există deja în content/categories.json. Termeni de glosar care lipsesc din content/glossary.json (verificat prin script, termen și alias): WAF, proxy invers, Nginx, limitare de cereri, CAPTCHA, Let's Encrypt, certificat SSL, upstream, HTTP flood, path traversal, Kubernetes, Ingress-NGINX, container, SSSE3, ARM, open core, root, DDoS. Comanda din documentație folosește `curl -k`, care dezactivează verificarea certificatului; am păstrat-o exact și am avertizat în scenariul exemplului."
+}
