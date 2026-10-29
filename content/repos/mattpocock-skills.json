@@ -267,6 +267,12 @@
         "name": "OpenCode",
         "why": "Skill-uri instalabile cu npx skills, care includ OpenCode printre asistenții suportați, ca să-i dai reguli de lucru gata făcute.",
         "in_catalog": true
+      },
+      {
+        "repo_url": "https://github.com/pbakaus/impeccable",
+        "name": "Impeccable",
+        "why": "Au același format SKILL.md și se instalează în același agent: skill-urile lui Pocock dau procesul (interviu, teste, revizuire), iar Impeccable adaugă judecata de design pentru interfață.",
+        "in_catalog": true
       }
     ],
     "gaps_noticed": [

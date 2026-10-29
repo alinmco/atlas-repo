@@ -1,0 +1,345 @@
+{
+  "slug": "ruview",
+  "repo_url": "https://github.com/ruvnet/RuView",
+  "name": "RuView",
+  "one_liner": "Detectează oameni într-o cameră din semnalul WiFi, fără camere video, cu plăcuțe ieftine.",
+  "problem_solved": "Vrei să știi dacă e cineva într-o cameră (și dacă respiră liniștit) fără camere video și fără brățări. RuView încearcă să afle asta din felul în care corpul deranjează semnalul WiFi, dar pentru rezultate reale ai nevoie de plăcuțe ESP32 speciale.",
+  "features": [
+    "Detectează prezența și mișcarea dintr-un semnal WiFi (CSI) captat de plăcuțe ESP32-S3 sau ESP32-C6",
+    "Estimează ritmul respirației și al inimii (experimental, declarat nevalidat medical)",
+    "Demo în Docker cu date simulate, fără nicio piesă de hardware",
+    "Se leagă de Home Assistant prin MQTT, cu intrări automate pentru automatizări",
+    "Server în Rust cu API REST și WebSocket, plus pachet Python (pip install ruview)",
+    "Model pre-antrenat pe Hugging Face și instrumente de calibrare și antrenare pentru camera ta",
+    "Plugin pentru Claude Code/Codex și server MCP, ca agenții AI să citească senzorii"
+  ],
+  "at_a_glance": {
+    "for_you_if": [
+      "Vrei să experimentezi cu senzori WiFi ieftini pentru prezență, de exemplu împreună cu Home Assistant.",
+      "Nu te sperie cumpărarea de plăcuțe, încărcarea firmware-ului și calibrarea camerei."
+    ],
+    "not_for_you_if": [
+      "Ai nevoie de o măsurătoare pe care să te bazezi pentru sănătate sau siguranță (cădere, puls).",
+      "Vrei ceva care merge din prima, doar cu laptopul, fără hardware special."
+    ],
+    "verdict": "Proiect ambițios și foarte detaliat documentat, dar o parte din promisiuni sunt încă experimentale: pentru prezență și mișcare merită încercat, pentru poziția corpului sau semne vitale nu te baza pe el."
+  },
+  "cost": {
+    "level": "gratuit complet",
+    "summary": "Programul e gratuit (MIT) și nu cere cheie API sau abonament AI; pentru senzori reali cumperi plăcuțe ESP32 (după README ~54 USD pentru 3-6 plăcuțe), iar demo-ul simulat nu costă nimic.",
+    "ai_access": {
+      "mode": "nu folosește AI",
+      "detail": "Nucleul rulează local și nu apelează niciun serviciu AI plătit; doar pluginul opțional pentru Claude Code/Codex folosește abonamentul sau cheia ta existentă din acele programe.",
+      "source_url": "https://github.com/ruvnet/RuView/blob/3686bc770f77eb6161d5379861dcd09d7d9a1e4b/README.md"
+    },
+    "items": [
+      {
+        "what": "Plăcuțe ESP32-S3 pentru senzori reali (3-6 recomandate; README afirmă ~9 USD/bucată și ~54 USD pentru mesh-ul cu router, neverificat). Exemplu de preț real: Adafruit ESP32-S3-DevKitC-1 cu WROOM-2, alt model decât cel recomandat de proiect (DevKitC-1 N8R8). Demo-ul simulat nu are nevoie de ele.",
+        "price": "19,95 USD pe Adafruit (model WROOM-2, epuizat la 2026-10-29)",
+        "required": true,
+        "source_url": "https://www.adafruit.com/product/5364"
+      },
+      {
+        "what": "Cognitum Seed (aparat mic de tip Pi Zero 2 W, vândut de autor, pentru memorie persistentă și căutare); README spune ~140 USD pentru setul complet, iar ghidul de utilizare ~15 USD pentru placa Seed, iar pagina oficială nu arată preț",
+        "price": null,
+        "required": false,
+        "source_url": "https://github.com/ruvnet/RuView/blob/3686bc770f77eb6161d5379861dcd09d7d9a1e4b/docs/user-guide.md"
+      },
+      {
+        "what": "Docker Desktop (pentru demo-ul din Docker și pentru compilarea firmware-ului ESP32; alternativ, compilezi din sursă cu Rust)",
+        "price": "Personal 0 USD; Pro 11 USD/lună (9 USD/lună anual); Team 16 USD/utilizator/lună (15 anual); Business 24 USD/utilizator/lună (verificat 2026-10-29)",
+        "required": false,
+        "source_url": "https://www.docker.com/pricing/"
+      },
+      {
+        "what": "Claude Code (opțional, doar pentru pluginul /ruview-* din repo; programul rulează cu abonament sau cheie API)",
+        "price": "Claude Pro 17 USD/lună cu abonament anual (200 USD plătiți odată) sau 20 USD/lună lunar (verificat 2026-10-29)",
+        "required": false,
+        "source_url": "https://claude.com/pricing"
+      },
+      {
+        "what": "Placă video (GPU) pentru antrenarea modelelor proprii; README citează un RTX 5080 pentru antrenări rapide, dar demo-ul și senzorii nu o cer",
+        "price": null,
+        "required": false,
+        "source_url": "https://github.com/ruvnet/RuView/blob/3686bc770f77eb6161d5379861dcd09d7d9a1e4b/README.md"
+      },
+      {
+        "what": "Placă de rețea de cercetare (Intel 5300 sau Atheros AR9580) pentru CSI complet, ca alternativă la ESP32; README dă ~50-100 USD, neverificat",
+        "price": null,
+        "required": false,
+        "source_url": "https://github.com/ruvnet/RuView/blob/3686bc770f77eb6161d5379861dcd09d7d9a1e4b/README.md"
+      }
+    ]
+  },
+  "platforms": {
+    "windows": "parțial",
+    "mac": "da",
+    "linux": "da",
+    "note": "Documentația listează Windows 10/11, macOS 10.15+ și Ubuntu 18.04+. Pe Windows, Docker Desktop are o problemă documentată cu adresa sursă a pachetelor UDP de la plăcuțe, iar compilarea firmware-ului merge doar prin Docker. Pe Linux nu există sursă de semnal WiFi obișnuit (RSSI), deci acolo folosești doar plăcuțe ESP32.",
+    "source_url": "https://github.com/ruvnet/RuView/blob/3686bc770f77eb6161d5379861dcd09d7d9a1e4b/docs/user-guide.md"
+  },
+  "risk_flags": [
+    {
+      "flag": "proiect instabil",
+      "detail": "README-ul are o secțiune „Beta software” (API și firmware se pot schimba), versiunile curente de firmware sunt marcate „pre-release”, iar firmware-ul precompilat din folderul release_bins este vechi față de sursă.",
+      "source_url": "https://github.com/ruvnet/RuView/blob/3686bc770f77eb6161d5379861dcd09d7d9a1e4b/README.md"
+    },
+    {
+      "flag": "licență restrictivă",
+      "detail": "Modelul de poziție a corpului de pe Hugging Face (wifi-densepose-mmfi-pose) are licență CC BY-NC 4.0, adică doar necomercial, deși codul repo-ului e MIT.",
+      "source_url": "https://huggingface.co/ruvnet/wifi-densepose-mmfi-pose"
+    }
+  ],
+  "audience_reason": "trebuie să flashezi plăcuțe, să configurezi rețea și MQTT și să calibrezi camera, iar documentația are sute de pagini și multe avertismente",
+  "setup_difficulty_reason": "demo-ul simulat e ușor, dar pentru semnal real cumperi hardware, încarci firmware (prin Docker), configurezi rețeaua și, opțional, MQTT și Home Assistant",
+  "analogy": "Ca un sonar pentru camera ta: plăcuțele ascultă cum se întorc undele WiFi și ghicesc dacă s-a mișcat cineva, la fel cum un liliac ghicește obstacole din ecou.",
+  "how_it_works": [
+    "Pasul 1 (intrare): una sau mai multe plăcuțe ESP32-S3 captează CSI, adică modul în care semnalul WiFi al routerului tău ajunge deformat de oamenii din cameră, și îl trimit prin UDP către un server.",
+    "Pasul 2 (proces): serverul scris în Rust filtrează semnalul și calculează prezența, mișcarea, ritmul respirației și al inimii cu reguli matematice (filtre de frecvență și numărarea trecerilor prin zero); opțional folosește și un model învățat.",
+    "Pasul 3 (ieșire): rezultatele ies ca API REST/WebSocket în format JSON, ca pagină web de vizualizare, ca entități MQTT pentru Home Assistant sau ca unelte MCP pentru agenți AI."
+  ],
+  "first_steps": null,
+  "categories": [
+    "Casă inteligentă și senzori"
+  ],
+  "search_intents": [
+    "vreau să detectez dacă e cineva în cameră fără cameră video",
+    "vreau un senzor de prezență cu WiFi și ESP32 pentru Home Assistant",
+    "vreau să măsor respirația unei persoane fără brățară sau cameră",
+    "vreau să văd ce fac semnalele WiFi când trece cineva printr-o cameră",
+    "vreau să încerc senzori WiFi (CSI) cu plăcuțe ieftine"
+  ],
+  "audience": "avansat",
+  "setup_difficulty": "greu",
+  "replaces": [
+    {
+      "service": "Linksys Aware (detectarea mișcării prin mesh WiFi, cu abonament)",
+      "service_url": "https://www.linksys.com/linksys-aware/",
+      "price": null,
+      "price_source_url": null,
+      "price_checked_at": "2026-10-29",
+      "replacement_level": "doar pentru cazuri simple",
+      "what_you_keep": [
+        "detectarea mișcării și a prezenței într-o casă fără camere video",
+        "datele rămân la tine, fără abonament lunar"
+      ],
+      "what_you_lose": [
+        "aplicația finisată și suportul oficial al producătorului",
+        "funcționarea cu routerele pe care le ai deja (RuView cere plăcuțe ESP32 proprii)",
+        "o soluție testată pe scară largă, fără calibrare manuală"
+      ],
+      "hidden_costs": [
+        "timp pentru flashat, rețea și calibrare",
+        "plăcuțe ESP32 și cabluri USB",
+        "mentenanță la fiecare versiune nouă de firmware, pentru că proiectul e în beta",
+        "prețul abonamentului Linksys nu l-am putut verifica pe pagina oficială (cererea a fost respinsă cu 429), deci nu îl compar aici"
+      ]
+    },
+    {
+      "service": "Aqara Presence Sensor FP2 (senzor de prezență cu radar mmWave)",
+      "service_url": "https://www.aqara.com/en/product/presence-sensor-fp2/",
+      "price": null,
+      "price_source_url": null,
+      "price_checked_at": "2026-10-29",
+      "replacement_level": "doar pentru cazuri simple",
+      "what_you_keep": [
+        "detectarea persoanelor care stau nemișcate",
+        "integrarea cu Home Assistant și alte sisteme de casă inteligentă"
+      ],
+      "what_you_lose": [
+        "un produs gata făcut, cu carcasă, garanție și aplicație",
+        "zonele de detecție configurate vizual și detectarea căderii prin montare pe tavan, descrise de producător",
+        "stabilitatea: la RuView ți se cere calibrare pe camera ta"
+      ],
+      "hidden_costs": [
+        "plăcuțe și timp de configurare",
+        "pagina oficială Aqara trimite spre magazin pentru preț, deci nu am putut verifica un preț oficial"
+      ]
+    }
+  ],
+  "examples": [
+    {
+      "title": "Demo în Docker, cu date simulate (fără hardware)",
+      "scenario": "Pornești serverul RuView în Docker, cu date simulate, și verifici că răspunde. Documentația precizează că imaginea se oprește cu codul 64 dacă nu setezi RUVIEW_API_TOKEN, deci îl generezi singur (nu e o cheie de la un serviciu extern). Un alt exemplu din același ghid (macOS) trimite tokenul în antetul Authorization pentru /api/v1/nodes, așa că unele adrese ale API-ului pot cere tokenul.",
+      "prerequisites": [
+        "Docker instalat și pornit",
+        "openssl (pentru a genera tokenul local)"
+      ],
+      "commands": [
+        "docker pull ruvnet/wifi-densepose:latest",
+        "export RUVIEW_API_TOKEN=$(openssl rand -hex 32)",
+        "docker run -p 127.0.0.1:3000:3000 -p 127.0.0.1:3001:3001 -e RUVIEW_API_TOKEN ruvnet/wifi-densepose:latest",
+        "# Deschide http://localhost:3000 în browser",
+        "curl http://localhost:3000/health"
+      ],
+      "code": "",
+      "output_from_docs": "{\"status\":\"ok\",\"source\":\"simulated\",\"clients\":0}",
+      "source_url": "https://github.com/ruvnet/RuView/blob/3686bc770f77eb6161d5379861dcd09d7d9a1e4b/docs/user-guide.md#quick-start",
+      "kind": "instalare"
+    },
+    {
+      "title": "Publică prezența și semnele vitale în Home Assistant",
+      "scenario": "Ai plăcuțe ESP32 deja flashate și un broker MQTT (de exemplu Mosquitto din Home Assistant). Pornești serverul RuView cu opțiunea --mqtt, iar documentația spune că Home Assistant creează singur un dispozitiv pentru fiecare nod în aproximativ 5 secunde. Atenție: ghidul de Home Assistant e mai vechi decât README-ul (folosește imaginea 0.7.0 și nu arată RUVIEW_API_TOKEN, cerut de imaginea actuală), așa că poate fi nevoie să adaugi tokenul ca în primul exemplu.",
+      "prerequisites": [
+        "Broker MQTT în rețeaua locală (de exemplu Mosquitto)",
+        "Home Assistant 2025.5 sau mai nou, cu integrarea MQTT activată",
+        "Plăcuțe ESP32 flashate care trimit CSI către mașina pe care rulează serverul",
+        "Docker"
+      ],
+      "commands": [
+        "docker run --rm --net=host \\\n    ruvnet/wifi-densepose:0.7.0 \\\n    --source esp32 \\\n    --mqtt --mqtt-host 192.168.1.10 \\\n    --mqtt-username homeassistant --mqtt-password-env MQTT_PASSWORD"
+      ],
+      "code": "",
+      "output_from_docs": null,
+      "source_url": "https://github.com/ruvnet/RuView/blob/3686bc770f77eb6161d5379861dcd09d7d9a1e4b/docs/integrations/home-assistant.md",
+      "kind": "folosire"
+    }
+  ],
+  "connectors": {
+    "inputs": [
+      "pachete UDP binare cu CSI de la plăcuțe ESP32-S3/C6 (format ADR-018, port 5005)",
+      "semnal WiFi RSSI de pe laptop (Windows prin netsh, macOS prin CoreWLAN), cu precizie mică",
+      "date simulate generate de server (implicit în Docker)",
+      "înregistrări .csi.jsonl pentru antrenare și fișiere de model RVF sau safetensors descărcate de pe Hugging Face"
+    ],
+    "outputs": [
+      "JSON prin API REST (de exemplu /health, /api/v1/vital-signs, /api/v1/pose/current) și mesaje WebSocket",
+      "interfață web Three.js pe portul 3000",
+      "entități MQTT cu descoperire automată pentru Home Assistant și punte Matter",
+      "unelte MCP (ruview.presence.now, ruview.vitals.get_*) pentru agenți AI"
+    ],
+    "pairs_well_with": [
+      {
+        "repo_url": "https://github.com/ruvnet/ruflo",
+        "name": "ruflo",
+        "why": "Același autor: serverul MCP @ruvnet/rvagent din RuView expune prezența și semnele vitale ca unelte, iar rolurile de agenți din ruflo le pot apela (ieșirea JSON a senzorilor devine intrare pentru agenți).",
+        "in_catalog": true
+      },
+      {
+        "repo_url": "https://github.com/ruvnet/RuVector",
+        "name": "RuVector",
+        "why": "README-ul spune că RuView e construit peste RuVector: vectorii (embeddings) CSI de 128 de dimensiuni din RuView pot fi stocați și căutați acolo.",
+        "in_catalog": false
+      },
+      {
+        "repo_url": "https://github.com/home-assistant/core",
+        "name": "Home Assistant",
+        "why": "RuView publică 15 entități implicite prin MQTT (prezență, număr de persoane, respirație etc.), iar Home Assistant le folosește în automatizări (lumini, alerte).",
+        "in_catalog": false
+      },
+      {
+        "repo_url": "https://github.com/eclipse-mosquitto/mosquitto",
+        "name": "Eclipse Mosquitto",
+        "why": "Broker MQTT gratuit care stă între serverul RuView (care publică mesaje) și Home Assistant (care le citește).",
+        "in_catalog": false
+      },
+      {
+        "repo_url": "https://github.com/esphome/esphome",
+        "name": "ESPHome",
+        "why": "Documentația RuView citește un kit radar mmWave de 60 GHz prin ESPHome (comanda mmwave --source esphome), ca al doilea senzor lângă CSI.",
+        "in_catalog": false
+      }
+    ],
+    "gaps_noticed": [
+      "Ghidul de integrare Home Assistant folosește imaginea ruvnet/wifi-densepose:0.7.0 și nu arată variabila RUVIEW_API_TOKEN, pe care README-ul o declară obligatorie.",
+      "Firmware-ul precompilat din folderul firmware/esp32-csi-node/release_bins este marcat 0.6.7, iar sursa e la 0.8.x; un issue deschis (#1499) raportează 0 pachete CSI pe placa ESP32-S3-DevKitC-1 cu acel fișier.",
+      "Fișierul model.safetensors publicat pe Hugging Face nu se încarcă cu încărcătorul de referință, conform README-ului (issue #1522), în așteptarea unei reîncărcări.",
+      "Pe Linux serverul nu are sursă de semnal WiFi obișnuit (RSSI); documentația spune că trebuie folosite plăcuțe ESP32.",
+      "Șase dintre cele 21 de entități Home Assistant descrise în README (zone, baie, ieșire din pat, tranziție între camere, ședință, poziție) nu sunt anunțate de server, conform testelor din cod."
+    ]
+  },
+  "when_not_to_use": [
+    "Dacă ai nevoie de o măsurătoare medicală sau de siguranță (puls, apnee, cădere): README-ul spune singur că sunt aplicații de cercetare și prototip, nu dispozitive medicale, iar valorile de la plăcuțe sunt etichetate „nevalidate”.",
+    "Dacă vrei poziția corpului (17 puncte) de la o singură plăcuță: README-ul recunoaște că modelul de pe plăcuță are doar 3% scor în propriul test și o cale de rulare încă neconectată; cifra bună (82,69%) vine dintr-un test public pe date de laborator, nu din camera ta.",
+    "Dacă ai doar laptopul: fără plăcuțe ESP32 primești doar detectare grosieră a prezenței din puterea semnalului (RSSI) sau date simulate.",
+    "Dacă monitorizezi alte persoane: autorul avertizează că rezultatele cer validare independentă, iar urmărirea oamenilor fără acordul lor ridică probleme legale și etice (observație a atlasului, nu din documentație).",
+    "Dacă vrei un produs stabil și mic: repo-ul are zeci de componente, sute de ADR-uri și versiuni de firmware care se schimbă la câteva zile.",
+    "Dacă ai doar prezență simplă în Home Assistant: un senzor mmWave sau PIR gata făcut e mai simplu și mai predictibil."
+  ],
+  "alternatives": [
+    {
+      "name": "ESPectre",
+      "url": "https://github.com/francescopace/espectre",
+      "difference": "Proiect mai îngust, doar pentru detectarea mișcării cu WiFi pe ESP32 (inclusiv ESPHome și Matter), cu licență GPL-3.0 și licențiere comercială separată, după descrierea sa."
+    },
+    {
+      "name": "espressif/esp-csi",
+      "url": "https://github.com/espressif/esp-csi",
+      "difference": "Exemplele oficiale de la producătorul ESP32 pentru captarea CSI; mai simple, fără server, model sau Home Assistant, cu licență Apache-2.0."
+    },
+    {
+      "name": "Aqara Presence Sensor FP2",
+      "url": "https://www.aqara.com/en/product/presence-sensor-fp2/",
+      "difference": "Senzor cu radar mmWave gata făcut, fără cod; detectează persoane nemișcate și zone, dar nu e deschis ca RuView."
+    }
+  ],
+  "tech_sheet": {
+    "license": "MIT",
+    "language": "Rust (server și multe componente), cu firmware C pentru ESP32, Python și JavaScript",
+    "commit_sha": "3686bc770f77eb6161d5379861dcd09d7d9a1e4b",
+    "last_commit_date": "2026-10-26",
+    "stars": 101328,
+    "requirements": [
+      "Demo rapid: Docker 20+ (recomandat 24+), 4 GB RAM (8 GB recomandat), 2 GB spațiu liber pe disc; sisteme: Windows 10/11, macOS 10.15+ sau Ubuntu 18.04+ (documentația cere minimum acestea)",
+      "Imaginea Docker ruvnet/wifi-densepose:latest cere variabila RUVIEW_API_TOKEN (generat local, de exemplu cu openssl rand -hex 32), altfel containerul se oprește cu codul 64; nu e nevoie de cont sau cheie API externă",
+      "Compilare din sursă: Rust 1.85 sau mai nou (fișierul rust-toolchain.toml fixează 1.89), Git; pe Debian/Ubuntu pachete de sistem: build-essential pkg-config libglib2.0-dev libgtk-3-dev libsoup-3.0-dev libjavascriptcoregtk-4.1-dev libwebkit2gtk-4.1-dev",
+      "Pachet Python: Python 3.10 sau mai nou, comanda pip install ruview (clientul asincron: pip install \"ruview[client]\"); varianta veche din archive/v1 cere Python 3.10+ cu numpy și scipy",
+      "Pachet npm opțional: Node.js 20 sau mai nou pentru npx @ruvnet/ruview (README citează versiunea 0.9.1, registrul npm arată 0.9.2)",
+      "Pentru semnal real: plăcuțe ESP32-S3 (3-6 recomandate) sau ESP32-C6, cablu USB, router WiFi; ESP32-C3 și ESP32 clasic nu sunt acceptate; README estimează ~9 USD per plăcuță și ~54 USD pentru mesh",
+      "Încărcarea firmware-ului: Python cu esptool (python -m esptool), scriptul firmware/esp32-csi-node/provision.py pentru parola WiFi și adresa serverului; compilarea firmware-ului din sursă se face prin Docker Desktop 28 sau mai nou cu ESP-IDF v5.4 (ghidul spune că ESP-IDF nu merge din Git Bash pe Windows)",
+      "Opțional: Cognitum Seed (aparat tip Pi Zero 2 W, ~15 USD placa; ~140 USD setul complet după README), placă de rețea Intel 5300 sau Atheros AR9580 pe Linux, kit radar mmWave de 60 GHz, GPU (README citează RTX 5080) pentru antrenări",
+      "Opțional pentru casă inteligentă: broker MQTT (de exemplu Mosquitto) și Home Assistant 2025.5 sau mai nou, testat în documentație",
+      "Opțional pentru model pre-antrenat: pip install huggingface_hub, apoi huggingface-cli download ruvnet/wifi-densepose-pretrained --local-dir models/wifi-densepose-pretrained",
+      "Opțional pentru agenți AI: Claude Code (comenzile /plugin marketplace add ruvnet/RuView, apoi /plugin install ruview@ruview) sau Codex; fiecare folosește contul sau cheia ta existentă"
+    ]
+  },
+  "monetization": [
+    {
+      "model": "serviciu de instalare și configurare",
+      "what_you_sell": "Montezi și configurezi o rețea mică de senzori de prezență cu plăcuțe ESP32 flashate și legi totul de Home Assistant prin MQTT, cu o calibrare a camerei, fără să promiți măsurători medicale.",
+      "for_whom": "Proprietari de case inteligente cu Home Assistant, care vor prezență fără camere video, dar nu vor să flasheze plăcuțe și să configureze rețea sau MQTT.",
+      "license_check": {
+        "license": "MIT",
+        "commercial_use": "permis cu condiții",
+        "conditions": "Codul din LICENSE e MIT: poți folosi, modifica și vinde servicii, păstrând notița de copyright. Atenție la trei lucruri: (1) modelul de poziție a corpului wifi-densepose-mmfi-pose de pe Hugging Face e CC BY-NC 4.0, deci nu îl folosești într-un serviciu plătit; modelul wifi-densepose-pretrained e marcat MIT pe pagina sa; (2) fișierul NOTICE spune că un patch MediaTek vendorizat (BSD-3-Clause-Clear) își păstrează licența proprie; (3) NOTICE și v2/Cargo.toml scriu „MIT OR Apache-2.0”, dar fișierul LICENSE conține doar MIT, o neconcordanță pe care nu o poți clarifica fără autor."
+      },
+      "path": "folosești repo-ul direct",
+      "own_build_notes": null,
+      "demand_evidence": [
+        {
+          "name": "Ficus Online: Home Assistant basic deployment service",
+          "url": "https://store.ficusonline.com/en/home/57-home-assistant-basic-deployment-service.html",
+          "price": "249 USD (taxe incluse): instalare Home Assistant la distanță, broker MQTT, până la 5 dispozitive și 5 automatizări; hardware neinclus",
+          "what_it_proves": "Se vinde deja instalarea și configurarea Home Assistant cu MQTT ca serviciu cu preț fix.",
+          "checked_at": "2026-10-29"
+        },
+        {
+          "name": "Chobble: Home Assistant technician",
+          "url": "https://chobble.com/services/home-assistant-technician",
+          "price": "200 GBP/oră pentru lucrări comerciale, 100 GBP/oră pentru ONG-uri și afaceri mici eligibile",
+          "what_it_proves": "Există tehnicieni care își taxează timpul pe oră pentru integrări Home Assistant, dar pagina nu menționează ESP32 sau detectarea prezenței.",
+          "checked_at": "2026-10-29"
+        }
+      ],
+      "startup_cost": "3-6 plăcuțe ESP32-S3 pentru teste (README estimează ~54 USD), un router, un laptop și zile de încercări până se calibrează stabil; fără licențe de plătit.",
+      "time_to_first_client": "Necunoscut: depinde de cât de repede obții rezultate stabile în camere reale și de publicul tău local.",
+      "difficulty": "greu",
+      "risks": [
+        "Acuratețea în viața reală nu e demonstrată independent: am găsit doar discuții sceptice pe Hacker News și nicio testare terță; nu garantezi rezultate clientului.",
+        "Concurență gratuită: același repo, ESPectre și senzori mmWave gata făcuți (Aqara FP2) rezolvă prezența mai simplu.",
+        "Proiect în beta, cu firmware-uri pre-release și binare precompilate vechi; suportul tău poate însemna rezolvat bug-urile ale altora.",
+        "Răspunderea: să nu vinzi alerte de sănătate sau cădere; README spune că nu sunt dispozitive medicale.",
+        "Confidențialitate: monitorizarea persoanelor cere acord informat și respectarea legii locale (GDPR în UE)."
+      ],
+      "first_steps": [
+        "Rulează demo-ul simulat din Docker și citește ghidul de calibrare din repo, ca să înțelegi ce poți promite.",
+        "Cumpără 3 plăcuțe ESP32-S3 și testează în casa ta: flash, provision, calibrare cu camera goală.",
+        "Conectează la Home Assistant cu --mqtt și notează ce entități apar de fapt (15 implicite în cod).",
+        "Scrie o ofertă cu limitele spuse clar (prezență și mișcare, fără semne vitale), apoi oferă un pilot în 1-2 camere."
+      ]
+    }
+  ],
+  "updated_at": "2026-10-29",
+  "notes_summary": "Am citit README-ul, ghidul de utilizare, scriptul Docker și părți din cod (semne vitale, poziție, intrări Home Assistant), fără să rulez nimic; mai multe afirmații din README nu se potrivesc cu codul sau cu cifrele publice, iar prețurile Linksys și Aqara nu s-au putut verifica.",
+  "notes": "Repo-ul a fost citit la commit 3686bc770f77eb6161d5379861dcd09d7d9a1e4b (2026-10-26), stars 101328, forks 13177, 505 issues deschise; GitHub arată pushed_at 2026-10-29. Nu am rulat nimic. \n\nPrimii pași: nu am găsit o experiență reală potrivită. Am căutat pe Hacker News (itemele 47305076 «no one can run it», 48157639, 48816921: discuții de opinie și scepticism, fără un proiect refăcut pas cu pas), în GitHub Issues (issue-urile #1499, #499, #1665 sunt rapoarte de bug scrise în format foarte structurat, unele probabil asistate de AI; #36 conține un test pe Windows care a rulat doar detecția grosieră din RSSI, fără nimeni care să treacă prin cameră), pe dev.to (articole de prezentare, SEO), pe cnx-software și botmonster/knightli (descrieri ale proiectului, nu teste proprii). Nu am inventat o poveste.\n\nAFIRMAȚII README vs COD/DOCUMENTE (verificate prin citire):\n1) „21 de entități per nod” în Home Assistant (README, ghid utilizare): codul (v2/crates/wifi-densepose-sensing-server/src/mqtt/discovery.rs) definește 21 de tipuri, dar un test cere exact 15 anunțate implicit și altul spune că zonele, baia, ieșirea din pat, tranziția între camere, ședința și poziția nu sunt anunțate fără sursă (issue #2085). Ghidul de integrare Home Assistant spune și el 15 (13 cu --privacy-mode). \n2) Scheletul 17 puncte din demo/Docker: funcția derive_single_person_pose (sensing-server/src/pose.rs) îl construiește din formule (sin, motion_score, putere de bandă) pe date simulate sau pe trăsături de semnal, nu dintr-un model învățat; README spune singur că modelul de pe plăcuță are PCK@20 = 3,0% și o cale de inferență care întoarce confidence=0, iar cifra 82,69% e pe setul public MM-Fi (5 GHz, NIC cu 3 antene), nu pe ESP32 (confirmat de răspunsul autorului în issue #1665).\n3) Badge „downloads 10M+” și „tests 1463 passed”: sunt insigne statice scrise de mână, nu am găsit nicio sursă în repo. Contoare publice văzute azi: crates.io wifi-densepose-core 1.231, signal 1.164, ruvector 855, vitals 128 descărcări; Docker Hub 302.073 de descărcări (pull) pentru ruvnet/wifi-densepose; pypistats ruview ~749/lună. Nu am numărat npm, Hugging Face sau alte pachete, deci nu pot spune că 10M e fals, doar că nu l-am putut confirma.\n4) „Catalog de 105 cog-uri din app-registry.json”: fișierul app-registry.json nu există în clonă; documentația din repo (docs/edge-modules/README.md) vorbește despre 60 de module WASM. Nu pot confirma cifra 105.\n5) Licența: LICENSE = MIT (20 de linii, copyright „2024 rUv”); pyproject.toml și pachetul PyPI = MIT; dar NOTICE, v2/Cargo.toml și insigna din firmware/esp32-csi-node/README.md scriu „MIT OR Apache-2.0”, iar NOTICE trimite la „LICENSE” care nu conține Apache. Am ales „MIT” (fișierul LICENSE).\n6) Modele: wifi-densepose-pretrained = MIT (card Hugging Face); wifi-densepose-mmfi-pose = CC BY-NC 4.0, ceea ce cardul modelului confirmă („inherits the non-commercial license”) și ADR-023 spune că greutățile antrenate pe MM-Fi nu pot fi folosite comercial. README spune doar „MIT License” fără această excepție.\n7) Prețuri hardware: README spune ~9 USD per ESP32-S3 și ~140 USD pentru setul cu Cognitum Seed; ghidul de utilizare spune ~15 USD pentru Seed; pagina cognitum.one/seed și /order nu arată prețuri (WebFetch). Pe Adafruit, ESP32-S3-DevKitC-1 cu WROOM-2 e 19,95 USD (epuizat azi), alt model decât cel recomandat.\n8) Through-wall: README: „up to ~5 m, signal-dependent”; ghid FAQ: ~5 m cu un AP, ~8 m cu mesh de 3-6 noduri, pereți nemetalici până la ~30 cm. Nu am găsit nicio măsurătoare independentă în repo; sunt valori declarate. Aceeași regulă pentru „detectare cădere <200 ms” și „memorie de 8 KB”.\n9) Ce SUSȚINE codul: există extractoare de respirație (bandpass 0,1-0,5 Hz, zero-crossing) și puls (0,8-2,0 Hz) în v2/crates/wifi-densepose-vitals/src/breathing.rs și heartrate.rs; containerul Docker iese cu codul 64 fără RUVIEW_API_TOKEN (docker/docker-entrypoint.sh, linia 75); valorile --source din ghid; semnarea Ed25519 a lanțului de martori există în cog-ha-matter/src/witness_signing.rs (nu am rulat-o); pachetul PyPI ruview 2.0.0a1 (alpha) și npm @ruvnet/ruview 0.9.2 există. Documentația marchează singură semnele vitale ca „experimentale/nevalidate” și spune că nu sunt dispozitive medicale.\n10) Credibilitate: pe Hacker News (item 48157639) comentatorii numesc proiectul „AI slop”; mai multe răspunsuri ale autorului în issue-uri au subsemnătura „Generated by Claude Code”; există un issue public (#37) în care autorul răspunde acuzațiilor de fals cu «it works». Nu am dovezi proprii pro sau contra; README-ul are însă secțiuni de „honest status” care contrazic singure titlurile (de exemplu «Read the label, not the headline»).\n\nRELAȚIA CU RUFLO: același autor (ruvnet). README-ul și ghidul menționează ruflo (server MCP @ruvnet/rvagent pentru roiuri ruflo, imagine hero «Ruflo coordination»); ruflo este în catalog (content/repos/ruflo.json), l-am pus în pairs_well_with. Am verificat doar că serverul MCP rvagent există în tools/ruview-mcp (package.json), nu l-am rulat.\n\nPREȚURI: Linksys Aware și Aqara FP2 au price null: paginile oficiale au întors 429 (Linksys) sau au trimis la magazin fără preț (Aqara). O căutare web a dat, din listări de aplicație, ~4,99 USD/lună sau 49,99 USD/an pentru Aware, dar neconfirmat pe site-ul oficial, deci nu l-am folosit în câmpuri. Docker (docker.com/pricing, 2026-10-29), Claude Pro (claude.com/pricing, 2026-10-29), Home Assistant installers (Ficus 249 USD, Chobble 200 GBP/oră) verificate azi. Home Assistant Link (nabucasa.com/pricing) costă 7,50 EUR/lună sau 75 EUR/an, dar RuView nu îl cere.\n\nALTELE: statisticile Hacker News/crates.io/Docker Hub sunt de azi, 2026-10-29. Docker Hub arată last_updated 2026-10-26. Cele două comenzi din exemplul Home Assistant sunt copiate exact din documentație (imagine 0.7.0, fără token); documentația principală spune altceva, am marcat în scenariu. Comanda curl din primul exemplu apare fără antet de autorizare în ghid; ghidul folosește antet Bearer într-un alt exemplu pentru /api/v1/nodes, deci pot exista endpoint-uri care cer token (nu am verificat care). Nu am rulat niciun test ori cod. Versiunea publicată de firmware (v0.8.16-esp32) e marcată «Pre-release»."
+}

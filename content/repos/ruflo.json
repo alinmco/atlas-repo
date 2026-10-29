@@ -166,6 +166,12 @@
         "name": "Servere MCP de referință",
         "why": "Ruflo vorbește MCP, deci poate fi folosit alături de alte servere MCP (fișiere, git, baze de date), iar clientul tău le oferă agenților împreună cu uneltele Ruflo (activ, ultim commit 2026-10-25).",
         "in_catalog": false
+      },
+      {
+        "repo_url": "https://github.com/ruvnet/RuView",
+        "name": "RuView",
+        "why": "Același autor: serverul MCP @ruvnet/rvagent din RuView expune prezența și semnele vitale ca unelte, iar rolurile de agenți din ruflo le pot apela (ieșirea JSON a senzorilor devine intrare pentru agenți).",
+        "in_catalog": true
       }
     ],
     "gaps_noticed": [

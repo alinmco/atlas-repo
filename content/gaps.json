@@ -423,5 +423,65 @@
     "gap": "Versiunea afișată în version.json din repo (v9.2.7) nu coincide cu ultima lansare de pe GitHub (v9.4.3).",
     "source_slug": "safeline",
     "added_at": "2026-10-29"
+  },
+  {
+    "gap": "Fișierul `.env` din rădăcina proiectului nu este citit; cheile se introduc în Settings sau prin `deeptutor config apply`.",
+    "source_slug": "deeptutor",
+    "added_at": "2026-10-29"
+  },
+  {
+    "gap": "Schimbarea modelului de embedding la o bază existentă cere reindexarea completă a bazei.",
+    "source_slug": "deeptutor",
+    "added_at": "2026-10-29"
+  },
+  {
+    "gap": "Documentația recomandă `git clone --branch dev`, deși ramura implicită a repo-ului este `main`.",
+    "source_slug": "deeptutor",
+    "added_at": "2026-10-29"
+  },
+  {
+    "gap": "Pentru transcrierea vocală cu adaptoarele DashScope/Volcengine pe Windows, FFmpeg trebuie instalat manual și adăugat în PATH.",
+    "source_slug": "deeptutor",
+    "added_at": "2026-10-29"
+  },
+  {
+    "gap": "Hook-urile cer pași manuali de aprobare în Codex (/hooks), Grok Build (/hooks-trust) și Hermes Agent (hermes plugins enable), diferiți de la unealtă la unealtă.",
+    "source_slug": "impeccable",
+    "added_at": "2026-10-29"
+  },
+  {
+    "gap": "Regulile care au nevoie de pagina randerizată (contrast mic, text mic) nu rulează pe fișiere sursă; trebuie pornit și un server local pentru scanarea URL-ului.",
+    "source_slug": "impeccable",
+    "added_at": "2026-10-29"
+  },
+  {
+    "gap": "Live mode merge doar pe un proiect local; pentru un site deja publicat nu există o cale documentată.",
+    "source_slug": "impeccable",
+    "added_at": "2026-10-29"
+  },
+  {
+    "gap": "Ghidul de integrare Home Assistant folosește imaginea ruvnet/wifi-densepose:0.7.0 și nu arată variabila RUVIEW_API_TOKEN, pe care README-ul o declară obligatorie.",
+    "source_slug": "ruview",
+    "added_at": "2026-10-29"
+  },
+  {
+    "gap": "Firmware-ul precompilat din folderul firmware/esp32-csi-node/release_bins este marcat 0.6.7, iar sursa e la 0.8.x; un issue deschis (#1499) raportează 0 pachete CSI pe placa ESP32-S3-DevKitC-1 cu acel fișier.",
+    "source_slug": "ruview",
+    "added_at": "2026-10-29"
+  },
+  {
+    "gap": "Fișierul model.safetensors publicat pe Hugging Face nu se încarcă cu încărcătorul de referință, conform README-ului (issue #1522), în așteptarea unei reîncărcări.",
+    "source_slug": "ruview",
+    "added_at": "2026-10-29"
+  },
+  {
+    "gap": "Pe Linux serverul nu are sursă de semnal WiFi obișnuit (RSSI); documentația spune că trebuie folosite plăcuțe ESP32.",
+    "source_slug": "ruview",
+    "added_at": "2026-10-29"
+  },
+  {
+    "gap": "Șase dintre cele 21 de entități Home Assistant descrise în README (zone, baie, ieșire din pat, tranziție între camere, ședință, poziție) nu sunt anunțate de server, conform testelor din cod.",
+    "source_slug": "ruview",
+    "added_at": "2026-10-29"
   }
 ]

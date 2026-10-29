@@ -357,6 +357,12 @@
         "name": "Caveman",
         "why": "Superpowers dă agentului un flux de lucru (plan, teste, revizuire), iar Caveman scurtează răspunsurile din acel flux; ambele sunt skill-uri instalabile în aceiași agenți.",
         "in_catalog": true
+      },
+      {
+        "repo_url": "https://github.com/pbakaus/impeccable",
+        "name": "Impeccable",
+        "why": "Superpowers conduce fluxul de lucru al agentului (plan, implementare, verificare), iar codul de interfață produs în acel flux poate fi trecut apoi prin `critique` și `polish`.",
+        "in_catalog": true
       }
     ],
     "gaps_noticed": [

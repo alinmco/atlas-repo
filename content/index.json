@@ -26,7 +26,8 @@
       "https://github.com/ruvnet/RuVector",
       "https://github.com/ruvnet/agentic-flow",
       "https://github.com/anthropics/claude-code",
-      "https://github.com/modelcontextprotocol/servers"
+      "https://github.com/modelcontextprotocol/servers",
+      "https://github.com/ruvnet/RuView"
     ],
     "used_in_recipes": []
   },
@@ -195,7 +196,8 @@
       "https://github.com/vercel-labs/skills",
       "https://github.com/mattpocock/dictionary-of-ai-coding",
       "https://github.com/obra/superpowers",
-      "https://github.com/anomalyco/opencode"
+      "https://github.com/anomalyco/opencode",
+      "https://github.com/pbakaus/impeccable"
     ],
     "used_in_recipes": []
   },
@@ -228,7 +230,8 @@
       "https://github.com/affaan-m/ECC",
       "https://github.com/anomalyco/opencode",
       "https://github.com/paperclipai/paperclip",
-      "https://github.com/JuliusBrussee/caveman"
+      "https://github.com/JuliusBrussee/caveman",
+      "https://github.com/pbakaus/impeccable"
     ],
     "used_in_recipes": []
   },
@@ -607,6 +610,93 @@
       "https://github.com/louislam/uptime-kuma",
       "https://github.com/usestrix/strix",
       "https://github.com/Kong/kong"
+    ],
+    "used_in_recipes": []
+  },
+  {
+    "slug": "deeptutor",
+    "name": "DeepTutor",
+    "one_liner": "Tutor AI personal: învață din documentele tale, face teste și îți ține minte progresul.",
+    "categories": [
+      "Învățare și ghiduri"
+    ],
+    "inputs": [
+      "Fișiere PDF, DOCX, XLSX, PPTX, EPUB, Markdown și imagini încărcate în baze de cunoștințe",
+      "Linkuri YouTube/Bilibili (transcriere) și repo-uri GitHub sau site-uri de documentație (crawl limitat)",
+      "Întrebări text sau voce în browser, ori comenzi în terminal",
+      "Export `conversations.json` din ChatGPT sau istoric Claude Code/Codex pentru import"
+    ],
+    "outputs": [
+      "Răspunsuri cu citări în interfața web",
+      "Export Markdown și Word (notițe, cărți, conversații)",
+      "Flux NDJSON (`--format json`), un eveniment pe linie, cu `session_id`",
+      "Teste, carduri de studiu și cărți interactive în aplicație"
+    ],
+    "updated_at": "2026-10-29",
+    "pairs_well_with": [
+      "https://github.com/ollama/ollama",
+      "https://github.com/HKUDS/LightRAG",
+      "https://github.com/opendatalab/MinerU",
+      "https://github.com/VectifyAI/PageIndex",
+      "https://github.com/searxng/searxng"
+    ],
+    "used_in_recipes": []
+  },
+  {
+    "slug": "impeccable",
+    "name": "Impeccable",
+    "one_liner": "Învață asistentul AI să facă interfețe web cu design îngrijit, nu generic.",
+    "categories": [
+      "Skill-uri pentru agenți AI",
+      "Unelte pentru programatori"
+    ],
+    "inputs": [
+      "comenzi tastate în agent: `/impeccable <comandă> <țintă>` (în Codex: `$impeccable ...`)",
+      "fișierele sursă ale proiectului: JSX, TSX, HTML, CSS, Vue, Svelte, Astro",
+      "un URL randerizat (de ex. `http://localhost:5173`) pentru regulile care au nevoie de pagina afișată",
+      "răspunsurile tale la întrebările din `init`"
+    ],
+    "outputs": [
+      "modificări de cod în fișierele de interfață ale proiectului",
+      "fișiere Markdown în proiect: PRODUCT.md, DESIGN.md și rapoarte de critică în `.impeccable/critique/`",
+      "descoperiri ale detectorului în text, JSON (`--json`) sau adnotări GitHub Actions (`--github`)",
+      "cod de ieșire 2 când sunt probleme și 1 când o țintă nu a putut fi scanată"
+    ],
+    "updated_at": "2026-10-29",
+    "pairs_well_with": [
+      "https://github.com/mattpocock/skills",
+      "https://github.com/obra/superpowers",
+      "https://github.com/vercel-labs/skills",
+      "https://github.com/microsoft/playwright-mcp"
+    ],
+    "used_in_recipes": []
+  },
+  {
+    "slug": "ruview",
+    "name": "RuView",
+    "one_liner": "Detectează oameni într-o cameră din semnalul WiFi, fără camere video, cu plăcuțe ieftine.",
+    "categories": [
+      "Casă inteligentă și senzori"
+    ],
+    "inputs": [
+      "pachete UDP binare cu CSI de la plăcuțe ESP32-S3/C6 (format ADR-018, port 5005)",
+      "semnal WiFi RSSI de pe laptop (Windows prin netsh, macOS prin CoreWLAN), cu precizie mică",
+      "date simulate generate de server (implicit în Docker)",
+      "înregistrări .csi.jsonl pentru antrenare și fișiere de model RVF sau safetensors descărcate de pe Hugging Face"
+    ],
+    "outputs": [
+      "JSON prin API REST (de exemplu /health, /api/v1/vital-signs, /api/v1/pose/current) și mesaje WebSocket",
+      "interfață web Three.js pe portul 3000",
+      "entități MQTT cu descoperire automată pentru Home Assistant și punte Matter",
+      "unelte MCP (ruview.presence.now, ruview.vitals.get_*) pentru agenți AI"
+    ],
+    "updated_at": "2026-10-29",
+    "pairs_well_with": [
+      "https://github.com/ruvnet/ruflo",
+      "https://github.com/ruvnet/RuVector",
+      "https://github.com/home-assistant/core",
+      "https://github.com/eclipse-mosquitto/mosquitto",
+      "https://github.com/esphome/esphome"
     ],
     "used_in_recipes": []
   }
