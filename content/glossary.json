@@ -37,7 +37,9 @@
       "subagenți",
       "subagenții",
       "subagenților",
-      "subagent-driven-development"
+      "subagent-driven-development",
+      "sub-agent",
+      "sub-agenți"
     ],
     "explanation": "agent ajutător pornit de agentul principal pentru o sarcină"
   },
@@ -1923,5 +1925,205 @@
       "atacuri DDoS"
     ],
     "explanation": "Atac care blochează un site prin trafic uriaș"
+  },
+  {
+    "term": "RAG",
+    "aliases": [
+      "RAG-ul"
+    ],
+    "explanation": "AI-ul caută mai întâi în documentele tale, apoi răspunde"
+  },
+  {
+    "term": "embedding",
+    "aliases": [
+      "embedding-uri",
+      "model de embedding",
+      "embeddings"
+    ],
+    "explanation": "Transformă textul în numere, ca să poată fi căutat după sens"
+  },
+  {
+    "term": "bază de cunoștințe",
+    "aliases": [
+      "baze de cunoștințe",
+      "baza de cunoștințe",
+      "knowledge base"
+    ],
+    "explanation": "Colecție de documente încărcate, în care caută tutorul"
+  },
+  {
+    "term": "LLM",
+    "aliases": [
+      "LLM-uri",
+      "model de limbaj"
+    ],
+    "explanation": "Modelul AI care înțelege și scrie text"
+  },
+  {
+    "term": "OAuth",
+    "aliases": [
+      "login OAuth"
+    ],
+    "explanation": "Autentificare prin browser, fără să copiezi o cheie"
+  },
+  {
+    "term": "PyPI",
+    "aliases": [],
+    "explanation": "Depozitul public de pachete Python, de unde rulează pip"
+  },
+  {
+    "term": "mediu virtual",
+    "aliases": [
+      "venv",
+      "mediul virtual"
+    ],
+    "explanation": "Folder izolat cu pachetele Python ale unui singur proiect"
+  },
+  {
+    "term": "FFmpeg",
+    "aliases": [
+      "ffmpeg"
+    ],
+    "explanation": "Program gratuit care convertește fișiere audio și video"
+  },
+  {
+    "term": "Cursor",
+    "aliases": [],
+    "explanation": "editor de cod cu asistent AI integrat"
+  },
+  {
+    "term": "CSS",
+    "aliases": [],
+    "explanation": "limbajul care stabilește culorile, fonturile și aspectul paginilor web"
+  },
+  {
+    "term": "HTML",
+    "aliases": [],
+    "explanation": "limbajul în care e scrisă structura unei pagini web"
+  },
+  {
+    "term": "sistem de design",
+    "aliases": [
+      "sistemul de design",
+      "design system"
+    ],
+    "explanation": "reguli comune de culori, fonturi și componente pentru tot produsul"
+  },
+  {
+    "term": "server de dezvoltare",
+    "aliases": [
+      "serverul de dezvoltare",
+      "dev server"
+    ],
+    "explanation": "program local care arată site-ul tău în timp ce îl construiești"
+  },
+  {
+    "term": "AI slop",
+    "aliases": [
+      "slop"
+    ],
+    "explanation": "aspectul generic și previzibil produs de asistenții AI"
+  },
+  {
+    "term": "Apache 2.0",
+    "aliases": [
+      "Apache-2.0"
+    ],
+    "explanation": "licență open-source permisivă, care permite și uz comercial"
+  },
+  {
+    "term": "submodul Git",
+    "aliases": [
+      "submodulul Git",
+      "git submodule"
+    ],
+    "explanation": "un alt repo inclus, la o versiune fixă, în proiectul tău"
+  },
+  {
+    "term": "CSI",
+    "aliases": [
+      "Channel State Information"
+    ],
+    "explanation": "informații fine despre cum ajunge semnalul WiFi la receptor"
+  },
+  {
+    "term": "RSSI",
+    "aliases": [],
+    "explanation": "puterea semnalului WiFi, un singur număr, mai grosier"
+  },
+  {
+    "term": "ESP32",
+    "aliases": [
+      "ESP32-S3",
+      "ESP32-C6",
+      "plăcuțe ESP32",
+      "plăcuță ESP32"
+    ],
+    "explanation": "plăcuță mică și ieftină, cu WiFi integrat"
+  },
+  {
+    "term": "MQTT",
+    "aliases": [
+      "broker MQTT"
+    ],
+    "explanation": "mod simplu prin care dispozitivele își trimit mesaje scurte"
+  },
+  {
+    "term": "Home Assistant",
+    "aliases": [],
+    "explanation": "program gratuit pentru controlul casei inteligente"
+  },
+  {
+    "term": "Matter",
+    "aliases": [],
+    "explanation": "standard comun al aparatelor de casă inteligentă"
+  },
+  {
+    "term": "Hugging Face",
+    "aliases": [],
+    "explanation": "site unde se publică modele AI și date"
+  },
+  {
+    "term": "mmWave",
+    "aliases": [
+      "radar mmWave",
+      "radar 60 GHz"
+    ],
+    "explanation": "radar mic pe unde foarte scurte, pentru prezență"
+  },
+  {
+    "term": "ESP-IDF",
+    "aliases": [],
+    "explanation": "kitul oficial pentru programarea plăcuțelor ESP32"
+  },
+  {
+    "term": "esptool",
+    "aliases": [],
+    "explanation": "program care scrie firmware-ul pe plăcuța ESP32"
+  },
+  {
+    "term": "flashare",
+    "aliases": [
+      "a flasha",
+      "flashezi",
+      "flashat",
+      "flashate",
+      "flasheze"
+    ],
+    "explanation": "scrierea firmware-ului în memoria unei plăcuțe"
+  },
+  {
+    "term": "euristică",
+    "aliases": [
+      "euristici"
+    ],
+    "explanation": "regulă simplă care ghicește, fără garanție de acuratețe"
+  },
+  {
+    "term": "Cognitum Seed",
+    "aliases": [
+      "Seed"
+    ],
+    "explanation": "aparat mic vândut de autor, cu memorie pentru senzori"
   }
 ]

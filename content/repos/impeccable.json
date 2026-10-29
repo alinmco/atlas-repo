@@ -1,0 +1,421 @@
+{
+  "slug": "impeccable",
+  "repo_url": "https://github.com/pbakaus/impeccable",
+  "name": "Impeccable",
+  "one_liner": "Învață asistentul AI să facă interfețe web cu design îngrijit, nu generic.",
+  "problem_solved": "Când ceri unui asistent AI o pagină web fără îndrumări, iese de multe ori aceeași interfață generică: același font, gradiente violet-albastru, carduri puse în carduri. Repo-ul îi dă agentului comenzi de design precise și un detector care prinde aceste defecte.",
+  "features": [
+    "24 de comenzi de design pentru agent (după README): polish, bolder, quieter, critique, audit, harden și altele",
+    "Detector cu 62 de reguli (după README), fără AI și fără cheie API, pentru tiparele „AI slop” (design generic)",
+    "Rulează în agentul tău (Claude Code, Cursor, Codex, Copilot, Gemini CLI și multe altele) sau separat, din terminal",
+    "Hook care verifică automat fișierele de interfață pe care le editează agentul",
+    "Live mode: alegi un element în browser și compari variante direct în pagină",
+    "Extensie Chrome care arată aceleași probleme peste orice pagină deschisă"
+  ],
+  "at_a_glance": {
+    "for_you_if": [
+      "Faci site-uri sau aplicații cu un agent AI și rezultatul arată prea generic.",
+      "Vrei o verificare automată a designului, în terminal sau în CI."
+    ],
+    "not_for_you_if": [
+      "Lucrezi doar la backend sau la lucruri fără interfață.",
+      "Nu vrei ca unelte instalate să-ți modifice setările agentului (hooks)."
+    ],
+    "verdict": "Utilă dacă lucrezi deja cu un agent AI pe interfețe web; detectorul merge și fără agent."
+  },
+  "cost": {
+    "level": "gratuit, dar cere servicii plătite",
+    "summary": "Impeccable e gratuit (Apache 2.0); plătești doar agentul AI în care îl rulezi, care merge cu abonament (de ex. Claude Pro/Max pentru Claude Code, ChatGPT Plus pentru Codex) sau cu cheie API; detectorul din terminal nu folosește AI.",
+    "ai_access": {
+      "mode": "abonament sau API",
+      "detail": "Repo-ul în sine nu cere cheie API (detectorul e „no LLM, no API key”), iar agentul gazdă se autentifică cum prevede documentația lui, de ex. Claude Pro/Max sau cheie API în Claude Code; doar generarea opțională de imagini cere OPENAI_API_KEY.",
+      "source_url": "https://code.claude.com/docs/en/authentication"
+    },
+    "items": [
+      {
+        "what": "Impeccable (licență Apache 2.0)",
+        "price": "gratuit",
+        "required": true,
+        "source_url": "https://github.com/pbakaus/impeccable/blob/5e745ace7e151feb2a93d360d0281fe39448b857/LICENSE"
+      },
+      {
+        "what": "Un agent AI de programare compatibil (obligatoriu pentru comenzile /impeccable; nu și pentru detectorul din terminal)",
+        "price": null,
+        "required": true,
+        "source_url": "https://github.com/pbakaus/impeccable/blob/5e745ace7e151feb2a93d360d0281fe39448b857/README.md"
+      },
+      {
+        "what": "Claude Pro (abonament care include Claude Code)",
+        "price": "17 USD/lună cu plata anuală, 20 USD/lună lunar",
+        "required": false,
+        "source_url": "https://claude.com/pricing"
+      },
+      {
+        "what": "Claude Max (limite mai mari pentru Claude Code)",
+        "price": "de la 100 USD/lună",
+        "required": false,
+        "source_url": "https://claude.com/pricing"
+      },
+      {
+        "what": "ChatGPT Plus (include Codex)",
+        "price": "20 USD/lună",
+        "required": false,
+        "source_url": "https://learn.chatgpt.com/docs/pricing"
+      },
+      {
+        "what": "GitHub Copilot Pro (pentru varianta Copilot / VS Code)",
+        "price": "10 USD/lună",
+        "required": false,
+        "source_url": "https://github.com/features/copilot/plans"
+      },
+      {
+        "what": "Cheie API OpenAI (opțional, doar pentru generarea de imagini-machetă cu gpt-image-2, facturată pe consum)",
+        "price": null,
+        "required": false,
+        "source_url": "https://impeccable.style/privacy"
+      },
+      {
+        "what": "Node.js (doar pentru comanda npx; instalarea manuală nu îl cere)",
+        "price": "gratuit (open-source)",
+        "required": false,
+        "source_url": "https://github.com/pbakaus/impeccable/blob/5e745ace7e151feb2a93d360d0281fe39448b857/package.json"
+      },
+      {
+        "what": "Chrome sau Edge instalat (pentru scanarea unui URL și live mode)",
+        "price": null,
+        "required": false,
+        "source_url": "https://github.com/pbakaus/impeccable/blob/5e745ace7e151feb2a93d360d0281fe39448b857/README.md"
+      }
+    ]
+  },
+  "platforms": {
+    "windows": "da",
+    "mac": "da",
+    "linux": "da",
+    "note": "Motorul are binare pentru windows-x64, darwin-arm64, darwin-x64, linux-x64 și linux-arm64, iar lansatorul are variantă .cmd pentru Windows. Hook-urile Codex sunt dezactivate pe Windows, conform docs/HARNESSES.md.",
+    "source_url": "https://github.com/pbakaus/impeccable/blob/5e745ace7e151feb2a93d360d0281fe39448b857/scripts/fetch-engine.mjs"
+  },
+  "risk_flags": [
+    {
+      "flag": "telemetrie",
+      "detail": "Înregistrează anonim ce direcții vizuale ți s-au arătat și pe care ai ales-o; se oprește cu `npx impeccable telemetry off`, DO_NOT_TRACK=1 sau \"telemetry\": false în .impeccable/config.json.",
+      "source_url": "https://github.com/pbakaus/impeccable/blob/5e745ace7e151feb2a93d360d0281fe39448b857/README.md"
+    },
+    {
+      "flag": "trimite date în cloud",
+      "detail": "La începutul unui design nou, skill-ul cere direcții din catalogul impeccable.style chiar și cu telemetria oprită; cu OPENAI_API_KEY setat, prompturile și imaginile de referință pentru machete merg la OpenAI.",
+      "source_url": "https://impeccable.style/privacy"
+    },
+    {
+      "flag": "modifică setările altor programe",
+      "detail": "Instalatorul poate adăuga hook-uri în setările agentului (de ex. Claude Code, Codex, Cursor, Copilot), iar README avertizează că hook-urile rulează în afara aprobării modelului.",
+      "source_url": "https://github.com/pbakaus/impeccable/blob/5e745ace7e151feb2a93d360d0281fe39448b857/README.md"
+    }
+  ],
+  "audience_reason": "presupune că ai deja un agent AI de programare și un proiect web pe care să lucrezi",
+  "setup_difficulty_reason": "o comandă npx și o rulare de inițializare, fără chei cerute de repo",
+  "analogy": "E ca un director de artă care se așază lângă un meseriaș priceput, dar cu gusturi comune: îi dă cuvinte clare („mai sobru”, „mai îndrăzneț”, „finisează”) și îi verifică munca cu o listă de greșeli tipice înainte să iasă din atelier.",
+  "how_it_works": [
+    "pas 1: rulezi `npx impeccable install` în rădăcina proiectului; instalatorul detectează uneltele tale AI, copiază skill-ul și îți oferă hook-ul de verificare",
+    "pas 2: rulezi o singură dată `/impeccable init` în agent; el citește codul, întreabă doar ce nu poate deduce și scrie PRODUCT.md (opțional `/impeccable document` scrie DESIGN.md)",
+    "pas 3: scrii o comandă și o țintă, de ex. `/impeccable critique the pricing cards`; agentul încarcă ghidul comenzii respective, pe care îl aplică țintei",
+    "pas 4: hook-ul sau comanda `npx impeccable detect` rulează cele 62 de reguli fără AI, direct pe fișierele editate, și întoarce descoperirile agentului",
+    "pas 5: rezultatul sunt modificări de cod în proiectul tău, rapoarte de critică și audit, fișierele PRODUCT.md și DESIGN.md și, în CI, un cod de ieșire 2 când există probleme"
+  ],
+  "first_steps": null,
+  "categories": [
+    "Skill-uri pentru agenți AI",
+    "Unelte pentru programatori"
+  ],
+  "search_intents": [
+    "vreau ca site-ul făcut de un asistent AI să nu arate generic",
+    "vreau să dau comenzi de design asistentului meu AI (mai îndrăzneț, mai sobru, finisare)",
+    "vreau să verific automat designul și accesibilitatea paginilor mele",
+    "vreau să prind defecte de design în CI, la fiecare commit",
+    "vreau să compar mai multe variante de design direct în browser"
+  ],
+  "audience": "intermediar",
+  "setup_difficulty": "ușor",
+  "replaces": [
+    {
+      "service": "Stark (platformă de accesibilitate pentru design și cod)",
+      "service_url": "https://www.getstark.co/",
+      "price": "de la 198 USD/utilizator/an (Premium Pack, minimum 3 locuri); de la 2.500 USD/an (Launch)",
+      "price_source_url": "https://www.getstark.co/pricing",
+      "price_checked_at": "2026-10-29",
+      "replacement_level": "doar pentru cazuri simple",
+      "what_you_keep": [
+        "verificări automate de contrast, text prea mic și alte probleme de interfață, în terminal, în CI sau pe o pagină live",
+        "audit tehnic cu probleme ordonate de la P0 la P3, făcut de agent"
+      ],
+      "what_you_lose": [
+        "plugin-uri pentru Figma și Sketch, care verifică designul înainte de cod",
+        "Compliance Center, rapoarte și urmărirea progresului pe proiecte",
+        "extensii pentru Firefox și Safari (extensia Impeccable e doar pentru Chrome)"
+      ],
+      "hidden_costs": [
+        "agentul AI în care îl rulezi (abonament sau API), pentru comenzile /impeccable",
+        "timp pentru configurare și pentru a verifica manual ce raportează agentul"
+      ]
+    },
+    {
+      "service": "Audit UX de la un freelancer (ex. pachetele TNCFlow pe Dribbble)",
+      "service_url": "https://dribbble.com/services/190018-Website-UX-Audit-With-Prioritized-Fixes",
+      "price": "600 USD (Starter, până la 10 ecrane), 1.400 USD (Standard), 2.800 USD (Premium)",
+      "price_source_url": "https://dribbble.com/services/190018-Website-UX-Audit-With-Prioritized-Fixes",
+      "price_checked_at": "2026-10-29",
+      "replacement_level": "doar pentru cazuri simple",
+      "what_you_keep": [
+        "un raport de critică cu probleme ordonate după prioritate, pentru ecranele proprii",
+        "o primă trecere rapidă înainte de a plăti un specialist"
+      ],
+      "what_you_lose": [
+        "judecata unui designer uman și analiza fluxurilor de conversie",
+        "machete Figma cu adnotări și o sesiune de întrebări după raport"
+      ],
+      "hidden_costs": [
+        "agentul AI (abonament sau API)",
+        "timpul tău pentru a citi și a decide ce din raportul agentului merită făcut"
+      ]
+    }
+  ],
+  "examples": [
+    {
+      "title": "Instalare în proiect și inițializare",
+      "scenario": "Din rădăcina proiectului instalezi skill-ul pentru uneltele AI detectate, apoi reîncarci unealta și creezi PRODUCT.md cu `init`.",
+      "prerequisites": [
+        "Node.js (pentru npx)",
+        "un agent AI de programare compatibil, de ex. Claude Code",
+        "un proiect web existent"
+      ],
+      "commands": [
+        "npx impeccable install",
+        "/impeccable init"
+      ],
+      "code": null,
+      "output_from_docs": null,
+      "source_url": "https://github.com/pbakaus/impeccable/blob/5e745ace7e151feb2a93d360d0281fe39448b857/README.md",
+      "kind": "instalare"
+    },
+    {
+      "title": "Comenzi de design în agent",
+      "scenario": "După inițializare, scrii în agent o comandă și o țintă îngustă. README spune că o țintă mică dă rezultate mai bune decât o pagină întreagă; în Codex scrii `$impeccable` în loc de `/impeccable`.",
+      "prerequisites": [
+        "Impeccable instalat și `/impeccable init` rulat o dată în proiect"
+      ],
+      "commands": [
+        "/impeccable critique the onboarding flow",
+        "/impeccable quieter the landing page",
+        "/impeccable polish settings",
+        "/impeccable harden checkout",
+        "/impeccable pin audit"
+      ],
+      "code": null,
+      "output_from_docs": null,
+      "source_url": "https://github.com/pbakaus/impeccable/blob/5e745ace7e151feb2a93d360d0281fe39448b857/README.md",
+      "kind": "folosire"
+    },
+    {
+      "title": "Detectorul din terminal sau din CI, fără agent",
+      "scenario": "Scanezi un folder, o pagină randerizată sau scoți rezultatul pentru GitHub Actions. README spune că ieșirea cu cod 2 înseamnă probleme găsite, iar cu cod 1 că o țintă nu a putut fi scanată.",
+      "prerequisites": [
+        "Node.js",
+        "Chrome sau Edge instalat, doar pentru scanarea unui URL"
+      ],
+      "commands": [
+        "npx impeccable detect src/",
+        "npx impeccable detect https://example.com",
+        "npx impeccable detect --json .",
+        "npx impeccable detect --github src/",
+        "npx impeccable detect --list-rules"
+      ],
+      "code": null,
+      "output_from_docs": null,
+      "source_url": "https://github.com/pbakaus/impeccable/blob/5e745ace7e151feb2a93d360d0281fe39448b857/README.md",
+      "kind": "folosire"
+    }
+  ],
+  "connectors": {
+    "inputs": [
+      "comenzi tastate în agent: `/impeccable <comandă> <țintă>` (în Codex: `$impeccable ...`)",
+      "fișierele sursă ale proiectului: JSX, TSX, HTML, CSS, Vue, Svelte, Astro",
+      "un URL randerizat (de ex. `http://localhost:5173`) pentru regulile care au nevoie de pagina afișată",
+      "răspunsurile tale la întrebările din `init`"
+    ],
+    "outputs": [
+      "modificări de cod în fișierele de interfață ale proiectului",
+      "fișiere Markdown în proiect: PRODUCT.md, DESIGN.md și rapoarte de critică în `.impeccable/critique/`",
+      "descoperiri ale detectorului în text, JSON (`--json`) sau adnotări GitHub Actions (`--github`)",
+      "cod de ieșire 2 când sunt probleme și 1 când o țintă nu a putut fi scanată"
+    ],
+    "pairs_well_with": [
+      {
+        "repo_url": "https://github.com/mattpocock/skills",
+        "name": "mattpocock-skills",
+        "why": "Au același format SKILL.md și se instalează în același agent: skill-urile lui Pocock dau procesul (interviu, teste, revizuire), iar Impeccable adaugă judecata de design pentru interfață.",
+        "in_catalog": true
+      },
+      {
+        "repo_url": "https://github.com/obra/superpowers",
+        "name": "superpowers",
+        "why": "Superpowers conduce fluxul de lucru al agentului (plan, implementare, verificare), iar codul de interfață produs în acel flux poate fi trecut apoi prin `critique` și `polish`.",
+        "in_catalog": true
+      },
+      {
+        "repo_url": "https://github.com/vercel-labs/skills",
+        "name": "skills (vercel-labs)",
+        "why": "Documentația Impeccable arată instalarea alternativă `npx skills add pbakaus/impeccable`, iar `npx skills update impeccable` o actualizează.",
+        "in_catalog": false
+      },
+      {
+        "repo_url": "https://github.com/microsoft/playwright-mcp",
+        "name": "playwright-mcp",
+        "why": "Ghidul `critique` face capturi de ecran ale paginii și menționează Playwright ca variantă când agentul nu are propriul instrument de browser; capturile devin intrare pentru critică.",
+        "in_catalog": false
+      }
+    ],
+    "gaps_noticed": [
+      "Hook-urile cer pași manuali de aprobare în Codex (/hooks), Grok Build (/hooks-trust) și Hermes Agent (hermes plugins enable), diferiți de la unealtă la unealtă.",
+      "Regulile care au nevoie de pagina randerizată (contrast mic, text mic) nu rulează pe fișiere sursă; trebuie pornit și un server local pentru scanarea URL-ului.",
+      "Live mode merge doar pe un proiect local; pentru un site deja publicat nu există o cale documentată."
+    ]
+  },
+  "when_not_to_use": [
+    "Lucrezi doar la backend sau la sarcini fără interfață: skill-ul însuși spune că nu e pentru ele.",
+    "Nu folosești niciun agent AI: comenzile /impeccable lipsesc, rămâne doar detectorul din terminal.",
+    "Instalezi hook-uri într-un depozit necunoscut: README avertizează că rulează în afara aprobării modelului și că `impeccable:manual-edit-validate` din package.json rulează cu permisiunile tale.",
+    "Vrei să injectezi live mode într-un site publicat: README spune explicit să nu o faci.",
+    "Aștepți că un detector cu reguli fixe înlocuiește ochiul unui designer: prinde tipare cunoscute, nu judecă marca sau publicul tău."
+  ],
+  "alternatives": [
+    {
+      "name": "frontend-design (Anthropic)",
+      "url": "https://github.com/anthropics/skills/tree/main/skills/frontend-design",
+      "difference": "Skill-ul de la care a pornit Impeccable, mai scurt; fără comenzile de revizuire și fără detectorul cu reguli. Nu am verificat licența lui."
+    },
+    {
+      "name": "Taste Skill",
+      "url": "https://github.com/Leonxlnx/taste-skill",
+      "difference": "Set de fișiere SKILL.md pe care le încarci înainte de generare (MIT); previne, în timp ce Impeccable adaugă și verificarea după generare."
+    },
+    {
+      "name": "UI UX Pro Max Skill",
+      "url": "https://github.com/nextlevelbuilder/ui-ux-pro-max-skill",
+      "difference": "Alt skill de design pentru agenți (MIT); nu am comparat funcțiile în detaliu."
+    },
+    {
+      "name": "v0 (Vercel)",
+      "url": "https://v0.app/pricing",
+      "difference": "Serviciu plătit care generează interfețe într-un chat (plan gratuit; Plus 30 USD/utilizator/lună); nu îți rafinează codul din proiectul tău."
+    }
+  ],
+  "tech_sheet": {
+    "license": "Apache-2.0",
+    "language": "Rust (motorul), JavaScript și Markdown (skill-ul și instalatorul)",
+    "commit_sha": "5e745ace7e151feb2a93d360d0281fe39448b857",
+    "last_commit_date": "2026-10-28",
+    "stars": 93656,
+    "requirements": [
+      "un agent AI de programare compatibil, din lista README: Claude Code, Cursor, Codex CLI, GitHub Copilot, Devin, Replit Agent, Gemini CLI, Grok Build, OpenCode, Google Antigravity, Kiro, Trae, Rovo Dev, Qoder, Mistral Vibe, Pi, Hermes Agent, DeepSeek Harness sau Veto",
+      "abonament sau chei API ale agentului ales (pot fi plătite; Impeccable în sine este gratuit)",
+      "Node.js >= 18.19.0, doar pentru comanda `npx impeccable install` (instalarea manuală prin copiere nu îl cere)",
+      "rulezi comanda de instalare din rădăcina proiectului; apoi reîncarci unealta și rulezi `/impeccable init` (în Codex: `$impeccable init`)",
+      "motorul (un binar static) vine lângă skill sau se descarcă o dată în ~/.impeccable/bin/, deci e nevoie de internet la prima rulare",
+      "Windows (x64), macOS (Intel și Apple Silicon) sau Linux (x64 și arm64), conform binarelor de motor",
+      "Chrome sau Edge instalat, doar pentru scanarea unui URL și pentru live mode",
+      "pentru extensia VS Code: VS Code 1.109.3 sau mai nou, Copilot Chat și un spațiu de lucru de încredere",
+      "pentru hook în Codex: aprobi hook-ul din /hooks; în Grok Build: /hooks-trust sau --trust; în Hermes Agent: hermes plugins enable impeccable-design-hook",
+      "opțional: OPENAI_API_KEY (cheie plătită pe consum) pentru generarea de imagini-machetă"
+    ]
+  },
+  "monetization": [
+    {
+      "model": "consultanță și training",
+      "what_you_sell": "Ateliere de o zi pentru echipe de design și front-end: cum își configurează agentul, cum folosesc comenzile de design și detectorul din CI și cum își scriu PRODUCT.md și DESIGN.md. Vinzi explicația și adaptarea la proiectul clientului, nu codul.",
+      "for_whom": "Echipe de produs și agenții web care folosesc deja Claude Code, Cursor sau Codex, dar primesc interfețe generice.",
+      "license_check": {
+        "license": "Apache-2.0",
+        "commercial_use": "permis",
+        "conditions": "Apache-2.0 permite uz comercial, modificare și redistribuire, cu condiția să păstrezi licența și notele de copyright (inclusiv NOTICE.md, cu material MIT preluat de la ehmo) și să marchezi modificările. Nu îți dă dreptul să folosești numele sau însemnele autorului ca și cum ai fi afiliat. Site-ul impeccable.style nu face parte din repo: verifică-l separat înainte de a-i reproduce textele."
+      },
+      "path": "folosești repo-ul direct",
+      "own_build_notes": null,
+      "demand_evidence": [
+        {
+          "name": "valantic: Claude Code for Developers (curs, Germania)",
+          "url": "https://www.valantic.com/en/training-center/claude-code-for-developers/",
+          "price": "€890 per persoană (plus TVA), curs de două zile",
+          "what_it_proves": "Companii plătesc deja pentru training de Claude Code pentru dezvoltatori.",
+          "checked_at": "2026-10-29"
+        },
+        {
+          "name": "Konigi: ateliere de echipă pentru Claude Code (echipe de design)",
+          "url": "https://www.konigi.com/answers/team-workshops",
+          "price": "7.500 USD pe zi, pentru până la opt persoane; deplasarea se facturează separat",
+          "what_it_proves": "Există cerere de ateliere de echipă pentru designeri care lucrează cu Claude Code.",
+          "checked_at": "2026-10-29"
+        }
+      ],
+      "startup_cost": "Practic zero în bani; un abonament la un agent AI pentru pregătire (Claude Pro: 17 USD/lună cu plata anuală sau 20 USD/lună lunar, conform claude.com/pricing, verificat 2026-10-29). Timp: câteva zile ca să citești documentația și să pregătești un atelier.",
+      "time_to_first_client": "Nu pot estima din surse; depinde de rețeaua ta. Un atelier gratuit sau ieftin pentru o echipă cunoscută este de obicei primul pas.",
+      "difficulty": "mediu",
+      "risks": [
+        "Concurență gratuită: README-ul și documentația de pe impeccable.style explică deja instalarea și comenzile.",
+        "Proiectul se schimbă repede (lansări la câteva zile), deci materialul tău se învechește.",
+        "Efort de suport: clienții vor întreba de erori ale agentului, care nu țin de repo.",
+        "Dependență de agenți și de planuri de abonament a căror ofertă se schimbă."
+      ],
+      "first_steps": [
+        "Citește README-ul și paginile de documentație pentru `init`, `critique`, `polish` și `detect`.",
+        "Pregătește un atelier de 2-3 ore pe un site mic de exemplu: instalare, `init`, o critică și o rulare a detectorului.",
+        "Oferă-l gratuit sau la preț mic unei echipe cunoscute și cere o recomandare scrisă.",
+        "Compară-ți oferta cu trainingurile din tabelul de cerere înainte de a stabili un preț."
+      ]
+    },
+    {
+      "model": "altul",
+      "what_you_sell": "Audit de design pentru site-uri existente: rulezi critica, auditul și detectorul, verifici manual descoperirile și livrezi un raport cu probleme ordonate după prioritate, plus corecturile alese de client.",
+      "for_whom": "Proprietari de site-uri mici, magazine online și startup-uri care au făcut interfața cu un asistent AI și vor o a doua părere.",
+      "license_check": {
+        "license": "Apache-2.0",
+        "commercial_use": "permis",
+        "conditions": "Apache-2.0 permite folosirea comercială a uneltei, cu păstrarea notelor de licență dacă redistribui codul. Raportul pe care îl livrezi e munca ta. Atenție la datele clientului: un agent AI trimite codul la furnizorul modelului, iar telemetria Impeccable se oprește separat (vezi riscurile)."
+      },
+      "path": "folosești repo-ul direct",
+      "own_build_notes": null,
+      "demand_evidence": [
+        {
+          "name": "TNCFlow pe Dribbble: Website UX Audit With Prioritized Fixes",
+          "url": "https://dribbble.com/services/190018-Website-UX-Audit-With-Prioritized-Fixes",
+          "price": "600 USD (până la 10 ecrane), 1.400 USD (până la 20 de ecrane), 2.800 USD (produs întreg)",
+          "what_it_proves": "Auditurile UX cu raport de probleme ordonate după prioritate se vând deja cu preț fix.",
+          "checked_at": "2026-10-29"
+        },
+        {
+          "name": "The Skins Factory: Enterprise UX Audit",
+          "url": "https://www.theskinsfactory.com/uiux-design-questions-answers/how-much-does-a-ux-audit-cost",
+          "price": "5.995 USD, pentru până la două fluxuri principale de produs",
+          "what_it_proves": "O agenție vinde publicat un audit UX la preț fix, fără implementare inclusă.",
+          "checked_at": "2026-10-29"
+        }
+      ],
+      "startup_cost": "Abonament la un agent AI (de la 17 USD/lună la Claude Pro cu plata anuală, claude.com/pricing, 2026-10-29) și timp pentru a învăța comenzile; fără alte costuri de licență.",
+      "time_to_first_client": "Nu pot estima din surse; un audit gratuit pe site-ul unui cunoscut e un prim pas realist.",
+      "difficulty": "mediu",
+      "risks": [
+        "Clientul poate rula singur detectorul gratuit: valoarea ta rămâne în judecata umană și în explicații.",
+        "Raportul unui agent poate conține greșeli; fără verificare manuală îți riști reputația.",
+        "Datele clientului: codul ajunge la furnizorul agentului, iar Impeccable face cereri către impeccable.style la începutul unui design nou.",
+        "Dependență de serverul și de catalogul autorului pentru modul de design nou."
+      ],
+      "first_steps": [
+        "Rulează `npx impeccable detect` pe un site propriu și pe unul al unui cunoscut și compară cu ce găsești manual.",
+        "Scrie un șablon de raport: probleme ordonate de la P0 la P3, cu captură și soluție.",
+        "Oferă un audit gratuit în schimbul unei recomandări, apoi stabilește un preț comparând cu pachetele din tabelul de cerere."
+      ]
+    }
+  ],
+  "updated_at": "2026-10-29",
+  "notes_summary": "Am citit README-ul, documentația oficială și codul motorului; n-am rulat nimic, iar o poveste reală potrivită nu am găsit.",
+  "notes": "Repo nou, cercetat 2026-10-29 la commit 5e745ace (ultimul commit 2026-10-28, v4.8.0 CLI/skill, motor v0.1.18; 93.656 stele; Apache-2.0, LICENSE standard; NOTICE.md menționează material MIT de la ehmo/platform-design-skills). Am citit: README, LICENSE, NOTICE.md, package.json, docs/ENGINE.md, RUNTIME-ENV.md, HARNESSES.md, WINDOWS-SIGNING.md, VSCODE-EXTENSION.md, skill/SKILL.src.md, skill/reference/hooks.md, scripts/fetch-engine.mjs, crates/context (telemetrie, generate_image), plus paginile impeccable.style/docs, /docs/hooks, /docs/detector și /privacy (via WebFetch, rezumate). Cifrele din README (24 de comenzi, 62 de reguli) diferă de cele din postări terțe (23/59, 18, 20), semn că proiectul se schimbă repede; am folosit README la SHA-ul citit. README-ul demonstrează cu un model numit „Fable 5.1”, nume pe care nu l-am putut verifica și nu l-am folosit. Numărul de reguli nu a fost verificat în cod (nu am rulat `--list-rules`). Licența anthropics/skills/frontend-design nu am verificat-o (API GitHub nu returnează licență pentru anthropics/skills). Chrome Web Store (extensia) și extensia VS Code nu au fost deschise: prețul extensiilor nu e verificat. Prețuri verificate 2026-10-29: claude.com/pricing (Pro 17/20, Max de la 100), learn.chatgpt.com/docs/pricing (Plus 20), github.com/features/copilot/plans (Pro 10), getstark.co/pricing (Premium Pack 198/utilizator/an, Launch de la 2.500/an), dribbble.com TNCFlow (600/1.400/2.800), theskinsfactory.com (5.995), v0.app/pricing (Plus 30/utilizator/lună), valantic (890 EUR), konigi (7.500 USD/zi). Deque axe DevTools: pagina nu arată prețuri, de aceea nu l-am inclus la replaces. Sisteme de operare: din binarele de motor și lansatorul .cmd; hook-urile Codex dezactivate pe Windows din docs/HARNESSES.md. Primii pași: nu am găsit o experiență reală potrivită. Am căutat pe Hacker News (hn.algolia: doar comentarii scurte care recomandă linkul, ex. 49725193, 49482198, 49294522), pe dev.to (un articol „How We Use impeccable” scris la persoana I plural despre un monorepo propriu, fără pași de pornire pentru un începător, și un articol despre Variant care nu e relatare directă) și prin căutare web. Am respins și postarea de pe mejba.me (Engr Mejba Ahmed, 2026-04-30, „I Tested It on My Site”, scor critică 25/40 → 32/40): e la persoana I și concretă, dar stilul pare asistat de AI, textul apare în 8 limbi și autorul își vinde servicii, deci nu am putut fi sigur că e scrisă de un om."
+}

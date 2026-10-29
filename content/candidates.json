@@ -411,5 +411,61 @@
     "suggested_by": "safeline",
     "why": "Repo-ul SafeLine include un plugin Kong (sdk/kong) care trimite fiecare cerere către motorul de detecție, deci protejezi API-urile din Kong fără să muți traficul prin consola SafeLine.",
     "added_at": "2026-10-29"
+  },
+  {
+    "repo_url": "https://github.com/HKUDS/LightRAG",
+    "name": "LightRAG",
+    "suggested_by": "deeptutor",
+    "why": "Motor RAG pe graf folosit de DeepTutor ca opțiune de indexare pentru bazele de cunoștințe; DeepTutor poate folosi și un LightRAG Server separat.",
+    "added_at": "2026-10-29"
+  },
+  {
+    "repo_url": "https://github.com/opendatalab/MinerU",
+    "name": "MinerU",
+    "suggested_by": "deeptutor",
+    "why": "Transformă PDF-uri complicate (tabele, formule) în text structurat, pe care DeepTutor îl indexează în bazele de cunoștințe.",
+    "added_at": "2026-10-29"
+  },
+  {
+    "repo_url": "https://github.com/VectifyAI/PageIndex",
+    "name": "PageIndex",
+    "suggested_by": "deeptutor",
+    "why": "Motor de căutare prin raționament, cu citări pe pagină; DeepTutor îl poate folosi, găzduit de tine, în locul indexării clasice.",
+    "added_at": "2026-10-29"
+  },
+  {
+    "repo_url": "https://github.com/searxng/searxng",
+    "name": "SearXNG",
+    "suggested_by": "deeptutor",
+    "why": "Metamotor de căutare web propriu; DeepTutor îl folosește pentru unealta de căutare web, fără cheie API de la un serviciu comercial.",
+    "added_at": "2026-10-29"
+  },
+  {
+    "repo_url": "https://github.com/microsoft/playwright-mcp",
+    "name": "playwright-mcp",
+    "suggested_by": "impeccable",
+    "why": "Ghidul `critique` face capturi de ecran ale paginii și menționează Playwright ca variantă când agentul nu are propriul instrument de browser; capturile devin intrare pentru critică.",
+    "added_at": "2026-10-29"
+  },
+  {
+    "repo_url": "https://github.com/home-assistant/core",
+    "name": "Home Assistant",
+    "suggested_by": "ruview",
+    "why": "RuView publică 15 entități implicite prin MQTT (prezență, număr de persoane, respirație etc.), iar Home Assistant le folosește în automatizări (lumini, alerte).",
+    "added_at": "2026-10-29"
+  },
+  {
+    "repo_url": "https://github.com/eclipse-mosquitto/mosquitto",
+    "name": "Eclipse Mosquitto",
+    "suggested_by": "ruview",
+    "why": "Broker MQTT gratuit care stă între serverul RuView (care publică mesaje) și Home Assistant (care le citește).",
+    "added_at": "2026-10-29"
+  },
+  {
+    "repo_url": "https://github.com/esphome/esphome",
+    "name": "ESPHome",
+    "suggested_by": "ruview",
+    "why": "Documentația RuView citește un kit radar mmWave de 60 GHz prin ESPHome (comanda mmwave --source esphome), ca al doilea senzor lângă CSI.",
+    "added_at": "2026-10-29"
   }
 ]

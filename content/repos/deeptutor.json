@@ -1,0 +1,406 @@
+{
+  "slug": "deeptutor",
+  "repo_url": "https://github.com/HKUDS/DeepTutor",
+  "name": "DeepTutor",
+  "one_liner": "Tutor AI personal: învață din documentele tale, face teste și îți ține minte progresul.",
+  "problem_solved": "Când înveți dintr-un manual, un curs sau lucrări științifice, nu ai pe cine să întrebi la 11 seara și nimeni nu-ți verifică ce ai înțeles. DeepTutor este un spațiu de studiu care răspunde pe baza materialelor tale, te testează și ține minte unde ai greșit.",
+  "features": [
+    "Chat cu tutorul AI, cu răspunsuri bazate pe documentele încărcate de tine (baze de cunoștințe)",
+    "Teste, exerciții și „Mastery Path” (traseu de învățare cu verificarea cunoștințelor)",
+    "Cărți interactive generate din materialele tale, plus caiet de notițe cu asistent",
+    "Memorie în trei straturi, pe care o poți citi și corecta (nu e un depozit ascuns)",
+    "Rulează local sau în Docker; merge și cu modele locale (Ollama, LM Studio)",
+    "Interfață în browser plus linie de comandă (`deeptutor chat`, `deeptutor run ...`)",
+    "Skill-uri instalabile din EduHub sau ClawHub, printr-un filtru de securitate"
+  ],
+  "at_a_glance": {
+    "for_you_if": [
+      "Vrei un tutor AI care lucrează pe materialele tale (PDF-uri, cursuri, cărți) și rulează pe calculatorul tău.",
+      "Ești OK să configurezi o cheie API sau un model local și să iei lucrurile pas cu pas."
+    ],
+    "not_for_you_if": [
+      "Vrei o aplicație gata făcută, fără nicio configurare, cu cont și abonament.",
+      "Ai un calculator slab și nu vrei să plătești un model AI online."
+    ],
+    "verdict": "Foarte complet și activ, dar mare și în schimbare rapidă; merită dacă accepți configurarea și costul modelului AI."
+  },
+  "cost": {
+    "level": "gratuit, dar cere servicii plătite",
+    "summary": "Programul e gratuit (Apache-2.0), dar are nevoie de un model AI: ori o cheie API plătită pe consum, ori un model local gratuit (Ollama), ori, experimental, abonamentul ChatGPT prin login Codex.",
+    "ai_access": {
+      "mode": "abonament sau API",
+      "detail": "Merge cu chei API de la mulți furnizori, cu modele locale, cu login OpenAI Codex pe planul tău ChatGPT (marcat experimental) sau GitHub Copilot; Claude Pro/Max apare doar indirect, prin Claude Code conectat ca sub-agent, care își folosește propriul login.",
+      "source_url": "https://github.com/HKUDS/DeepTutor/blob/1ea7df155447f4caf0e3abc86b3ff5395479cd4a/README.md"
+    },
+    "items": [
+      {
+        "what": "Cheie API pentru un model AI (OpenAI, Anthropic, Gemini, DeepSeek, OpenRouter etc.), plătită pe consum; obligatorie dacă nu folosești un model local sau login Codex",
+        "price": null,
+        "required": true,
+        "source_url": "https://github.com/HKUDS/DeepTutor/blob/1ea7df155447f4caf0e3abc86b3ff5395479cd4a/docs-for-dev/AGENT_SETUP.md"
+      },
+      {
+        "what": "Model de embedding (transformă documentele în vectori pentru căutare); necesar doar pentru baze de cunoștințe, poate fi și local",
+        "price": null,
+        "required": false,
+        "source_url": "https://github.com/HKUDS/DeepTutor/blob/1ea7df155447f4caf0e3abc86b3ff5395479cd4a/docs-for-dev/AGENT_SETUP.md"
+      },
+      {
+        "what": "Abonament ChatGPT Plus (alternativă la cheia API, prin login OpenAI Codex, experimental)",
+        "price": "20 USD/lună",
+        "required": false,
+        "source_url": "https://learn.chatgpt.com/docs/pricing"
+      },
+      {
+        "what": "Abonament Claude Pro (doar dacă conectezi Claude Code ca sub-agent; include Claude Code)",
+        "price": "17 USD/lună cu plată anuală, 20 USD/lună lunar",
+        "required": false,
+        "source_url": "https://claude.com/pricing"
+      },
+      {
+        "what": "Docker Desktop (pentru varianta Docker); gratuit pentru uz personal",
+        "price": "0 USD/lună, plan Personal",
+        "required": false,
+        "source_url": "https://www.docker.com/pricing/"
+      },
+      {
+        "what": "Model local prin Ollama / LM Studio / llama.cpp (software gratuit; hardware potrivit, eventual GPU, după model)",
+        "price": null,
+        "required": false,
+        "source_url": "https://github.com/HKUDS/DeepTutor/blob/1ea7df155447f4caf0e3abc86b3ff5395479cd4a/README.md"
+      },
+      {
+        "what": "Furnizor de căutare web (DuckDuckGo merge fără cheie; altele cer cheie)",
+        "price": null,
+        "required": false,
+        "source_url": "https://github.com/HKUDS/DeepTutor/blob/1ea7df155447f4caf0e3abc86b3ff5395479cd4a/docs-for-dev/AGENT_SETUP.md"
+      },
+      {
+        "what": "PageIndex (motor de căutare opțional, hosted, cu abonament; există și varianta OSS găzduită de tine)",
+        "price": null,
+        "required": false,
+        "source_url": "https://github.com/HKUDS/DeepTutor/blob/1ea7df155447f4caf0e3abc86b3ff5395479cd4a/README.md"
+      }
+    ]
+  },
+  "platforms": {
+    "windows": "da",
+    "mac": "da",
+    "linux": "da",
+    "note": "README dă comenzi pentru Windows PowerShell, macOS/Linux și Docker, plus un lansator .command pentru macOS. Izolarea codului generat de model e mai puternică pe Linux (bubblewrap) sau cu Docker; pe Windows/macOS fără Docker se folosește varianta „best effort”.",
+    "source_url": "https://github.com/HKUDS/DeepTutor/blob/1ea7df155447f4caf0e3abc86b3ff5395479cd4a/README.md"
+  },
+  "risk_flags": [
+    {
+      "flag": "trimite date în cloud",
+      "detail": "Textele din chat și fragmentele din documentele tale ajung la furnizorul de model ales (OpenAI, Anthropic etc.), dacă nu folosești un model local.",
+      "source_url": "https://github.com/HKUDS/DeepTutor/blob/1ea7df155447f4caf0e3abc86b3ff5395479cd4a/docs-for-dev/AGENT_SETUP.md"
+    },
+    {
+      "flag": "proiect instabil",
+      "detail": "Apar versiuni noi la câteva zile (v1.7.0 a schimbat structura pachetelor, iar v1.6.3 a avut o refactorizare cu schimbări incompatibile); login-ul Codex este marcat experimental.",
+      "source_url": "https://github.com/HKUDS/DeepTutor/blob/1ea7df155447f4caf0e3abc86b3ff5395479cd4a/README.md"
+    }
+  ],
+  "audience_reason": "ai nevoie de Python/Node sau Docker și de alegerea unui model AI, dar documentația dă pași clari și o variantă de probă dintr-o comandă Docker",
+  "setup_difficulty_reason": "mai mulți pași (Python și Node sau Docker, configurarea modelului și a embedding-ului) și, de obicei, o cheie API plătită sau un model local",
+  "analogy": "Ca un meditator care a citit manualul tău, ține un carnet cu ce ai greșit și te întreabă din nou până înțelegi.",
+  "how_it_works": [
+    "Intrare: încarci documente (PDF, Word, Excel, PowerPoint, linkuri, repo-uri GitHub) într-o bază de cunoștințe și alegi un model AI.",
+    "Procesare: documentele sunt analizate și indexate (RAG); tutorul caută în ele, apelează unelte (căutare web, execuție de cod în sandbox) și folosește memoria ta.",
+    "Ieșire: răspunsuri cu citări, teste, cărți interactive, notițe și un traseu de învățare, în browser sau în terminal (`--format json` pentru alți agenți)."
+  ],
+  "first_steps": null,
+  "categories": [
+    "Învățare și ghiduri"
+  ],
+  "search_intents": [
+    "vreau un tutor AI care învață din cursurile și PDF-urile mele",
+    "vreau să mă pregătesc pentru examen cu teste generate din materialele mele",
+    "vreau să întreb un AI despre o carte sau un manual încărcat de mine",
+    "vreau un asistent de studiu care rulează local, fără abonament",
+    "vreau să generez întrebări și exerciții dintr-un curs"
+  ],
+  "audience": "intermediar",
+  "setup_difficulty": "mediu",
+  "replaces": [
+    {
+      "service": "Khanmigo (Khan Academy)",
+      "service_url": "https://www.khanmigo.ai/",
+      "price": "4 USD/lună pentru familii, fără taxe",
+      "price_source_url": "https://www.khanmigo.ai/parents",
+      "price_checked_at": "2026-10-29",
+      "replacement_level": "parțial",
+      "what_you_keep": [
+        "Tutor AI conversațional cu abordare pas cu pas",
+        "Exerciții și teste",
+        "Date și documente rămase pe calculatorul tău"
+      ],
+      "what_you_lose": [
+        "Curriculum gata făcut și lecții video Khan Academy",
+        "Controale pentru părinți și profesori gata configurate, adaptate copiilor",
+        "Siguranță și moderare pentru minori făcute și întreținute de o organizație"
+      ],
+      "hidden_costs": [
+        "Cheie API sau hardware pentru model local",
+        "Timp de configurare și actualizări dese",
+        "Materialele de studiu trebuie să le aduci tu"
+      ]
+    },
+    {
+      "service": "MagicSchool",
+      "service_url": "https://www.magicschool.ai/pricing",
+      "price": "12,99 USD/lună lunar sau 8,33 USD/lună cu plată anuală (99,96 USD/an), plan Plus; există plan Free și Enterprise la cerere",
+      "price_source_url": "https://www.magicschool.ai/pricing",
+      "price_checked_at": "2026-10-29",
+      "replacement_level": "doar pentru cazuri simple",
+      "what_you_keep": [
+        "Generare de teste și întrebări din materiale",
+        "Un asistent AI pentru explicații și feedback"
+      ],
+      "what_you_lose": [
+        "Peste 80 de unelte pentru profesori gata făcute",
+        "Integrări cu platforme școlare, SSO, panouri de raportare",
+        "Suport și acord de confidențialitate pentru școli"
+      ],
+      "hidden_costs": [
+        "Cheie API sau model local",
+        "Configurare și întreținere proprie",
+        "Pentru o clasă, trebuie să activezi și să administrezi conturile (modul multi-utilizator)"
+      ]
+    }
+  ],
+  "examples": [
+    {
+      "title": "Încearcă DeepTutor dintr-o singură comandă Docker",
+      "scenario": "Vrei să vezi aplicația fără să instalezi Python sau Node.js. Pornești containerul oficial, deschizi browserul și configurezi modelul AI din Settings → Providers.",
+      "prerequisites": [
+        "Docker instalat (https://docs.docker.com/get-docker/)",
+        "O cheie API sau un model local, de configurat după pornire"
+      ],
+      "commands": [
+        "docker run --rm --name deeptutor \\\n  -p 127.0.0.1:3782:3782 \\\n  -v deeptutor-data:/app/data \\\n  ghcr.io/hkuds/deeptutor:latest"
+      ],
+      "code": "",
+      "output_from_docs": null,
+      "source_url": "https://github.com/HKUDS/DeepTutor/blob/1ea7df155447f4caf0e3abc86b3ff5395479cd4a/README.md#one-command-docker-trial",
+      "kind": "instalare"
+    },
+    {
+      "title": "Folosire din terminal: chat, bază de cunoștințe și memorie",
+      "scenario": "După instalare poți lucra din linia de comandă: chat interactiv, o întrebare punctuală, crearea unei baze de cunoștințe dintr-un manual PDF și verificarea memoriei.",
+      "prerequisites": [
+        "DeepTutor instalat și configurat (`deeptutor init`)",
+        "Model AI configurat; embedding configurat pentru comenzile cu `--kb`"
+      ],
+      "commands": [
+        "deeptutor chat                                          # interactive REPL",
+        "deeptutor chat --capability deep_solve --kb my-kb",
+        "deeptutor run chat \"Explain Fourier transform\"",
+        "deeptutor run deep_solve \"Solve x^2 = 4\" --kb my-kb",
+        "deeptutor kb create my-kb --doc textbook.pdf",
+        "deeptutor memory show",
+        "deeptutor config show"
+      ],
+      "code": "",
+      "output_from_docs": null,
+      "source_url": "https://github.com/HKUDS/DeepTutor/blob/1ea7df155447f4caf0e3abc86b3ff5395479cd4a/README.md#option-4--cli-only",
+      "kind": "folosire"
+    }
+  ],
+  "connectors": {
+    "inputs": [
+      "Fișiere PDF, DOCX, XLSX, PPTX, EPUB, Markdown și imagini încărcate în baze de cunoștințe",
+      "Linkuri YouTube/Bilibili (transcriere) și repo-uri GitHub sau site-uri de documentație (crawl limitat)",
+      "Întrebări text sau voce în browser, ori comenzi în terminal",
+      "Export `conversations.json` din ChatGPT sau istoric Claude Code/Codex pentru import"
+    ],
+    "outputs": [
+      "Răspunsuri cu citări în interfața web",
+      "Export Markdown și Word (notițe, cărți, conversații)",
+      "Flux NDJSON (`--format json`), un eveniment pe linie, cu `session_id`",
+      "Teste, carduri de studiu și cărți interactive în aplicație"
+    ],
+    "pairs_well_with": [
+      {
+        "repo_url": "https://github.com/ollama/ollama",
+        "name": "Ollama",
+        "why": "Rulează modele AI local; DeepTutor se conectează la serverul Ollama ca furnizor de model (LLM) și de embedding, deci fără cheie API.",
+        "in_catalog": false
+      },
+      {
+        "repo_url": "https://github.com/HKUDS/LightRAG",
+        "name": "LightRAG",
+        "why": "Motor RAG pe graf folosit de DeepTutor ca opțiune de indexare pentru bazele de cunoștințe; DeepTutor poate folosi și un LightRAG Server separat.",
+        "in_catalog": false
+      },
+      {
+        "repo_url": "https://github.com/opendatalab/MinerU",
+        "name": "MinerU",
+        "why": "Transformă PDF-uri complicate (tabele, formule) în text structurat, pe care DeepTutor îl indexează în bazele de cunoștințe.",
+        "in_catalog": false
+      },
+      {
+        "repo_url": "https://github.com/VectifyAI/PageIndex",
+        "name": "PageIndex",
+        "why": "Motor de căutare prin raționament, cu citări pe pagină; DeepTutor îl poate folosi, găzduit de tine, în locul indexării clasice.",
+        "in_catalog": false
+      },
+      {
+        "repo_url": "https://github.com/searxng/searxng",
+        "name": "SearXNG",
+        "why": "Metamotor de căutare web propriu; DeepTutor îl folosește pentru unealta de căutare web, fără cheie API de la un serviciu comercial.",
+        "in_catalog": false
+      }
+    ],
+    "gaps_noticed": [
+      "Fișierul `.env` din rădăcina proiectului nu este citit; cheile se introduc în Settings sau prin `deeptutor config apply`.",
+      "Schimbarea modelului de embedding la o bază existentă cere reindexarea completă a bazei.",
+      "Documentația recomandă `git clone --branch dev`, deși ramura implicită a repo-ului este `main`.",
+      "Pentru transcrierea vocală cu adaptoarele DashScope/Volcengine pe Windows, FFmpeg trebuie instalat manual și adăugat în PATH."
+    ]
+  },
+  "when_not_to_use": [
+    "Dacă ai nevoie de o aplicație gata făcută, cu contul și abonamentul gestionate de altcineva, pentru copii mici sau clase întregi fără administrator.",
+    "Dacă nu vrei să plătești niciun model AI și calculatorul tău nu poate rula un model local decent.",
+    "Dacă ai nevoie de stabilitate: versiunile apar la câteva zile, iar între ele pot veni schimbări de structură.",
+    "Dacă materialele sunt confidențiale și le-ai trimite unui furnizor cloud; atunci ai nevoie de model local.",
+    "Dacă vrei dovezi că învățarea chiar e mai bună: rezultatele din lucrarea autorilor sunt ale lor, iar impactul în clasă nu e verificat independent (din analize terțe citite de atlas)."
+  ],
+  "alternatives": [
+    {
+      "name": "AnythingLLM",
+      "url": "https://github.com/Mintplex-Labs/anything-llm",
+      "difference": "Chat cu documentele tale (MIT), mai simplu și generalist; nu are teste, cărți interactive sau traseu de învățare."
+    },
+    {
+      "name": "Open WebUI",
+      "url": "https://github.com/open-webui/open-webui",
+      "difference": "Interfață generală pentru modele locale și online, cu RAG; nu este gândită ca tutor. Pe GitHub licența apare fără identificator standard, citește fișierul LICENSE."
+    },
+    {
+      "name": "KnoWhiz DeepTutor (alt proiect cu același nume)",
+      "url": "https://deeptutor.knowhiz.us/",
+      "difference": "Serviciu web separat, pentru citit lucrări științifice, fără legătură cu HKUDS/DeepTutor; atenție la confuzia de nume."
+    }
+  ],
+  "tech_sheet": {
+    "license": "Apache-2.0",
+    "language": "Python (backend) și TypeScript / Next.js (interfață web)",
+    "commit_sha": "1ea7df155447f4caf0e3abc86b3ff5395479cd4a",
+    "last_commit_date": "2026-10-29",
+    "stars": 48699,
+    "requirements": [
+      "Python 3.11–3.14 (pentru instalarea din PyPI sau din sursă)",
+      "Node.js 20+ pe PATH pentru pachetul PyPI; Node.js 22 LTS pentru instalarea din sursă (potrivit CI și Docker)",
+      "Alternativ: Docker (imaginea ghcr.io/hkuds/deeptutor:latest), fără Python sau Node pe calculatorul tău",
+      "Instalare PyPI: `pip install -U \"deeptutor[full]\"`, apoi `deeptutor init` și `deeptutor start`; interfața se deschide la http://127.0.0.1:3782",
+      "Instalare din sursă: `git clone --branch dev https://github.com/HKUDS/DeepTutor.git`, mediu virtual, `python -m pip install -r requirements/full.txt`, `python -m pip install -e . --no-deps`, `npm ci --legacy-peer-deps` în folderul web/",
+      "Un model AI (LLM): cheie API de la un furnizor (OpenAI, Anthropic, Gemini, DeepSeek, OpenRouter etc.), sau model local (Ollama, LM Studio, llama.cpp, vLLM), sau login OpenAI Codex / GitHub Copilot",
+      "Pentru baze de cunoștințe (RAG): un model de embedding configurat (de exemplu text-embedding-3-small), local sau prin API",
+      "Opțional: furnizor de căutare web (DuckDuckGo fără cheie; altele cer cheie API)",
+      "Opțional: FFmpeg în PATH pentru transcriere vocală cu adaptoarele DashScope/Volcengine; extra-uri precum LaTeX/ffmpeg pentru Math Animator",
+      "Opțional: Docker sau Linux bubblewrap pentru izolarea codului generat de model (exec sandbox)",
+      "Opțional: contul Claude Code, Codex sau Grok CLI instalat și autentificat pe aceeași mașină, pentru funcția „My Agents”",
+      "Date și setări în folderul `data/` din directorul de unde pornești aplicația (sau DEEPTUTOR_HOME)",
+      "Spațiu pe disc și memorie pentru indexuri; nu am găsit în documentație cifre minime de RAM sau GPU"
+    ]
+  },
+  "monetization": [
+    {
+      "model": "serviciu de instalare și configurare",
+      "what_you_sell": "Instalezi și configurezi DeepTutor pe un server mic sau în Docker, pornești modul multi-utilizator, încarci materialele de curs ale clientului și predai un ghid de folosire.",
+      "for_whom": "Centre de meditații, școli private mici, profesori independenți și grupuri de studiu care vor un tutor AI pe materialele lor, fără să-și configureze singuri serverul.",
+      "license_check": {
+        "license": "Apache-2.0",
+        "commercial_use": "permis cu condiții",
+        "conditions": "Apache-2.0 permite uz comercial dacă păstrezi licența și notificările și nu folosești numele/logo-ul ca marcă proprie. Atenție: instalarea completă (`requirements/full.txt`) trage PyMuPDF, care este dublu licențiat AGPL / comercial (pymupdf.readthedocs.io/en/latest/about.html); dacă oferi aplicația ca serviciu în rețea, verifică obligațiile AGPL sau licența comercială Artifex (verificare de făcut de tine, nu o concluzie juridică). Materialele de curs ale clientului trebuie să aibă drepturi clare."
+      },
+      "path": "folosești repo-ul direct",
+      "own_build_notes": null,
+      "demand_evidence": [
+        {
+          "name": "Khanmigo (Khan Academy)",
+          "url": "https://www.khanmigo.ai/parents",
+          "price": "4 USD/lună, fără taxe",
+          "what_it_proves": "Familiile plătesc deja pentru un tutor AI; pe această piață prețul de referință este mic.",
+          "checked_at": "2026-10-29"
+        },
+        {
+          "name": "MagicSchool",
+          "url": "https://www.magicschool.ai/pricing",
+          "price": "12,99 USD/lună lunar; 8,33 USD/lună cu plată anuală (99,96 USD/an); Enterprise la cerere",
+          "what_it_proves": "Profesorii și școlile plătesc pentru unelte AI de predare; există plan comercial pentru districte.",
+          "checked_at": "2026-10-29"
+        },
+        {
+          "name": "Șablon Railway „DeepTutor” (publicat de Just Deploy It)",
+          "url": "https://railway.com/deploy/deeptutor-personalized-ai-tutoring",
+          "price": null,
+          "what_it_proves": "Alții împachetează deja DeepTutor ca instalare gata de pornit; pagina nu arată preț.",
+          "checked_at": "2026-10-29"
+        }
+      ],
+      "startup_cost": "Un server mic (cost de hosting variabil, necunoscut) plus consumul modelului AI al clientului; fără licențe de plătit pentru DeepTutor în sine.",
+      "time_to_first_client": "Variază; depinde de rețeaua ta de profesori și centre locale.",
+      "difficulty": "mediu",
+      "risks": [
+        "Concurență gratuită: documentația oficială și promptul pentru agentul tău pot face instalarea la îndemâna oricui.",
+        "Proiectul se schimbă la câteva zile; întreții actualizări și migrări (ex. pachetele 1.7.0).",
+        "Date ale elevilor: ai nevoie de acord și reguli de confidențialitate (GDPR) și de un model care nu trimite datele unde nu trebuie.",
+        "Suport continuu: clienții vor întreba de erori ale modelului AI, nu doar de instalare."
+      ],
+      "first_steps": [
+        "Pornește varianta Docker pentru tine, cu un model local sau o cheie API proprie, și încearcă-o pe un curs real.",
+        "Citește docs-for-dev/CONTAINERIZATION.md și ghidul pentru multi-utilizator.",
+        "Pregătește o ofertă clară (instalare + ghid + o ședință de predare) și arată-o unui centru de meditații local.",
+        "Clarifică cu clientul ce materiale are voie să încarce și unde se păstrează datele."
+      ]
+    },
+    {
+      "model": "conținut și cursuri",
+      "what_you_sell": "Ghiduri și workshop-uri despre cum îți construiești un tutor AI propriu: cum organizezi materialele, alegi modelul (local sau API) și folosești testele și traseul de învățare.",
+      "for_whom": "Studenți, profesori și părinți care vor să folosească AI la învățat, dar nu vor să configureze tehnic totul.",
+      "license_check": {
+        "license": "Apache-2.0",
+        "commercial_use": "permis cu condiții",
+        "conditions": "Poți vinde propriul conținut educativ despre un program Apache-2.0; nu copia documentația oficială integral fără să păstrezi notificările de licență și nu folosi numele/logo-ul ca și cum ai fi proiectul oficial. Dacă îți instalezi cursanții cu o instalare completă, vezi nota despre PyMuPDF (AGPL / comercial) de la prima idee."
+      },
+      "path": "folosești repo-ul direct",
+      "own_build_notes": null,
+      "demand_evidence": [
+        {
+          "name": "MagicSchool (plan Plus pentru profesori; planul Free include suport și dezvoltare profesională)",
+          "url": "https://www.magicschool.ai/pricing",
+          "price": "12,99 USD/lună lunar; 8,33 USD/lună cu plată anuală",
+          "what_it_proves": "Există interes plătit pentru unelte și instruire AI pentru educație; concurența oferă deja suport și dezvoltare profesională.",
+          "checked_at": "2026-10-29"
+        },
+        {
+          "name": "Khanmigo (Khan Academy)",
+          "url": "https://www.khanmigo.ai/parents",
+          "price": "4 USD/lună, fără taxe",
+          "what_it_proves": "Un tutor AI gata făcut costă puțin; conținutul tău trebuie să ofere ce nu oferă aceștia (ex. materiale proprii, limba română, local).",
+          "checked_at": "2026-10-29"
+        }
+      ],
+      "startup_cost": "Timp pentru a testa unealta și a scrie materialele; fără licențe de plătit.",
+      "time_to_first_client": "Variază mult; depinde de audiența ta.",
+      "difficulty": "mediu",
+      "risks": [
+        "Concurență gratuită: documentația oficială, README-ul și un prompt pentru agent îl ghidează deja pe utilizator.",
+        "Conținutul se învechește repede, din cauza ritmului de versiuni.",
+        "Exemplele trebuie testate de tine; atlasul nu a rulat DeepTutor.",
+        "Piața de ghiduri despre AI în educație este aglomerată, iar unele concurente sunt gratuite."
+      ],
+      "first_steps": [
+        "Rulează DeepTutor tu însuți cu un curs real și notează unde te blochezi.",
+        "Scrie un ghid scurt pentru un public concret (ex. pregătire de licență) cu pașii pe care i-ai verificat.",
+        "Publică un tutorial gratuit și vezi ce întrebări primești, înainte să faci ceva plătit."
+      ]
+    }
+  ],
+  "updated_at": "2026-10-29",
+  "notes_summary": "Am citit README-ul, ghidul pentru agenți, codul și documentația din repo și am verificat prețurile concurenților; nu am rulat nimic și nu am găsit o experiență reală potrivită de povestit.",
+  "notes": "Repo nou. Clonat la commit 1ea7df155447f4caf0e3abc86b3ff5395479cd4a (2026-10-29), versiunea v1.7.0 (2026-10-28), 48.699 stele, 6.031 forkuri, creat 2025-12-28 (date GitHub API). Licența: fișierul LICENSE este Apache-2.0 (verificat). README-ul spune că autorii NU au produse online plătite („we DO NOT have paid online products of any form”). Documentația recomandă clonarea ramurii `dev`; clona atlasului este pe ramura implicită `main`, care are același README. Primii pași: nu am găsit o experiență reală potrivită. Am căutat pe Hacker News (API Algolia: doar postări despre alt proiect omonim, KnoWhiz/DeepTutor, și un link către repo fără comentarii), dev.to (zero rezultate relevante), blogul knightli.com (404), dailyaiworld.com (articol de marketing al unui CEO, cu cifre contradictorii între secțiuni, respins), remio.ai (analiză la persoana a treia, nu experiență proprie) și căutări web generale (în rest pagini SEO/agregatoare). Reddit nu l-am încercat insistent. Atenție: există alt proiect, KnoWhiz/DeepTutor (deeptutor.knowhiz.us), fără legătură cu acesta. Prețuri verificate azi: Khanmigo 4 USD/lună (khanmigo.ai/parents, fără taxe), MagicSchool Plus 12,99 USD/lună sau 8,33 USD/lună anual (magicschool.ai/pricing), ChatGPT Plus 20 USD/lună (learn.chatgpt.com/docs/pricing), Claude Pro 17/20 USD (claude.com/pricing), Docker Personal 0 (docker.com/pricing). Nu am putut verifica pe pagina oficială Quizlet (403), Chegg (403), NotebookLM (pagina nu arată prețuri), prețurile API OpenAI (redirect, nu am căutat tariful embedding) sau PageIndex: acestea sunt `null` sau lipsesc. Compararea cu NotebookLM și Quizlet nu a fost inclusă în `replaces` din lipsa prețurilor verificate. Pachetul 1.7.0 este modular (`deeptutor[full]`); actualizarea de la 1.6.15 cere dezinstalarea `deeptutor-cli` înainte (README). Dependențe cu licență notabilă: instalarea full trage PyMuPDF (AGPL sau licență comercială Artifex, conform pymupdf.readthedocs.io/en/latest/about.html), prezent în requirements/modules/parsing.txt; nu am analizat restul arborelui de dependențe. Nu am găsit în cod telemetrie către autori (modulul `llm/telemetry.py` doar scrie în jurnal local); aplicația contactează totuși serviciile configurate de tine (model, căutare, EduHub/ClawHub pentru skill-uri, registrul npm pentru versiunea Codex, la login). Cerințe minime de RAM/GPU nu sunt date în documentația citită. Categorie: „Învățare și ghiduri” (există în categories.json); nu s-a creat categorie nouă. Comparații și idei de monetizare sunt propuneri, netestate; fără estimări de venit."
+}
