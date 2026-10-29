@@ -308,10 +308,108 @@
     "added_at": "2026-10-29"
   },
   {
-    "repo_url": "https://github.com/sherlock-project/sherlock",
-    "name": "Sherlock",
-    "suggested_by": "spiderfoot",
-    "why": "Pentru un nume de utilizator găsit de SpiderFoot, caută conturile de pe alte rețele sociale, ca verificare suplimentară.",
+    "repo_url": "https://github.com/zaproxy/zaproxy",
+    "name": "OWASP ZAP",
+    "suggested_by": "strix",
+    "why": "ZAP e deja în imaginea sandbox, iar un scan ZAP clasic pe aceeași țintă poate fi comparat cu rezultatele agenților Strix.",
+    "added_at": "2026-10-29"
+  },
+  {
+    "repo_url": "https://github.com/semgrep/semgrep",
+    "name": "Semgrep",
+    "suggested_by": "strix",
+    "why": "Analiza statică Semgrep (inclusă în Strix la scanările white-box) completează testele dinamice, iar rezultatele ambelor se pot citi ca SARIF.",
+    "added_at": "2026-10-29"
+  },
+  {
+    "repo_url": "https://github.com/microsoft/winget-cli",
+    "name": "WinGet (Windows Package Manager)",
+    "suggested_by": "win11debloat",
+    "why": "După curățare, cu comenzi winget reinstalezi rapid aplicațiile dorite; wiki-ul Win11Debloat îl menționează ca modalitate de reinstalare a aplicațiilor eliminate.",
+    "added_at": "2026-10-29"
+  },
+  {
+    "repo_url": "https://github.com/zoicware/RemoveWindowsAI",
+    "name": "RemoveWindowsAI",
+    "suggested_by": "win11debloat",
+    "why": "Scoate funcțiile AI din Windows mai în profunzime decât Win11Debloat; îl rulezi după Win11Debloat, pe același PC.",
+    "added_at": "2026-10-29"
+  },
+  {
+    "repo_url": "https://github.com/ChrisTitusTech/winutil",
+    "name": "Chris Titus Tech's Windows Utility",
+    "suggested_by": "win11debloat",
+    "why": "După curățare, instalează programele tale și ajustează Windows Update; poate fi folosit în aceeași sesiune pe un PC nou.",
+    "added_at": "2026-10-29"
+  },
+  {
+    "repo_url": "https://github.com/valinet/ExplorerPatcher",
+    "name": "ExplorerPatcher",
+    "suggested_by": "win11debloat",
+    "why": "Poate aduce bara de activități, Start și Alt+Tab în stil Windows 10, după README-ul său; îl instalezi după curățare, dacă vrei un aspect mai clasic.",
+    "added_at": "2026-10-29"
+  },
+  {
+    "repo_url": "https://github.com/soxoj/socid-extractor",
+    "name": "socid-extractor",
+    "suggested_by": "maigret",
+    "why": "Biblioteca pe care Maigret o folosește la extragerea datelor din profil; o poți rula separat pe o pagină salvată ca să scoată ID-uri și linkuri în JSON.",
+    "added_at": "2026-10-29"
+  },
+  {
+    "repo_url": "https://github.com/neo4j/neo4j",
+    "name": "Neo4j",
+    "suggested_by": "maigret",
+    "why": "Fișierul .cypher generat de Maigret cu --neo4j se importă în Neo4j și devine un graf de conturi pe care poți face interogări.",
+    "added_at": "2026-10-29"
+  },
+  {
+    "repo_url": "https://github.com/kaifcodec/user-scanner",
+    "name": "user-scanner",
+    "suggested_by": "maigret",
+    "why": "FAQ-ul Maigret îl recomandă pentru e-mail: adresele de e-mail extrase de Maigret din profiluri devin intrarea pentru user-scanner.",
+    "added_at": "2026-10-29"
+  },
+  {
+    "repo_url": "https://github.com/sharsil/mailcat",
+    "name": "mailcat",
+    "suggested_by": "maigret",
+    "why": "Tot din FAQ-ul Maigret: verifică în ce servicii de e-mail există o adresă găsită de Maigret într-un profil.",
+    "added_at": "2026-10-29"
+  },
+  {
+    "repo_url": "https://github.com/Lissy93/awesome-privacy",
+    "name": "awesome-privacy",
+    "suggested_by": "personal-security-checklist",
+    "why": "Lista trimite aici pentru recomandări de programe (gestionare de parole, aplicații 2FA, browsere): citești sfatul în checklist, alegi programul din awesome-privacy.",
+    "added_at": "2026-10-29"
+  },
+  {
+    "repo_url": "https://github.com/privacyguides/privacyguides.org",
+    "name": "Privacy Guides",
+    "suggested_by": "personal-security-checklist",
+    "why": "Dacă vrei un al doilea ghid de confidențialitate, îl poți citi în paralel pentru a compara recomandările de programe.",
+    "added_at": "2026-10-29"
+  },
+  {
+    "repo_url": "https://github.com/crowdsecurity/crowdsec",
+    "name": "CrowdSec",
+    "suggested_by": "safeline",
+    "why": "SafeLine oprește atacurile la nivel de cerere web, iar CrowdSec poate citi loguri (SafeLine le scrie în folderul logs/nginx din compose.yaml) și interzice IP-urile repetate; compatibilitatea exactă cu formatul logurilor nu am verificat-o.",
+    "added_at": "2026-10-29"
+  },
+  {
+    "repo_url": "https://github.com/louislam/uptime-kuma",
+    "name": "Uptime Kuma",
+    "suggested_by": "safeline",
+    "why": "După ce pui SafeLine în fața unui site, Uptime Kuma verifică periodic adresa lui publică și te anunță dacă firewall-ul blochează din greșeală cereri legitime sau dacă site-ul cade.",
+    "added_at": "2026-10-29"
+  },
+  {
+    "repo_url": "https://github.com/Kong/kong",
+    "name": "Kong Gateway",
+    "suggested_by": "safeline",
+    "why": "Repo-ul SafeLine include un plugin Kong (sdk/kong) care trimite fiecare cerere către motorul de detecție, deci protejezi API-urile din Kong fără să muți traficul prin consola SafeLine.",
     "added_at": "2026-10-29"
   }
 ]

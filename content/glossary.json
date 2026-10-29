@@ -1304,5 +1304,624 @@
       "port deschis"
     ],
     "explanation": "număr prin care un server primește un anumit serviciu"
+  },
+  {
+    "term": "pentest",
+    "aliases": [
+      "pentesturi",
+      "pentesturile",
+      "test de penetrare",
+      "teste de penetrare",
+      "penetration testing"
+    ],
+    "explanation": "Atac simulat, cu acord, ca să afli unde ești vulnerabil"
+  },
+  {
+    "term": "vulnerabilitate",
+    "aliases": [
+      "vulnerabilități",
+      "vulnerabilitățile",
+      "găuri de securitate"
+    ],
+    "explanation": "Slăbiciune a unui program pe care o poate exploata un atacator"
+  },
+  {
+    "term": "exploit",
+    "aliases": [
+      "exploit-uri",
+      "exploit-urile"
+    ],
+    "explanation": "Cod sau pași care folosesc o slăbiciune ca să atace"
+  },
+  {
+    "term": "dovadă de concept",
+    "aliases": [
+      "PoC",
+      "PoC-uri",
+      "proof-of-concept",
+      "dovezi de concept"
+    ],
+    "explanation": "Demonstrație practică, mică, că o vulnerabilitate chiar funcționează"
+  },
+  {
+    "term": "false pozitive",
+    "aliases": [
+      "fals pozitiv",
+      "alerte false",
+      "fals pozitive",
+      "falsuri pozitive",
+      "rezultate fals pozitive"
+    ],
+    "explanation": "Alerte sau rezultate care se dovedesc greșite, deși par reale"
+  },
+  {
+    "term": "white-box",
+    "aliases": [
+      "white box",
+      "test white-box",
+      "testare white-box"
+    ],
+    "explanation": "Test în care ai acces la codul sursă"
+  },
+  {
+    "term": "black-box",
+    "aliases": [
+      "black box",
+      "test black-box",
+      "testare black-box"
+    ],
+    "explanation": "Test în care vezi doar aplicația din exterior, ca un atacator"
+  },
+  {
+    "term": "grey-box",
+    "aliases": [
+      "gray-box",
+      "grey box",
+      "test grey-box"
+    ],
+    "explanation": "Test cu acces parțial, de exemplu un cont de utilizator"
+  },
+  {
+    "term": "SARIF",
+    "aliases": [
+      "findings.sarif",
+      "SARIF 2.1.0"
+    ],
+    "explanation": "Format standard de fișier pentru rezultatele scanărilor de securitate"
+  },
+  {
+    "term": "SAST",
+    "aliases": [
+      "analiză statică de securitate"
+    ],
+    "explanation": "Căutare de probleme de securitate direct în cod, fără a-l rula"
+  },
+  {
+    "term": "DAST",
+    "aliases": [
+      "test dinamic",
+      "analiză dinamică"
+    ],
+    "explanation": "Testare de securitate pe aplicația pornită, în funcțiune"
+  },
+  {
+    "term": "OWASP Top 10",
+    "aliases": [
+      "OWASP",
+      "OWASP API Security Top 10"
+    ],
+    "explanation": "Lista celor mai răspândite riscuri de securitate web"
+  },
+  {
+    "term": "SQL injection",
+    "aliases": [
+      "injecție SQL",
+      "injecții SQL",
+      "SQLi"
+    ],
+    "explanation": "Atac care strecoară comenzi în baza de date prin formulare"
+  },
+  {
+    "term": "XSS",
+    "aliases": [
+      "cross-site scripting"
+    ],
+    "explanation": "Atac care rulează cod străin în browserul altui utilizator"
+  },
+  {
+    "term": "IDOR",
+    "aliases": [
+      "BOLA"
+    ],
+    "explanation": "Acces la datele altui utilizator doar schimbând un identificator"
+  },
+  {
+    "term": "CVSS",
+    "aliases": [
+      "scor CVSS"
+    ],
+    "explanation": "Scor standard de la 0 la 10 pentru gravitatea unei vulnerabilități"
+  },
+  {
+    "term": "bug bounty",
+    "aliases": [
+      "bug bounty-uri",
+      "recompense pentru vulnerabilități"
+    ],
+    "explanation": "Program care plătește pe cine găsește și raportează vulnerabilități"
+  },
+  {
+    "term": "reverse shell",
+    "aliases": [
+      "reverse shell-uri",
+      "shell invers"
+    ],
+    "explanation": "Conexiune inversă prin care atacatorul controlează terminalul țintei"
+  },
+  {
+    "term": "Caido",
+    "aliases": [
+      "proxy Caido"
+    ],
+    "explanation": "Unealtă care interceptează și modifică traficul web între browser și site"
+  },
+  {
+    "term": "Kali Linux",
+    "aliases": [
+      "Kali"
+    ],
+    "explanation": "Distribuție Linux plină cu unelte de securitate"
+  },
+  {
+    "term": "LiteLLM",
+    "aliases": [],
+    "explanation": "Bibliotecă care vorbește cu zeci de furnizori de modele AI"
+  },
+  {
+    "term": "GitHub Actions",
+    "aliases": [
+      "workflow GitHub",
+      "flux GitHub Actions"
+    ],
+    "explanation": "Automatizări care rulează la fiecare modificare în GitHub"
+  },
+  {
+    "term": "mod fără interfață",
+    "aliases": [
+      "headless",
+      "mod headless",
+      "modul fără interfață"
+    ],
+    "explanation": "Rulare fără ecran interactiv, potrivită pentru scripturi și CI"
+  },
+  {
+    "term": "pipx",
+    "aliases": [],
+    "explanation": "Instalează programe Python în medii izolate"
+  },
+  {
+    "term": "Hack The Box",
+    "aliases": [
+      "HTB"
+    ],
+    "explanation": "Platformă cu mașini de antrenament pentru exerciții legale de securitate"
+  },
+  {
+    "term": "PostHog",
+    "aliases": [
+      "Scarf",
+      "OTEL",
+      "OpenTelemetry"
+    ],
+    "explanation": "Servicii care strâng statistici anonime de utilizare"
+  },
+  {
+    "term": "Vertex AI",
+    "aliases": [
+      "Google Vertex",
+      "Vertex"
+    ],
+    "explanation": "Serviciu Google Cloud pentru modele AI"
+  },
+  {
+    "term": "AWS Bedrock",
+    "aliases": [
+      "Bedrock"
+    ],
+    "explanation": "Serviciu Amazon pentru modele AI în cloud"
+  },
+  {
+    "term": "registru Windows",
+    "aliases": [
+      "registrul Windows",
+      "registry"
+    ],
+    "explanation": "baza de date cu setările interne ale Windows"
+  },
+  {
+    "term": "bloatware",
+    "aliases": [
+      "bloat"
+    ],
+    "explanation": "aplicații preinstalate pe care mulți nu le folosesc"
+  },
+  {
+    "term": "punct de restaurare",
+    "aliases": [
+      "puncte de restaurare",
+      "punctul de restaurare",
+      "restore point",
+      "System Restore",
+      "sistem de restaurare"
+    ],
+    "explanation": "instantaneu al Windows la care poți reveni"
+  },
+  {
+    "term": "WinGet",
+    "aliases": [],
+    "explanation": "programul Windows care instalează și dezinstalează aplicații din comenzi"
+  },
+  {
+    "term": "UAC",
+    "aliases": [
+      "fereastra UAC"
+    ],
+    "explanation": "fereastra Windows care cere permisiune de administrator"
+  },
+  {
+    "term": "Sysprep",
+    "aliases": [
+      "modul Sysprep",
+      "mod Audit"
+    ],
+    "explanation": "pregătirea unei imagini Windows pentru copiat pe mai multe PC-uri"
+  },
+  {
+    "term": "Copilot",
+    "aliases": [
+      "Microsoft Copilot"
+    ],
+    "explanation": "asistentul AI al Microsoft integrat în Windows"
+  },
+  {
+    "term": "Recall",
+    "aliases": [
+      "Windows Recall"
+    ],
+    "explanation": "funcția Windows care face capturi de ecran ca să-ți amintești"
+  },
+  {
+    "term": "fișier .reg",
+    "aliases": [
+      "fișiere .reg"
+    ],
+    "explanation": "fișier mic care schimbă setări în registrul Windows"
+  },
+  {
+    "term": "politici locale",
+    "aliases": [
+      "politicile locale"
+    ],
+    "explanation": "reguli Windows care blochează sau forțează anumite setări"
+  },
+  {
+    "term": "username",
+    "aliases": [
+      "username-ul",
+      "username-uri"
+    ],
+    "explanation": "numele de cont folosit pe o rețea, de exemplu user123"
+  },
+  {
+    "term": "amprentă digitală",
+    "aliases": [
+      "amprenta digitală",
+      "amprentei digitale"
+    ],
+    "explanation": "toate urmele tale online: conturi, postări, date publice"
+  },
+  {
+    "term": "XLSX",
+    "aliases": [],
+    "explanation": "formatul fișierelor Excel moderne"
+  },
+  {
+    "term": "GDPR",
+    "aliases": [
+      "RGPD",
+      "Regulamentul general privind protecția datelor"
+    ],
+    "explanation": "legea europeană care protejează datele personale"
+  },
+  {
+    "term": "rețeaua Tor",
+    "aliases": [
+      "Tor Browser"
+    ],
+    "explanation": "rețea care ascunde de unde te conectezi"
+  },
+  {
+    "term": "I2P",
+    "aliases": [
+      "rețeaua I2P"
+    ],
+    "explanation": "rețea anonimă, ca Tor, cu site-uri .i2p"
+  },
+  {
+    "term": "Neo4j",
+    "aliases": [
+      "script Neo4j",
+      "baza de date Neo4j"
+    ],
+    "explanation": "bază de date care păstrează legături între elemente"
+  },
+  {
+    "term": "căutare recursivă",
+    "aliases": [
+      "căutarea recursivă",
+      "recursivitate"
+    ],
+    "explanation": "caută din nou, cu ce a descoperit prima dată"
+  },
+  {
+    "term": "CAPTCHA",
+    "aliases": [
+      "test anti-bot"
+    ],
+    "explanation": "test care verifică dacă ești om, nu robot"
+  },
+  {
+    "term": "FlareSolverr",
+    "aliases": [],
+    "explanation": "program care trece de verificarea Cloudflare cu un browser"
+  },
+  {
+    "term": "Cloudflare",
+    "aliases": [
+      "protecția Cloudflare"
+    ],
+    "explanation": "serviciu care blochează roboții de pe multe site-uri"
+  },
+  {
+    "term": "Snap",
+    "aliases": [
+      "Snap Store"
+    ],
+    "explanation": "format de instalare a programelor pe Linux"
+  },
+  {
+    "term": "XMind",
+    "aliases": [
+      "raport XMind"
+    ],
+    "explanation": "program de hărți mentale; Maigret poate exporta în el"
+  },
+  {
+    "term": "proxy rezidențial",
+    "aliases": [
+      "proxy-uri rezidențiale",
+      "proxy rezidențiale"
+    ],
+    "explanation": "conexiune prin IP de acasă, mai greu de blocat"
+  },
+  {
+    "term": "2FA",
+    "aliases": [
+      "autentificare în doi pași",
+      "autentificare cu doi factori",
+      "2-factor authentication"
+    ],
+    "explanation": "verificare în plus, pe lângă parolă, de exemplu un cod din aplicație"
+  },
+  {
+    "term": "gestionar de parole",
+    "aliases": [
+      "gestionarul de parole",
+      "password manager"
+    ],
+    "explanation": "program care generează, ține minte și completează parolele pentru tine"
+  },
+  {
+    "term": "passkey",
+    "aliases": [
+      "passkeys",
+      "chei de acces"
+    ],
+    "explanation": "autentificare fără parolă, cu amprentă, față sau PIN pe dispozitiv"
+  },
+  {
+    "term": "phishing",
+    "aliases": [],
+    "explanation": "mesaj fals care te păcălește să îți dai parola sau datele"
+  },
+  {
+    "term": "BitLocker",
+    "aliases": [],
+    "explanation": "funcția Windows care criptează tot discul calculatorului"
+  },
+  {
+    "term": "criptare",
+    "aliases": [
+      "criptat",
+      "criptată",
+      "criptează",
+      "encrypt"
+    ],
+    "explanation": "transformarea datelor într-un cod ce nu poate fi citit fără cheie"
+  },
+  {
+    "term": "model de amenințare",
+    "aliases": [
+      "threat model",
+      "modelul de amenințare"
+    ],
+    "explanation": "ce vrei să aperi și de cine anume"
+  },
+  {
+    "term": "credential stuffing",
+    "aliases": [],
+    "explanation": "atac care încearcă parole scurse pe alte site-uri"
+  },
+  {
+    "term": "SIM swapping",
+    "aliases": [
+      "SIM-swapping"
+    ],
+    "explanation": "atacatorul îți preia numărul de telefon prin operator"
+  },
+  {
+    "term": "cheie de securitate",
+    "aliases": [
+      "chei de securitate",
+      "cheie hardware",
+      "FIDO2",
+      "U2F"
+    ],
+    "explanation": "dispozitiv USB sau NFC care confirmă că ești tu"
+  },
+  {
+    "term": "CC BY 4.0",
+    "aliases": [
+      "Creative Commons",
+      "Creative Commons Attribution",
+      "licența CC BY"
+    ],
+    "explanation": "licență care permite refolosirea, cu condiția să-l numești pe autor"
+  },
+  {
+    "term": "Qwik",
+    "aliases": [],
+    "explanation": "framework folosit pentru a construi site-ul listei"
+  },
+  {
+    "term": "Yarn",
+    "aliases": [],
+    "explanation": "program care descarcă bibliotecile necesare unui proiect Node.js"
+  },
+  {
+    "term": "WAF",
+    "aliases": [
+      "WAF-ul",
+      "firewall pentru aplicații web",
+      "firewall web"
+    ],
+    "explanation": "Filtru care oprește cererile periculoase înainte să ajungă la aplicație"
+  },
+  {
+    "term": "proxy invers",
+    "aliases": [
+      "reverse proxy",
+      "proxy-ul invers"
+    ],
+    "explanation": "Intermediar care primește vizitatorii și trimite mai departe doar traficul curat"
+  },
+  {
+    "term": "Nginx",
+    "aliases": [
+      "Tengine"
+    ],
+    "explanation": "Server web popular, folosit și ca intermediar de trafic"
+  },
+  {
+    "term": "limitare de cereri",
+    "aliases": [
+      "rate limiting"
+    ],
+    "explanation": "Limitează câte cereri poate face un vizitator într-un interval"
+  },
+  {
+    "term": "Let's Encrypt",
+    "aliases": [
+      "Let’s Encrypt"
+    ],
+    "explanation": "Serviciu gratuit care emite certificate pentru HTTPS"
+  },
+  {
+    "term": "certificat SSL",
+    "aliases": [
+      "SSL",
+      "TLS",
+      "HTTPS"
+    ],
+    "explanation": "Certificat care activează conexiunea securizată (lacătul din browser)"
+  },
+  {
+    "term": "upstream",
+    "aliases": [
+      "serverul upstream"
+    ],
+    "explanation": "Serverul real al aplicației, aflat în spatele WAF-ului"
+  },
+  {
+    "term": "HTTP flood",
+    "aliases": [
+      "flood HTTP"
+    ],
+    "explanation": "Val de cereri făcut să încarce prea tare serverul"
+  },
+  {
+    "term": "path traversal",
+    "aliases": [
+      "path-traversal"
+    ],
+    "explanation": "Atac care citește fișiere din afara folderului permis"
+  },
+  {
+    "term": "Kubernetes",
+    "aliases": [
+      "K8s"
+    ],
+    "explanation": "Sistem care rulează și coordonează multe containere"
+  },
+  {
+    "term": "Ingress-NGINX",
+    "aliases": [
+      "ingress"
+    ],
+    "explanation": "Poarta prin care intră traficul într-un cluster Kubernetes"
+  },
+  {
+    "term": "container Docker",
+    "aliases": [
+      "containere Docker",
+      "containerul Docker",
+      "imagini Docker",
+      "imagine Docker"
+    ],
+    "explanation": "Mediu izolat, cu tot ce-i trebuie, în care rulează un program"
+  },
+  {
+    "term": "SSSE3",
+    "aliases": [],
+    "explanation": "Set de instrucțiuni al procesorului, cerut de motorul SafeLine"
+  },
+  {
+    "term": "ARM",
+    "aliases": [
+      "arm64"
+    ],
+    "explanation": "Tip de procesor, întâlnit la Raspberry Pi și Mac-uri noi"
+  },
+  {
+    "term": "open core",
+    "aliases": [
+      "open-core"
+    ],
+    "explanation": "Parte publică, gratuită; restul produsului rămâne închis"
+  },
+  {
+    "term": "root",
+    "aliases": [
+      "drepturi root"
+    ],
+    "explanation": "Contul de administrator total al unui sistem Linux"
+  },
+  {
+    "term": "DDoS",
+    "aliases": [
+      "DoS",
+      "atacuri DDoS"
+    ],
+    "explanation": "Atac care blochează un site prin trafic uriaș"
   }
 ]

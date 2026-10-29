@@ -1,0 +1,352 @@
+{
+  "slug": "sherlock",
+  "repo_url": "https://github.com/sherlock-project/sherlock",
+  "name": "Sherlock",
+  "one_liner": "Caută un nume de utilizator pe sute de rețele sociale deodată.",
+  "problem_solved": "Vrei să afli unde mai există un nume de utilizator pe internet (conturi uitate sau conturi care îți copiază numele), dar verificarea de mână a sute de site-uri durează ore. Sherlock face verificarea automat și îți dă lista adreselor unde numele există.",
+  "features": [
+    "Verifică un nume de utilizator pe peste 400 de site-uri (lista locală din repo are 481 de intrări)",
+    "Acceptă mai multe nume într-o singură comandă și variante de tip {?} (înlocuit cu _, - sau .)",
+    "Salvează rezultatele în fișier text, CSV sau XLSX (Excel)",
+    "Poate limita căutarea la site-uri alese (--site) sau trece cererile printr-un proxy",
+    "Se instalează cu o singură comandă (pipx, pip, uv, Docker sau dnf) și nu cere cont sau cheie API"
+  ],
+  "at_a_glance": {
+    "for_you_if": [
+      "Vrei să vezi ce conturi vechi sau uitate ai pe numele tău de utilizator.",
+      "Vrei să verifici dacă cineva îți copiază numele de brand pe alte rețele."
+    ],
+    "not_for_you_if": [
+      "Vrei să afli date despre o persoană (e-mail, telefon, adresă): Sherlock caută doar după nume de utilizator.",
+      "Intenționezi să urmărești sau să profilezi pe cineva fără acordul lui."
+    ],
+    "verdict": "Instrument simplu, gratuit și bine întreținut pentru un singur lucru; fiecare rezultat trebuie verificat manual și folosit doar etic."
+  },
+  "cost": {
+    "level": "gratuit complet",
+    "summary": "Programul e gratuit (licență MIT), nu cere cont sau cheie API și nu folosește AI, deci nu ai nevoie de abonament AI sau de API plătit.",
+    "ai_access": {
+      "mode": "nu folosește AI",
+      "detail": "Dependențele din pyproject.toml sunt biblioteci de rețea și de export (requests, pandas, openpyxl); nu apare niciun serviciu AI.",
+      "source_url": "https://github.com/sherlock-project/sherlock/blob/e40a45ec2a074b90703b3b4b842c8a3adbd6ada3/pyproject.toml"
+    },
+    "items": [
+      {
+        "what": "Python 3.9 sau mai nou (limbajul în care e scris)",
+        "price": "gratuit (licență PSF, uz comercial permis)",
+        "required": true,
+        "source_url": "https://docs.python.org/3/license.html"
+      },
+      {
+        "what": "Docker (opțional, ca alternativă de instalare; plan Personal pentru uz individual)",
+        "price": "Personal: 0 USD/lună; Pro: 11 USD/utilizator/lună (9 USD la plata anuală)",
+        "required": false,
+        "source_url": "https://www.docker.com/pricing/"
+      },
+      {
+        "what": "Proxy sau VPN (opțional, pentru --proxy)",
+        "price": null,
+        "required": false,
+        "source_url": "https://github.com/sherlock-project/sherlock/blob/e40a45ec2a074b90703b3b4b842c8a3adbd6ada3/docs/README.md"
+      }
+    ]
+  },
+  "platforms": {
+    "windows": "da",
+    "mac": "da",
+    "linux": "da",
+    "note": "pyproject.toml declară „Operating System :: OS Independent”; documentația de instalare dă comenzi pentru pipx/pip/Docker, Homebrew (macOS), apt/dnf/pacman (Linux). Windows nu are o pagină proprie în documentație: „da” e dedus din faptul că programul e Python pur.",
+    "source_url": "https://github.com/sherlock-project/sherlock/blob/e40a45ec2a074b90703b3b4b842c8a3adbd6ada3/pyproject.toml"
+  },
+  "risk_flags": [
+    {
+      "flag": "trimite date în cloud",
+      "detail": "Numele căutat e trimis către fiecare site verificat; în plus, la fiecare rulare programul descarcă lista de site-uri de la data.sherlockproject.xyz și lista de excluderi de pe raw.githubusercontent.com și verifică ultima versiune prin API-ul GitHub.",
+      "source_url": "https://github.com/sherlock-project/sherlock/blob/e40a45ec2a074b90703b3b4b842c8a3adbd6ada3/sherlock_project/sites.py"
+    }
+  ],
+  "audience_reason": "intermediar, pentru că lucrezi în terminal și trebuie să judeci singur ce rezultate sunt corecte",
+  "setup_difficulty_reason": "ușor, pentru că documentația dă o singură comandă de instalare, fără chei sau hardware special",
+  "analogy": "E ca un portar care sună la 400 de uși și întreabă: „Locuiește aici cineva cu numele ăsta?”, apoi îți dă lista ușilor la care i s-a răspuns da.",
+  "how_it_works": [
+    "Pasul 1, intrare: scrii în terminal unul sau mai multe nume de utilizator, de exemplu sherlock user123.",
+    "Pasul 2: programul ia lista de site-uri (adresa profilului are un loc gol {} pentru nume, plus regula prin care ghicește dacă profilul există: cod de răspuns, mesaj de eroare sau redirecționare).",
+    "Pasul 3: trimite cererile către toate site-urile în paralel și decide, după regula fiecărui site, dacă numele e ocupat.",
+    "Pasul 4, ieșire: afișează în terminal adresele găsite și, la cerere, le salvează în fișier text (--txt), CSV (--csv) sau Excel (--xlsx)."
+  ],
+  "first_steps": null,
+  "categories": [
+    "Securitate și OSINT",
+    "Monitorizare și audit"
+  ],
+  "search_intents": [
+    "vreau să aflu ce conturi am pe numele meu de utilizator",
+    "vreau să caut un username pe mai multe rețele sociale",
+    "vreau să verific dacă cineva îmi folosește numele de brand pe alte site-uri",
+    "vreau o alternativă gratuită la căutarea de username-uri plătită",
+    "vreau să găsesc conturi uitate pe care să le șterg"
+  ],
+  "audience": "intermediar",
+  "setup_difficulty": "ușor",
+  "replaces": [
+    {
+      "service": "UserSearch",
+      "service_url": "https://usersearch.com/",
+      "price": "Premium: 18,97 USD/lună sau 159,97 USD/an; există și plan gratuit cu module limitate",
+      "price_source_url": "https://usersearch.com/pricing",
+      "price_checked_at": "2026-10-29",
+      "replacement_level": "doar pentru cazuri simple",
+      "what_you_keep": [
+        "Căutarea după nume de utilizator, făcută local, fără abonament"
+      ],
+      "what_you_lose": [
+        "Celelalte tipuri de căutare pe care pagina de prețuri le listează (e-mail, telefon, imagini, vehicul etc.)",
+        "Interfața web și creditele de date premium incluse în abonament"
+      ],
+      "hidden_costs": [
+        "Timpul tău pentru a verifica manual fiecare rezultat",
+        "Rezultatele pot include fals pozitive (site-uri care răspund la fel pentru orice nume)"
+      ]
+    },
+    {
+      "service": "OSINT Industries",
+      "service_url": "https://www.osint.industries/",
+      "price": "Basic 19 GBP/lună (30 de credite), 49 GBP/lună (100 de credite), 99 GBP/lună (300 de credite)",
+      "price_source_url": "https://www.osint.industries/pricing",
+      "price_checked_at": "2026-10-29",
+      "replacement_level": "doar pentru cazuri simple",
+      "what_you_keep": [
+        "Căutarea de username-uri pe site-uri publice, gratuit"
+      ],
+      "what_you_lose": [
+        "Căutările după e-mail, telefon, nume, portofele crypto, IP, domeniu și imagini, pe care pagina de prețuri le listează",
+        "Suportul și planul pentru echipe cu SSO"
+      ],
+      "hidden_costs": [
+        "Verificarea manuală a rezultatelor",
+        "Mentenanța ta: dacă un site își schimbă structura, rezultatele pentru el pot deveni greșite până apare o actualizare a listei"
+      ]
+    }
+  ],
+  "examples": [
+    {
+      "title": "Instalare cu pipx și verificare",
+      "scenario": "Instalezi Sherlock o singură dată, apoi verifici că programul răspunde. Documentația spune că poți folosi pip sau uv în locul lui pipx.",
+      "prerequisites": [
+        "Python 3.9 sau mai nou",
+        "pipx instalat"
+      ],
+      "commands": [
+        "pipx install sherlock-project",
+        "sherlock --version"
+      ],
+      "code": "",
+      "output_from_docs": null,
+      "source_url": "https://github.com/sherlock-project/sherlock/blob/e40a45ec2a074b90703b3b4b842c8a3adbd6ada3/docs/README.md",
+      "kind": "instalare"
+    },
+    {
+      "title": "Căutare pentru unul sau mai multe nume de utilizator",
+      "scenario": "Cauți unde există un nume (sau mai multe) pe site-urile din listă. Documentația spune că rezultatele găsite se salvează în fișiere text cu numele căutat (de exemplu user123.txt).",
+      "prerequisites": [
+        "Sherlock instalat"
+      ],
+      "commands": [
+        "sherlock user123",
+        "sherlock user1 user2 user3"
+      ],
+      "code": "",
+      "output_from_docs": null,
+      "source_url": "https://github.com/sherlock-project/sherlock/blob/e40a45ec2a074b90703b3b4b842c8a3adbd6ada3/docs/README.md",
+      "kind": "folosire"
+    },
+    {
+      "title": "Căutare dintr-un container Docker, fără instalare locală",
+      "scenario": "Rulezi o căutare unică din imaginea oficială, fără să instalezi Python pe calculator.",
+      "prerequisites": [
+        "Docker instalat"
+      ],
+      "commands": [
+        "docker pull sherlock/sherlock",
+        "docker run --rm -t sherlock/sherlock user123"
+      ],
+      "code": "",
+      "output_from_docs": null,
+      "source_url": "https://sherlockproject.xyz/installation",
+      "kind": "folosire"
+    }
+  ],
+  "connectors": {
+    "inputs": [
+      "Unul sau mai multe nume de utilizator, scrise în terminal (cu {?} pentru variante cu _, - sau .)",
+      "Opțional: un fișier JSON propriu cu lista de site-uri (--json) sau doar numele unor site-uri (--site)"
+    ],
+    "outputs": [
+      "Linii în terminal cu adresa profilului găsit pe fiecare site",
+      "Fișier text <nume>.txt cu adresele găsite (după cod, cu opțiunea --txt)",
+      "Fișier CSV <nume>.csv cu coloanele username, name, url_main, url_user, exists, http_status, response_time_s",
+      "Fișier Excel .xlsx (opțiunea --xlsx)"
+    ],
+    "pairs_well_with": [
+      {
+        "repo_url": "https://github.com/smicallef/spiderfoot",
+        "name": "SpiderFoot",
+        "why": "Un nume de utilizator găsit de SpiderFoot (în rezultatele scanării) devine intrare pentru Sherlock, care caută conturile de pe alte rețele.",
+        "in_catalog": true
+      },
+      {
+        "repo_url": "https://github.com/soxoj/maigret",
+        "name": "Maigret",
+        "why": "Instrument cu aceeași idee (MIT, activ în 2026); rulezi ambele pe același nume și compari listele ca să prinzi fals pozitive.",
+        "in_catalog": true
+      },
+      {
+        "repo_url": "https://github.com/simonw/datasette",
+        "name": "Datasette",
+        "why": "După ce transformi CSV-ul Sherlock într-o bază SQLite (cu sqlite-utils), îl poți filtra și căuta într-o interfață web.",
+        "in_catalog": false
+      },
+      {
+        "repo_url": "https://github.com/Lissy93/personal-security-checklist",
+        "name": "Personal Security Checklist",
+        "why": "După sfaturile despre rețele sociale și ștergerea datelor publice, poți verifica pe ce site-uri există conturi cu numele tău de utilizator (legătură propusă de noi, nu din documentație).",
+        "in_catalog": true
+      }
+    ],
+    "gaps_noticed": [
+      "Sherlock nu verifică singur dacă un cont găsit aparține aceleiași persoane: fiecare adresă trebuie deschisă și judecată de mână.",
+      "Datasette deschide fișiere SQLite, nu CSV direct, deci CSV-ul din Sherlock trebuie încărcat într-o bază printr-un pas separat.",
+      "README spune că rezultatele se salvează în <nume>.txt, dar în cod fișierul text se scrie doar cu opțiunea --txt (implicit e oprită).",
+      "Nu există alertare sau căutare programată: pentru monitorizare regulată trebuie scris un script propriu care rulează comanda periodic."
+    ]
+  },
+  "when_not_to_use": [
+    "Prudența mea (nu e în documentație): nu îl folosi ca să urmărești, să hărțuiești sau să profilezi o persoană fără acordul ei; compilarea de date despre persoane poate intra sub reguli de protecția datelor (GDPR) sau sub legi despre hărțuire, deci verifică cu un jurist înainte de proiecte pe date ale altora.",
+    "Prudența mea: un nume de utilizator identic nu dovedește că două conturi aparțin aceleiași persoane; nu trage concluzii și nu acuza pe nimeni pe baza unui rezultat.",
+    "Din documentație: opțiunea --ignore-exclusions avertizează că „may return more false positives”, iar docs/removed-sites.md listează site-uri pe care metoda nu mai funcționează; tratează rezultatele ca piste de verificat.",
+    "Nu găsește conturi create cu alt nume, conturi private sau pagini care cer autentificare (deducere din felul în care verifică adrese publice).",
+    "Dacă ai nevoie de căutări după e-mail, telefon sau număr de înmatriculare, Sherlock nu le face."
+  ],
+  "alternatives": [
+    {
+      "name": "Maigret",
+      "url": "https://github.com/soxoj/maigret",
+      "difference": "Pornit ca fork al Sherlock (după documentația Maigret), dar caută pe mii de site-uri, citește date din profiluri (--parse) și face rapoarte HTML sau PDF, cu graf. Licență MIT; ultima versiune 0.6.6 (2026-09-18)."
+    },
+    {
+      "name": "WhatsMyName",
+      "url": "https://github.com/WebBreacher/WhatsMyName",
+      "difference": "O listă de site-uri și reguli de detecție întreținută de comunitate, nu un program de sine stătător; API-ul GitHub nu raportează o licență clară (NOASSERTION), deci verifică înainte de reutilizare."
+    },
+    {
+      "name": "SpiderFoot",
+      "url": "https://github.com/smicallef/spiderfoot",
+      "difference": "Platformă mai largă (domenii, IP-uri, e-mailuri, nume de utilizator) cu interfață web, dar mai grea de configurat."
+    }
+  ],
+  "tech_sheet": {
+    "license": "MIT",
+    "language": "Python",
+    "commit_sha": "e40a45ec2a074b90703b3b4b842c8a3adbd6ada3",
+    "last_commit_date": "2026-09-26",
+    "stars": 95163,
+    "requirements": [
+      "Python 3.9 sau mai nou (pyproject.toml: python = ^3.9; clasificatori pentru 3.10-3.13)",
+      "Windows, macOS sau Linux (pyproject.toml: Operating System :: OS Independent)",
+      "O metodă de instalare la alegere: pipx install sherlock-project (recomandat în documentație), pip install --user sherlock-project, uv, Docker (docker pull sherlock/sherlock) sau dnf install sherlock-project (pachetele pentru Homebrew, Debian/Ubuntu, Kali și BlackArch sunt făcute de terți)",
+      "Verificare după instalare: sherlock --version",
+      "Conexiune la internet la fiecare rulare (descarcă lista de site-uri și interoghează site-urile)",
+      "Nu cere cont, cheie API sau GPU",
+      "Dependențe instalate automat de pachet: requests, requests-futures, colorama, PySocks, pandas, openpyxl, stem, certifi, tomli",
+      "Opțional: un proxy (opțiunea --proxy) sau Docker"
+    ]
+  },
+  "monetization": [
+    {
+      "model": "consultanță și training",
+      "what_you_sell": "Un audit de amprentă digitală, făcut doar cu acordul scris al persoanei sau firmei: cauți numele de utilizator și numele de brand al clientului, verifici manual rezultatele și livrezi un raport scurt cu conturile găsite, conturile care par impersonări și pașii de curățare.",
+      "for_whom": "Persoane expuse public (freelanceri, creatori, directori) și firme mici care vor să-și controleze prezența online sau să prindă conturi care le copiază numele de brand.",
+      "license_check": {
+        "license": "MIT",
+        "commercial_use": "permis",
+        "conditions": "MIT permite uz comercial, modificare și redistribuire; păstrezi nota de copyright și textul licenței dacă redistribui codul. Lucrezi doar pe numele clientului, pe bază de acord scris, iar datele personale găsite le tratezi conform legii (GDPR). Documentația Sherlock nu conține un text despre uz etic, deci regulile de conduct și contractul sunt responsabilitatea ta."
+      },
+      "path": "folosești repo-ul direct",
+      "own_build_notes": null,
+      "demand_evidence": [
+        {
+          "name": "UserSearch",
+          "url": "https://usersearch.com/pricing",
+          "price": "Premium 18,97 USD/lună sau 159,97 USD/an",
+          "what_it_proves": "Căutările de username și de amprentă online se vând deja ca abonament; planul Teams există pentru organizații.",
+          "checked_at": "2026-10-29"
+        },
+        {
+          "name": "OSINT Industries",
+          "url": "https://www.osint.industries/pricing",
+          "price": "19 / 49 / 99 GBP pe lună, în funcție de credite",
+          "what_it_proves": "Căutarea după username, e-mail și telefon se vinde pe credite, inclusiv pentru echipe.",
+          "checked_at": "2026-10-29"
+        },
+        {
+          "name": "DeleteMe",
+          "url": "https://joindeleteme.com/privacy-protection-plans/",
+          "price": null,
+          "what_it_proves": "Oamenii și firmele plătesc abonamente (1 an, 2 ani, planuri pentru 1-4 persoane) ca să-și curețe datele personale de pe internet; pagina nu arată sumele.",
+          "checked_at": "2026-10-29"
+        }
+      ],
+      "startup_cost": "Un laptop și timp pentru un contract-model și un raport-model; fără licențe de plătit. Un jurist pentru contract e recomandat.",
+      "time_to_first_client": "Variază mult; depinde de rețeaua ta și de încrederea pe care o poți arăta.",
+      "difficulty": "mediu",
+      "risks": [
+        "Concurență gratuită: clientul poate rula singur Sherlock, deci vinzi verificarea, interpretarea și curățarea, nu comanda.",
+        "Răspundere juridică: dacă lucrezi pe date ale altei persoane fără acord, riști încălcarea GDPR sau acuzații de hărțuire.",
+        "Rezultate fals pozitive: o greșeală din raport (cont atribuit greșit) poate dăuna clientului sau unui terț.",
+        "Serviciile plătite ca UserSearch și OSINT Industries oferă mai multe tipuri de căutare decât Sherlock."
+      ],
+      "first_steps": [
+        "Rulezi Sherlock pe propriul nume de utilizator și verifici manual fiecare rezultat ca să vezi cât de multe sunt fals pozitive.",
+        "Scrii un contract-model cu acord explicit, limitele muncii și ce faci cu datele găsite (ștergere după livrare).",
+        "Faci un raport-model anonimizat și îl oferi gratuit pe numele tău sau al unui prieten, cu acordul lui."
+      ]
+    },
+    {
+      "model": "conținut și cursuri",
+      "what_you_sell": "Un atelier în limba română despre OSINT etic și protecția amprentei digitale: cum cauți un username, cum verifici rezultatele, ce spune legea despre datele altora și cum își curăță oamenii conturile vechi.",
+      "for_whom": "Jurnaliști, specialiști HR, studenți la securitate și angajați care vor să înțeleagă ce se poate afla public despre ei.",
+      "license_check": {
+        "license": "MIT",
+        "commercial_use": "permis",
+        "conditions": "MIT permite uz comercial al codului și al documentației din repo; păstrezi nota de copyright dacă redistribui. Paginile de pe sherlockproject.xyz nu sunt acoperite de licența din repo; nu le copia ca material de curs, ci scrie propriile explicații."
+      },
+      "path": "folosești repo-ul direct",
+      "own_build_notes": null,
+      "demand_evidence": [
+        {
+          "name": "SANS SEC497: Practical Open-Source Intelligence",
+          "url": "https://www.sans.org/cyber-security-courses/practical-open-source-intelligence",
+          "price": "8.780 USD (OnDemand, 36 de ore); 8.230 EUR la SANS Paris, noiembrie 2026",
+          "what_it_proves": "Training-ul OSINT se vinde la prețuri mari și include o secțiune și un laborator despre căutarea de nume de utilizator.",
+          "checked_at": "2026-10-29"
+        }
+      ],
+      "startup_cost": "Timp pentru materiale și un spațiu de găzduire pentru webinar; fără licențe de plătit.",
+      "time_to_first_client": "Variază mult; un public mic, dar interesat, poate fi atins prin comunități locale de securitate.",
+      "difficulty": "mediu",
+      "risks": [
+        "Concurență cu cursuri mari (SANS) și cu tutoriale gratuite despre Sherlock.",
+        "Publicul pentru OSINT în română e mic; un atelier prost explicat poate fi folosit în scopuri nepotrivite, deci include reguli etice clare.",
+        "Interfața și lista de site-uri se schimbă; materialul trebuie reverificat periodic."
+      ],
+      "first_steps": [
+        "Scrii un ghid scurt cu exemple pe propriul tău nume de utilizator.",
+        "Ții o sesiune gratuită într-o comunitate locală și aduni întrebări.",
+        "Din întrebări construiești un atelier plătit cu exerciții pe conturi de test."
+      ]
+    }
+  ],
+  "updated_at": "2026-10-29",
+  "notes_summary": "Am citit README-ul, codul principal și documentația de instalare, fără să rulez nimic; nu am găsit o experiență reală potrivită pentru Primii pași, iar documentația nu conține un text despre uz etic.",
+  "notes": "Citit: docs/README.md (README-ul real stă în docs/, nu în rădăcină), pyproject.toml, sherlock_project/sherlock.py, sites.py, resources/data.json, Dockerfile, docs/removed-sites.md, .github/SECURITY.md, sherlockproject.xyz/usage și /installation. Nu am rulat codul. SHA e40a45ec2a074b90703b3b4b842c8a3adbd6ada3 (merge PR #3143, 2026-09-26) pe ramura master; API-ul GitHub arată pushed_at 2026-10-29 (probabil alte ramuri), release-ul curent v0.16.2 din 2026-09-08, 355 de issue-uri deschise, aprox. 2.933 de commit-uri, 95.163 de stele, licență MIT confirmată în LICENSE (Copyright 2019 Sherlock Project). Pachetul PyPI 0.16.2 cere Python >=3.9,<4.0. Uz legal/etic: nici README-ul, nici pagina sherlockproject.xyz/usage, nici folderul docs/ (doar CODE_OF_CONDUCT.md) nu conțin vreo declarație despre uz legal sau etic. Tot ce apare ca avertisment în fișă (acord, GDPR, fals pozitive ca dovadă de identitate) este prudența mea, marcată ca atare; singurul avertisment din documentație este textul de la --ignore-exclusions („may return more false positives”) și lista docs/removed-sites.md. Discrepanțe: (1) README spune că rezultatele se salvează în <nume>.txt, dar în sherlock.py fișierul text se scrie doar cu --txt (implicit False); CSV și XLSX cer --csv/--xlsx. (2) Pagina sherlockproject.xyz/usage listează încă --tor și --unique-tor, care nu mai apar în codul actual și nici în README. (3) Docker: pagina de instalare montează /opt/sherlock/results, iar Dockerfile-ul are WORKDIR /sherlock; nu am verificat potrivirea. Comportament de rețea confirmat în cod: lista de site-uri se descarcă implicit de la https://data.sherlockproject.xyz (sau se folosește --local pentru fișierul din pachet), lista de excluderi de pe raw.githubusercontent.com (ramura exclusions), iar la fiecare rulare se interoghează API-ul GitHub pentru ultima versiune; nu am găsit telemetrie către autori. README-ul conține bannere sponsor către servicii OSINT comerciale (osintsearch.org, usersearch.com, osint.industries). Prețuri verificate 2026-10-29: usersearch.com/pricing (Premium 18,97 USD/lună, 159,97 USD/an), osint.industries/pricing (19/49/99 GBP pe lună; prețurile anuale de pe pagină stau lângă text „Lorem ipsum” și le-am omis), docker.com/pricing, sans.org SEC497 (8.780 USD OnDemand). Maltego (maltego.com/pricing-plans: Entry 3.000 EUR/an, Professional 7.500 EUR/an) e deja în catalog la SpiderFoot și nu l-am pus la replaces, fiindcă e o platformă de graf mult mai largă. DeleteMe: pagina nu arată sume, deci price null. namechk.com a dat 403. Primii pași: nu am găsit o experiență reală potrivită. Am căutat pe Hacker News (hn.algolia: doar linkuri către repo și discuții scurte; recenzia de pe vulnerability.blog, HN 42538768, nu a putut fi deschisă din mediul meu, deci nu am citit-o), pe dev.to (articole generale despre OSINT, fără experiență proprie cu Sherlock), pe forumul Techlore (mutat/închis) și pe bloguri (hongkiat, ostechnix, twistedcircuits, dontlooksecurity: ghiduri la persoana a doua, fără caz real). Maigret: MIT, pushed 2026-10-29, 39.498 de stele (gh api); WhatsMyName: pushed 2026-10-27, licență NOASSERTION; Datasette: Apache-2.0, pushed 2026-10-23, nu deschide CSV direct (docs.datasette.io/en/stable/getting_started.html). Categorii: am folosit doar categorii deja existente în content/categories.json (Securitate și OSINT, Monitorizare și audit). Glosar: lipsesc din content/glossary.json termenii username, amprentă digitală, XLSX și uv; OSINT, Docker, pipx, pip, CLI, terminal, proxy, CSV, JSON, MIT și false pozitive există deja."
+}

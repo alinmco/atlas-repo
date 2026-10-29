@@ -313,5 +313,115 @@
     "gap": "Cheile API trebuie obținute și introduse una câte una pentru fiecare serviciu.",
     "source_slug": "spiderfoot",
     "added_at": "2026-10-29"
+  },
+  {
+    "gap": "Verificarea prin reverse shell nu funcționa din containerul Docker în povestea citită; documentația oficială nu descrie o soluție.",
+    "source_slug": "strix",
+    "added_at": "2026-10-29"
+  },
+  {
+    "gap": "Documentația de modele (providers) menționează încă versiuni vechi de modele în câteva pagini, iar lista recomandată se schimbă des, deci trebuie reverificată.",
+    "source_slug": "strix",
+    "added_at": "2026-10-29"
+  },
+  {
+    "gap": "Fără o secțiune pentru Windows în documentație; pe Windows trebuie să rulezi scriptul de instalare dintr-un shell bash.",
+    "source_slug": "strix",
+    "added_at": "2026-10-29"
+  },
+  {
+    "gap": "Wiki-ul spune că exportul configurației nu se poate face din linia de comandă, doar din interfața grafică.",
+    "source_slug": "win11debloat",
+    "added_at": "2026-10-29"
+  },
+  {
+    "gap": "Copia de siguranță a registrului nu readuce aplicațiile dezinstalate; acelea se reinstalează manual din Microsoft Store sau cu WinGet.",
+    "source_slug": "win11debloat",
+    "added_at": "2026-10-29"
+  },
+  {
+    "gap": "Anularea cere pași diferiți după ce ai schimbat: restaurarea copiei registrului, rularea din nou cu opțiuni debifate sau fișiere .reg din Regfiles/Undo; aplicațiile eliminate se reinstalează separat.",
+    "source_slug": "win11debloat",
+    "added_at": "2026-10-29"
+  },
+  {
+    "gap": "Sherlock nu verifică singur dacă un cont găsit aparține aceleiași persoane: fiecare adresă trebuie deschisă și judecată de mână.",
+    "source_slug": "sherlock",
+    "added_at": "2026-10-29"
+  },
+  {
+    "gap": "Datasette deschide fișiere SQLite, nu CSV direct, deci CSV-ul din Sherlock trebuie încărcat într-o bază printr-un pas separat.",
+    "source_slug": "sherlock",
+    "added_at": "2026-10-29"
+  },
+  {
+    "gap": "README spune că rezultatele se salvează în <nume>.txt, dar în cod fișierul text se scrie doar cu opțiunea --txt (implicit e oprită).",
+    "source_slug": "sherlock",
+    "added_at": "2026-10-29"
+  },
+  {
+    "gap": "Nu există alertare sau căutare programată: pentru monitorizare regulată trebuie scris un script propriu care rulează comanda periodic.",
+    "source_slug": "sherlock",
+    "added_at": "2026-10-29"
+  },
+  {
+    "gap": "Căutarea după e-mail sau telefon nu face parte din Maigret; ce găsește el în profiluri trebuie copiat manual în alte unelte.",
+    "source_slug": "maigret",
+    "added_at": "2026-10-29"
+  },
+  {
+    "gap": "Rezultatele nu spun dacă un cont aparține persoanei căutate sau unui omonim; verificarea rămâne manuală.",
+    "source_slug": "maigret",
+    "added_at": "2026-10-29"
+  },
+  {
+    "gap": "Rapoartele sunt fișiere pe o singură rulare; în documentație nu am găsit comparație automată între rulări sau monitorizare periodică.",
+    "source_slug": "maigret",
+    "added_at": "2026-10-29"
+  },
+  {
+    "gap": "Rezumatul --ai cere o cheie API pe consum; nu există o cale documentată prin abonament.",
+    "source_slug": "maigret",
+    "added_at": "2026-10-29"
+  },
+  {
+    "gap": "Bifatul de pe site nu poate fi exportat sau trimis colegilor/familiei din ce arată documentația.",
+    "source_slug": "personal-security-checklist",
+    "added_at": "2026-10-29"
+  },
+  {
+    "gap": "Nu există un format cu pași pe sistem de operare (de exemplu doar Windows): trebuie să cauți manual în fiecare secțiune.",
+    "source_slug": "personal-security-checklist",
+    "added_at": "2026-10-29"
+  },
+  {
+    "gap": "Secțiunea API din README promite endpointuri, dar fișierele lib/api.py și lib/api-spec.yml sunt goale la acest commit și adresa digital-defense.io/api/checklists răspunde 404 (verificat azi).",
+    "source_slug": "personal-security-checklist",
+    "added_at": "2026-10-29"
+  },
+  {
+    "gap": "Pluginul ingress-nginx din repo se adresează Kubernetes ingress-nginx, iar repo-ul kubernetes/ingress-nginx este arhivat (ultim commit 2026-03-23).",
+    "source_slug": "safeline",
+    "added_at": "2026-10-29"
+  },
+  {
+    "gap": "Pluginul Traefik e un submodul (chaitin/traefik-safeline), cu ultimul commit pe 2025-01-22; BlazeHTTP, unealta de test din repo, are ultimul commit pe 2024-07-01.",
+    "source_slug": "safeline",
+    "added_at": "2026-10-29"
+  },
+  {
+    "gap": "Pentru plugin-urile Kong și Ingress-NGINX, motorul de detecție trebuie mutat manual de pe socket Unix pe TCP (editezi detector.yml și compose.yaml), apoi repornești stiva.",
+    "source_slug": "safeline",
+    "added_at": "2026-10-29"
+  },
+  {
+    "gap": "Serverul MCP expune un singur instrument (get_attack_events); crearea site-urilor sau a listelor de blocare se face doar din consolă.",
+    "source_slug": "safeline",
+    "added_at": "2026-10-29"
+  },
+  {
+    "gap": "Versiunea afișată în version.json din repo (v9.2.7) nu coincide cu ultima lansare de pe GitHub (v9.4.3).",
+    "source_slug": "safeline",
+    "added_at": "2026-10-29"
   }
 ]

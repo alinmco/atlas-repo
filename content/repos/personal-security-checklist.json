@@ -1,0 +1,330 @@
+{
+  "slug": "personal-security-checklist",
+  "repo_url": "https://github.com/Lissy93/personal-security-checklist",
+  "name": "Personal Security Checklist",
+  "one_liner": "Listă de peste 250 de sfaturi pentru a-ți proteja conturile, telefonul și datele.",
+  "problem_solved": "Securitatea personală pe internet pare un munte de reguli împrăștiate prin zeci de articole, iar un începător nu știe cu ce să înceapă. Lista pune într-un singur loc pașii concreți (parole, telefon, rețea, bani), ordonați după importanță.",
+  "features": [
+    "259 de sfaturi în 12 secțiuni: autentificare, browser, e-mail, mesaje, rețele sociale, rețele, telefon, calculator, casă inteligentă, bani, comportament, securitate fizică",
+    "Fiecare sfat are o prioritate: Esențial (94), Opțional (104) sau Avansat (61)",
+    "Citibil direct pe GitHub (CHECKLIST.md), ca versiune scurtă (TLDR) sau pe site-ul digital-defense.io",
+    "Site cu bifat sfaturile făcute și grafice de progres, pe care îl poți rula și local (Docker sau Node.js)",
+    "Datele stau într-un singur fișier YAML, ușor de copiat și de adaptat"
+  ],
+  "at_a_glance": {
+    "for_you_if": [
+      "Vrei un traseu clar de pași pentru a-ți securiza conturile, telefonul și calculatorul.",
+      "Vrei o bază de la care să pornești un ghid sau un audit de securitate pentru alții."
+    ],
+    "not_for_you_if": [
+      "Cauți un program care îți scanează sau repară singur calculatorul.",
+      "Ai nevoie de protecție împotriva unor adversari serioși (state, urmărire țintită)."
+    ],
+    "verdict": "O listă gratuită, bună ca punct de pornire, dar nu un program și nu un înlocuitor pentru consultanță adaptată situației tale."
+  },
+  "cost": {
+    "level": "gratuit complet",
+    "summary": "Lista și site-ul sunt gratuite și nu folosesc AI; plătești doar dacă alegi tu unelte recomandate de listă (de exemplu un gestionar de parole premium sau o cheie de securitate).",
+    "ai_access": {
+      "mode": "nu folosește AI",
+      "detail": "Repo-ul conține text (sfaturi) și un site static, fără nicio funcție care apelează un model AI.",
+      "source_url": "https://github.com/Lissy93/personal-security-checklist/blob/a89c3b4413deaae2a43c0890cd34a49f6184f149/.github/README.md"
+    },
+    "items": [
+      {
+        "what": "Lista și site-ul digital-defense.io (citit în browser sau pe GitHub)",
+        "price": "0",
+        "required": true,
+        "source_url": "https://github.com/Lissy93/personal-security-checklist/blob/a89c3b4413deaae2a43c0890cd34a49f6184f149/.github/README.md"
+      },
+      {
+        "what": "Docker, doar dacă rulezi site-ul local (plan Docker Personal)",
+        "price": "0 USD (plan Docker Personal)",
+        "required": false,
+        "source_url": "https://www.docker.com/pricing/"
+      },
+      {
+        "what": "Gestionar de parole recomandat de listă (Bitwarden Premium), opțional",
+        "price": "19,80 USD/an (1,65 USD/lună, facturat anual); există și plan gratuit",
+        "required": false,
+        "source_url": "https://bitwarden.com/pricing/"
+      },
+      {
+        "what": "Cheie de securitate hardware (FIDO2/U2F), recomandată ca sfat avansat; lista dă ca exemple SoloKey și NitroKey",
+        "price": null,
+        "required": false,
+        "source_url": "https://github.com/Lissy93/personal-security-checklist/blob/a89c3b4413deaae2a43c0890cd34a49f6184f149/CHECKLIST.md"
+      }
+    ]
+  },
+  "platforms": {
+    "windows": "da",
+    "mac": "da",
+    "linux": "da",
+    "note": "Lista se citește în orice browser. Rularea locală a site-ului cere Docker sau Node.js; compatibilitatea cu sistemele de operare este dedusă (documentația nu o listează explicit).",
+    "source_url": "https://github.com/Lissy93/personal-security-checklist/blob/a89c3b4413deaae2a43c0890cd34a49f6184f149/.github/README.md"
+  },
+  "risk_flags": [],
+  "audience_reason": "Sfaturile sunt scrise pentru oricine, fără cunoștințe tehnice; doar rularea locală a site-ului cere comenzi.",
+  "setup_difficulty_reason": "pentru citit nu instalezi nimic; Docker sau Node.js sunt necesare doar dacă vrei site-ul local.",
+  "analogy": "E ca o listă de verificare de la un mecanic auto: ulei, frâne, anvelope, în ordinea importanței. Tu bifezi ce ai făcut.",
+  "how_it_works": [
+    "Pasul 1: autoarea și contribuitorii adaugă sfaturi într-un singur fișier YAML (personal-security-checklist.yml), fiecare cu titlu, prioritate și explicație.",
+    "Pasul 2: din acel fișier se generează automat pagina CHECKLIST.md, iar site-ul digital-defense.io îl citește la construire.",
+    "Pasul 3: tu citești pagina sau site-ul, aplici sfaturile pe rând (începând cu cele Esențiale) și le bifezi pe site pe măsură ce le termini."
+  ],
+  "first_steps": null,
+  "categories": [
+    "Securitate personală",
+    "Învățare și ghiduri",
+    "Colecții curatoriate"
+  ],
+  "search_intents": [
+    "vreau să-mi securizez conturile și telefonul pas cu pas",
+    "vreau o listă de verificare pentru securitatea mea online",
+    "vreau să știu ce setări de confidențialitate să schimb pe calculator",
+    "vreau un ghid de securitate pe care să-l dau familiei mele",
+    "vreau o bază de sfaturi pentru un training de securitate al angajaților"
+  ],
+  "audience": "începător",
+  "setup_difficulty": "ușor",
+  "replaces": [
+    {
+      "service": "Consultație personală de securitate digitală (exemplu: Cyborg Support, Tier One)",
+      "service_url": "https://cal.com/cyborg",
+      "price": "250 USD pentru 60 de minute (Tier One); 450 USD pentru sesiunea în două părți (Tier Two)",
+      "price_source_url": "https://cal.com/cyborg",
+      "price_checked_at": "2026-10-29",
+      "replacement_level": "doar pentru cazuri simple",
+      "what_you_keep": [
+        "Lista de priorități (Esențial / Opțional / Avansat) pentru conturi, telefon și calculator",
+        "Explicațiile de ce contează fiecare pas"
+      ],
+      "what_you_lose": [
+        "Un om care te ascultă și adaptează pașii la situația ta",
+        "Căutarea în baze de date ale intermediarilor de date (data brokers), pe care consultația plătită o include conform paginii",
+        "Ajutor la aplicarea setărilor și la cererile de ștergere a datelor"
+      ],
+      "hidden_costs": [
+        "Timpul tău: 259 de sfaturi nu se fac într-o seară",
+        "Trebuie să judeci singur ce se potrivește situației tale",
+        "Unele sfaturi trimit la produse plătite (gestionar de parole, chei de securitate)"
+      ]
+    },
+    {
+      "service": "Training de conștientizare a securității pentru firme mici (exemplu: Hook Security)",
+      "service_url": "https://www.hooksecurity.co/pricing",
+      "price": "499 USD/an pentru până la 10 utilizatori (Micro); 1.199 USD/an pentru 11-60 (Starter)",
+      "price_source_url": "https://www.hooksecurity.co/pricing",
+      "price_checked_at": "2026-10-29",
+      "replacement_level": "doar pentru cazuri simple",
+      "what_you_keep": [
+        "Conținut de bază pe teme precum parole, 2FA, e-mail, comportament și securitate fizică, pe care îl poți împărți angajaților"
+      ],
+      "what_you_lose": [
+        "Lecții interactive, simulări de phishing și rapoarte pe angajat (funcții ale platformelor comerciale; repo-ul conține doar text)",
+        "Dovada de instruire cerută uneori de clienți sau asigurători",
+        "Urmărirea automată a cine a citit ce"
+      ],
+      "hidden_costs": [
+        "Cineva trebuie să adapteze lista la firmă și să o prezinte angajaților",
+        "Repo-ul nu are urmărirea progresului pe echipă: bifatul de pe site e local fiecărui utilizator (dedus din cod, neverificat)"
+      ]
+    }
+  ],
+  "examples": [
+    {
+      "title": "Rulezi site-ul cu bifat local, cu Docker",
+      "scenario": "Vrei propria copie a site-ului Digital Defense, pe calculatorul tău sau pe un server, fără să depinzi de digital-defense.io.",
+      "prerequisites": [
+        "Docker instalat și pornit"
+      ],
+      "commands": [
+        "docker run -d -p 8080:8080 lissy93/personal-security-checklist"
+      ],
+      "code": "",
+      "output_from_docs": null,
+      "source_url": "https://github.com/Lissy93/personal-security-checklist/blob/a89c3b4413deaae2a43c0890cd34a49f6184f149/.github/README.md",
+      "kind": "instalare"
+    },
+    {
+      "title": "Citești și aplici un sfat din secțiunea „Personal Computers”",
+      "scenario": "Ai un calculator cu Windows și vrei să știi ce trebuie făcut întâi. Deschizi CHECKLIST.md și cauți secțiunea „Personal Computers”; sfaturile marcate Essential sunt primele de făcut.",
+      "prerequisites": [
+        "Un browser (nu e nevoie de instalare)"
+      ],
+      "commands": [],
+      "code": "**Keep your System up-to-date** | Essential | System updates contain fixes/patches for security issues, improve performance, and sometimes add new features. Install new updates when prompted.\n**Encrypt your Device** | Essential | Use BitLocker for Windows, FileVault on MacOS, or LUKS on Linux, to enable full disk encryption. This prevents unauthorized access if your computer is lost or stolen.",
+      "output_from_docs": null,
+      "source_url": "https://github.com/Lissy93/personal-security-checklist/blob/a89c3b4413deaae2a43c0890cd34a49f6184f149/CHECKLIST.md",
+      "kind": "folosire"
+    }
+  ],
+  "connectors": {
+    "inputs": [
+      "Fișierul personal-security-checklist.yml (titlu, prioritate Essential/Optional/Advanced și detalii pentru fiecare sfat) din rădăcina repo-ului",
+      "Pentru citit, nimic: deschizi CHECKLIST.md pe GitHub sau site-ul digital-defense.io"
+    ],
+    "outputs": [
+      "Pagina Markdown CHECKLIST.md, generată din YAML",
+      "Site static (folder dist/ după yarn build.ssg) sau imagine Docker care servește site-ul pe portul 8080",
+      "Progresul bifat pe site, afișat ca grafice (modul de salvare nu e descris în documentație)"
+    ],
+    "pairs_well_with": [
+      {
+        "repo_url": "https://github.com/Lissy93/awesome-privacy",
+        "name": "awesome-privacy",
+        "why": "Lista trimite aici pentru recomandări de programe (gestionare de parole, aplicații 2FA, browsere): citești sfatul în checklist, alegi programul din awesome-privacy.",
+        "in_catalog": false
+      },
+      {
+        "repo_url": "https://github.com/Raphire/Win11Debloat",
+        "name": "Win11Debloat",
+        "why": "Sfaturile despre Cortana, datele de utilizare trimise în cloud și aplicațiile inutile se pot aplica pe Windows cu scriptul acesta, în loc de click-uri manuale.",
+        "in_catalog": true
+      },
+      {
+        "repo_url": "https://github.com/sherlock-project/sherlock",
+        "name": "Sherlock",
+        "why": "După sfaturile despre rețele sociale și ștergerea datelor publice, poți verifica pe ce site-uri există conturi cu numele tău de utilizator (legătură propusă de noi, nu din documentație).",
+        "in_catalog": true
+      },
+      {
+        "repo_url": "https://github.com/privacyguides/privacyguides.org",
+        "name": "Privacy Guides",
+        "why": "Dacă vrei un al doilea ghid de confidențialitate, îl poți citi în paralel pentru a compara recomandările de programe.",
+        "in_catalog": false
+      }
+    ],
+    "gaps_noticed": [
+      "Bifatul de pe site nu poate fi exportat sau trimis colegilor/familiei din ce arată documentația.",
+      "Nu există un format cu pași pe sistem de operare (de exemplu doar Windows): trebuie să cauți manual în fiecare secțiune.",
+      "Secțiunea API din README promite endpointuri, dar fișierele lib/api.py și lib/api-spec.yml sunt goale la acest commit și adresa digital-defense.io/api/checklists răspunde 404 (verificat azi)."
+    ]
+  },
+  "when_not_to_use": [
+    "Nu e un program: nu scanează, nu repară și nu aplică nicio setare în locul tău.",
+    "Nu e adaptată la situația ta: lista însăși notează că nu e exhaustivă și un comentator HN a cerut model de amenințare înainte de sfaturi.",
+    "Sfaturile de nivel Avansat pot strica comoditatea (de exemplu dezactivarea deblocării cu fața) și nu sunt pentru toată lumea.",
+    "Unele linkuri și recomandări de programe pot fi învechite (un comentator HN a semnalat un proiect listat, dar abandonat).",
+    "Nu înlocuiește un specialist dacă ești țintă a unor atacatori puternici, ai o firmă cu obligații legale sau ai suferit deja o breșă."
+  ],
+  "alternatives": [
+    {
+      "name": "awesome-privacy",
+      "url": "https://github.com/Lissy93/awesome-privacy",
+      "difference": "Același autor; listă de programe și servicii de confidențialitate, nu o listă de pași de urmat."
+    },
+    {
+      "name": "Privacy Guides",
+      "url": "https://www.privacyguides.org",
+      "difference": "Ghiduri și recomandări de unelte, cu licență CC-BY-SA-4.0 pe depozitul sursă (cere ca derivatele să păstreze aceeași licență)."
+    },
+    {
+      "name": "Surveillance Self-Defense (EFF)",
+      "url": "https://ssd.eff.org",
+      "difference": "Ghid al organizației EFF, structurat pe scenarii (de exemplu protest, jurnalism), semnalat de un comentator HN ca alternativă."
+    },
+    {
+      "name": "Defensive Computing Checklist",
+      "url": "https://defensivecomputingchecklist.com/",
+      "difference": "Altă listă de verificare, listată chiar în CHECKLIST.md la secțiunea de liste similare."
+    }
+  ],
+  "tech_sheet": {
+    "license": "CC BY 4.0 (fișierul LICENSE); README și web/package.json declară MIT",
+    "language": "Markdown și YAML (conținut); TypeScript cu Qwik (site)",
+    "commit_sha": "a89c3b4413deaae2a43c0890cd34a49f6184f149",
+    "last_commit_date": "2026-10-15",
+    "stars": 22654,
+    "requirements": [
+      "Pentru citit: doar un browser (CHECKLIST.md pe GitHub sau digital-defense.io); nu e nimic de instalat",
+      "Pentru site local cu Docker: Docker; comanda din documentație este docker run -d -p 8080:8080 lissy93/personal-security-checklist, site-ul rulează pe portul 8080",
+      "Pentru site din sursă: Git și Node.js 20.19+ sau 22.12+, plus Yarn (documentația: yarn, apoi yarn dev, din folderul web/)",
+      "Pentru verificarea modificărilor în fișierul YAML: Python 3 cu venv și pachetele din lib/requirements.txt (make validate)",
+      "Nu sunt necesare conturi, chei API sau hardware special"
+    ]
+  },
+  "monetization": [
+    {
+      "model": "consultanță și training",
+      "what_you_sell": "Un audit de igienă digitală în română pentru persoane și familii: parcurgi împreună cu clientul secțiunile relevante, îl ajuți să aplice pașii Esențiali (parole, 2FA, criptarea discului, setări de telefon) și îi dai un raport scurt cu ce s-a făcut și ce a rămas.",
+      "for_whom": "Persoane ocupate, părinți în vârstă, freelanceri și familii care vor ajutor practic, nu o listă de citit singuri.",
+      "license_check": {
+        "license": "CC BY 4.0 (fișierul LICENSE); README și web/package.json declară MIT",
+        "commercial_use": "permis cu condiții",
+        "conditions": "Fișierul LICENSE conține CC BY 4.0 (permite uz comercial și adaptări cu atribuire: numești autoarea, pui linkul spre licență și spui ce ai modificat). README-ul și web/package.json spun MIT, iar GitHub nu detectează nicio licență; ambele sunt permisive, dar nu sunt identice, așa că păstrează atribuirea pentru autoare (Alicia Sykes) și textul ambelor. Licența acoperă lista, nu paginile externe la care trimite. Nu folosi numele și logo-ul Digital Defense ca și cum ar fi ale tale."
+      },
+      "path": "folosești repo-ul direct",
+      "own_build_notes": null,
+      "demand_evidence": [
+        {
+          "name": "Cyborg Support (consultație 1:1 de securitate digitală)",
+          "url": "https://cal.com/cyborg",
+          "price": "250 USD / 60 min (Tier One); 450 USD (Tier Two)",
+          "what_it_proves": "Un furnizor vinde deja consultații personale de securitate digitală, cu preț public.",
+          "checked_at": "2026-10-29"
+        },
+        {
+          "name": "Privacy Insight Solutions (audit de expunere digitală)",
+          "url": "https://privacyinsightsolutions.com/services",
+          "price": "595 EUR (The Mirror); 995 EUR (The Lockdown)",
+          "what_it_proves": "Auditurile de confidențialitate pentru persoane se vând cu preț fix; ele includ cercetare, nu doar o listă de pași.",
+          "checked_at": "2026-10-29"
+        }
+      ],
+      "startup_cost": "Practic zero în bani; timpul de a citi lista și de a-ți pregăti un șablon de raport.",
+      "time_to_first_client": "Depinde de rețeaua ta; nu pot estima o durată realistă fără date.",
+      "difficulty": "mediu",
+      "risks": [
+        "Concurență gratuită: chiar lista, plus ghiduri ca Privacy Guides sau EFF SSD, sunt la un clic distanță.",
+        "Răspundere: sfaturile greșite sau învechite pot afecta clientul; lista spune ea însăși că nu e exhaustivă.",
+        "Dacă accesezi conturile clientului, intri sub incidența GDPR și a încrederii: lucrezi cu contract scris.",
+        "Încrederea se câștigă greu pentru un serviciu de securitate fără referințe."
+      ],
+      "first_steps": [
+        "Citește lista și alege 15-20 de sfaturi Esențiale pe care le poți explica și verifica ușor.",
+        "Scrie un șablon de raport în română (ce s-a făcut, ce a rămas), cu atribuirea către autoare.",
+        "Propune o primă sesiune gratuită unui prieten sau unei rude, ca să-ți testezi procesul."
+      ]
+    },
+    {
+      "model": "conținut și cursuri",
+      "what_you_sell": "Un mini-training de securitate pentru angajații firmelor mici (2 ore, în română), construit pe secțiunile Authentication, Email, Human Aspect și Physical Security, cu exerciții și un certificat simplu de participare.",
+      "for_whom": "Firme mici (cabinete, contabili, agenții) care vor ceva simplu și în română, fără o platformă scumpă.",
+      "license_check": {
+        "license": "CC BY 4.0 (fișierul LICENSE); README și web/package.json declară MIT",
+        "commercial_use": "permis cu condiții",
+        "conditions": "La fel ca mai sus: atribuire către Alicia Sykes, link spre licență și mențiunea modificărilor (adaptare/traducere). Nu copia logo-ul sau designul site-ului Digital Defense; rescrie materialul în stilul tău, cu surse proprii pentru ce adaugi."
+      },
+      "path": "folosești repo-ul direct",
+      "own_build_notes": null,
+      "demand_evidence": [
+        {
+          "name": "Hook Security (training de conștientizare, firme mici)",
+          "url": "https://www.hooksecurity.co/pricing",
+          "price": "499 USD/an (Micro, până la 10 utilizatori); 1.199 USD/an (Starter, 11-60)",
+          "what_it_proves": "Firmele mici cumpără deja training de securitate cu preț fix, deci există o categorie de cumpărători.",
+          "checked_at": "2026-10-29"
+        }
+      ],
+      "startup_cost": "Zero în bani; timp pentru materiale, exerciții și (opțional) o pagină de prezentare.",
+      "time_to_first_client": "Nu pot estima; vânzările către firme depind de rețea și de încredere.",
+      "difficulty": "mediu",
+      "risks": [
+        "Platformele comerciale oferă simulări de phishing și rapoarte pe angajat, pe care un curs din text nu le are.",
+        "Mulți clienți vor dovezi de conformitate (NIS2, ISO 27001) pe care acest material nu le dă.",
+        "Conținutul se învechește: trebuie reverificat din când în când față de lista actualizată.",
+        "Concurență gratuită: lista originală și alte resurse deschise, în engleză, sunt gratuite."
+      ],
+      "first_steps": [
+        "Alege 6-8 sfaturi care contează într-o firmă mică și scrie fiecare ca scenariu real, cu exercițiu.",
+        "Pune la început atribuirea CC BY 4.0 către Alicia Sykes și lista celor modificate.",
+        "Testează cursul cu un grup mic și cere feedback înainte de a stabili un preț."
+      ]
+    }
+  ],
+  "updated_at": "2026-10-29",
+  "notes_summary": "Am citit CHECKLIST.md, README-ul, licența, YAML-ul și codul site-ului, fără să rulez nimic; licența e CC BY 4.0 în LICENSE, dar MIT în README, iar API-ul promis nu există la acest commit.",
+  "notes": "Repo clonat în sandbox/personal-security-checklist (commit a89c3b4, 2026-10-15; 22.654 stele conform GitHub API azi). Citite: .github/README.md, CHECKLIST.md (259 de rânduri cu prioritate: 94 Essential, 104 Optional, 61 Advanced; 12 secțiuni plus Notes), articles/2_TLDR_Short_List.md, personal-security-checklist.yml, Makefile, docker/Dockerfile și compose.yml, web/package.json (engines Node ^20.19.0 || >=22.12.0), web/vercel.json.\n\nLicența este neclară în fișiere: LICENSE conține text complet CC BY 4.0 (Alicia Sykes 2020), notele din CHECKLIST.md spun tot CC BY 4.0, dar .github/README.md și web/README.txt spun MIT (2024), web/package.json are \"MIT\", iar API-ul GitHub arată NOASSERTION. Am ales commercial_use = \"permis cu condiții\" pentru că ambele licențe sunt permisive, cu atribuire; editorul poate schimba în \"neclar\" dacă preferă prudența maximă. Nu am o confirmare de la autoare care licență are prioritate.\n\nAPI: README-ul descrie un API gratuit la digital-defense.io/api (checklists, search), dar lib/api.py și lib/api-spec.yml au 0 bytes la acest commit, link-ul Swagger din README este gol, iar curl pe https://digital-defense.io/api/checklists a returnat 404 azi (2026-10-29). Nu l-am pus la funcții. Site-ul digital-defense.io (WebFetch) arată bifat de sfaturi și contor de progres, fără cont; filtrarea după model de amenințare apare în README, dar nu am putut-o confirma pe site. Cum se salvează progresul bifat nu am verificat. În codul site-ului nu am găsit unelte de analytics (grep după analytics/umami/plausible/gtag/posthog/fathom, fără rezultate), deci risk_flags e gol.\n\nPrețuri (verificate azi): cal.com/cyborg arată Tier One 250 USD / 60 min și Tier Two 450 USD (o căutare web dădea 350 USD pentru Tier One: am luat valoarea de pe pagina preluată); privacyinsightsolutions.com/services: 595 EUR (Mirror), 995 EUR (Lockdown), 3.800 EUR (Eraser); hooksecurity.co/pricing: Micro 499 USD/an (10 utilizatori), Starter 1.199 USD/an (11-60); bitwarden.com/pricing: Premium 19,80 USD/an; docker.com/pricing: Personal 0. KnowBe4 și SANS Security Awareness nu afișează prețuri publice (null, nefolosite). Cheile de securitate hardware: preț necitat (null).\n\nCategorii: am folosit \"Securitate personală\" (nouă, nu există încă în content/categories.json, adăugată la publicare în content/categories.json), plus \"Învățare și ghiduri\" și \"Colecții curatoriate\" (existente). Termeni de glosar noi, adăugați la publicare în content/glossary.json: 2FA, gestionar de parole, passkey, phishing, BitLocker, criptare, model de amenințare, credential stuffing, SIM swapping, cheie de securitate, CC BY 4.0, Qwik, Yarn. Docker, API, YAML, Markdown și Node.js există deja. Aliasurile au fost verificate la publicare: nu se suprapun cu alți termeni.\n\nPrimii pași: nu am găsit o experiență reală potrivită. Am căutat pe Hacker News (hn.algolia.com: 30902426, 30922779, 43022717, 39458250, 39362161 — comentarii de opinie, nu povești de aplicare; comentariul din 30991811 vorbește despre cu totul altceva), pe dev.to (API, tag privacy și interogare după nume), și cu WebSearch (doar oglinzi ale repo-ului, postări LinkedIn de recomandare și pagini SEO; nicio poveste în prima persoană cu pași concreți). Reddit și Medium nu au fost încercate la fel de insistent.\n\nPairs: awesome-privacy (CC0-1.0, ultimul commit 2026-10-25), Win11Debloat (MIT, 2026-10-28), Sherlock (MIT, 2026-10-29), Privacy Guides (CC-BY-SA-4.0, 2026-10-28), toate active în ultimele 12 luni. Legătura cu Sherlock este propunerea noastră, nu apare în documentație. Alternativele ssd.eff.org și defensivecomputingchecklist.com nu au fost verificate pentru licență sau activitate; ssd.eff.org e menționat de un comentator HN, iar defensivecomputingchecklist.com apare în CHECKLIST.md."
+}
