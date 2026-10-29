@@ -403,5 +403,32 @@
       "https://github.com/caveman-ai/blocks"
     ],
     "used_in_recipes": []
+  },
+  {
+    "slug": "spiderfoot",
+    "name": "SpiderFoot",
+    "one_liner": "Adună automat informații publice despre un domeniu, IP sau persoană, într-o singură interfață.",
+    "categories": [
+      "Securitate și OSINT",
+      "Monitorizare și audit"
+    ],
+    "inputs": [
+      "O țintă ca text: nume de domeniu, adresă IP, subrețea CIDR, ASN, adresă de e-mail, număr de telefon, nume de utilizator, nume de persoană sau adresă Bitcoin",
+      "Opțional: chei API puse în setările programului (interfață web sau fișier de configurare exportat/importat)",
+      "Opțional: fișiere de reguli de corelare .yaml scrise de tine, în folderul correlations"
+    ],
+    "outputs": [
+      "Rezultate în interfața web și în terminal (format tab, CSV sau JSON, ales cu -o)",
+      "Export CSV, JSON sau GEXF (graf)",
+      "Fișier spiderfoot.db (SQLite) cu toate evenimentele scanării"
+    ],
+    "updated_at": "2026-10-29",
+    "pairs_well_with": [
+      "https://github.com/simonw/datasette",
+      "https://github.com/projectdiscovery/httpx",
+      "https://github.com/projectdiscovery/nuclei",
+      "https://github.com/sherlock-project/sherlock"
+    ],
+    "used_in_recipes": []
   }
 ]

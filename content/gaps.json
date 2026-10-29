@@ -298,5 +298,20 @@
     "gap": "Comanda Auto și funcțiile cu cont duc spre Caveman Cloud (serviciu comercial separat); repo-ul nu conține codul acelui serviciu.",
     "source_slug": "caveman",
     "added_at": "2026-10-27"
+  },
+  {
+    "gap": "Nu există alertare încorporată în versiunea open-source: pentru scanări programate și notificări trebuie scrise scripturi proprii (cron, Discord/Slack).",
+    "source_slug": "spiderfoot",
+    "added_at": "2026-10-29"
+  },
+  {
+    "gap": "Rezultatele mari (zeci de mii de evenimente) trebuie filtrate manual; README nu descrie un format de raport gata de dat unui client.",
+    "source_slug": "spiderfoot",
+    "added_at": "2026-10-29"
+  },
+  {
+    "gap": "Cheile API trebuie obținute și introduse una câte una pentru fiecare serviciu.",
+    "source_slug": "spiderfoot",
+    "added_at": "2026-10-29"
   }
 ]
