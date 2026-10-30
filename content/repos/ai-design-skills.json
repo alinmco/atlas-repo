@@ -1,0 +1,352 @@
+{
+  "slug": "ai-design-skills",
+  "repo_url": "https://github.com/elayadesign/ai-design-skills",
+  "name": "AI Design Skills",
+  "one_liner": "Un fișier cu reguli care învață asistentul AI să construiască pagini de prezentare care convertesc.",
+  "problem_solved": "Când ceri unui asistent AI o pagină de prezentare (landing page), iese de multe ori o pagină generică, fără o ofertă clară și cu fonturi, spații și animații alese la întâmplare. Repo-ul îi dă agentului un set de reguli: întâi întrebări despre ofertă, apoi structura paginii, textele și un sistem vizual fix.",
+  "features": [
+    "Un singur skill acum, `landing-page-design` (un fișier SKILL.md de 431 de linii), cu promisiunea „mai multe vor veni”",
+    "Partea A: întrebări de început, structura paginii, alegerea machetei, texte orientate spre conversie, SEO",
+    "Partea B: sistem vizual strict (fonturi, spații, colțuri rotunjite, culori de fundal, iconițe, animații)",
+    "Format de răspuns fix: întâi schița paginii, textele și întrebările frecvente, abia apoi codul",
+    "Se instalează copiind un fișier, în Claude Code, Cursor, Codex, Windsurf, Cline sau Claude.ai",
+    "Valorile de design stau într-o singură secțiune, ca să-ți poți face propria versiune"
+  ],
+  "at_a_glance": {
+    "for_you_if": [
+      "Faci pagini de prezentare cu un agent AI și vrei ca agentul să pună întâi întrebările potrivite.",
+      "Vrei un set de reguli de design scurt, pe care îl poți citi și modifica într-o seară."
+    ],
+    "not_for_you_if": [
+      "Ai nevoie de comenzi de revizuire, detector automat sau extensie de browser (acolo ajută Impeccable).",
+      "Nu îți plac regulile rigide: fonturi impuse, fără gradient pe fundal, fără cratime în text."
+    ],
+    "verdict": "Un singur fișier de reguli, bun de pornire pentru pagini de prezentare, fără verificare automată; pentru restul designului ai nevoie de altceva."
+  },
+  "cost": {
+    "level": "gratuit, dar cere servicii plătite",
+    "summary": "Repo-ul e gratuit (MIT) și nu cere chei API; plătești doar asistentul AI în care îl pui, care merge cu abonament (de ex. Claude Pro sau ChatGPT Plus) sau cu cheie API.",
+    "ai_access": {
+      "mode": "abonament sau API",
+      "detail": "Skill-ul e doar text și nu apelează singur niciun AI; agentul gazdă se autentifică cum prevede documentația lui, de ex. Claude Code merge cu Claude Pro/Max sau cu cheie API.",
+      "source_url": "https://code.claude.com/docs/en/authentication"
+    },
+    "items": [
+      {
+        "what": "AI Design Skills (licență MIT)",
+        "price": "gratuit",
+        "required": true,
+        "source_url": "https://github.com/elayadesign/ai-design-skills/blob/ded7efc9d5c02761c41a03caf3b78f9259ab8828/LICENSE"
+      },
+      {
+        "what": "Un asistent AI care citește fișiere de reguli (Claude Code, Cursor, Codex, Windsurf, Cline sau Claude.ai)",
+        "price": null,
+        "required": true,
+        "source_url": "https://github.com/elayadesign/ai-design-skills/blob/ded7efc9d5c02761c41a03caf3b78f9259ab8828/README.md"
+      },
+      {
+        "what": "Claude Pro (abonament care include Claude Code)",
+        "price": "17 USD/lună cu plata anuală, 20 USD/lună lunar",
+        "required": false,
+        "source_url": "https://claude.com/pricing"
+      },
+      {
+        "what": "Claude Max (limite mai mari pentru Claude Code)",
+        "price": "de la 100 USD/lună",
+        "required": false,
+        "source_url": "https://claude.com/pricing"
+      },
+      {
+        "what": "ChatGPT Plus (include Codex)",
+        "price": "20 USD/lună",
+        "required": false,
+        "source_url": "https://learn.chatgpt.com/docs/pricing"
+      },
+      {
+        "what": "Cursor Plus (planul gratuit există; Premium costă 30 USD/lună)",
+        "price": "8 USD/lună",
+        "required": false,
+        "source_url": "https://cursor.com/pricing"
+      },
+      {
+        "what": "Tailwind CSS în proiectul tău (regulile de dimensiuni sunt scrise în clase Tailwind)",
+        "price": null,
+        "required": false,
+        "source_url": "https://github.com/elayadesign/ai-design-skills/blob/ded7efc9d5c02761c41a03caf3b78f9259ab8828/skills/landing-page-design/SKILL.md"
+      }
+    ]
+  },
+  "platforms": {
+    "windows": "parțial",
+    "mac": "da",
+    "linux": "da",
+    "note": "Comenzile de instalare din README folosesc `mkdir -p`, `cp -r` și `/tmp`, deci un terminal de tip bash. README nu pomenește Windows; dedus: pe Windows poți copia manual fișierul SKILL.md sau folosi Git Bash. Skill-ul în sine e doar text.",
+    "source_url": "https://github.com/elayadesign/ai-design-skills/blob/ded7efc9d5c02761c41a03caf3b78f9259ab8828/README.md"
+  },
+  "risk_flags": [],
+  "audience_reason": "instalarea e copierea unui fișier, dar folosirea cere să lucrezi deja cu un asistent AI de programare",
+  "setup_difficulty_reason": "câteva comenzi de copiere, fără chei API și fără hardware special",
+  "analogy": "Ca o fișă de brief pe care o dai unui designer nou: întâi îl pui să îți ceară datele, apoi îi spui exact ce fonturi și spații are voie să folosească.",
+  "how_it_works": [
+    "Pasul 1: copiezi fișierul SKILL.md al skill-ului în folderul de reguli al asistentului (de ex. `.claude/skills` în Claude Code).",
+    "Pasul 2: ceri, în limbaj obișnuit, o pagină de prezentare; asistentul recunoaște cererea după descrierea din fișier și încarcă regulile.",
+    "Pasul 3: agentul pune într-un singur lot întrebările de început (ofertă, public, obiecții, dovezi), apoi alege structura și macheta paginii.",
+    "Pasul 4: scrie textele (titlu, buton, întrebări frecvente) și le aliniază la sistemul vizual: fonturi, spații, colțuri, culori, iconițe, animații.",
+    "Pasul 5: iese întâi schița paginii, textele, întrebările frecvente și recomandarea de SEO, apoi codul, secțiune cu secțiune."
+  ],
+  "first_steps": null,
+  "categories": [
+    "Skill-uri pentru agenți AI",
+    "Design de interfețe"
+  ],
+  "search_intents": [
+    "vreau ca AI-ul să facă o pagină de prezentare care vinde",
+    "vreau reguli de design pentru Claude Code sau Cursor",
+    "vreau să nu mai iasă paginile făcute de AI generice",
+    "vreau texte și structură bune pentru landing page",
+    "vreau un skill gata făcut pentru landing page"
+  ],
+  "audience": "intermediar",
+  "setup_difficulty": "ușor",
+  "replaces": [
+    {
+      "service": "Unbounce (constructor de landing pages cu AI)",
+      "service_url": "https://unbounce.com/",
+      "price": "de la 22 USD/lună cu plata anuală (29 USD/lună lunar), plan Starter; 74 USD/lună anual pentru Build",
+      "price_source_url": "https://unbounce.com/pricing/",
+      "price_checked_at": "2026-10-30",
+      "replacement_level": "doar pentru cazuri simple",
+      "what_you_keep": [
+        "îndrumare pentru structura paginii, textele orientate spre conversie și întrebările frecvente",
+        "cod de pagină generat de agent, pe care îl deții și îl poți găzdui oriunde"
+      ],
+      "what_you_lose": [
+        "găzduirea inclusă, formularele de lead și integrările platformei",
+        "testele A/B (planul Experiment) și rutarea AI a traficului (planul Optimize)",
+        "un editor vizual pentru cineva care nu vrea să vadă cod"
+      ],
+      "hidden_costs": [
+        "asistentul AI în care rulezi skill-ul (abonament sau API)",
+        "găzduirea paginii rezultate și formularele le rezolvi tu",
+        "timp ca să verifici manual dacă agentul a respectat regulile"
+      ]
+    },
+    {
+      "service": "Framer (constructor de site-uri cu AI)",
+      "service_url": "https://www.framer.com/",
+      "price": "plan gratuit; Basic 10 USD/site/lună, Pro 30 USD/site/lună",
+      "price_source_url": "https://www.framer.com/pricing",
+      "price_checked_at": "2026-10-30",
+      "replacement_level": "doar pentru cazuri simple",
+      "what_you_keep": [
+        "o pagină de prezentare cu aspect îngrijit, cu reguli de design și copy deja gândite",
+        "codul paginii, fără blocare într-o platformă"
+      ],
+      "what_you_lose": [
+        "editorul vizual și găzduirea cu domeniu gratuit Framer",
+        "colecțiile CMS și traducerile pe locale ale platformei"
+      ],
+      "hidden_costs": [
+        "asistentul AI (abonament sau API)",
+        "pagina rezultată trebuie publicată și întreținută de tine",
+        "cunoștințe minime de proiect web ca să rulezi codul"
+      ]
+    },
+    {
+      "service": "Freelancer pentru landing page (ex. oferte pe Dribbble)",
+      "service_url": "https://dribbble.com/services/22672-Figma-Landing-Page-Design",
+      "price": "200 USD pachetul Quick Hire, 3 concepte, 2 revizuiri, 1 săptămână (un singur vânzător, plus 10 USD taxă Dribbble); alte oferte merg la mii de dolari",
+      "price_source_url": "https://dribbble.com/services/22672-Figma-Landing-Page-Design",
+      "price_checked_at": "2026-10-30",
+      "replacement_level": "doar pentru cazuri simple",
+      "what_you_keep": [
+        "o primă variantă de pagină, cu text și structură, într-un timp scurt",
+        "posibilitatea să refaci pagina de câte ori vrei, fără cost per revizuire"
+      ],
+      "what_you_lose": [
+        "ochiul unui designer uman, machete în Figma și gust personal",
+        "identitate vizuală proprie: regulile skill-ului sunt aceleași pentru toată lumea"
+      ],
+      "hidden_costs": [
+        "abonamentul la asistentul AI",
+        "timpul tău pentru a răspunde la întrebări și a corecta rezultatul"
+      ]
+    }
+  ],
+  "examples": [
+    {
+      "title": "Instalare în Claude Code (comenzile din README)",
+      "scenario": "Copiezi skill-ul `landing-page-design` în proiectul tău, ca Claude Code să îl găsească. Înlocuiești `<skill-name>` cu numele folderului; singurul skill listat acum e `landing-page-design`.",
+      "prerequisites": [
+        "Git instalat",
+        "Un terminal de tip bash",
+        "Claude Code și un proiect în care lucrezi"
+      ],
+      "commands": [
+        "mkdir -p .claude/skills",
+        "git clone https://github.com/elayadesign/ai-design-skills.git /tmp/ai-design-skills",
+        "cp -r /tmp/ai-design-skills/skills/<skill-name> .claude/skills/"
+      ],
+      "code": null,
+      "output_from_docs": null,
+      "source_url": "https://github.com/elayadesign/ai-design-skills/blob/ded7efc9d5c02761c41a03caf3b78f9259ab8828/README.md",
+      "kind": "instalare"
+    },
+    {
+      "title": "Folosire: ce primești când ceri o pagină de prezentare",
+      "scenario": "După instalare, README spune doar: „Then just ask, in plain language, for what that skill covers.” Skill-ul cere ca, la o pagină nouă, agentul să returneze în ordine elementele de mai jos, înainte de cod. Documentația nu arată un exemplu de răspuns real.",
+      "prerequisites": [
+        "Skill-ul instalat (exemplul de mai sus)",
+        "O cerere în limbaj obișnuit pentru o pagină de prezentare"
+      ],
+      "commands": [],
+      "code": "When generating a landing page from scratch, return these in order before writing code:\n\n1. **Page outline** — sections and their order\n2. **Hero copy** — headline, subheadline, CTA, proof line\n3. **Benefits** — three to five outcome driven bullets\n4. **How it works** — three steps\n5. **FAQ** — six to twelve questions and answers\n6. **SEO / AEO** — index or noindex recommendation, plus title and meta if indexed\n7. **Layout recommendation** — A, B, C, or D, and why\n\nThen build section by section per A6.",
+      "output_from_docs": null,
+      "source_url": "https://github.com/elayadesign/ai-design-skills/blob/ded7efc9d5c02761c41a03caf3b78f9259ab8828/skills/landing-page-design/SKILL.md",
+      "kind": "folosire"
+    }
+  ],
+  "connectors": {
+    "inputs": [
+      "Cerere în limbaj obișnuit pentru o pagină de prezentare, scrisă în chatul asistentului AI",
+      "Răspunsurile tale la întrebările de început: ofertă, public, acțiunea dorită, dovezi, tonul mărcii",
+      "Fișierul `SKILL.md` copiat în `.claude/skills/`, `.cursor/rules/`, `AGENTS.md`, `.windsurfrules` sau `.clinerules`"
+    ],
+    "outputs": [
+      "Text: schița paginii, textele, întrebările frecvente și recomandarea de SEO",
+      "Cod de pagină web scris de agent în proiectul tău (stilat cu clase Tailwind, după regulile skill-ului)"
+    ],
+    "pairs_well_with": [
+      {
+        "repo_url": "https://github.com/elayadesign/redesign-skill",
+        "name": "redesign-skill",
+        "why": "Același autor; skill-ul pentru site-uri deja existente trimite la regulile din `landing-page-design` pentru fiecare valoare concretă, deci pagina nouă de aici devine intrare pentru refacerea ei ulterioară.",
+        "in_catalog": false
+      },
+      {
+        "repo_url": "https://github.com/pbakaus/impeccable",
+        "name": "Impeccable",
+        "why": "După ce agentul a generat pagina cu regulile de aici, comenzile `critique` și `audit` din Impeccable o pot verifica; codul paginii devine intrarea lor.",
+        "in_catalog": true
+      },
+      {
+        "repo_url": "https://github.com/obra/superpowers",
+        "name": "superpowers",
+        "why": "Superpowers conduce procesul agentului (plan, implementare, verificare), iar acest skill dă regulile de design pentru partea de interfață din plan.",
+        "in_catalog": true
+      },
+      {
+        "repo_url": "https://github.com/mattpocock/skills",
+        "name": "mattpocock-skills",
+        "why": "Același format SKILL.md, instalabil în același agent; skill-urile lui Pocock dau procesul de lucru, iar acesta dă regulile paginii.",
+        "in_catalog": true
+      }
+    ],
+    "gaps_noticed": [
+      "Nu există un instalator: fiecare unealtă primește fișierul prin copiere manuală (README arată comenzi diferite pentru Claude Code, Cursor, Codex, Windsurf și Cline).",
+      "Nicio captură de ecran sau pagină-exemplu în repo; nu poți vedea rezultatul înainte să instalezi.",
+      "Issue-ul #5 arată reguli care se contrazic în fișier (animezi doar `transform` și `opacity`, dar și culoarea la hover și la secțiunea cu slogan); agentul trebuie să aleagă singur.",
+      "Regulile de dimensiuni sunt scrise în clase Tailwind; pentru alt sistem de stiluri nu e descris cum se traduc.",
+      "Nu există verificare automată după generare: respectarea regulilor depinde de ce face agentul."
+    ]
+  },
+  "when_not_to_use": [
+    "Dacă ai nevoie de un editor vizual, găzduire, formulare și teste A/B incluse: un constructor ca Unbounce sau Framer face asta fără cod.",
+    "Dacă proiectul are deja un sistem de design propriu: regulile fixe de aici (fonturi permise, spații, culori de fundal) se vor bate cu el.",
+    "Dacă vrei verificare automată sau comenzi de revizuire: repo-ul nu are cod, doar un fișier de text. Impeccable le oferă.",
+    "Dacă nu folosești Tailwind: regulile de mărimi a textului sunt date ca clase Tailwind.",
+    "Dacă vrei să te bazezi pe un proiect cu istoric lung: repo-ul a fost creat în iulie 2026 și are un singur skill și un singur commit."
+  ],
+  "alternatives": [
+    {
+      "name": "Impeccable",
+      "url": "https://github.com/pbakaus/impeccable",
+      "difference": "Mult mai larg: 24 de comenzi de design, detector cu reguli, hook și extensie Chrome (după README-ul lui; Apache-2.0). AI Design Skills e un singur fișier orientat pe landing page; are părerea lui fermă despre design, dar nu verifică nimic după generare."
+    },
+    {
+      "name": "Taste Skill",
+      "url": "https://github.com/Leonxlnx/taste-skill",
+      "difference": "Colecție de skill-uri împotriva interfețelor generice (MIT); AI Design Skills declară că a adaptat de acolo idei despre realismul conținutului și mișcare, apoi le-a rescris."
+    },
+    {
+      "name": "redesign-skill",
+      "url": "https://github.com/elayadesign/redesign-skill",
+      "difference": "Același autor, pentru îmbunătățirea unui site existent; acesta construiește o pagină de la zero."
+    },
+    {
+      "name": "frontend-design (Anthropic)",
+      "url": "https://github.com/anthropics/skills/tree/main/skills/frontend-design",
+      "difference": "Skill general de interfețe în colecția oficială Anthropic; nu e specific pentru landing page. Licența lui nu am verificat-o (GitHub nu o afișează pentru repo)."
+    }
+  ],
+  "tech_sheet": {
+    "license": "MIT",
+    "language": "Markdown (fișiere SKILL.md; fără cod executabil)",
+    "commit_sha": "ded7efc9d5c02761c41a03caf3b78f9259ab8828",
+    "last_commit_date": "2026-10-27",
+    "stars": 12367,
+    "requirements": [
+      "Un asistent AI care citește fișiere de reguli: Claude Code, Cursor, Codex, Windsurf, Cline sau Claude.ai (cu un Project); cont sau abonament la acesta",
+      "Git, pentru `git clone` din instalarea în Claude Code (pentru Cursor ajunge `curl`)",
+      "Terminal de tip bash pentru comenzile din README (`mkdir -p`, `cp -r`, `/tmp`); pe Windows, Git Bash sau copiere manuală a fișierului (dedus, README nu pomenește Windows)",
+      "Folderul de reguli al unealtei: `.claude/skills/` (Claude Code), `.cursor/rules/` (Cursor), `AGENTS.md` (Codex), `.windsurfrules` (Windsurf), `.clinerules` (Cline)",
+      "Opțional: Tailwind CSS în proiect, pentru că regulile de mărimi sunt date în clase Tailwind",
+      "Nicio cheie API cerută de repo"
+    ]
+  },
+  "monetization": [
+    {
+      "model": "integrare pentru o nișă",
+      "what_you_sell": "Pagini de prezentare livrate rapid pentru firme dintr-o singură nișă (de ex. cabinete, restaurante, meseriași): faci un fork al skill-ului, îi schimbi secțiunea cu valorile de design pe brandul nișei și livrezi pagina generată de agent, verificată de tine. Vinzi pagina și rezultatul, nu fișierul.",
+      "for_whom": "Mici afaceri locale care vor o pagină de prezentare ieftină și nu au designer.",
+      "license_check": {
+        "license": "MIT",
+        "commercial_use": "permis",
+        "conditions": "MIT permite uz comercial, modificare și redistribuire, cu condiția să păstrezi nota de copyright și textul licenței în copiile fișierului. SKILL.md conține și nota MIT a lui taste-skill (Leonxlnx), pe care o păstrezi dacă redistribui fișierul. README spune „No attribution needed” pentru ce construiești cu el, dar textul din LICENSE e cel care contează."
+      },
+      "path": "folosești repo-ul direct",
+      "own_build_notes": null,
+      "demand_evidence": [
+        {
+          "name": "Dribbble: Figma Landing Page Design (freelancer)",
+          "url": "https://dribbble.com/services/22672-Figma-Landing-Page-Design",
+          "price": "200 USD, pachet Quick Hire (3 concepte, 2 revizuiri, 1 săptămână); plus 10 USD taxă Dribbble",
+          "what_it_proves": "Se vând deja pagini de prezentare la un preț mic, unde un agent AI cu reguli bune poate concura pe viteză.",
+          "checked_at": "2026-10-30"
+        },
+        {
+          "name": "Unbounce (constructor de landing pages)",
+          "url": "https://unbounce.com/pricing/",
+          "price": "de la 22 USD/lună cu plata anuală (Starter)",
+          "what_it_proves": "Firmele plătesc abonamente lunare doar pentru a face și găzdui pagini de prezentare.",
+          "checked_at": "2026-10-30"
+        },
+        {
+          "name": "Framer (site-uri cu AI)",
+          "url": "https://www.framer.com/pricing",
+          "price": "Basic 10 USD/lună, Pro 30 USD/lună pe site",
+          "what_it_proves": "Există cerere pentru site-uri rapide cu AI, inclusiv la preț de abonament mic.",
+          "checked_at": "2026-10-30"
+        }
+      ],
+      "startup_cost": "Un abonament la un asistent AI (de ex. Claude Pro: 17 USD/lună cu plata anuală, 20 USD/lună lunar, claude.com/pricing, verificat 2026-10-30), un domeniu și găzduire pentru pagini (costuri nesemnalate în documentație, nu le-am verificat).",
+      "time_to_first_client": "Nu pot estima din surse; depinde de rețeaua ta și de portofoliul pe care îl ai.",
+      "difficulty": "mediu",
+      "risks": [
+        "Concurență gratuită: oricine poate instala același fișier, iar constructorii cu AI (Framer, Unbounce) devin tot mai ieftini.",
+        "Aceleași reguli pentru toți dau pagini care seamănă între ele; clienții cer ceva propriu, deci munca ta de design contează.",
+        "Regulile din fișier se contrazic în două locuri (issue-ul #5); trebuie să verifici manual rezultatul.",
+        "Dependență de asistentul AI ales și de limitele abonamentului lui; proiectul e nou (iulie 2026) și se poate schimba sau opri.",
+        "Suport: clienții cer modificări după livrare, iar tu trebuie să găzduiești și să întreții pagina."
+      ],
+      "first_steps": [
+        "Alege o nișă și fă 2-3 pagini de probă cu skill-ul, ca să ai un portofoliu.",
+        "Fă un fork și schimbă secțiunea cu valorile de design (README o numește „Make it yours”) pe brandul nișei.",
+        "Stabilește un preț fix pentru o pagină, cu un număr limitat de revizuiri, și oferă-l unei afaceri cunoscute."
+      ]
+    }
+  ],
+  "updated_at": "2026-10-30",
+  "notes_summary": "Am citit README-ul, singurul SKILL.md, licența, issue-urile și pagina de prețuri a concurenților; nu am rulat nimic și nu am găsit o poveste reală de folosire.",
+  "notes": "Commit ded7efc (2026-10-27), un singur commit în clona superficială: „Move design-to-motion to its own repo”. Repo creat pe 2026-07-29, 12.367 stele pe GitHub la verificare; un articol de pe un blog personal (bitdoze.com, 2026-08-28) îl dădea cu 1,4K stele și îl plasa pe locul 11 din 11 ca „absolute minimal start”. Nu pot explica saltul. Fișierul skill: 431 de linii, în engleză; regulile sunt categorice (ex. fonturi permise Geist, Manrope, Geist Mono, Poppins; interzis Inter, Roboto; fără gradient pe fundal; fără cratime în text). Contradicția din issue-ul #5 (B7 și B11) am confirmat-o citind SKILL.md. 5 PR-uri deschise la verificare, niciunul îmbinat, inclusiv unul care rescrie B7. Un issue (#7) este spam. Comparația cu Impeccable: Impeccable are comenzi, detector și hook-uri și este mult mai mare; AI Design Skills este doar un fișier de reguli. Primii pași: nu am găsit o experiență reală potrivită; am căutat pe Hacker News (Algolia, fără rezultate pentru repo), în GitHub (fără Discussions, doar issue-uri/PR-uri) și pe web (doar liste și un clasament pe blog, fără o poveste de folosire). Prețuri verificate pe 2026-10-30: Claude Pro/Max (claude.com/pricing), ChatGPT Plus (learn.chatgpt.com/docs/pricing), Cursor (cursor.com/pricing, planurile Free, Plus 8, Premium 30, Super 100, Ultra 200), Unbounce (unbounce.com/pricing, pagina arată și un 29 USD facturat anual în cardul Starter, în conflict cu 22 USD; am notat 22 USD anual și 29 USD lunar), Framer (framer.com/pricing, prețurile anuale nu sunt listate), Dribbble (un singur vânzător, 200 USD). Instalarea în Codex, Windsurf, Cline și Claude.ai nu e dată cu comenzi în README, doar cu căi/instrucțiuni; n-am reprodus-o în exemple. Nu am verificat dacă toate uneltele listate citesc efectiv fișierul. Licența lui frontend-design (Anthropic) nu am verificat-o."
+}

@@ -1,0 +1,428 @@
+{
+  "slug": "gods-eye-view",
+  "repo_url": "https://github.com/bilawalsidhu/gods-eye-view",
+  "name": "God's Eye View",
+  "one_liner": "Glob 3D în browser cu avioane, nave și sateliți reali, în timp real.",
+  "problem_solved": "Datele publice despre zboruri, nave, sateliți, cutremure, incendii și camere de trafic sunt împrăștiate pe zeci de site-uri diferite. God's Eye View le pune pe același glob 3D, ca să poți trece de la imaginea globală la un singur avion sau la o stradă.",
+  "features": [
+    "Glob 3D în browser, cu avioane, nave, sateliți, cutremure și incendii pe hartă",
+    "Click pe un avion: camera îl urmărește, iar vederea din cockpit coboară cu el",
+    "Camere publice de trafic proiectate în 3D, străzi, radio local, trasee și vreme",
+    "Control cu vocea („GEV MIC”) printr-un agent AI, opțional, cu cheie OpenAI sau Gemini",
+    "Merge fără chei API la pornire; cheile opționale adaugă hartă 3D fotorealistă, nave, voce",
+    "Instalare cu un clic (Pinokio), din terminal sau cu Docker; poate fi folosit și din Claude/Codex prin MCP"
+  ],
+  "at_a_glance": {
+    "for_you_if": [
+      "Vrei să explorezi zboruri, nave și sateliți reali pe un glob 3D, doar pentru învățare sau hobby.",
+      "Predai sau ai curiozitate despre date deschise (OSINT, geospațial) și vrei un demo spectaculos."
+    ],
+    "not_for_you_if": [
+      "Vrei un produs comercial fără să cureți datele cu licență necomercială (OpenSky, cabluri submarine).",
+      "Ai nevoie de date sigure pentru navigație, urgențe sau decizii operaționale."
+    ],
+    "verdict": "Codul e MIT și pornește gratuit, dar datele terților au condiții proprii, iar folosirea comercială cere curățenie și verificări."
+  },
+  "cost": {
+    "level": "gratuit, dar cere servicii plătite",
+    "summary": "La pornire nu plătești nimic și nu ai nevoie de chei; harta 3D fotorealistă comercială, vocea și alte chei opționale pot costa. Vocea merge cu cheie API OpenAI sau Gemini (plată pe consum) sau, experimental, cu autentificarea ChatGPT/Codex din abonament.",
+    "ai_access": {
+      "mode": "abonament sau API",
+      "detail": "Vocea AI e opțională: cheie API OpenAI sau Gemini (pe consum) ori, experimental și doar pe aceeași mașină (nu în Docker), autentificarea ChatGPT/Codex, pe care documentația o declară neconfirmată oficial pentru acest scop.",
+      "source_url": "https://github.com/bilawalsidhu/gods-eye-view/blob/423ca3ca5f379c218f6cd4a96fa85dde848aa5c8/README.md#%EF%B8%8F-talk-to-it"
+    },
+    "items": [
+      {
+        "what": "Node.js 24.14+ sau 26.x (pentru calea din terminal)",
+        "price": "0 (gratuit, open source)",
+        "required": false,
+        "source_url": "https://github.com/nodejs/node/blob/main/LICENSE"
+      },
+      {
+        "what": "Pinokio, lansatorul cu un clic (versiunea 8.2 sau mai nouă)",
+        "price": null,
+        "required": false,
+        "source_url": "https://pinokio.co/"
+      },
+      {
+        "what": "Docker Desktop (cale alternativă de instalare)",
+        "price": "0 USD, plan Personal (Pro 11 USD/lună)",
+        "required": false,
+        "source_url": "https://www.docker.com/pricing/"
+      },
+      {
+        "what": "Token Cesium ion, plan Community: hartă 3D fotorealistă Google și teren mondial, doar uz personal/necomercial",
+        "price": "0 USD (Community); plan Commercial de la 149 USD/lună",
+        "required": false,
+        "source_url": "https://cesium.com/platform/cesium-ion/pricing/"
+      },
+      {
+        "what": "Cheie Google Maps (Photorealistic 3D Tiles direct, căutare de locuri, Street View); cere facturare activată",
+        "price": "primele 1.000 de evenimente pe lună gratis, apoi 6 USD la 1.000",
+        "required": false,
+        "source_url": "https://developers.google.com/maps/billing-and-pricing/pricing"
+      },
+      {
+        "what": "Cheie API OpenAI pentru voce (GEV MIC) și rezumatul AI din HUD; aplicația afișează costul și are plafon de 5 USD per sesiune",
+        "price": null,
+        "required": false,
+        "source_url": "https://github.com/bilawalsidhu/gods-eye-view/blob/423ca3ca5f379c218f6cd4a96fa85dde848aa5c8/README.md#-what-it-actually-costs"
+      },
+      {
+        "what": "Cheie API Gemini pentru voce, alternativa la OpenAI",
+        "price": null,
+        "required": false,
+        "source_url": "https://github.com/bilawalsidhu/gods-eye-view/blob/423ca3ca5f379c218f6cd4a96fa85dde848aa5c8/README.md#%EF%B8%8F-talk-to-it"
+      },
+      {
+        "what": "Cheie AISStream pentru nave (autentificare cu GitHub, doar de pe server)",
+        "price": "0 (gratuit, conform paginii)",
+        "required": false,
+        "source_url": "https://aisstream.io/"
+      },
+      {
+        "what": "Cheie TomTom pentru viteze de trafic live pe stratul de trafic",
+        "price": "0 pentru primele 200.000 de cereri de tile pe lună",
+        "required": false,
+        "source_url": "https://docs.tomtom.com/pricing"
+      },
+      {
+        "what": "Chei gratuite opționale: NASA FIRMS (incendii), Mapillary (fotografii stradale), OpenSky (mai multe credite de interogare)",
+        "price": null,
+        "required": false,
+        "source_url": "https://github.com/bilawalsidhu/gods-eye-view/blob/423ca3ca5f379c218f6cd4a96fa85dde848aa5c8/README.md#-api-keys"
+      },
+      {
+        "what": "Token opțional Launch Library 2 (Patreon) pentru limite mai mari la lansări spațiale",
+        "price": null,
+        "required": false,
+        "source_url": "https://github.com/bilawalsidhu/gods-eye-view/blob/423ca3ca5f379c218f6cd4a96fa85dde848aa5c8/README.md#-api-keys"
+      },
+      {
+        "what": "Browser cu accelerare grafică hardware (documentația a măsurat în Chrome); un GPU dedicat nu e cerut în documentație",
+        "price": null,
+        "required": true,
+        "source_url": "https://github.com/bilawalsidhu/gods-eye-view/blob/423ca3ca5f379c218f6cd4a96fa85dde848aa5c8/docs/PERFORMANCE.md"
+      }
+    ]
+  },
+  "platforms": {
+    "windows": "da",
+    "mac": "da",
+    "linux": "da",
+    "note": "Documentația spune că instalarea cu Pinokio e disponibilă pe Windows, macOS și Linux; Docker merge și pe Linux/NAS. Scriptul ./scripts/dev-fresh.sh cu cheile din Keychain e doar pentru macOS. Pe Windows, butonul de login Codex poate să nu pornească un Codex instalat cu npm.",
+    "source_url": "https://github.com/bilawalsidhu/gods-eye-view/blob/423ca3ca5f379c218f6cd4a96fa85dde848aa5c8/README.md#-quick-start"
+  },
+  "risk_flags": [
+    {
+      "flag": "licență restrictivă",
+      "detail": "Licența MIT acoperă doar codul; datele terților (OpenSky, cabluri submarine TeleGeography, scena Nepal, GhostMaps) sunt necomerciale sau au condiții proprii.",
+      "source_url": "https://github.com/bilawalsidhu/gods-eye-view/blob/423ca3ca5f379c218f6cd4a96fa85dde848aa5c8/LICENSE"
+    },
+    {
+      "flag": "trimite date în cloud",
+      "detail": "Vocea trimite sunetul de la microfon la OpenAI sau Gemini, iar la nivel de stradă agentul citește o captură de ecran a hărții; browserul cere și direct hărți și fotografii de la furnizori externi.",
+      "source_url": "https://github.com/bilawalsidhu/gods-eye-view/blob/423ca3ca5f379c218f6cd4a96fa85dde848aa5c8/README.md#%EF%B8%8F-talk-to-it"
+    },
+    {
+      "flag": "cere plată",
+      "detail": "Funcțiile opționale cu Google Maps direct, Street View, vocea cu cheie API și OpenAI HUD sunt taxate pe consum de furnizori.",
+      "source_url": "https://github.com/bilawalsidhu/gods-eye-view/blob/423ca3ca5f379c218f6cd4a96fa85dde848aa5c8/README.md#-what-it-actually-costs"
+    },
+    {
+      "flag": "proiect instabil",
+      "detail": "README-ul spune că e un client în evoluție pentru explorare, nu un serviciu de producție întărit; un server vizibil în rețea oferă cheile tale oricui îl poate accesa.",
+      "source_url": "https://github.com/bilawalsidhu/gods-eye-view/blob/423ca3ca5f379c218f6cd4a96fa85dde848aa5c8/README.md#-sharing-an-instance"
+    }
+  ],
+  "audience_reason": "pornește cu un clic în Pinokio și fără chei, dar straturile avansate cer chei și înțelegerea limitelor datelor",
+  "setup_difficulty_reason": "câteva comenzi sau un clic în Pinokio, fără chei obligatorii și fără hardware special documentat",
+  "analogy": "Ca o cameră de comandă de film cu spioni, doar că ecranele arată date deschise pe care le poate vedea oricine, nu secrete.",
+  "how_it_works": [
+    "Pasul 1: pornești serverul local (Pinokio, npm sau Docker) și deschizi http://localhost:4173 în browser.",
+    "Pasul 2: serverul local preia fluxuri publice (OpenSky, adsb.lol, CelesTrak, USGS, AISStream etc.) și ține cheile private doar pe partea de server.",
+    "Pasul 3: CesiumJS desenează globul 3D, iar aplicația interpolează între actualizări ca avioanele și navele să se miște fluid.",
+    "Pasul 4: tu dai click pe un avion sau o cameră, folosești panourile sau vorbești cu agentul AI, care mută harta și răspunde cu telemetria obiectului.",
+    "Pasul 5: poți salva scene, link-uri partajabile sau poți folosi globul din Claude/Codex prin serverul MCP inclus."
+  ],
+  "first_steps": null,
+  "categories": [
+    "Securitate și OSINT",
+    "Monitorizare și audit",
+    "Hărți și date geospațiale"
+  ],
+  "search_intents": [
+    "vreau să văd avioanele și navele live pe un glob 3D",
+    "vreau o alternativă gratuită la Flightradar24 pentru hobby",
+    "vreau să urmăresc sateliții și lansările spațiale pe hartă",
+    "vreau un demo de OSINT geospațial pentru elevi sau studenți",
+    "vreau să conectez un glob 3D cu date publice la Claude prin MCP",
+    "vreau să văd camere publice de trafic proiectate pe hartă 3D"
+  ],
+  "audience": "începător",
+  "setup_difficulty": "ușor",
+  "replaces": [
+    {
+      "service": "Flightradar24 (abonamente Silver, Gold, Business)",
+      "service_url": "https://www.flightradar24.com/premium/",
+      "price": null,
+      "price_source_url": "https://apps.apple.com/us/app/flightradar24-flight-tracker/id382233851",
+      "price_checked_at": "2026-10-30",
+      "replacement_level": "doar pentru cazuri simple",
+      "what_you_keep": [
+        "Vizualizare live a aeroportului și a unui avion ales, din OpenSky și adsb.lol",
+        "Metadate de bază despre aeronavă (tip, înmatriculare, rută pentru zborul urmărit)",
+        "Posibilitatea de a-ți conecta propriul receptor ADS-B (RTL-SDR, tar1090/readsb)"
+      ],
+      "what_you_lose": [
+        "Acoperirea comercială proprie a Flightradar24 și istoricul de zboruri pe 90-365 de zile (în planurile lor)",
+        "Aplicațiile mobile oficiale, alertele și suportul",
+        "Garanții de acuratețe: README-ul spune explicit să nu folosești aplicația pentru navigație sau decizii operaționale"
+      ],
+      "hidden_costs": [
+        "OpenSky e licențiat necomercial; pentru uz comercial ai nevoie de acord separat cu ei",
+        "Timp de configurare și actualizări dese ale repo-ului",
+        "Cheia Google/Cesium plătită, dacă vrei hartă 3D fotorealistă în uz comercial"
+      ]
+    },
+    {
+      "service": "MarineTraffic (urmărire nave)",
+      "service_url": "https://www.marinetraffic.com/",
+      "price": null,
+      "price_source_url": null,
+      "price_checked_at": null,
+      "replacement_level": "doar pentru cazuri simple",
+      "what_you_keep": [
+        "Poziții live de nave din AISStream, cu urmă și card de informații",
+        "Legătura dintre o navă și cea mai apropiată cameră publică"
+      ],
+      "what_you_lose": [
+        "Date AIS prin satelit: documentația spune că AIS terestru tace în mijlocul oceanului, iar cel prin satelit costă",
+        "Istoric, rapoarte și analize comerciale ale MarineTraffic"
+      ],
+      "hidden_costs": [
+        "Cheia AISStream rulează doar de pe server (browserul nu e permis) și nu există termeni comerciali clari pe pagina lor",
+        "Timp de configurare și întreținere a unui server local"
+      ]
+    }
+  ],
+  "examples": [
+    {
+      "title": "Instalare din terminal (calea 2 din README)",
+      "scenario": "Pornești aplicația local, fără chei, și o deschizi în browser la adresa localhost:4173.",
+      "prerequisites": [
+        "Node.js 24.x (24.14.0 sau mai nou) sau 26.x",
+        "Git",
+        "Browser cu accelerare grafică hardware"
+      ],
+      "commands": [
+        "git clone https://github.com/bilawalsidhu/gods-eye-view.git",
+        "cd gods-eye-view",
+        "npm ci",
+        "npm run doctor",
+        "npm run dev"
+      ],
+      "code": "Apoi deschizi http://localhost:4173 și alegi din panoul de prim contact: Live Contacts, Space Missions, Environmental sau Explore Manually.",
+      "output_from_docs": null,
+      "source_url": "https://github.com/bilawalsidhu/gods-eye-view/blob/423ca3ca5f379c218f6cd4a96fa85dde848aa5c8/README.md#-quick-start",
+      "kind": "instalare"
+    },
+    {
+      "title": "Folosirea globului din Claude Code prin MCP",
+      "scenario": "După ce aplicația rulează local, o legi la Claude Code ca să ceri globul cu o frază. Documentația spune că Claude Code răspunde cu date și un link, iar Claude Desktop și Codex afișează globul live.",
+      "prerequisites": [
+        "Aplicația rulează local pe http://localhost:4173",
+        "Node.js 24.14+ sau 26.x",
+        "Claude Code (sau Codex CLI / Claude Desktop)"
+      ],
+      "commands": [
+        "npm install",
+        "npm run build:panel",
+        "npm run dev",
+        "claude mcp add gods-eye-view -- node /abs/path/gods-eye-view/server/mcp/stdio.js --api-base http://localhost:4173"
+      ],
+      "code": "Show San Diego in God's Eye View with military flights on.",
+      "output_from_docs": null,
+      "source_url": "https://github.com/bilawalsidhu/gods-eye-view/blob/423ca3ca5f379c218f6cd4a96fa85dde848aa5c8/docs/MCP_SETUP.md",
+      "kind": "folosire"
+    }
+  ],
+  "connectors": {
+    "inputs": [
+      "Fluxuri publice de date pe internet (OpenSky, adsb.lol, AISStream, CelesTrak, USGS, NASA FIRMS, camere de trafic ale orașelor)",
+      "Opțional: fișier aircraft.json de la propriul receptor ADS-B (dump1090-fa, readsb, tar1090) sau un stick RTL-SDR deschis în browser prin WebUSB",
+      "Opțional: chei API puse în fișierul .env sau în panoul POWER UP",
+      "Opțional: fișiere de scenă pentru Director (camere, mișcări, pachete de date) importate din fișier"
+    ],
+    "outputs": [
+      "Globul interactiv în browser la http://localhost:4173",
+      "Link-uri de partajare (camera, stratul, ținta urmărită serializate în URL)",
+      "Fișiere de scenă și pachete exportate din Director",
+      "Răspunsuri și link prin serverul MCP către Claude Code, Codex sau Claude Desktop"
+    ],
+    "pairs_well_with": [
+      {
+        "repo_url": "https://github.com/pinokiocomputer/pinokio",
+        "name": "Pinokio",
+        "why": "Lansatorul care instalează și pornește God's Eye View cu un clic; scriptul de instalare produce un server local pe care îl deschizi în browser.",
+        "in_catalog": false
+      },
+      {
+        "repo_url": "https://github.com/wiedehopf/tar1090",
+        "name": "tar1090",
+        "why": "Interfața peste un decodor ADS-B propriu; fișierul lui aircraft.json devine intrare pentru stratul Local ADS-B din God's Eye View.",
+        "in_catalog": false
+      },
+      {
+        "repo_url": "https://github.com/wiedehopf/readsb",
+        "name": "readsb",
+        "why": "Decodorul care ascultă avioanele cu un receptor propriu și expune aircraft.json, pe care God's Eye View îl poate citi ca flux local.",
+        "in_catalog": false
+      },
+      {
+        "repo_url": "https://github.com/CesiumGS/cesium",
+        "name": "CesiumJS",
+        "why": "Biblioteca pe care e construit globul; util dacă vrei să înțelegi sau să extinzi straturile, ca punct de plecare pentru propriile hărți 3D.",
+        "in_catalog": false
+      }
+    ],
+    "gaps_noticed": [
+      "Nu există istoric: README-ul spune că prezentul e partea ieftină, iar redarea trecutului cere stocare și calcul serios.",
+      "Datele de la SpiderFoot (domenii, IP-uri) și cele de aici (poziții fizice) nu au un format comun; legătura dintre ele ar fi un pas manual.",
+      "Straturile cu licențe diferite (OpenSky, TeleGeography, GhostMaps) trebuie scoase sau înlocuite manual pentru uz comercial."
+    ]
+  },
+  "when_not_to_use": [
+    "Pentru navigație aeriană sau maritimă, urgențe, decizii medicale sau investiții: README-ul spune explicit că datele pot fi întârziate, incomplete sau greșite.",
+    "Pentru urmărirea persoanelor: proiectul declară că nu are căutare după nume, recunoaștere facială sau urmărire de indivizi, iar astfel de PR-uri nu se acceptă.",
+    "Ca produs comercial fără să scoți datele necomerciale (OpenSky, cabluri submarine TeleGeography, scena Nepal, GhostMaps) și fără token Cesium sau cheie Google potrivite.",
+    "Ca serviciu public găzduit: README-ul spune că nu e un serviciu de producție întărit, iar un server vizibil în rețea oferă cheile tale oricui îl accesează.",
+    "Dacă vrei imagini satelit live sau istoric: imaginile de bază sunt hărți standard, nu video din satelit, iar istoricul nu e inclus.",
+    "Pe un calculator fără accelerare grafică: globul 3D poate fi sacadat în afara unui browser accelerat hardware."
+  ],
+  "alternatives": [
+    {
+      "name": "World Monitor",
+      "url": "https://github.com/koala73/worldmonitor",
+      "difference": "Tablou de bord de știri și monitorizare geopolitică cu AI, sub AGPL-3.0; mai puțin un glob 3D cu cockpit și mai mult agregare de informații."
+    },
+    {
+      "name": "Google Earth",
+      "url": "https://earth.google.com/",
+      "difference": "Aplicație gratuită de la Google pentru explorat globul în 3D, fără fluxuri live de avioane și nave și fără cod modificabil."
+    },
+    {
+      "name": "CesiumJS",
+      "url": "https://github.com/CesiumGS/cesium",
+      "difference": "Biblioteca de bază sub Apache-2.0; construiești tu propriile straturi, fără interfața și fluxurile gata făcute."
+    }
+  ],
+  "tech_sheet": {
+    "license": "MIT (doar codul; datele și modelele 3D ale terților au licențe proprii)",
+    "language": "JavaScript (Node.js, Vite, CesiumJS)",
+    "commit_sha": "423ca3ca5f379c218f6cd4a96fa85dde848aa5c8",
+    "last_commit_date": "2026-10-29",
+    "stars": 61221,
+    "requirements": [
+      "Cale 1 (fără terminal): Pinokio 8.2 sau mai nou, pe Windows, macOS sau Linux",
+      "Cale 2 (terminal): Node.js 24.x (24.14.0 sau mai nou) sau 26.x (Node 25 e avertizat), npm și Git",
+      "Cale 3 (Docker): Docker cu Docker Compose, fără Node instalat",
+      "Browser modern cu accelerare grafică hardware (documentația a măsurat în Chrome); aplicația ascultă pe http://localhost:4173",
+      "Nicio cheie API nu e obligatorie la pornire; cheile se adaugă din panoul POWER UP sau din fișierul .env",
+      "Chei opționale: Cesium ion token (gratuit, uz personal/necomercial), cheie Google Maps (cu facturare), OpenAI sau Gemini pentru voce, AISStream pentru nave, NASA FIRMS pentru incendii, TomTom pentru trafic, Mapillary pentru fotografii stradale, OpenSky pentru mai multe credite",
+      "Pentru globul în Claude/Codex: Claude Code, Codex CLI sau Claude Desktop și comanda npm run build:panel; serverul MCP rulează cu Node, nu în Docker",
+      "Opțional: stick RTL-SDR și Chrome sau Edge pe desktop (WebUSB) pentru stratul Local ADS-B"
+    ]
+  },
+  "monetization": [
+    {
+      "model": "consultanță și training",
+      "what_you_sell": "Atelier practic de geo-OSINT cu date publice: cum urmărești zboruri, nave, sateliți și incendii pe un glob 3D, de unde vin datele și ce limite au.",
+      "for_whom": "Școli, facultăți, ONG-uri și redacții mici care vor un demo practic despre date deschise.",
+      "license_check": {
+        "license": "MIT (doar codul; datele și modelele 3D ale terților au licențe proprii)",
+        "commercial_use": "permis cu condiții",
+        "conditions": "Codul MIT permite uz comercial cu păstrarea notei de copyright. Datele terților nu sunt MIT: OpenSky e necomercial, cablurile TeleGeography sunt CC BY-NC-SA 3.0 (documentația cere ștergerea lor pentru uz comercial), scena Bhote Koshi e CC BY-NC 4.0, GhostMaps e CC BY-NC-SA 4.0, iar Cesium ion Community e doar pentru uz personal/necomercial. Pentru un atelier plătit, scoți aceste surse sau le înlocuiești cu variante licențiate și păstrezi atribuirea afișată în aplicație. ODbL cere atribuire și share-alike pe date. Modelele 3D sunt CC BY 4.0 (atribuire)."
+      },
+      "path": "folosești repo-ul direct",
+      "own_build_notes": null,
+      "demand_evidence": [
+        {
+          "name": "SANS SEC497 Practical Open-Source Intelligence (OSINT)",
+          "url": "https://www.sans.org/cyber-security-courses/practical-open-source-intelligence",
+          "price": "8.780 USD, versiunea OnDemand",
+          "what_it_proves": "Se vinde deja training OSINT cu preț mare, deși cursul acoperă mai ales persoane, site-uri și infrastructură, nu zboruri și nave.",
+          "checked_at": "2026-10-30"
+        },
+        {
+          "name": "Bellingcat Workshops",
+          "url": "https://www.bellingcat.com/workshops/",
+          "price": null,
+          "what_it_proves": "Un grup de investigații deschise listează ateliere de geolocare și imagini satelit în 2026; pagina nu arată prețuri și nu menționează urmărirea zborurilor sau navelor.",
+          "checked_at": "2026-10-30"
+        }
+      ],
+      "startup_cost": "Aproape zero pentru materiale; dacă vrei harta 3D fotorealistă într-un context comercial, Cesium ion Commercial începe de la 149 USD/lună, iar varianta fără chei folosește imagini Esri și teren fără cheie.",
+      "time_to_first_client": "Nu pot estima; depinde de rețeaua ta și de piața locală.",
+      "difficulty": "mediu",
+      "risks": [
+        "Concurență gratuită: autorul are o serie YouTube cu milioane de vizualizări și un walkthrough complet al aplicației.",
+        "Autorul anunță o versiune găzduită oficială (Halfpixel), care poate reduce interesul pentru instalări locale.",
+        "Repo-ul se schimbă rapid (CHANGELOG foarte lung), deci materialul se învechește.",
+        "Datele live pot fi întârziate sau greșite; trebuie explicat clar în atelier."
+      ],
+      "first_steps": [
+        "Citește DATA_SOURCES.md și hotărăște ce surse păstrezi pentru uz comercial.",
+        "Pregătește un demo cu straturile fără cheie (zboruri adsb.lol, cutremure USGS, sateliți CelesTrak, vreme NOAA).",
+        "Alege 2-3 întrebări de investigat (de ex. un incendiu și camera publică cea mai apropiată) și scrie fișa atelierului.",
+        "Propune un atelier gratuit unei școli sau unui club local pentru feedback înainte să pui preț."
+      ]
+    },
+    {
+      "model": "integrare pentru o nișă",
+      "what_you_sell": "Configurarea unui panou privat pe receptorul ADS-B propriu (RTL-SDR sau tar1090/readsb) plus straturi locale, pentru o comunitate care vrea să-și vadă traficul aerian local pe un glob 3D.",
+      "for_whom": "Cluburi de aviație, aerodromuri mici și pasionați de radioamatorism care au deja un receptor.",
+      "license_check": {
+        "license": "MIT (doar codul; datele și modelele 3D ale terților au licențe proprii)",
+        "commercial_use": "permis cu condiții",
+        "conditions": "Codul MIT permite lucru comercial. Folosești datele de la receptorul propriu (Local ADS-B), nu fluxul OpenSky, care e necomercial și poate cere acord scris pentru uz operațional. Harta de bază: Esri World Imagery fără cheie, cu atribuire, sau Cesium ion plătit. Scoți folderul TeleGeography și scena Bhote Koshi. Nu expui serverul în rețea publică fără autentificare, pentru că README-ul spune că el oferă cheile configurate oricui îl accesează."
+      },
+      "path": "folosești repo-ul direct",
+      "own_build_notes": null,
+      "demand_evidence": [
+        {
+          "name": "Flightradar24 API, planuri lunare Explorer, Essential, Advanced",
+          "url": "https://fr24api.flightradar24.com/subscriptions-and-credits",
+          "price": null,
+          "what_it_proves": "Datele de zbor live se vând pe abonament lunar; pagina listează planurile, dar nu am putut citi prețurile.",
+          "checked_at": "2026-10-30"
+        },
+        {
+          "name": "Cesium ion, plan Commercial",
+          "url": "https://cesium.com/platform/cesium-ion/pricing/",
+          "price": "149 USD/lună (individual) sau 524 USD/lună (echipă)",
+          "what_it_proves": "Infrastructura de glob 3D pentru uz comercial se vinde cu abonament, ceea ce arată cererea pentru produse similare.",
+          "checked_at": "2026-10-30"
+        }
+      ],
+      "startup_cost": "Un receptor ADS-B (hardware, preț pe care nu l-am verificat) și, pentru uz comercial, eventual Cesium ion Commercial de la 149 USD/lună.",
+      "time_to_first_client": "Nu pot estima; nișa e mică și cererea pentru acest serviciu nu e dovedită.",
+      "difficulty": "mediu",
+      "risks": [
+        "Cererea pentru un astfel de serviciu nu e dovedită: dovezile de mai sus arată doar că datele de zbor și globurile 3D se vând.",
+        "Concurență gratuită: tar1090 are deja o interfață bună pentru receptor propriu.",
+        "Repo-ul poate schimba formatul sau stratul Local ADS-B; trebuie întreținut.",
+        "Suport tehnic pe hardware radio, adică timp petrecut cu depanare."
+      ],
+      "first_steps": [
+        "Citește docs/LOCAL-RECEIVERS.md și configurează LOCAL_RECEIVER_FEEDS pentru propriul receptor.",
+        "Testează pe un singur aerodrom sau club care are deja tar1090.",
+        "Scrie o pagină cu ce e inclus, ce nu e și ce date nu pot fi folosite comercial.",
+        "Ia feedback înainte să stabilești un preț."
+      ]
+    }
+  ],
+  "updated_at": "2026-10-30",
+  "notes_summary": "Am citit README-ul, LICENSE, DATA_SOURCES.md, SECURITY.md și docs/MCP_SETUP.md, nu am rulat codul; condițiile exacte ale unor surse și prețurile unor servicii nu le-am putut verifica.",
+  "notes": "Cercetat la commit 423ca3ca (2026-10-29); repo creat 2026-06-22, 61k stele, 11,9k fork-uri, release v0.3.0 (2026-10-28). Nu am rulat codul. Licență: GitHub arată NOASSERTION pentru că LICENSE conține MIT + o notă extinsă despre date și active ale terților. Am decis commercial_use = „permis cu condiții”: codul e MIT, dar OpenSky (necomercial, poate cere acord scris), TeleGeography (CC BY-NC-SA 3.0, de șters pentru uz comercial), scena Bhote Koshi (CC BY-NC 4.0; datele derivate sunt compilate în src/data/bhoteKoshiFloodPath.js), S2 GhostMaps (CC BY-NC-SA 4.0, preluat la rulare), Google News RSS (doar personal/necomercial), FL511 (individual personal, oprit implicit), NYC DOT (acord propriu necesar, oprit implicit), Lituania (licență foto neconfirmată, oprit implicit) și Cesium ion Community (doar personal/necomercial) au condiții proprii; modelele 3D sunt CC BY 4.0 (atribuire). Am citit DATA_SOURCES.md doar pe tabele și secțiuni-cheie (are 116 KB), nu fiecare rând. Confidențialitate: stratul ALPR arată doar locații de camere de citire a plăcuțelor, etichetate în OpenStreetMap, fără date despre plăcuțe sau video; camerele publice de trafic arată cadre live de la autorități; fotografiile stradale (Mapillary, KartaView, Panoramax, Street View) pot conține oameni; traficul e simulat cu date agregate de locație (TomTom); documentația spune că proiectul nu face căutare după persoană, recunoaștere facială sau urmărire de indivizi. Grep rapid prin cod nu a găsit telemetrie sau analytics proprii (mențiunile găsite sunt în identificatori); index.html încarcă fonturi de la Google Fonts, deci Google vede vizita. Vocea trimite audio la OpenAI sau Gemini; OAuth ChatGPT/Codex e experimental și documentația spune că un contract Realtime acceptat oficial nu e confirmat. README-ul menționează modele (gpt-realtime-2, gemini-3.8-live, gpt-5-nano) pe care nu le-am putut verifica. Prețuri verificate 2026-10-30: Cesium ion (Community 0, Commercial 149/lună individual, 524/lună echipă), Google Map Tiles Photorealistic 3D (1.000 gratuite/lună, apoi 6 USD/1.000; pagina nu spune dacă unitatea e sesiune sau cerere rădăcină), Docker (Personal 0), TomTom (200.000 cereri tile/lună gratuit), AISStream (gratuit, autentificare GitHub), SANS SEC497 (8.780 USD OnDemand). Neverificate: Flightradar24 (403; listările din App Store sunt contradictorii și variază după țară, le-am marcat ca atare), MarineTraffic (403), OpenAI Realtime (pagina nu a dat prețuri), Gemini, Pinokio (pagina nu spune nimic despre licență sau preț), FlightAware AeroAPI (nu arată prețuri), ArcGIS Online (nu arată prețuri), Bellingcat (nu arată prețuri). OpenSky terms-of-use: 403 la fetch; am folosit ce spune DATA_SOURCES.md. Perechi verificate active (ultimul commit în ultimele 12 luni): Pinokio (2026-09-02), tar1090 (2026-10-26), readsb (2026-10-29), CesiumJS (2026-10-30). SpiderFoot (în catalog) nu e listat ca pereche: nu există flux de date direct între ele, am notat doar în gaps. Categorie nouă propusă, de adăugat în categories.json de editor: „Hărți și date geospațiale”. Primii pași: nu am găsit o experiență reală potrivită. Am căutat pe Hacker News (postările despre repo au 0 comentarii substanțiale; singurul comentariu relevant e al unui cont creat doar pentru un proiect derivat, „God's Eye UAP”), GitHub Discussions (dezactivate), dev.to (doar articole fără legătură), și prin căutare web (articole de tip prezentare și traduceri automate, nu povești proprii). Nu am găsit o poveste first-person cu pași clari. Termeni de glosar noi de adăugat de editor: Pinokio, CesiumJS, Cesium ion, ADS-B, AIS, ODbL, CC BY-NC-SA, GEOINT, CCTV, ALPR, RTL-SDR, Photorealistic 3D Tiles, localhost, tile (OSINT, token, MCP, Docker Compose etc. există deja)."
+}

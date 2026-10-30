@@ -363,6 +363,12 @@
         "name": "Impeccable",
         "why": "Superpowers conduce fluxul de lucru al agentului (plan, implementare, verificare), iar codul de interfață produs în acel flux poate fi trecut apoi prin `critique` și `polish`.",
         "in_catalog": true
+      },
+      {
+        "repo_url": "https://github.com/elayadesign/ai-design-skills",
+        "name": "AI Design Skills",
+        "why": "Superpowers conduce procesul agentului (plan, implementare, verificare), iar acest skill dă regulile de design pentru partea de interfață din plan.",
+        "in_catalog": true
       }
     ],
     "gaps_noticed": [

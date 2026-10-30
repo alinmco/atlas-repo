@@ -273,6 +273,12 @@
         "name": "Impeccable",
         "why": "Au același format SKILL.md și se instalează în același agent: skill-urile lui Pocock dau procesul (interviu, teste, revizuire), iar Impeccable adaugă judecata de design pentru interfață.",
         "in_catalog": true
+      },
+      {
+        "repo_url": "https://github.com/elayadesign/ai-design-skills",
+        "name": "AI Design Skills",
+        "why": "Același format SKILL.md, instalabil în același agent; skill-urile lui Pocock dau procesul de lucru, iar acesta dă regulile paginii.",
+        "in_catalog": true
       }
     ],
     "gaps_noticed": [

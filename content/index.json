@@ -197,7 +197,8 @@
       "https://github.com/mattpocock/dictionary-of-ai-coding",
       "https://github.com/obra/superpowers",
       "https://github.com/anomalyco/opencode",
-      "https://github.com/pbakaus/impeccable"
+      "https://github.com/pbakaus/impeccable",
+      "https://github.com/elayadesign/ai-design-skills"
     ],
     "used_in_recipes": []
   },
@@ -231,7 +232,8 @@
       "https://github.com/anomalyco/opencode",
       "https://github.com/paperclipai/paperclip",
       "https://github.com/JuliusBrussee/caveman",
-      "https://github.com/pbakaus/impeccable"
+      "https://github.com/pbakaus/impeccable",
+      "https://github.com/elayadesign/ai-design-skills"
     ],
     "used_in_recipes": []
   },
@@ -373,7 +375,8 @@
       "https://github.com/ggml-org/whisper.cpp",
       "https://github.com/yt-dlp/yt-dlp",
       "https://github.com/FFmpeg/FFmpeg",
-      "https://github.com/mifi/lossless-cut"
+      "https://github.com/mifi/lossless-cut",
+      "https://github.com/Sac-Y/match-cut"
     ],
     "used_in_recipes": []
   },
@@ -667,7 +670,8 @@
       "https://github.com/mattpocock/skills",
       "https://github.com/obra/superpowers",
       "https://github.com/vercel-labs/skills",
-      "https://github.com/microsoft/playwright-mcp"
+      "https://github.com/microsoft/playwright-mcp",
+      "https://github.com/elayadesign/ai-design-skills"
     ],
     "used_in_recipes": []
   },
@@ -697,6 +701,90 @@
       "https://github.com/home-assistant/core",
       "https://github.com/eclipse-mosquitto/mosquitto",
       "https://github.com/esphome/esphome"
+    ],
+    "used_in_recipes": []
+  },
+  {
+    "slug": "ai-design-skills",
+    "name": "AI Design Skills",
+    "one_liner": "Un fișier cu reguli care învață asistentul AI să construiască pagini de prezentare care convertesc.",
+    "categories": [
+      "Skill-uri pentru agenți AI",
+      "Design de interfețe"
+    ],
+    "inputs": [
+      "Cerere în limbaj obișnuit pentru o pagină de prezentare, scrisă în chatul asistentului AI",
+      "Răspunsurile tale la întrebările de început: ofertă, public, acțiunea dorită, dovezi, tonul mărcii",
+      "Fișierul `SKILL.md` copiat în `.claude/skills/`, `.cursor/rules/`, `AGENTS.md`, `.windsurfrules` sau `.clinerules`"
+    ],
+    "outputs": [
+      "Text: schița paginii, textele, întrebările frecvente și recomandarea de SEO",
+      "Cod de pagină web scris de agent în proiectul tău (stilat cu clase Tailwind, după regulile skill-ului)"
+    ],
+    "updated_at": "2026-10-30",
+    "pairs_well_with": [
+      "https://github.com/elayadesign/redesign-skill",
+      "https://github.com/pbakaus/impeccable",
+      "https://github.com/obra/superpowers",
+      "https://github.com/mattpocock/skills"
+    ],
+    "used_in_recipes": []
+  },
+  {
+    "slug": "match-cut",
+    "name": "match-cut",
+    "one_liner": "Skill care pune agentul AI să facă un film scurt de produs, pe ritm.",
+    "categories": [
+      "Editare video",
+      "Creare de conținut",
+      "Skill-uri pentru agenți AI"
+    ],
+    "inputs": [
+      "Cerere în limbaj obișnuit către agentul AI (de ex. un film de 20 de secunde pentru un produs)",
+      "Imagini oficiale ale produsului (câte una pentru fiecare stare arătată) și logo, ca fișiere imagine",
+      "Fișier montage.json cu timeline, surse, culoare, text, muzică și lista de cadre (pornind de la examples/template.json)"
+    ],
+    "outputs": [
+      "Fișier mp4 1080p",
+      "Master video ProRes",
+      "Piste audio separate (stems)",
+      "plan.md, task-map.json și montage.json pentru fiecare proiect",
+      "README pentru fiecare versiune, cu jurnalul schimbărilor"
+    ],
+    "updated_at": "2026-10-30",
+    "pairs_well_with": [
+      "https://github.com/opencut-app/opencut",
+      "https://github.com/vercel-labs/skills"
+    ],
+    "used_in_recipes": []
+  },
+  {
+    "slug": "gods-eye-view",
+    "name": "God's Eye View",
+    "one_liner": "Glob 3D în browser cu avioane, nave și sateliți reali, în timp real.",
+    "categories": [
+      "Securitate și OSINT",
+      "Monitorizare și audit",
+      "Hărți și date geospațiale"
+    ],
+    "inputs": [
+      "Fluxuri publice de date pe internet (OpenSky, adsb.lol, AISStream, CelesTrak, USGS, NASA FIRMS, camere de trafic ale orașelor)",
+      "Opțional: fișier aircraft.json de la propriul receptor ADS-B (dump1090-fa, readsb, tar1090) sau un stick RTL-SDR deschis în browser prin WebUSB",
+      "Opțional: chei API puse în fișierul .env sau în panoul POWER UP",
+      "Opțional: fișiere de scenă pentru Director (camere, mișcări, pachete de date) importate din fișier"
+    ],
+    "outputs": [
+      "Globul interactiv în browser la http://localhost:4173",
+      "Link-uri de partajare (camera, stratul, ținta urmărită serializate în URL)",
+      "Fișiere de scenă și pachete exportate din Director",
+      "Răspunsuri și link prin serverul MCP către Claude Code, Codex sau Claude Desktop"
+    ],
+    "updated_at": "2026-10-30",
+    "pairs_well_with": [
+      "https://github.com/pinokiocomputer/pinokio",
+      "https://github.com/wiedehopf/tar1090",
+      "https://github.com/wiedehopf/readsb",
+      "https://github.com/CesiumGS/cesium"
     ],
     "used_in_recipes": []
   }
