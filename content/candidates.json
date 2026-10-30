@@ -467,5 +467,40 @@
     "suggested_by": "ruview",
     "why": "Documentația RuView citește un kit radar mmWave de 60 GHz prin ESPHome (comanda mmwave --source esphome), ca al doilea senzor lângă CSI.",
     "added_at": "2026-10-29"
+  },
+  {
+    "repo_url": "https://github.com/elayadesign/redesign-skill",
+    "name": "redesign-skill",
+    "suggested_by": "ai-design-skills",
+    "why": "Același autor; skill-ul pentru site-uri deja existente trimite la regulile din `landing-page-design` pentru fiecare valoare concretă, deci pagina nouă de aici devine intrare pentru refacerea ei ulterioară.",
+    "added_at": "2026-10-30"
+  },
+  {
+    "repo_url": "https://github.com/pinokiocomputer/pinokio",
+    "name": "Pinokio",
+    "suggested_by": "gods-eye-view",
+    "why": "Lansatorul care instalează și pornește God's Eye View cu un clic; scriptul de instalare produce un server local pe care îl deschizi în browser.",
+    "added_at": "2026-10-30"
+  },
+  {
+    "repo_url": "https://github.com/wiedehopf/tar1090",
+    "name": "tar1090",
+    "suggested_by": "gods-eye-view",
+    "why": "Interfața peste un decodor ADS-B propriu; fișierul lui aircraft.json devine intrare pentru stratul Local ADS-B din God's Eye View.",
+    "added_at": "2026-10-30"
+  },
+  {
+    "repo_url": "https://github.com/wiedehopf/readsb",
+    "name": "readsb",
+    "suggested_by": "gods-eye-view",
+    "why": "Decodorul care ascultă avioanele cu un receptor propriu și expune aircraft.json, pe care God's Eye View îl poate citi ca flux local.",
+    "added_at": "2026-10-30"
+  },
+  {
+    "repo_url": "https://github.com/CesiumGS/cesium",
+    "name": "CesiumJS",
+    "suggested_by": "gods-eye-view",
+    "why": "Biblioteca pe care e construit globul; util dacă vrei să înțelegi sau să extinzi straturile, ca punct de plecare pentru propriile hărți 3D.",
+    "added_at": "2026-10-30"
   }
 ]

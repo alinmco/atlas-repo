@@ -1,0 +1,313 @@
+{
+  "slug": "match-cut",
+  "repo_url": "https://github.com/Sac-Y/match-cut",
+  "name": "match-cut",
+  "one_liner": "Skill care pune agentul AI să facă un film scurt de produs, pe ritm.",
+  "problem_solved": "Un film scurt de prezentare a unui produs, în care aceeași mișcare trece de la un obiect la altul la fiecare tăietură, cere mult montaj și mult meșteșug. Skill-ul îl pune pe agentul AI să facă tot drumul: idee, cadre, clipuri, muzică, montaj și livrare.",
+  "features": [
+    "Plan complet al filmului: idee, text, lumi și tabel cu fiecare tăietură",
+    "Cadre-cheie, clipuri video, muzică, voce off și sunete generate prin serviciul Renoise",
+    "Montaj pe ritmul muzicii (BPM), cu scripturi Python configurate dintr-un fișier JSON",
+    "Verificări de calitate: potrivirea tăieturilor, luminozitate, cadre mărite pentru mâini și produs",
+    "Livrare: mp4 1080p, master ProRes și piste audio separate, cu un README pentru fiecare versiune",
+    "Două moduri de lucru: dintr-o bucată (aprobi o dată planul și bugetul) sau cu aprobare la fiecare etapă"
+  ],
+  "at_a_glance": {
+    "for_you_if": [
+      "Vrei un film de produs de 20 de secunde, făcut de un agent AI, cu stil de montaj controlat.",
+      "Ai deja Claude Code sau Codex și ești dispus să plătești credite Renoise."
+    ],
+    "not_for_you_if": [
+      "Vrei un editor video cu timeline și butoane, sau ceva complet gratuit.",
+      "Ai deja filmări reale și vrei doar să le tai pe ritm."
+    ],
+    "verdict": "Idee interesantă și bine documentată, dar proiect foarte nou și legat de un serviciu plătit (Renoise)."
+  },
+  "cost": {
+    "level": "gratuit, dar cere servicii plătite",
+    "summary": "Skill-ul e gratuit (MIT), dar fără credite Renoise (plătite) nu generează nimic; agentul poate merge cu abonamentul Claude sau ChatGPT, dar creditele Renoise rămân separat.",
+    "ai_access": {
+      "mode": "abonament sau API",
+      "detail": "Skill-ul rulează în Claude Code sau Codex, iar Claude Code e inclus în abonamentele plătite Claude (Pro/Max); documentația repo-ului nu cere cheie API și spune explicit că agentul nu trebuie să ceară chei.",
+      "source_url": "https://support.claude.com/en/articles/11145838-using-claude-code-with-your-pro-or-max-plan"
+    },
+    "items": [
+      {
+        "what": "Credite Renoise (video, muzică, voce off, sunete; în Claude Code și cadrele-cheie)",
+        "price": "Din tabelul de pe blogul Renoise: Lite 5 USD / 300 credite, Starter 20 USD / 1.200, Standard 60 USD / 3.600, Advanced 200 USD / 14.000; pagina nu spune dacă sunt prețuri lunare, iar pagina de prețuri nu afișa sume la verificare",
+        "required": true,
+        "source_url": "https://renoise.ai/blog/ai-video-cost-explained"
+      },
+      {
+        "what": "Agent AI: Claude Code (abonament Claude Pro/Max sau cheie API)",
+        "price": "Pro 20 USD/lună (facturare lunară), Max de la 100 USD/lună",
+        "required": true,
+        "source_url": "https://claude.com/pricing"
+      },
+      {
+        "what": "Alternativ: Codex (inclus în planul ChatGPT); cadrele-cheie vin din unealta de imagini a lui, pe contul ChatGPT",
+        "price": null,
+        "required": false,
+        "source_url": "https://github.com/Sac-Y/match-cut/blob/b51c98f5c795b046ceb1c69396368dbabd88d5d9/README.en.md"
+      },
+      {
+        "what": "Python 3.11, FFmpeg și pachetele Python (numpy, scipy, opencv, librosa etc.), toate gratuite; mediul ocupă aproximativ 500 MB",
+        "price": "gratuit",
+        "required": true,
+        "source_url": "https://github.com/Sac-Y/match-cut/blob/b51c98f5c795b046ceb1c69396368dbabd88d5d9/SKILL.md"
+      },
+      {
+        "what": "Imagini oficiale ale produsului și logo (le furnizezi tu)",
+        "price": null,
+        "required": true,
+        "source_url": "https://github.com/Sac-Y/match-cut/blob/b51c98f5c795b046ceb1c69396368dbabd88d5d9/SKILL.md"
+      }
+    ]
+  },
+  "platforms": {
+    "windows": "parțial",
+    "mac": "da",
+    "linux": "parțial",
+    "note": "Documentația menționează doar macOS (brew install ffmpeg), iar fontul implicit din scripturi e o cale de macOS (/System/Library/Fonts/HelveticaNeue.ttc). Pe Windows și Linux e dedus din cod că scripturile Python și FFmpeg ar merge, dar fontul trebuie schimbat în configurație; nu e testat.",
+    "source_url": "https://github.com/Sac-Y/match-cut/blob/b51c98f5c795b046ceb1c69396368dbabd88d5d9/scripts/render.py"
+  },
+  "risk_flags": [
+    {
+      "flag": "cere cont",
+      "detail": "Ai nevoie de cont Renoise, cu autentificare în browser, pentru ca agentul să poată genera ceva.",
+      "source_url": "https://github.com/Sac-Y/match-cut/blob/b51c98f5c795b046ceb1c69396368dbabd88d5d9/README.en.md"
+    },
+    {
+      "flag": "cere plată",
+      "detail": "Video, muzică, voce și sunete se plătesc în credite Renoise, iar skill-ul cere aprobarea unei cotații de buget înainte de generare.",
+      "source_url": "https://github.com/Sac-Y/match-cut/blob/b51c98f5c795b046ceb1c69396368dbabd88d5d9/references/generation.md"
+    },
+    {
+      "flag": "trimite date în cloud",
+      "detail": "Imaginile produsului, logo-ul și cadrele-cheie se încarcă în Renoise, iar filmul final se urcă și el acolo la livrare.",
+      "source_url": "https://github.com/Sac-Y/match-cut/blob/b51c98f5c795b046ceb1c69396368dbabd88d5d9/references/generation.md"
+    }
+  ],
+  "audience_reason": "trebuie să conectezi un serviciu extern, să aprobi bugete și să judeci calitatea unui film generat",
+  "setup_difficulty_reason": "cere agent AI, cont Renoise cu credite plătite, Python 3.11 și FFmpeg",
+  "analogy": "Ca o ștafetă la atletism: un gest sau o formă trece ca un băț de la un obiect la altul, iar la fiecare predare lumea din jur se schimbă, în ritmul bătăilor muzicii.",
+  "how_it_works": [
+    "Pasul 1, intrare: îi spui agentului produsul și datele despre el, îi dai imaginile oficiale și logo-ul, apoi îi ceri un film scurt (20 s implicit).",
+    "Pasul 2, plan: agentul alege unghiul, scrie textul, lumile și tabelul de tăieturi, cere cotația în credite Renoise și îți arată planul; tu aprobi.",
+    "Pasul 3, generare: cadrele-cheie, clipurile, muzica, vocea și sunetele se generează prin Renoise (în Codex, cadrele-cheie vin din unealta de imagini a lui).",
+    "Pasul 4, montaj: scripturile Python taie clipurile pe grila de ritm din fișierul montage.json, aplică culoare, text, mixaj și cadrul final.",
+    "Pasul 5, ieșire: primești un mp4 1080p, un master ProRes și piste audio separate, plus un README pentru fiecare versiune."
+  ],
+  "first_steps": null,
+  "categories": [
+    "Editare video",
+    "Creare de conținut",
+    "Skill-uri pentru agenți AI"
+  ],
+  "search_intents": [
+    "vreau să fac un film scurt de prezentare pentru un produs cu AI",
+    "vreau să montez un clip video pe ritmul muzicii",
+    "vreau ca agentul AI să genereze o reclamă video în stil match cut",
+    "vreau tranziții între obiecte care se potrivesc ca formă sau mișcare",
+    "vreau o alternativă la generatoarele de reclame video AI"
+  ],
+  "audience": "intermediar",
+  "setup_difficulty": "mediu",
+  "replaces": [
+    {
+      "service": "Creatify (generator AI de reclame video pentru produse)",
+      "service_url": "https://creatify.ai/pricing",
+      "price": "Standard 10 USD/lună (listat la 15), Pro 38 USD/lună (listat la 55); pagina nu spune perioada de facturare a prețurilor reduse",
+      "price_source_url": "https://creatify.ai/pricing",
+      "price_checked_at": "2026-10-30",
+      "replacement_level": "doar pentru cazuri simple",
+      "what_you_keep": [
+        "Un film scurt de produs generat din imagini oficiale, cu muzică și text",
+        "Control mare asupra stilului: tăieturi pe ritm, tabel de tăieturi, versiuni succesive"
+      ],
+      "what_you_lose": [
+        "Interfața vizuală: aici lucrezi prin chat cu un agent AI",
+        "Avatarii și formatele de reclame tip UGC pe care le oferă serviciul comercial",
+        "Un preț previzibil pe lună: creditele Renoise se consumă după model, durată și rezoluție"
+      ],
+      "hidden_costs": [
+        "Credite Renoise (obligatorii) pe lângă abonamentul agentului AI",
+        "Timp pentru configurarea Python 3.11, FFmpeg și a contului Renoise",
+        "Timp de revizuire: skill-ul însuși spune că defectele de mâini și de produs trebuie reparate, nu ignorate",
+        "Drepturile asupra mărcilor din film (exemplele din repo sunt filme neoficiale, făcute doar pentru test)"
+      ]
+    }
+  ],
+  "examples": [
+    {
+      "title": "Instalare: skill-ul și conectarea la Renoise (Claude Code)",
+      "scenario": "Adaugi skill-ul în proiectul curent, apoi conectezi serverul Renoise la Claude Code și te autentifici în browser.",
+      "prerequisites": [
+        "Node.js 22.20 sau mai nou",
+        "Claude Code sau Codex",
+        "Cont Renoise (autentificare în browser)"
+      ],
+      "commands": [
+        "npx skills add Sac-Y/match-cut",
+        "claude mcp add --transport http renoise https://renoise.ai/api/public/mcp"
+      ],
+      "code": null,
+      "output_from_docs": null,
+      "source_url": "https://github.com/Sac-Y/match-cut/blob/b51c98f5c795b046ceb1c69396368dbabd88d5d9/README.en.md#install",
+      "kind": "instalare"
+    },
+    {
+      "title": "Folosire: ceri filmul în limbaj obișnuit",
+      "scenario": "După instalare, scrii agentului ce vrei. Documentația dă exemplul de mai jos și descrie ce urmează: agentul verifică Renoise, strânge datele produsului, propune un plan de bază și întreabă cum să lucreze (dintr-o bucată sau cu aprobare la fiecare etapă).",
+      "prerequisites": [
+        "Skill-ul instalat și Renoise conectat",
+        "Credite Renoise în cont"
+      ],
+      "commands": [],
+      "code": "make a 20-second match-cut promo for our new water bottle",
+      "output_from_docs": "Delivers a 1080p mp4, a ProRes master and stems, with a README per version.",
+      "source_url": "https://github.com/Sac-Y/match-cut/blob/b51c98f5c795b046ceb1c69396368dbabd88d5d9/README.en.md#use",
+      "kind": "folosire"
+    },
+    {
+      "title": "Folosire: analiza melodiei pe ritm, cu scriptul din skill",
+      "scenario": "Documentația de montaj arată cum agentul citește grila de bătăi a unei melodii generate și cum o taie la lungimea filmului. Comenzile rulează în mediul Python al skill-ului (S este folderul scripts/ al skill-ului).",
+      "prerequisites": [
+        "Mediul Python 3.11 cu scripts/requirements.txt",
+        "FFmpeg",
+        "O melodie descărcată din Renoise"
+      ],
+      "commands": [
+        "python $S/music.py analyze dl/renoise-789.mp3 --bpm 150",
+        "python $S/music.py cut montage.json"
+      ],
+      "code": null,
+      "output_from_docs": null,
+      "source_url": "https://github.com/Sac-Y/match-cut/blob/b51c98f5c795b046ceb1c69396368dbabd88d5d9/references/post.md",
+      "kind": "folosire"
+    }
+  ],
+  "connectors": {
+    "inputs": [
+      "Cerere în limbaj obișnuit către agentul AI (de ex. un film de 20 de secunde pentru un produs)",
+      "Imagini oficiale ale produsului (câte una pentru fiecare stare arătată) și logo, ca fișiere imagine",
+      "Fișier montage.json cu timeline, surse, culoare, text, muzică și lista de cadre (pornind de la examples/template.json)"
+    ],
+    "outputs": [
+      "Fișier mp4 1080p",
+      "Master video ProRes",
+      "Piste audio separate (stems)",
+      "plan.md, task-map.json și montage.json pentru fiecare proiect",
+      "README pentru fiecare versiune, cu jurnalul schimbărilor"
+    ],
+    "pairs_well_with": [
+      {
+        "repo_url": "https://github.com/opencut-app/opencut",
+        "name": "OpenCut",
+        "why": "Ieșirea (mp4-ul final) poate fi deschisă într-un editor video pentru retușuri manuale sau subtitrări; e un pas manual, nu o integrare documentată.",
+        "in_catalog": true
+      },
+      {
+        "repo_url": "https://github.com/vercel-labs/skills",
+        "name": "skills (vercel-labs)",
+        "why": "Este programul din spatele comenzii `npx skills add`, care instalează skill-ul în agentul tău.",
+        "in_catalog": false
+      }
+    ],
+    "gaps_noticed": [
+      "Documentația descrie macOS (brew, font de sistem macOS); pe Windows și Linux fontul implicit și comenzile de tip `JOBS=6 python ...` trebuie adaptate manual.",
+      "Fără cont și credite Renoise, restul pașilor (video, muzică) nu pornesc; nu există o cale documentată cu alt furnizor.",
+      "Nu există un pas automat de import al mp4-ului final într-un editor cu timeline; se face manual."
+    ]
+  },
+  "when_not_to_use": [
+    "Dacă vrei ceva complet gratuit: generarea de video și muzică se plătește în credite Renoise.",
+    "Dacă ai filmări reale și vrei doar tăieturi pe ritm: skill-ul e făcut pentru clipuri generate de AI, nu pentru montaj clasic.",
+    "Dacă ai nevoie de un proiect matur: repo-ul a fost creat pe 29 octombrie 2026, are 72 de stele și nicio lansare oficială sau issue-uri, deci poate să se schimbe repede.",
+    "Dacă lucrezi pe Windows și vrei ceva fără ajustări: documentația și fontul implicit sunt gândite pentru macOS.",
+    "Dacă vrei să folosești mărci cunoscute în reclame: exemplele din repo sunt filme neoficiale de test, iar drepturile asupra mărcii rămân ale proprietarului."
+  ],
+  "alternatives": [
+    {
+      "name": "OpenCut",
+      "url": "https://github.com/OpenCut-app/OpenCut",
+      "difference": "Editor video cu timeline, gratuit și open-source; montezi tu manual, fără generare AI."
+    },
+    {
+      "name": "Creatify",
+      "url": "https://creatify.ai/pricing",
+      "difference": "Serviciu comercial cu interfață web, care generează reclame video din linkul unui produs."
+    },
+    {
+      "name": "Remotion",
+      "url": "https://github.com/remotion-dev/remotion",
+      "difference": "Faci filme prin cod React, fără generare AI inclusă; licență proprie, cu condiții pentru firme."
+    }
+  ],
+  "tech_sheet": {
+    "license": "MIT",
+    "language": "Python (scripturi) și Markdown (instrucțiunile skill-ului)",
+    "commit_sha": "b51c98f5c795b046ceb1c69396368dbabd88d5d9",
+    "last_commit_date": "2026-10-29",
+    "stars": 72,
+    "requirements": [
+      "Agent AI compatibil cu skill-uri: Claude Code sau Codex (instalatorul le detectează); alternativ Claude Desktop / claude.ai (Settings, Connectors) sau alt agent cu MCP",
+      "Node.js 22.20 sau mai nou (pentru `npx skills add Sac-Y/match-cut`; `-g` pentru instalare globală)",
+      "Cont Renoise (autentificare în browser) și credite Renoise plătite",
+      "Server MCP Renoise conectat: `claude mcp add --transport http renoise https://renoise.ai/api/public/mcp` (Claude Code, apoi repornire și /mcp) sau `codex mcp add renoise --url https://renoise.ai/api/public/mcp` și `codex mcp login renoise` (Codex)",
+      "Python 3.11 cu pachetele din scripts/requirements.txt (numpy, scipy, opencv-python-headless, soundfile, librosa, pyloudnorm, pillow); mediul virtual ocupă aproximativ 500 MB și îl pregătește agentul",
+      "FFmpeg în PATH (pe macOS: brew install ffmpeg); agentul întreabă înainte să-l instaleze",
+      "Imagini oficiale ale produsului și logo, furnizate de tine",
+      "Pe Codex: unealta de imagini inclusă (image_gen), facturată pe planul ChatGPT; fără cheie API separată în mod normal"
+    ]
+  },
+  "monetization": [
+    {
+      "model": "altul",
+      "what_you_sell": "Filme scurte de prezentare a produsului (15-30 de secunde, tăiate pe ritm), făcute la comandă cu ajutorul skill-ului, livrate ca mp4 cu versiuni și un README pentru fiecare.",
+      "for_whom": "Magazine online mici și branduri locale care nu au buget pentru o agenție de producție video.",
+      "license_check": {
+        "license": "MIT",
+        "commercial_use": "permis cu condiții",
+        "conditions": "Codul și instrucțiunile din repo sunt MIT, deci le poți folosi comercial. Rezultatele depind însă de termenii Renoise: potrivit lor, poți folosi materialele generate comercial doar în limitele planului tău, iar Renoise spune că rezultatele pot să nu fie exclusive sau utilizabile comercial. Pot exista restricții și pe fiecare model de generare. Mărcile, produsele și imaginile clienților trebuie să fie ale lor sau cu drepturi clare."
+      },
+      "path": "folosești repo-ul direct",
+      "own_build_notes": null,
+      "demand_evidence": [
+        {
+          "name": "Shhots AI (serviciu done-for-you de videoclipuri AI)",
+          "url": "https://shhots.ai/done-for-you/",
+          "price": "499 USD/lună pentru 30 de videoclipuri AI (aproximativ 16 USD pe videoclip)",
+          "what_it_proves": "Există clienți care plătesc abonament lunar pentru videoclipuri AI de produs, livrate gata făcute.",
+          "checked_at": "2026-10-30"
+        },
+        {
+          "name": "Creatify (generator AI de reclame video)",
+          "url": "https://creatify.ai/pricing",
+          "price": "Standard 10 USD/lună, Pro 38 USD/lună (prețuri listate pe pagină, la 2026-10-30)",
+          "what_it_proves": "Piața de reclame video AI pentru produse are oferte self-serve ieftine, deci concurența de preț e mare.",
+          "checked_at": "2026-10-30"
+        }
+      ],
+      "startup_cost": "Abonament agent AI (Claude Pro 20 USD/lună verificat la 2026-10-30) plus credite Renoise (de la 5 USD pentru 300 de credite, conform blogului lor) și câteva ore de configurare.",
+      "time_to_first_client": "necunoscut; depinde de cât de repede ai un portofoliu cu 2-3 filme proprii",
+      "difficulty": "mediu",
+      "risks": [
+        "Concurență gratuită sau ieftină: Creatify și alte generatoare au prețuri self-serve de ordinul zecilor de dolari pe lună.",
+        "Dependență totală de Renoise: prețurile, modelele sau termenii se pot schimba, iar fără el skill-ul nu produce nimic.",
+        "Calitate și revizuire: skill-ul însuși arată, în exemplele lui, mai multe runde de corecturi (v1-v3, până la v6) pentru mâini, direcția mișcării și starea produsului.",
+        "Repo foarte nou (creat pe 29 octombrie 2026): instrucțiunile se pot schimba rapid.",
+        "Drepturi: clientul trebuie să aibă drepturi asupra mărcii, produsului și imaginilor folosite."
+      ],
+      "first_steps": [
+        "Citești termenii Renoise privind folosirea comercială a rezultatelor și verifici ce permite planul ales.",
+        "Faci 2-3 filme-test pentru produse proprii sau fictive, folosind modul cu aprobare la fiecare etapă.",
+        "Pui filmele într-un mic portofoliu și îți definești pachetul (durată, număr de versiuni, ce imagini trebuie să aducă clientul).",
+        "Îți faci un calcul real de cost pe film (credite Renoise consumate) înainte să stabilești prețul."
+      ]
+    }
+  ],
+  "updated_at": "2026-10-30",
+  "notes_summary": "Am citit README-ul (cu versiune în engleză, deci traducere din chineză nu a fost necesară), SKILL.md, referințele, scripturile și exemplele; n-am rulat nimic, iar prețurile Renoise nu au putut fi confirmate pe pagina lor de prețuri.",
+  "notes": "Repo nou: creat pe 2026-10-29, ultimul commit 2026-10-29 (b51c98f), 72 de stele, 8 forkuri, 0 issue-uri, fără lansări oficiale (GitHub releases) și cu Discussions dezactivate. Documentația are README.md în chineză simplificată și README.en.md în engleză, plus SKILL.md în engleză; am folosit versiunea engleză, deci nu a fost nevoie de traducere. IMPORTANT: repo-ul nu este un editor care taie un video existent pe ritm. Este un skill (instrucțiuni pentru agent) plus scripturi Python de montaj; clipurile, muzica, vocea și sunetele se generează în serviciul extern Renoise (Seedance, Wan, Seedream, Lyria, ElevenLabs SFX, conform SKILL.md), iar scripturile fac montajul, culoarea, mixajul și livrarea. Nu confunda Renoise (renoise.ai, platformă de generare video) cu Renoise DAW (renoise.com), o aplicație muzicală fără legătură. Prețuri: pagina renoise.ai/pricing nu afișa sume în conținutul obținut (randare pe client); tabelul Lite 5 USD / 300 credite, Starter 20 / 1.200, Standard 60 / 3.600, Advanced 200 / 14.000 vine de pe blogul lor (renoise.ai/blog/ai-video-cost-explained), care nu spune dacă sunt prețuri lunare; un site terț (GetApp, doar din fragment de căutare, neverificat) indică Starter 20 USD/lună. Nu am verificat dacă accesul MCP cere un anumit plan. Claude Pro 20 USD/lună și Max de la 100 USD/lună verificate pe claude.com/pricing la 2026-10-30; prețul ChatGPT nu s-a putut încărca (403), deci null. Creatify 10 și 38 USD/lună sunt prețurile reduse afișate pe pagină (listate la 15 și 55); CapCut nu a fost folosit pentru comparație, pentru că pagina afișa prețuri în lei fără funcții de sincronizare pe ritm. Accesul AI: documentația repo-ului pomenește Claude Code și Codex, nu cere chei API și interzice agentului să ceară credențiale; Claude Code e inclus în abonamentele Claude plătite conform paginii de suport Claude; pe Codex, cadrele-cheie sunt facturate pe planul ChatGPT, iar documentația spune că scriptul CLI de rezervă al Codex cere cheie OpenAI doar dacă o cere utilizatorul. Platforme: documentația menționează macOS (brew) și fontul implicit este o cale macOS, deci Windows/Linux sunt marcate parțial, dedus din cod. Exemplele de film (iPhone Duo, Big Mac) sunt filme neoficiale de test, fără legătură cu Apple sau McDonald's; exemplul Big Mac notează că vocea off folosește lista oficială de ingrediente McDonald's și că o lansare reală ar cere drepturile asupra ei. Primii pași: nu am găsit o experiență reală potrivită (repo creat cu o zi înainte; am căutat pe Hacker News prin API-ul Algolia, în GitHub issues/discussions și pe web; nimic despre acest repo). Parteneri verificați la 2026-10-30: OpenCut-app/OpenCut (MIT, ultim push 2026-09-24), vercel-labs/skills (MIT, push 2026-10-29); Remotion apare doar ca alternativă, licență proprie (NOASSERTION pe GitHub). Termeni Renoise (renoise.ai/terms, secțiunea 10): poți folosi rezultatul comercial în limitele planului, rezultatul poate să nu fie exclusiv, înregistrabil sau utilizabil comercial. Livrabil din documentație: mp4 1080p, master ProRes și piste separate."
+}

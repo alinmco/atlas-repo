@@ -946,7 +946,10 @@
     "term": "cadre cheie",
     "aliases": [
       "cadre-cheie",
-      "keyframes"
+      "keyframes",
+      "cadru-cheie",
+      "cadrul-cheie",
+      "cadrelor-cheie"
     ],
     "explanation": "puncte din timp unde setezi o valoare care se animează"
   },
@@ -2125,5 +2128,222 @@
       "Seed"
     ],
     "explanation": "aparat mic vândut de autor, cu memorie pentru senzori"
+  },
+  {
+    "term": "landing page",
+    "aliases": [
+      "landing page-uri",
+      "landing page-ul",
+      "pagină de prezentare",
+      "pagini de prezentare",
+      "pagina de prezentare"
+    ],
+    "explanation": "pagină web făcută pentru o singură ofertă și o singură acțiune"
+  },
+  {
+    "term": "Tailwind CSS",
+    "aliases": [
+      "Tailwind",
+      "clase Tailwind"
+    ],
+    "explanation": "set de clase gata făcute pentru stilul paginilor web"
+  },
+  {
+    "term": "CTA",
+    "aliases": [
+      "CTA-uri",
+      "buton de acțiune"
+    ],
+    "explanation": "butonul sau textul care îndeamnă vizitatorul la o acțiune"
+  },
+  {
+    "term": "SEO",
+    "aliases": [
+      "SEO / AEO",
+      "AEO"
+    ],
+    "explanation": "optimizare ca pagina să apară în căutări"
+  },
+  {
+    "term": "Windsurf",
+    "aliases": [],
+    "explanation": "editor de cod cu asistent AI integrat"
+  },
+  {
+    "term": "Cline",
+    "aliases": [],
+    "explanation": "asistent AI de programare, ca extensie în editor"
+  },
+  {
+    "term": "fork",
+    "aliases": [
+      "forkul",
+      "fork-ul",
+      "faci fork"
+    ],
+    "explanation": "copia ta a unui proiect, pe care o poți modifica"
+  },
+  {
+    "term": "match cut",
+    "aliases": [
+      "match-cut",
+      "match cut-uri",
+      "tăietură potrivită"
+    ],
+    "explanation": "tăietură între două cadre care se potrivesc ca formă sau mișcare"
+  },
+  {
+    "term": "BPM",
+    "aliases": [
+      "bătăi pe minut",
+      "grila de ritm"
+    ],
+    "explanation": "câte bătăi muzicale sunt într-un minut"
+  },
+  {
+    "term": "Renoise",
+    "aliases": [
+      "serverul Renoise",
+      "serviciul Renoise",
+      "creditele Renoise",
+      "credite Renoise"
+    ],
+    "explanation": "serviciu plătit care generează video, muzică și sunete"
+  },
+  {
+    "term": "ProRes",
+    "aliases": [
+      "master ProRes"
+    ],
+    "explanation": "format video de calitate înaltă, folosit pentru montaj"
+  },
+  {
+    "term": "animatic",
+    "aliases": [
+      "animatic-ul"
+    ],
+    "explanation": "variantă brută a filmului, din imagini fixe, cu muzica pusă"
+  },
+  {
+    "term": "voce off",
+    "aliases": [
+      "vocea off",
+      "VO"
+    ],
+    "explanation": "voce care citește textul peste imagine, fără a fi în cadru"
+  },
+  {
+    "term": "foley",
+    "aliases": [
+      "sunete foley"
+    ],
+    "explanation": "sunete mici adăugate peste imagine, ca zgomotul unui gest"
+  },
+  {
+    "term": "mp4",
+    "aliases": [
+      "fișier mp4"
+    ],
+    "explanation": "formatul obișnuit de fișier video"
+  },
+  {
+    "term": "Pinokio",
+    "aliases": [
+      "Pinokio-ul"
+    ],
+    "explanation": "aplicație care instalează și pornește alte programe cu un clic"
+  },
+  {
+    "term": "CesiumJS",
+    "aliases": [
+      "Cesium"
+    ],
+    "explanation": "bibliotecă care desenează globul 3D în browser"
+  },
+  {
+    "term": "Cesium ion",
+    "aliases": [],
+    "explanation": "serviciul Cesium cu hărți și teren 3D, pe bază de token"
+  },
+  {
+    "term": "ADS-B",
+    "aliases": [
+      "ADS-B-ul"
+    ],
+    "explanation": "semnal radio pe care avioanele îl emit cu poziția lor"
+  },
+  {
+    "term": "AIS",
+    "aliases": [
+      "AIS-ul"
+    ],
+    "explanation": "semnal radio cu poziția navelor, emis public"
+  },
+  {
+    "term": "ODbL",
+    "aliases": [
+      "ODbL 1.0"
+    ],
+    "explanation": "licență pentru date deschise: cere menționarea sursei și aceeași licență mai departe"
+  },
+  {
+    "term": "CC BY-NC-SA",
+    "aliases": [
+      "CC BY-NC-SA 3.0",
+      "CC BY-NC-SA 4.0",
+      "CC BY-NC"
+    ],
+    "explanation": "licență care interzice folosirea comercială și cere aceeași licență mai departe"
+  },
+  {
+    "term": "GEOINT",
+    "aliases": [
+      "GEOINT-ul"
+    ],
+    "explanation": "analiză de informații pornind de la hărți și poziții geografice"
+  },
+  {
+    "term": "CCTV",
+    "aliases": [
+      "camere CCTV"
+    ],
+    "explanation": "camere de supraveghere, aici camere publice de trafic"
+  },
+  {
+    "term": "ALPR",
+    "aliases": [
+      "ALPR-uri"
+    ],
+    "explanation": "cameră care citește automat plăcuțele de înmatriculare"
+  },
+  {
+    "term": "RTL-SDR",
+    "aliases": [
+      "SDR"
+    ],
+    "explanation": "stick USB ieftin care primește semnale radio, inclusiv de la avioane"
+  },
+  {
+    "term": "Photorealistic 3D Tiles",
+    "aliases": [
+      "3D Tiles",
+      "Google 3D"
+    ],
+    "explanation": "orașe în 3D foarte detaliate, oferite de Google"
+  },
+  {
+    "term": "localhost",
+    "aliases": [
+      "localhost:4173"
+    ],
+    "explanation": "adresa propriului calculator, vizibilă doar ție"
+  },
+  {
+    "term": "tile",
+    "aliases": [
+      "tile-uri",
+      "tile-urile"
+    ],
+    "explanation": "bucată pătrată de hartă încărcată separat"
   }
 ]

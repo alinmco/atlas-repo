@@ -165,6 +165,12 @@
         "name": "LosslessCut",
         "why": "Taie rapid, fără recodare, fișiere lungi, iar bucățile rezultate (MP4) intră apoi în OpenCut pentru montajul final.",
         "in_catalog": false
+      },
+      {
+        "repo_url": "https://github.com/Sac-Y/match-cut",
+        "name": "match-cut",
+        "why": "Ieșirea (mp4-ul final) poate fi deschisă într-un editor video pentru retușuri manuale sau subtitrări; e un pas manual, nu o integrare documentată.",
+        "in_catalog": true
       }
     ],
     "gaps_noticed": [

@@ -483,5 +483,60 @@
     "gap": "Șase dintre cele 21 de entități Home Assistant descrise în README (zone, baie, ieșire din pat, tranziție între camere, ședință, poziție) nu sunt anunțate de server, conform testelor din cod.",
     "source_slug": "ruview",
     "added_at": "2026-10-29"
+  },
+  {
+    "gap": "Nu există un instalator: fiecare unealtă primește fișierul prin copiere manuală (README arată comenzi diferite pentru Claude Code, Cursor, Codex, Windsurf și Cline).",
+    "source_slug": "ai-design-skills",
+    "added_at": "2026-10-30"
+  },
+  {
+    "gap": "Nicio captură de ecran sau pagină-exemplu în repo; nu poți vedea rezultatul înainte să instalezi.",
+    "source_slug": "ai-design-skills",
+    "added_at": "2026-10-30"
+  },
+  {
+    "gap": "Issue-ul #5 arată reguli care se contrazic în fișier (animezi doar `transform` și `opacity`, dar și culoarea la hover și la secțiunea cu slogan); agentul trebuie să aleagă singur.",
+    "source_slug": "ai-design-skills",
+    "added_at": "2026-10-30"
+  },
+  {
+    "gap": "Regulile de dimensiuni sunt scrise în clase Tailwind; pentru alt sistem de stiluri nu e descris cum se traduc.",
+    "source_slug": "ai-design-skills",
+    "added_at": "2026-10-30"
+  },
+  {
+    "gap": "Nu există verificare automată după generare: respectarea regulilor depinde de ce face agentul.",
+    "source_slug": "ai-design-skills",
+    "added_at": "2026-10-30"
+  },
+  {
+    "gap": "Documentația descrie macOS (brew, font de sistem macOS); pe Windows și Linux fontul implicit și comenzile de tip `JOBS=6 python ...` trebuie adaptate manual.",
+    "source_slug": "match-cut",
+    "added_at": "2026-10-30"
+  },
+  {
+    "gap": "Fără cont și credite Renoise, restul pașilor (video, muzică) nu pornesc; nu există o cale documentată cu alt furnizor.",
+    "source_slug": "match-cut",
+    "added_at": "2026-10-30"
+  },
+  {
+    "gap": "Nu există un pas automat de import al mp4-ului final într-un editor cu timeline; se face manual.",
+    "source_slug": "match-cut",
+    "added_at": "2026-10-30"
+  },
+  {
+    "gap": "Nu există istoric: README-ul spune că prezentul e partea ieftină, iar redarea trecutului cere stocare și calcul serios.",
+    "source_slug": "gods-eye-view",
+    "added_at": "2026-10-30"
+  },
+  {
+    "gap": "Datele de la SpiderFoot (domenii, IP-uri) și cele de aici (poziții fizice) nu au un format comun; legătura dintre ele ar fi un pas manual.",
+    "source_slug": "gods-eye-view",
+    "added_at": "2026-10-30"
+  },
+  {
+    "gap": "Straturile cu licențe diferite (OpenSky, TeleGeography, GhostMaps) trebuie scoase sau înlocuite manual pentru uz comercial.",
+    "source_slug": "gods-eye-view",
+    "added_at": "2026-10-30"
   }
 ]

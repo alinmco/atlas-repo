@@ -272,6 +272,12 @@
         "name": "playwright-mcp",
         "why": "Ghidul `critique` face capturi de ecran ale paginii și menționează Playwright ca variantă când agentul nu are propriul instrument de browser; capturile devin intrare pentru critică.",
         "in_catalog": false
+      },
+      {
+        "repo_url": "https://github.com/elayadesign/ai-design-skills",
+        "name": "AI Design Skills",
+        "why": "După ce agentul a generat pagina cu regulile de aici, comenzile `critique` și `audit` din Impeccable o pot verifica; codul paginii devine intrarea lor.",
+        "in_catalog": true
       }
     ],
     "gaps_noticed": [
