@@ -2345,5 +2345,56 @@
       "tile-urile"
     ],
     "explanation": "bucată pătrată de hartă încărcată separat"
+  },
+  {
+    "term": "NDJSON",
+    "aliases": [],
+    "explanation": "Fișier text cu câte un obiect JSON pe fiecare linie"
+  },
+  {
+    "term": "SmartScreen",
+    "aliases": [],
+    "explanation": "Avertisment Windows pentru programe nesemnate sau necunoscute"
+  },
+  {
+    "term": "Anki",
+    "aliases": [],
+    "explanation": "Program gratuit de carduri de memorat, cu repetare spațiată"
+  },
+  {
+    "term": "iCalendar",
+    "aliases": [
+      ".ics"
+    ],
+    "explanation": "Fișier .ics de evenimente, importabil în orice calendar"
+  },
+  {
+    "term": "TTS",
+    "aliases": [
+      "Text-to-Speech"
+    ],
+    "explanation": "Transformare automată a textului în voce vorbită"
+  },
+  {
+    "term": "AGPL",
+    "aliases": [
+      "AGPL-3.0"
+    ],
+    "explanation": "Licență care cere publicarea codului și pentru serviciile online"
+  },
+  {
+    "term": "Mastery Path",
+    "aliases": [],
+    "explanation": "Traseu de învățare care verifică ce ai stăpânit"
+  },
+  {
+    "term": "PageIndex",
+    "aliases": [],
+    "explanation": "Motor de căutare în documente prin raționament, cu citări pe pagină"
+  },
+  {
+    "term": "LightRAG",
+    "aliases": [],
+    "explanation": "Motor de căutare în documente bazat pe graf de legături"
   }
 ]

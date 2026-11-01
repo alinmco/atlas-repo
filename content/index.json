@@ -632,10 +632,11 @@
     "outputs": [
       "Răspunsuri cu citări în interfața web",
       "Export Markdown și Word (notițe, cărți, conversații)",
+      "Carduri de studiu exportate în Anki și evenimente din calendar exportate ca fișier iCalendar (.ics)",
       "Flux NDJSON (`--format json`), un eveniment pe linie, cu `session_id`",
-      "Teste, carduri de studiu și cărți interactive în aplicație"
+      "Teste și cărți interactive în aplicație"
     ],
-    "updated_at": "2026-10-29",
+    "updated_at": "2026-11-01",
     "pairs_well_with": [
       "https://github.com/ollama/ollama",
       "https://github.com/HKUDS/LightRAG",
