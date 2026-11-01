@@ -538,5 +538,20 @@
     "gap": "Straturile cu licențe diferite (OpenSky, TeleGeography, GhostMaps) trebuie scoase sau înlocuite manual pentru uz comercial.",
     "source_slug": "gods-eye-view",
     "added_at": "2026-10-30"
+  },
+  {
+    "gap": "Aplicația desktop se descarcă doar din artefactele unui workflow GitHub de pe ramura dev (cont GitHub, expiră după 7 zile); nu există încă instalator în pagina de release.",
+    "source_slug": "deeptutor",
+    "added_at": "2026-11-01"
+  },
+  {
+    "gap": "Limba română nu apare în lista limbilor de interfață (en, zh, de, fr, ja, pl, pt, tr, uk, vi) și nici în lista limbilor de răspuns din cod (response_languages.py).",
+    "source_slug": "deeptutor",
+    "added_at": "2026-11-01"
+  },
+  {
+    "gap": "Pentru „Video Lesson”, backend-ul cere Node.js 22+ și npm, iar Math Animator cere dependențe Manim opționale.",
+    "source_slug": "deeptutor",
+    "added_at": "2026-11-01"
   }
 ]
