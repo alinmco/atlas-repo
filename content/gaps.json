@@ -553,5 +553,15 @@
     "gap": "Pentru „Video Lesson”, backend-ul cere Node.js 22+ și npm, iar Math Animator cere dependențe Manim opționale.",
     "source_slug": "deeptutor",
     "added_at": "2026-11-01"
+  },
+  {
+    "gap": "Documentația oficială nu descrie pașii pentru a folosi modelul salvat în alte programe de rulare locală (de ex. conversia în alt format); un issue deschis arată că formatul GGUF nu e acceptat ca intrare.",
+    "source_slug": "heretic",
+    "added_at": "2026-11-02"
+  },
+  {
+    "gap": "Alegerea variantei din frontul Pareto este un pas manual, la fiecare rulare, în terminal.",
+    "source_slug": "heretic",
+    "added_at": "2026-11-02"
   }
 ]

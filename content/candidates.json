@@ -502,5 +502,26 @@
     "suggested_by": "gods-eye-view",
     "why": "Biblioteca pe care e construit globul; util dacă vrei să înțelegi sau să extinzi straturile, ca punct de plecare pentru propriile hărți 3D.",
     "added_at": "2026-10-30"
+  },
+  {
+    "repo_url": "https://github.com/optuna/optuna",
+    "name": "Optuna",
+    "suggested_by": "heretic",
+    "why": "Bibliotecă folosită chiar de Heretic pentru optimizarea parametrilor; util dacă vrei să înțelegi sau să ajustezi căutarea (pe scurt: parametrii încercați devin variantele pe care le alegi).",
+    "added_at": "2026-11-02"
+  },
+  {
+    "repo_url": "https://github.com/huggingface/transformers",
+    "name": "Transformers",
+    "suggested_by": "heretic",
+    "why": "Biblioteca din care Heretic încarcă modelele; modelul salvat de Heretic se încarcă înapoi cu ea pentru folosire sau teste proprii.",
+    "added_at": "2026-11-02"
+  },
+  {
+    "repo_url": "https://github.com/EleutherAI/lm-evaluation-harness",
+    "name": "lm-evaluation-harness",
+    "suggested_by": "heretic",
+    "why": "Setul de benchmark-uri (de tip MMLU, GSM8K) folosit pentru a verifica ce capacități a pierdut modelul modificat, față de cel original.",
+    "added_at": "2026-11-02"
   }
 ]

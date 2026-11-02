@@ -788,5 +788,30 @@
       "https://github.com/CesiumGS/cesium"
     ],
     "used_in_recipes": []
+  },
+  {
+    "slug": "heretic",
+    "name": "Heretic",
+    "one_liner": "Modifică automat un model de limbaj local ca să refuze mai puțin, fără reantrenare.",
+    "categories": [
+      "Inteligență artificială și învățare automată"
+    ],
+    "inputs": [
+      "Un model de limbaj de pe Hugging Face (nume de tip organizație/model, de ex. Qwen/Qwen3-4B-Instruct-2507) sau un folder local cu model, în format compatibil Transformers",
+      "Opțional: un fișier config.toml (setări, scorere, seturi de date), în folderul de lucru",
+      "Opțional: un fișier reproduce.json pentru --reproduce"
+    ],
+    "outputs": [
+      "Model modificat salvat local într-un folder (greutățile, la alegerea ta din meniu)",
+      "Model urcat pe Hugging Face (cu fișier README generat, care menționează Heretic și parametrii)",
+      "Opțional: folder reproduce cu reproduce.json și instrucțiuni pentru refacerea exactă a modelului"
+    ],
+    "updated_at": "2026-11-02",
+    "pairs_well_with": [
+      "https://github.com/optuna/optuna",
+      "https://github.com/huggingface/transformers",
+      "https://github.com/EleutherAI/lm-evaluation-harness"
+    ],
+    "used_in_recipes": []
   }
 ]
