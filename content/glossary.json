@@ -2396,5 +2396,98 @@
     "term": "LightRAG",
     "aliases": [],
     "explanation": "Motor de căutare în documente bazat pe graf de legături"
+  },
+  {
+    "term": "abliteration",
+    "aliases": [
+      "abliterare",
+      "abliterated",
+      "abliterate"
+    ],
+    "explanation": "tehnică ce reduce refuzurile unui model modificându-i ponderile interne"
+  },
+  {
+    "term": "aliniere de siguranță",
+    "aliases": [
+      "alinierea de siguranță",
+      "safety alignment",
+      "alinierii de siguranță"
+    ],
+    "explanation": "antrenarea unui model să refuze cereri considerate dăunătoare"
+  },
+  {
+    "term": "VRAM",
+    "aliases": [
+      "memoria video"
+    ],
+    "explanation": "memoria plăcii video, unde stă modelul în timpul rulării"
+  },
+  {
+    "term": "PyTorch",
+    "aliases": [],
+    "explanation": "bibliotecă Python pentru rularea modelelor pe placa video"
+  },
+  {
+    "term": "CUDA",
+    "aliases": [
+      "CUDA Toolkit"
+    ],
+    "explanation": "software Nvidia care permite calculele pe placa video"
+  },
+  {
+    "term": "ROCm",
+    "aliases": [],
+    "explanation": "echivalentul AMD pentru CUDA, pentru plăci video AMD"
+  },
+  {
+    "term": "Optuna",
+    "aliases": [],
+    "explanation": "bibliotecă ce încearcă automat mai multe combinații de setări"
+  },
+  {
+    "term": "divergență KL",
+    "aliases": [
+      "KL divergence",
+      "divergența KL"
+    ],
+    "explanation": "măsură a cât s-a schimbat un model față de original"
+  },
+  {
+    "term": "cuantizare",
+    "aliases": [
+      "cuantizarea",
+      "quantization",
+      "bnb_4bit"
+    ],
+    "explanation": "comprimarea modelului pentru a ocupa mai puțină memorie"
+  },
+  {
+    "term": "front Pareto",
+    "aliases": [
+      "frontul Pareto",
+      "Pareto front"
+    ],
+    "explanation": "lista variantelor cu cel mai bun echilibru între două obiective"
+  },
+  {
+    "term": "TOML",
+    "aliases": [
+      "fișier TOML"
+    ],
+    "explanation": "format simplu de fișier pentru setări"
+  },
+  {
+    "term": "sicofanție",
+    "aliases": [
+      "sycophancy"
+    ],
+    "explanation": "tendința modelului de a-ți da mereu dreptate"
+  },
+  {
+    "term": "manifest de reproducere",
+    "aliases": [
+      "reproduce.json"
+    ],
+    "explanation": "fișier mic cu toți pașii pentru refacerea exactă a modelului"
   }
 ]

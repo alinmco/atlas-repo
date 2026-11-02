@@ -1,0 +1,289 @@
+{
+  "slug": "heretic",
+  "repo_url": "https://github.com/p-e-w/heretic",
+  "name": "Heretic",
+  "one_liner": "Modifică automat un model de limbaj local ca să refuze mai puțin, fără reantrenare.",
+  "problem_solved": "Modelele de limbaj din deschidere vin cu „aliniere de siguranță” (refuză anumite cereri, uneori și cereri nevinovate). Heretic modifică automat un model de pe calculatorul tău ca să refuze mai puțin sau să-și schimbe stilul, fără reantrenare costisitoare.",
+  "features": [
+    "Reduce refuzurile unui model (acțiunea implicită), cu parametri aleși automat de un optimizator",
+    "Alte moduri, din fișiere de configurare incluse: mai puțin „slop”, mai puțin umor, mai puțină lingușire, alt ton emoțional",
+    "Măsoară cât s-a schimbat modelul față de original (rata de refuzuri și divergența KL) și îți arată compromisurile",
+    "La final poți salva modelul, îl poți urca pe Hugging Face, poți discuta cu el sau rula teste standard",
+    "Modele reproductibile: un fișier mic (manifest) permite refacerea exactă a modelului pe alt calculator",
+    "Scorere și modificatori ca pluginuri, scrise de tine, fără a modifica pachetul"
+  ],
+  "at_a_glance": {
+    "for_you_if": [
+      "Ești cercetător sau pasionat de modele locale și ai un GPU decent.",
+      "Vrei să înțelegi sau să reduci refuzurile false ale unui model pe care îl rulezi tu."
+    ],
+    "not_for_you_if": [
+      "Nu ai un GPU cu suficient VRAM și nu vrei să închiriezi unul.",
+      "Vrei un model care să rămână cu filtrele de siguranță pentru public larg sau copii."
+    ],
+    "verdict": "Unealtă serioasă, făcută de oameni, dar modelul rezultat nu mai are filtrele originale, iar responsabilitatea e a ta."
+  },
+  "cost": {
+    "level": "gratuit complet",
+    "summary": "Programul e gratuit (AGPL) și nu folosește API-uri sau abonamente AI; plătești doar GPU-ul tău sau unul închiriat pe oră.",
+    "ai_access": {
+      "mode": "nu folosește AI",
+      "detail": "Nu apelează servicii AI plătite: descarcă modelul ales de la Hugging Face și îl modifică local pe GPU-ul tău, deci nu are nevoie nici de cheie API, nici de abonament.",
+      "source_url": "https://github.com/p-e-w/heretic/blob/0db5c31e10ecc426440b6fb0ce4bf85352faf1a7/README.md"
+    },
+    "items": [
+      {
+        "what": "GPU cu VRAM suficient (documentația: aproximativ 2,5 GB de VRAM pentru fiecare miliard de parametri; cuantizarea pe 4 biți reduce nevoia cu aproximativ 70%)",
+        "price": null,
+        "required": true,
+        "source_url": "https://heretic-project.org/tutorial"
+      },
+      {
+        "what": "Închiriere GPU în cloud ca alternativă la GPU propriu (exemplu RunPod, RTX 3090 24 GB, pe oră)",
+        "price": "0,50 USD/oră (tabelul Pods, pagina marcată „Updated October 28, 2026”)",
+        "required": false,
+        "source_url": "https://www.runpod.io/pricing"
+      },
+      {
+        "what": "Cont Hugging Face cu token de scriere (doar dacă urci modelul rezultat; descărcarea modelelor publice nu cere token în documentație)",
+        "price": "Plan PRO opțional: 9 USD/lună (pagina nu descrie clar contul gratuit)",
+        "required": false,
+        "source_url": "https://huggingface.co/pricing"
+      },
+      {
+        "what": "Spațiu pe disc pentru modelul original și cel modificat",
+        "price": null,
+        "required": true,
+        "source_url": null
+      }
+    ]
+  },
+  "platforms": {
+    "windows": "parțial",
+    "mac": "parțial",
+    "linux": "da",
+    "note": "Documentația nu enumeră sisteme de operare; tutorialul folosește comenzi Linux (source venv/bin/activate) și GPU Nvidia (CUDA) sau AMD (ROCm). Din cod se vede că există tratare pentru Windows (codare UTF-8), pentru macOS (backend MPS) și alte accelerătoare, dar este dedus, nu testat.",
+    "source_url": "https://heretic-project.org/tutorial"
+  },
+  "risk_flags": [
+    {
+      "flag": "licență restrictivă",
+      "detail": "Programul e sub AGPL-3.0-or-later (copyleft puternic), iar modelele de bază pot avea licențe proprii (Gemma și Llama 3.1 apar ca licențe personalizate pe Hugging Face), cu politici de utilizare care se aplică și versiunilor modificate.",
+      "source_url": "https://github.com/p-e-w/heretic/blob/0db5c31e10ecc426440b6fb0ce4bf85352faf1a7/LICENSE"
+    },
+    {
+      "flag": "proiect instabil",
+      "detail": "Versiunea 2.0.0 a apărut pe 2026-11-01, configurațiile din 1.x nu mai sunt compatibile, iar issue-urile deschise raportează modele „distruse” sau scoruri diferite la exportul modelului.",
+      "source_url": "https://github.com/p-e-w/heretic/issues/487"
+    }
+  ],
+  "audience_reason": "e un program în linie de comandă care cere Python, PyTorch pentru GPU-ul tău și înțelegerea unor scoruri (refuzuri, divergență KL)",
+  "setup_difficulty_reason": "pip install e scurt, dar PyTorch potrivit GPU-ului, VRAM mare și rulări de 30 de minute până la câteva ore ridică dificultatea",
+  "analogy": "Ca un reglaj fin la un radio: nu construiești radioul din nou, ci muți un buton până dispare un zgomot, urmărind să nu strici restul sunetului.",
+  "how_it_works": [
+    "Pas 1, intrare: alegi un model de pe Hugging Face (de ex. Qwen/Qwen3-4B-Instruct-2507) și rulezi comanda heretic cu numele lui.",
+    "Pas 2, măsurare: programul compară răspunsurile modelului la două seturi de cereri, unele pe care modelul le refuză și unele inofensive, ca să găsească „direcția” internă asociată refuzului.",
+    "Pas 3, optimizare: un optimizator (Optuna) încearcă mai multe combinații de parametri, ca să scadă numărul de refuzuri păstrând modelul cât mai aproape de original (divergența KL).",
+    "Pas 4, ieșire: primești o listă de variante (frontul Pareto); alegi una și o salvezi local, o urci pe Hugging Face, discuți cu ea sau o testezi cu benchmark-uri."
+  ],
+  "first_steps": null,
+  "categories": [
+    "Inteligență artificială și învățare automată"
+  ],
+  "search_intents": [
+    "vreau să modific un model de limbaj local ca să refuze mai puțin",
+    "vreau să înțeleg ce este abliteration la modelele AI",
+    "vreau să reduc „slop-ul” și lingușirea unui model local",
+    "vreau să cercetez cum funcționează alinierea de siguranță a modelelor",
+    "vreau să refac exact un model modificat cu Heretic dintr-un fișier de reproducere"
+  ],
+  "audience": "avansat",
+  "setup_difficulty": "mediu",
+  "replaces": [],
+  "examples": [
+    {
+      "title": "Instalare și prima rulare (tutorialul oficial, GPU Nvidia)",
+      "scenario": "Pregătești un mediu Python, instalezi PyTorch și Heretic, apoi rulezi programul pe un model mic de pe Hugging Face. Programul îți cere apoi decizii în terminal (alegerea unei variante și a unei acțiuni).",
+      "prerequisites": [
+        "Python 3.10 sau mai nou",
+        "GPU Nvidia cu CUDA Toolkit (pentru AMD tutorialul folosește altă comandă pip cu rocm7.2)",
+        "VRAM: aproximativ 2,5 GB pentru fiecare miliard de parametri ai modelului"
+      ],
+      "commands": [
+        "python -m venv venv",
+        "source venv/bin/activate",
+        "pip install torch torchvision",
+        "pip install -U heretic-llm",
+        "heretic Qwen/Qwen3.5-4B"
+      ],
+      "code": "",
+      "output_from_docs": null,
+      "source_url": "https://heretic-project.org/tutorial",
+      "kind": "instalare"
+    },
+    {
+      "title": "Alt mod de folosire: reducerea „slop-ului” (fișier de configurare inclus)",
+      "scenario": "Heretic nu e doar pentru refuzuri: fișierul config.noslop.toml din repo schimbă obiectivul în reducerea clișeelor de stil în texte de ficțiune. Fișierul spune în comentariul de început să-l redenumești config.toml și să-l pui în folderul din care rulezi Heretic. Mai jos sunt primele rânduri din acel fișier, exact ca în repo.",
+      "prerequisites": [
+        "Heretic instalat (vezi exemplul anterior)",
+        "Fișierul config.noslop.toml din repo, redenumit config.toml în folderul de lucru"
+      ],
+      "commands": [],
+      "code": "# Rename this file to config.toml, place it in the working directory\n# that you run Heretic from, and edit the configuration to your liking.\n\nmax_response_length = 300\n\nmodified_model_type = \"slop-reduced\"\n\nupload_tags = [\n    \"no-slop\",\n]\n\nsystem_prompt = \"You are a professional writer.\"",
+      "output_from_docs": null,
+      "source_url": "https://github.com/p-e-w/heretic/blob/0db5c31e10ecc426440b6fb0ce4bf85352faf1a7/config.noslop.toml",
+      "kind": "folosire"
+    },
+    {
+      "title": "Refacerea unui model dintr-un manifest de reproducere",
+      "scenario": "Dacă cineva a urcat un model cu informații de reproductibilitate, un fișier reproduce.json (aproximativ 9 KB) permite refacerea lui. Heretic verifică mediul tău față de cel original și, după export, compară hash-urile fișierelor.",
+      "prerequisites": [
+        "Heretic instalat",
+        "Un fișier reproduce.json (vezi biblioteca „Heretic Grimoire” de pe Hugging Face)"
+      ],
+      "commands": [
+        "heretic --reproduce path/to/reproduce.json"
+      ],
+      "code": "",
+      "output_from_docs": null,
+      "source_url": "https://github.com/p-e-w/heretic/blob/0db5c31e10ecc426440b6fb0ce4bf85352faf1a7/README.md",
+      "kind": "folosire"
+    }
+  ],
+  "connectors": {
+    "inputs": [
+      "Un model de limbaj de pe Hugging Face (nume de tip organizație/model, de ex. Qwen/Qwen3-4B-Instruct-2507) sau un folder local cu model, în format compatibil Transformers",
+      "Opțional: un fișier config.toml (setări, scorere, seturi de date), în folderul de lucru",
+      "Opțional: un fișier reproduce.json pentru --reproduce"
+    ],
+    "outputs": [
+      "Model modificat salvat local într-un folder (greutățile, la alegerea ta din meniu)",
+      "Model urcat pe Hugging Face (cu fișier README generat, care menționează Heretic și parametrii)",
+      "Opțional: folder reproduce cu reproduce.json și instrucțiuni pentru refacerea exactă a modelului"
+    ],
+    "pairs_well_with": [
+      {
+        "repo_url": "https://github.com/optuna/optuna",
+        "name": "Optuna",
+        "why": "Bibliotecă folosită chiar de Heretic pentru optimizarea parametrilor; util dacă vrei să înțelegi sau să ajustezi căutarea (pe scurt: parametrii încercați devin variantele pe care le alegi).",
+        "in_catalog": false
+      },
+      {
+        "repo_url": "https://github.com/huggingface/transformers",
+        "name": "Transformers",
+        "why": "Biblioteca din care Heretic încarcă modelele; modelul salvat de Heretic se încarcă înapoi cu ea pentru folosire sau teste proprii.",
+        "in_catalog": false
+      },
+      {
+        "repo_url": "https://github.com/EleutherAI/lm-evaluation-harness",
+        "name": "lm-evaluation-harness",
+        "why": "Setul de benchmark-uri (de tip MMLU, GSM8K) folosit pentru a verifica ce capacități a pierdut modelul modificat, față de cel original.",
+        "in_catalog": false
+      }
+    ],
+    "gaps_noticed": [
+      "Documentația oficială nu descrie pașii pentru a folosi modelul salvat în alte programe de rulare locală (de ex. conversia în alt format); un issue deschis arată că formatul GGUF nu e acceptat ca intrare.",
+      "Alegerea variantei din frontul Pareto este un pas manual, la fiecare rulare, în terminal."
+    ]
+  },
+  "when_not_to_use": [
+    "Modelul rezultat nu mai refuză cereri dăunătoare (inclusiv ilegale): nu îl pune la dispoziția publicului larg, a copiilor sau într-un produs fără un strat propriu de control al accesului și al conținutului.",
+    "Responsabilitatea legală și etică pentru modelul modificat și pentru ce se produce cu el îți revine ție, nu autorului programului; verifică legislația din țara ta și regulile platformelor unde îl publici.",
+    "Licențele modelelor de bază pot interzice sau limita modificarea ori redistribuirea (de ex. politica de utilizare Gemma interzice, la punctul 2.4, „încercările de a eluda filtrele de siguranță”; Llama 3.1 are licență proprie): citește licența înainte să salvezi sau să publici.",
+    "Hugging Face are o politică de conținut care poate duce la restricționarea sau ștergerea modelelor și conturilor care încalcă regulile; modelele modificate pot fi marcate sau scoase.",
+    "Nu ai GPU cu suficient VRAM: documentația spune că pe CPU rulează de ordine de mărime mai încet și e potrivit doar pentru modele minuscule.",
+    "Ai nevoie de un model cu performanțe sigure, neschimbate: modificarea poate degrada capacitățile (în special raționamentul matematic, conform unei comparații externe citate în surse), iar o parte din refuzuri poate rămâne."
+  ],
+  "alternatives": [
+    {
+      "name": "Abliterator.py (FailSpy)",
+      "url": "https://github.com/FailSpy/abliterator",
+      "difference": "Implementare mai veche a aceleiași idei de bază (abliteration), fără optimizatorul automat; listată de autorul Heretic ca „prior art”."
+    },
+    {
+      "name": "ErisForge",
+      "url": "https://github.com/Tsadoq/ErisForge",
+      "difference": "Bibliotecă pentru modificarea modelelor prin ablație, listată ca lucrare anterioară în README-ul Heretic; mai manuală."
+    },
+    {
+      "name": "Reglaj fin (fine-tuning) la un serviciu cloud",
+      "url": "https://www.together.ai/pricing",
+      "difference": "Antrenezi modelul pe date proprii, pe bani (SFT de la 0,34 USD per milion de tokeni la modele mici, minim 4 USD per job); schimbă comportamentul prin date, nu prin modificarea directă a ponderilor."
+    }
+  ],
+  "tech_sheet": {
+    "license": "AGPL-3.0-or-later",
+    "language": "Python",
+    "commit_sha": "0db5c31e10ecc426440b6fb0ce4bf85352faf1a7",
+    "last_commit_date": "2026-11-01",
+    "stars": 37646,
+    "requirements": [
+      "Python 3.10 sau mai nou (pyproject.toml: requires-python >= 3.10)",
+      "PyTorch 2.6 sau mai nou, instalat potrivit hardware-ului (README: Prepare a Python 3.10+ environment with PyTorch 2.6+)",
+      "GPU Nvidia cu CUDA Toolkit sau GPU AMD cu ROCm; pe CPU funcționează doar pentru modele minuscule, mult mai lent (tutorial)",
+      "VRAM: aproximativ 2,5 GB per miliard de parametri; cu quantization = \"bnb_4bit\" necesarul scade (tutorial: cu aproximativ 70%)",
+      "Mediu virtual recomandat: python -m venv venv; source venv/bin/activate (tutorial)",
+      "Pentru AMD: pip install torch torchvision --index-url https://download.pytorch.org/whl/rocm7.2 (tutorial)",
+      "Instalare: pip install -U heretic-llm",
+      "Acces la internet, pentru descărcarea modelului și a seturilor de date de pe Hugging Face",
+      "Spațiu pe disc suficient pentru modelul original și cel modificat",
+      "Opțional, doar pentru încărcare pe Hugging Face: cont și token cu drept de scriere"
+    ]
+  },
+  "monetization": [
+    {
+      "model": "consultanță și training",
+      "what_you_sell": "Consultanță pentru echipe care rulează modele deschise local: alegerea unui model cu licență permisivă (de ex. Apache-2.0), rularea Heretic cu un obiectiv clar (de ex. mai puține refuzuri false pe domeniul lor, sau mai puțin „slop” în texte), măsurarea pierderilor de calitate și documentarea licențelor, a controlului accesului și a limitărilor.",
+      "for_whom": "Firme mici sau echipe de cercetare care vor un model local, adaptat pe domeniul lor, și au nevoie de cineva care să facă rularea, evaluarea și evidența licențelor.",
+      "license_check": {
+        "license": "AGPL-3.0-or-later",
+        "commercial_use": "permis cu condiții",
+        "conditions": "AGPL permite folosirea comercială a programului. Dacă îl modifici și oferi altora acces la versiunea modificată printr-un serviciu online, trebuie să publici codul modificat sub AGPL. Rularea Heretic pentru tine sau pentru un client, fără a-l expune ca serviciu, nu declanșează această cerință. Separat, licențele modelelor de bază decid ce ai voie să faci cu modelul modificat (Qwen3-4B-Instruct-2507 apare ca Apache-2.0 pe Hugging Face; Gemma și Llama 3.1 au licențe personalizate cu politici de utilizare). Un model rezultat care nu mai refuză cereri dăunătoare nu trebuie livrat sau vândut unor persoane care nu pot fi verificate."
+      },
+      "path": "folosești repo-ul direct",
+      "own_build_notes": null,
+      "demand_evidence": [
+        {
+          "name": "LLM.co - integrator de LLM-uri private (setup, găzduire, sprint de descoperire)",
+          "url": "https://llm.co/pricing",
+          "price": null,
+          "what_it_proves": "Firme vând deja implementări de LLM-uri private pe modele deschise; pagina nu publică prețuri (proiecte scopate individual).",
+          "checked_at": "2026-11-02"
+        },
+        {
+          "name": "Together AI - reglaj fin de modele deschise (alternativa cloud)",
+          "url": "https://www.together.ai/pricing",
+          "price": "de la 0,34 USD per milion de tokeni (SFT, modele mici), minim 4 USD per job",
+          "what_it_proves": "Există piață plătită pentru adaptarea modelelor deschise la nevoi proprii; arată și prețul cu care concurezi.",
+          "checked_at": "2026-11-02"
+        },
+        {
+          "name": "RunPod - închiriere GPU pe oră",
+          "url": "https://www.runpod.io/pricing",
+          "price": "RTX 3090: 0,50 USD/oră; A100 80GB: 1,79 USD/oră",
+          "what_it_proves": "Costul infrastructurii pentru rulările tale este public și mic, deci serviciul se vinde pe timp și expertiză, nu pe hardware.",
+          "checked_at": "2026-11-02"
+        }
+      ],
+      "startup_cost": "Un GPU propriu sau închiriere pe oră (vezi RunPod), plus timp de învățare; nu sunt necesare licențe de software.",
+      "time_to_first_client": "Variază mult; fără clienți existenți, găsirea unei firme interesate poate dura luni.",
+      "difficulty": "greu",
+      "risks": [
+        "Concurență gratuită: Heretic e liber, iar mii de modele deja modificate sunt publicate pe Hugging Face de comunitate.",
+        "Răspundere: un model care nu mai refuză cereri dăunătoare poate crea probleme legale și de reputație pentru tine și pentru client; contractele trebuie să spună clar cine răspunde.",
+        "Licențele modelelor de bază: unele interzic eludarea filtrelor sau limitează redistribuirea, deci lista modelelor utilizabile comercial e mai mică decât pare.",
+        "Proiect tânăr și în schimbare: versiunea 2.0.0 din 2026-11-01 a rupt compatibilitatea cu configurațiile 1.x, iar rezultatele pot varia între modele și hardware.",
+        "Platformele (Hugging Face) pot restricționa modelele modificate, ceea ce afectează livrarea."
+      ],
+      "first_steps": [
+        "Citește tutorialul oficial și rulează o dată, pe un model mic cu licență Apache-2.0, ca să vezi timpii și scorurile.",
+        "Alege un obiectiv fără conținut dăunător (de ex. reducerea refuzurilor false într-un domeniu al clientului sau a „slop-ului” în texte) și definește cum îl măsori.",
+        "Redactează o fișă simplă: modelul de bază și licența lui, scorurile înainte și după, limitările și cine are acces la model.",
+        "Oferă un proiect-pilot mic, cu predare de raport, nu un model „fără restricții” livrat fără control."
+      ]
+    }
+  ],
+  "updated_at": "2026-11-02",
+  "notes_summary": "Am citit README-ul, documentația oficială (tutorial), configurările și codul principal, fără să rulez nimic; nu am găsit o poveste reală potrivită și nu am verificat în detaliu licențele fiecărui model de bază.",
+  "notes": "Subiect sensibil: Heretic elimină automat refuzurile (alinierea de siguranță) din modele de limbaj; l-am descris neutru, cu accent pe utilizări legitime (cercetare, modele locale, reducerea refuzurilor false, schimbarea stilului) și pe riscurile reale, fără instrucțiuni sau exemple despre cum se obține conținut dăunător. Exemplele sunt doar din documentație (tutorial, README, config.noslop.toml). Versiune: Heretic 2.0.0, lansat 2026-11-01 (aceeași zi cu ultimul commit, SHA 0db5c31e10ecc426440b6fb0ce4bf85352faf1a7); repo-ul are 1 commit în clona superficială, deci n-am citit istoricul. Stele: 37646 (GitHub API, 2026-11-02). Licența: LICENSE este AGPL-3.0 (textul complet FSF), README spune AGPL-3.0-or-later, pyproject.toml la fel. Hardware: tutorialul spune ~2,5 GB VRAM per miliard de parametri, o rulare de 4B pe 100 de încercări a durat ~2 ore; README dă 30-40 min pentru Qwen3-4B pe RTX 3090. Platforme: documentația nu enumeră Windows/macOS; am marcat „parțial” pe baza codului (UTF-8 pe Windows, backend MPS), ceea ce este dedus. Prețuri verificate 2026-11-02: RunPod (RTX 3090 0,50 USD/oră, tabel marcat „Updated October 28, 2026”; prețul din tabelul vizibil e cel Secure Cloud, Community e mai mic), Together AI (SFT 0,34 USD/M tokeni la modele mici, minim 4 USD), Hugging Face (PRO 9 USD/lună; pagina nu descrie planul gratuit). llm.co nu publică prețuri. `replaces` este gol: niciun serviciu plătit nu face exact acest lucru; reglajul fin la Together AI este doar o alternativă parțială, trecută la `alternatives`. Date și modele: setul de date implicit folosit pentru măsurarea refuzurilor este mlabonne/harmful_behaviors (plus mlabonne/harmless_alpaca) de pe Hugging Face, descărcat automat; nu am verificat licențele acestor seturi de date, deci ar trebui verificate înainte de uz comercial. Licențe modele: Qwen/Qwen3-4B-Instruct-2507 = apache-2.0; google/gemma-3-12b-it = „gemma” (acces manual); meta-llama/Llama-3.1-8B-Instruct = „llama3.1” (acces manual), conform API-ului Hugging Face; politica de utilizare Gemma (pagina ai.google.dev/gemma/prohibited_use_policy, marcată depreciată, ultima modificare 2024-02-21) interzice la 2.4 „Attempts to override or circumvent safety filters” și se aplică și derivatelor. Politica de conținut Hugging Face: huggingface.co/content-policy. Issue-uri deschise relevante pentru stabilitate: #487, #490, #533. Declarație din README: autorul spune că nu este cod „vibe-coded”; este afirmația lui, nu am verificat-o. README susține că modelele Heretic compară favorabil cu alte instrumente, citând două postări Reddit; nu le-am putut verifica, iar o analiză externă citată în căutări spune că raționamentul matematic (GSM8K) scade cel mai mult după abliteration. Un comentariu HN (2026-05-02) susține că unele modele noi au rezistat tehnicilor vechi; nu am verificat. Primii pași: nu am găsit o experiență reală potrivită. Am căutat pe Hacker News (hn.algolia.com, povestea de lansare 2.0 și comentarii), dev.to (tag-urile heretic și abliteration), blogul dsebastien.net (doar rezumat, fără rulare proprie) și căutare web generală; articolele găsite sunt prezentări generale, ghiduri ale unor firme (Apidog/dev.to), sau texte care par generate automat (articolul de pe dev.to despre securitate cibernetică, pe un model alt decât cel produs cu Heretic). Parteneri verificați ca existenți și activi: optuna/optuna, huggingface/transformers, EleutherAI/lm-evaluation-harness (dependențe directe ale Heretic: optuna~=5.0, transformers[kernels], lm-eval[hf]); data ultimului commit a fost verificată prin GitHub API la 2026-11-02."
+}
