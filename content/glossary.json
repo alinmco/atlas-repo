@@ -938,7 +938,8 @@
   {
     "term": "Whisper",
     "aliases": [
-      "modele Whisper"
+      "modele Whisper",
+      "Whisper ASR"
     ],
     "explanation": "model AI deschis care transformă vorbirea în text"
   },
@@ -2083,7 +2084,9 @@
   },
   {
     "term": "Hugging Face",
-    "aliases": [],
+    "aliases": [
+      "HuggingFace"
+    ],
     "explanation": "site unde se publică modele AI și date"
   },
   {
@@ -2418,19 +2421,23 @@
   {
     "term": "VRAM",
     "aliases": [
-      "memoria video"
+      "memoria video",
+      "memorie video"
     ],
     "explanation": "memoria plăcii video, unde stă modelul în timpul rulării"
   },
   {
     "term": "PyTorch",
-    "aliases": [],
+    "aliases": [
+      "torch"
+    ],
     "explanation": "bibliotecă Python pentru rularea modelelor pe placa video"
   },
   {
     "term": "CUDA",
     "aliases": [
-      "CUDA Toolkit"
+      "CUDA Toolkit",
+      "cu128"
     ],
     "explanation": "software Nvidia care permite calculele pe placa video"
   },
@@ -2590,7 +2597,9 @@
   },
   {
     "term": "Apple Silicon",
-    "aliases": [],
+    "aliases": [
+      "MPS"
+    ],
     "explanation": "procesoarele proprii Apple din Mac-urile de după 2020"
   },
   {
@@ -2614,7 +2623,11 @@
       "clonarea vocii",
       "clonează",
       "clonezi",
-      "clonare vocală"
+      "clonare vocală",
+      "clonat",
+      "clonată",
+      "clonarea unei voci",
+      "voice cloning"
     ],
     "explanation": "generarea de vorbire cu vocea unei persoane, dintr-o înregistrare scurtă"
   },
@@ -2731,5 +2744,298 @@
       "filigranul"
     ],
     "explanation": "semn inaudibil care arată că sunetul e generat de AI"
+  },
+  {
+    "term": "voice design",
+    "aliases": [
+      "creare de voce",
+      "crearea unei voci"
+    ],
+    "explanation": "crearea unei voci noi dintr-o descriere: gen, vârstă, accent"
+  },
+  {
+    "term": "LoRA",
+    "aliases": [
+      "adaptor LoRA",
+      "adaptorul LoRA"
+    ],
+    "explanation": "ajustare ușoară a unui model, cu un fișier mic adăugat"
+  },
+  {
+    "term": "tokenizer audio",
+    "aliases": [
+      "tokenizerul audio",
+      "tokenizer"
+    ],
+    "explanation": "transformă sunetul în coduri și coduri înapoi în sunet"
+  },
+  {
+    "term": "ComfyUI",
+    "aliases": [],
+    "explanation": "program vizual în care îmbini pași de generare AI"
+  },
+  {
+    "term": "API compatibil OpenAI",
+    "aliases": [
+      "OpenAI-compatible",
+      "compatibil OpenAI"
+    ],
+    "explanation": "serviciu care primește cereri în formatul folosit de OpenAI"
+  },
+  {
+    "term": "CPU",
+    "aliases": [
+      "procesor",
+      "procesorul",
+      "procesorului"
+    ],
+    "explanation": "procesorul obișnuit al calculatorului, nu placa video"
+  },
+  {
+    "term": "uvx",
+    "aliases": [
+      "uvx pocket-tts"
+    ],
+    "explanation": "comandă care rulează un program Python într-un mediu izolat, fără instalare"
+  },
+  {
+    "term": "WAV",
+    "aliases": [
+      "fișier WAV",
+      "fișiere WAV"
+    ],
+    "explanation": "format audio necomprimat, ușor de editat"
+  },
+  {
+    "term": "safetensors",
+    "aliases": [
+      "fișier safetensors",
+      "fișiere safetensors"
+    ],
+    "explanation": "format de fișier pentru salvat date de model, rapid de încărcat"
+  },
+  {
+    "term": "FastAPI",
+    "aliases": [],
+    "explanation": "bibliotecă Python pentru servere web, folosită la serverul local"
+  },
+  {
+    "term": "Kokoro",
+    "aliases": [
+      "Kokoro-82M"
+    ],
+    "explanation": "alt model mic de voce, deschis, din alt proiect"
+  },
+  {
+    "term": "streaming audio",
+    "aliases": [
+      "redare în flux",
+      "flux audio"
+    ],
+    "explanation": "audio redat pe măsură ce e generat, fără așteptare până la capăt"
+  },
+  {
+    "term": "M4B",
+    "aliases": [
+      "fișier M4B",
+      ".m4b"
+    ],
+    "explanation": "format de fișier audio pentru cărți, cu capitole"
+  },
+  {
+    "term": "podcast",
+    "aliases": [
+      "podcasturi",
+      "podcasturile",
+      "podcast-uri"
+    ],
+    "explanation": "emisiune audio cu episoade, publicată pe internet"
+  },
+  {
+    "term": "DRM",
+    "aliases": [
+      "fișiere cu DRM",
+      "protecție DRM",
+      "non-DRM"
+    ],
+    "explanation": "protecție care blochează redarea fișierului în afara aplicației magazinului"
+  },
+  {
+    "term": "NAS",
+    "aliases": [
+      "NAS-ul"
+    ],
+    "explanation": "mic server de acasă pentru stocat fișiere în rețea"
+  },
+  {
+    "term": "VPN",
+    "aliases": [
+      "WireGuard"
+    ],
+    "explanation": "tunel securizat către rețeaua de acasă"
+  },
+  {
+    "term": "PWA",
+    "aliases": [
+      "aplicație web progresivă"
+    ],
+    "explanation": "site care se instalează și se comportă ca o aplicație"
+  },
+  {
+    "term": "OIDC",
+    "aliases": [
+      "OpenID Connect",
+      "SSO"
+    ],
+    "explanation": "autentificare cu un cont existent, fără parolă nouă"
+  },
+  {
+    "term": "metadate",
+    "aliases": [
+      "metadata"
+    ],
+    "explanation": "informații despre carte: autor, copertă, descriere, capitole"
+  },
+  {
+    "term": "tag-uri ID3",
+    "aliases": [
+      "ID3",
+      "tag-urile din fișier"
+    ],
+    "explanation": "informații despre piesă scrise chiar în fișierul audio"
+  },
+  {
+    "term": "Chromecast",
+    "aliases": [],
+    "explanation": "dispozitiv Google care redă audio sau video pe televizor"
+  },
+  {
+    "term": "EPUB",
+    "aliases": [
+      "cărți electronice",
+      "fișiere EPUB",
+      "fișier EPUB"
+    ],
+    "explanation": "format de carte electronică, ca fișier de citit"
+  },
+  {
+    "term": "Proxmox",
+    "aliases": [
+      "LXC"
+    ],
+    "explanation": "program care rulează mai multe servere virtuale pe un computer"
+  },
+  {
+    "term": "amd64",
+    "aliases": [
+      "x86-64"
+    ],
+    "explanation": "tipul obișnuit de procesor din PC-uri"
+  },
+  {
+    "term": "XTTS",
+    "aliases": [
+      "XTTSv2",
+      "XTTS-v2"
+    ],
+    "explanation": "model multilingv de voce, care poate clona voci"
+  },
+  {
+    "term": "Coqui",
+    "aliases": [],
+    "explanation": "firma care a creat modelul XTTS și biblioteca TTS"
+  },
+  {
+    "term": "CPML",
+    "aliases": [
+      "Coqui Public Model License"
+    ],
+    "explanation": "licență Coqui: model și rezultate doar pentru uz necomercial"
+  },
+  {
+    "term": "Calibre",
+    "aliases": [],
+    "explanation": "program gratuit pentru conversia și gestionarea cărților electronice"
+  },
+  {
+    "term": "OCR",
+    "aliases": [
+      "recunoaștere de text"
+    ],
+    "explanation": "citirea automată a textului din imagini"
+  },
+  {
+    "term": "Tesseract",
+    "aliases": [],
+    "explanation": "motor gratuit de OCR pentru poze cu text"
+  },
+  {
+    "term": "Gradio",
+    "aliases": [],
+    "explanation": "bibliotecă pentru interfețe web locale ale programelor AI"
+  },
+  {
+    "term": "Piper TTS",
+    "aliases": [
+      "piper-tts"
+    ],
+    "explanation": "motor rapid de voce, fără clonare, bun pe procesor"
+  },
+  {
+    "term": "Bark",
+    "aliases": [],
+    "explanation": "motor de voce expresivă, mai greu de rulat"
+  },
+  {
+    "term": "Fairseq",
+    "aliases": [
+      "MMS"
+    ],
+    "explanation": "voci pentru peste 1000 de limbi, bazate pe modele Meta"
+  },
+  {
+    "term": "MusicGen",
+    "aliases": [],
+    "explanation": "model Meta care generează muzică dintr-o descriere text"
+  },
+  {
+    "term": "Audiobookshelf",
+    "aliases": [],
+    "explanation": "server propriu pentru audiobook-uri și podcasturi"
+  },
+  {
+    "term": "Google Colab",
+    "aliases": [
+      "Colab"
+    ],
+    "explanation": "caiet online gratuit de la Google, cu placă video"
+  },
+  {
+    "term": "Scoop",
+    "aliases": [],
+    "explanation": "manager de programe pentru Windows, fără drepturi de administrator"
+  },
+  {
+    "term": "etichete SML",
+    "aliases": [
+      "SML",
+      "tag-uri SML"
+    ],
+    "explanation": "etichete în text pentru pauze și schimbarea vocii"
+  },
+  {
+    "term": "Argos Translate",
+    "aliases": [
+      "argostranslate"
+    ],
+    "explanation": "bibliotecă de traducere care rulează local, fără cloud"
+  },
+  {
+    "term": "model fine-tuned",
+    "aliases": [
+      "fine-tuned",
+      "modele fine-tuned"
+    ],
+    "explanation": "model reantrenat suplimentar pe o voce anume"
   }
 ]

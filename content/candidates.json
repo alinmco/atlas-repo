@@ -553,13 +553,6 @@
     "added_at": "2026-11-03"
   },
   {
-    "repo_url": "https://github.com/k2-fsa/OmniVoice",
-    "name": "k2-fsa/OmniVoice",
-    "suggested_by": "voicestudio",
-    "why": "Motorul implicit de voce din aplicație: textul și referința ta devin audio; util dacă vrei modelul direct, cu atenția cuvenită la greutățile CC-BY-NC.",
-    "added_at": "2026-11-03"
-  },
-  {
     "repo_url": "https://github.com/n8n-io/n8n",
     "name": "n8n",
     "suggested_by": "voicestudio",
@@ -574,10 +567,80 @@
     "added_at": "2026-11-03"
   },
   {
-    "repo_url": "https://github.com/kyutai-labs/pocket-tts",
-    "name": "Pocket TTS",
-    "suggested_by": "voicestudio",
-    "why": "Motor de voce ușor, potrivit pentru CPU, listat în catalogul de motoare: text și referință intră, audio iese.",
+    "repo_url": "https://github.com/jianchang512/pyvideotrans",
+    "name": "pyVideoTrans",
+    "suggested_by": "omnivoice",
+    "why": "Traduce un video și îl dublează; listat în documentația OmniVoice ca motor de voce, deci textul tradus intră în OmniVoice și iese vocea dublată.",
+    "added_at": "2026-11-03"
+  },
+  {
+    "repo_url": "https://github.com/maemreyo/omnivoice-server",
+    "name": "omnivoice-server",
+    "suggested_by": "omnivoice",
+    "why": "Pune OmniVoice în spatele unui API de tip OpenAI (/v1/audio/speech): alte programe trimit text în JSON și primesc audio.",
+    "added_at": "2026-11-03"
+  },
+  {
+    "repo_url": "https://github.com/Blaizzy/mlx-audio",
+    "name": "MLX-Audio",
+    "suggested_by": "omnivoice",
+    "why": "Listat în documentația OmniVoice pentru rulare eficientă pe Apple Silicon, cu aceleași intrări text și referință și ieșire audio.",
+    "added_at": "2026-11-03"
+  },
+  {
+    "repo_url": "https://github.com/teddybear082/pocket-tts-openai_streaming_server",
+    "name": "pocket-tts-openai_streaming_server",
+    "suggested_by": "pocket-tts",
+    "why": "Pune Pocket TTS în spatele unui API compatibil OpenAI: aplicațiile care cer TTS de la OpenAI primesc audio local (text intră, audio iese).",
+    "added_at": "2026-11-03"
+  },
+  {
+    "repo_url": "https://github.com/k2-fsa/sherpa-onnx",
+    "name": "sherpa-onnx",
+    "suggested_by": "pocket-tts",
+    "why": "Listat în README ca implementare alternativă care rulează Pocket TTS pe Windows, macOS, Linux și plăci mici (Raspberry Pi), cu legături pentru multe limbaje.",
+    "added_at": "2026-11-03"
+  },
+  {
+    "repo_url": "https://github.com/advplyr/audiobookshelf-app",
+    "name": "audiobookshelf-app",
+    "suggested_by": "audiobookshelf",
+    "why": "Aplicația oficială Android/iOS: se conectează la adresa serverului și redă biblioteca de pe telefon.",
+    "added_at": "2026-11-03"
+  },
+  {
+    "repo_url": "https://github.com/sandreas/m4b-tool",
+    "name": "m4b-tool",
+    "suggested_by": "audiobookshelf",
+    "why": "Unește fișierele MP3 ale unei cărți într-un singur M4B cu capitole, pe care Audiobookshelf îl pune apoi în bibliotecă.",
+    "added_at": "2026-11-03"
+  },
+  {
+    "repo_url": "https://github.com/tailscale/tailscale",
+    "name": "Tailscale",
+    "suggested_by": "audiobookshelf",
+    "why": "Creează un VPN privat, deci accesezi serverul de acasă din telefon fără să-l expui pe internet.",
+    "added_at": "2026-11-03"
+  },
+  {
+    "repo_url": "https://github.com/kovidgoyal/calibre",
+    "name": "Calibre",
+    "suggested_by": "audiobookshelf",
+    "why": "Gestionează și convertește cărțile electronice, care pot sta apoi în biblioteca de cărți a serverului.",
+    "added_at": "2026-11-03"
+  },
+  {
+    "repo_url": "https://github.com/DrewThomasson/E2A-SML",
+    "name": "E2A-SML",
+    "suggested_by": "ebook2audiobook",
+    "why": "Adaugă automat în text etichete SML pentru voci multiple; textul etichetat devine intrarea ebook2audiobook. Pe GitHub nu are licență declarată, deci verifică-o înainte de orice uz comercial.",
+    "added_at": "2026-11-03"
+  },
+  {
+    "repo_url": "https://github.com/DrewThomasson/Universal_TTS_Finetune",
+    "name": "Universal TTS Finetune",
+    "suggested_by": "ebook2audiobook",
+    "why": "Antrenezi un model de voce propriu, iar arhiva .zip rezultată se încarcă în ebook2audiobook cu --custom_model.",
     "added_at": "2026-11-03"
   }
 ]

@@ -908,5 +908,123 @@
       "https://github.com/kyutai-labs/pocket-tts"
     ],
     "used_in_recipes": []
+  },
+  {
+    "slug": "omnivoice",
+    "name": "OmniVoice",
+    "one_liner": "Transformă text în voce naturală, în peste 600 de limbi, inclusiv cu vocea clonată.",
+    "categories": [
+      "Clonare și generare de voce",
+      "Narare și voice-over"
+    ],
+    "inputs": [
+      "Text simplu (șir de caractere), cu etichete opționale precum [laughter] și [sigh] sau pronunție în pinyin/CMU",
+      "Fișier audio de referință (de exemplu ref.wav, recomandat 3-10 secunde) și transcrierea lui; transcrierea poate lipsi, atunci o face Whisper",
+      "Descriere a vocii ca text (instruct), de exemplu „female, low pitch, british accent”",
+      "Fișier JSONL pentru lot (omnivoice-infer-batch), cu câmpurile id, text și opțional ref_audio, ref_text, instruct, language_id, duration, speed"
+    ],
+    "outputs": [
+      "Fișier WAV la 24 kHz (listă de tablouri numpy din Python, salvate cu soundfile)",
+      "Fișier .pt cu vocea clonată reutilizabilă (VoiceClonePrompt)",
+      "Fișiere audio în folderul de rezultate la inferența pe loturi"
+    ],
+    "updated_at": "2026-11-03",
+    "pairs_well_with": [
+      "https://github.com/debpalash/voicestudio",
+      "https://github.com/jianchang512/pyvideotrans",
+      "https://github.com/maemreyo/omnivoice-server",
+      "https://github.com/SYSTRAN/faster-whisper",
+      "https://github.com/Blaizzy/mlx-audio"
+    ],
+    "used_in_recipes": []
+  },
+  {
+    "slug": "pocket-tts",
+    "name": "Pocket TTS",
+    "one_liner": "Transformă textul în voce vorbită direct pe calculator, fără placă video sau abonament.",
+    "categories": [
+      "Clonare și generare de voce",
+      "Creare de conținut"
+    ],
+    "inputs": [
+      "Text simplu UTF-8 (argumentul --text, un șir în Python sau câmpul text la POST /tts)",
+      "Fișier audio WAV sau MP3 cu vocea de clonat (se citesc primele 30 de secunde) sau nume de voce din catalog",
+      "Fișier .safetensors cu o voce deja exportată cu export-voice",
+      "Fișier YAML de configurare (--config) pentru modele comunitare, local, prin https:// sau hf://"
+    ],
+    "outputs": [
+      "Fișier WAV mono la 24 kHz (implicit ./tts_output.wav)",
+      "Flux audio audio/wav de la serverul local (POST /tts, câmpuri text, voice_url, voice_wav)",
+      "Tensor PCM în Python (audio.numpy()), pentru procesare în continuare",
+      "Fișier .safetensors cu vocea exportată, pentru încărcare rapidă data viitoare"
+    ],
+    "updated_at": "2026-11-03",
+    "pairs_well_with": [
+      "https://github.com/teddybear082/pocket-tts-openai_streaming_server",
+      "https://github.com/k2-fsa/sherpa-onnx",
+      "https://github.com/SYSTRAN/faster-whisper",
+      "https://github.com/ollama/ollama",
+      "https://github.com/debpalash/voicestudio"
+    ],
+    "used_in_recipes": []
+  },
+  {
+    "slug": "audiobookshelf",
+    "name": "Audiobookshelf",
+    "one_liner": "Serverul tău personal de cărți audio și podcasturi, accesibil din telefon sau browser.",
+    "categories": [
+      "Cărți audio și podcasturi",
+      "Server media personal"
+    ],
+    "inputs": [
+      "Fișiere audio fără DRM (MP3, M4A, M4B, FLAC etc.) în foldere de forma Autor / Serie / Carte",
+      "Podcasturi: căutare prin iTunes sau adresă de feed RSS",
+      "Cărți electronice (EPUB, PDF, CBR, CBZ) puse în aceeași bibliotecă"
+    ],
+    "outputs": [
+      "Interfață web (PWA) pe portul 13378 și aplicații mobile Android/iOS",
+      "Backup-uri zip ale bazei de date SQLite și ale imaginilor (în /metadata/backups)",
+      "Fișiere metadata.json pentru fiecare carte, utile în scripturi",
+      "Feed-uri RSS deschise pentru cărți și podcasturi"
+    ],
+    "updated_at": "2026-11-03",
+    "pairs_well_with": [
+      "https://github.com/advplyr/audiobookshelf-app",
+      "https://github.com/sandreas/m4b-tool",
+      "https://github.com/tailscale/tailscale",
+      "https://github.com/kovidgoyal/calibre",
+      "https://github.com/DrewThomasson/ebook2audiobook"
+    ],
+    "used_in_recipes": []
+  },
+  {
+    "slug": "ebook2audiobook",
+    "name": "ebook2audiobook",
+    "one_liner": "Transformă cărți electronice în audiobook-uri cu voce clonată, pe calculatorul tău.",
+    "categories": [
+      "Clonare și generare de voce",
+      "Cărți audio și podcasturi"
+    ],
+    "inputs": [
+      "Fișiere carte non-DRM: .epub, .mobi, .azw3, .pdf, .txt, .docx, .html, .fb2 și altele (README recomandă .epub sau .mobi pentru capitole detectate automat)",
+      "Imagini cu text (.png, .jpg, .tiff, .bmp), citite prin OCR",
+      "Text lipit direct în interfață sau dat cu --text",
+      "Opțional: fișier audio cu o voce de clonat (ideal 1-5 minute)",
+      "Opțional: arhivă .zip cu model personalizat (XTTSv2, VITS, Fairseq, Piper), cu --custom_model",
+      "Opțional: fișier JSON care leagă fiecare carte de o voce (--voice_map, pentru un folder de cărți)"
+    ],
+    "outputs": [
+      "Fișier audiobook cu capitole și metadate: m4b (implicit), m4a, mp4, mp3, flac, wav, ogg, aac, webm, mov",
+      "Opțional: audiobook trimis într-o bibliotecă Audiobookshelf (--abs_url, --abs_api_token, --abs_library)",
+      "Opțional: carte tradusă (--translate) și muzică între capitole (--enable_interlude)"
+    ],
+    "updated_at": "2026-11-03",
+    "pairs_well_with": [
+      "https://github.com/advplyr/audiobookshelf",
+      "https://github.com/DrewThomasson/E2A-SML",
+      "https://github.com/DrewThomasson/Universal_TTS_Finetune",
+      "https://github.com/kovidgoyal/calibre"
+    ],
+    "used_in_recipes": []
   }
 ]

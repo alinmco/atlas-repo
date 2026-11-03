@@ -1,0 +1,432 @@
+{
+  "slug": "pocket-tts",
+  "repo_url": "https://github.com/kyutai-labs/pocket-tts",
+  "name": "Pocket TTS",
+  "one_liner": "Transformă textul în voce vorbită direct pe calculator, fără placă video sau abonament.",
+  "problem_solved": "Vocile sintetice bune cer de obicei o placă video puternică sau un serviciu cloud plătit pe caractere. Pocket TTS citește textul cu voce naturală pe procesorul obișnuit al calculatorului tău.",
+  "features": [
+    "Rulează pe procesorul (CPU) obișnuit, fără placă video, folosind doar 2 nuclee",
+    "Clonare de voce dintr-un fișier audio scurt (se procesează primele 30 de secunde)",
+    "Limbi: engleză, franceză, germană, portugheză, italiană, spaniolă, olandeză (fără română)",
+    "Folosit din linia de comandă, ca bibliotecă Python sau ca server local cu pagină web",
+    "Primul fragment audio apare în aproximativ 200 ms, iar textul poate fi oricât de lung",
+    "Program de sine stătător (Rust) pentru Windows, macOS și Linux, fără Python",
+    "Cod de antrenare inclus, plus modele făcute de comunitate pentru alte limbi"
+  ],
+  "at_a_glance": {
+    "for_you_if": [
+      "Vrei voce sintetică locală, gratuită, în engleză sau în alte limbi europene suportate.",
+      "Vrei să clonezi o voce (cu acordul ei) fără cont de cloud și fără plată pe caractere."
+    ],
+    "not_for_you_if": [
+      "Ai nevoie de limba română: nu e printre limbile oficiale din documentație.",
+      "Vrei studio cu editare, dublaj și sute de voci gata făcute, cu suport."
+    ],
+    "verdict": "Un motor mic și rapid de voce locală, bun ca piesă într-un flux propriu, nu un studio de voce complet."
+  },
+  "cost": {
+    "level": "gratuit complet",
+    "summary": "Codul și modelul sunt gratuite și rulează local, fără abonament AI sau cheie API: plătești doar calculatorul tău. Pentru clonarea de voce ai nevoie de un cont Hugging Face în care accepți termenii modelului.",
+    "ai_access": {
+      "mode": "nu folosește AI",
+      "detail": "Modelul de voce rulează local pe calculatorul tău; nu e nevoie de abonament AI (Claude, ChatGPT, Gemini) sau de cheie API plătită.",
+      "source_url": "https://github.com/kyutai-labs/pocket-tts/blob/91a9e96433bfe23375eea719b03f0081466f8e20/README.md"
+    },
+    "items": [
+      {
+        "what": "Codul Pocket TTS (licență MIT)",
+        "price": "0 USD",
+        "required": true,
+        "source_url": "https://github.com/kyutai-labs/pocket-tts/blob/91a9e96433bfe23375eea719b03f0081466f8e20/LICENSE"
+      },
+      {
+        "what": "Greutățile modelului de pe Hugging Face (CC BY 4.0, acces cu acceptarea termenilor)",
+        "price": "0 USD (licență CC BY 4.0, fără taxă menționată)",
+        "required": true,
+        "source_url": "https://huggingface.co/kyutai/pocket-tts"
+      },
+      {
+        "what": "Cont Hugging Face, doar pentru clonarea de voce (planul plătit PRO nu e cerut de documentație)",
+        "price": null,
+        "required": false,
+        "source_url": "https://huggingface.co/pricing"
+      },
+      {
+        "what": "Calculator cu procesor obișnuit; spațiul pe disc depinde de PyTorch (circa 200 MB varianta CPU, circa 3 GB varianta CUDA pe Linux)",
+        "price": null,
+        "required": true,
+        "source_url": "https://github.com/kyutai-labs/pocket-tts/blob/91a9e96433bfe23375eea719b03f0081466f8e20/README.md#cpu-only-installation"
+      },
+      {
+        "what": "Placă video NVIDIA, opțională (în documentație: aproximativ 2,6x mai rapid pe un VM cloud cu Tesla T4; neoficial)",
+        "price": null,
+        "required": false,
+        "source_url": "https://github.com/kyutai-labs/pocket-tts/blob/91a9e96433bfe23375eea719b03f0081466f8e20/README.md#running-on-gpu"
+      }
+    ]
+  },
+  "platforms": {
+    "windows": "da",
+    "mac": "da",
+    "linux": "da",
+    "note": "Pachetul Python merge pe toate trei (pe Linux, instalează varianta CPU a PyTorch ca să eviți circa 3 GB în plus). Programul Rust fără Python vine pentru Linux și macOS (x86 și ARM) și pentru Windows (x86), conform README-ului. Antrenarea modelelor e susținută oficial doar pe Linux cu GPU NVIDIA.",
+    "source_url": "https://github.com/kyutai-labs/pocket-tts/blob/91a9e96433bfe23375eea719b03f0081466f8e20/README.md#standalone-binaries-without-python"
+  },
+  "risk_flags": [
+    {
+      "flag": "cere cont",
+      "detail": "Pentru clonarea de voce trebuie să ai cont Hugging Face, să accepți termenii și să rulezi `uvx hf auth login`; fără asta merge doar catalogul de voci gata făcute.",
+      "source_url": "https://github.com/kyutai-labs/pocket-tts/blob/91a9e96433bfe23375eea719b03f0081466f8e20/pocket_tts/models/tts_model.py"
+    },
+    {
+      "flag": "licență restrictivă",
+      "detail": "Unele voci vin din seturile expresso și ears, licențiate CC BY-NC (doar uz necomercial); modelul interzice și clonarea vocilor fără acordul persoanei.",
+      "source_url": "https://huggingface.co/kyutai/tts-voices"
+    }
+  ],
+  "audience_reason": "se folosește din terminal sau din cod Python, dar comenzile de pornire sunt puține și simple",
+  "setup_difficulty_reason": "câteva comenzi, fără cheie API și fără placă video; clonarea cere doar un cont Hugging Face gratuit",
+  "analogy": "E ca un cititor cu voce de buzunar: în loc să suni un studio de înregistrări scump, ai un mic aparat care citește textul cu voce tare chiar pe masa ta.",
+  "how_it_works": [
+    "Pasul 1, intrare: îi dai un text și, opțional, o voce (nume din catalog sau un fișier WAV/MP3 al vocii de clonat).",
+    "Pasul 2, proces: un model mic de 100 de milioane de parametri (descărcat o dată de pe Hugging Face) transformă textul în audio, bucată cu bucată, pe procesor.",
+    "Pasul 3, ieșire: primești un fișier WAV (implicit tts_output.wav) sau un flux audio de la serverul local, la 24 kHz."
+  ],
+  "first_steps": {
+    "origin": "experiență utilizator",
+    "story_url": "https://news.ycombinator.com/item?id=47034286",
+    "story_platform": "Hacker News",
+    "story_date": "2026-02-16",
+    "title": "Un asistent de cod care îți spune cu voce tare ce a făcut",
+    "intro": "Un programator a vrut să vorbească cu agenții de cod și să-i audă răspunzând, fără abonamente la servicii de voce. A ales unelte deschise pentru voce, iar pentru redarea textului a folosit Pocket TTS.",
+    "steps": [
+      {
+        "you_do": "A ales Pocket TTS (model de 100 de milioane de parametri, doar engleză) pentru vocea de ieșire, alături de o aplicație deschisă pentru dictare.",
+        "what_happens": "Spune că vocea sună bine și că nu mai e nevoie să plătești servicii precum Wispr Flow, Superwhisper sau ElevenLabs.",
+        "source_url": "https://news.ycombinator.com/item?id=47034286"
+      },
+      {
+        "you_do": "A construit peste Pocket TTS un plugin de voce pentru Claude Code, care vorbește când agentul se oprește.",
+        "what_happens": "Cu ajutorul unor hooks, agentul e îndemnat să încheie cu un scurt rezumat ușor de citit cu voce tare; dacă uită, un agent separat creează rezumatul.",
+        "source_url": "https://news.ycombinator.com/item?id=47034286"
+      },
+      {
+        "you_do": "A rezolvat problemele de redare: redare în flux cu FFmpeg pentru latență mică și blocări cu directoare, ca mai multe sesiuni să nu vorbească una peste alta.",
+        "what_happens": "Spune că a fost mai greu decât se aștepta, dar sistemul ajunge să dea actualizări vocale scurte fără suprapuneri.",
+        "source_url": "https://news.ycombinator.com/item?id=46988826"
+      },
+      {
+        "you_do": "Schimbă vocea și stilul cu comenzi de tipul /voice:speak azelma sau /voice:speak prompt urmat de un text.",
+        "what_happens": "Azelma e una dintre vocile din catalogul Pocket TTS; plugin-ul îi permite să oprească vocea sau să-i schimbe stilul.",
+        "source_url": "https://news.ycombinator.com/item?id=47034286"
+      }
+    ],
+    "takeaway": "El spune că a fost mai greu decât se aștepta, dar că sistemul ajunge să dea actualizări vocale scurte fără suprapuneri. Nu compară cu cifre (cost sau timp), iar plugin-ul e munca lui, nu a autorilor Pocket TTS."
+  },
+  "categories": [
+    "Clonare și generare de voce",
+    "Creare de conținut"
+  ],
+  "search_intents": [
+    "vreau să transform textul în voce pe calculatorul meu, fără cont în cloud",
+    "vreau o alternativă gratuită la ElevenLabs care merge fără placă video",
+    "vreau să clonez o voce dintr-o înregistrare scurtă, local",
+    "vreau să fac un server local de text-to-speech pentru aplicațiile mele",
+    "vreau ca asistentul meu să vorbească cu voce tare, fără să plătesc pe caracter"
+  ],
+  "audience": "intermediar",
+  "setup_difficulty": "ușor",
+  "replaces": [
+    {
+      "service": "ElevenLabs",
+      "service_url": "https://elevenlabs.io/pricing",
+      "price": "Free 0 USD (10.000 credite); Starter 6 USD/lună (prima lună 1 USD); Creator 22 USD/lună; Pro 99 USD/lună; Scale 299 USD/lună; Business 990 USD/lună (facturare lunară)",
+      "price_source_url": "https://elevenlabs.io/pricing",
+      "price_checked_at": "2026-11-03",
+      "replacement_level": "parțial",
+      "what_you_keep": [
+        "Text transformat în voce pe calculatorul tău, fără limită de credite sau de caractere",
+        "Clonare de voce dintr-o probă scurtă, cu fișierele audio rămase local",
+        "Server local cu API HTTP pentru propriile aplicații"
+      ],
+      "what_you_lose": [
+        "Sute de voci profesionale și interfața de studio cu editare",
+        "Clonarea profesională, dublajul și suportul comercial",
+        "Limba română și mult mai multe limbi (Pocket TTS oficial are șapte)",
+        "Calitate echivalentă: nu am găsit un test comparativ în documentație, iar în issue-urile repo-ului utilizatorii semnalează probleme de prozodie și cuvinte sărite"
+      ],
+      "hidden_costs": [
+        "Calculatorul și curentul tău, plus timpul de configurare",
+        "Calitatea probei de voce contează: documentația recomandă curățarea ei înainte",
+        "Verificarea licenței vocilor folosite și a acordului persoanei a cărei voce o clonezi",
+        "Fără suport oficial: aperi singur de actualizările care schimbă modelele implicite"
+      ]
+    },
+    {
+      "service": "OpenAI text-to-speech (API)",
+      "service_url": "https://developers.openai.com/api/docs/pricing",
+      "price": "tts-1: 15 USD per 1 milion de caractere; tts-1-hd: 30 USD per 1 milion de caractere; gpt-4o-mini-tts: 0,60 USD per 1 milion de tokeni text la intrare și 12 USD per 1 milion de tokeni audio la ieșire",
+      "price_source_url": "https://developers.openai.com/api/docs/pricing",
+      "price_checked_at": "2026-11-03",
+      "replacement_level": "doar pentru cazuri simple",
+      "what_you_keep": [
+        "Voce generată din text prin apel HTTP, dar pe propriul calculator",
+        "Fără factură pe consum și fără trimiterea textului către un terț"
+      ],
+      "what_you_lose": [
+        "Hosting gata făcut, disponibilitate și scalare la cerere",
+        "API compatibil cu OpenAI din fabrică: serverul oficial are propriul endpoint /tts (există un server comunitar compatibil, dar nu e oficial)",
+        "Instrucțiuni de stil în limbaj natural și mai multe limbi"
+      ],
+      "hidden_costs": [
+        "Hosting propriu dacă vrei să-l expui în rețea (un server mic, curent, monitorizare)",
+        "Timp de integrare și de testare a calității pentru limba ta"
+      ]
+    },
+    {
+      "service": "Speechify",
+      "service_url": "https://speechify.com/pricing/",
+      "price": "Premium 29 USD/lună facturat lunar sau 139 USD/an facturat anual; planul gratuit are 10 voci robotice",
+      "price_source_url": "https://speechify.com/pricing/",
+      "price_checked_at": "2026-11-03",
+      "replacement_level": "doar pentru cazuri simple",
+      "what_you_keep": [
+        "Citirea cu voce tare a textelor tale, local, gratuit",
+        "Voci naturale în engleză și în alte câteva limbi europene"
+      ],
+      "what_you_lose": [
+        "Aplicațiile gata făcute (scanare, rezumate AI, integrări cu Drive/Dropbox/OneDrive)",
+        "Peste 60 de limbi și peste 1000 de voci"
+      ],
+      "hidden_costs": [
+        "Trebuie să adaugi singur o interfață: unele aplicații comunitare există (de exemplu cititoare de ecran sau de PDF), dar sunt proiecte mici și independente"
+      ]
+    }
+  ],
+  "examples": [
+    {
+      "title": "Prima propoziție în audio, din linia de comandă",
+      "scenario": "Vrei să auzi vocea fără să instalezi nimic permanent: uvx rulează Pocket TTS într-un mediu izolat și salvează un fișier WAV. Pe Linux, README-ul recomandă varianta CPU a PyTorch ca să eviți câțiva gigabyți.",
+      "prerequisites": [
+        "uv instalat (pentru uvx) sau pip",
+        "Python 3.10-3.14 și PyTorch 2.5+ (PyTorch vine prin instalare)",
+        "Internet la prima rulare, pentru descărcarea modelului de pe Hugging Face"
+      ],
+      "commands": [
+        "uvx pocket-tts generate",
+        "# sau, dacă l-ai instalat cu pip:",
+        "pocket-tts generate",
+        "# pe Linux, ca să nu tragi varianta CUDA a PyTorch:",
+        "pip install pocket-tts --extra-index-url https://download.pytorch.org/whl/cpu"
+      ],
+      "code": null,
+      "output_from_docs": null,
+      "source_url": "https://github.com/kyutai-labs/pocket-tts/blob/91a9e96433bfe23375eea719b03f0081466f8e20/README.md#trying-it-with-the-cli",
+      "kind": "instalare"
+    },
+    {
+      "title": "Text în voce dintr-un script Python",
+      "scenario": "Folosești Pocket TTS ca bibliotecă: încarci modelul o dată, alegi o voce din catalog (sau un fișier audio propriu) și salvezi rezultatul într-un fișier WAV.",
+      "prerequisites": [
+        "pip install pocket-tts (sau uv add pocket-tts)",
+        "Python cu scipy (instalat odată cu pachetul)"
+      ],
+      "commands": [
+        "pip install pocket-tts"
+      ],
+      "code": "from pocket_tts import TTSModel\nimport scipy.io.wavfile\n\ntts_model = TTSModel.load_model()\nvoice_state = tts_model.get_state_for_audio_prompt(\n    \"alba\"  # One of the pre-made voices, see above\n    # You can also use any voice file you have locally or from Hugging Face:\n    # \"./some_audio.wav\"\n    # or \"hf://kyutai/tts-voices/expresso/ex01-ex02_default_001_channel2_198s.wav\"\n)\naudio = tts_model.generate_audio(voice_state, \"Hello world, this is a test.\")\n# Audio is a 1D torch tensor containing PCM data.\nscipy.io.wavfile.write(\"output.wav\", tts_model.sample_rate, audio.numpy())",
+      "output_from_docs": null,
+      "source_url": "https://github.com/kyutai-labs/pocket-tts/blob/91a9e96433bfe23375eea719b03f0081466f8e20/README.md#using-it-as-a-python-library",
+      "kind": "folosire"
+    }
+  ],
+  "connectors": {
+    "inputs": [
+      "Text simplu UTF-8 (argumentul --text, un șir în Python sau câmpul text la POST /tts)",
+      "Fișier audio WAV sau MP3 cu vocea de clonat (se citesc primele 30 de secunde) sau nume de voce din catalog",
+      "Fișier .safetensors cu o voce deja exportată cu export-voice",
+      "Fișier YAML de configurare (--config) pentru modele comunitare, local, prin https:// sau hf://"
+    ],
+    "outputs": [
+      "Fișier WAV mono la 24 kHz (implicit ./tts_output.wav)",
+      "Flux audio audio/wav de la serverul local (POST /tts, câmpuri text, voice_url, voice_wav)",
+      "Tensor PCM în Python (audio.numpy()), pentru procesare în continuare",
+      "Fișier .safetensors cu vocea exportată, pentru încărcare rapidă data viitoare"
+    ],
+    "pairs_well_with": [
+      {
+        "repo_url": "https://github.com/teddybear082/pocket-tts-openai_streaming_server",
+        "name": "pocket-tts-openai_streaming_server",
+        "why": "Pune Pocket TTS în spatele unui API compatibil OpenAI: aplicațiile care cer TTS de la OpenAI primesc audio local (text intră, audio iese).",
+        "in_catalog": false
+      },
+      {
+        "repo_url": "https://github.com/k2-fsa/sherpa-onnx",
+        "name": "sherpa-onnx",
+        "why": "Listat în README ca implementare alternativă care rulează Pocket TTS pe Windows, macOS, Linux și plăci mici (Raspberry Pi), cu legături pentru multe limbaje.",
+        "in_catalog": false
+      },
+      {
+        "repo_url": "https://github.com/SYSTRAN/faster-whisper",
+        "name": "faster-whisper",
+        "why": "Transcrie vorbirea în text; textul poate trece apoi la un model de limbaj, iar răspunsul devine intrare pentru Pocket TTS, într-un asistent vocal local.",
+        "in_catalog": false
+      },
+      {
+        "repo_url": "https://github.com/ollama/ollama",
+        "name": "Ollama",
+        "why": "Generează local răspunsuri text cu un model de limbaj; textul lor intră în Pocket TTS ca să fie citit cu voce tare.",
+        "in_catalog": false
+      },
+      {
+        "repo_url": "https://github.com/debpalash/voicestudio",
+        "name": "VoiceStudio",
+        "why": "Aplicație de voce cu mai multe motoare, unde Pocket TTS poate fi motorul ușor pentru CPU (în catalogul nostru).",
+        "in_catalog": true
+      }
+    ],
+    "gaps_noticed": [
+      "Limba română nu e printre limbile oficiale și nu apare nici în lista modelelor comunitare din README.",
+      "Ieșirea e doar WAV: nu produce MP3, subtitrări SRT sau marcaje de timp (există un fork comunitar cu timestamp-uri pe cuvinte).",
+      "Nu se pot insera pauze sau tăceri în text (README: funcție nesuportată, issue #6).",
+      "Serverul oficial are endpoint-ul propriu /tts, nu API-ul OpenAI; compatibilitatea vine dintr-un proiect comunitar separat.",
+      "Un text lung (carte, articol) cere un script propriu de împărțire pe capitole și lipire a fișierelor audio."
+    ]
+  },
+  "when_not_to_use": [
+    "Ai nevoie de voce în română: modelele oficiale nu o suportă.",
+    "Vrei cea mai bună expresivitate și emoție: README-ul spune singur că modelul e mic, iar în issue-uri utilizatorii raportează probleme de prozodie și cuvinte sărite la unele voci și limbi.",
+    "Vrei să clonezi vocea unei persoane fără acordul ei: termenii modelului interzic asta explicit.",
+    "Vrei un program cu interfață de studio, dublaj sau editare: Pocket TTS e un motor, nu o aplicație completă.",
+    "Vrei angajamente de disponibilitate sau suport comercial: e un proiect deschis, fără SLA."
+  ],
+  "alternatives": [
+    {
+      "name": "Kokoro",
+      "url": "https://github.com/hexgrad/kokoro",
+      "difference": "Alt motor mic și deschis (Apache-2.0) pentru voce pe CPU; ultimul commit din repo e din august 2025. Nu am verificat dacă are clonare de voce."
+    },
+    {
+      "name": "Piper (OHF-Voice/piper1-gpl)",
+      "url": "https://github.com/OHF-Voice/piper1-gpl",
+      "difference": "Motor TTS local, activ, sub GPL-3.0; nu am verificat lista de limbi sau clonarea de voce, iar licența GPL cere condiții la redistribuire."
+    },
+    {
+      "name": "Chatterbox",
+      "url": "https://github.com/resemble-ai/chatterbox",
+      "difference": "Alt model de voce cu clonare, sub MIT, mai mare decât Pocket TTS; nu am verificat cerințele de hardware, deci compară-le înainte."
+    },
+    {
+      "name": "OmniVoice",
+      "url": "https://github.com/k2-fsa/OmniVoice",
+      "difference": "Model cu clonare de voce și, după descrierea repo-ului, peste 600 de limbi (Apache-2.0); verifică dacă include româna și cât de mare e față de Pocket TTS."
+    }
+  ],
+  "tech_sheet": {
+    "license": "MIT (cod); CC BY 4.0 (greutățile modelului)",
+    "language": "Python (PyTorch), cu un program Rust fără Python în rust/",
+    "commit_sha": "91a9e96433bfe23375eea719b03f0081466f8e20",
+    "last_commit_date": "2026-10-31",
+    "stars": 10182,
+    "requirements": [
+      "Python 3.10, 3.11, 3.12, 3.13 sau 3.14 (pachetul cere >=3.10 și <3.15)",
+      "PyTorch 2.5 sau mai nou (varianta CPU e suficientă; nu cere GPU)",
+      "uv (recomandat, pentru comanda uvx) sau pip pentru pip install pocket-tts",
+      "Pe Linux: instalare cu indexul CPU al PyTorch (pip install pocket-tts --extra-index-url https://download.pytorch.org/whl/cpu), ca să eviți circa 3 GB de biblioteci CUDA",
+      "Internet la prima rulare, pentru descărcarea greutăților modelului de pe Hugging Face",
+      "Pentru clonarea de voce: cont Hugging Face, acceptarea termenilor pe pagina huggingface.co/kyutai/pocket-tts și autentificare locală cu uvx hf auth login",
+      "Opțional: soundfile (pip install pocket-tts[audio]) pentru unele moduri audio; torchao (pocket-tts[quantize]) pentru cuantizare",
+      "Alternativ, program de sine stătător din pagina de release (Windows x86, macOS, Linux), fără Python și fără PyTorch",
+      "Opțional: Docker (există Dockerfile și docker-compose.yaml pentru serverul pe portul 8000)"
+    ]
+  },
+  "monetization": [
+    {
+      "model": "serviciu de instalare și configurare",
+      "what_you_sell": "Instalarea și configurarea unui server local de voce (Docker, cu API compatibil OpenAI prin proiectul comunitar), plus alegerea vocilor cu licență clară, pentru cine nu vrea ca textele lui să plece în cloud.",
+      "for_whom": "Creatori de conținut, mici agenții și firme care produc voiceover sau citire de documente în engleză sau în alte limbi suportate.",
+      "license_check": {
+        "license": "MIT (cod); CC BY 4.0 (greutățile modelului)",
+        "commercial_use": "permis cu condiții",
+        "conditions": "Codul e MIT. Greutățile sunt CC BY 4.0 (se cere atribuire), dar modelul de pe Hugging Face are și un text de utilizare interzisă (clonare fără acord, dezinformare, conținut ilegal), iar accesul cere acceptarea termenilor. Unele voci vin din seturile expresso și ears, CC BY-NC, deci nu pot fi folosite comercial; vocile din seturile VCTK și alba-mackenna cer atribuire, iar cele din voice-zero și voice-donations sunt CC0. Licența vocilor în alte limbi (giovanni, lola, juergen, rafael) nu am verificat-o."
+      },
+      "path": "folosești repo-ul direct",
+      "own_build_notes": null,
+      "demand_evidence": [
+        {
+          "name": "ElevenLabs",
+          "url": "https://elevenlabs.io/pricing",
+          "price": "Starter 6 USD/lună, Creator 22 USD/lună, Pro 99 USD/lună (facturare lunară)",
+          "what_it_proves": "Oamenii plătesc pentru voce sintetică și clonare; arată cât costă varianta în cloud, nu că cineva plătește pentru instalare locală.",
+          "checked_at": "2026-11-03"
+        },
+        {
+          "name": "OpenAI text-to-speech (API)",
+          "url": "https://developers.openai.com/api/docs/pricing",
+          "price": "tts-1 15 USD per 1 milion de caractere; tts-1-hd 30 USD per 1 milion de caractere",
+          "what_it_proves": "Aplicațiile plătesc la consum pentru voce; un server local fără cost pe caracter e o alternativă pentru volume mari.",
+          "checked_at": "2026-11-03"
+        }
+      ],
+      "startup_cost": "Aproape zero: un calculator de test și câteva ore pentru a documenta procesul pe Windows, macOS și Linux.",
+      "time_to_first_client": "Greu de estimat; nu am dovezi publice despre cât durează până la primul client pentru un astfel de serviciu.",
+      "difficulty": "mediu",
+      "risks": [
+        "Concurență gratuită: documentația oficială și proiectele comunitare (server OpenAI-compatibil, Docker) fac instalarea ușoară pentru oricine.",
+        "Calitatea variază după voce și limbă; clientul poate cere calitate de studio pe care modelul nu o dă.",
+        "Licența vocilor și acordul pentru clonare: răspunderea ta dacă promiți uz comercial fără să verifici.",
+        "Dependență de Hugging Face (acces cu termeni acceptați) și de actualizări care schimbă modelul implicit."
+      ],
+      "first_steps": [
+        "Instalează local conform README-ului și compară vocile din catalog cu textele clienților tăi țintă.",
+        "Documentează pe o pagină ce voci poți folosi comercial (CC0, CC BY cu atribuire) și ce nu.",
+        "Oferă o primă configurare unui creator cunoscut, cu acord scris despre cum se folosesc vocile."
+      ]
+    },
+    {
+      "model": "produs construit peste repo",
+      "what_you_sell": "Un flux de voiceover offline: ia un script sau un articol, îl împarte în fragmente, generează audio cu Pocket TTS și livrează un WAV sau MP3 pe capitole, cu o listă clară a vocilor folosibile comercial.",
+      "for_whom": "Creatori de cursuri, podcasturi explicative sau newslettere în engleză, franceză, germană sau alte limbi suportate, care nu vor abonament pe caracter.",
+      "license_check": {
+        "license": "MIT (cod); CC BY 4.0 (greutățile modelului)",
+        "commercial_use": "permis cu condiții",
+        "conditions": "Cod MIT, deci îl poți include într-un produs. Greutățile sunt CC BY 4.0 (atribuire obligatorie), cu termenii de utilizare interzisă de pe Hugging Face (fără clonare fără acord, fără conținut înșelător). Folosește doar vocile cu licență comercială și păstrează atribuirea cerută de seturile CC BY."
+      },
+      "path": "folosești repo-ul direct",
+      "own_build_notes": null,
+      "demand_evidence": [
+        {
+          "name": "Speechify Premium",
+          "url": "https://speechify.com/pricing/",
+          "price": "29 USD/lună lunar sau 139 USD/an anual",
+          "what_it_proves": "Utilizatorii plătesc pentru citire cu voce tare a textelor; un produs local pentru creatori ar avea acest preț ca punct de comparație.",
+          "checked_at": "2026-11-03"
+        },
+        {
+          "name": "ElevenLabs Creator",
+          "url": "https://elevenlabs.io/pricing",
+          "price": "22 USD/lună (facturare lunară)",
+          "what_it_proves": "Creatorii plătesc deja un abonament lunar pentru voiceover și clonare.",
+          "checked_at": "2026-11-03"
+        }
+      ],
+      "startup_cost": "Mic: timp de dezvoltare și un calculator de test; fără costuri de GPU, pentru că modelul rulează pe CPU.",
+      "time_to_first_client": "Nu am dovezi publice; depinde de nișă și de cât de bine arată calitatea în limba clientului.",
+      "difficulty": "mediu",
+      "risks": [
+        "Concurență gratuită: aplicații comunitare pentru cititoare de ecran, PDF-uri și audiobook-uri sunt listate chiar în README.",
+        "Calitatea și stabilitatea unor modele: issue-urile publice raportează cuvinte sărite și prozodie slabă la unele voci.",
+        "Licențele vocilor și regulile de utilizare interzisă; un produs care permite clonare liberă ar răspunde de abuzuri.",
+        "Lipsa limbii române limitează piața locală; piața e în alte limbi, cu concurență mare."
+      ],
+      "first_steps": [
+        "Alege o nișă clară (de exemplu cursuri în franceză sau engleză) și testează 3-4 voci pe texte reale.",
+        "Construiește un mic script: împărțire pe capitole, apel la TTSModel, lipire în fișiere audio.",
+        "Cere feedback de la 3 creatori înainte să construiești interfața."
+      ]
+    }
+  ],
+  "updated_at": "2026-11-03",
+  "notes_summary": "Am citit README-ul, documentația CLI, codul modelului și cardurile de pe Hugging Face; nu am rulat nimic. Română nu e suportată oficial, iar licența unor voci din catalog e doar necomercială.",
+  "notes": "Repo nou, analizat la commit 91a9e96 (2026-10-31), versiunea 4.0.1. Cod citit, nerulat. Licența greutăților: API-ul Hugging Face (huggingface.co/api/models/kyutai/pocket-tts) arată license: cc-by-4.0, gated: auto (acces cu acceptarea termenilor, cu câmpurile 'Company or university' și 'I want to use this model for'); modelul alternativ kyutai/pocket-tts-without-voice-cloning are aceeași licență și nu e gated. Pagina de model (huggingface.co/kyutai/pocket-tts) nu cere login pentru vizualizare în WebFetch, README-ul raw dă 401. Cardul declară și un text de utilizare interzisă (clonare fără acord, dezinformare etc.); nu e clar juridic dacă e o restricție în plus față de CC BY 4.0 sau doar o politică, de aceea commercial_use e 'permis cu condiții'. Voci: licențe din huggingface.co/kyutai/tts-voices (CC0: voice-donations, voice-zero, înregistrările proprii Kyutai; CC BY 4.0: vctk, alba-mackenna, cml-tts; CC BY-NC: expresso și ears; numele cosette și jean nu apar pe pagina tts-voices, deci nu le-am legat de licență). Licența vocilor non-engleze (giovanni, lola, juergen, rafael) nu am putut-o verifica. Fișierul LICENSE conține textul MIT fără titlu și fără linie de copyright; GitHub îl detectează ca MIT. README-ul și docs/ nu sunt consecvente asupra modelului implicit: generate.md zice că 'english' = english_2026-10, python-api.md zice english_2026-09_2 (după release v4.0.1, PR #398 face english_2026-10 implicit). Release v4.0.1 are arhive Rust cu numele 3.3.0 (posibil învechite). Issue #390 (modelele mici 2026-10 'cenzurau' cuvinte) e închis și rezolvat în v4.0.1, dar utilizatorii raportau și cuvinte sărite la textele lungi pe modelele mici noi. Issue-uri deschise relevante: #115 (prozodie mai slabă decât Kokoro), #91, #174 (spaniolă trunchiată). Nu am găsit telemetrie în cod; singura cerere de rețea e descărcarea de pe Hugging Face/URL-uri. Primii pași: povestea aleasă e un comentariu HN (d4rkp4ttern, 2026-02-16) completat de al doilea comentariu al aceluiași autor (id 46988826) pentru detaliile tehnice; nu am putut deschide documentația plugin-ului lui (404), deci pașii vin doar din cele două comentarii; alte povești (dev.to, bloguri) erau generice sau despre alte modele. Prețuri verificate pe 2026-11-03: elevenlabs.io/pricing, developers.openai.com/api/docs/pricing, speechify.com/pricing/; murf.ai/pricing și cloud.google.com/text-to-speech/pricing nu au dat prețuri prin WebFetch (neincluse). huggingface.co/pricing nu descrie un plan gratuit explicit, deci prețul contului e null. Categorii: ambele există în categories.json. Recomandare pentru editor: pe pagina VoiceStudio, Pocket TTS e listat ca 'in_catalog: false', de actualizat la legare. Termeni noi pentru glosar propuși în glossary_terms (CPU, uvx, WAV, safetensors, FastAPI, Kokoro, streaming audio, parametri)."
+}
