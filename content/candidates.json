@@ -523,5 +523,19 @@
     "suggested_by": "heretic",
     "why": "Setul de benchmark-uri (de tip MMLU, GSM8K) folosit pentru a verifica ce capacități a pierdut modelul modificat, față de cel original.",
     "added_at": "2026-11-02"
+  },
+  {
+    "repo_url": "https://github.com/langchain-ai/langchainjs",
+    "name": "LangChain.js",
+    "suggested_by": "api-anything",
+    "why": "Exemplul din repo (examples/langchain.mjs) dă unui agent LangChain uneltele MCP ale API Anything; JSON-ul din operații devine observația agentului.",
+    "added_at": "2026-11-03"
+  },
+  {
+    "repo_url": "https://github.com/vercel/ai",
+    "name": "Vercel AI SDK",
+    "suggested_by": "api-anything",
+    "why": "Repo-ul are un exemplu cu AI SDK (examples/vercel-ai-sdk.mjs): uneltele MCP ale API Anything sunt apelate de modelul din aplicația ta JavaScript.",
+    "added_at": "2026-11-03"
   }
 ]

@@ -207,6 +207,12 @@
         "name": "Caveman",
         "why": "Agent de programare open-source, listat în README ca agent cu plugin nativ Caveman: răspunsurile lui devin scurte, iar logurile comprimate ajung la model.",
         "in_catalog": true
+      },
+      {
+        "repo_url": "https://github.com/goodnight000/api-anything",
+        "name": "API Anything",
+        "why": "Agentul de programare din terminal cere operația prin MCP (api-anything mcp --print-config dă configurarea), iar JSON-ul primit îi intră direct în context.",
+        "in_catalog": true
       }
     ],
     "gaps_noticed": [

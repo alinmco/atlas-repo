@@ -2489,5 +2489,59 @@
       "reproduce.json"
     ],
     "explanation": "fișier mic cu toți pașii pentru refacerea exactă a modelului"
+  },
+  {
+    "term": "scraping",
+    "aliases": [
+      "scraper",
+      "scrapere",
+      "web scraping"
+    ],
+    "explanation": "Extragere automată de date din paginile unui site"
+  },
+  {
+    "term": "cookie",
+    "aliases": [
+      "cookie-uri",
+      "cookie-urile"
+    ],
+    "explanation": "Fișier mic prin care site-ul te recunoaște după autentificare"
+  },
+  {
+    "term": "browser fără interfață",
+    "aliases": [
+      "headless browser",
+      "browser headless"
+    ],
+    "explanation": "Browser care rulează în fundal, fără fereastră vizibilă"
+  },
+  {
+    "term": "Chromium",
+    "aliases": [
+      "browser Chromium"
+    ],
+    "explanation": "Baza open source a Chrome, Edge, Brave și Vivaldi"
+  },
+  {
+    "term": "OpenAPI",
+    "aliases": [],
+    "explanation": "Document standard care descrie ce poți cere unui serviciu web"
+  },
+  {
+    "term": "TypeScript",
+    "aliases": [],
+    "explanation": "Limbaj de programare care extinde JavaScript cu tipuri de date"
+  },
+  {
+    "term": "LangChain",
+    "aliases": [
+      "LangChain.js"
+    ],
+    "explanation": "Bibliotecă pentru construit aplicații și agenți cu modele AI"
+  },
+  {
+    "term": "Playwright",
+    "aliases": [],
+    "explanation": "Unealtă Microsoft care controlează un browser din program"
   }
 ]
