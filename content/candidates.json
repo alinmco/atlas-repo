@@ -551,5 +551,33 @@
     "suggested_by": "cloudroom",
     "why": "Pi rulează prin Core în mod RPC și poate lucra cu mai mulți furnizori de modele.",
     "added_at": "2026-11-03"
+  },
+  {
+    "repo_url": "https://github.com/k2-fsa/OmniVoice",
+    "name": "k2-fsa/OmniVoice",
+    "suggested_by": "voicestudio",
+    "why": "Motorul implicit de voce din aplicație: textul și referința ta devin audio; util dacă vrei modelul direct, cu atenția cuvenită la greutățile CC-BY-NC.",
+    "added_at": "2026-11-03"
+  },
+  {
+    "repo_url": "https://github.com/n8n-io/n8n",
+    "name": "n8n",
+    "suggested_by": "voicestudio",
+    "why": "Un flux n8n trimite text către API-ul VoiceStudio și primește un fișier WAV, pe care îl poate pasa mai departe altui pas.",
+    "added_at": "2026-11-03"
+  },
+  {
+    "repo_url": "https://github.com/SYSTRAN/faster-whisper",
+    "name": "faster-whisper",
+    "suggested_by": "voicestudio",
+    "why": "Unul dintre motoarele de transcriere din catalog: fișierul audio devine text cu marcaje de timp, de unde pornește dublajul.",
+    "added_at": "2026-11-03"
+  },
+  {
+    "repo_url": "https://github.com/kyutai-labs/pocket-tts",
+    "name": "Pocket TTS",
+    "suggested_by": "voicestudio",
+    "why": "Motor de voce ușor, potrivit pentru CPU, listat în catalogul de motoare: text și referință intră, audio iese.",
+    "added_at": "2026-11-03"
   }
 ]
