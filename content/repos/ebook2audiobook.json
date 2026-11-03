@@ -1,0 +1,440 @@
+{
+  "slug": "ebook2audiobook",
+  "repo_url": "https://github.com/DrewThomasson/ebook2audiobook",
+  "name": "ebook2audiobook",
+  "one_liner": "Transformă cărți electronice în audiobook-uri cu voce clonată, pe calculatorul tău.",
+  "problem_solved": "Multe cărți nu au versiune audio, iar serviciile de narare AI se plătesc lunar sau per carte. Vrei să transformi singur un fișier EPUB sau PDF într-un audiobook, fără să-l trimiți altcuiva.",
+  "features": [
+    "Citește EPUB, PDF, MOBI, DOCX, TXT și alte formate, inclusiv imagini cu text (OCR)",
+    "Scrie audiobook cu capitole și metadate (m4b implicit; mp3, flac, wav, ogg ș.a.)",
+    "Nouă motoare de voce (XTTSv2, Bark, Piper, VITS, Fairseq, Tortoise și altele)",
+    "Clonare de voce dintr-o înregistrare de 1-5 minute (doar cu motoarele care o permit)",
+    "Interfață web locală sau linie de comandă (--headless) pentru cărți multe",
+    "Opțional: traducere locală a cărții, muzică între capitole, trimitere în Audiobookshelf"
+  ],
+  "at_a_glance": {
+    "for_you_if": [
+      "Vrei audiobook-uri din cărțile tale (EPUB, PDF), pe calculatorul tău, fără abonament.",
+      "Vrei să alegi o voce gata făcută sau să o clonezi dintr-o înregistrare proprie."
+    ],
+    "not_for_you_if": [
+      "Vrei să vinzi audiobook-urile: vocea implicită (XTTS-v2) are licență doar necomercială.",
+      "Ai doar procesor, fără placă video, și vrei rezultat rapid: pe CPU poate dura mult mai mult decât cartea."
+    ],
+    "verdict": "Convertor gratuit și complet, bun pentru uz personal; pentru audiobook-uri vândute trebuie schimbat motorul de voce implicit."
+  },
+  "cost": {
+    "level": "gratuit complet",
+    "summary": "Programul e gratuit (Apache-2.0), fără cont, cheie API sau abonament AI; costul real e un calculator cu placă video sau mult timp de procesare. Vocea implicită (XTTS-v2) e doar pentru uz necomercial.",
+    "ai_access": {
+      "mode": "nu folosește AI",
+      "detail": "Vocile rulează local, din modele descărcate; nu există nicio integrare cu abonamente (Claude, ChatGPT, Gemini) sau cu API-uri plătite. Doar Audiobookshelf are un token opțional, dar acela nu e serviciu AI.",
+      "source_url": "https://github.com/DrewThomasson/ebook2audiobook/blob/0a98ac313ec43a470ee1e5feb13dd881ffb3e969/README.md"
+    },
+    "items": [
+      {
+        "what": "ebook2audiobook (cod sub Apache-2.0)",
+        "price": "0 USD",
+        "required": true,
+        "source_url": "https://github.com/DrewThomasson/ebook2audiobook/blob/0a98ac313ec43a470ee1e5feb13dd881ffb3e969/LICENSE"
+      },
+      {
+        "what": "Placă video (NVIDIA CUDA, AMD ROCm, Intel XPU sau Apple Silicon): opțională, dar recomandată; README spune că motoarele moderne sunt foarte lente pe procesor",
+        "price": null,
+        "required": false,
+        "source_url": "https://github.com/DrewThomasson/ebook2audiobook/blob/0a98ac313ec43a470ee1e5feb13dd881ffb3e969/README.md#hardware-requirements"
+      },
+      {
+        "what": "Închiriere GPU în cloud, de exemplu RunPod (alternativă la placa proprie; nu e recomandată în documentația repo-ului)",
+        "price": "RTX 3090 de la 0,22 USD/oră (Community Cloud) sau 0,50 USD/oră (Secure Cloud); pagina e actualizată 28 oct. 2026",
+        "required": false,
+        "source_url": "https://www.runpod.io/pricing"
+      },
+      {
+        "what": "Docker Desktop (opțional, pentru varianta cu container)",
+        "price": "Personal: 0 USD; Pro: 11 USD/utilizator/lună (9 USD cu plată anuală)",
+        "required": false,
+        "source_url": "https://www.docker.com/pricing/"
+      },
+      {
+        "what": "Google Colab, Kaggle sau Hugging Face Spaces (variante online gratuite din README, cu putere limitată)",
+        "price": null,
+        "required": false,
+        "source_url": "https://github.com/DrewThomasson/ebook2audiobook/blob/0a98ac313ec43a470ee1e5feb13dd881ffb3e969/README.md"
+      },
+      {
+        "what": "Audiobookshelf (server propriu de audiobook-uri, opțional; software GPL-3.0)",
+        "price": "0 USD",
+        "required": false,
+        "source_url": "https://github.com/advplyr/audiobookshelf"
+      }
+    ]
+  },
+  "platforms": {
+    "windows": "da",
+    "mac": "da",
+    "linux": "da",
+    "note": "README bifează Windows x86 și ARM, Linux x86 și ARM, Mac Intel și Apple Silicon. Pe Windows, scriptul instalează programele lipsă cu Scoop, fără drepturi de administrator; pe macOS cu Homebrew. Docker pe Windows cere virtualizare activată, iar în Docker nu e disponibil MPS (Apple), deci rămâne doar procesorul.",
+    "source_url": "https://github.com/DrewThomasson/ebook2audiobook/blob/0a98ac313ec43a470ee1e5feb13dd881ffb3e969/README.md"
+  },
+  "risk_flags": [
+    {
+      "flag": "licență restrictivă",
+      "detail": "Modelul de voce implicit (coqui/XTTS-v2) are licența CPML, care permite doar uz necomercial al modelului și al rezultatelor lui; la fel MMS/Fairseq și MusicGen (CC-BY-NC 4.0 pe Hugging Face).",
+      "source_url": "https://huggingface.co/coqui/XTTS-v2/blob/main/LICENSE.txt"
+    },
+    {
+      "flag": "telemetrie",
+      "detail": "Rapoartele anonimizate de erori sunt pornite implicit și se trimit la radsl.net; se opresc cu DO_NOT_TRACK=1. README-ul nu menționează asta.",
+      "source_url": "https://github.com/DrewThomasson/ebook2audiobook/blob/0a98ac313ec43a470ee1e5feb13dd881ffb3e969/lib/conf.py#L211-L214"
+    },
+    {
+      "flag": "modifică setările altor programe",
+      "detail": "Scriptul de instalare descarcă și rulează instalatori externi (uv, Rust, Calibre) și instalează programe de sistem (Scoop, Homebrew sau managerul Linux, cu sudo); pe Linux/macOS, în modul headless, te poate adăuga într-un grup de utilizatori cu sudo.",
+      "source_url": "https://github.com/DrewThomasson/ebook2audiobook/blob/0a98ac313ec43a470ee1e5feb13dd881ffb3e969/ebook2audiobook.sh#L54-L62"
+    }
+  ],
+  "audience_reason": "se instalează cu scripturi, dar placa video și alegerea motorului de voce cer ceva răbdare",
+  "setup_difficulty_reason": "scripturile instalează totul singure, dar sunt descărcări mari de modele și probleme frecvente la detectarea plăcii video (README trimite la un wiki)",
+  "analogy": "Ca un actor de voce angajat doar pentru tine: îi dai cartea, el o citește capitol cu capitol, iar tu alegi dacă folosește o voce gata făcută sau o imită pe a ta.",
+  "how_it_works": [
+    "Pasul 1 (intrare): încarci o carte (EPUB, PDF, MOBI, DOCX, TXT sau imagini cu text) în interfața web sau cu --ebook în linia de comandă.",
+    "Pasul 2 (pregătire): Calibre convertește cartea într-un format de text unificat; pentru imagini, Tesseract citește textul (OCR).",
+    "Pasul 3 (proces): textul se împarte pe capitole și propoziții; etichetele [pause] sau [voice:...] din text controlează pauzele și schimbarea vocii.",
+    "Pasul 4 (voce): motorul ales (XTTSv2, Piper, Bark etc.) citește fiecare bucată, opțional cu voce clonată dintr-un fișier audio.",
+    "Pasul 5 (ieșire): FFmpeg lipește bucățile într-un fișier audiobook (m4b implicit) cu capitole și metadate; opțional îl trimite în Audiobookshelf."
+  ],
+  "first_steps": {
+    "origin": "experiență utilizator",
+    "story_url": "https://github.com/DrewThomasson/ebook2audiobook/discussions/477",
+    "story_platform": "GitHub",
+    "story_date": "2025-03-12",
+    "title": "Cum a pornit un utilizator accelerarea pe placa video NVIDIA, pe Windows",
+    "intro": "Un utilizator de Windows, cu o placă video NVIDIA, a vrut ca ebook2audiobook să genereze audiobook-ul pe placa video, nu pe procesor. Ghidul lui e din martie 2025, pentru o versiune mai veche.",
+    "steps": [
+      {
+        "you_do": "Instalează o singură dată Nvidia CUDA Toolkit.",
+        "what_happens": "Calculatorul e pregătit pentru calcul pe placa video; spune că pasul se repetă doar la actualizarea toolkit-ului.",
+        "source_url": "https://github.com/DrewThomasson/ebook2audiobook/discussions/477"
+      },
+      {
+        "you_do": "Descarcă arhiva zip cu codul, o dezarhivează într-un folder și rulează ebook2audiobook.cmd (fără drepturi de administrator).",
+        "what_happens": "Scriptul face configurarea inițială a mediului Python; omul așteaptă să se termine, apoi închide fereastra.",
+        "source_url": "https://github.com/DrewThomasson/ebook2audiobook/discussions/477"
+      },
+      {
+        "you_do": "Deschide Anaconda Prompt și activează mediul python_env din folderul programului.",
+        "what_happens": "Ajunge în mediul Python creat de script, unde poate schimba pachetele.",
+        "source_url": "https://github.com/DrewThomasson/ebook2audiobook/discussions/477"
+      },
+      {
+        "you_do": "Dezinstalează torch, torchvision și torchaudio, apoi le instalează pe cele compatibile CUDA (el a ales varianta nightly cu128, pentru placa lui).",
+        "what_happens": "Versiunea instalată automat, fără suport pentru placa video, e înlocuită cu una care o poate folosi.",
+        "source_url": "https://github.com/DrewThomasson/ebook2audiobook/discussions/477"
+      },
+      {
+        "you_do": "Rulează din nou ebook2audiobook.cmd.",
+        "what_happens": "Programul pornește cu accelerare pe placa video; omul spune că metoda a mers constant după fiecare actualizare.",
+        "source_url": "https://github.com/DrewThomasson/ebook2audiobook/discussions/477"
+      }
+    ],
+    "takeaway": "Pe un RTX 5090, spune el, un audiobook de 7 h 13 min s-a generat în 1 h 54 min; nu compară cu rularea pe procesor. Atenție: versiunile noi au un instalator de dispozitiv (lib/classes/device_installer.py) care alege singur varianta CUDA, deci pașii manuali pot fi depășiți."
+  },
+  "categories": [
+    "Clonare și generare de voce",
+    "Cărți audio și podcasturi"
+  ],
+  "search_intents": [
+    "vreau să transform o carte EPUB într-un audiobook gratuit",
+    "vreau să clonez o voce ca să-mi citească cartea",
+    "vreau să generez audiobook-uri pe calculatorul meu, fără abonament",
+    "vreau să convertesc un PDF în fișier audio cu capitole",
+    "vreau să convertesc mai multe cărți deodată în audiobook-uri",
+    "vreau un audiobook în limba română dintr-un fișier de text"
+  ],
+  "audience": "intermediar",
+  "setup_difficulty": "mediu",
+  "replaces": [
+    {
+      "service": "ElevenLabs (narare de cărți și clonare de voce)",
+      "service_url": "https://elevenlabs.io",
+      "price": "Free 0 USD (fără licență comercială); Starter 6 USD/lună; Creator 22 USD/lună; Pro 99 USD/lună; Scale 299 USD/lună; Business 990 USD/lună",
+      "price_source_url": "https://elevenlabs.io/pricing",
+      "price_checked_at": "2026-11-03",
+      "replacement_level": "parțial",
+      "what_you_keep": [
+        "Audiobook cu capitole din EPUB/PDF, fără limită lunară de caractere",
+        "Clonare de voce din înregistrare proprie (cu XTTSv2)",
+        "Cărțile rămân pe calculatorul tău, fără cont"
+      ],
+      "what_you_lose": [
+        "Calitate și naturalețe de top, plus editor vizual și suport comercial",
+        "Licență comercială inclusă în plan (la ebook2audiobook, vocea implicită XTTS-v2 e doar necomercială)",
+        "Clonare de voce în română: XTTS nu are română în lista de limbi din cod",
+        "Viteza din cloud, fără placă video proprie"
+      ],
+      "hidden_costs": [
+        "Placă video sau mult timp de procesare",
+        "Descărcări mari de modele la prima rulare",
+        "Timp de instalare, actualizări și rezolvarea problemelor de GPU"
+      ]
+    },
+    {
+      "service": "Speechify (ascultat cărți cu voci AI)",
+      "service_url": "https://speechify.com",
+      "price": "Premium 29 USD/lună (facturare lunară) sau 139 USD/an",
+      "price_source_url": "https://speechify.com/pricing/",
+      "price_checked_at": "2026-11-03",
+      "replacement_level": "doar pentru cazuri simple",
+      "what_you_keep": [
+        "Ascultarea cărților tale ca fișiere audio, offline, într-un player la alegere (de exemplu Audiobookshelf)",
+        "Fără abonament lunar"
+      ],
+      "what_you_lose": [
+        "Aplicația de telefon cu citire instantanee și sincronizare",
+        "Vocile premium: planul gratuit Speechify are doar voci robotice, dar cele plătite sunt mai naturale decât multe motoare locale",
+        "Citire pe loc a paginilor web, a PDF-urilor și a documentelor; ebook2audiobook generează fișiere, nu citește live"
+      ],
+      "hidden_costs": [
+        "Timp de generare (uneori ore pe carte) înainte de a putea asculta",
+        "Calculator cu placă video pentru viteză rezonabilă"
+      ]
+    }
+  ],
+  "examples": [
+    {
+      "title": "Instalare și pornire (script oficial)",
+      "scenario": "Clonezi repo-ul și rulezi scriptul potrivit sistemului tău: ./ebook2audiobook.command pe Linux/macOS sau ebook2audiobook.cmd pe Windows. Scriptul instalează singur programele lipsă (Windows: Scoop; macOS: Homebrew). Apoi deschizi în browser adresa afișată în terminal, http://localhost:7860/, ca să convertești cărți.",
+      "prerequisites": [
+        "Git",
+        "Windows, macOS sau Linux",
+        "Conexiune la internet pentru programe și modele",
+        "Minim 2 GB RAM (8 GB recomandat); placă video opțională"
+      ],
+      "commands": [
+        "git clone https://github.com/DrewThomasson/ebook2audiobook.git",
+        "cd ebook2audiobook",
+        "./ebook2audiobook.command",
+        "ebook2audiobook.cmd"
+      ],
+      "code": null,
+      "output_from_docs": null,
+      "source_url": "https://github.com/DrewThomasson/ebook2audiobook/blob/0a98ac313ec43a470ee1e5feb13dd881ffb3e969/README.md#instructions",
+      "kind": "instalare"
+    },
+    {
+      "title": "Conversia unei cărți din linia de comandă (modul headless)",
+      "scenario": "Fără interfață web, dai calea către cartea ta, opțional un fișier cu vocea de clonat și codul limbii (ISO-639-3, de exemplu eng, ita, deu). Prima comandă e pentru Linux/macOS, a doua pentru Windows. Limba implicită e eng, iar --voice și --language sunt opționale.",
+      "prerequisites": [
+        "ebook2audiobook instalat (vezi exemplul de instalare)",
+        "Un fișier carte non-DRM, de exemplu .epub",
+        "Opțional: un fișier audio cu vocea de clonat (ideal 1-5 minute)"
+      ],
+      "commands": [
+        "./ebook2audiobook.command --headless --ebook <path_to_ebook_file> --voice <path_to_voice_file> --language <language_code>",
+        "ebook2audiobook.cmd --headless --ebook <path_to_ebook_file> --voice <path_to_voice_file> --language <language_code>"
+      ],
+      "code": null,
+      "output_from_docs": null,
+      "source_url": "https://github.com/DrewThomasson/ebook2audiobook/blob/0a98ac313ec43a470ee1e5feb13dd881ffb3e969/README.md#basic-usage",
+      "kind": "folosire"
+    }
+  ],
+  "connectors": {
+    "inputs": [
+      "Fișiere carte non-DRM: .epub, .mobi, .azw3, .pdf, .txt, .docx, .html, .fb2 și altele (README recomandă .epub sau .mobi pentru capitole detectate automat)",
+      "Imagini cu text (.png, .jpg, .tiff, .bmp), citite prin OCR",
+      "Text lipit direct în interfață sau dat cu --text",
+      "Opțional: fișier audio cu o voce de clonat (ideal 1-5 minute)",
+      "Opțional: arhivă .zip cu model personalizat (XTTSv2, VITS, Fairseq, Piper), cu --custom_model",
+      "Opțional: fișier JSON care leagă fiecare carte de o voce (--voice_map, pentru un folder de cărți)"
+    ],
+    "outputs": [
+      "Fișier audiobook cu capitole și metadate: m4b (implicit), m4a, mp4, mp3, flac, wav, ogg, aac, webm, mov",
+      "Opțional: audiobook trimis într-o bibliotecă Audiobookshelf (--abs_url, --abs_api_token, --abs_library)",
+      "Opțional: carte tradusă (--translate) și muzică între capitole (--enable_interlude)"
+    ],
+    "pairs_well_with": [
+      {
+        "repo_url": "https://github.com/advplyr/audiobookshelf",
+        "name": "Audiobookshelf",
+        "why": "Audiobook-ul .m4b generat de ebook2audiobook se trimite direct în biblioteca Audiobookshelf (opțiunile --abs_*), de unde îl asculți de pe telefon.",
+        "in_catalog": true
+      },
+      {
+        "repo_url": "https://github.com/DrewThomasson/E2A-SML",
+        "name": "E2A-SML",
+        "why": "Adaugă automat în text etichete SML pentru voci multiple; textul etichetat devine intrarea ebook2audiobook. Pe GitHub nu are licență declarată, deci verifică-o înainte de orice uz comercial.",
+        "in_catalog": false
+      },
+      {
+        "repo_url": "https://github.com/DrewThomasson/Universal_TTS_Finetune",
+        "name": "Universal TTS Finetune",
+        "why": "Antrenezi un model de voce propriu, iar arhiva .zip rezultată se încarcă în ebook2audiobook cu --custom_model.",
+        "in_catalog": false
+      },
+      {
+        "repo_url": "https://github.com/kovidgoyal/calibre",
+        "name": "Calibre",
+        "why": "README-ul cere să ștergi manual din EPUB textul pe care nu vrei să-l auzi (prefețe, note); editezi cartea în Calibre, iar fișierul curat devine intrarea ebook2audiobook.",
+        "in_catalog": false
+      }
+    ],
+    "gaps_noticed": [
+      "EPUB nu are o structură standard pentru capitole, prefețe sau note, deci cartea trebuie curățată manual înainte de conversie (README).",
+      "XTTSv2, singurul motor cu clonare de voce, nu are limba română în lista din lib/conf_models.py; pentru română rămân Piper (voce Mihai) și Fairseq, cu voci fixe.",
+      "Descrierea repo-ului pe GitHub (50+ motoare, 1696 de limbi) nu se potrivește cu README-ul și codul de la acest commit (9 motoare, 1158 de limbi).",
+      "README trimite la un fișier „Mac Ebook2Audiobook Launcher.command” care nu apare în rădăcina repo-ului; scriptul existent se numește ebook2audiobook.command.",
+      "pyproject.toml declară licența MIT, dar fișierul LICENSE este Apache-2.0.",
+      "Spațiul pe disc necesar pentru modele nu e dat în documentație.",
+      "Nu există un pas automat de ascultare sau verificare a pronunției; README cere să raportezi audio trunchiat pe care îl observi."
+    ]
+  },
+  "when_not_to_use": [
+    "Vrei să vinzi sau să publici contra cost audiobook-urile: vocea implicită XTTS-v2 e doar pentru uz necomercial (și rezultatele), la fel Fairseq/MMS și MusicGen (CC-BY-NC 4.0).",
+    "Cărțile au protecție DRM sau nu le deții legal: README spune că programul e doar pentru cărți non-DRM, obținute legal.",
+    "Vrei voce clonată în limba română: XTTS nu are română în cod; pentru română poți folosi doar voci fixe (Piper, Fairseq).",
+    "Ai doar procesor: autorul spune în discuția #19 că, pe un laptop doar cu CPU, conversia poate dura zile (măsurătoare din 2024, pe o versiune mai veche).",
+    "Vrei calitate de narator profesionist, cu emoții și personaje: pronunția poate greși, iar README cere raportarea audio-ului trunchiat.",
+    "Presetele fine-tuned poartă nume de persoane reale (actori, voci cunoscute): nu le folosi pentru conținut public fără acordul lor."
+  ],
+  "alternatives": [
+    {
+      "name": "abogen",
+      "url": "https://github.com/denizsafak/abogen",
+      "difference": "MIT; descris pe GitHub ca generator de audiobook-uri din EPUB, PDF și text, cu subtitrări sincronizate; activ în noiembrie 2026."
+    },
+    {
+      "name": "epub_to_audiobook",
+      "url": "https://github.com/p0n1/epub_to_audiobook",
+      "difference": "MIT; optimizat pentru Audiobookshelf, cu interfață web; descrierea nu spune ce motoare de voce folosește (nu am verificat)."
+    },
+    {
+      "name": "epub2tts",
+      "url": "https://github.com/aedocw/epub2tts",
+      "difference": "Apache-2.0; transformă EPUB sau text în audiobook; mai mic și mai puțin activ (ultimul commit în feb. 2026)."
+    },
+    {
+      "name": "audiobook-creator",
+      "url": "https://github.com/prakharsr/audiobook-creator",
+      "difference": "Atribuie voci diferite personajelor cu ajutorul unor LLM-uri și Kokoro/Orpheus TTS; GitHub nu raportează o licență clară (descrierea spune GPL-3.0)."
+    }
+  ],
+  "tech_sheet": {
+    "license": "Apache-2.0",
+    "language": "Python",
+    "commit_sha": "0a98ac313ec43a470ee1e5feb13dd881ffb3e969",
+    "last_commit_date": "2026-10-06",
+    "stars": 20493,
+    "requirements": [
+      "Git, pentru clonarea repo-ului",
+      "Windows (x86 sau ARM), macOS (Intel sau Apple Silicon) sau Linux (x86 sau ARM)",
+      "Python 3.10-3.12 (pyproject.toml și lib/conf.py); scriptul de instalare creează singur mediul python_env cu uv",
+      "Programe instalate automat de script: Calibre, FFmpeg, Tesseract OCR, espeak-ng, sox, mediainfo, Node.js, cmake, curl, pkg-config, Rust/cargo (Windows: Scoop, fără administrator; macOS: Homebrew; Linux: managerul de pachete, cu sudo)",
+      "Conexiune la internet la prima rulare, pentru pachete și modelele de voce (XTTSv2 ș.a.) de pe Hugging Face",
+      "Hardware: minim 2 GB RAM (8 GB recomandat) și 1 GB VRAM (4 GB recomandat); placa video e opțională (NVIDIA CUDA >= 11.8, AMD ROCm >= 5.7, Intel XPU, Apple MPS, Jetson), dar pe procesor motoarele moderne sunt foarte lente",
+      "Opțional: Docker sau Podman (pe Windows cere virtualizare activată; MPS nu e disponibil în Docker)",
+      "Fără chei API sau cont obligatoriu; token Audiobookshelf doar dacă vrei trimiterea în biblioteca ta",
+      "Cărți non-DRM, obținute legal"
+    ]
+  },
+  "monetization": [
+    {
+      "model": "serviciu de instalare și configurare",
+      "what_you_sell": "Instalare, alegerea motorului de voce potrivit limbii și configurarea plăcii video pe calculatorul clientului, plus scurt training, pentru audiobook-uri făcute pentru uz personal sau intern.",
+      "for_whom": "Persoane și mici organizații (biblioteci, școli, asociații) care vor audiobook-uri din cărțile lor, locale, fără abonament și fără să-și trimită textele altcuiva.",
+      "license_check": {
+        "license": "Apache-2.0",
+        "commercial_use": "permis cu condiții",
+        "conditions": "Codul (Apache-2.0) permite uz comercial, cu păstrarea notei de licență. Modelul implicit XTTS-v2 are licența CPML: doar uz necomercial al modelului și al rezultatelor, deci nu livra clienților audiobook-uri făcute cu XTTS-v2 pentru vânzare. Un serviciu de instalare pentru uz personal e un caz diferit, dar verifică termenii înainte. Dependențele (piper-tts GPL-3.0, Calibre GPL-3.0, coqui-tts MPL-2.0) rămân sub licențele lor; dacă redistribui un pachet sau o imagine Docker cu ele, respectă-le."
+      },
+      "path": "folosești repo-ul direct",
+      "own_build_notes": null,
+      "demand_evidence": [
+        {
+          "name": "ElevenLabs",
+          "url": "https://elevenlabs.io/pricing",
+          "price": "Starter 6 USD/lună, Creator 22 USD/lună, Pro 99 USD/lună",
+          "what_it_proves": "Arată că oamenii plătesc abonamente pentru narare cu voce AI; nu dovedește cerere pentru servicii de instalare locală.",
+          "checked_at": "2026-11-03"
+        },
+        {
+          "name": "Speechify",
+          "url": "https://speechify.com/pricing/",
+          "price": "Premium 29 USD/lună sau 139 USD/an",
+          "what_it_proves": "Ascultarea cărților cu voci AI se vinde pe abonament; alternativa locală are un punct de comparație, dar nu e dovadă pentru instalare plătită.",
+          "checked_at": "2026-11-03"
+        }
+      ],
+      "startup_cost": "Aproape zero: un PC de test (ideal cu placă NVIDIA) sau câteva ore de GPU închiriat, de la 0,22 USD/oră pe RunPod Community Cloud (28 oct. 2026), plus timp de documentare.",
+      "time_to_first_client": "Variază mult; depinde de rețeaua ta, nu am găsit dovezi publice că există cerere pentru instalare.",
+      "difficulty": "mediu",
+      "risks": [
+        "Concurență gratuită: README, notebook-urile Colab/Kaggle și imaginile Docker oficiale fac instalarea posibilă fără tine.",
+        "Probleme de detectare a plăcii video (CUDA, ROCm) apar des și cer suport pentru fiecare client.",
+        "Repo-ul se schimbă rapid (versiuni noi aproape în fiecare lună: 26.8.20, 26.9.7, 26.10.1), deci instrucțiunile se învechesc.",
+        "Dacă clientul folosește rezultatul comercial cu XTTS-v2, încalcă licența CPML."
+      ],
+      "first_steps": [
+        "Instalează o dată pe un PC de test (Windows și Linux) și notează timpii reali pe 2-3 cărți.",
+        "Scrie un ghid scurt în limba clientului: ce motor pentru ce limbă (pentru română: Piper sau Fairseq).",
+        "Pregătește o ofertă clară pe care o poți susține: instalare, test cu o carte a clientului, 30 de minute de training.",
+        "Spune clientului din prima că vocea implicită e doar necomercială."
+      ]
+    },
+    {
+      "model": "produs construit peste repo",
+      "what_you_sell": "Audiobook-uri gata făcute (sau un serviciu de conversie) pentru autori independenți, construite cu un motor de voce cu licență care permite uz comercial.",
+      "for_whom": "Autori independenți și edituri mici care vor un audiobook mai ieftin decât unul cu narator uman, pentru cărți pe care le dețin.",
+      "license_check": {
+        "license": "Apache-2.0",
+        "commercial_use": "neclar",
+        "conditions": "Codul e Apache-2.0, dar motorul implicit (XTTS-v2, CPML), Fairseq/MMS și MusicGen (CC-BY-NC 4.0) sunt necomerciale, iar pentru celelalte (Bark MIT pe Hugging Face, Piper cu licență diferită per voce, Tortoise, VITS) nu am verificat fiecare model. Până verifici modelul și vocea, uzul comercial e neclar."
+      },
+      "path": "construiești propria implementare",
+      "own_build_notes": "Construiești tu funcționalitatea, nu preiei modelele: carte -> capitole -> voce -> fișier m4b cu metadate, plus o verificare a pronunției și a pauzelor înainte de livrare (aici poți face ideea mai bună decât repo-ul). Codul aplicației e Apache-2.0 și poate fi citit sau refolosit cu atribuire; restricția e la modele, voci și date. Puncte de plecare legale cu licențe permisive, verificate la 2026-11-03: Chatterbox (MIT, cod și model, resemble-ai/chatterbox) și Qwen3-TTS (Apache-2.0, cod și model). Unele voci Piper au dataset CC0 (de exemplu ro_RO-mihai, cf. model card), dar verifică licența fiecărei voci. NU prelua: greutățile XTTS-v2, vocile de persoane reale din presetele fine-tuned (drepturi la imagine și voce), modelele MMS/MusicGen, vocile din E2A-Voices fără verificarea sursei, numele, logo-ul și designul ebook2audiobook.",
+      "demand_evidence": [
+        {
+          "name": "Leanpub AI audiobook",
+          "url": "https://leanpub.com/services/audiobook_ai",
+          "price": "De la 999 USD per carte (până la 200.000 de cuvinte; 799 USD pentru membri Max/Ultra)",
+          "what_it_proves": "O platformă vinde deja audiobook-uri AI pentru autori, per carte.",
+          "checked_at": "2026-11-03"
+        },
+        {
+          "name": "Narration Box (producție la cheie)",
+          "url": "https://narrationbox.com/pricing",
+          "price": "11 USD la 1.000 de cuvinte, minim 399 USD (un manuscris de 75.000 de cuvinte e estimat la 825 USD); abonamente de la 15 USD/lună",
+          "what_it_proves": "Producția AI de audiobook-uri se vinde la cheie, pe număr de cuvinte.",
+          "checked_at": "2026-11-03"
+        },
+        {
+          "name": "ElevenLabs",
+          "url": "https://elevenlabs.io/pricing",
+          "price": "Creator 22 USD/lună, Pro 99 USD/lună",
+          "what_it_proves": "Principalul concurent plătit are planuri cu licență comercială pentru narare.",
+          "checked_at": "2026-11-03"
+        }
+      ],
+      "startup_cost": "PC cu placă video sau GPU închiriat (de la 0,22 USD/oră pe RunPod Community Cloud, 28 oct. 2026), plus ore de testare a modelelor cu licență comercială.",
+      "time_to_first_client": "Variază; depinde de calitatea probelor audio și de cum ajungi la autori.",
+      "difficulty": "greu",
+      "risks": [
+        "Concurență puternică și ieftină: ElevenLabs, Narration Box, Leanpub au deja produse și prețuri publice.",
+        "Calitatea vocilor deschise poate rămâne sub cea a serviciilor plătite, mai ales în română.",
+        "Licențele modelelor se pot schimba; trebuie verificate la fiecare actualizare.",
+        "Drepturi asupra textului: lucrezi doar cu cărți pe care clientul le deține.",
+        "Platformele de distribuție pot avea reguli proprii despre naratori AI; verifică-le înainte să promiți ceva."
+      ],
+      "first_steps": [
+        "Alege un motor cu licență permisivă (Chatterbox sau Qwen3-TTS) și citește licența completă a modelului.",
+        "Fă un prototip: un EPUB scurt, convertit în capitole și voce, cu verificare manuală a pronunției.",
+        "Compară cu o probă de la un serviciu plătit, ca să vezi unde pierzi calitate.",
+        "Abia apoi propune probe gratuite unor autori pentru o carte pe care o dețin."
+      ]
+    }
+  ],
+  "updated_at": "2026-11-03",
+  "notes_summary": "Am citit README-ul, codul, scripturile de instalare și licențele modelelor pe Hugging Face; n-am rulat nimic, iar spațiul pe disc necesar nu apare în documentație.",
+  "notes": "Repo nou, citit la commit 0a98ac31 (2026-10-06, versiune 26.10.1, release publicat 2026-10-05). Licența codului: Apache-2.0 (fișierul LICENSE și API-ul GitHub); pyproject.toml spune MIT, o inconsecvență. Modele (verificate pe cardurile Hugging Face, 2026-11-03): coqui/XTTS-v2 = Coqui Public Model License (doar necomercial, incluzând rezultatele); drewThomasson/fineTunedTTSModels = card apache-2.0, dar sunt fine-tune-uri ale XTTS-v2 (deci derivate din model CPML) și multe poartă nume de persoane reale (BobOdenkirk, MorganFreeman, ScarlettJohansson etc., din lib/classes/tts_engines/presets/xtts_presets.py): am tratat licența lor ca neclară; facebook/mms-tts-eng (baza motorului Fairseq, dedus din numele tts_models/[lang]/fairseq/vits din Coqui) = cc-by-nc-4.0; facebook/musicgen-small (muzică între capitole, opțional) = cc-by-nc-4.0; suno/bark = mit; rhasspy/piper-voices = card mit, dar licența diferă per voce (ro_RO-mihai: dataset CC0, en_GB-alan: „See URL”); drewThomasson/segmentation = mit; dataset ebook2audiobook/E2A-Voices = mit (nu am verificat sursa vocilor). Nu am verificat licențele modelelor Tortoise, VITS, GlowTTS, Tacotron, YourTTS și knnvc (modelul de conversie de voce implicit). Dependențe cu licență copyleft: piper-tts 1.4.2 (GPL-3.0-or-later, PyPI), coqui-tts 0.27.5 (MPL-2.0, PyPI), Calibre (GPL-3.0). Cod citit: README, ebook2audiobook.sh/.cmd, lib/conf.py, lib/conf_models.py, presets, bug_reporter.py. Telemetrie: lib/conf.py liniile 211-214 (bug_report_enabled=True, endpoint radsl.net, opt-out DO_NOT_TRACK=1); conținutul raportului e anonimizat prin reguli de redactare, dar README nu menționează raportarea. Descrierea GitHub (50+ motoare, 1696 limbi) nu corespunde codului de la acest commit (TTS_ENGINES are 9 intrări; README spune 1158 de limbi): am scris cifrele din cod/README. Limbi: XTTS nu include româna; Piper (ro_RO-mihai) și Fairseq (1078 limbi, inclusiv ron) o includ, ambele fără clonare (motoare cu vorbitor intern). Prețuri verificate 2026-11-03: elevenlabs.io/pricing (Free 0, Starter 6, Creator 22, Pro 99, Scale 299, Business 990), speechify.com/pricing/ (Premium 29/lună sau 139/an; pagina Studio dă 404), leanpub.com/services/audiobook_ai (de la 999 USD; un rezumat de căutare arăta 199 USD, am păstrat valoarea de pe pagină), narrationbox.com/pricing (producție la cheie 11 USD/1000 cuvinte, minim 399), runpod.io/pricing (actualizat 28 oct. 2026), docker.com/pricing. Murf, Google Colab și Kaggle: prețuri neverificate (pagini fără conținut utilizabil), deci null. Parteneri verificați activi (ultimul push): audiobookshelf 2026-11-01, calibre 2026-11-03, E2A-SML 2026-10-02 (fără licență declarată pe GitHub), Universal_TTS_Finetune 2026-09-27 (MIT). Alternative: abogen 2026-11-01 (MIT), epub_to_audiobook 2026-10-28 (MIT), epub2tts 2026-02-08 (Apache-2.0), audiobook-creator 2025-11-17 (licență NOASSERTION pe GitHub). Puncte de plecare permisive pentru idea 2: Chatterbox (MIT, push 2026-07-21), Qwen3-TTS (Apache-2.0, push 2026-03-17); Kokoro (Apache-2.0) are ultimul push 2025-08-06, deci nu l-am listat ca activ. Primii pași: experiența aleasă e discuția GitHub #477 (martie 2025), scrisă de un utilizator, nu de autorul repo-ului; e un ghid de ocolire a unei probleme de instalare CUDA din versiuni vechi (repo-ul are acum lib/classes/device_installer.py, care alege tag-ul CUDA, inclusiv cu128 pe Windows, dar n-am verificat că elimină pașii manuali). Căutat fără rezultat util: HN (doar link-uri, fără comentarii cu pași), dev.to (articole generice de tip SEO), web (recenzii secundare, fără primă mână). Discuția #19 (timpi) conține cifre ale autorului, nu povestea unui utilizator. Reddit nu a fost încercat. Termeni de glosar care lipseau: XTTS, Coqui, CPML, Calibre, OCR, Tesseract, Gradio, EPUB, M4B, DRM, Piper, Bark, Fairseq, MusicGen, Audiobookshelf, Google Colab, Scoop, etichete SML, Argos Translate, model fine-tuned. Dificultate: mediu (scripturi automate, dar descărcări mari și GPU)."
+}

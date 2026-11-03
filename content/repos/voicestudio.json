@@ -263,9 +263,9 @@
     "pairs_well_with": [
       {
         "repo_url": "https://github.com/k2-fsa/OmniVoice",
-        "name": "k2-fsa/OmniVoice",
-        "why": "Motorul implicit de voce din aplicație: textul și referința ta devin audio; util dacă vrei modelul direct, cu atenția cuvenită la greutățile CC-BY-NC.",
-        "in_catalog": false
+        "name": "OmniVoice",
+        "why": "Aplicație desktop gata făcută care folosește OmniVoice ca motor implicit: tu dai text și o referință, ea îți dă audio, fără să scrii Python.",
+        "in_catalog": true
       },
       {
         "repo_url": "https://github.com/ollama/ollama",
@@ -288,8 +288,8 @@
       {
         "repo_url": "https://github.com/kyutai-labs/pocket-tts",
         "name": "Pocket TTS",
-        "why": "Motor de voce ușor, potrivit pentru CPU, listat în catalogul de motoare: text și referință intră, audio iese.",
-        "in_catalog": false
+        "why": "Aplicație de voce cu mai multe motoare, unde Pocket TTS poate fi motorul ușor pentru CPU (în catalogul nostru).",
+        "in_catalog": true
       }
     ],
     "gaps_noticed": [

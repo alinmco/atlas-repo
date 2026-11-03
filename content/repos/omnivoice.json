@@ -1,0 +1,371 @@
+{
+  "slug": "omnivoice",
+  "repo_url": "https://github.com/k2-fsa/OmniVoice",
+  "name": "OmniVoice",
+  "one_liner": "Transformă text în voce naturală, în peste 600 de limbi, inclusiv cu vocea clonată.",
+  "problem_solved": "Serviciile de voce artificială (narare, voice-over, clonarea unei voci) se plătesc lunar și acoperă puține limbi. OmniVoice rulează pe calculatorul tău și citește text în peste 600 de limbi, inclusiv româna, cu o voce clonată dintr-o înregistrare scurtă sau descrisă în cuvinte.",
+  "features": [
+    "Citește text cu voce: peste 600 de limbi (româna e în lista oficială)",
+    "Clonează o voce dintr-o înregistrare de 3-10 secunde",
+    "Creează o voce nouă dintr-o descriere: gen, vârstă, ton, accent",
+    "Adaugă râsete, suspine și corectează pronunția direct în text",
+    "Interfață web locală, comenzi în terminal și cod Python",
+    "Poate fi ajustat pe propriile date (LoRA și antrenare completă, cu exemple)"
+  ],
+  "at_a_glance": {
+    "for_you_if": [
+      "Vrei narare sau voice-over local, fără abonament lunar și fără limită de minute.",
+      "Ai nevoie de o limbă mai rară și poți rula Python sau măcar o comandă într-un terminal."
+    ],
+    "not_for_you_if": [
+      "Vrei un program cu buton de instalare sau vinzi audio comercial: greutățile pre-antrenate sunt necomerciale (CC-BY-NC).",
+      "Nu ai plăcuță video și nu vrei să aștepți: documentația nu dă cerințe minime de memorie."
+    ],
+    "verdict": "Model bun de încercat pentru voce locală în multe limbi, dar greutățile pre-antrenate sunt CC-BY-NC (necomerciale), deci nu le folosi pentru audio vândut fără o licență de la autori."
+  },
+  "cost": {
+    "level": "gratuit complet",
+    "summary": "Codul e gratuit (Apache-2.0), modelul se descarcă fără cont și fără cheie API; plătești doar curentul și, dacă nu ai o plăcuță video potrivită, eventual calcul în cloud. Nu folosește abonamente AI (ChatGPT, Claude etc.) și nici API-uri plătite pe consum, pentru că modelul rulează local.",
+    "ai_access": {
+      "mode": "nu folosește AI",
+      "detail": "Nu apelează servicii AI plătite: modelul de voce se descarcă de pe Hugging Face și rulează local, deci nu ai nevoie nici de cheie API, nici de abonament.",
+      "source_url": "https://github.com/k2-fsa/OmniVoice/blob/08be0b4ccbac3e13e374e86fbfead4b4cac343e2/README.md"
+    },
+    "items": [
+      {
+        "what": "Codul OmniVoice (Apache-2.0) și modelul k2-fsa/OmniVoice de pe Hugging Face, descărcat automat la prima rulare",
+        "price": "0 USD",
+        "required": true,
+        "source_url": "https://github.com/k2-fsa/OmniVoice/blob/08be0b4ccbac3e13e374e86fbfead4b4cac343e2/README.md"
+      },
+      {
+        "what": "Python 3.10 sau mai nou, PyTorch 2.8.0 și biblioteci Python (pip sau uv), toate gratuite",
+        "price": "0 USD",
+        "required": true,
+        "source_url": "https://github.com/k2-fsa/OmniVoice/blob/08be0b4ccbac3e13e374e86fbfead4b4cac343e2/pyproject.toml"
+      },
+      {
+        "what": "Modelul Whisper large-v3-turbo (OpenAI), descărcat automat dacă nu dai textul înregistrării de referință; licență MIT pe Hugging Face",
+        "price": "0 USD",
+        "required": false,
+        "source_url": "https://github.com/k2-fsa/OmniVoice/blob/08be0b4ccbac3e13e374e86fbfead4b4cac343e2/README.md"
+      },
+      {
+        "what": "Placă video NVIDIA (CUDA), Apple Silicon sau Intel Arc pentru viteză; fără ele codul alege procesorul, mai lent. Documentația nu spune cât VRAM (memorie video) cere",
+        "price": null,
+        "required": false,
+        "source_url": "https://github.com/k2-fsa/OmniVoice/blob/08be0b4ccbac3e13e374e86fbfead4b4cac343e2/omnivoice/utils/common.py"
+      },
+      {
+        "what": "GPU închiriat în cloud (exemplu: RTX 3090 la RunPod), dacă nu ai plăcuță proprie",
+        "price": "0,50 USD/oră (RTX 3090, Secure Cloud; pagina arată „Updated October 28, 2026”, verificată 2026-11-03)",
+        "required": false,
+        "source_url": "https://www.runpod.io/pricing"
+      },
+      {
+        "what": "Notebook Google Colab oficial din repo (docs/OmniVoice.ipynb), ca alternativă fără instalare locală",
+        "price": null,
+        "required": false,
+        "source_url": "https://colab.research.google.com/github/k2-fsa/OmniVoice/blob/master/docs/OmniVoice.ipynb"
+      }
+    ]
+  },
+  "platforms": {
+    "windows": "da",
+    "mac": "da",
+    "linux": "da",
+    "note": "README-ul descrie instalarea pentru plăci NVIDIA, Apple Silicon (device_map=\"mps\") și Intel Arc (XPU); pyproject.toml are clasificatorul „OS Independent” și cere roți CUDA pe Linux și Windows. Windows nu are o secțiune proprie în documentație, deci „da” pentru Windows e dedus din pyproject.toml. Codul alege automat CUDA, XPU, MPS sau procesorul.",
+    "source_url": "https://github.com/k2-fsa/OmniVoice/blob/08be0b4ccbac3e13e374e86fbfead4b4cac343e2/README.md"
+  },
+  "risk_flags": [
+    {
+      "flag": "licență restrictivă",
+      "detail": "Greutățile pre-antrenate sunt CC-BY-NC (necomerciale), după secțiunea License din fișa Hugging Face. Tokenizerul audio livrat odată cu modelul are licența Boson Higgs Audio 2 (bazată pe Llama 3): cere mențiune, limită de 100.000 de utilizatori activi pe an și respectarea politicii de uz Llama.",
+      "source_url": "https://huggingface.co/k2-fsa/OmniVoice"
+    }
+  ],
+  "audience_reason": "se instalează cu pip și Python, dar există interfață web (omnivoice-demo) și notebook Colab, deci nu cere programare avansată",
+  "setup_difficulty_reason": "trebuie potrivit PyTorch cu placa video, apoi modelul se descarcă la prima rulare; nu ai chei API sau servicii de configurat",
+  "analogy": "E ca un actor de voce care învață să te imite după câteva secunde de ascultat și apoi citește orice text, în aproape orice limbă, direct în camera ta.",
+  "how_it_works": [
+    "Pasul 1, intrare: scrii un text și, opțional, dai o înregistrare scurtă (3-10 secunde) cu vocea de clonat și transcrierea ei, sau o descriere ca „female, low pitch, british accent”.",
+    "Pasul 2, proces: un model de limbaj (pornit din Qwen3-0.6B) completează treptat, în mai mulți pași de „curățare”, codurile audio ale vocii; un tokenizer audio le transformă apoi în sunet.",
+    "Pasul 3, ieșire: primești unda audio la 24 kHz, pe care o salvezi ca fișier WAV, din Python sau din linia de comandă."
+  ],
+  "first_steps": {
+    "origin": "experiență utilizator",
+    "story_url": "https://news.ycombinator.com/item?id=50236921",
+    "story_platform": "Hacker News",
+    "story_date": "2026-10-25",
+    "title": "Un om care învață latina a ajustat OmniVoice pentru pronunția clasică",
+    "intro": "Un om care învață latina voia o voce artificială care citește latina cu pronunția clasică restaurată. A pornit de la OmniVoice și l-a ajustat pe propriile date, apoi a publicat demonstrația pe Hacker News.",
+    "steps": [
+      {
+        "you_do": "A strâns circa 22 de ore de audio latin cu text marcat pentru lungimea vocalelor: un subset din Vox Classica (CC-BY-4.0), Fabulele lui Orbilius și înregistrări suplimentare.",
+        "what_happens": "Aceste ore au devenit datele de antrenare pentru limba pe care modelul de bază nu o avea în listă.",
+        "source_url": "https://huggingface.co/coolcoder613/omnivoice-latin-lora-1"
+      },
+      {
+        "you_do": "A antrenat un adaptor LoRA (rang 16, 4000 de pași) peste modelul k2-fsa/OmniVoice.",
+        "what_happens": "Se obține un fișier mic de ajustare, iar modelul original rămâne neatins, cum descrie documentația oficială LoRA.",
+        "source_url": "https://github.com/k2-fsa/OmniVoice/blob/08be0b4ccbac3e13e374e86fbfead4b4cac343e2/docs/lora_finetuning.md"
+      },
+      {
+        "you_do": "A adăugat perechea „latin”: „la” în LANG_NAME_TO_ID și a rulat omnivoice.cli.infer cu --lora_adapter și --language la.",
+        "what_happens": "Modelul citește textul latin cu adaptorul aplicat, pornind de la o înregistrare de referință, după pașii din fișa publicată de autor.",
+        "source_url": "https://huggingface.co/coolcoder613/omnivoice-latin-lora-1"
+      },
+      {
+        "you_do": "A publicat o demonstrație online (un Space pe Hugging Face) și a anunțat-o pe Hacker News.",
+        "what_happens": "Postarea trimite la demonstrația online, ca vocea să poată fi ascultată fără instalare (n-am deschis-o eu).",
+        "source_url": "https://news.ycombinator.com/item?id=50236921"
+      }
+    ],
+    "takeaway": "Spune că după mai multe încercări de-a lungul timpului, aceasta e „cea mai reușită” voce latină a lui de până acum; nu compară cifric cu încercările anterioare."
+  },
+  "categories": [
+    "Clonare și generare de voce",
+    "Narare și voice-over"
+  ],
+  "search_intents": [
+    "vreau să transform un text în voce în limba română, local",
+    "vreau să clonez o voce dintr-o înregistrare scurtă",
+    "vreau o alternativă gratuită la ElevenLabs",
+    "vreau să creez o voce nouă descriind-o în cuvinte",
+    "vreau să ajustez un model de voce pe propriile înregistrări"
+  ],
+  "audience": "intermediar",
+  "setup_difficulty": "mediu",
+  "replaces": [
+    {
+      "service": "ElevenLabs",
+      "service_url": "https://elevenlabs.io",
+      "price": "Free 0 USD (10.000 credite, fără licență comercială); Starter 6 USD/lună (prima lună 1 USD); Creator 22 USD/lună; Pro 99 USD/lună; Scale 299 USD/lună; Business 990 USD/lună",
+      "price_source_url": "https://elevenlabs.io/pricing",
+      "price_checked_at": "2026-11-03",
+      "replacement_level": "parțial",
+      "what_you_keep": [
+        "Text-to-speech în multe limbi, fără limită de minute lunare",
+        "Clonare de voce dintr-o înregistrare scurtă",
+        "Creare de voce dintr-o descriere (voice design)",
+        "Datele și vocile rămân pe calculatorul tău"
+      ],
+      "what_you_lose": [
+        "Aplicație gata făcută, cu bibliotecă de voci, studio de editare și API gestionat",
+        "Licență comercială clară inclusă în plan (la OmniVoice greutățile pre-antrenate sunt CC-BY-NC, necomerciale)",
+        "Suport comercial și viteza garantată din cloud",
+        "Funcții extra ale serviciului, precum dublajul video integrat"
+      ],
+      "hidden_costs": [
+        "Placă video sau răbdare: documentația nu dă cerințe minime, iar pe procesor rulează mai lent",
+        "Timp de configurare PyTorch și Python, plus descărcări mari de modele",
+        "Mentenanță: versiuni noi ale bibliotecilor (transformers >= 5.3.0) pot strica mediul"
+      ]
+    },
+    {
+      "service": "Fish Audio",
+      "service_url": "https://fish.audio",
+      "price": "Free 0 USD (doar uz necomercial, 8.000 credite); Plus 15 USD/lună (11 USD/lună plătit anual); Pro 100 USD/lună (75 USD/lună plătit anual); API facturat separat, fără preț afișat pe pagina de planuri",
+      "price_source_url": "https://fish.audio/plan/",
+      "price_checked_at": "2026-11-03",
+      "replacement_level": "doar pentru cazuri simple",
+      "what_you_keep": [
+        "Clonare de voce și voice design",
+        "Generare fără credite lunare",
+        "Controlul complet asupra fișierelor audio"
+      ],
+      "what_you_lose": [
+        "Aplicație web gata făcută, cu sloturi de voci și echipe",
+        "Licență comercială clară în abonament",
+        "Calitate și limbi garantate de furnizor (nu am comparat calitatea)"
+      ],
+      "hidden_costs": [
+        "Hardware sau GPU închiriat",
+        "Timp de configurare și depanare"
+      ]
+    }
+  ],
+  "examples": [
+    {
+      "title": "Instalare cu pip pe un calculator cu placă NVIDIA",
+      "scenario": "Creezi un mediu virtual, instalezi PyTorch pentru versiunea ta de CUDA, apoi OmniVoice din PyPI. După instalare poți porni interfața web locală cu omnivoice-demo.",
+      "prerequisites": [
+        "Python 3.10 sau mai nou și pip",
+        "Mediu virtual nou (conda, venv etc.), recomandat de documentație",
+        "Placă video NVIDIA cu CUDA 12.8 (pentru comanda de mai jos); pentru Apple Silicon sau Intel Arc folosește comenzile din README",
+        "Internet pentru descărcarea PyTorch și a modelului k2-fsa/OmniVoice la prima rulare"
+      ],
+      "commands": [
+        "pip install torch==2.8.0+cu128 torchaudio==2.8.0+cu128 --extra-index-url https://download.pytorch.org/whl/cu128",
+        "pip install omnivoice",
+        "omnivoice-demo --ip 0.0.0.0 --port 8001"
+      ],
+      "code": null,
+      "output_from_docs": null,
+      "source_url": "https://github.com/k2-fsa/OmniVoice#installation",
+      "kind": "instalare"
+    },
+    {
+      "title": "Clonarea unei voci în Python și salvarea rezultatului",
+      "scenario": "Ai un fișier ref.wav cu vocea de clonat și textul spus în el; modelul citește un text nou cu acea voce.",
+      "prerequisites": [
+        "OmniVoice instalat (exemplul de mai sus)",
+        "Un fișier ref.wav de 3-10 secunde, în aceeași limbă cu textul țintă pentru pronunție standard",
+        "Placă NVIDIA (cuda:0); pe Apple Silicon folosești device_map=\"mps\", pe Intel Arc device_map=\"xpu\""
+      ],
+      "commands": [],
+      "code": "from omnivoice import OmniVoice\nimport soundfile as sf\nimport torch\n\nmodel = OmniVoice.from_pretrained(\n    \"k2-fsa/OmniVoice\",\n    device_map=\"cuda:0\",\n    dtype=torch.float16\n)\n# Apple Silicon users: use device_map=\"mps\" instead\n# Intel Arc GPU users: use device_map=\"xpu\" instead\n\naudio = model.generate(\n    text=\"Hello, this is a test of zero-shot voice cloning.\",\n    ref_audio=\"ref.wav\",\n    ref_text=\"Transcription of the reference audio.\",\n) # audio is a list of `np.ndarray` with shape (T,) at 24 kHz.\n\n# If you don't want to input `ref_text` manually, you can directly omit the `ref_text`.\n# The model will use Whisper ASR to auto-transcribe it. To use a local copy (or\n# a different Whisper model), pass `asr_model_name=\"...\"` to `from_pretrained`.\n# To control which device Whisper is loaded on (e.g. another GPU in multi-GPU\n# setups, or the CPU), pass `asr_device=\"cuda:1\"` (or `\"cpu\"`).\n\nsf.write(\"out.wav\", audio[0], 24000)",
+      "output_from_docs": null,
+      "source_url": "https://github.com/k2-fsa/OmniVoice#voice-cloning",
+      "kind": "folosire"
+    }
+  ],
+  "connectors": {
+    "inputs": [
+      "Text simplu (șir de caractere), cu etichete opționale precum [laughter] și [sigh] sau pronunție în pinyin/CMU",
+      "Fișier audio de referință (de exemplu ref.wav, recomandat 3-10 secunde) și transcrierea lui; transcrierea poate lipsi, atunci o face Whisper",
+      "Descriere a vocii ca text (instruct), de exemplu „female, low pitch, british accent”",
+      "Fișier JSONL pentru lot (omnivoice-infer-batch), cu câmpurile id, text și opțional ref_audio, ref_text, instruct, language_id, duration, speed"
+    ],
+    "outputs": [
+      "Fișier WAV la 24 kHz (listă de tablouri numpy din Python, salvate cu soundfile)",
+      "Fișier .pt cu vocea clonată reutilizabilă (VoiceClonePrompt)",
+      "Fișiere audio în folderul de rezultate la inferența pe loturi"
+    ],
+    "pairs_well_with": [
+      {
+        "repo_url": "https://github.com/debpalash/voicestudio",
+        "name": "VoiceStudio",
+        "why": "Aplicație desktop gata făcută care folosește OmniVoice ca motor implicit: tu dai text și o referință, ea îți dă audio, fără să scrii Python.",
+        "in_catalog": true
+      },
+      {
+        "repo_url": "https://github.com/jianchang512/pyvideotrans",
+        "name": "pyVideoTrans",
+        "why": "Traduce un video și îl dublează; listat în documentația OmniVoice ca motor de voce, deci textul tradus intră în OmniVoice și iese vocea dublată.",
+        "in_catalog": false
+      },
+      {
+        "repo_url": "https://github.com/maemreyo/omnivoice-server",
+        "name": "omnivoice-server",
+        "why": "Pune OmniVoice în spatele unui API de tip OpenAI (/v1/audio/speech): alte programe trimit text în JSON și primesc audio.",
+        "in_catalog": false
+      },
+      {
+        "repo_url": "https://github.com/SYSTRAN/faster-whisper",
+        "name": "faster-whisper",
+        "why": "Transcrie o înregistrare în text cu marcaje de timp; textul (tradus sau nu) devine intrarea pentru OmniVoice într-un flux de dublaj.",
+        "in_catalog": false
+      },
+      {
+        "repo_url": "https://github.com/Blaizzy/mlx-audio",
+        "name": "MLX-Audio",
+        "why": "Listat în documentația OmniVoice pentru rulare eficientă pe Apple Silicon, cu aceleași intrări text și referință și ieșire audio.",
+        "in_catalog": false
+      }
+    ],
+    "gaps_noticed": [
+      "Repo-ul nu include un server HTTP sau un API gata făcut; proiectele din comunitate (omnivoice-server, vLLM-Omni) le oferă separat și nu sunt susținute oficial.",
+      "Pentru dublaj lipsește legătura directă între transcriere, traducere și voce: trebuie combinate manual sau printr-o unealtă ca pyVideoTrans.",
+      "Documentația nu arată cerințe minime de memorie video sau de disc, nici viteze pe procesor.",
+      "Nu am găsit în cod sau documentație nicio marcare sau filigran al audio-ului generat."
+    ]
+  },
+  "when_not_to_use": [
+    "Nu clona vocea cuiva fără acordul lui: documentația interzice explicit clonarea neautorizată, uzurparea de identitate și frauda.",
+    "Dacă vinzi sau publici audio comercial: greutățile pre-antrenate sunt CC-BY-NC după secțiunea License din fișa Hugging Face, iar VoiceStudio spune același lucru; pentru uz comercial cere o licență de la autori.",
+    "Dacă vrei un program cu instalare prin dublu-clic și interfață completă: repo-ul oferă doar o interfață web simplă (omnivoice-demo).",
+    "Dacă ai nevoie de clipuri foarte scurte (1-2 secunde) fără înregistrare de referință: documentația spune că modelul nu le generează fiabil.",
+    "Dacă ai nevoie de voce descrisă (voice design) în alte limbi decât engleza și chineza: e antrenat doar pe date în engleză și chineză, iar în rest poate fi instabil."
+  ],
+  "alternatives": [
+    {
+      "name": "VoiceStudio",
+      "url": "https://github.com/debpalash/VoiceStudio",
+      "difference": "Aplicație desktop completă (narare, dublaj, dictare) care folosește OmniVoice ca motor; mai ușor de instalat, dar mult mai mare și sub AGPL-3.0."
+    },
+    {
+      "name": "Qwen3-TTS",
+      "url": "https://github.com/QwenLM/Qwen3-TTS",
+      "difference": "Alt model de voce, cu cod Apache-2.0 și greutăți Apache-2.0 (verificat pe Hugging Face); nu am comparat limbile sau calitatea."
+    },
+    {
+      "name": "Chatterbox",
+      "url": "https://github.com/resemble-ai/chatterbox",
+      "difference": "Alt model de voce cu clonare, licență MIT; nu am comparat limbile sau calitatea cu OmniVoice."
+    }
+  ],
+  "tech_sheet": {
+    "license": "Apache-2.0 (codul); greutățile pre-antrenate: CC-BY-NC, după secțiunea License din fișa Hugging Face (câmpul de licență din metadate e gol); tokenizerul audio livrat cu modelul: Boson Higgs Audio 2 Community License",
+    "language": "Python",
+    "commit_sha": "08be0b4ccbac3e13e374e86fbfead4b4cac343e2",
+    "last_commit_date": "2026-08-24",
+    "stars": 16234,
+    "requirements": [
+      "Python 3.10 sau mai nou (requires-python >= 3.10)",
+      "Mediu virtual nou (conda, venv etc.), recomandat de documentație pentru a evita conflictele",
+      "PyTorch 2.8.0 și torchaudio 2.8.0, instalate înainte de OmniVoice: pe NVIDIA cu roți CUDA (ex: torch==2.8.0+cu128 din https://download.pytorch.org/whl/cu128), pe Apple Silicon cu pip install torch==2.8.0 torchaudio==2.8.0, pe Intel Arc (XPU) cu driverele Intel și roțile XPU din README",
+      "Instalare OmniVoice: pip install omnivoice (PyPI) sau pip install git+https://github.com/k2-fsa/OmniVoice.git; alternativ git clone, apoi uv sync (cere uv și Git)",
+      "Dependențe instalate automat: transformers >= 5.3.0, accelerate, gradio, soundfile, librosa, pydub, numpy",
+      "Internet la prima rulare pentru descărcarea modelului k2-fsa/OmniVoice de pe Hugging Face (dacă nu ajungi la Hugging Face: export HF_ENDPOINT=\"https://hf-mirror.com\") și a modelului Whisper large-v3-turbo dacă omiți ref_text",
+      "Placă video opțională: NVIDIA (CUDA), Apple Silicon (MPS) sau Intel Arc (XPU); fără ele codul folosește procesorul, mai lent; documentația nu dă cerințe minime de VRAM sau disc",
+      "Nu cere cont, chei API sau abonamente",
+      "Opțional: pip install \"omnivoice[tn]\" pentru normalizarea numerelor (pe macOS Apple Silicon, pynini se instalează întâi cu conda install -c conda-forge pynini); pip install \"omnivoice[lora]\" pentru LoRA; FlashInfer (pip install flashinfer-python==0.6.15.post1 cu indexul potrivit CUDA) pentru viteză pe NVIDIA",
+      "Pornire interfață web: omnivoice-demo --ip 0.0.0.0 --port 8001; atenție, 0.0.0.0 face serverul vizibil în rețeaua locală"
+    ]
+  },
+  "monetization": [
+    {
+      "model": "găzduire gestionată",
+      "what_you_sell": "Un serviciu online de narare și voice-over în limbi mai rare (inclusiv româna), cu preț pe pachet de credite, pe model alternativ cu licență clară.",
+      "for_whom": "Creatori și firme mici care vor voce în limba lor fără abonament lunar și fără să rămână fără minute.",
+      "license_check": {
+        "license": "Apache-2.0 (codul); greutățile pre-antrenate: CC-BY-NC, după secțiunea License din fișa Hugging Face (câmpul de licență din metadate e gol); tokenizerul audio livrat cu modelul: Boson Higgs Audio 2 Community License",
+        "commercial_use": "interzis",
+        "conditions": "Un serviciu găzduit care vinde audio generat de greutățile OmniVoice nu e permis: greutățile pre-antrenate sunt CC-BY-NC (necomercial), după secțiunea License din fișa Hugging Face. Tokenizerul audio are licența Boson Higgs Audio 2 (mențiune obligatorie, limită de 100.000 de utilizatori activi pe an, politica de uz Llama, fără folosirea ieșirilor pentru a îmbunătăți alte modele de limbaj). Nu le folosi pentru un serviciu cu plată."
+      },
+      "path": "construiești propria implementare",
+      "own_build_notes": "Construiești tu funcționalitatea (API și aplicație web de narare multilingvă, cu credite), nu copiezi modelul. Punct de plecare legal: modele cu licență permisivă verificată pe Hugging Face, precum Qwen3-TTS (Apache-2.0 pe cod și greutăți) sau Chatterbox (MIT); verifică separat limbile și calitatea lor, eu nu le-am comparat. Poți îmbunătăți ideea cu pachete pe limbă, voci de studio înregistrate cu acord scris și export în formate gata de publicat. Codul OmniVoice e Apache-2.0 și poate fi reutilizat cu licența și notițele păstrate. NU prelua: greutățile k2-fsa/OmniVoice (CC-BY-NC) și tokenizerul audio Boson pentru uz comercial, numele și logo-ul OmniVoice și conținutul din paginile sau demo-urile lor. Nu antrena sau ajusta pe voci ale căror proprietari nu și-au dat acordul.",
+      "demand_evidence": [
+        {
+          "name": "omnivoice.app (serviciu independent)",
+          "url": "https://omnivoice.app",
+          "price": "Free 0 USD (2 credite de probă); Basic 9,90 USD (800 de credite); Pro 29,90 USD (3.000 de credite); Business 49,90 USD (6.000 de credite); pachete unice, fără abonament",
+          "what_it_proves": "Există deja un serviciu independent care vinde generare găzduită cu OmniVoice, pe pachete de credite; nu am verificat legătura cu autorii.",
+          "checked_at": "2026-11-03"
+        },
+        {
+          "name": "ElevenLabs",
+          "url": "https://elevenlabs.io/pricing",
+          "price": "Starter 6 USD/lună (30.000 credite), Creator 22 USD/lună, Pro 99 USD/lună",
+          "what_it_proves": "Piața plătește lunar pentru voce artificială cu licență comercială inclusă.",
+          "checked_at": "2026-11-03"
+        },
+        {
+          "name": "Fish Audio",
+          "url": "https://fish.audio/plan/",
+          "price": "Plus 15 USD/lună (11 USD/lună plătit anual); Pro 100 USD/lună (75 USD/lună plătit anual)",
+          "what_it_proves": "Un al doilea furnizor vinde abonamente pentru clonare de voce și narare.",
+          "checked_at": "2026-11-03"
+        }
+      ],
+      "startup_cost": "GPU închiriat (exemplu: RTX 3090 la 0,50 USD/oră pe RunPod, la 2026-11-03) plus hosting și domeniu; costul exact depinde de trafic și nu l-am estimat.",
+      "time_to_first_client": "Nu am dovezi publice; piața e aglomerată și depinde de nișă.",
+      "difficulty": "greu",
+      "risks": [
+        "Concurență puternică: ElevenLabs, Fish Audio și deja un serviciu independent bazat pe OmniVoice.",
+        "Greutățile OmniVoice sunt CC-BY-NC, deci nu le poți folosi comercial; dacă alegi alt model, depinzi de licența lui.",
+        "Răspundere pentru abuz: clonarea fără acord poate atrage probleme legale și blocarea contului de plată.",
+        "Costuri de calcul și suport; un API găzduit cere monitorizare continuă."
+      ],
+      "first_steps": [
+        "Testează 2-3 modele cu licență permisivă pe texte reale în limba țintă și compară calitatea ascultând.",
+        "Verifică licența greutăților și a datelor de antrenare ale modelului ales, în scris, înainte să construiești ceva.",
+        "Construiește un prototip pe un GPU închiriat și arată-l la 3-5 potențiali clienți din nișa ta."
+      ]
+    }
+  ],
+  "updated_at": "2026-11-03",
+  "notes_summary": "Am citit README-ul, documentația, codul, licențele din repo și de pe Hugging Face; n-am rulat nimic. Licența greutăților e CC-BY-NC după fișa Hugging Face; cerințele de memorie video au rămas necunoscute.",
+  "notes": "Repo nou. Clonat 2026-11-03; HEAD 08be0b4 (2026-08-24), versiune PyPI 0.2.1 (2026-07-16), 46 de issue-uri deschise (fără PR-uri), 16.234 stele. LICENȘĂ: LICENSE din repo e Apache-2.0 (cod; pyproject.toml spune la fel). Fișa modelului k2-fsa/OmniVoice pe Hugging Face are, în secțiunea „License” din README (verificat 2026-11-03 pe fișierul raw), textul „The pre-trained model is licensed under the CC-BY-NC due to constraints from its training data (e.g., Emilia)”, iar codul e Apache-2.0; câmpul de licență din metadatele fișei e gol (cardData fără câmp license); istoricul de commit-uri arată license: apache-2.0 în primele revizii, scoasă în commit-ul „Add paper link and improve model card” din 2026-04-04, fără motiv afirmat; Space-ul k2-fsa/OmniVoice are metadata license: apache-2.0. VoiceStudio (LICENSE-NOTICE.md) afirmă același lucru, iar fișa modelului îl confirmă. Dosarul audio_tokenizer/ din modelul de pe Hugging Face conține licența Boson Higgs Audio 2 Community (bazată pe Llama 3: mențiune obligatorie, limită 100.000 utilizatori activi/an, politica de uz Llama, interdicția de a folosi ieșirile pentru a îmbunătăți alte LLM-uri). Modelul pornește din Qwen3-0.6B (Apache-2.0, verificat pe HF). Datele: 581k ore, „curated entirely from open-source data” (rezumatul lucrării arXiv:2604.00688, citit doar pe abstract); licențele datelor de antrenare nu le-am verificat. Româna apare în docs/languages.md cu 70,23 ore de date; n-am citit lucrarea, deci nu știu calitatea pe română. Prețuri verificate 2026-11-03: elevenlabs.io/pricing (pagina nu are dată; oferta $1 pare expirată), fish.audio/plan/ (/pricing dă 404; API facturat separat, fără preț pe pagină), runpod.io/pricing (RTX 3090 0,50 USD/h, 4090 0,89 USD/h, L4 0,59 USD/h, „Updated October 28, 2026”), omnivoice.app (serviciu independent, nu afirmă legătura cu k2-fsa; unitatea „credit” nu e explicată pe pagină). Google Colab: pagina de prețuri dă 403/gol, deci preț null. Parteneri verificați 2026-11-03 prin API GitHub: debpalash/VoiceStudio (în catalog, activ 2026-11-02; vechiul OmniVoice-Studio redirecționează aici), jianchang512/pyvideotrans (GPL-3.0, activ 2026-11-03), maemreyo/omnivoice-server (MIT, push 2026-11-02, 93 stele), SYSTRAN/faster-whisper (MIT, 2026-11-02), Blaizzy/mlx-audio (MIT, 2026-11-02); toate listate de documentația OmniVoice, mai puțin faster-whisper. Alternative: QwenLM/Qwen3-TTS (Apache-2.0, ultimul push 2026-03-17), resemble-ai/chatterbox (MIT, 2026-07-21). Cerințe VRAM: documentația oficială nu le dă; un review terț (Techsy) vorbea de ~8 GB, neverificat, nu l-am inclus. Windows: dedus din pyproject.toml (marker sys_platform win32 pentru roțile CUDA, clasificator OS Independent). Primii pași: povestea e Show HN „Classical Latin TTS” (id 50236921, 2026-10-25, autor uman, nu autorul repo-ului); postarea în sine are o frază, pașii vin din fișa modelului publicată de el pe Hugging Face (coolcoder613/omnivoice-latin-lora-1: ~22 h de date, LoRA r=16, 4000 de pași, comanda cu --lora_adapter); n-am deschis demo-ul Space. Povestea e despre ajustarea pentru o limbă nouă, nu despre folosirea de zi cu zi, și nu compară cu alte unelte; alte surse căutate: Home Assistant Community (postare scurtă fără pași, 2026-04-13), dev.to (articole de comparație sau despre alte motoare), HN (comentarii scurte), Reddit nu am încercat. Glosar: lipseau, probabil, text-to-speech, clonare de voce (există deja la VoiceStudio), voice design, greutăți, Hugging Face, PyTorch, CUDA, VRAM, Whisper, LoRA, tokenizer audio, Apple Silicon, ComfyUI, API compatibil OpenAI; categorii propuse: „Clonare și generare de voce” (existentă) și „Narare și voice-over” (nouă, de adăugat în categories.json). Pagina VoiceStudio și cea a OmniVoice spun acum același lucru despre greutăți."
+}

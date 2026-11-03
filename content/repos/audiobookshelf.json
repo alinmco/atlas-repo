@@ -1,0 +1,389 @@
+{
+  "slug": "audiobookshelf",
+  "repo_url": "https://github.com/advplyr/audiobookshelf",
+  "name": "Audiobookshelf",
+  "one_liner": "Serverul tău personal de cărți audio și podcasturi, accesibil din telefon sau browser.",
+  "problem_solved": "Ai cărți audio și podcasturi risipite prin foldere, pe mai multe aparate, fără un loc unde să le asculți din telefon și să-ți reții unde ai rămas. Aplicațiile comerciale cer abonament și nu îți lasă fișierele proprii la îndemână.",
+  "features": [
+    "Server propriu: asculți cărțile și podcasturile tale din browser sau din aplicațiile Android/iOS (beta)",
+    "Progres de ascultare reținut separat pentru fiecare utilizator, sincronizat între aparate",
+    "Mai mulți utilizatori, cu drepturi diferite (de exemplu pentru familie)",
+    "Căutare și descărcare automată de episoade de podcast",
+    "Coperți, descrieri și capitole preluate din surse online, la cererea ta",
+    "Backup-uri automate zilnice și suport pentru cărți electronice (EPUB, PDF)"
+  ],
+  "at_a_glance": {
+    "for_you_if": [
+      "Ai deja cărți audio sau podcasturi fără protecție (DRM) și vrei să le asculți oriunde.",
+      "Ai un computer, un NAS sau un mini-server acasă și te ajută Docker."
+    ],
+    "not_for_you_if": [
+      "Vrei un magazin de cărți audio cu catalog, ca Audible, sau fișiere cu DRM.",
+      "Nu vrei să administrezi nimic și ai nevoie de aplicație iOS stabilă pe loc."
+    ],
+    "verdict": "O alternativă gratuită și matură la aplicațiile de ascultat cărți audio, cu condiția să aduci tu fișierele și serverul."
+  },
+  "cost": {
+    "level": "gratuit complet",
+    "summary": "Programul e gratuit și nu folosește AI; plătești doar, dacă vrei, un server (propriul computer sau o găzduire de la ~2,79 USD/lună) și cărțile în sine.",
+    "ai_access": {
+      "mode": "nu folosește AI",
+      "detail": "Documentația și codul nu folosesc modele AI; nu ai nevoie nici de abonament, nici de cheie API.",
+      "source_url": "https://github.com/advplyr/audiobookshelf/blob/ce41ce489cebaf00e008919f6f2901b428acfd56/readme.md"
+    },
+    "items": [
+      {
+        "what": "Un computer, NAS sau mini-server care rulează non-stop (cerințe mici, cum scrie PikaPods: 0,5 CPU, 0,5 GB RAM)",
+        "price": null,
+        "required": true,
+        "source_url": "https://www.pikapods.com/apps/audiobookshelf"
+      },
+      {
+        "what": "Docker Desktop, doar dacă rulezi pe Windows sau Mac prin Docker (plan Personal)",
+        "price": "0 USD (plan Personal)",
+        "required": false,
+        "source_url": "https://www.docker.com/pricing/"
+      },
+      {
+        "what": "Găzduire gestionată, dacă nu vrei server acasă (PikaPods)",
+        "price": "de la 2,79 USD/lună, plătit în credit, facturat pe oră",
+        "required": false,
+        "source_url": "https://www.pikapods.com/apps/audiobookshelf"
+      },
+      {
+        "what": "Acces de acasă din afară: VPN sau reverse proxy (de exemplu Tailscale, plan Personal)",
+        "price": "0 USD (plan Personal, până la 6 utilizatori)",
+        "required": false,
+        "source_url": "https://tailscale.com/pricing"
+      },
+      {
+        "what": "Cărțile audio în sine, fără DRM (cumpărate sau din surse proprii); serverul nu vinde conținut",
+        "price": null,
+        "required": true,
+        "source_url": "https://github.com/advplyr/audiobookshelf/blob/ce41ce489cebaf00e008919f6f2901b428acfd56/readme.md"
+      }
+    ]
+  },
+  "platforms": {
+    "windows": "da",
+    "mac": "parțial",
+    "linux": "da",
+    "note": "Windows: installer nativ cu aplicație în tray (Windows 10 64-bit sau mai nou) sau Docker. Linux: Docker sau pachete Debian/RPM (doar amd64). Mac: documentația oferă doar Docker, nu un installer nativ (dedus din lista de instalări).",
+    "source_url": "https://github.com/audiobookshelf/audiobookshelf-docs/blob/17475264dbd0be750f5f85045edeea2ae73f2e67/docs/documentation/install/6.windows-install.md"
+  },
+  "risk_flags": [
+    {
+      "flag": "trimite date în cloud",
+      "detail": "Când potrivești manual o carte cu o sursă online (Audible/Audnexus, Google Books, Open Library etc.) sau cauți podcasturi (iTunes), titlul sau autorul pleacă spre acele servicii; nu se întâmplă automat.",
+      "source_url": "https://github.com/audiobookshelf/audiobookshelf-docs/blob/17475264dbd0be750f5f85045edeea2ae73f2e67/docs/documentation/libraries/book-library/2.book-metadata.md"
+    }
+  ],
+  "audience_reason": "pentru începător e ușor de folosit după instalare, dar instalarea (Docker, foldere, acces din afară) cere puțin confort tehnic",
+  "setup_difficulty_reason": "câteva comenzi cu Docker Compose, fără chei sau hardware special; accesul din afara casei (proxy/VPN) mai adaugă pași",
+  "analogy": "E ca o bibliotecă personală cu bibliotecar digital: tu aduci cărțile pe raft, iar el le ține în ordine și îți spune pe ce pagină ai rămas, pe orice telefon.",
+  "how_it_works": [
+    "Pas 1, intrare: pui fișierele audio (MP3, M4B etc.) și podcasturile în foldere pe un computer sau NAS, după structura Autor / Serie / Carte.",
+    "Pas 2, proces: serverul (Node.js cu bază de date SQLite, de obicei într-un container Docker) scanează folderele, citește tag-urile și numele folderelor și folosește ffmpeg pentru redare.",
+    "Pas 3, opțional: potrivești manual cărțile cu surse online (Audible/Audnexus, Google Books, Open Library, FantLab, MusicBrainz) ca să primești coperți, descrieri și capitole.",
+    "Pas 4, ieșire: asculți din interfața web (PWA) la portul 13378 sau din aplicațiile mobile; progresul se sincronizează, iar serverul face și backup-uri zip ale bazei de date."
+  ],
+  "first_steps": {
+    "origin": "experiență utilizator",
+    "story_url": "https://arstechnica.com/gadgets/2025/03/i-threw-away-audibles-app-and-now-i-self-host-my-audiobooks/",
+    "story_platform": "blog",
+    "story_date": "2025-03-14",
+    "title": "Soția nu mai putea folosi aplicația Audible, așa că și-au făcut propriul server",
+    "intro": "Un jurnalist tehnic cu un server Proxmox acasă a vrut să-și facă familia să asculte din nou cărți audio, după ce aplicația Audible a soției rămânea blocată pe ecranul bibliotecii.",
+    "steps": [
+      {
+        "you_do": "A instalat Audiobookshelf într-un container LXC cu Ubuntu 24.04, pe serverul Proxmox de acasă, fără Docker.",
+        "what_happens": "Serverul pornește și, după spusele lui, consumă cam 150 MB de RAM când nu face nimic; documentația oferă și Docker, Windows și pachete Linux ca alternative.",
+        "source_url": "https://arstechnica.com/gadgets/2025/03/i-threw-away-audibles-app-and-now-i-self-host-my-audiobooks/"
+      },
+      {
+        "you_do": "A copiat în folderul bibliotecii cele aproximativ 300 de cărți audio, cumpărate de pe web și rip-uite de pe CD-uri.",
+        "what_happens": "Audiobookshelf le organizează după tag-urile din fișiere sau după numele folderelor; fișierele cu DRM nu pot fi redate, iar autorul lasă acest pas pe seama cititorului.",
+        "source_url": "https://github.com/audiobookshelf/audiobookshelf-docs/blob/17475264dbd0be750f5f85045edeea2ae73f2e67/docs/documentation/libraries/book-library/1.book-directory-structure.md"
+      },
+      {
+        "you_do": "A instalat o aplicație pe telefon: pe iOS a folosit Plappa, pentru că aplicația oficială e doar beta prin TestFlight.",
+        "what_happens": "Telefonul se conectează la server și redă cărțile; autorul spune că aplicația e mai receptivă și mai puțin predispusă la blocări decât Apple Books.",
+        "source_url": "https://arstechnica.com/gadgets/2025/03/i-threw-away-audibles-app-and-now-i-self-host-my-audiobooks/"
+      },
+      {
+        "you_do": "A pornit un VPN WireGuard pe telefon, ca aplicația să ajungă la server și când nu e acasă.",
+        "what_happens": "Cărțile pot fi ascultate și în afara rețelei de acasă, fără să expună serverul direct pe internet.",
+        "source_url": "https://arstechnica.com/gadgets/2025/03/i-threw-away-audibles-app-and-now-i-self-host-my-audiobooks/"
+      }
+    ],
+    "takeaway": "După circa două săptămâni, spune autorul, soția poate asculta din nou cărți audio; aplicația Audible de pe telefonul ei tot nu funcționează. Autorul nu compară costurile cu Audible."
+  },
+  "categories": [
+    "Cărți audio și podcasturi",
+    "Server media personal"
+  ],
+  "search_intents": [
+    "vreau să-mi ascult cărțile audio de pe propriul server",
+    "vreau o alternativă la Audible pentru fișierele mele",
+    "vreau să-mi descarc automat podcasturile și să le ascult din telefon",
+    "vreau să țin progresul de ascultare sincronizat între telefon și calculator",
+    "vreau o bibliotecă de cărți audio pentru toată familia"
+  ],
+  "audience": "intermediar",
+  "setup_difficulty": "ușor",
+  "replaces": [
+    {
+      "service": "Audible (doar aplicația de ascultat, nu magazinul)",
+      "service_url": "https://www.audible.com/",
+      "price": null,
+      "price_source_url": "https://www.audible.com/ep/membership",
+      "price_checked_at": "2026-11-03",
+      "replacement_level": "doar pentru cazuri simple",
+      "what_you_keep": [
+        "Ascultarea cărților pe care le deții deja în fișiere fără DRM",
+        "Progres sincronizat, marcaje și capitole, pe web și mobil"
+      ],
+      "what_you_lose": [
+        "Catalogul și magazinul Audible: tu aduci fișierele",
+        "Redarea fișierelor Audible cu DRM",
+        "O aplicație iOS oficială stabilă (e în beta și beta-ul e plin)"
+      ],
+      "hidden_costs": [
+        "Un computer sau server care rulează non-stop",
+        "Timp pentru configurare, backup și actualizări",
+        "Cărțile în sine (le cumperi altundeva)"
+      ]
+    },
+    {
+      "service": "Pocket Casts Plus (doar partea de podcasturi)",
+      "service_url": "https://pocketcasts.com/plus/",
+      "price": "3,99 USD/lună sau 39,99 USD/an (abonați noi, înainte de taxe)",
+      "price_source_url": "https://support.pocketcasts.com/knowledge-base/pocket-casts-plus-pricing/",
+      "price_checked_at": "2026-11-03",
+      "replacement_level": "doar pentru cazuri simple",
+      "what_you_keep": [
+        "Căutare de podcasturi și descărcare automată de episoade",
+        "Sincronizarea progresului între aparate"
+      ],
+      "what_you_lose": [
+        "Aplicațiile și descoperirea de podcasturi, mult mai rafinate la un produs comercial",
+        "Serverul în sine: depinzi de tine pentru acces și backup"
+      ],
+      "hidden_costs": [
+        "Server care rulează non-stop și spațiu de stocare pentru episoade",
+        "Timp de configurare și mentenanță"
+      ]
+    }
+  ],
+  "examples": [
+    {
+      "title": "Pornești serverul cu Docker Compose",
+      "scenario": "Pui Audiobookshelf pe un computer sau NAS cu Docker și îl deschizi în browser pe portul 13378.",
+      "prerequisites": [
+        "Docker și Docker Compose instalate",
+        "Patru foldere pe disc: config, metadata, audiobooks, podcasts"
+      ],
+      "commands": [
+        "docker compose up --detach"
+      ],
+      "code": "services:\n  audiobookshelf:\n    image: ghcr.io/advplyr/audiobookshelf:latest\n    # ABS runs on port 13378 by default. If you want to change\n    # the port, only change the external port\n    ports:\n      - 13378:80\n    volumes:\n      # These volumes are needed to keep your library persistent\n      # and allow media to be accessed by the ABS server.\n      - </path/to/config>:/config\n      - </path/to/metadata>:/metadata\n      # The path to the left of the colon is the path on your computer,\n      # and the path to the right of the colon is where the data is\n      # available to ABS in Docker. You can change these lines freely\n      # or add additional mounts for additional libraries.\n      - </path/to/audiobooks>:/audiobooks\n      - </path/to/podcasts>:/podcasts\n    environment:\n      - TZ=America/Toronto\n      # Add other environment variables here\n    restart: unless-stopped\n    # Audiobookshelf does not use PUID or GUID environment variables.\n    # To run as a different user, use the following directive.\n    #user: 1000:1000",
+      "output_from_docs": null,
+      "source_url": "https://github.com/audiobookshelf/audiobookshelf-docs/blob/17475264dbd0be750f5f85045edeea2ae73f2e67/docs/documentation/install/2.docker-compose-install.md",
+      "kind": "instalare"
+    },
+    {
+      "title": "Organizezi foldere pentru cărți (structura din documentație)",
+      "scenario": "După instalare, folosești zilnic serverul punând cărțile în foldere pe disc, în formatul pe care îl înțelege biblioteca.",
+      "prerequisites": [
+        "Serverul pornit și o bibliotecă de cărți creată în interfața web, cu un folder-rădăcină"
+      ],
+      "commands": [],
+      "code": "-- Single file books at library root\n\n[Library Root]\n  🎵 Ender's Game.m4b\n  🎵 Human Action.m4b\n\n-- Author with a single book\n\n[Library Root]\n  📁 Steven Levy\n    📁 Hackers - Heroes of the Computer Revolution {Mike Chamberlain}\n      🎵 Audio File.m4a\n\n-- Author with a standalone book and series of multiple books\n[Library Root]\n  📁 Terry Goodkind\n    📁 Heart of Black Ice - Sister of Darkness\n      🎵 Audio File.m4a\n    📁 Sword of Truth\n      📁 Vol 1 - 1994 - Wizards First Rule {Sam Tsoutsouvas}\n        🎵 Audio Track 1.mp3\n        🎵 Audio Track 2.mp3\n        🖼️ Cover.jpg\n      📁 Vol 2 - 1995 - Stone of Tears\n        🎵 Audiobook.m4b",
+      "output_from_docs": null,
+      "source_url": "https://github.com/audiobookshelf/audiobookshelf-docs/blob/17475264dbd0be750f5f85045edeea2ae73f2e67/docs/documentation/libraries/book-library/1.book-directory-structure.md",
+      "kind": "folosire"
+    }
+  ],
+  "connectors": {
+    "inputs": [
+      "Fișiere audio fără DRM (MP3, M4A, M4B, FLAC etc.) în foldere de forma Autor / Serie / Carte",
+      "Podcasturi: căutare prin iTunes sau adresă de feed RSS",
+      "Cărți electronice (EPUB, PDF, CBR, CBZ) puse în aceeași bibliotecă"
+    ],
+    "outputs": [
+      "Interfață web (PWA) pe portul 13378 și aplicații mobile Android/iOS",
+      "Backup-uri zip ale bazei de date SQLite și ale imaginilor (în /metadata/backups)",
+      "Fișiere metadata.json pentru fiecare carte, utile în scripturi",
+      "Feed-uri RSS deschise pentru cărți și podcasturi"
+    ],
+    "pairs_well_with": [
+      {
+        "repo_url": "https://github.com/advplyr/audiobookshelf-app",
+        "name": "audiobookshelf-app",
+        "why": "Aplicația oficială Android/iOS: se conectează la adresa serverului și redă biblioteca de pe telefon.",
+        "in_catalog": false
+      },
+      {
+        "repo_url": "https://github.com/sandreas/m4b-tool",
+        "name": "m4b-tool",
+        "why": "Unește fișierele MP3 ale unei cărți într-un singur M4B cu capitole, pe care Audiobookshelf îl pune apoi în bibliotecă.",
+        "in_catalog": false
+      },
+      {
+        "repo_url": "https://github.com/tailscale/tailscale",
+        "name": "Tailscale",
+        "why": "Creează un VPN privat, deci accesezi serverul de acasă din telefon fără să-l expui pe internet.",
+        "in_catalog": false
+      },
+      {
+        "repo_url": "https://github.com/kovidgoyal/calibre",
+        "name": "Calibre",
+        "why": "Gestionează și convertește cărțile electronice, care pot sta apoi în biblioteca de cărți a serverului.",
+        "in_catalog": false
+      },
+      {
+        "repo_url": "https://github.com/DrewThomasson/ebook2audiobook",
+        "name": "ebook2audiobook",
+        "why": "Audiobook-ul .m4b generat de ebook2audiobook se trimite direct în biblioteca Audiobookshelf (opțiunile --abs_*), de unde îl asculți de pe telefon.",
+        "in_catalog": true
+      }
+    ],
+    "gaps_noticed": [
+      "Fișierele cu DRM (de exemplu cele de la Audible) nu pot fi folosite direct; nu există pas inclus pentru ele.",
+      "Aplicația oficială iOS e în beta, iar beta-ul e plin; pe iPhone se folosesc aplicații terțe.",
+      "Acces din afara casei cere un pas separat (reverse proxy sau VPN), nu e inclus în server.",
+      "Backup-urile nu includ fișierele media, deci copia cărților rămâne o treabă manuală.",
+      "Backup-urile nu se pot muta între metode de instalare (de exemplu Windows și Linux) fără să pierzi progresul."
+    ]
+  },
+  "when_not_to_use": [
+    "Dacă vrei un magazin cu catalog și cumpărare de cărți: Audiobookshelf e doar serverul, tu aduci fișierele.",
+    "Dacă cărțile tale au DRM: serverul nu le poate reda, iar scoaterea DRM-ului ține de legea locală.",
+    "Dacă ai nevoie de aplicație iOS oficială stabilă: la momentul citirii e doar beta.",
+    "README-ul avertizează că interfața web (Vue) e în rescriere pentru React, iar cererile de modificare pe frontend nu se mai primesc deocamdată.",
+    "Nu pune folderul /config (baza de date) pe un disc din rețea: documentația avertizează că se poate corupe.",
+    "Dacă nu vrei să administrezi un server, rămâi la un serviciu gata făcut sau la o găzduire gestionată."
+  ],
+  "alternatives": [
+    {
+      "name": "Jellyfin",
+      "url": "https://github.com/jellyfin/jellyfin",
+      "difference": "Server media general (filme, muzică); acoperă mai puțin cărțile audio și progresul pe carte."
+    },
+    {
+      "name": "Plex",
+      "url": "https://www.plex.tv/",
+      "difference": "Server comercial pentru media proprie, cu funcții plătite în Plex Pass; nu e deschis ca Audiobookshelf."
+    },
+    {
+      "name": "Libro.fm",
+      "url": "https://libro.fm/",
+      "difference": "Magazin de cărți audio fără DRM de unde poți cumpăra fișiere pe care apoi să le pui în Audiobookshelf."
+    }
+  ],
+  "tech_sheet": {
+    "license": "GPL-3.0",
+    "language": "JavaScript (Node.js server, client Vue/Nuxt)",
+    "commit_sha": "ce41ce489cebaf00e008919f6f2901b428acfd56",
+    "last_commit_date": "2026-11-01",
+    "stars": 14898,
+    "requirements": [
+      "Metoda recomandată: Docker (imaginea ghcr.io/advplyr/audiobookshelf:latest) cu Docker Compose, pe Windows, Mac sau Linux; imaginea suportă linux/amd64 și linux/arm64",
+      "Patru foldere pe disc montate în container: /config, /metadata, /audiobooks, /podcasts (/config nu trebuie să fie pe disc din rețea)",
+      "Alternativ, Windows 10 pe 64 biți sau mai nou: installer nativ din mikiher/audiobookshelf-windows",
+      "Alternativ, Linux amd64: pachet Debian (repo apt oficial) sau RPM pentru Red Hat/CentOS Stream",
+      "Pentru rulat din sursă: Node.js 24 și FFmpeg (doar dezvoltare; opțional dev container cu Docker Desktop și VSCode)",
+      "Pentru acces din exterior: reverse proxy cu suport WebSocket (de exemplu Nginx, Caddy, Traefik), sau un VPN",
+      "Nicio cheie API, niciun cont și fără GPU; la prima pornire creezi contul de administrator în interfață"
+    ]
+  },
+  "monetization": [
+    {
+      "model": "serviciu de instalare și configurare",
+      "what_you_sell": "Instalezi și configurezi Audiobookshelf pentru familii sau pasionați: Docker pe NAS/mini-PC, foldere organizate, utilizatori, aplicații pe telefoane, acces din afară cu VPN sau reverse proxy, backup.",
+      "for_whom": "Familii și pasionați de cărți audio fără timp sau cunoștințe tehnice, dar cu colecții proprii de fișiere.",
+      "license_check": {
+        "license": "GPL-3.0",
+        "commercial_use": "permis cu condiții",
+        "conditions": "GPL-3.0 permite folosirea comercială și vânzarea de servicii. Dacă livrezi clienților o versiune modificată a programului (de exemplu o imagine Docker cu schimbări proprii), trebuie să oferi și codul modificat sub GPL. Numele și logo-ul nu sunt acoperite de licență. Serviciul tău nu vinde cărți sau fișiere cu DRM."
+      },
+      "path": "folosești repo-ul direct",
+      "own_build_notes": null,
+      "demand_evidence": [
+        {
+          "name": "ElfHosted: Audiobookshelf gestionat, preconfigurat cu mounts, TLS și SSO",
+          "url": "https://store.elfhosted.com/product/audiobookshelf/",
+          "price": "9,00 USD/lună (7 zile probă, taxă de înscriere 1 USD)",
+          "what_it_proves": "Oamenii plătesc pentru o instanță gata configurată, în loc să o ruleze singuri.",
+          "checked_at": "2026-11-03"
+        },
+        {
+          "name": "DINAO: Audiobookshelf administrat (instalare, actualizări, backup, monitorizare)",
+          "url": "https://dinao.com/en/conteneur/audiobookshelf",
+          "price": "de la 9,90 EUR/lună fără TVA; suport prioritar opțional +15 EUR/lună",
+          "what_it_proves": "Există cerere pentru gestionare completă, inclusiv suport plătit separat.",
+          "checked_at": "2026-11-03"
+        }
+      ],
+      "startup_cost": "Aproape zero: un calculator de test și Docker (Personal, 0 USD); timp pentru a scrie o listă de verificare.",
+      "time_to_first_client": "Variază; depinde de unde găsești clienți (grupuri locale de self-hosting, familie, prieteni).",
+      "difficulty": "ușor",
+      "risks": [
+        "Concurență gratuită: documentația oficială e clară și mulți se descurcă singuri.",
+        "Clienții pot cere ajutor cu fișiere piratate sau cu DRM: nu poți ajuta cu asta.",
+        "Suport pe termen lung: actualizări, probleme de rețea și backup rămân în sarcina ta dacă promiți mentenanță.",
+        "Frontend-ul se rescrie (Vue spre React): pașii și ecranele se pot schimba."
+      ],
+      "first_steps": [
+        "Pregătește o listă de pași proprie, pornind din documentația oficială (Docker, structura folderelor, reverse proxy, backup).",
+        "Instalează-l pe propriul computer și testează aplicațiile Android și iOS (sau Plappa) înainte să promiți ceva.",
+        "Oferă prima instalare la preț mic prietenilor sau unui grup local, ca să afli ce întrebări apar."
+      ]
+    },
+    {
+      "model": "găzduire gestionată",
+      "what_you_sell": "Instanțe Audiobookshelf găzduite pentru familii: tu rulezi serverul, faci backup și actualizări, iar clientul își încarcă propriile fișiere fără DRM.",
+      "for_whom": "Oameni care vor serverul, dar nu au hardware sau nu vor să administreze nimic.",
+      "license_check": {
+        "license": "GPL-3.0",
+        "commercial_use": "permis cu condiții",
+        "conditions": "GPL-3.0 nu are clauza de rețea a AGPL: poți oferi programul ca serviciu online fără să publici codul, dacă nu îl modifici pentru distribuire. Dacă modifici și dai clienților cod sau imagini, trebuie să publici sursa sub GPL. Tu răspunzi pentru conținutul încărcat de clienți și pentru legea drepturilor de autor."
+      },
+      "path": "folosești repo-ul direct",
+      "own_build_notes": null,
+      "demand_evidence": [
+        {
+          "name": "PikaPods: Audiobookshelf gestionat, gata în sub un minut",
+          "url": "https://www.pikapods.com/apps/audiobookshelf",
+          "price": "de la 2,79 USD/lună (prepaid, facturat pe oră)",
+          "what_it_proves": "Un serviciu public vinde deja exact asta, la prețuri foarte mici.",
+          "checked_at": "2026-11-03"
+        },
+        {
+          "name": "ElfHosted: Audiobookshelf",
+          "url": "https://store.elfhosted.com/product/audiobookshelf/",
+          "price": "9,00 USD/lună",
+          "what_it_proves": "Cerere confirmată și la un preț mai mare, cu TLS și SSO incluse.",
+          "checked_at": "2026-11-03"
+        }
+      ],
+      "startup_cost": "Un VPS sau server propriu (preț neverificat), spațiu de stocare pentru bibliotecile clienților și timp pentru backup.",
+      "time_to_first_client": "Variază mult; depinde de nișă și de promovare.",
+      "difficulty": "mediu",
+      "risks": [
+        "Concurență puternică la preț mic (de la 2,79 USD/lună la PikaPods), deci marja e subțire.",
+        "Costuri de stocare care cresc cu biblioteca fiecărui client, plus trafic de redare.",
+        "Răspundere pentru conținutul încărcat (drepturi de autor, DRM) și pentru pierderea datelor.",
+        "Suport și actualizări constante; schimbări de versiune pot strica instanțele."
+      ],
+      "first_steps": [
+        "Compară costul real de stocare și trafic cu prețurile PikaPods și ElfHosted înainte să alegi un preț.",
+        "Găsește o nișă pe care ceilalți n-o acoperă (de exemplu limbă, familii locale, școli) și scrie condițiile de utilizare pentru conținut.",
+        "Pornește cu câțiva utilizatori de test și măsoară spațiul și banda folosite."
+      ]
+    }
+  ],
+  "updated_at": "2026-11-03",
+  "notes_summary": "Am citit README-ul, documentația oficială (din repo-ul audiobookshelf-docs), Dockerfile-ul și codul pentru surse online; n-am rulat nimic. Prețul Audible nu l-am putut verifica.",
+  "notes": "Repo clonat în sandbox/audiobookshelf la SHA ce41ce489cebaf00e008919f6f2901b428acfd56 (ultimul commit 2026-11-01, versiune 2.37.2, release din 2026-10-23, 14.898 stele, GPL-3.0, fișierul LICENSE e GPL v3 complet). Documentația site-ului (audiobookshelf.org/docs) se află în repo-ul separat audiobookshelf/audiobookshelf-docs (SHA 17475264dbd0be750f5f85045edeea2ae73f2e67, GPL-3.0); exemplele sunt copiate din acele fișiere sursă, cu link SHA-pinned, pentru că URL-urile live ale paginilor Library Structure nu au fost verificate. Exemplul de instalare e copiat exact din docker-compose-install.md; comanda 'docker compose up --detach' apare în documentație la secțiunea Upgrading. Documentația nu arată output pentru niciun exemplu, deci output_from_docs e null. Prețuri verificate 2026-11-03: pikapods.com/apps/audiobookshelf (de la 2,79 USD/lună; paginile /pricing și ?run= dau 404), store.elfhosted.com/product/audiobookshelf (9 USD/lună), dinao.com (9,90 EUR/lună fără TVA), docker.com/pricing (Personal 0), tailscale.com/pricing (Personal 0, până la 6 utilizatori), support.pocketcasts.com/knowledge-base/pocket-casts-plus-pricing (3,99/lună, 39,99/an). Neverificate: Audible (pagina de membership a arătat doar o promoție, deci price null), Plex Pass (403, deci nu l-am inclus la replaces; lifetime 749,99 USD din forumul Plex, lunar/anual neconfirmat oficial), Libro.fm (403). Nu am găsit telemetrie sau analytics în server (grep); clientul web al administratorului interoghează api.github.com/repos/advplyr/audiobookshelf/releases ca să afișeze versiuni noi (client/plugins/version.js). Cărțile se potrivesc cu surse online doar la cererea adminului (provideri în server/providers: Audible, Audnexus, AudiobookCovers, FantLab, GoogleBooks, iTunes, MusicBrainz, OpenLibrary). Aplicațiile mobile sunt un alt repo (advplyr/audiobookshelf-app, GPL-3.0, push 2026-10-11); aplicația iOS e în beta, iar README spune că beta-ul e plin. Windows: installerul vine din mikiher/audiobookshelf-windows (licență nespecificată în API, neverificată). README avertizează că frontend-ul e în rescriere spre React. Primii pași: povestea e din Ars Technica (Lee Hutchinson, 2025-03-14); arstechnica.com nu a putut fi citit direct de WebFetch, așa că am folosit o copie în hn.jakechampion.name/reader, al cărei rezumat (nu textul integral) l-am citit; detaliile (LXC Ubuntu 24.04 pe Proxmox, ~150 MB RAM, ~300 cărți, Plappa pe iOS, WireGuard, soția cu aplicația Audible blocată) vin de acolo. Povestea nu e despre un tutorial pas cu pas, iar autorul nu compară costuri. Parteneri verificați activi 2026-11-03: advplyr/audiobookshelf-app (push 2026-10-11, GPL-3.0), sandreas/m4b-tool (MIT, push 2026-04-18), tailscale/tailscale (BSD-3-Clause, push 2026-11-03), kovidgoyal/calibre (GPL-3.0, push 2026-11-03). Categorii noi de adăugat în categories.json (nu există încă): „Cărți audio și podcasturi”, „Server media personal”. Termeni de glosar noi: M4B, podcast, DRM, NAS, VPN (WireGuard), PWA, OIDC (SSO), metadate, tag-uri ID3, Chromecast, EPUB, container, Proxmox (LXC), amd64; „Docker”, „Docker Compose”, „reverse proxy”, „WebSocket”, „ffmpeg”, „SQLite”, „RSS”, „self-hosted”, „Tailscale” existau deja în glosar la verificare (înainte de aliasuri exacte, de verificat din nou de editor)."
+}

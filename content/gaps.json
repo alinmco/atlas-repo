@@ -618,5 +618,110 @@
     "gap": "Răspunsurile API către alte programe nu spun dacă modelul activ permite uz comercial; informația e doar în Model Manager și în inventarul de licențe.",
     "source_slug": "voicestudio",
     "added_at": "2026-11-03"
+  },
+  {
+    "gap": "Repo-ul nu include un server HTTP sau un API gata făcut; proiectele din comunitate (omnivoice-server, vLLM-Omni) le oferă separat și nu sunt susținute oficial.",
+    "source_slug": "omnivoice",
+    "added_at": "2026-11-03"
+  },
+  {
+    "gap": "Pentru dublaj lipsește legătura directă între transcriere, traducere și voce: trebuie combinate manual sau printr-o unealtă ca pyVideoTrans.",
+    "source_slug": "omnivoice",
+    "added_at": "2026-11-03"
+  },
+  {
+    "gap": "Documentația nu arată cerințe minime de memorie video sau de disc, nici viteze pe procesor.",
+    "source_slug": "omnivoice",
+    "added_at": "2026-11-03"
+  },
+  {
+    "gap": "Nu am găsit în cod sau documentație nicio marcare sau filigran al audio-ului generat.",
+    "source_slug": "omnivoice",
+    "added_at": "2026-11-03"
+  },
+  {
+    "gap": "Limba română nu e printre limbile oficiale și nu apare nici în lista modelelor comunitare din README.",
+    "source_slug": "pocket-tts",
+    "added_at": "2026-11-03"
+  },
+  {
+    "gap": "Ieșirea e doar WAV: nu produce MP3, subtitrări SRT sau marcaje de timp (există un fork comunitar cu timestamp-uri pe cuvinte).",
+    "source_slug": "pocket-tts",
+    "added_at": "2026-11-03"
+  },
+  {
+    "gap": "Nu se pot insera pauze sau tăceri în text (README: funcție nesuportată, issue #6).",
+    "source_slug": "pocket-tts",
+    "added_at": "2026-11-03"
+  },
+  {
+    "gap": "Serverul oficial are endpoint-ul propriu /tts, nu API-ul OpenAI; compatibilitatea vine dintr-un proiect comunitar separat.",
+    "source_slug": "pocket-tts",
+    "added_at": "2026-11-03"
+  },
+  {
+    "gap": "Un text lung (carte, articol) cere un script propriu de împărțire pe capitole și lipire a fișierelor audio.",
+    "source_slug": "pocket-tts",
+    "added_at": "2026-11-03"
+  },
+  {
+    "gap": "Fișierele cu DRM (de exemplu cele de la Audible) nu pot fi folosite direct; nu există pas inclus pentru ele.",
+    "source_slug": "audiobookshelf",
+    "added_at": "2026-11-03"
+  },
+  {
+    "gap": "Aplicația oficială iOS e în beta, iar beta-ul e plin; pe iPhone se folosesc aplicații terțe.",
+    "source_slug": "audiobookshelf",
+    "added_at": "2026-11-03"
+  },
+  {
+    "gap": "Acces din afara casei cere un pas separat (reverse proxy sau VPN), nu e inclus în server.",
+    "source_slug": "audiobookshelf",
+    "added_at": "2026-11-03"
+  },
+  {
+    "gap": "Backup-urile nu includ fișierele media, deci copia cărților rămâne o treabă manuală.",
+    "source_slug": "audiobookshelf",
+    "added_at": "2026-11-03"
+  },
+  {
+    "gap": "Backup-urile nu se pot muta între metode de instalare (de exemplu Windows și Linux) fără să pierzi progresul.",
+    "source_slug": "audiobookshelf",
+    "added_at": "2026-11-03"
+  },
+  {
+    "gap": "EPUB nu are o structură standard pentru capitole, prefețe sau note, deci cartea trebuie curățată manual înainte de conversie (README).",
+    "source_slug": "ebook2audiobook",
+    "added_at": "2026-11-03"
+  },
+  {
+    "gap": "XTTSv2, singurul motor cu clonare de voce, nu are limba română în lista din lib/conf_models.py; pentru română rămân Piper (voce Mihai) și Fairseq, cu voci fixe.",
+    "source_slug": "ebook2audiobook",
+    "added_at": "2026-11-03"
+  },
+  {
+    "gap": "Descrierea repo-ului pe GitHub (50+ motoare, 1696 de limbi) nu se potrivește cu README-ul și codul de la acest commit (9 motoare, 1158 de limbi).",
+    "source_slug": "ebook2audiobook",
+    "added_at": "2026-11-03"
+  },
+  {
+    "gap": "README trimite la un fișier „Mac Ebook2Audiobook Launcher.command” care nu apare în rădăcina repo-ului; scriptul existent se numește ebook2audiobook.command.",
+    "source_slug": "ebook2audiobook",
+    "added_at": "2026-11-03"
+  },
+  {
+    "gap": "pyproject.toml declară licența MIT, dar fișierul LICENSE este Apache-2.0.",
+    "source_slug": "ebook2audiobook",
+    "added_at": "2026-11-03"
+  },
+  {
+    "gap": "Spațiul pe disc necesar pentru modele nu e dat în documentație.",
+    "source_slug": "ebook2audiobook",
+    "added_at": "2026-11-03"
+  },
+  {
+    "gap": "Nu există un pas automat de ascultare sau verificare a pronunției; README cere să raportezi audio trunchiat pe care îl observi.",
+    "source_slug": "ebook2audiobook",
+    "added_at": "2026-11-03"
   }
 ]
