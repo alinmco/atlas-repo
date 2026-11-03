@@ -537,5 +537,19 @@
     "suggested_by": "api-anything",
     "why": "Repo-ul are un exemplu cu AI SDK (examples/vercel-ai-sdk.mjs): uneltele MCP ale API Anything sunt apelate de modelul din aplicația ta JavaScript.",
     "added_at": "2026-11-03"
+  },
+  {
+    "repo_url": "https://github.com/openai/codex",
+    "name": "Codex",
+    "suggested_by": "cloudroom",
+    "why": "Agentul Codex e primul harness al Core-ului: login-ul tău ChatGPT devine accesul la model pentru sesiunile din cloud.",
+    "added_at": "2026-11-03"
+  },
+  {
+    "repo_url": "https://github.com/earendil-works/pi",
+    "name": "Pi",
+    "suggested_by": "cloudroom",
+    "why": "Pi rulează prin Core în mod RPC și poate lucra cu mai mulți furnizori de modele.",
+    "added_at": "2026-11-03"
   }
 ]

@@ -1,0 +1,414 @@
+{
+  "slug": "cloudroom",
+  "repo_url": "https://github.com/davidondrej/cloudroom",
+  "name": "Cloudroom",
+  "one_liner": "Agenții AI de programare lucrează mai departe în cloud, chiar cu laptopul închis.",
+  "problem_solved": "Agenții AI de programare (Claude Code, Codex) lucrează doar cât timp laptopul e deschis și pornit. Cloudroom îi mută într-un calculator din cloud, ca să termine sarcina singuri.",
+  "features": [
+    "Pornești agenți pe Mac, Windows sau Linux, sau le dai fiecăruia un calculator în cloud",
+    "Fiecare fir de lucru din cloud are propriul mediu izolat și propria ramură Git",
+    "Folosești abonamentele tale (Claude, ChatGPT), fără adaos de preț la modele",
+    "„Teleport”: muți un agent care rulează între laptop și cloud, cu aceeași conversație",
+    "Poți găzdui singur partea de cloud (Core) pe un server Ubuntu, fără cont Cloudroom",
+    "Bucle programate: un agent verifică ceva la fiecare câteva ore și te anunță doar dacă e ceva"
+  ],
+  "at_a_glance": {
+    "for_you_if": [
+      "Folosești deja Claude Code sau Codex și vrei ca sarcinile lungi să continue cu laptopul închis.",
+      "Ai un server Ubuntu liber și vrei un „birou” de agenți AI al tău."
+    ],
+    "not_for_you_if": [
+      "Nu ai folosit niciodată un agent AI de programare: începe mai întâi cu unul simplu.",
+      "Vrei securitate strictă: agenții rulează fără întrebări de aprobare și pot avea acces la Mac-ul tău."
+    ],
+    "verdict": "Proiect foarte nou (septembrie 2026) și activ, util dacă ai deja abonamente la agenți AI; instalarea self-host cere un server Linux."
+  },
+  "cost": {
+    "level": "gratuit, dar cere servicii plătite",
+    "summary": "Aplicația și Core-ul sunt gratuite (Apache 2.0), dar agenții cer abonamentul tău la Claude/ChatGPT sau o cheie API plătită pe consum; cloud-ul găzduit de ei are plan gratuit limitat.",
+    "ai_access": {
+      "mode": "abonament sau API",
+      "detail": "Documentația spune că agenții folosesc login-ul tău nativ (Claude, ChatGPT/Codex) fără adaos de preț; site-ul oficial acceptă și chei API (OpenRouter sau alt furnizor).",
+      "source_url": "https://github.com/davidondrej/cloudroom/blob/main/core/docs/harnesses.md"
+    },
+    "items": [
+      {
+        "what": "Cloudroom găzduit - plan Free (3.000 Cloud Credits la 30 de zile; agenții locali gratuit)",
+        "price": "0 USD",
+        "required": false,
+        "source_url": "https://www.cloudroom.dev"
+      },
+      {
+        "what": "Cloudroom găzduit - plan Pro",
+        "price": "50 USD/lună",
+        "required": false,
+        "source_url": "https://www.cloudroom.dev"
+      },
+      {
+        "what": "Cloudroom găzduit - plan Super",
+        "price": "150 USD/lună",
+        "required": false,
+        "source_url": "https://www.cloudroom.dev"
+      },
+      {
+        "what": "Cloudroom găzduit - plan Ultra",
+        "price": "500 USD/lună",
+        "required": false,
+        "source_url": "https://www.cloudroom.dev"
+      },
+      {
+        "what": "Claude Pro (pentru agentul Claude Code, prin abonament)",
+        "price": "20 USD/lună, sau 17 USD/lună plătit anual",
+        "required": false,
+        "source_url": "https://claude.com/pricing"
+      },
+      {
+        "what": "Claude Max (limite mai mari pentru Claude Code)",
+        "price": "de la 100 USD/lună",
+        "required": false,
+        "source_url": "https://claude.com/pricing"
+      },
+      {
+        "what": "Abonament ChatGPT sau cheie API OpenAI (pentru agentul Codex)",
+        "price": null,
+        "required": false,
+        "source_url": "https://developers.openai.com/codex/auth/"
+      },
+      {
+        "what": "Server Ubuntu 24.04 pentru Core self-host (VPS, server de acasă sau laptop vechi)",
+        "price": null,
+        "required": false,
+        "source_url": "https://github.com/davidondrej/cloudroom/blob/main/core/docs/setup.md"
+      },
+      {
+        "what": "Cheie API pe consum la un furnizor de modele (alternativă la abonament)",
+        "price": null,
+        "required": false,
+        "source_url": "https://www.cloudroom.dev"
+      }
+    ]
+  },
+  "platforms": {
+    "windows": "da",
+    "mac": "da",
+    "linux": "da",
+    "note": "README: aplicația rulează pe Apple Silicon (macOS 13+), Linux x64 și Windows 11. Core-ul self-host e descris doar pentru Ubuntu 24.04; containerele și alte distribuții sunt în afara ghidului. Build-ul din sursă a aplicației e documentat doar pentru macOS Apple Silicon. Pe GitHub, issue-urile #104 și #106 (deschise) raportează probleme pe Windows: unități de rețea WSL nevăzute și agentul Devin care nu funcționează.",
+    "source_url": "https://github.com/davidondrej/cloudroom/blob/main/README.md"
+  },
+  "risk_flags": [
+    {
+      "flag": "trimite date în cloud",
+      "detail": "Pe sandbox-urile găzduite de Cloudroom, istoricul sesiunilor se salvează pe serverele lor; self-host cu CLOUDROOM_LOCAL_HISTORY=1 îl ține pe discul tău.",
+      "source_url": "https://github.com/davidondrej/cloudroom/blob/main/core/docs/setup.md"
+    },
+    {
+      "flag": "telemetrie",
+      "detail": "Core-ul trimite diagnostice (rute, erori, CPU/memorie) către CLOUDROOM_API_URL, iar aplicația are telemetrie de utilizare (PostHog) care se poate opri din Setări.",
+      "source_url": "https://github.com/davidondrej/cloudroom/blob/main/core/docs/observability.md"
+    },
+    {
+      "flag": "cere cont",
+      "detail": "Cloudroom găzduit cere cont (GitHub, Google sau email); aplicația locală și Core self-host nu necesită cont Cloudroom, conform README.",
+      "source_url": "https://github.com/davidondrej/cloudroom/blob/main/README.md"
+    },
+    {
+      "flag": "modifică setările altor programe",
+      "detail": "Scriptul opțional install/agent-home.py --apply arhivează setările Codex/Pi ale administratorului și blochează comenzile lui obișnuite Codex/Pi.",
+      "source_url": "https://github.com/davidondrej/cloudroom/blob/main/core/docs/setup.md"
+    },
+    {
+      "flag": "proiect instabil",
+      "detail": "Core are versiunea 0.1.95 și proiectul a apărut în septembrie 2026; documentația spune că testele cu inferență reală și activarea pe șabloane rămân necesare.",
+      "source_url": "https://github.com/davidondrej/cloudroom/blob/main/core/docs/harnesses.md"
+    }
+  ],
+  "audience_reason": "este un instrument pentru cine folosește deja agenți AI de programare și un terminal",
+  "setup_difficulty_reason": "aplicația se descarcă, dar self-host cere server Ubuntu, login în agent și abonamente; din sursă cere Rust și pnpm",
+  "analogy": "Ca un birou pe care îl închiriezi pentru angajatul tău robot: pleci acasă, iar el continuă munca în birou, nu pe masa din sufrageria ta.",
+  "how_it_works": [
+    "Pasul 1: pornești în aplicație un agent (Claude Code, Codex, Pi etc.) cu o sarcină, local sau în cloud",
+    "Pasul 2: pentru Cloud, fiecare fir primește un sandbox izolat cu serviciul Core și agentul alături; aplicația vorbește direct cu el prin HTTP",
+    "Pasul 3: Core pornește agentul sub un utilizator Linux separat, păstrează jurnalul sesiunii și continuă lucrul chiar dacă te deconectezi",
+    "Pasul 4: primești rezultatul în aplicație: istoric, ramură Git proprie și, dacă vrei, o previzualizare a aplicației agentului"
+  ],
+  "first_steps": null,
+  "categories": [
+    "Agenți AI și automatizare",
+    "Unelte pentru programatori"
+  ],
+  "search_intents": [
+    "vreau ca agentul AI de programare să lucreze și după ce închid laptopul",
+    "vreau să rulez Claude Code sau Codex pe un server al meu",
+    "vreau să-mi folosesc abonamentul Claude sau ChatGPT pentru agenți în cloud",
+    "vreau o aplicație care să conducă mai mulți agenți AI de programare deodată",
+    "vreau să programez un agent AI să verifice ceva la fiecare câteva ore"
+  ],
+  "audience": "intermediar",
+  "setup_difficulty": "mediu",
+  "replaces": [
+    {
+      "service": "Cursor - agenți în cloud (plan Premium)",
+      "service_url": "https://cursor.com/pricing",
+      "price": "30 USD/lună, plan Premium (conform tabelului de comparație; agenții în cloud nu sunt în Free și Plus)",
+      "price_source_url": "https://cursor.com/pricing",
+      "price_checked_at": "2026-11-03",
+      "replacement_level": "parțial",
+      "what_you_keep": [
+        "Agenți care continuă lucrul în cloud cu laptopul închis",
+        "Poți rula chiar agentul Cursor ca harness în Cloudroom (README: Cursor e în lista de agenți compatibili)"
+      ],
+      "what_you_lose": [
+        "Editorul Cursor integrat și completarea de cod din editor",
+        "Modelele incluse în abonamentul Cursor: în Cloudroom vii cu abonamentul sau cheia ta",
+        "Suport comercial și garanții de stabilitate"
+      ],
+      "hidden_costs": [
+        "Abonamentele la modele rămân în sarcina ta",
+        "Pentru self-host: server Linux, actualizări și copii de siguranță ale jurnalului",
+        "Timp de configurare și risc de securitate: agenții rulează fără aprobări"
+      ]
+    },
+    {
+      "service": "Devin (agent AI de programare în cloud)",
+      "service_url": "https://devin.ai/pricing",
+      "price": "20 USD/lună, plan Pro (conform paginii de prețuri; consumul peste limită se taxează la prețuri API)",
+      "price_source_url": "https://devin.ai/pricing",
+      "price_checked_at": "2026-11-03",
+      "replacement_level": "doar pentru cazuri simple",
+      "what_you_keep": [
+        "Idee similară: agent AI care lucrează autonom în cloud pe sarcini de programare",
+        "Devin poate fi folosit ca agent în Cloudroom, deci nu trebuie neapărat să renunți la el"
+      ],
+      "what_you_lose": [
+        "Agentul propriu Devin, antrenat și rafinat de firma lui, dacă folosești alt agent",
+        "Suport comercial și produs maturizat"
+      ],
+      "hidden_costs": [
+        "Abonamentul la agentul ales (Claude, ChatGPT) sau cheie API",
+        "Mentenanța serverului dacă faci self-host"
+      ]
+    }
+  ],
+  "examples": [
+    {
+      "title": "Instalezi Core-ul pe propriul server Ubuntu (self-host)",
+      "scenario": "Ai un server Ubuntu 24.04 curat și vrei serviciul Cloudroom Core pornit acolo, fără cont Cloudroom. Scriptul verifică checksum-ul, instalează Node.js 24 dacă lipsește, creează conturile și pornește serviciul.",
+      "prerequisites": [
+        "Ubuntu 24.04 proaspăt, pentru un singur utilizator de încredere, cu sudo, systemd și cgroup v2",
+        "Mașină x86_64 sau arm64",
+        "Login într-un agent (Codex sau Pi) după instalare"
+      ],
+      "commands": [
+        "curl -fsSL https://cloudroom.dev/install.sh -o install.sh",
+        "sudo bash install.sh"
+      ],
+      "code": "curl -fsSL https://cloudroom.dev/install.sh -o install.sh\nsudo bash install.sh",
+      "output_from_docs": null,
+      "source_url": "https://github.com/davidondrej/cloudroom/blob/main/README.md",
+      "kind": "instalare"
+    },
+    {
+      "title": "Prima sarcină trimisă agentului prin API-ul Core",
+      "scenario": "După instalare, pornești o sesiune Codex și îi ceri să creeze un fișier. Ghidul avertizează că HTTP 202 înseamnă doar „cerere acceptată”, nu „terminat”. Ctrl+C sau deconectarea SSH închid doar vizualizarea, serviciul continuă.",
+      "prerequisites": [
+        "Core pornit conform ghidului de instalare",
+        "Autentificare în agentul Codex sub contul cloudroom-agent"
+      ],
+      "commands": [
+        "api() {",
+        "  sudo awk -F= '/^CLOUDROOM_TOKEN=/{print \"header = \\\"Authorization: Bearer \" $2 \"\\\"\"}' /etc/cloudroom/core.env |",
+        "    curl --config - --silent --show-error --fail-with-body \"$@\"",
+        "}",
+        "api http://127.0.0.1:9840/v1/ready",
+        "api --json '{\"request_id\":\"quickstart\",\"harness\":\"codex\"}' http://127.0.0.1:9840/v1/sessions",
+        "api http://127.0.0.1:9840/v1/sessions/cr_quickstart",
+        "api http://127.0.0.1:9840/v1/ready",
+        "api --json '{\"request_id\":\"quickstart\",\"harness\":\"codex\"}' http://127.0.0.1:9840/v1/sessions",
+        "api http://127.0.0.1:9840/v1/sessions/cr_quickstart",
+        "api --json '{\"request_id\":\"hello\",\"text\":\"Create hello.txt containing Hello from Cloudroom.\"}' \\",
+        "  http://127.0.0.1:9840/v1/sessions/cr_quickstart/prompts",
+        "api --no-buffer http://127.0.0.1:9840/v1/sessions/cr_quickstart/stream"
+      ],
+      "code": "api() {\n  sudo awk -F= '/^CLOUDROOM_TOKEN=/{print \"header = \\\"Authorization: Bearer \" $2 \"\\\"\"}' /etc/cloudroom/core.env |\n    curl --config - --silent --show-error --fail-with-body \"$@\"\n}\napi http://127.0.0.1:9840/v1/ready\napi --json '{\"request_id\":\"quickstart\",\"harness\":\"codex\"}' http://127.0.0.1:9840/v1/sessions\napi http://127.0.0.1:9840/v1/sessions/cr_quickstart\napi http://127.0.0.1:9840/v1/ready\napi --json '{\"request_id\":\"quickstart\",\"harness\":\"codex\"}' http://127.0.0.1:9840/v1/sessions\napi http://127.0.0.1:9840/v1/sessions/cr_quickstart\n\napi --json '{\"request_id\":\"hello\",\"text\":\"Create hello.txt containing Hello from Cloudroom.\"}' \\\n  http://127.0.0.1:9840/v1/sessions/cr_quickstart/prompts\napi --no-buffer http://127.0.0.1:9840/v1/sessions/cr_quickstart/stream",
+      "output_from_docs": "Documentația spune doar: „Readiness should return {\"ready\":true}” și că trebuie repetată comanda de stare până când session.state este idle, apoi se trimite sarcina.",
+      "source_url": "https://github.com/davidondrej/cloudroom/blob/main/core/docs/setup.md",
+      "kind": "folosire"
+    }
+  ],
+  "connectors": {
+    "inputs": [
+      "Mesaje de text către agent, scrise în aplicația desktop",
+      "Cereri HTTP către API-ul Core, de exemplu POST /v1/sessions cu JSON {\"request_id\":\"...\",\"harness\":\"codex\"}",
+      "Un repository Git (folderul de lucru al agentului)",
+      "Fișierul /etc/cloudroom/core.env cu token și variabile CLOUDROOM_*",
+      "Skill-uri în fișiere SKILL.md (Cloudroom livrează opt: decisions, create-loop, risky-changes etc.)"
+    ],
+    "outputs": [
+      "Conversația și rezultatele agentului în aplicație (istoric salvat în jurnal)",
+      "Modificări de cod pe o ramură Git proprie fiecărui fir din cloud",
+      "Răspunsuri JSON de la API-ul Core, plus flux live (stream) de evenimente",
+      "Adrese de previzualizare de tip http://p3000-1234abcd.localhost:3000, prin comanda room-cli preview"
+    ],
+    "pairs_well_with": [
+      {
+        "repo_url": "https://github.com/openai/codex",
+        "name": "Codex",
+        "why": "Agentul Codex e primul harness al Core-ului: login-ul tău ChatGPT devine accesul la model pentru sesiunile din cloud.",
+        "in_catalog": false
+      },
+      {
+        "repo_url": "https://github.com/anthropics/claude-code",
+        "name": "Claude Code",
+        "why": "Core pornește CLI-ul nativ Claude Code cu abonamentul tău, iar rezultatul (cod pe o ramură Git) revine în aplicație.",
+        "in_catalog": false
+      },
+      {
+        "repo_url": "https://github.com/anomalyco/opencode",
+        "name": "OpenCode",
+        "why": "OpenCode e agent compatibil: modelele lui gratuite rulează fără login, iar sesiunea apare în aceeași aplicație.",
+        "in_catalog": true
+      },
+      {
+        "repo_url": "https://github.com/earendil-works/pi",
+        "name": "Pi",
+        "why": "Pi rulează prin Core în mod RPC și poate lucra cu mai mulți furnizori de modele.",
+        "in_catalog": false
+      },
+      {
+        "repo_url": "https://github.com/obra/superpowers",
+        "name": "Superpowers",
+        "why": "Skill-urile lui se încarcă în agenții Claude Code/Codex pornit de Cloudroom, ca agentul din cloud să lucreze metodic.",
+        "in_catalog": true
+      }
+    ],
+    "gaps_noticed": [
+      "Core self-host e documentat doar pentru Ubuntu 24.04; Windows și alte distribuții Linux nu au ghid.",
+      "Build-ul aplicației din sursă e documentat doar pentru macOS Apple Silicon.",
+      "Documentația detaliată (core/docs, gui/docs) e scrisă pentru dezvoltatori, nu pentru începători.",
+      "Site-ul oficial are informații contradictorii despre cont: „nu e nevoie de cont”, dar înregistrarea se face la deschiderea aplicației."
+    ]
+  },
+  "when_not_to_use": [
+    "Dacă nu ai deja abonament sau cheie API la un agent AI: Cloudroom organizează agenții, nu îți dă modele.",
+    "Dacă vrei un instrument pe care să te poți baza în producție acum: proiectul are doar câteva luni, versiuni 0.1.x, iar anumite integrări (Cursor, Devin) sunt marcate ca previzualizare sau au probleme deschise.",
+    "Dacă lucrezi cu cod sau date confidențiale: agenții rulează fără întrebări de aprobare, au drepturi de administrator în propriul sandbox, iar cu „Mac access” pot citi fișiere și rula comenzi pe Mac-ul tău.",
+    "Dacă nu vrei să administrezi un server Linux: varianta self-host cere SSH, sudo, actualizări și copii de siguranță.",
+    "Un singur server pentru mai mulți utilizatori: documentația recomandă o mașină proprie pentru fiecare utilizator de încredere."
+  ],
+  "alternatives": [
+    {
+      "name": "BB",
+      "url": "https://github.com/get-bb/bb",
+      "difference": "Proiectul pe care e construită aplicația Cloudroom (licență MIT); fără partea de Core în cloud descrisă aici."
+    },
+    {
+      "name": "Paperclip",
+      "url": "https://github.com/paperclipai/paperclip",
+      "difference": "Panou de control care conduce o echipă de agenți ca pe o firmă; nu pornește mașini în cloud pentru fiecare agent."
+    },
+    {
+      "name": "Coder",
+      "url": "https://github.com/coder/coder",
+      "difference": "Platformă open source de medii de dezvoltare în cloud (AGPL-3.0), fără aplicația de agenți integrată."
+    }
+  ],
+  "tech_sheet": {
+    "license": "Apache-2.0",
+    "language": "Rust (core), TypeScript (aplicația desktop), Python (scripturi auxiliare)",
+    "commit_sha": "31eb00aab91d8862b1b5f45c3cba9ab835f8e855",
+    "last_commit_date": "2026-11-02",
+    "stars": 1309,
+    "requirements": [
+      "Aplicația desktop: Mac Apple Silicon cu macOS 13+, Linux x64 sau Windows 11 (descărcare de pe cloudroom.dev/download)",
+      "Agenți locali: un CLI de agent instalat și autentificat (de exemplu Claude Code sau Codex), cu abonamentul tău sau o cheie API (YOUR_API_KEY)",
+      "Core self-host: Ubuntu 24.04 proaspăt (x86_64 sau arm64), un singur utilizator de încredere, cu sudo, systemd și cgroup v2",
+      "Instalare rapidă: curl, sudo bash install.sh (instalează Node.js 24 dacă lipsește); după instalare, login într-un agent (Codex/Pi/Claude Code)",
+      "Build Core din sursă: Rust 1.89+, build-essential, curl, git, ca-certificates, pkg-config, python3, openssl, Node.js 24 instalat global, Codex 0.154.0 (npm i -g @openai/codex@0.154.0)",
+      "Pi (dacă îl folosești): @earendil-works/pi-coding-agent 0.85.1 sau mai nou; Claude Code 2.1.280+ pentru modelul Opus 5.5",
+      "Previzualizări în cloud (opțional): OpenSSH și Python 3.11+",
+      "Build aplicație din sursă: macOS Apple Silicon, Git, Node.js 22.19+, pnpm 10.34.9, Python 3.11+, Xcode Command Line Tools",
+      "Cont Cloudroom doar pentru varianta găzduită (GitHub, Google sau email); nu e nevoie pentru aplicația locală sau Core self-host"
+    ]
+  },
+  "monetization": [
+    {
+      "model": "serviciu de instalare și configurare",
+      "what_you_sell": "Instalezi și securizezi Core-ul Cloudroom pe serverul clientului (Ubuntu 24.04), conectezi aplicația și configurezi login-urile agenților, mașina de agent separată și copiile de siguranță ale jurnalului.",
+      "for_whom": "Programatori independenți și echipe mici care vor agenți AI în cloud, dar nu vor să-și petreacă zilele cu systemd, tokeni și SSH.",
+      "license_check": {
+        "license": "Apache-2.0",
+        "commercial_use": "permis",
+        "conditions": "Apache 2.0 permite uz comercial; păstrezi LICENSE și NOTICE (aplicația conține notița MIT a proiectului BB). Numele și logo-ul Cloudroom nu sunt acoperite de licență. Modelele și abonamentele terților au propriile termeni."
+      },
+      "path": "folosești repo-ul direct",
+      "own_build_notes": null,
+      "demand_evidence": [
+        {
+          "name": "Cloudroom găzduit (planuri plătite)",
+          "url": "https://www.cloudroom.dev",
+          "price": "Pro 50 USD/lună, Super 150 USD/lună, Ultra 500 USD/lună",
+          "what_it_proves": "Oamenii plătesc pentru agenți AI gestionați în cloud, deci o parte din public nu vrea să administreze singură partea de server.",
+          "checked_at": "2026-11-03"
+        },
+        {
+          "name": "Devin",
+          "url": "https://devin.ai/pricing",
+          "price": "Pro 20 USD/lună",
+          "what_it_proves": "Există piață plătită pentru agenți AI de programare în cloud.",
+          "checked_at": "2026-11-03"
+        }
+      ],
+      "startup_cost": "Un server de test Ubuntu 24.04 (preț neverificat) și abonamentele proprii la agenți, pentru probe.",
+      "time_to_first_client": "Necunoscut; depinde de cum găsești clienți și de cât de stabil rămâne proiectul.",
+      "difficulty": "mediu",
+      "risks": [
+        "Concurență gratuită: autorii oferă același lucru găzduit, cu plan Free și script de instalare propriu.",
+        "Proiect foarte nou (0.1.x): instalarea și protocoalele se pot schimba des, iar serviciul tău ar trebui reactualizat.",
+        "Dependență de furnizorii de agenți: Claude, Codex și Cursor își pot schimba termenii pentru accesul prin aplicații terțe.",
+        "Răspundere de securitate: agenții rulează fără aprobări și cu acces larg; configurarea greșită poate expune serverul sau Mac-ul clientului."
+      ],
+      "first_steps": [
+        "Instalezi tu Core-ul pe un VPS Ubuntu 24.04 de test, după core/docs/setup.md, și notezi toate problemele întâlnite.",
+        "Scrii o listă de verificare (token, utilizator agent separat, HTTPS, copii de siguranță).",
+        "Cauți 2-3 programatori sau echipe mici care vor un server de agenți și le oferi prima instalare la preț de probă."
+      ]
+    },
+    {
+      "model": "consultanță și training",
+      "what_you_sell": "Ateliere scurte despre cum lucrezi sigur cu agenți AI în cloud: bucle programate (create-loop), ramuri separate, limite de acces la Mac, fluxuri de revizuire.",
+      "for_whom": "Echipe mici de dezvoltare care au abonamente la agenți AI, dar nu au un proces de lucru și o politică de securitate.",
+      "license_check": {
+        "license": "Apache-2.0",
+        "commercial_use": "permis",
+        "conditions": "Nu vinzi codul, ci instruirea; Apache 2.0 nu pune condiții suplimentare pentru training. Dacă redistribui materiale cu fragmente din repo, păstrezi notița de licență."
+      },
+      "path": "folosești repo-ul direct",
+      "own_build_notes": null,
+      "demand_evidence": [
+        {
+          "name": "Cursor - planuri pentru echipe",
+          "url": "https://cursor.com/pricing",
+          "price": "Teams de la 30 USD/utilizator/lună (conform paginii de prețuri)",
+          "what_it_proves": "Echipele plătesc pentru unelte cu agenți în cloud, deci apare nevoia de adoptare și proces în jurul lor.",
+          "checked_at": "2026-11-03"
+        }
+      ],
+      "startup_cost": "Timp pentru materiale și un cont de test; fără costuri fixe de infrastructură.",
+      "time_to_first_client": "Necunoscut.",
+      "difficulty": "mediu",
+      "risks": [
+        "Subiect care se schimbă săptămânal: materialele se învechesc rapid.",
+        "Concurență gratuită: documentația și video-urile autorului sunt publice.",
+        "Greu de demonstrat valoare fără cifre măsurate pe echipa clientului."
+      ],
+      "first_steps": [
+        "Parcurgi singur ghidul de self-host și documentezi o rețetă proprie în limba clientului.",
+        "Pregătești un atelier de 2 ore cu 3 scenarii (sarcină lungă în cloud, buclă programată, previzualizare).",
+        "Îl propui într-un grup local de dezvoltatori, pentru feedback."
+      ]
+    }
+  ],
+  "updated_at": "2026-11-03",
+  "notes_summary": "Am citit README-ul, documentația din core/ și gui/, scripturile de instalare și site-ul oficial; n-am rulat nimic și nu am găsit o poveste reală de utilizare.",
+  "notes": "Repo nou. Clonat la commit 31eb00a (2026-11-02). Licența: Apache-2.0 (fișier LICENSE complet, verificat); fișierul NOTICE păstrează notița MIT a proiectului BB (get-bb/bb, MIT, activ), pe care e construită aplicația. Repo-ul are un singur README mare plus documentație extinsă în core/docs și gui/docs, scrisă pentru dezvoltatori. Prețurile planurilor Cloudroom (Free 0 / Pro 50 / Super 150 / Ultra 500 USD/lună) sunt citite de pe cloudroom.dev pe 2026-11-03; pagina nu spune ce conține fiecare plan în afara celor 3.000 Cloud Credits la Free. Prețurile Claude (Pro 17 USD/lună anual sau 20 lunar, Max de la 100) sunt de pe claude.com/pricing; Cursor și Devin din fetch-ul paginilor lor din 2026-11-03: pagina Cursor listează planurile Free 0, Plus 8, Premium 30, Super 100, Ultra 200, iar agenții în cloud apar în Premium și peste; pagina Devin listează Pro 20, Max 200. Aceste pagini au dat rezultate diferite față de ce știam, deci prețurile Cursor și Devin au fost confirmate pe pagina lor la 2026-11-03. Contradicție pe site: „No account needed” vs. FAQ (cont la deschiderea aplicației); changelog v66 spune că aplicația locală merge fără cont, iar agenții Cloud au avut listă de așteptare/invitații (v66), apoi conturi gratuite pot porni fire Cloud (v103, v106). README spune Windows 11, dar directoare terțe îl numesc beta și există issue-uri deschise pe Windows (de ex. #104, #106); am notat Windows ca „da” pe baza README-ului. Core-ul trimite diagnostice limitate la CLOUDROOM_API_URL (fără prompturi, căi sau credențiale, conform observability.md); telemetria aplicației (PostHog) se poate opri din Setări. Hacker News: o singură postare de lansare, 1 comentariu al autorului (ID 50135735, 2026-10-17), deci nu e poveste de utilizator. Primii pași: nu am găsit o experiență reală potrivită; am căutat pe Hacker News (Algolia), GitHub issues (sunt întrebări/bug-uri, nu povești) și dev.to. Skill-uri livrate: 8 în skills/manifest.json. Repo-ul menționează două dependențe de agent (Codex 0.154.0, Pi 0.85.1+) cu versiuni testate; versiunile pot fi depășite."
+}
