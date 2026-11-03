@@ -369,6 +369,12 @@
         "name": "AI Design Skills",
         "why": "Superpowers conduce procesul agentului (plan, implementare, verificare), iar acest skill dă regulile de design pentru partea de interfață din plan.",
         "in_catalog": true
+      },
+      {
+        "repo_url": "https://github.com/davidondrej/cloudroom",
+        "name": "Cloudroom",
+        "why": "Skill-urile lui se încarcă în agenții Claude Code/Codex pornit de Cloudroom, ca agentul din cloud să lucreze metodic.",
+        "in_catalog": true
       }
     ],
     "gaps_noticed": [

@@ -213,6 +213,12 @@
         "name": "API Anything",
         "why": "Agentul de programare din terminal cere operația prin MCP (api-anything mcp --print-config dă configurarea), iar JSON-ul primit îi intră direct în context.",
         "in_catalog": true
+      },
+      {
+        "repo_url": "https://github.com/davidondrej/cloudroom",
+        "name": "Cloudroom",
+        "why": "OpenCode e agent compatibil: modelele lui gratuite rulează fără login, iar sesiunea apare în aceeași aplicație.",
+        "in_catalog": true
       }
     ],
     "gaps_noticed": [

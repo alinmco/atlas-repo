@@ -583,5 +583,25 @@
     "gap": "Pentru operații care scriu pe un site nu vine nicio operație gata făcută; fiecare trebuie învățată și pornită explicit cu --allow-writes.",
     "source_slug": "api-anything",
     "added_at": "2026-11-03"
+  },
+  {
+    "gap": "Core self-host e documentat doar pentru Ubuntu 24.04; Windows și alte distribuții Linux nu au ghid.",
+    "source_slug": "cloudroom",
+    "added_at": "2026-11-03"
+  },
+  {
+    "gap": "Build-ul aplicației din sursă e documentat doar pentru macOS Apple Silicon.",
+    "source_slug": "cloudroom",
+    "added_at": "2026-11-03"
+  },
+  {
+    "gap": "Documentația detaliată (core/docs, gui/docs) e scrisă pentru dezvoltatori, nu pentru începători.",
+    "source_slug": "cloudroom",
+    "added_at": "2026-11-03"
+  },
+  {
+    "gap": "Site-ul oficial are informații contradictorii despre cont: „nu e nevoie de cont”, dar înregistrarea se face la deschiderea aplicației.",
+    "source_slug": "cloudroom",
+    "added_at": "2026-11-03"
   }
 ]

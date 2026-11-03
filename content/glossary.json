@@ -2543,5 +2543,69 @@
     "term": "Playwright",
     "aliases": [],
     "explanation": "Unealtă Microsoft care controlează un browser din program"
+  },
+  {
+    "term": "Cloud Credits",
+    "aliases": [
+      "credite Cloud",
+      "Cloud Credits-uri"
+    ],
+    "explanation": "puncte consumate când rulezi agenți în cloudul Cloudroom"
+  },
+  {
+    "term": "Cloudroom Core",
+    "aliases": [],
+    "explanation": "serviciul din cloud care rulează agenții și salvează istoricul"
+  },
+  {
+    "term": "fir de lucru",
+    "aliases": [
+      "thread",
+      "thread-uri",
+      "firul de lucru"
+    ],
+    "explanation": "o conversație cu un agent, cu mediul și ramura ei"
+  },
+  {
+    "term": "Teleport",
+    "aliases": [],
+    "explanation": "mută un agent între laptop și cloud, păstrând conversația"
+  },
+  {
+    "term": "SSH",
+    "aliases": [],
+    "explanation": "conectare securizată în terminal la un alt calculator"
+  },
+  {
+    "term": "systemd",
+    "aliases": [],
+    "explanation": "programul Linux care pornește și supraveghează serviciile"
+  },
+  {
+    "term": "VM",
+    "aliases": [
+      "mașină virtuală"
+    ],
+    "explanation": "calculator virtual închiriat într-un centru de date"
+  },
+  {
+    "term": "Apple Silicon",
+    "aliases": [],
+    "explanation": "procesoarele proprii Apple din Mac-urile de după 2020"
+  },
+  {
+    "term": "pnpm",
+    "aliases": [],
+    "explanation": "program care instalează pachetele unui proiect JavaScript"
+  },
+  {
+    "term": "agentul Pi",
+    "aliases": [],
+    "explanation": "alt agent AI de programare în terminal, compatibil cu Cloudroom"
+  },
+  {
+    "term": "Devin",
+    "aliases": [],
+    "explanation": "agent AI de programare comercial, rulat în cloud"
   }
 ]

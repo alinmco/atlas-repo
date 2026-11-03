@@ -233,7 +233,8 @@
       "https://github.com/paperclipai/paperclip",
       "https://github.com/JuliusBrussee/caveman",
       "https://github.com/pbakaus/impeccable",
-      "https://github.com/elayadesign/ai-design-skills"
+      "https://github.com/elayadesign/ai-design-skills",
+      "https://github.com/davidondrej/cloudroom"
     ],
     "used_in_recipes": []
   },
@@ -293,7 +294,8 @@
       "https://github.com/anomalyco/models.dev",
       "https://github.com/paperclipai/paperclip",
       "https://github.com/JuliusBrussee/caveman",
-      "https://github.com/goodnight000/api-anything"
+      "https://github.com/goodnight000/api-anything",
+      "https://github.com/davidondrej/cloudroom"
     ],
     "used_in_recipes": []
   },
@@ -840,6 +842,37 @@
       "https://github.com/langchain-ai/langchainjs",
       "https://github.com/vercel/ai",
       "https://github.com/microsoft/playwright-mcp"
+    ],
+    "used_in_recipes": []
+  },
+  {
+    "slug": "cloudroom",
+    "name": "Cloudroom",
+    "one_liner": "Agenții AI de programare lucrează mai departe în cloud, chiar cu laptopul închis.",
+    "categories": [
+      "Agenți AI și automatizare",
+      "Unelte pentru programatori"
+    ],
+    "inputs": [
+      "Mesaje de text către agent, scrise în aplicația desktop",
+      "Cereri HTTP către API-ul Core, de exemplu POST /v1/sessions cu JSON {\"request_id\":\"...\",\"harness\":\"codex\"}",
+      "Un repository Git (folderul de lucru al agentului)",
+      "Fișierul /etc/cloudroom/core.env cu token și variabile CLOUDROOM_*",
+      "Skill-uri în fișiere SKILL.md (Cloudroom livrează opt: decisions, create-loop, risky-changes etc.)"
+    ],
+    "outputs": [
+      "Conversația și rezultatele agentului în aplicație (istoric salvat în jurnal)",
+      "Modificări de cod pe o ramură Git proprie fiecărui fir din cloud",
+      "Răspunsuri JSON de la API-ul Core, plus flux live (stream) de evenimente",
+      "Adrese de previzualizare de tip http://p3000-1234abcd.localhost:3000, prin comanda room-cli preview"
+    ],
+    "updated_at": "2026-11-03",
+    "pairs_well_with": [
+      "https://github.com/openai/codex",
+      "https://github.com/anthropics/claude-code",
+      "https://github.com/anomalyco/opencode",
+      "https://github.com/earendil-works/pi",
+      "https://github.com/obra/superpowers"
     ],
     "used_in_recipes": []
   }
