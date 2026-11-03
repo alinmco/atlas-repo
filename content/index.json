@@ -875,5 +875,38 @@
       "https://github.com/obra/superpowers"
     ],
     "used_in_recipes": []
+  },
+  {
+    "slug": "voicestudio",
+    "name": "VoiceStudio",
+    "one_liner": "Aplicație care clonează voci, dublează video și dictează text, totul pe calculatorul tău.",
+    "categories": [
+      "Clonare și generare de voce",
+      "Dublaj și traducere video",
+      "Transcriere și dictare"
+    ],
+    "inputs": [
+      "Text simplu sau manuscris lung pentru narare",
+      "Fișier audio de referință (WAV și alte formate comune) pentru clonarea unei voci",
+      "Fișier video sau link pentru dublaj",
+      "Fișier audio sau flux de microfon (WebM/Opus sau PCM 16 kHz pe WebSocket) pentru transcriere",
+      "Cereri HTTP JSON către /v1/audio/speech și /v1/audio/transcriptions (compatibile OpenAI)"
+    ],
+    "outputs": [
+      "Fișiere audio generate (WAV, MP3; Ogg/Opus prin MCP, cu FFmpeg)",
+      "Video dublat exportat",
+      "Text transcris, inclusiv SRT și VTT prin API",
+      "Pachet portabil de voce .ovsvoice",
+      "Răspunsuri JSON din API și unelte MCP (generate_speech, clone_voice, transcribe etc.)"
+    ],
+    "updated_at": "2026-11-03",
+    "pairs_well_with": [
+      "https://github.com/k2-fsa/OmniVoice",
+      "https://github.com/ollama/ollama",
+      "https://github.com/n8n-io/n8n",
+      "https://github.com/SYSTRAN/faster-whisper",
+      "https://github.com/kyutai-labs/pocket-tts"
+    ],
+    "used_in_recipes": []
   }
 ]

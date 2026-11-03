@@ -603,5 +603,20 @@
     "gap": "Site-ul oficial are informații contradictorii despre cont: „nu e nevoie de cont”, dar înregistrarea se face la deschiderea aplicației.",
     "source_slug": "cloudroom",
     "added_at": "2026-11-03"
+  },
+  {
+    "gap": "Documentația recomandă un pas manual în interfață (acceptarea licenței pyannote și un token Hugging Face) înainte ca detectarea vorbitorilor să funcționeze la dublaj.",
+    "source_slug": "voicestudio",
+    "added_at": "2026-11-03"
+  },
+  {
+    "gap": "Exemplele cu python -m backend.speech_client cer o copie a codului sursă și mediul Python al ei, nu merg doar cu aplicația instalată din installer.",
+    "source_slug": "voicestudio",
+    "added_at": "2026-11-03"
+  },
+  {
+    "gap": "Răspunsurile API către alte programe nu spun dacă modelul activ permite uz comercial; informația e doar în Model Manager și în inventarul de licențe.",
+    "source_slug": "voicestudio",
+    "added_at": "2026-11-03"
   }
 ]

@@ -1,0 +1,441 @@
+{
+  "slug": "voicestudio",
+  "repo_url": "https://github.com/debpalash/voicestudio",
+  "name": "VoiceStudio",
+  "one_liner": "Aplicație care clonează voci, dublează video și dictează text, totul pe calculatorul tău.",
+  "problem_solved": "Serviciile de voce AI (clonare, dublaj, narare) se plătesc lunar și îți trimit vocea și fișierele în cloud. VoiceStudio face aceleași lucruri direct pe calculatorul tău, fără cont și fără cheie API.",
+  "features": [
+    "Clonare de voce dintr-o înregistrare de referință curată",
+    "Design de voce: descrii vocea în cuvinte și o generezi",
+    "Dublaj video cu traducere și vorbire sincronizată cu originalul",
+    "Dictare (widget plutitor) și transcriere locală, în 646 de limbi",
+    "Narare pe loturi (povești, cărți audio) și coadă de lucrări",
+    "API local compatibil OpenAI, server MCP și rețete de automatizare",
+    "Zeci de motoare de voce la alegere, descărcate doar la cerere"
+  ],
+  "at_a_glance": {
+    "for_you_if": [
+      "Vrei să înlocuiești un abonament de voce AI cu ceva care rulează la tine pe PC.",
+      "Ai nevoie de clonare, dublaj sau dictare fără să trimiți audio în cloud."
+    ],
+    "not_for_you_if": [
+      "Vrei să vinzi vocile generate: modelul implicit are greutăți CC-BY-NC (necomerciale).",
+      "Ai un Mac Intel sau un PC foarte slab și vrei viteză."
+    ],
+    "verdict": "Aplicație completă și gratuită pentru uz personal, dar pentru uz comercial trebuie verificată licența fiecărui model în parte."
+  },
+  "cost": {
+    "level": "gratuit complet",
+    "summary": "Aplicația e gratuită (AGPL-3.0), fără cont și fără cheie API; funcțiile de bază rulează cu modele locale. Planul Pro (licență comercială și funcții extra) e opțional și plătit. Cheile LLM sau abonamentele CLI sunt necesare doar pentru traducere sau curățare de text cu un model din cloud.",
+    "ai_access": {
+      "mode": "abonament sau API",
+      "detail": "Funcțiile de bază folosesc modele locale, fără cheie sau abonament; pentru traducere și curățarea textului poți alege opțional un API cu cheie sau un CLI deja autentificat (Claude Code, Codex, Pi, OpenCode).",
+      "source_url": "https://github.com/debpalash/VoiceStudio/blob/429f1e5bb2703ac5b928ab8ba6f60159167e9c44/docs/electron-llm-providers.md"
+    },
+    "items": [
+      {
+        "what": "Aplicația VoiceStudio (AGPL-3.0)",
+        "price": "0 USD",
+        "required": true,
+        "source_url": "https://github.com/debpalash/VoiceStudio/blob/429f1e5bb2703ac5b928ab8ba6f60159167e9c44/LICENSE-NOTICE.md"
+      },
+      {
+        "what": "VoiceStudio Pro: sursă închisă, licență comercială, 3 dispozitive (opțional)",
+        "price": "199 USD/an preț de listă, 99 USD/an preț de lansare (pagina datată 23 oct 2026)",
+        "required": false,
+        "source_url": "https://voicestudio.sh/pro"
+      },
+      {
+        "what": "VoiceStudio Lifetime: plată unică, actualizări incluse (opțional)",
+        "price": "499 USD preț de listă, 199 USD preț de lansare",
+        "required": false,
+        "source_url": "https://voicestudio.sh/pro"
+      },
+      {
+        "what": "Spațiu pe disc pentru aplicație, mediu Python și modele (~10 GB; ~5 GiB doar CPU pe Windows)",
+        "price": null,
+        "required": true,
+        "source_url": "https://github.com/debpalash/VoiceStudio/blob/429f1e5bb2703ac5b928ab8ba6f60159167e9c44/docs/install/windows.md"
+      },
+      {
+        "what": "Placă video NVIDIA (CUDA), AMD (ROCm, opțional) sau Mac Apple Silicon pentru viteză; fără ele rulează pe CPU, mai lent",
+        "price": null,
+        "required": false,
+        "source_url": "https://github.com/debpalash/VoiceStudio/blob/429f1e5bb2703ac5b928ab8ba6f60159167e9c44/README.md"
+      },
+      {
+        "what": "Cont gratuit Hugging Face și token, doar pentru detectarea vorbitorilor (diarizare) la dublaj cu mai multe personaje",
+        "price": null,
+        "required": false,
+        "source_url": "https://github.com/debpalash/VoiceStudio/blob/429f1e5bb2703ac5b928ab8ba6f60159167e9c44/docs/dubbing/multi-speaker-guide.md"
+      },
+      {
+        "what": "Furnizori externi pentru traducere sau curățare text (OpenAI, Gemini, DeepL, Google Cloud Translation etc.), doar dacă îi alegi tu",
+        "price": null,
+        "required": false,
+        "source_url": "https://github.com/debpalash/VoiceStudio/blob/429f1e5bb2703ac5b928ab8ba6f60159167e9c44/docs/electron-llm-providers.md"
+      },
+      {
+        "what": "Ollama local cu un model mic (~2,5 GB) pentru traducere și curățare de dictare fără cheie",
+        "price": null,
+        "required": false,
+        "source_url": "https://github.com/debpalash/VoiceStudio/blob/429f1e5bb2703ac5b928ab8ba6f60159167e9c44/docs/electron-llm-providers.md"
+      }
+    ]
+  },
+  "platforms": {
+    "windows": "da",
+    "mac": "da",
+    "linux": "da",
+    "note": "Windows 10/11 x64 (ARM experimental); macOS 13.3+ doar Apple Silicon (pe Mac Intel rulează doar interfața, cu backend pe alt calculator); Linux x86_64 cu desktop grafic, fără pachete ARM. Există și Docker, iar aplicații de telefon (Android 10+, iOS 17+) în stadiu preview.",
+    "source_url": "https://github.com/debpalash/VoiceStudio/blob/429f1e5bb2703ac5b928ab8ba6f60159167e9c44/README.md"
+  },
+  "risk_flags": [
+    {
+      "flag": "licență restrictivă",
+      "detail": "Modelul implicit (k2-fsa/OmniVoice) are greutăți CC-BY-NC, necomerciale, iar niciun model din inventar nu are uz comercial confirmat ca verificat.",
+      "source_url": "https://github.com/debpalash/VoiceStudio/blob/429f1e5bb2703ac5b928ab8ba6f60159167e9c44/LICENSE-NOTICE.md"
+    },
+    {
+      "flag": "telemetrie",
+      "detail": "Analiza de utilizare PostHog există în orice build, dar pornește doar după un prompt de consimțământ la prima rulare; poți opri totul cu OMNIVOICE_ANALYTICS_DISABLED=1 în Docker.",
+      "source_url": "https://github.com/debpalash/VoiceStudio/blob/429f1e5bb2703ac5b928ab8ba6f60159167e9c44/docs/install/docker.md"
+    },
+    {
+      "flag": "trimite date în cloud",
+      "detail": "Doar dacă alegi tu un furnizor extern pentru traducere sau LLM (cheie API); funcțiile de bază rămân locale.",
+      "source_url": "https://github.com/debpalash/VoiceStudio/blob/429f1e5bb2703ac5b928ab8ba6f60159167e9c44/docs/electron-llm-providers.md"
+    },
+    {
+      "flag": "proiect instabil",
+      "detail": "Fișierul CLAUDE.md al proiectului îl descrie drept „active beta”, cu versiuni 0.5.x publicate frecvent.",
+      "source_url": "https://github.com/debpalash/VoiceStudio/blob/429f1e5bb2703ac5b928ab8ba6f60159167e9c44/CLAUDE.md"
+    }
+  ],
+  "audience_reason": "are installer clasic și interfață grafică, deci nu cere cod pentru uzul de bază",
+  "setup_difficulty_reason": "sunt câteva comenzi sau un installer, dar prima rulare descarcă Python, FFmpeg și modele de mai multe GB",
+  "analogy": "E ca un studio de înregistrări complet într-o singură cutie, instalat în propria ta casă, în loc să închiriezi studioul altcuiva cu ora.",
+  "how_it_works": [
+    "Pas 1: instalezi aplicația desktop (sau containerul Docker) și, la prima pornire, ea își descarcă singură Python, FFmpeg și modelele alese.",
+    "Pas 2: dai ca intrare un text, o înregistrare de referință a unei voci, un fișier audio sau un videoclip.",
+    "Pas 3: motorul ales (implicit OmniVoice, sau altul din Model Manager) rulează pe placa video sau pe CPU și generează vorbirea, transcrierea sau dublajul.",
+    "Pas 4: rezultatul iese ca fișier audio sau video exportat, sau prin API-ul local (port 3900) și serverul MCP, pentru alte programe și agenți AI."
+  ],
+  "first_steps": null,
+  "categories": [
+    "Clonare și generare de voce",
+    "Dublaj și traducere video",
+    "Transcriere și dictare"
+  ],
+  "search_intents": [
+    "vreau să clonez o voce pe calculatorul meu, fără abonament",
+    "vreau să dublez un video în altă limbă local",
+    "vreau o alternativă gratuită la ElevenLabs",
+    "vreau să dictez text în orice aplicație fără cloud",
+    "vreau să transform un text într-o carte audio",
+    "vreau ca un agent AI să vorbească cu o voce aleasă de mine"
+  ],
+  "audience": "începător",
+  "setup_difficulty": "mediu",
+  "replaces": [
+    {
+      "service": "ElevenLabs",
+      "service_url": "https://elevenlabs.io",
+      "price": "Free 0 USD (fără licență comercială); Starter 6 USD/lună (prima lună 1 USD); Creator 22 USD/lună; Pro 99 USD/lună; Scale 299 USD/lună",
+      "price_source_url": "https://elevenlabs.io/pricing",
+      "price_checked_at": "2026-11-03",
+      "replacement_level": "parțial",
+      "what_you_keep": [
+        "Clonare de voce din înregistrare de referință",
+        "Text-to-speech și narare pe loturi",
+        "Dublaj video cu traducere",
+        "API local compatibil OpenAI",
+        "Fără limită de minute lunare, doar timpul tău de calcul"
+      ],
+      "what_you_lose": [
+        "Infrastructură gestionată și suport comercial al furnizorului",
+        "Licență comercială clară inclusă în plan (la VoiceStudio modelul implicit e CC-BY-NC, iar verificarea fiecărui model rămâne pe tine)",
+        "Viteză din cloud fără placă video proprie"
+      ],
+      "hidden_costs": [
+        "Placă video sau răbdare: pe CPU generarea e mai lentă",
+        "~10 GB de disc și descărcări mari de modele",
+        "Timp de configurare și depanare (proiect în beta, 127 issue-uri deschise)"
+      ]
+    },
+    {
+      "service": "Rask AI",
+      "service_url": "https://www.rask.ai",
+      "price": "Creator 39 USD/lună (25 min); Creator Pro 99 USD/lună (100 min); Business 249 USD/lună (250 min)",
+      "price_source_url": "https://www.rask.ai/pricing",
+      "price_checked_at": "2026-11-03",
+      "replacement_level": "parțial",
+      "what_you_keep": [
+        "Dublaj video cu traducere și voce clonată",
+        "Editarea transcrierii și a traducerii înainte de export",
+        "Separarea vocii de fundal sonor"
+      ],
+      "what_you_lose": [
+        "Serviciu complet gestionat: încarci fișierul și primești rezultatul",
+        "Calitate și timp de procesare garantate de furnizor",
+        "Suport și funcții de colaborare în echipă"
+      ],
+      "hidden_costs": [
+        "Calculator puternic pentru videoclipuri lungi",
+        "Verificare manuală a traducerii și a vorbitorilor",
+        "Licențele modelelor de voce limitează publicarea comercială a dublajelor"
+      ]
+    },
+    {
+      "service": "Wispr Flow",
+      "service_url": "https://wisprflow.ai",
+      "price": "Free 0 USD; Pro 15 USD/utilizator/lună (12 USD/lună facturat anual); Growth 23 USD/utilizator/lună",
+      "price_source_url": "https://wisprflow.ai/pricing",
+      "price_checked_at": "2026-11-03",
+      "replacement_level": "doar pentru cazuri simple",
+      "what_you_keep": [
+        "Dictare cu scurtătură globală în orice câmp de text",
+        "Transcriere locală a înregistrărilor",
+        "Control prin API local pentru scripturi și editoare"
+      ],
+      "what_you_lose": [
+        "Aplicații mobile dedicate de dictare și funcții de echipă (SSO, spațiu comun)",
+        "Un produs de dictare cu un singur scop, mai ușor de pornit"
+      ],
+      "hidden_costs": [
+        "Modelele de transcriere se descarcă și rulează local, deci consumă RAM și disc",
+        "Pe CPU latența e mai mare, iar CLI-urile LLM pornesc prea lent pentru curățare live"
+      ]
+    }
+  ],
+  "examples": [
+    {
+      "title": "Instalare pe Windows, Linux sau macOS cu scriptul oficial",
+      "scenario": "Instalezi aplicația desktop cu o singură comandă; apoi deschizi Voice cloning, alegi o voce sau adaugi o înregistrare curată, scrii textul și generezi. Aplicația te întreabă înainte să descarce orice model.",
+      "prerequisites": [
+        "Windows 10/11 x64, macOS 13.3+ pe Apple Silicon sau Linux x64 cu desktop grafic",
+        "~10 GB spațiu liber",
+        "Internet pentru descărcarea aplicației și a modelelor"
+      ],
+      "commands": [
+        "irm https://voicestudio.sh/install.ps1 | iex",
+        "curl -fsSL https://voicestudio.sh/install | sh"
+      ],
+      "code": null,
+      "output_from_docs": null,
+      "source_url": "https://github.com/debpalash/VoiceStudio/blob/429f1e5bb2703ac5b928ab8ba6f60159167e9c44/README.md#install-windows",
+      "kind": "instalare"
+    },
+    {
+      "title": "Descoperă API-ul local și transcrie un fișier audio",
+      "scenario": "După ce VoiceStudio e deschis, backend-ul ascultă pe portul 3900; întrebi ce capabilități are și transcrii o înregistrare dintr-un script.",
+      "prerequisites": [
+        "VoiceStudio pornit (backend pe 127.0.0.1:3900)",
+        "Pentru comenzile python: o copie a repo-ului VoiceStudio și mediul ei Python",
+        "Un motor de transcriere instalat și un fișier recording.wav"
+      ],
+      "commands": [
+        "curl http://127.0.0.1:3900/.well-known/voicestudio-speech",
+        "python -m backend.speech_client capabilities",
+        "python -m backend.speech_client transcribe recording.wav"
+      ],
+      "code": null,
+      "output_from_docs": null,
+      "source_url": "https://github.com/debpalash/VoiceStudio/blob/429f1e5bb2703ac5b928ab8ba6f60159167e9c44/docs/speech-platform.md",
+      "kind": "folosire"
+    }
+  ],
+  "connectors": {
+    "inputs": [
+      "Text simplu sau manuscris lung pentru narare",
+      "Fișier audio de referință (WAV și alte formate comune) pentru clonarea unei voci",
+      "Fișier video sau link pentru dublaj",
+      "Fișier audio sau flux de microfon (WebM/Opus sau PCM 16 kHz pe WebSocket) pentru transcriere",
+      "Cereri HTTP JSON către /v1/audio/speech și /v1/audio/transcriptions (compatibile OpenAI)"
+    ],
+    "outputs": [
+      "Fișiere audio generate (WAV, MP3; Ogg/Opus prin MCP, cu FFmpeg)",
+      "Video dublat exportat",
+      "Text transcris, inclusiv SRT și VTT prin API",
+      "Pachet portabil de voce .ovsvoice",
+      "Răspunsuri JSON din API și unelte MCP (generate_speech, clone_voice, transcribe etc.)"
+    ],
+    "pairs_well_with": [
+      {
+        "repo_url": "https://github.com/k2-fsa/OmniVoice",
+        "name": "k2-fsa/OmniVoice",
+        "why": "Motorul implicit de voce din aplicație: textul și referința ta devin audio; util dacă vrei modelul direct, cu atenția cuvenită la greutățile CC-BY-NC.",
+        "in_catalog": false
+      },
+      {
+        "repo_url": "https://github.com/ollama/ollama",
+        "name": "Ollama",
+        "why": "Rulează local un model mic de limbaj pe care VoiceStudio îl folosește pentru traducerea la dublaj și curățarea dictării, fără cheie API.",
+        "in_catalog": false
+      },
+      {
+        "repo_url": "https://github.com/n8n-io/n8n",
+        "name": "n8n",
+        "why": "Un flux n8n trimite text către API-ul VoiceStudio și primește un fișier WAV, pe care îl poate pasa mai departe altui pas.",
+        "in_catalog": false
+      },
+      {
+        "repo_url": "https://github.com/SYSTRAN/faster-whisper",
+        "name": "faster-whisper",
+        "why": "Unul dintre motoarele de transcriere din catalog: fișierul audio devine text cu marcaje de timp, de unde pornește dublajul.",
+        "in_catalog": false
+      },
+      {
+        "repo_url": "https://github.com/kyutai-labs/pocket-tts",
+        "name": "Pocket TTS",
+        "why": "Motor de voce ușor, potrivit pentru CPU, listat în catalogul de motoare: text și referință intră, audio iese.",
+        "in_catalog": false
+      }
+    ],
+    "gaps_noticed": [
+      "Documentația recomandă un pas manual în interfață (acceptarea licenței pyannote și un token Hugging Face) înainte ca detectarea vorbitorilor să funcționeze la dublaj.",
+      "Exemplele cu python -m backend.speech_client cer o copie a codului sursă și mediul Python al ei, nu merg doar cu aplicația instalată din installer.",
+      "Răspunsurile API către alte programe nu spun dacă modelul activ permite uz comercial; informația e doar în Model Manager și în inventarul de licențe."
+    ]
+  },
+  "when_not_to_use": [
+    "Nu clona vocea unei persoane fără acordul ei; README-ul cere explicit permisiunea proprietarului vocii, iar clonarea poate fi folosită pentru înșelăciune.",
+    "Nu vinde audio generat cu modelul implicit fără să verifici licența: greutățile OmniVoice sunt CC-BY-NC, iar proiectul spune că nu a confirmat uzul comercial pentru niciun model.",
+    "Nu e potrivit pentru Mac Intel (doar interfața, cu backend pe alt calculator) sau pentru Linux ARM; fără placă video, generarea e lentă.",
+    "Proiectul e în beta și se schimbă des (versiuni 0.5.x, cu beta-uri publicate la câteva zile distanță); poate apărea ceva stricat între versiuni.",
+    "Dacă ai nevoie doar de câteva minute de voce pe lună, planul gratuit al unui serviciu online poate fi mai simplu decât ~10 GB de instalare."
+  ],
+  "alternatives": [
+    {
+      "name": "voicebox",
+      "url": "https://github.com/jamiepine/voicebox",
+      "difference": "Studio local de voce sub licență MIT, descris chiar de documentația VoiceStudio drept cel mai direct concurent; mai permisiv ca licență a aplicației."
+    },
+    {
+      "name": "pyvideotrans",
+      "url": "https://github.com/jianchang512/pyvideotrans",
+      "difference": "Specializat doar pe traducerea și dublajul video (GPL-3.0), fără clonare și design de voce ca produs principal."
+    },
+    {
+      "name": "ElevenLabs",
+      "url": "https://elevenlabs.io",
+      "difference": "Serviciu online gestionat, cu licență comercială în planurile plătite, dar cu cost lunar și audio trimis în cloud."
+    }
+  ],
+  "tech_sheet": {
+    "license": "AGPL-3.0",
+    "language": "TypeScript (Electron) și Python (backend FastAPI), cu Rust, Swift și Kotlin pentru componente native și mobile",
+    "commit_sha": "429f1e5bb2703ac5b928ab8ba6f60159167e9c44",
+    "last_commit_date": "2026-11-02",
+    "stars": 99562,
+    "requirements": [
+      "Windows 10/11 x64 (ARM experimental), macOS 13.3+ pe Apple Silicon (Mac Intel: doar interfața, cu backend pe alt calculator) sau Linux x86_64 cu desktop grafic X11/Wayland (fără ARM)",
+      "~10 GB spațiu liber pe disc (aproximativ 5 GiB pe Windows fără GPU NVIDIA)",
+      "Instalare prin installer (EXE, DMG, DEB, AppImage, Snap, AUR, Homebrew), script (irm https://voicestudio.sh/install.ps1 | iex pe Windows; curl -fsSL https://voicestudio.sh/install | sh pe macOS/Linux) sau imagine Docker ghcr.io/debpalash/voicestudio:stable",
+      "Python, FFmpeg și modelele (modelul implicit ~2,3 GB) se descarcă singure la prima pornire; nu e nevoie de toolchain pentru aplicația împachetată",
+      "Opțional: placă NVIDIA cu driver (CUDA), AMD (ROCm, opt-in pe Windows și Linux) sau Apple Silicon (MPS); fără ele rulează pe CPU, mai lent",
+      "Din sursă: Git și bun (bun run dev); backend Python >= 3.11 gestionat cu uv; pe Windows, build-ul de pe main cere Visual Studio C++ build tools",
+      "Docker: portul 3900 și o cheie în OMNIVOICE_API_KEY (ex: openssl rand -hex 32)",
+      "Opțional: cont gratuit Hugging Face, token și acceptarea licenței pyannote pentru detectarea vorbitorilor la dublaj",
+      "Opțional: Ollama cu un model mic (~2,5 GB) sau chei API proprii (YOUR_API_KEY) pentru traducere și curățare de text",
+      "Pe Linux Snap, microfonul cere: sudo snap connect voicestudio:audio-record",
+      "Fără cont și fără cheie API pentru funcțiile de bază"
+    ]
+  },
+  "monetization": [
+    {
+      "model": "serviciu de instalare și configurare",
+      "what_you_sell": "Instalare, alegerea motoarelor de voce și configurare pe calculatorul clientului (inclusiv instruire scurtă), pentru dictare sau voice-over care nu trebuie să plece în cloud.",
+      "for_whom": "Birouri mici, creatori și firme care vor audio sau dictare locală, dar nu vor să se ocupe de modele și drivere.",
+      "license_check": {
+        "license": "AGPL-3.0",
+        "commercial_use": "permis cu condiții",
+        "conditions": "AGPL-3.0 permite uzul comercial al aplicației. Dacă oferi o versiune modificată a aplicației altora printr-o rețea, publici codul modificat sub AGPL; un serviciu de instalare fără modificări nu declanșează asta. Greutățile modelelor au licențe separate (cele implicite sunt CC-BY-NC): nu promite clientului uz comercial al vocilor generate fără să verifici licența modelului ales."
+      },
+      "path": "folosești repo-ul direct",
+      "own_build_notes": null,
+      "demand_evidence": [
+        {
+          "name": "VoiceStudio Pro (Enterprise la cerere)",
+          "url": "https://voicestudio.sh/pro",
+          "price": "Pro 199 USD/an listă (99 lansare); Lifetime 499 listă (199 lansare); Enterprise la cerere",
+          "what_it_proves": "Autorii vând deja licență comercială și variantă enterprise; arată că firmele plătesc pentru suport și licențiere, nu că plătesc pentru instalare făcută de terți.",
+          "checked_at": "2026-11-03"
+        },
+        {
+          "name": "Wispr Flow",
+          "url": "https://wisprflow.ai/pricing",
+          "price": "Pro 15 USD/utilizator/lună (12 USD anual)",
+          "what_it_proves": "Dictarea plătită pe utilizator există ca produs; o alternativă locală configurată pentru echipe are un punct de comparație.",
+          "checked_at": "2026-11-03"
+        }
+      ],
+      "startup_cost": "Aproape zero: un PC de test (cu placă NVIDIA, dacă vrei să demonstrezi viteza) și timp pentru a documenta procesul.",
+      "time_to_first_client": "Greu de estimat; depinde de rețeaua ta, nu am dovezi publice despre timpul până la primul client.",
+      "difficulty": "mediu",
+      "risks": [
+        "Concurență gratuită: documentația oficială și agentul de instalare din docs/install/agent.md fac instalarea accesibilă oricui.",
+        "Proiect în beta, cu schimbări frecvente: configurările pot înceta să mai meargă după o actualizare.",
+        "Licențele modelelor sunt neclare pentru uz comercial; clientul poate cere garanții pe care nu le poți da.",
+        "Suport continuu: probleme de drivere GPU, Gatekeeper pe macOS și descărcări eșuate."
+      ],
+      "first_steps": [
+        "Citește ghidurile oficiale de instalare pentru fiecare sistem și notează problemele frecvente din pagina de troubleshooting.",
+        "Alege 1-2 motoare pe care le poți explica clientului și citește licența fiecăruia în Model Manager.",
+        "Scrie o ofertă clară: ce instalezi, ce NU garantezi (licența vocilor generate) și ce suport oferi."
+      ]
+    },
+    {
+      "model": "integrare pentru o nișă",
+      "what_you_sell": "Un serviciu de dublaj și voice-over în română sau în alte limbi pentru creatori și firme mici, construit de tine pe modele cu licență comercială verificată.",
+      "for_whom": "Creatori YouTube, cursuri online și firme mici care vor conținut video localizat, dar nu își permit abonamente de dublaj.",
+      "license_check": {
+        "license": "AGPL-3.0",
+        "commercial_use": "neclar",
+        "conditions": "Aplicația e sub AGPL-3.0, dar modelul implicit are greutăți CC-BY-NC, iar proiectul declară că niciun model nu are uz comercial verificat; deci uzul comercial al audio-ului generat este neclar pentru orice motor din catalog până la verificarea individuală."
+      },
+      "path": "construiești propria implementare",
+      "own_build_notes": "Construiești tu funcționalitatea (flux: transcriere, traducere, voce, export video), nu codul VoiceStudio: poți face fluxul mai bun pentru o limbă anume, cu glosare și revizuire umană. Nu prelua numele, logo-ul, designul, codul Pro (sursă închisă) și nici greutățile OmniVoice (CC-BY-NC) sau tokenizatorul Boson/Llama pentru uz comercial. Punct de plecare legal: faster-whisper (MIT) pentru transcriere și un motor de voce cu licență comercială verificată de tine (ex: Pocket TTS, cod MIT; verifică greutățile direct pe Hugging Face înainte de orice uz comercial), ambele cu pipeline propriu. Dacă totuși ți-ai construi pe codul AGPL al VoiceStudio și l-ai oferi online modificat, ești obligat să publici codul modificat.",
+      "demand_evidence": [
+        {
+          "name": "Rask AI",
+          "url": "https://www.rask.ai/pricing",
+          "price": "Creator 39 USD/lună (25 min); Creator Pro 99 USD/lună (100 min); Business 249 USD/lună (250 min)",
+          "what_it_proves": "Firme vând deja dublaj video AI pe minut, cu preț lunar public.",
+          "checked_at": "2026-11-03"
+        },
+        {
+          "name": "ElevenLabs",
+          "url": "https://elevenlabs.io/pricing",
+          "price": "Starter 6 USD/lună; Creator 22 USD/lună; Pro 99 USD/lună",
+          "what_it_proves": "Clonare de voce și Dubbing Studio sunt vândute pe abonament, cu licență comercială începând cu Starter.",
+          "checked_at": "2026-11-03"
+        },
+        {
+          "name": "HeyGen",
+          "url": "https://www.heygen.com/pricing",
+          "price": "Creator 29 USD/lună; Pro 49 USD/lună; Business 149 USD/lună + 20 USD/loc",
+          "what_it_proves": "Traducerea și dublajul video cu clonare de voce sunt vândute public, pe limită de lungime a videoclipului.",
+          "checked_at": "2026-11-03"
+        }
+      ],
+      "startup_cost": "Un PC cu GPU pentru teste sau chirie de GPU la oră, plus timpul tău de dezvoltare; costul exact nu l-am verificat.",
+      "time_to_first_client": "Greu de estimat; nu am o sursă publică despre timpul până la primul client.",
+      "difficulty": "greu",
+      "risks": [
+        "Concurență gratuită și plătită: VoiceStudio însuși (gratuit), voicebox (MIT) și serviciile de mai sus.",
+        "Licențele modelelor de voce se pot schimba sau pot interzice uzul comercial; trebuie verificate la fiecare model.",
+        "Clonarea vocilor fără consimțământ e un risc juridic și reputațional; ai nevoie de acorduri scrise.",
+        "Calitatea traducerii și a sincronizării cere revizuire umană, adică muncă repetitivă pe fiecare clip."
+      ],
+      "first_steps": [
+        "Testează un clip scurt cu două-trei motoare și compară calitatea pentru limba ta.",
+        "Citește licența fiecărui model direct la sursă și păstrează o evidență pentru clienți.",
+        "Pregătește un acord de consimțământ pentru voci și un exemplu de livrare (video dublat plus transcriere)."
+      ]
+    }
+  ],
+  "updated_at": "2026-11-03",
+  "notes_summary": "Am citit README-ul, licențele, documentația de instalare, API și MCP, fără să rulez nimic; prețurile sunt verificate azi, iar o poveste reală de utilizator nu am găsit.",
+  "notes": "Citit din clona la commit 429f1e5 (2026-11-02): README.md, LICENSE (AGPL-3.0 text standard), LICENSE-NOTICE.md, CLAUDE.md, docs/install/*.md, docs/mcp.md, docs/speech-platform.md, docs/agentic-voice.md, docs/electron-llm-providers.md, docs/licensing/model-inventory.md, docs/model-credits.md, docs/dubbing/multi-speaker-guide.md. Nu am instalat și nu am rulat nimic. Licență: aplicația e AGPL-3.0; pachetul omnivoice/ e Apache-2.0; componente Electron adaptate din T3 Code au notă MIT; greutățile modelului implicit k2-fsa/OmniVoice sunt CC-BY-NC, iar tokenizatorul are termeni Boson Higgs Audio 2 și Meta Llama separați; inventarul de licențe al proiectului spune că niciun model nu are uz comercial confirmat. De aceea ideea de monetizare cu audio generat e marcată „neclar” cu implementare proprie. Cifre: README-ul spune 646 de limbi (depinde de motor); repo-ul are 99,5k stele conform GitHub API la 2026-11-03, repo creat la 2026-04-09, release stabil v0.5.7 (2026-10-26), 127 issue-uri deschise. Numele vechi era OmniVoice-Studio (rename recent; în variabilele de mediu apare încă OMNIVOICE_). Prețuri verificate azi: voicestudio.sh/pro (pagină datată 23 oct 2026; prețuri de lansare fără dată de încheiere), elevenlabs.io/pricing, rask.ai/pricing, wisprflow.ai/pricing, heygen.com/pricing. Prețurile pentru GPU, Ollama și cont Hugging Face nu le-am verificat, deci sunt null. Pagina Wispr Flow nu spune dacă audio e procesat în cloud, deci nu am afirmat asta. Telemetrie: CLAUDE.md și docs/electron-privacy.md descriu PostHog (SUA) ca opt-in cu prompt la prima rulare, token de scriere inclus în repo; contul VoiceStudio Cloud e oprit implicit. Primii pași: sursa nu răspunde (nu am găsit o experiență reală potrivită). Am căutat pe Hacker News (Algolia: postările de lansare ale autorilor sau ale altora nu au comentarii cu povești de utilizare, iar comentariile găsite sunt ale autorului), dev.to (recenzia andrew.ooo e o evaluare generală, nu un proiect real; articolul cybiqon despre voce gratuită nu folosește VoiceStudio, ci Pocket TTS și IndicF5), GitHub Discussions (doar întrebări de suport) și Reddit (blocat). Parteneri verificați activi la 2026-11-03: k2-fsa/OmniVoice (Apache-2.0, push 2026-11-02), ollama/ollama (MIT), n8n-io/n8n (licență fair-code Sustainable Use, GitHub arată NOASSERTION), SYSTRAN/faster-whisper (MIT), kyutai-labs/pocket-tts (MIT; greutățile sunt raportate CC BY 4.0, dar cardul brut a returnat 401 în verificarea proiectului, deci nu am confirmat). Nu am verificat dacă Pocket TTS are uz comercial permis pentru greutăți; textul spune explicit că trebuie verificat. Nu am putut verifica independent afirmații din recenzii terțe (ex: glibc 2.39+ pe Linux), deci nu le-am folosit."
+}

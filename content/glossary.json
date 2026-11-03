@@ -2607,5 +2607,129 @@
     "term": "Devin",
     "aliases": [],
     "explanation": "agent AI de programare comercial, rulat în cloud"
+  },
+  {
+    "term": "clonare de voce",
+    "aliases": [
+      "clonarea vocii",
+      "clonează",
+      "clonezi",
+      "clonare vocală"
+    ],
+    "explanation": "generarea de vorbire cu vocea unei persoane, dintr-o înregistrare scurtă"
+  },
+  {
+    "term": "dublaj",
+    "aliases": [
+      "dublaj video",
+      "dublezi",
+      "dublează",
+      "dublajul"
+    ],
+    "explanation": "înlocuirea vocii dintr-un video cu vorbire tradusă, sincronizată"
+  },
+  {
+    "term": "dictare",
+    "aliases": [
+      "dictarea",
+      "dictezi",
+      "dictează"
+    ],
+    "explanation": "transformarea vorbirii tale în text, direct în orice câmp"
+  },
+  {
+    "term": "diarizare",
+    "aliases": [
+      "detectarea vorbitorilor",
+      "diarizarea"
+    ],
+    "explanation": "recunoașterea cine vorbește în fiecare moment al unei înregistrări"
+  },
+  {
+    "term": "ElevenLabs",
+    "aliases": [],
+    "explanation": "serviciu comercial online de voci AI, plătit lunar"
+  },
+  {
+    "term": "CC-BY-NC",
+    "aliases": [
+      "CC-BY-NC 4.0"
+    ],
+    "explanation": "licență care permite folosirea doar necomercială, cu atribuire"
+  },
+  {
+    "term": "greutățile modelului",
+    "aliases": [
+      "weights"
+    ],
+    "explanation": "fișierele cu ce a învățat un model AI"
+  },
+  {
+    "term": "motor de voce",
+    "aliases": [
+      "motoare de voce"
+    ],
+    "explanation": "un model AI care generează sau transcrie vorbire"
+  },
+  {
+    "term": "OmniVoice",
+    "aliases": [
+      "k2-fsa/OmniVoice"
+    ],
+    "explanation": "modelul de voce implicit al aplicației, de la k2-fsa"
+  },
+  {
+    "term": "GGUF",
+    "aliases": [],
+    "explanation": "format de model compact, pornit ușor pe CPU sau GPU"
+  },
+  {
+    "term": "Vulkan",
+    "aliases": [],
+    "explanation": "tehnologie prin care placa video accelerează calcule, pe orice marcă"
+  },
+  {
+    "term": "Homebrew",
+    "aliases": [
+      "brew"
+    ],
+    "explanation": "manager de programe pentru macOS, din terminal"
+  },
+  {
+    "term": "AppImage",
+    "aliases": [],
+    "explanation": "fișier Linux executabil direct, fără instalare"
+  },
+  {
+    "term": "bun-ul",
+    "aliases": [],
+    "explanation": "program care instalează și rulează proiecte JavaScript"
+  },
+  {
+    "term": "n8n",
+    "aliases": [],
+    "explanation": "program de automatizări cu pași legați vizual"
+  },
+  {
+    "term": "Docker Hub",
+    "aliases": [
+      "GHCR"
+    ],
+    "explanation": "magazin online de imagini Docker gata de rulat"
+  },
+  {
+    "term": "WebSocket",
+    "aliases": [
+      "WebSocket-uri"
+    ],
+    "explanation": "conexiune continuă prin care se trimit date în timp real"
+  },
+  {
+    "term": "filigran audio",
+    "aliases": [
+      "watermark invizibil",
+      "filigranul"
+    ],
+    "explanation": "semn inaudibil care arată că sunetul e generat de AI"
   }
 ]
