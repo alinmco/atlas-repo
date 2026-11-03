@@ -1,0 +1,391 @@
+{
+  "slug": "api-anything",
+  "repo_url": "https://github.com/goodnight000/api-anything",
+  "name": "API Anything",
+  "one_liner": "Agentul AI primește date de pe site-uri fără API oficial, fără să mai deschidă browserul.",
+  "problem_solved": "Multe site-uri (cărți, zboruri, magazine) nu oferă o cale oficială prin care un program să le ceară date, așa că un agent AI deschide browserul, dă clic și citește ecranul, lent și scump în tokeni. API Anything învață cererea site-ului o dată și o repetă direct, cu rezultat JSON.",
+  "features": [
+    "Învață o operație de pe un site din două exemple de intrare, fără model AI în pasul de învățare",
+    "Apelează operația printr-o cerere HTTP simplă, fără browser, de obicei în sub o secundă",
+    "Vine cu 114 specificații de site-uri incluse (Hacker News, Goodreads, Google Flights, Amazon etc.), în stare de lucru variabilă",
+    "Se conectează singur la Claude Code, Codex, Cursor, Claude Desktop, Gemini CLI și VS Code prin MCP",
+    "Încearcă să repare singur o operație când site-ul se schimbă și o salvează doar după o reluare reușită",
+    "Scrierile (postări, comenzi) sunt oprite implicit; citirile sunt separate de ele",
+    "Catalog comun opțional, unde agenții își împart operațiile învățate, fără cookie-uri sau parole"
+  ],
+  "at_a_glance": {
+    "for_you_if": [
+      "Ai un agent AI de programare și vrei să citească rapid date de pe site-uri fără API.",
+      "Ești programator și vrei să automatizezi pe contul tău lucruri pe care le-ai face și manual."
+    ],
+    "not_for_you_if": [
+      "Vrei să extragi date în masă de pe site-uri ai căror termeni interzic accesul automat.",
+      "Nu poți instala Node.js și nu ai un agent compatibil cu MCP."
+    ],
+    "verdict": "Idee bună și proiect foarte activ, dar tânăr (v0.3.2, din septembrie 2026); folosirea pe site-uri terțe rămâne pe răspunderea ta față de termenii lor de utilizare."
+  },
+  "cost": {
+    "level": "gratuit complet",
+    "summary": "Unealta e gratuită (MIT), nu cere cont sau cheie API; agentul tău AI (cu abonament sau cu API-ul lui) rămâne un cost separat, iar apelurile din linia de comandă nu au nevoie de AI.",
+    "ai_access": {
+      "mode": "abonament sau API",
+      "detail": "Unealta nu apelează niciun model: documentația spune că nu există cont API Anything și nu e nevoie de cheie de model, iar raționamentul îl face agentul tău, cu abonamentul sau cheia lui.",
+      "source_url": "https://github.com/goodnight000/api-anything/blob/e22c3dab9410ca2b24f0dde5731c7834a546581d/docs/QUICKSTART.md"
+    },
+    "items": [
+      {
+        "what": "API Anything (npm, licență MIT)",
+        "price": "gratuit",
+        "required": true,
+        "source_url": "https://github.com/goodnight000/api-anything/blob/e22c3dab9410ca2b24f0dde5731c7834a546581d/LICENSE"
+      },
+      {
+        "what": "Node.js 22.13 sau mai nou",
+        "price": "gratuit",
+        "required": true,
+        "source_url": "https://github.com/goodnight000/api-anything/blob/e22c3dab9410ca2b24f0dde5731c7834a546581d/INSTALL.md"
+      },
+      {
+        "what": "Browser Chromium (Chrome, Brave, Edge etc.), necesar doar pentru învățarea de site-uri noi",
+        "price": "gratuit",
+        "required": false,
+        "source_url": "https://github.com/goodnight000/api-anything/blob/e22c3dab9410ca2b24f0dde5731c7834a546581d/docs/QUICKSTART.md"
+      },
+      {
+        "what": "Agent AI compatibil MCP, de exemplu Claude Code (abonament Claude Pro)",
+        "price": "17 USD/lună cu abonament anual, 20 USD/lună lunar (Pro), verificat 2026-11-03",
+        "required": false,
+        "source_url": "https://claude.com/pricing"
+      }
+    ]
+  },
+  "platforms": {
+    "windows": "parțial",
+    "mac": "da",
+    "linux": "da",
+    "note": "Documentația descrie căi de configurare pentru Windows, dar importul automat de cookie-uri din browser merge doar pe macOS și Linux (pe Windows se deschide o fereastră de autentificare). CI-ul din repo rulează doar pe Ubuntu, iar demo-urile au fost înregistrate pe macOS; evaluarea Windows este dedusă din documentație.",
+    "source_url": "https://github.com/goodnight000/api-anything#sessions-and-logins"
+  },
+  "risk_flags": [
+    {
+      "flag": "trimite date în cloud",
+      "detail": "Căutările făcute de agent (cuvinte, domeniu sau URL) merg la catalogul comun, găzduit pe Cloudflare, indiferent dacă partajarea e pornită sau nu.",
+      "source_url": "https://github.com/goodnight000/api-anything/blob/e22c3dab9410ca2b24f0dde5731c7834a546581d/docs/REGISTRY.md"
+    },
+    {
+      "flag": "telemetrie",
+      "detail": "Cu partajarea pornită (implicit da la setup), după fiecare apel se trimite un raport anonim semnat cu rezultatul și timpul, iar serverul MCP inactiv testează în fundal până la 20 de operații pe zi.",
+      "source_url": "https://github.com/goodnight000/api-anything#what-leaves-your-machine"
+    },
+    {
+      "flag": "modifică setările altor programe",
+      "detail": "Comanda setup editează configurările agenților găsiți (Claude Code, Cursor, VS Code etc.) și instalează un skill, cu copie de siguranță a fișierelor.",
+      "source_url": "https://github.com/goodnight000/api-anything#quick-start"
+    },
+    {
+      "flag": "proiect instabil",
+      "detail": "Versiunea este 0.3.2, catalogul e descris de autor ca tânăr, iar README-ul recunoaște operații defecte (google-flights.priceCalendar) și faptul că o operație poate eșua pentru tine.",
+      "source_url": "https://github.com/goodnight000/api-anything#limits"
+    }
+  ],
+  "audience_reason": "se instalează prin agent, dar ca să alegi operațiile și să înțelegi erorile trebuie să știi ce e un terminal și un server MCP",
+  "setup_difficulty_reason": "o comandă npx și Node 22.13+, fără cheie și fără hardware special; învățarea de site-uri noi mai cere un browser Chromium",
+  "analogy": "Ca un curier care a mers o dată cu tine la ghișeu, a notat exact ce formular completezi și ce primești, iar de acum merge singur, fără să mai aștepte la coadă.",
+  "how_it_works": [
+    "Intrare: agentul cere ceva de pe un site, de exemplu ratingul cărții Piranesi pe Goodreads; întâi caută în operațiile de pe calculator și în catalogul comun.",
+    "Învățare (dacă nimeni nu a învățat site-ul): un browser fără interfață încarcă pagina de două ori cu două valori de test; ce se schimbă în cerere devine parametru, iar restul rămâne identic.",
+    "Apel: cererea se trimite prin HTTP simplu, cu un pas de rezervă prin browser dacă site-ul blochează cererea simplă.",
+    "Reparare: dacă răspunsul nu mai se potrivește, unealta folosește versiunea reparată din catalog sau reînvață cererea și o salvează doar după o reluare reușită.",
+    "Ieșire: JSON cu câmpuri precum ok, class, tier, data și, la eșec, motivul și pasul următor."
+  ],
+  "first_steps": null,
+  "categories": [
+    "Agenți AI și automatizare"
+  ],
+  "search_intents": [
+    "vreau să transform un site fără API într-un API",
+    "vreau ca agentul meu AI să citească date de pe un site fără să deschidă browserul",
+    "vreau să reduc tokenii consumați de agent când navighează pe web",
+    "vreau să conectez Claude Code la Goodreads sau Google Flights",
+    "vreau un server MCP care apelează operații de pe site-uri"
+  ],
+  "audience": "intermediar",
+  "setup_difficulty": "ușor",
+  "replaces": [
+    {
+      "service": "Apify (scrapere gata făcute, Actors)",
+      "service_url": "https://apify.com/pricing",
+      "price": "Free 0 USD cu 5 USD credit lunar; Starter 19 USD/lună; Scale 199 USD/lună; Business 999 USD/lună",
+      "price_source_url": "https://apify.com/pricing",
+      "price_checked_at": "2026-11-03",
+      "replacement_level": "doar pentru cazuri simple",
+      "what_you_keep": [
+        "Date JSON de pe site-uri fără API, la cerere",
+        "Control local asupra sesiunii și a contului tău",
+        "Cost zero pentru unealta în sine"
+      ],
+      "what_you_lose": [
+        "Rularea în cloud, programarea la ore fixe și stocarea rezultatelor",
+        "Rotirea IP-urilor și volumul mare: apelurile merg de pe rețeaua ta, la ritm uman (circa o cerere pe secundă per site)",
+        "Marketplace cu mii de scrapere întreținute de terți și suport comercial"
+      ],
+      "hidden_costs": [
+        "Timp de configurare și verificare a operațiilor",
+        "Agentul AI care învață site-uri noi consumă tokeni sau abonament (README-ul citează 1,19 USD și 6,3 minute pentru o rulare pe Goodreads)",
+        "Mentenanță: operațiile se pot strica la orice schimbare a site-ului"
+      ]
+    },
+    {
+      "service": "Browserbase (browsere în cloud pentru agenți)",
+      "service_url": "https://www.browserbase.com/pricing",
+      "price": "Free 0 USD (1 oră de browser); Developer 20 USD/lună (100 de ore); Startup 99 USD/lună (500 de ore); Scale la cerere",
+      "price_source_url": "https://www.browserbase.com/pricing",
+      "price_checked_at": "2026-11-03",
+      "replacement_level": "doar pentru cazuri simple",
+      "what_you_keep": [
+        "Citiri repetate de pe site-uri pentru care există deja operații învățate, fără browser",
+        "Browserul tău real pentru autentificare, pe calculatorul tău"
+      ],
+      "what_you_lose": [
+        "Browsere găzduite, paralele și la scară mare",
+        "Funcții comerciale de evitare a blocajelor: unealta nu rezolvă CAPTCHA și nu imită amprenta TLS",
+        "Operații pentru orice site: funcționează doar pentru ce a fost învățat de cineva"
+      ],
+      "hidden_costs": [
+        "Calculatorul tău trebuie să fie pornit și conectat",
+        "Un site care blochează rețeaua ta de acasă nu poate fi apelat",
+        "Timp pentru reparat operațiile care se strică"
+      ]
+    }
+  ],
+  "examples": [
+    {
+      "title": "Conectează API Anything la agenții tăi AI",
+      "scenario": "Instalare cu o singură comandă: găsește agenții de pe calculator (Claude Code, Codex, Cursor, Claude Desktop, Gemini CLI, VS Code), îi conectează prin MCP și adaugă skill-ul acolo unde se poate.",
+      "prerequisites": [
+        "Node.js 22.13 sau mai nou",
+        "Cel puțin un agent compatibil cu MCP, de exemplu Claude Code",
+        "Un browser Chromium, doar dacă vei învăța site-uri noi"
+      ],
+      "commands": [
+        "npx -y api-anything setup"
+      ],
+      "code": "",
+      "output_from_docs": null,
+      "source_url": "https://github.com/goodnight000/api-anything#quick-start",
+      "kind": "instalare"
+    },
+    {
+      "title": "Apelează o operație din linia de comandă",
+      "scenario": "Cauți pe Hacker News după cuvântul sqlite, printr-o singură cerere HTTP, fără browser și fără cont.",
+      "prerequisites": [
+        "Node.js 22.13 sau mai nou"
+      ],
+      "commands": [
+        "npx -y api-anything call hacker-news search query=sqlite"
+      ],
+      "code": "",
+      "output_from_docs": "{\"ok\":true,\"class\":\"ok\",\"tier\":1,\"data\":[\n  {\"title\":\"Hosting SQLite databases on GitHub Pages or any static file hoster\", ...}, ...],\n \"ms\":185}",
+      "source_url": "https://github.com/goodnight000/api-anything#quick-start",
+      "kind": "folosire"
+    },
+    {
+      "title": "Învață unealta un site nou, din linia de comandă",
+      "scenario": "Îi dai adresa paginii cu un loc gol ({domain}), două exemple de valori și câmpurile de extras; apoi apelezi operația cu o valoare nouă.",
+      "prerequisites": [
+        "Node.js 22.13 sau mai nou",
+        "Un browser Chromium instalat",
+        "api-anything instalat global (npm install -g api-anything) sau rulat prin npx"
+      ],
+      "commands": [
+        "api-anything add hn-demo links \\\n  --trigger 'https://news.ycombinator.com/from?site={domain}' \\\n  --example domain=github.com --example2 domain=github.io --match path=/from \\\n  --html '{\"items\":\"tr.athing\",\"fields\":{\"title\":\".titleline > a\",\"url\":\".titleline > a@href\"}}'",
+        "api-anything call hn-demo links domain=arxiv.org      # 30 arxiv.org stories, tier 1"
+      ],
+      "code": "",
+      "output_from_docs": null,
+      "source_url": "https://github.com/goodnight000/api-anything#teach-it-a-new-site",
+      "kind": "folosire"
+    }
+  ],
+  "connectors": {
+    "inputs": [
+      "Cerere în limbaj natural a agentului prin MCP (find_sites, call_operation)",
+      "Comandă de terminal: api-anything call <site> <operație> nume=valoare",
+      "Apel din cod TypeScript/JavaScript: call(\"goodreads\", \"searchBooks\", {q: \"piranesi\"})",
+      "Adresă de pagină cu un loc gol {domain} plus două valori de exemplu, pentru învățarea unui site nou",
+      "Fișier de specificație JSON al unui site (folderul sites/ din repo)"
+    ],
+    "outputs": [
+      "JSON cu câmpurile ok, class, tier, data, ms; la eșec: reason, next, retry",
+      "structuredContent MCP pentru răspunsurile de tip obiect",
+      "Fișier JSON de specificație (api-anything export) și upload în catalogul comun (publish)"
+    ],
+    "pairs_well_with": [
+      {
+        "repo_url": "https://github.com/anomalyco/opencode",
+        "name": "OpenCode",
+        "why": "Agentul de programare din terminal cere operația prin MCP (api-anything mcp --print-config dă configurarea), iar JSON-ul primit îi intră direct în context.",
+        "in_catalog": true
+      },
+      {
+        "repo_url": "https://github.com/langchain-ai/langchainjs",
+        "name": "LangChain.js",
+        "why": "Exemplul din repo (examples/langchain.mjs) dă unui agent LangChain uneltele MCP ale API Anything; JSON-ul din operații devine observația agentului.",
+        "in_catalog": false
+      },
+      {
+        "repo_url": "https://github.com/vercel/ai",
+        "name": "Vercel AI SDK",
+        "why": "Repo-ul are un exemplu cu AI SDK (examples/vercel-ai-sdk.mjs): uneltele MCP ale API Anything sunt apelate de modelul din aplicația ta JavaScript.",
+        "in_catalog": false
+      },
+      {
+        "repo_url": "https://github.com/microsoft/playwright-mcp",
+        "name": "Playwright MCP",
+        "why": "Pentru site-urile pentru care nu există încă nicio operație învățată, agentul poate recurge la un browser controlat, iar o parte din ce vede poate fi apoi învățată ca operație.",
+        "in_catalog": false
+      }
+    ],
+    "gaps_noticed": [
+      "Importul automat de cookie-uri din browser nu există pe Windows; sesiunea se face manual într-o fereastră.",
+      "Operațiile învățate nu au un format de ieșire comun între site-uri: câmpurile (ratingsCount, points etc.) diferă de la un site la altul.",
+      "Nu există pagini numerotate cu indicii de paginare: sunt oferite doar cursorul propriu al site-ului, când există.",
+      "Pentru operații care scriu pe un site nu vine nicio operație gata făcută; fiecare trebuie învățată și pornită explicit cu --allow-writes."
+    ]
+  },
+  "when_not_to_use": [
+    "Aspect legal: unealta automatizează site-uri ale altora, iar documentația spune că termenii multor site-uri restricționează accesul automat și că răspunderea îți aparține. Citește termenii fiecărui site înainte, nu o folosi pentru extragere în masă și nu automatiza conturi ale altor persoane.",
+    "Conturi: dacă folosești sesiunea contului tău (de exemplu LinkedIn), un site poate să-ți limiteze sau să-ți închidă contul pentru acces automat.",
+    "Date personale: operațiile pe rețele sociale sau liste de persoane pot aduce date personale; la colectare, stocare sau revânzare se aplică legislația de protecție a datelor (în UE, GDPR).",
+    "Pentru volum mare, rulări programate non-stop sau IP-uri rotative: apelurile merg de pe rețeaua ta, la circa o cerere pe secundă per site, deci nu înlocuiește un serviciu de scraping în cloud.",
+    "Dacă site-ul are deja API oficial, mai sigur și mai stabil este cel oficial, în cadrul termenilor lui.",
+    "Unealta nu rezolvă CAPTCHA: un site care provoacă browserul real rămâne blocat până la intervenția ta manuală.",
+    "Operațiile partajate în catalog sunt munca altcuiva și pot eșua în regiunea ta; proiectul e tânăr (v0.3.2), iar serverul rulează prin npx -y, adică mereu ultima versiune publicată."
+  ],
+  "alternatives": [
+    {
+      "name": "Playwright MCP",
+      "url": "https://github.com/microsoft/playwright-mcp",
+      "difference": "Dă agentului un browser controlat pentru orice site; este mai general, dar fiecare pas costă timp și tokeni, pe când API Anything repetă o cerere învățată."
+    },
+    {
+      "name": "browser-use",
+      "url": "https://github.com/browser-use/browser-use",
+      "difference": "Agent care conduce un browser la fiecare sarcină, fără să memoreze cererea de rețea; mai flexibil, mai lent."
+    },
+    {
+      "name": "Firecrawl",
+      "url": "https://github.com/firecrawl/firecrawl",
+      "difference": "Transformă pagini în text curat pentru AI și poate căuta sau parcurge site-uri; licență AGPL-3.0, plus serviciu cloud plătit."
+    },
+    {
+      "name": "Crawlee",
+      "url": "https://github.com/apify/crawlee",
+      "difference": "Bibliotecă de programare pentru scrapere proprii; mai multă muncă de cod, dar control complet și potrivită pentru volum mare."
+    }
+  ],
+  "tech_sheet": {
+    "license": "MIT",
+    "language": "TypeScript",
+    "commit_sha": "e22c3dab9410ca2b24f0dde5731c7834a546581d",
+    "last_commit_date": "2026-11-02",
+    "stars": 2148,
+    "requirements": [
+      "Node.js 22.13 sau mai nou (verifică cu node --version)",
+      "Un agent compatibil MCP: Claude Code, Codex, Cursor, Claude Desktop, Gemini CLI sau VS Code (opțional pentru folosirea din linia de comandă sau din cod)",
+      "Un browser Chromium (Chrome, Brave, Edge, Chromium, Vivaldi, Arc), necesar doar pentru învățarea de site-uri noi; pentru un alt browser se setează variabila API_ANYTHING_BROWSER",
+      "Instalare: npx -y api-anything setup (sau npm install -g api-anything, apoi claude mcp add --scope user api-anything -- api-anything mcp)",
+      "După setup, repornește agentul ca să încarce uneltele noi",
+      "Nu are nevoie de cont API Anything, cheie API de model sau GPU; agentul tău AI rămâne un abonament sau API separat",
+      "Pentru a lucra din codul sursă: git clone, apoi npm ci"
+    ]
+  },
+  "monetization": [
+    {
+      "model": "serviciu de instalare și configurare",
+      "what_you_sell": "Configurarea agenților AI ai unei echipe (Claude Code, Cursor etc.) cu API Anything și învățarea de operații pentru portalurile și panourile web pe care clientul le deține sau le folosește cu permisiunea furnizorului, plus o scurtă documentație de folosire sigură.",
+      "for_whom": "Firme mici și echipe de dezvoltare care au sisteme web interne sau portaluri de furnizori fără API și vor ca agenții lor să le citească fără browser.",
+      "license_check": {
+        "license": "MIT",
+        "commercial_use": "permis",
+        "conditions": "MIT permite folosirea comercială, cu păstrarea notei de copyright și a licenței. Licența nu acoperă termenii site-urilor ținte: acolo ai nevoie de acordul proprietarului sau de verificarea termenilor."
+      },
+      "path": "folosești repo-ul direct",
+      "own_build_notes": null,
+      "demand_evidence": [
+        {
+          "name": "UiPath (automatizare de procese web)",
+          "url": "https://www.uipath.com/pricing",
+          "price": "Community gratuit; Basic de la 25 USD/lună; Standard și Enterprise la cerere",
+          "what_it_proves": "Firmele plătesc deja pentru automatizarea muncii pe interfețe web fără API.",
+          "checked_at": "2026-11-03"
+        },
+        {
+          "name": "Browserbase",
+          "url": "https://www.browserbase.com/pricing",
+          "price": "Developer 20 USD/lună; Startup 99 USD/lună",
+          "what_it_proves": "Există cerere plătită pentru acces programatic al agenților la site-uri care nu au API.",
+          "checked_at": "2026-11-03"
+        }
+      ],
+      "startup_cost": "Practic zero: un laptop, abonamentul propriu la un agent AI și timp pentru a învăța unealta.",
+      "time_to_first_client": "Poate să dureze luni; depinde de rețeaua ta și de capacitatea de a arăta un demo pe un portal al clientului.",
+      "difficulty": "mediu",
+      "risks": [
+        "Termenii de utilizare ai site-urilor ținte pot interzice accesul automat, iar răspunderea o porți tu și clientul.",
+        "Operațiile se pot strica la orice schimbare a site-ului, deci mentenanța devine o obligație continuă.",
+        "Concurență gratuită: repo-ul în sine, plus alternative precum Playwright MCP.",
+        "Proiect tânăr (v0.3.2), cu schimbări frecvente; ceva poate deveni incompatibil între versiuni."
+      ],
+      "first_steps": [
+        "Instalează API Anything pe propriul calculator și învață 2-3 operații pe un site al tău sau cu termeni permisivi.",
+        "Scrie o pagină de ofertă cu limite clare: doar site-uri deținute sau autorizate de client.",
+        "Oferă un pilot unui client mic, pe un portal unde are deja acces și acord."
+      ]
+    },
+    {
+      "model": "consultanță și training",
+      "what_you_sell": "Un atelier practic de 2-3 ore pentru programatori: cum conectezi un agent AI la API-uri învățate din traficul unui site, cum măsori economia de tokeni și cum rămâi în limitele termenilor site-urilor.",
+      "for_whom": "Echipe de dezvoltare și freelanceri care folosesc deja agenți AI de programare și plătesc tokeni pentru navigarea pe web.",
+      "license_check": {
+        "license": "MIT",
+        "commercial_use": "permis",
+        "conditions": "MIT permite folosirea comercială, cu păstrarea notei de copyright și a licenței. Licența nu acoperă termenii site-urilor ținte."
+      },
+      "path": "folosești repo-ul direct",
+      "own_build_notes": null,
+      "demand_evidence": [
+        {
+          "name": "Apify (soluții și servicii profesionale pentru automatizare web)",
+          "url": "https://apify.com/custom-solutions",
+          "price": null,
+          "what_it_proves": "Apify oferă apeluri de vânzări pentru soluții personalizate; semn că firmele cumpără ajutor pentru datele de pe web, dar pagina nu arată preț.",
+          "checked_at": "2026-11-03"
+        },
+        {
+          "name": "Apify",
+          "url": "https://apify.com/pricing",
+          "price": "Starter 19 USD/lună; Scale 199 USD/lună",
+          "what_it_proves": "Se plătesc abonamente lunare pentru date extrase de pe site-uri.",
+          "checked_at": "2026-11-03"
+        }
+      ],
+      "startup_cost": "Practic zero în bani; investiție de timp pentru materiale și pentru o rulare proprie documentată.",
+      "time_to_first_client": "Greu de estimat; probabil luni, în funcție de audiența ta.",
+      "difficulty": "mediu",
+      "risks": [
+        "Subiectul are un risc legal real; trebuie să explici clar limitele, ca să nu încurajezi folosiri abuzive.",
+        "Documentația oficială este bună și gratuită, deci trebuie să aduci ceva în plus (exerciții, cazuri reale).",
+        "Interfața și comenzile se pot schimba rapid, iar materialele se învechesc."
+      ],
+      "first_steps": [
+        "Rulează tu însuți exemplele din README pe calculatorul tău și notează ce nu merge.",
+        "Pregătește un atelier cu o singură sarcină reală: o căutare repetată pe un site cu termeni permisivi.",
+        "Testează-l gratuit cu 3-5 colegi și ajustează după feedback."
+      ]
+    }
+  ],
+  "updated_at": "2026-11-03",
+  "notes_summary": "Am citit README-ul, documentația (QUICKSTART, REGISTRY, REFERENCE), exemplele și codul principal, fără să rulez nimic; Primii pași lipsesc, pentru că nu am găsit încă o poveste reală potrivită.",
+  "notes": "Repo nou, citit la commit e22c3dab (2026-11-02 UTC, 2148 stele, 255 forkuri, creat 2026-09-27, v0.3.2). Nu am rulat codul. Licența MIT confirmată în LICENSE (Copyright 2026 Tianjun Zheng); registry/ (Cloudflare Worker) e în același repo, sub aceeași licență, cu API propriu. README-ul spune 68 de site-uri / 139 de operații incluse, dar folderul sites/ are 114 specificații JSON (issue-ul #95 vorbește de 114 site-uri și 323 de operații); am folosit 114, din folder, dar numărul din README nu e actualizat. Cifrele de benchmark din README (1,5-2x mai repede, jumătate din tokeni, 20/20 răspunsuri corecte) sunt ale autorului, pe un singur site și un singur model; nu le-am verificat. Aspecte legale: documentația însăși spune că termenii multor site-uri restricționează accesul automat și că utilizatorul răspunde; lista inclusă conține site-uri mari (Amazon, LinkedIn, Instagram, TikTok, X, Reddit, Booking, Netflix etc.), pentru care termenii se verifică separat; nu am citit termenii nici unui site. Autorul spune în postarea HN că a folosit unealta pentru a-și automatiza parțial outreach-ul pe LinkedIn: exemplu clar de utilizare în zonă gri. Date: documentația spune că unealta păstrează cookie-urile în ~/.api-anything (0600), le înlocuiește cu [redacted] în erori, nu rezolvă CAPTCHA și nu imită amprente TLS. Scrierile sunt oprite implicit (--allow-writes). Pe Windows: CI doar pe Ubuntu, demo-uri pe macOS; setup.ts are ramuri win32, deci Windows 'parțial', dedus. Primii pași: nu am găsit o experiență reală potrivită. Am căutat pe Hacker News (2 postări ale autorului: 50017682 și 50264548, ambele fără comentarii de la alți oameni; singurul comentariu e al autorului) și în issues GitHub (issue-ul #84 al unui utilizator, despre Google Flights, descrie un zid de consimțământ după circa 50 de cereri automate; e o întrebare, nu o poveste cu rezultat, deci l-am exclus), plus o căutare web generală fără rezultate. Prețuri verificate 2026-11-03: Apify (apify.com/pricing), Browserbase (browserbase.com/pricing), Firecrawl (Hobby 19 USD/lună, Standard 99 USD/lună, firecrawl.dev/pricing; nu e în replaces, doar în alternative), UiPath (Basic de la 25 USD/lună), Claude Pro (claude.com/pricing). Parteneri verificați activi (commit în ultimele 12 luni, 2026-11-03): anomalyco/opencode (in catalog), langchain-ai/langchainjs, vercel/ai, microsoft/playwright-mcp; alternative: browser-use, firecrawl (AGPL-3.0), crawlee."
+}

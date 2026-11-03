@@ -563,5 +563,25 @@
     "gap": "Alegerea variantei din frontul Pareto este un pas manual, la fiecare rulare, în terminal.",
     "source_slug": "heretic",
     "added_at": "2026-11-02"
+  },
+  {
+    "gap": "Importul automat de cookie-uri din browser nu există pe Windows; sesiunea se face manual într-o fereastră.",
+    "source_slug": "api-anything",
+    "added_at": "2026-11-03"
+  },
+  {
+    "gap": "Operațiile învățate nu au un format de ieșire comun între site-uri: câmpurile (ratingsCount, points etc.) diferă de la un site la altul.",
+    "source_slug": "api-anything",
+    "added_at": "2026-11-03"
+  },
+  {
+    "gap": "Nu există pagini numerotate cu indicii de paginare: sunt oferite doar cursorul propriu al site-ului, când există.",
+    "source_slug": "api-anything",
+    "added_at": "2026-11-03"
+  },
+  {
+    "gap": "Pentru operații care scriu pe un site nu vine nicio operație gata făcută; fiecare trebuie învățată și pornită explicit cu --allow-writes.",
+    "source_slug": "api-anything",
+    "added_at": "2026-11-03"
   }
 ]

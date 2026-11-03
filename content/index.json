@@ -292,7 +292,8 @@
       "https://github.com/mattpocock/skills",
       "https://github.com/anomalyco/models.dev",
       "https://github.com/paperclipai/paperclip",
-      "https://github.com/JuliusBrussee/caveman"
+      "https://github.com/JuliusBrussee/caveman",
+      "https://github.com/goodnight000/api-anything"
     ],
     "used_in_recipes": []
   },
@@ -811,6 +812,34 @@
       "https://github.com/optuna/optuna",
       "https://github.com/huggingface/transformers",
       "https://github.com/EleutherAI/lm-evaluation-harness"
+    ],
+    "used_in_recipes": []
+  },
+  {
+    "slug": "api-anything",
+    "name": "API Anything",
+    "one_liner": "Agentul AI primește date de pe site-uri fără API oficial, fără să mai deschidă browserul.",
+    "categories": [
+      "Agenți AI și automatizare"
+    ],
+    "inputs": [
+      "Cerere în limbaj natural a agentului prin MCP (find_sites, call_operation)",
+      "Comandă de terminal: api-anything call <site> <operație> nume=valoare",
+      "Apel din cod TypeScript/JavaScript: call(\"goodreads\", \"searchBooks\", {q: \"piranesi\"})",
+      "Adresă de pagină cu un loc gol {domain} plus două valori de exemplu, pentru învățarea unui site nou",
+      "Fișier de specificație JSON al unui site (folderul sites/ din repo)"
+    ],
+    "outputs": [
+      "JSON cu câmpurile ok, class, tier, data, ms; la eșec: reason, next, retry",
+      "structuredContent MCP pentru răspunsurile de tip obiect",
+      "Fișier JSON de specificație (api-anything export) și upload în catalogul comun (publish)"
+    ],
+    "updated_at": "2026-11-03",
+    "pairs_well_with": [
+      "https://github.com/anomalyco/opencode",
+      "https://github.com/langchain-ai/langchainjs",
+      "https://github.com/vercel/ai",
+      "https://github.com/microsoft/playwright-mcp"
     ],
     "used_in_recipes": []
   }
