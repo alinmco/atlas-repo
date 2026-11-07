@@ -642,5 +642,40 @@
     "suggested_by": "ebook2audiobook",
     "why": "Antrenezi un model de voce propriu, iar arhiva .zip rezultată se încarcă în ebook2audiobook cu --custom_model.",
     "added_at": "2026-11-03"
+  },
+  {
+    "repo_url": "https://github.com/Aider-AI/aider",
+    "name": "Aider",
+    "suggested_by": "colibri",
+    "why": "Asistent de programare în terminal: primește adresa OPENAI_API_BASE de la serverul colibri, cum arată docs/api.md, și îți scrie cod cu un model care rulează la tine.",
+    "added_at": "2026-11-07"
+  },
+  {
+    "repo_url": "https://github.com/charmbracelet/crush",
+    "name": "Crush",
+    "suggested_by": "colibri",
+    "why": "Agent de programare în terminal: docs/api.md dă un exemplu de crush.json care îl îndreaptă spre serverul colibri (API-ul de chat devine intrarea agentului).",
+    "added_at": "2026-11-07"
+  },
+  {
+    "repo_url": "https://github.com/NousResearch/hermes-agent",
+    "name": "Hermes Agent",
+    "suggested_by": "colibri",
+    "why": "Agent AI general: documentația colibri îl menționează în măsurători, iar interfața coli ui îl poate porni deja îndreptat spre modelul local.",
+    "added_at": "2026-11-07"
+  },
+  {
+    "repo_url": "https://github.com/ggml-org/llama.cpp",
+    "name": "llama.cpp",
+    "suggested_by": "colibri",
+    "why": "Motorul care a popularizat fișierele GGUF: aceleași fișiere publicate pot fi importate în colibri cu ./coli import, iar llama.cpp rămâne varianta pentru modele mici.",
+    "added_at": "2026-11-07"
+  },
+  {
+    "repo_url": "https://github.com/open-webui/open-webui",
+    "name": "Open WebUI",
+    "suggested_by": "colibri",
+    "why": "Interfață de chat în browser; presupunere dedusă din API-ul compatibil OpenAI (nu e descrisă în documentația colibri): adresa http://127.0.0.1:8000/v1 devine sursa modelelor.",
+    "added_at": "2026-11-07"
   }
 ]

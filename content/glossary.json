@@ -337,7 +337,8 @@
   {
     "term": "MCP",
     "aliases": [
-      "servere MCP"
+      "servere MCP",
+      "Model Context Protocol"
     ],
     "explanation": "standard prin care agenții AI folosesc unelte externe"
   },
@@ -1183,7 +1184,9 @@
     "term": "GPU",
     "aliases": [
       "GPU-ul",
-      "GPU-uri"
+      "GPU-uri",
+      "placă video",
+      "placa video"
     ],
     "explanation": "placă grafică, folosită pentru calcule grele de AI"
   },
@@ -2693,7 +2696,10 @@
   },
   {
     "term": "GGUF",
-    "aliases": [],
+    "aliases": [
+      "fișiere GGUF",
+      "fișier GGUF"
+    ],
     "explanation": "format de model compact, pornit ușor pe CPU sau GPU"
   },
   {
@@ -2778,7 +2784,8 @@
     "term": "API compatibil OpenAI",
     "aliases": [
       "OpenAI-compatible",
-      "compatibil OpenAI"
+      "compatibil OpenAI",
+      "API-ul OpenAI"
     ],
     "explanation": "serviciu care primește cereri în formatul folosit de OpenAI"
   },
@@ -3037,5 +3044,51 @@
       "modele fine-tuned"
     ],
     "explanation": "model reantrenat suplimentar pe o voce anume"
+  },
+  {
+    "term": "RAM",
+    "aliases": [
+      "memoria RAM",
+      "memorie RAM"
+    ],
+    "explanation": "memoria rapidă a calculatorului, în care stau programele deschise"
+  },
+  {
+    "term": "SSD NVMe",
+    "aliases": [
+      "NVMe",
+      "SSD"
+    ],
+    "explanation": "disc foarte rapid, mult mai rapid decât un disc clasic"
+  },
+  {
+    "term": "MoE",
+    "aliases": [
+      "mixture-of-experts"
+    ],
+    "explanation": "model format din mulți experți, din care se folosesc doar câțiva"
+  },
+  {
+    "term": "tokeni pe secundă",
+    "aliases": [
+      "tok/s",
+      "tokeni/s",
+      "token pe secundă"
+    ],
+    "explanation": "cât de repede scrie modelul, în bucăți de cuvânt pe secundă"
+  },
+  {
+    "term": "int4",
+    "aliases": [
+      "int8"
+    ],
+    "explanation": "numere comprimate, ca modelul să ocupe mai puțin loc"
+  },
+  {
+    "term": "cache",
+    "aliases": [
+      "cache-ul"
+    ],
+    "explanation": "rezervă rapidă cu ce s-a folosit recent"
   }
 ]
