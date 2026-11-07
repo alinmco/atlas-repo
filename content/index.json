@@ -1026,5 +1026,36 @@
       "https://github.com/kovidgoyal/calibre"
     ],
     "used_in_recipes": []
+  },
+  {
+    "slug": "colibri",
+    "name": "colibri",
+    "one_liner": "Rulează pe calculatorul tău modele AI uriașe, citind din disc doar ce are nevoie.",
+    "categories": [
+      "Modele AI locale",
+      "Reducere costuri AI"
+    ],
+    "inputs": [
+      "Text tastat în chat (terminal sau browser) sau cereri JSON la http://127.0.0.1:8000/v1/chat/completions, /v1/completions și /v1/messages (Anthropic)",
+      "Fișiere text sau PDF trimise cu /file CALE în coli chat (maximum 64 MiB și 2 milioane de caractere)",
+      "Imagini (cale în mesaj, atașament în coli web/coli ui sau parte image_url) la modelele cu viziune",
+      "Fișier GGUF importat cu ./coli import, sau foldere de model descărcate de pe Hugging Face",
+      "Cereri JSON la /v1/systemone cu câmpurile state și questions (tipuri noul, choice, score)"
+    ],
+    "outputs": [
+      "Text în flux (SSE) sau JSON, în format OpenAI sau Anthropic",
+      "JSON de la /v1/systemone: opțiunea aleasă, probabilitatea fiecărei opțiuni și confidence între 0 și 1",
+      "Imagini de la /v1/images/generations (Qwen-Image-2.1)",
+      "Dashboard în browser la http://127.0.0.1:8000/ și fișierul .coli_usage cu istoricul experților folosiți"
+    ],
+    "updated_at": "2026-11-07",
+    "pairs_well_with": [
+      "https://github.com/Aider-AI/aider",
+      "https://github.com/charmbracelet/crush",
+      "https://github.com/NousResearch/hermes-agent",
+      "https://github.com/ggml-org/llama.cpp",
+      "https://github.com/open-webui/open-webui"
+    ],
+    "used_in_recipes": []
   }
 ]

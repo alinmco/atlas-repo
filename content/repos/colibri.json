@@ -1,0 +1,449 @@
+{
+  "slug": "colibri",
+  "repo_url": "https://github.com/JustVugg/colibri",
+  "name": "colibri",
+  "one_liner": "Rulează pe calculatorul tău modele AI uriașe, citind din disc doar ce are nevoie.",
+  "problem_solved": "Modelele AI foarte mari cer de obicei servere scumpe cu multă memorie sau abonamente la servicii în cloud, iar întrebările tale pleacă pe serverele altora. colibri le rulează local, pe un PC sau laptop obișnuit, citind de pe disc doar părțile de care are nevoie la fiecare cuvânt.",
+  "features": [
+    "Pornire dintr-un singur pas (START-HERE.bat sau start-here.sh): detectează PC-ul, recomandă un model, îl descarcă și îl pornește",
+    "Rulează pe procesor, fără placă video; opțional folosește Vulkan, CUDA sau Metal (Apple)",
+    "Chat în terminal și în browser (dashboard și coli ui), cu căutare web opțională",
+    "Server local cu API compatibil OpenAI și Anthropic, la care se conectează unelte ca Aider sau Crush",
+    "Zeci de modele: Qwen3.6, GLM-5.2, DeepSeek V4, Kimi K3 și multe fișiere GGUF publicate",
+    "Mod „System One”: întrebări cu răspunsuri închise (da/nu, alegere), cu probabilitate pentru fiecare variantă"
+  ],
+  "at_a_glance": {
+    "for_you_if": [
+      "Vrei un asistent AI care rulează local, fără abonament și fără să trimiți textele altcuiva.",
+      "Ai un PC cu 16 GB RAM sau mai mult și accepți descărcări de zeci de GB."
+    ],
+    "not_for_you_if": [
+      "Vrei răspunsuri rapide de la cele mai mari modele: pe hardware modest sunt foarte lente.",
+      "Ai sub 8 GB RAM sau nu vrei să lucrezi deloc în terminal."
+    ],
+    "verdict": "Motor local ambițios și foarte activ, util pentru modele mici și medii; modelele gigant merg, dar încet."
+  },
+  "cost": {
+    "level": "gratuit complet",
+    "summary": "Codul și modelele sunt gratuite și rulează local, fără abonament AI sau cheie API (nu folosește Claude Pro, ChatGPT Plus etc.); plătești doar calculatorul, discul și electricitatea.",
+    "ai_access": {
+      "mode": "nu folosește AI",
+      "detail": "Nu apelează servicii AI plătite: modelele se descarcă de pe Hugging Face și rulează local, deci nu ai nevoie nici de abonament, nici de cheie API.",
+      "source_url": "https://github.com/JustVugg/colibri/blob/0a5504a1dc64f86fcd0fe7db298b0448c730e7e6/docs/api.md#connect-a-coding-cli-or-editor"
+    },
+    "items": [
+      {
+        "what": "Calculator cu minimum 8 GB RAM și 22 GB liberi pe disc (pentru cel mai mic model)",
+        "price": null,
+        "required": true,
+        "source_url": "https://github.com/JustVugg/colibri/blob/0a5504a1dc64f86fcd0fe7db298b0448c730e7e6/README.md#get-started"
+      },
+      {
+        "what": "Disc SSD NVMe rapid și multă memorie pentru modelele mari (descărcări de la 85 GB la 1,56 TB)",
+        "price": null,
+        "required": false,
+        "source_url": "https://github.com/JustVugg/colibri/blob/0a5504a1dc64f86fcd0fe7db298b0448c730e7e6/README.md#which-model-for-my-machine"
+      },
+      {
+        "what": "Placă video (opțional, accelerează: Vulkan pe orice placă, CUDA pe NVIDIA)",
+        "price": null,
+        "required": false,
+        "source_url": "https://github.com/JustVugg/colibri/blob/0a5504a1dc64f86fcd0fe7db298b0448c730e7e6/README.md#gpus"
+      },
+      {
+        "what": "Descărcarea modelelor de pe Hugging Face (token HF_TOKEN doar pentru depozitele cu acces restricționat)",
+        "price": null,
+        "required": true,
+        "source_url": "https://github.com/JustVugg/colibri/blob/0a5504a1dc64f86fcd0fe7db298b0448c730e7e6/c/setup_download.py"
+      },
+      {
+        "what": "Compilator (gcc și make; MSYS2 pe Windows), doar dacă vrei să construiești motorul din sursă; altfel se descarcă varianta gata făcută",
+        "price": null,
+        "required": false,
+        "source_url": "https://github.com/JustVugg/colibri/blob/0a5504a1dc64f86fcd0fe7db298b0448c730e7e6/docs/AI_SETUP.md"
+      },
+      {
+        "what": "CUDA toolkit pe Linux, doar pentru placă NVIDIA și build din sursă (pe Windows pachetul CUDA vine gata făcut)",
+        "price": null,
+        "required": false,
+        "source_url": "https://github.com/JustVugg/colibri/blob/0a5504a1dc64f86fcd0fe7db298b0448c730e7e6/docs/windows.md"
+      },
+      {
+        "what": "Donație voluntară (Buy Me a Coffee) către autor",
+        "price": null,
+        "required": false,
+        "source_url": "https://github.com/JustVugg/colibri/blob/0a5504a1dc64f86fcd0fe7db298b0448c730e7e6/README.md"
+      }
+    ]
+  },
+  "platforms": {
+    "windows": "da",
+    "mac": "da",
+    "linux": "da",
+    "note": "Documentația descrie pașii pentru toate trei; pe Windows rulezi START-HERE.bat, pe Linux și macOS ./start-here.sh. În arhiva pentru macOS, accelerarea Metal se pornește cu COLI_METAL=1, iar setup-ul într-un pas construiește pentru procesor. Pe WSL ține modelele pe discul Linux, nu sub /mnt/c.",
+    "source_url": "https://github.com/JustVugg/colibri/blob/0a5504a1dc64f86fcd0fe7db298b0448c730e7e6/docs/quickstart.md"
+  },
+  "risk_flags": [
+    {
+      "flag": "trimite date în cloud",
+      "detail": "Doar dacă pornești căutarea web din interfața coli ui: interogarea merge la DuckDuckGo (sau la un SearXNG ales de tine) și paginile citite de model sunt descărcate de pe internet; chatul în sine rămâne local.",
+      "source_url": "https://github.com/JustVugg/colibri/blob/0a5504a1dc64f86fcd0fe7db298b0448c730e7e6/ui/README.md"
+    },
+    {
+      "flag": "proiect instabil",
+      "detail": "Proiectul se declară Beta în pyproject.toml și se schimbă foarte repede (387 de pull request-uri în versiunea 2.1.0), deci comenzile și setările pot fi modificate între versiuni.",
+      "source_url": "https://github.com/JustVugg/colibri/blob/0a5504a1dc64f86fcd0fe7db298b0448c730e7e6/pyproject.toml"
+    },
+    {
+      "flag": "licență restrictivă",
+      "detail": "Codul e Apache-2.0, dar unele modele din catalog au licențe proprii (de exemplu Qwen-Image-2.1 este doar necomercial, iar Muse Spark Open se rulează sub acordul Meta).",
+      "source_url": "https://github.com/JustVugg/colibri/blob/0a5504a1dc64f86fcd0fe7db298b0448c730e7e6/README.md#which-model-for-my-machine"
+    }
+  ],
+  "audience_reason": "pornirea e ghidată, dar trebuie să alegi un model potrivit pentru memoria și discul tău și să citești un terminal",
+  "setup_difficulty_reason": "un script care face mai mulți pași, plus descărcări mari (19 GB până la peste 1 TB) și, opțional, compilare sau drivere pentru placa video",
+  "analogy": "E ca o bibliotecă uriașă într-un apartament mic: cărțile folosite des stau pe birou (în RAM), restul în depozit (pe disc), iar bibliotecarul aduce doar volumele de care ai nevoie acum.",
+  "how_it_works": [
+    "Pasul 1, intrare: scriptul de pornire citește calculatorul tău (RAM, spațiu pe disc, procesor, placă video) și recomandă un model care încape.",
+    "Pasul 2, proces: partea care trebuie mereu la îndemână a modelului stă în RAM, iar „expertii” rar folosiți (părți specializate ale modelului) stau pe disc și sunt citiți doar când modelul îi cere; un cache învață care sunt cei mai folosiți.",
+    "Pasul 3, ieșire: primești un chat în terminal sau în browser și un server local la http://127.0.0.1:8000/v1, cu care se pot conecta și alte aplicații."
+  ],
+  "first_steps": {
+    "origin": "experiență utilizator",
+    "story_url": "https://news.ycombinator.com/item?id=48858401",
+    "story_platform": "Hacker News",
+    "story_date": "2026-07-10",
+    "title": "Un model de 744 de miliarde de parametri pe un Threadripper, cu 0,44 cuvinte pe secundă",
+    "intro": "Un utilizator cu o stație de lucru (128 GB RAM, SSD NVMe rapid) a vrut să vadă cum merge modelul GLM-5.2 în colibri, la o zi după ce proiectul a apărut pe Hacker News.",
+    "steps": [
+      {
+        "you_do": "A pornit colibri pe un AMD Threadripper PRO 5975WX (32 de nuclee), cu 128 GB RAM și un SSD NVMe de circa 7 GB/s.",
+        "what_happens": "Motorul a încărcat modelul uriaș GLM-5.2 și l-a rulat local, citind părți din el de pe disc.",
+        "source_url": "https://news.ycombinator.com/item?id=48858401"
+      },
+      {
+        "you_do": "A făcut puțin reglaj: a fixat programul pe cele 32 de nuclee fizice (nu pe 64 de fire) și a adăugat opțiunea --topp 0.7.",
+        "what_happens": "Cu reglajul, a măsurat 0,44 tokeni pe secundă la prima rulare, cu discul rece; el spune că e mult sub estimările din README-ul de atunci.",
+        "source_url": "https://news.ycombinator.com/item?id=48858401"
+      },
+      {
+        "you_do": "A cerut unui agent AI să pună peste motor un API compatibil OpenAI, ca să-l încerce cu un program de tip agent, apoi a trimis primul prompt real: o întrebare filosofică generală.",
+        "what_happens": "Răspunsul a ajuns la capăt după mult timp, dar a degenerat în repetiții; autorul comentariului spune că mai e mult de lucru pentru o unealtă de programat.",
+        "source_url": "https://news.ycombinator.com/item?id=48858401"
+      }
+    ],
+    "takeaway": "Omul a reușit să ruleze acasă un model de 744B, ceea ce a găsit „pretty cool for a model this size”, dar l-a văzut prea lent și instabil pentru programat la acel moment. Nu compară cu rularea fără colibri; repo-ul spune astăzi că bucla de repetiții era legată de formatul vechi de int4 per rând (issue 455)."
+  },
+  "categories": [
+    "Modele AI locale",
+    "Reducere costuri AI"
+  ],
+  "search_intents": [
+    "vreau să rulez un model AI mare pe laptopul meu, fără cont în cloud",
+    "vreau un ChatGPT local, gratuit, care nu trimite textele mele pe internet",
+    "vreau un server local compatibil OpenAI la care să conectez Aider sau alte unelte de programat",
+    "vreau să rulez DeepSeek, Qwen sau GLM pe un calculator fără placă video puternică",
+    "vreau să clasific documente cu un model local, cu probabilitate pentru fiecare răspuns"
+  ],
+  "audience": "intermediar",
+  "setup_difficulty": "mediu",
+  "replaces": [
+    {
+      "service": "Claude Pro (Anthropic)",
+      "service_url": "https://claude.com/pricing",
+      "price": "20 USD/lună facturat lunar sau 17 USD/lună cu plata anuală (200 USD); Max de la 100 USD/lună",
+      "price_source_url": "https://claude.com/pricing",
+      "price_checked_at": "2026-11-07",
+      "replacement_level": "doar pentru cazuri simple",
+      "what_you_keep": [
+        "Chat cu un model care rulează la tine, fără ca textele să plece spre un serviciu extern",
+        "Un server local pe care se poate conecta și Claude Code, prin API-ul compatibil Anthropic descris în README",
+        "Zero abonament recurent"
+      ],
+      "what_you_lose": [
+        "Calitatea și viteza modelelor de top ale Anthropic: modelele locale sunt mai slabe sau mult mai lente",
+        "Aplicațiile mobile și desktop, memoria între conversații și integrările pe care le oferă serviciul plătit",
+        "Disponibilitatea garantată de un serviciu gestionat de o firmă"
+      ],
+      "hidden_costs": [
+        "Calculator cu mult RAM și SSD rapid, eventual placă video",
+        "Timp de configurare și de citit documentația",
+        "Descărcări de zeci sau sute de GB și electricitate",
+        "Mentenanță: proiectul se schimbă rapid, deci actualizezi des"
+      ]
+    },
+    {
+      "service": "OpenAI API (modele mici, text)",
+      "service_url": "https://developers.openai.com/api/docs/pricing",
+      "price": "gpt-6-luna: 0,10 USD la 1 milion tokeni de intrare și 0,50 USD la 1 milion de ieșire; modele mai mari de la 1 USD intrare și 5 USD ieșire (gpt-6.1-terra), până la 10 USD și 50 USD (gpt-6-astra)",
+      "price_source_url": "https://developers.openai.com/api/docs/pricing",
+      "price_checked_at": "2026-11-07",
+      "replacement_level": "parțial",
+      "what_you_keep": [
+        "API compatibil OpenAI la http://127.0.0.1:8000/v1: aplicațiile care vorbesc cu OpenAI pot fi îndreptate spre colibri doar schimbând adresa",
+        "Nicio factură pe token și date care nu părăsesc calculatorul",
+        "Mod System One pentru decizii cu probabilitate, compatibil cu API-ul Jev"
+      ],
+      "what_you_lose": [
+        "Viteza și scalarea unui serviciu în cloud: un server local deservește mult mai puțini utilizatori deodată",
+        "Modelele proprii ale OpenAI, care nu se pot rula local",
+        "Disponibilitate, monitorizare și suport oferite de furnizor"
+      ],
+      "hidden_costs": [
+        "Hardware și electricitate în loc de factură pe consum; la volume mici API-ul în cloud poate ieși mai ieftin",
+        "Timp de reglaj (cache, discuri, placă video) pentru a obține o viteză acceptabilă",
+        "Răspunderea pentru actualizări, securitate și disponibilitate"
+      ]
+    }
+  ],
+  "examples": [
+    {
+      "title": "Instalare într-un singur pas (Linux)",
+      "scenario": "Pornești scriptul care îți analizează calculatorul, recomandă un model, descarcă motorul și modelul și deschide dashboardul în browser. Pe Windows descarci ZIP-ul și dai dublu-clic pe START-HERE.bat; pe macOS pașii sunt cu xcode-select, brew și același ./start-here.sh. Răspunzi la o singură întrebare (ce model), iar Enter ia recomandarea.",
+      "prerequisites": [
+        "Linux Ubuntu sau Debian (alte distribuții au aceleași pachete cu alte nume)",
+        "minimum 8 GB RAM și 22 GB liberi pe disc",
+        "conexiune la internet",
+        "acces sudo pentru instalarea pachetelor"
+      ],
+      "commands": [
+        "sudo apt install git python3 build-essential",
+        "git clone https://github.com/JustVugg/colibri",
+        "cd colibri",
+        "./start-here.sh"
+      ],
+      "code": "",
+      "output_from_docs": "Starting colibri\n  Browser:             http://127.0.0.1:8000/\n  OpenAI base URL:     http://127.0.0.1:8000/v1\n  Anthropic base URL:  http://127.0.0.1:8000\n  stop: press Ctrl+C here (or close this window)",
+      "source_url": "https://github.com/JustVugg/colibri/blob/0a5504a1dc64f86fcd0fe7db298b0448c730e7e6/README.md#get-started",
+      "kind": "instalare"
+    },
+    {
+      "title": "Chat în terminal cu modelul instalat",
+      "scenario": "După instalare, pornești chatul în terminal. Exemplul din README folosește modelul GLM-5.2; ca să alegi un alt model, dai folderul lui cu --model. Documentația spune că launcherul citește config.json al modelului și alege singur motorul potrivit.",
+      "prerequisites": [
+        "colibri instalat (exemplul anterior)",
+        "un model descărcat, de exemplu în /nvme/qwen36"
+      ],
+      "commands": [
+        "./coli chat",
+        "./coli chat  --model /nvme/qwen36          # chat in the terminal"
+      ],
+      "code": "",
+      "output_from_docs": "$ ./coli chat\n  colibri v2.1.0 · GLM-5.2 · 744B MoE · int4 · streaming CPU\n  ✓ ready in 32s · resident 9.9 GB\n  › ciao!\n  ◆ Ciao! Come posso aiutarti oggi?",
+      "source_url": "https://github.com/JustVugg/colibri/blob/0a5504a1dc64f86fcd0fe7db298b0448c730e7e6/README.md#3-run-it",
+      "kind": "folosire"
+    },
+    {
+      "title": "Conectează Aider la colibri",
+      "scenario": "Serverul pornit cu coli serve vorbește ca API-ul OpenAI. Unelte precum Aider (asistent de programare în terminal) se conectează dacă le dai adresa locală și o cheie oarecare, nenulă. Înlocuiește numele modelului cu cel afișat de coli status, dacă ai alt model decât GLM-5.2.",
+      "prerequisites": [
+        "colibri pornit (coli serve sau pornirea din START-HERE)",
+        "Aider instalat separat"
+      ],
+      "commands": [
+        "export OPENAI_API_BASE=http://localhost:8000/v1",
+        "export OPENAI_API_KEY=local",
+        "aider --model openai/glm-5.2-colibri     # the openai/ prefix routes to OPENAI_API_BASE"
+      ],
+      "code": "",
+      "output_from_docs": null,
+      "source_url": "https://github.com/JustVugg/colibri/blob/0a5504a1dc64f86fcd0fe7db298b0448c730e7e6/docs/api.md#connect-a-coding-cli-or-editor",
+      "kind": "folosire"
+    }
+  ],
+  "connectors": {
+    "inputs": [
+      "Text tastat în chat (terminal sau browser) sau cereri JSON la http://127.0.0.1:8000/v1/chat/completions, /v1/completions și /v1/messages (Anthropic)",
+      "Fișiere text sau PDF trimise cu /file CALE în coli chat (maximum 64 MiB și 2 milioane de caractere)",
+      "Imagini (cale în mesaj, atașament în coli web/coli ui sau parte image_url) la modelele cu viziune",
+      "Fișier GGUF importat cu ./coli import, sau foldere de model descărcate de pe Hugging Face",
+      "Cereri JSON la /v1/systemone cu câmpurile state și questions (tipuri noul, choice, score)"
+    ],
+    "outputs": [
+      "Text în flux (SSE) sau JSON, în format OpenAI sau Anthropic",
+      "JSON de la /v1/systemone: opțiunea aleasă, probabilitatea fiecărei opțiuni și confidence între 0 și 1",
+      "Imagini de la /v1/images/generations (Qwen-Image-2.1)",
+      "Dashboard în browser la http://127.0.0.1:8000/ și fișierul .coli_usage cu istoricul experților folosiți"
+    ],
+    "pairs_well_with": [
+      {
+        "repo_url": "https://github.com/Aider-AI/aider",
+        "name": "Aider",
+        "why": "Asistent de programare în terminal: primește adresa OPENAI_API_BASE de la serverul colibri, cum arată docs/api.md, și îți scrie cod cu un model care rulează la tine.",
+        "in_catalog": false
+      },
+      {
+        "repo_url": "https://github.com/charmbracelet/crush",
+        "name": "Crush",
+        "why": "Agent de programare în terminal: docs/api.md dă un exemplu de crush.json care îl îndreaptă spre serverul colibri (API-ul de chat devine intrarea agentului).",
+        "in_catalog": false
+      },
+      {
+        "repo_url": "https://github.com/NousResearch/hermes-agent",
+        "name": "Hermes Agent",
+        "why": "Agent AI general: documentația colibri îl menționează în măsurători, iar interfața coli ui îl poate porni deja îndreptat spre modelul local.",
+        "in_catalog": false
+      },
+      {
+        "repo_url": "https://github.com/ggml-org/llama.cpp",
+        "name": "llama.cpp",
+        "why": "Motorul care a popularizat fișierele GGUF: aceleași fișiere publicate pot fi importate în colibri cu ./coli import, iar llama.cpp rămâne varianta pentru modele mici.",
+        "in_catalog": false
+      },
+      {
+        "repo_url": "https://github.com/open-webui/open-webui",
+        "name": "Open WebUI",
+        "why": "Interfață de chat în browser; presupunere dedusă din API-ul compatibil OpenAI (nu e descrisă în documentația colibri): adresa http://127.0.0.1:8000/v1 devine sursa modelelor.",
+        "in_catalog": false
+      }
+    ],
+    "gaps_noticed": [
+      "Nu există pachet de instalare simplu (.deb, Flatpak, AppImage); un utilizator a cerut asta în issue 1852 după ce nu a reușit instalarea pe două calculatoare Ubuntu 26.04.",
+      "Exemplul din documentația de conectare a uneltelor folosește numele de model glm-5.2-colibri, deși modelul recomandat pentru un PC obișnuit este altul; numele trebuie înlocuit manual cu cel din coli status.",
+      "Unele modele (OLMoE, GLM-5.3-Flash, DeepSeek V4.1 Flash, Qwen3.8-27B) cer pași manuali de conversie sau pregătire după descărcare, în afara setup-ului într-un singur pas.",
+      "Documentația nu spune nimic despre calitatea în limba română a modelelor; depinde de fiecare model în parte."
+    ]
+  },
+  "when_not_to_use": [
+    "Vrei viteză de chat de serviciu comercial de la modelele gigant: README-ul măsoară 0,05-0,1 tokeni pe secundă la rece pe un laptop de 25 GB cu GLM-5.2, practic o pagină pe zi.",
+    "Ai mai puțin de 8 GB RAM sau prea puțin loc pe disc: cel mai mic model are 19-23 GB de descărcat.",
+    "Cauți calitatea celor mai bune modele din cloud: modelele sunt comprimate (int4 sau mai jos), iar README-ul măsoară el însuși costul de calitate al compresiei.",
+    "Nu vrei deloc să lucrezi cu terminalul, compilatoare sau drivere pentru placa video.",
+    "Vrei să folosești comercial Qwen-Image-2.1 sau alte modele cu licență necomercială: catalogul le include, dar licența lor nu permite asta.",
+    "Ai nevoie de un produs stabil, cu API înghețat: proiectul se declară Beta și se schimbă săptămânal."
+  ],
+  "alternatives": [
+    {
+      "name": "llama.cpp",
+      "url": "https://github.com/ggml-org/llama.cpp",
+      "difference": "Cel mai răspândit motor local (MIT), foarte matur și cu comunitate imensă; colibri se concentrează pe modele gigant cu experți pe disc și cache care învață."
+    },
+    {
+      "name": "Ollama",
+      "url": "https://github.com/ollama/ollama",
+      "difference": "Mult mai simplu pentru modele mici și medii, cu un singur program de instalat; nu vizează modelele de sute de miliarde care nu încap în RAM."
+    },
+    {
+      "name": "flash-moe",
+      "url": "https://github.com/danveloper/flash-moe",
+      "difference": "Proiect similar pentru modele MoE mari pe Mac (comentat pe Hacker News); ultimul commit e din martie 2026, deci mai puțin activ."
+    },
+    {
+      "name": "ds4",
+      "url": "https://github.com/antirez/ds4",
+      "difference": "Motor dedicat unui singur model (DeepSeek V4); colibri acoperă mai multe familii de modele."
+    }
+  ],
+  "tech_sheet": {
+    "license": "Apache-2.0 (cod); modelele au licențe separate",
+    "language": "C (motoarele de inferență), Python (setup, server API, convertoare), cu back-end-uri opționale CUDA, Vulkan și Metal",
+    "commit_sha": "0a5504a1dc64f86fcd0fe7db298b0448c730e7e6",
+    "last_commit_date": "2026-10-31",
+    "stars": 48554,
+    "requirements": [
+      "Sistem de operare: Windows 10/11, Linux (Ubuntu/Debian recomandate în documentație) sau macOS",
+      "RAM: minimum 8 GB, recomandat 16 GB sau mai mult; modelele mari cer 16-120 GB",
+      "Spațiu liber pe disc: 22 GB pentru cel mai mic model, până la 1,56 TB pentru cele mai mari; SSD NVMe rapid recomandat",
+      "Conexiune la internet pentru descărcarea motorului și a modelelor de pe Hugging Face",
+      "Python 3.10 sau mai nou (pe Windows se poate instala cu winget: winget install -e --id Python.Python.3.12 --scope user)",
+      "Git",
+      "Linux (Ubuntu/Debian): sudo apt install git python3 build-essential",
+      "macOS: xcode-select --install și brew install libomp git python (Homebrew)",
+      "Windows: descarcă ZIP-ul repo-ului și rulează START-HERE.bat; compilator opțional MSYS2",
+      "Compilator C (gcc sau clang cu OpenMP) și make: opțional; fără ele se descarcă motorul gata făcut din releases",
+      "Placă video: opțională; Vulkan 1.2 pe orice placă, CUDA pe NVIDIA (pe Linux cere CUDA toolkit; pe Windows arhiva CUDA din releases cere driver NVIDIA pentru CUDA 12 și placă RTX 30 sau mai nouă)",
+      "Fără cheie API sau cont; HF_TOKEN doar pentru depozitele Hugging Face cu acces restricționat",
+      "Opțional pentru PDF-uri: pdftotext (poppler) sau pypdf"
+    ]
+  },
+  "monetization": [
+    {
+      "model": "serviciu de instalare și configurare",
+      "what_you_sell": "Instalarea și reglajul unui asistent AI privat, rulat pe calculatorul sau serverul clientului (alegerea modelului potrivit pentru memoria lui, pornirea serverului local, conectarea la Aider sau la un chat), plus o scurtă instruire.",
+      "for_whom": "Birouri mici care nu vor să-și trimită documentele în cloud (contabilitate, avocatură, cabinete) și programatori independenți care vor un asistent local.",
+      "license_check": {
+        "license": "Apache-2.0 (cod); modelele au licențe separate",
+        "commercial_use": "permis cu condiții",
+        "conditions": "Codul Apache-2.0 permite folosirea comercială: păstrezi LICENSE și NOTICE și marchezi modificările. Fiecare model are licența lui: Qwen3.6-35B-A3B și Qwen3-Coder-30B-A3B apar pe Hugging Face cu apache-2.0, iar GLM-5.2 cu mit (verificat 2026-11-07 prin API-ul Hugging Face); Qwen-Image-2.1 este doar necomercial, iar Muse Spark Open și LFM3-VL au acorduri proprii. Verifică licența fiecărui model înainte să-l livrezi unui client."
+      },
+      "path": "folosești repo-ul direct",
+      "own_build_notes": null,
+      "demand_evidence": [
+        {
+          "name": "Techneek, pachetul AI Starter (LLM local cu Ollama și LiteLLM, RAG, chat intern)",
+          "url": "https://techneek-site.pages.dev/pricing",
+          "price": "2.500 USD o singură dată; AI Professional 7.500 USD plus 299 USD/lună",
+          "what_it_proves": "Există firme care vând instalarea unui LLM privat local pentru birouri mici, cu preț fix pe proiect (cu altă tehnologie decât colibri).",
+          "checked_at": "2026-11-07"
+        },
+        {
+          "name": "Palark, LLM privat găzduit pe infrastructura clientului",
+          "url": "https://palark.com/services/private-self-hosted-llm/",
+          "price": "taxă de configurare de la 5.000 EUR; abonament 1.000 EUR/lună (Basic) sau 5.000 EUR/lună (Pro), hardware exclus",
+          "what_it_proves": "Companiile plătesc pentru configurare și mentenanță de modele deschise (Qwen, DeepSeek, Llama) rulate în rețeaua lor, din motive de confidențialitate.",
+          "checked_at": "2026-11-07"
+        }
+      ],
+      "startup_cost": "Calculatorul tău de test (cu 32 GB RAM sau mai mult, ca să încerci modele medii) și timp pentru documentare; nu ai nevoie de licențe plătite.",
+      "time_to_first_client": "Necunoscut; depinde de rețeaua ta de cunoștințe, nu de unealtă. Prima parte (să înveți și să testezi modelele pe hardware-ul clientului) cere câteva săptămâni.",
+      "difficulty": "mediu",
+      "risks": [
+        "Concurență gratuită: Ollama, llama.cpp și LM Studio instalează modele mici cu mult mai puțină bătaie de cap decât colibri, iar clientul le poate încerca singur.",
+        "Viteza: modelele gigant sunt foarte lente pe hardware obișnuit, deci trebuie să stabilești așteptările clientului din prima.",
+        "Proiectul se schimbă rapid (Beta); ofertele de mentenanță înseamnă actualizări frecvente.",
+        "Efort de suport și răspundere pentru calitatea răspunsurilor modelului."
+      ],
+      "first_steps": [
+        "Instalează colibri pe propriul calculator și măsoară viteza reală a 2-3 modele mici și medii (Qwen3.6-35B-A3B, Qwen3-Coder-30B-A3B).",
+        "Compară cu Ollama pe aceeași mașină și scrie o notă simplă: ce model recomanzi pentru ce memorie.",
+        "Pregătește o ofertă fixă (instalare, test și instruire) și un document cu limitele de viteză și de calitate.",
+        "Propune un proiect-pilot unui birou mic din rețeaua ta, cu acord scris privind datele."
+      ]
+    },
+    {
+      "model": "integrare pentru o nișă",
+      "what_you_sell": "Un mic sistem de triere locală: documente sau mesaje intră într-o coadă, colibri (modul System One, endpoint /v1/systemone) întoarce alegerea și probabilitatea fiecărui răspuns, iar cazurile nesigure ajung la un om.",
+      "for_whom": "Firme mici cu volum repetitiv de documente confidențiale (facturi, solicitări, tichete) care vor decizii cu prag de siguranță, fără să trimită textele unui serviciu extern.",
+      "license_check": {
+        "license": "Apache-2.0 (cod); modelele au licențe separate",
+        "commercial_use": "permis cu condiții",
+        "conditions": "Codul Apache-2.0 permite folosirea comercială cu păstrarea LICENSE și NOTICE. Alege modele cu licență permisivă (de exemplu Qwen3.6-35B-A3B, apache-2.0 pe Hugging Face, verificat 2026-11-07). Licențele modelelor de decizie Laya, GLiNER2.5-Decide și Clef nu au fost verificate aici, deci le citești înainte de livrare."
+      },
+      "path": "folosești repo-ul direct",
+      "own_build_notes": null,
+      "demand_evidence": [
+        {
+          "name": "Palark, cazuri de utilizare: revizuire de contracte, extragere din facturi, căutare în cunoștințe interne",
+          "url": "https://palark.com/services/private-self-hosted-llm/",
+          "price": "de la 5.000 EUR configurare plus 1.000 EUR/lună (Basic)",
+          "what_it_proves": "Clienții cumpără deja LLM-uri private pentru sarcini repetitive pe documente de afaceri.",
+          "checked_at": "2026-11-07"
+        },
+        {
+          "name": "OpenAI API (modele mici, pe consum, folosit și pentru clasificare)",
+          "url": "https://developers.openai.com/api/docs/pricing",
+          "price": "gpt-6-luna: 0,10 USD la 1 milion tokeni de intrare, 0,50 USD la 1 milion de ieșire",
+          "what_it_proves": "Concurența din cloud are prețuri foarte mici pe token; argumentul tău trebuie să fie confidențialitatea, nu prețul pe cerere.",
+          "checked_at": "2026-11-07"
+        }
+      ],
+      "startup_cost": "Un calculator de test și timp de dezvoltare pentru integrarea cu fluxul clientului (e-mail, foldere, tichete); nu necesită licențe plătite.",
+      "time_to_first_client": "Necunoscut; un demo funcțional pe documentele unei nișe îți ia probabil câteva săptămâni, apoi depinde de vânzare.",
+      "difficulty": "mediu",
+      "risks": [
+        "Concurență gratuită și matură: OpenAI, Anthropic și Google oferă API-uri ieftine pentru clasificare; fără cerința de confidențialitate clientul nu are motiv să aleagă varianta locală.",
+        "Un model local mic poate greși; trebuie măsurată acuratețea pe documentele reale înainte de orice promisiune către client.",
+        "Dependența de un proiect Beta care se schimbă repede: endpoint-ul System One poate evolua între versiuni.",
+        "Efortul de suport, actualizări și răspunderea pentru decizii greșite luate pe baza probabilităților."
+      ],
+      "first_steps": [
+        "Citește docs/systemone.md și trimite 20-30 de documente exemplu din nișa aleasă prin /v1/systemone.",
+        "Măsoară cât de des alegerea modelului coincide cu a unui om și unde stabilești pragul de siguranță.",
+        "Construiește un demo mic (folder cu documente care intră, tabel cu decizii care iese) și arată-l unui prim client potențial."
+      ]
+    }
+  ],
+  "updated_at": "2026-11-07",
+  "notes_summary": "Am citit README-ul, documentația principală, catalogul de modele și pagina de utilizator de pe Hacker News; n-am rulat nimic, iar viteza reală depinde mult de calculatorul tău.",
+  "notes": "Repo nou, analizat la commit 0a5504a (2026-10-31), versiunea 2.1.0, creat pe 2026-07-01, 48.554 de stele (API GitHub, 2026-11-07), licență Apache-2.0 (LICENSE citit, plus NOTICE și THIRD_PARTY_NOTICES.md cu componente MIT adaptate din ds4/ggml). Codul n-a fost rulat. Toate cifrele de viteză sunt din README și docs, măsurate de autor sau de contribuitori, nu verificate de mine. Licențele modelelor: am verificat prin API-ul Hugging Face doar Kreuzzelg/qwen36-35b-a3b-colibri-i4-gs64, Justvugg/Qwen3-Coder-30B-A3B-colibri-int4, Qwen/Qwen3.6-35B-A3B și Qwen/Qwen3-Coder-30B-A3B-Instruct (toate apache-2.0) și mastouri/GLM-5.2-colibri-int4-g64-with-int8-mtp (mit); celelalte (Muse Spark Open, LFM3-VL, Laya, GLiNER2.5-Decide, Clef, Kimi K3, DeepSeek, MiMo, Inkling) nu le-am verificat. Qwen-Image-2.1 e marcat necomercial chiar în catalogul repo-ului (c/setup_catalog.py). Primii pași: povestea e un comentariu first-person de pe Hacker News (item 48858401, 2026-07-10) al unui utilizator care nu e autorul; e din prima zi a proiectului, iar rezultatul include răspunsuri în buclă, pe care README-ul actual le leagă de formatul int4 vechi (issue 455), deci nu reflectă neapărat versiunea 2.1.0. Alte surse căutate: Show HN (item 48842459, doar autorul), comentarii HN despre colibri (majoritatea doar menționează repo-ul), dev.to (jamilxt și andrew-ooo sunt articole de tip prezentare, fără rulare proprie) și wavect.io (spune explicit că nu a rulat nimic), GitHub issues 200 și 273 (contribuitori care modifică codul, prea avansate). Prețuri verificate 2026-11-07: claude.com/pricing (Pro 20 USD/lună lunar, 17 USD/lună anual, Max 100 USD), developers.openai.com/api/docs/pricing, techneek-site.pages.dev/pricing, palark.com/services/private-self-hosted-llm/. chatgpt.com/pricing nu a arătat sumele, deci ChatGPT Plus nu e inclus. Prețurile hardware nu sunt estimate. Parteneri verificați activi (ultimul commit în 2026): llama.cpp, Aider (2026-05-22), Crush, Hermes Agent, Open WebUI (cel din urmă dedus din compatibilitatea OpenAI, nu din documentația colibri). Categorie nouă propusă pentru catalog: „Modele AI locale”. Unde neclar: nu am verificat dacă interfața coli ui modifică fișiere de configurare ale altor programe; din cod rezultă că folosește profiluri proprii pentru OpenClaw, Hermes și OpenCode, fără să atingă configurația utilizatorului. Calitatea în română a modelelor nu e documentată."
+}
