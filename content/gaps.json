@@ -723,5 +723,75 @@
     "gap": "Nu există un pas automat de ascultare sau verificare a pronunției; README cere să raportezi audio trunchiat pe care îl observi.",
     "source_slug": "ebook2audiobook",
     "added_at": "2026-11-03"
+  },
+  {
+    "gap": "Clipul sursă e limitat la 4-15 secunde și 50 MB: clipurile lungi trebuie tăiate manual, în afara aplicației.",
+    "source_slug": "open-genjutsu",
+    "added_at": "2026-11-14"
+  },
+  {
+    "gap": "Starea jobului e ținută în memorie și se pierde dacă repornești serverul; nu există coadă de joburi sau procesare în lot.",
+    "source_slug": "open-genjutsu",
+    "added_at": "2026-11-14"
+  },
+  {
+    "gap": "Aplicația nu are autentificare și README-ul cere să rămână pe 127.0.0.1, deci nu se poate oferi direct altor utilizatori.",
+    "source_slug": "open-genjutsu",
+    "added_at": "2026-11-14"
+  },
+  {
+    "gap": "Fișierul exportat are numele fix genjutsu-lite-final.mp4 în cod, chiar și pentru randarea Seedance.",
+    "source_slug": "open-genjutsu",
+    "added_at": "2026-11-14"
+  },
+  {
+    "gap": "O instalare cu npx pentru un singur skill nu copiază folderul references/ cu listele de verificare (issue #361).",
+    "source_slug": "addyosmani-agent-skills",
+    "added_at": "2026-11-14"
+  },
+  {
+    "gap": "Comenzile /spec, /plan, /build nu apar în Copilot și nici în Antigravity CLI; acolo se invocă skill-urile pe nume.",
+    "source_slug": "addyosmani-agent-skills",
+    "added_at": "2026-11-14"
+  },
+  {
+    "gap": "Skill-urile cu cod lipit direct în cerere nu se activează mereu (issue #620).",
+    "source_slug": "addyosmani-agent-skills",
+    "added_at": "2026-11-14"
+  },
+  {
+    "gap": "Documentația principală e în chineză; versiunea engleză există, dar multe detalii și exemplele de rezultat (nume de firme, termeni precum chip concentration) sunt orientate spre piața chineză.",
+    "source_slug": "daily-stock-analysis",
+    "added_at": "2026-11-14"
+  },
+  {
+    "gap": "Limba rapoartelor: REPORT_LANGUAGE acceptă zh, en și ko, iar traducerea în română rămâne un pas manual.",
+    "source_slug": "daily-stock-analysis",
+    "added_at": "2026-11-14"
+  },
+  {
+    "gap": "Lista de acțiuni din alphasift nu se leagă automat de STOCK_LIST; trebuie copiată de mână sau printr-un script propriu.",
+    "source_slug": "daily-stock-analysis",
+    "added_at": "2026-11-14"
+  },
+  {
+    "gap": "Raportul în Markdown și JSON nu se transformă automat în tichete GitHub sau în alerte de securitate.",
+    "source_slug": "security-audit-skill",
+    "added_at": "2026-11-14"
+  },
+  {
+    "gap": "Fără sandbox, descoperirile rămân „de validat” și proprietarul trebuie să le verifice de mână.",
+    "source_slug": "security-audit-skill",
+    "added_at": "2026-11-14"
+  },
+  {
+    "gap": "Validatoarele nu rulează pe Windows (issue #117), deci faza 4 (validarea structurii) nu poate trece pe Windows.",
+    "source_slug": "security-audit-skill",
+    "added_at": "2026-11-14"
+  },
+  {
+    "gap": "Nu există o estimare a costului în tokeni înainte de rulare, doar un buget opțional de agenți.",
+    "source_slug": "security-audit-skill",
+    "added_at": "2026-11-14"
   }
 ]

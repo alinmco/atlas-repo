@@ -278,6 +278,12 @@
         "name": "AI Design Skills",
         "why": "După ce agentul a generat pagina cu regulile de aici, comenzile `critique` și `audit` din Impeccable o pot verifica; codul paginii devine intrarea lor.",
         "in_catalog": true
+      },
+      {
+        "repo_url": "https://github.com/addyosmani/agent-skills",
+        "name": "Agent Skills (Addy Osmani)",
+        "why": "Pachetul aduce procesul (specificație, teste, revizuire), iar Impeccable adaugă judecata de design pentru interfața construită în faza /build.",
+        "in_catalog": true
       }
     ],
     "gaps_noticed": [

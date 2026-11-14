@@ -1,0 +1,409 @@
+{
+  "slug": "security-audit-skill",
+  "repo_url": "https://github.com/cloudflare/security-audit-skill",
+  "name": "security-audit (Cloudflare)",
+  "one_liner": "Transformă agentul tău de programare într-un auditor care caută vulnerabilități în cod.",
+  "problem_solved": "Verificarea securității unui proiect cere experți scumpi sau ore de citit cod. Un agent AI lăsat să „caute probleme” fără metodă dă liste lungi, pline de alarme false.",
+  "features": [
+    "Audit în 6 faze: recunoaștere, vânătoare, validare, raport structurat, verificare independentă, raport final",
+    "Agenți separați: cel care verifică o problemă nu e cel care a găsit-o",
+    "Trei verdicte clare: confirmat, de validat și respins, fiecare cu dovezi din cod",
+    "Fișiere gata de citit: REPORT.md, FINDINGS-DETAIL.md, NEEDS-VALIDATION.md și findings.json",
+    "Ghiduri pentru ținte diferite: web, cloud, AI/LLM, aplicații desktop, lanț de livrare",
+    "Rulări repetate care se completează: folosește rezultatele anterioare ca să acopere golurile",
+    "Trei profiluri de efort (quick, standard, deep) și buget opțional de agenți"
+  ],
+  "at_a_glance": {
+    "for_you_if": [
+      "Ai un proiect propriu și un agent de programare (Claude Code, Codex) și vrei o primă trecere de securitate.",
+      "Te interesează o metodă de audit documentată, nu un singur prompt vag."
+    ],
+    "not_for_you_if": [
+      "Nu ai un agent AI cu abonament sau credit și nu vrei să consumi multe tokenuri.",
+      "Cauți un scaner clasic, rapid și ieftin, sau un înlocuitor pentru un pentest făcut de oameni."
+    ],
+    "verdict": "O metodă serioasă și bine documentată de audit cu agenți AI, dar costisitoare în tokenuri, cu probleme deschise legate de izolare și neprobată pe Windows."
+  },
+  "cost": {
+    "level": "gratuit, dar cere servicii plătite",
+    "summary": "Skill-ul e gratuit (MIT), dar rulează în agentul tău: merge cu abonamentul (Claude Pro/Max, ChatGPT Plus/Pro) sau cu API pe consum, iar un audit complet poate epuiza limitele zilei.",
+    "ai_access": {
+      "mode": "abonament sau API",
+      "detail": "Skill-ul nu are propriul model: îl rulează agentul tău, iar Claude Code e inclus în Pro/Max, iar Codex în planurile ChatGPT; ambele pot fi folosite și cu API pe consum.",
+      "source_url": "https://claude.com/pricing"
+    },
+    "items": [
+      {
+        "what": "Claude Pro (include Claude Code), pentru agentul care rulează auditul",
+        "price": "17 USD/lună la plata anuală, 20 USD/lună la plata lunară (verificat 2026-11-14)",
+        "required": false,
+        "source_url": "https://claude.com/pricing"
+      },
+      {
+        "what": "Claude Max (limite mai mari, util pentru audit complet pe proiecte mari)",
+        "price": "100 USD/lună (verificat 2026-11-14)",
+        "required": false,
+        "source_url": "https://claude.com/pricing"
+      },
+      {
+        "what": "ChatGPT Plus (include Codex), alternativă la Claude Code",
+        "price": "20 USD/lună (verificat 2026-11-14)",
+        "required": false,
+        "source_url": "https://learn.chatgpt.com/docs/pricing"
+      },
+      {
+        "what": "Tokeni API pe consum, dacă nu folosești abonament (un audit complet lansează zeci de agenți)",
+        "price": null,
+        "required": false,
+        "source_url": "https://claude.com/pricing"
+      },
+      {
+        "what": "Skills CLI (npx skills), programul care instalează skill-ul",
+        "price": "0 (open source, licență MIT)",
+        "required": true,
+        "source_url": "https://github.com/vercel-labs/skills"
+      },
+      {
+        "what": "Node.js, pentru cele două validatoare din skill",
+        "price": null,
+        "required": true,
+        "source_url": "https://github.com/cloudflare/security-audit-skill#requirements"
+      },
+      {
+        "what": "Sandbox impus de sistemul de operare (mașină virtuală sau container) ca să poată rula codul țintei",
+        "price": null,
+        "required": false,
+        "source_url": "https://github.com/cloudflare/security-audit-skill#requirements"
+      }
+    ]
+  },
+  "platforms": {
+    "windows": "parțial",
+    "mac": "parțial",
+    "linux": "da",
+    "note": "Pe Windows, validatoarele din skill refuză să citească fișiere (issue #117, remediere propusă în PR #145, încă deschis); în codul validatorului se folosește O_NOFOLLOW, indisponibil pe Windows. Pe Mac a rulat într-o poveste reală, dar fără sandbox, deci toate descoperirile au rămas „de validat”. Pentru Linux nu există o listă oficială de sisteme: „da” e dedus din faptul că nu apar probleme raportate acolo.",
+    "source_url": "https://github.com/cloudflare/security-audit-skill/issues/117"
+  },
+  "risk_flags": [],
+  "audience_reason": "se instalează ușor, dar cere un agent AI, familiaritate cu cod și înțelegerea rapoartelor de securitate",
+  "setup_difficulty_reason": "instalarea e o singură comandă, dar pentru verdicte „confirmat” trebuie un sandbox, plus un agent și tokeni pentru rulări mari",
+  "analogy": "E ca o inspecție a casei făcută de o echipă: unii caută crăpăturile, alții încearcă să le conteste, iar un șef scrie raportul doar cu ce rezistă.",
+  "how_it_works": [
+    "Pasul 1, intrare: îi ceri agentului, în folderul unui proiect, de exemplu „security audit this codebase”.",
+    "Pasul 2, recunoaștere: agenți separați descriu arhitectura și suprafețele de atac în architecture.md și coverage-ledger.json.",
+    "Pasul 3, vânătoare și validare: „vânători” caută pe clase de atac, iar câte un verificator nou încearcă să infirme fiecare candidat.",
+    "Pasul 4, verificare: validatoarele Node.js verifică findings.json și ledger-ul, iar alți agenți reconfirmă afirmațiile din cod.",
+    "Pasul 5, ieșire: primești REPORT.md, FINDINGS-DETAIL.md, NEEDS-VALIDATION.md și findings.json într-un folder din afara proiectului."
+  ],
+  "first_steps": {
+    "origin": "experiență utilizator",
+    "story_url": "https://dev.to/elliot_brenya/an-ai-security-audit-found-31-holes-in-my-app-i-fixed-them-in-a-day-1717",
+    "story_platform": "dev.to",
+    "story_date": "2026-11-12",
+    "title": "31 de probleme într-o aplicație Laravel, reparate într-o zi",
+    "intro": "Un cofondator de startup a rulat skill-ul din Claude Code pe propria aplicație Laravel 12, găzduită pe un hosting partajat. A vrut să afle ce probleme de securitate are codul lui.",
+    "steps": [
+      {
+        "you_do": "A pornit auditul din Claude Code pe aplicația lui, pe 5 noiembrie.",
+        "what_happens": "Povestea descrie un proces cu 4 agenți de recunoaștere, 20 de vânători, 6 critici și două reverificări pentru fiecare problemă, în total 93 de rulări de agenți. Auditul a atins limita de utilizare de două ori și a trebuit reluat.",
+        "source_url": "https://dev.to/elliot_brenya/an-ai-security-audit-found-31-holes-in-my-app-i-fixed-them-in-a-day-1717"
+      },
+      {
+        "you_do": "A lăsat auditul să ruleze fără sandbox, pentru că Mac-ul lui Intel nu putea oferi unul și nu folosește Docker.",
+        "what_happens": "Toate cele 31 de descoperiri au ieșit „de validat”, niciuna confirmată, fiecare cu o notă despre cum o verifică proprietarul de mână. Regula din documentație este că, fără sandbox, codul țintei nu se rulează.",
+        "source_url": "https://github.com/cloudflare/security-audit-skill#requirements"
+      },
+      {
+        "you_do": "A citit raportul și a trecut cele 31 de puncte în backlog.",
+        "what_happens": "Raportul a notat singur scurtăturile: un vânător a returnat JSON stricat și a fost rugat să retrimită, iar o descoperire și-a schimbat punctul de intrare după ce un verificator nu a fost de acord. Autorul spune că i-a plăcut asta.",
+        "source_url": "https://dev.to/elliot_brenya/an-ai-security-audit-found-31-holes-in-my-app-i-fixed-them-in-a-day-1717"
+      },
+      {
+        "you_do": "Șase zile mai târziu a reparat toate cele 31 într-o singură ședință, de exemplu un subiect de tichet cu rânduri noi care putea imita un mesaj „CEO:” în chatul agenților lui, un cod SMS care valida o adresă de email și un redirect păcălit cu backslash.",
+        "what_happens": "Raportul indicase aceste probleme din cod, iar el a scris corecturile: indentarea rândurilor continuare, verificarea canalului prin care a fost trimis codul și o verificare strictă a URL-ului. Nu a fost nevoie de sandbox pentru reparații.",
+        "source_url": "https://dev.to/elliot_brenya/an-ai-security-audit-found-31-holes-in-my-app-i-fixed-them-in-a-day-1717"
+      }
+    ],
+    "takeaway": "Autorul spune că niciuna dintre cele 31 nu a avut nevoie de sandbox pentru reparare, ci „an afternoon”; nu compară cu un audit făcut fără skill, iar o greșeală proprie a fost un commit accidental în timpul reparațiilor."
+  },
+  "categories": [
+    "Agenți AI și securitate",
+    "Skill-uri pentru agenți AI"
+  ],
+  "search_intents": [
+    "vreau să găsesc vulnerabilități în codul meu cu un agent AI",
+    "vreau un audit de securitate pentru aplicația mea înainte de lansare",
+    "vreau să folosesc Claude Code pentru review de securitate",
+    "vreau o alternativă gratuită la un pentest de cod",
+    "vreau un raport de vulnerabilități în format structurat, cu dovezi din cod"
+  ],
+  "audience": "intermediar",
+  "setup_difficulty": "mediu",
+  "replaces": [
+    {
+      "service": "GitHub Code Security",
+      "service_url": "https://github.com/security/plans",
+      "price": "30 USD pe committer activ pe lună",
+      "price_source_url": "https://github.com/security/plans",
+      "price_checked_at": "2026-11-14",
+      "replacement_level": "parțial",
+      "what_you_keep": [
+        "o trecere de securitate pe codul sursă, cu dovezi pe fișier și linie",
+        "rapoarte în Markdown și JSON, fără abonament lunar per dezvoltator",
+        "alegerea agentului și a modelului"
+      ],
+      "what_you_lose": [
+        "scanare continuă la fiecare commit și alerte direct în pull request",
+        "reguli deterministe CodeQL, repetabile și rapide",
+        "panou central, istoric și permisiuni pentru echipă",
+        "reparații sugerate automat în fluxul GitHub"
+      ],
+      "hidden_costs": [
+        "tokeni sau abonament AI pentru fiecare audit",
+        "configurarea unui sandbox ca să nu rămână totul „de validat”",
+        "timp pentru triajul manual al descoperirilor"
+      ]
+    },
+    {
+      "service": "Pentest web făcut de o firmă (Astra Pentest)",
+      "service_url": "https://www.getastra.com/pricing",
+      "price": "2.999 USD per pentest (Pentest Auto) sau 5.999 USD (Pentest Expert, cu testare manuală)",
+      "price_source_url": "https://www.getastra.com/pricing",
+      "price_checked_at": "2026-11-14",
+      "replacement_level": "doar pentru cazuri simple",
+      "what_you_keep": [
+        "o primă listă de probleme din codul sursă, la un cost mic",
+        "posibilitatea de a repeta auditul oricând"
+      ],
+      "what_you_lose": [
+        "testare pe aplicația care rulează, făcută de oameni sau scanere dinamice",
+        "raport semnat și certificat pentru clienți sau conformitate",
+        "asistență de remediere și retestare",
+        "responsabilitate contractuală a unei firme"
+      ],
+      "hidden_costs": [
+        "timpul tău pentru a verifica manual descoperirile",
+        "o singură rulare găsește aproximativ jumătate din ce găsesc rulările repetate, după autori"
+      ]
+    }
+  ],
+  "examples": [
+    {
+      "title": "Instalarea skill-ului cu Skills CLI",
+      "scenario": "Adaugi skill-ul în agentul tău de programare, o singură dată, la nivel de utilizator.",
+      "prerequisites": [
+        "Node.js",
+        "Un agent de programare compatibil cu Skills CLI (de exemplu Claude Code)"
+      ],
+      "commands": [
+        "npx skills add https://github.com/cloudflare/security-audit-skill \\\n  --skill security-audit \\\n  --global"
+      ],
+      "code": "",
+      "output_from_docs": null,
+      "source_url": "https://github.com/cloudflare/security-audit-skill#installation",
+      "kind": "instalare"
+    },
+    {
+      "title": "Cererea de audit, în limbaj obișnuit",
+      "scenario": "Pornești agentul în folderul proiectului (sau îl îndrepți spre el) și ceri auditul; skill-ul se activează singur.",
+      "prerequisites": [
+        "Skill-ul instalat",
+        "Agent de programare cu model care știe să folosească unelte și sub-agenți",
+        "Un sandbox impus de sistemul de operare, dacă vrei verdicte „confirmat”"
+      ],
+      "commands": [],
+      "code": "security audit this codebase\n\nfind security vulnerabilities in ./src\n\ndo a security review, output to ~/audits/my-project",
+      "output_from_docs": null,
+      "source_url": "https://github.com/cloudflare/security-audit-skill#usage",
+      "kind": "folosire"
+    }
+  ],
+  "connectors": {
+    "inputs": [
+      "folderul unui repository de cod (sursă) pe care îl auditezi",
+      "o cerere în limbaj obișnuit către agent, de exemplu „security audit this codebase”",
+      "opțional: profil (quick, standard, deep), domeniu restrâns de fișiere sau buget maxim de agenți",
+      "opțional: rezultatele unei rulări anterioare (ledger și findings.json) pentru acoperirea golurilor"
+    ],
+    "outputs": [
+      "REPORT.md, FINDINGS-DETAIL.md și NEEDS-VALIDATION.md (Markdown)",
+      "findings.json, cu verdictele confirmed, needs_validation și rejected, validat față de report-schema.json",
+      "coverage-ledger.json, arhitectura în architecture.md și run-metadata.json",
+      "folder implicit: ~/security-audit-skill/<repo-name>/run-<N>"
+    ],
+    "pairs_well_with": [
+      {
+        "repo_url": "https://github.com/usestrix/strix",
+        "name": "Strix",
+        "why": "Skill-ul citește doar codul sursă, iar Strix atacă aplicația care rulează; problemele din findings.json devin ținte de testat dinamic.",
+        "in_catalog": true
+      },
+      {
+        "repo_url": "https://github.com/semgrep/semgrep",
+        "name": "Semgrep",
+        "why": "Reguli deterministe, rapide și repetabile; rezultatele lui (fișier și linie) se compară cu cele din findings.json, iar în postarea Cloudflare agenții au invocat Semgrep de zero ori.",
+        "in_catalog": false
+      },
+      {
+        "repo_url": "https://github.com/google/osv-scanner",
+        "name": "OSV-Scanner",
+        "why": "Verifică dependențele după baza de vulnerabilități cunoscute, iar lista lui completează clasa de atac „lanț de livrare” din skill.",
+        "in_catalog": false
+      },
+      {
+        "repo_url": "https://github.com/gitleaks/gitleaks",
+        "name": "Gitleaks",
+        "why": "Caută secrete uitate în istoricul Git; rezultatul lui (raport JSON) arată ce chei trebuie rotite, ceea ce un audit de cod nu acoperă complet.",
+        "in_catalog": false
+      },
+      {
+        "repo_url": "https://github.com/vercel-labs/skills",
+        "name": "Skills CLI (vercel-labs/skills)",
+        "why": "Este programul prin care se instalează acest skill în agent, iar aceleași comenzi instalează și alte skill-uri compatibile.",
+        "in_catalog": false
+      }
+    ],
+    "gaps_noticed": [
+      "Raportul în Markdown și JSON nu se transformă automat în tichete GitHub sau în alerte de securitate.",
+      "Fără sandbox, descoperirile rămân „de validat” și proprietarul trebuie să le verifice de mână.",
+      "Validatoarele nu rulează pe Windows (issue #117), deci faza 4 (validarea structurii) nu poate trece pe Windows.",
+      "Nu există o estimare a costului în tokeni înainte de rulare, doar un buget opțional de agenți."
+    ]
+  },
+  "when_not_to_use": [
+    "Rulează fără sandbox doar în mod de ghidare sau cu verdicte „de validat”. Un utilizator Windows a raportat (issue #128) că un agent, încercând să facă un mediu „curat”, a șters profilul real al utilizatorului; nu pornești auditul complet pe un calculator cu date nesalvate.",
+    "Consumă foarte mulți tokeni: pe HN un utilizator spune că a trecut de 150.000 de tokeni la un proiect FastAPI mic și și-a atins limita, iar în povestea reală auditul a lovit limita de două ori.",
+    "Codul auditat este citit de agentul tău, deci ajunge la furnizorul modelului; nu îl folosi pe cod confidențial dacă politica firmei nu permite asta.",
+    "Nu înlocuiește un pentest făcut de oameni, o certificare sau o scanare continuă pe fiecare commit.",
+    "O singură rulare găsește, după autori, aproximativ jumătate din ce găsesc rulările repetate; un raport fără probleme nu înseamnă cod sigur.",
+    "Pe Windows validatoarele nu citesc fișiere (issue #117); proiectul are multe issue-uri deschise despre contractul de validare (de exemplu #134: o descoperire inventată trece validarea).",
+    "Auditează doar cod pe care ai dreptul să îl testezi: autorii cer date dummy și fără atacuri asupra unor servicii live."
+  ],
+  "alternatives": [
+    {
+      "name": "Strix",
+      "url": "https://github.com/usestrix/strix",
+      "difference": "Agenți care atacă o aplicație rulată, în sandbox; acest skill citește codul sursă."
+    },
+    {
+      "name": "Semgrep",
+      "url": "https://github.com/semgrep/semgrep",
+      "difference": "Scaner pe reguli, rapid și repetabil, fără model AI; mai puține descoperiri creative, dar fără consum de tokeni."
+    },
+    {
+      "name": "anthropics/claude-code-security-review",
+      "url": "https://github.com/anthropics/claude-code-security-review",
+      "difference": "Revizuire de securitate pe pull request, mai ușoară; acest skill face un audit complet, în mai multe faze."
+    },
+    {
+      "name": "Visa vulnerability agentic harness",
+      "url": "https://github.com/visa/visa-vulnerability-agentic-harness",
+      "difference": "Alt sistem agentic pentru vulnerabilități, cu licență nedeclarată pe GitHub (NOASSERTION)."
+    }
+  ],
+  "tech_sheet": {
+    "license": "MIT",
+    "language": "Markdown (instrucțiuni) și JavaScript/Node.js (validatoare .cjs)",
+    "commit_sha": "c1c8a8c1471069fb0e188eeaff69b8e8db6564a8",
+    "last_commit_date": "2026-09-14",
+    "stars": 72140,
+    "requirements": [
+      "Un agent de programare cu model care suportă unelte și sub-agenți paraleli (de exemplu Claude Code sau Codex)",
+      "Node.js, pentru validatoarele validate-findings.cjs și validate-coverage-ledger.cjs",
+      "Skills CLI: npx skills add https://github.com/cloudflare/security-audit-skill --skill security-audit (opțional --global)",
+      "Un sandbox impus de sistemul de operare (fără rețea externă, mediu golit, scriere doar în scratch, limite de resurse), ca să se poată rula codul țintei; fără el verdictele rămân „de validat”",
+      "Windows: validatoarele nu funcționează momentan (issue #117, PR #145 deschis)",
+      "Abonament AI (Claude Pro/Max, ChatGPT Plus/Pro) sau cheie API pe consum; un audit complet consumă mulți tokeni"
+    ]
+  },
+  "monetization": [
+    {
+      "model": "serviciu de instalare și configurare",
+      "what_you_sell": "Audit de securitate al codului pentru startupuri și aplicații făcute rapid cu AI: rulezi skill-ul într-un sandbox pregătit de tine, triezi descoperirile și predai un raport citibil, cu priorități.",
+      "for_whom": "Fondatori fără echipă de securitate și agenții mici de dezvoltare care vor o primă verificare înainte de lansare.",
+      "license_check": {
+        "license": "MIT",
+        "commercial_use": "permis",
+        "conditions": "MIT permite folosirea comercială și modificarea; păstrezi nota de copyright și textul licenței dacă redistribui codul skill-ului."
+      },
+      "path": "folosești repo-ul direct",
+      "own_build_notes": null,
+      "demand_evidence": [
+        {
+          "name": "Astra Pentest",
+          "url": "https://www.getastra.com/pricing",
+          "price": "2.999 USD per pentest (Auto), 5.999 USD (Expert)",
+          "what_it_proves": "Firmele plătesc deja pentru pentesturi publice cu preț afișat; un audit de cod este o variantă mai ieftină și mai limitată.",
+          "checked_at": "2026-11-14"
+        },
+        {
+          "name": "GitHub Code Security",
+          "url": "https://github.com/security/plans",
+          "price": "30 USD pe committer activ pe lună",
+          "what_it_proves": "Securitatea codului se vinde ca abonament pe dezvoltator; există buget pentru ea.",
+          "checked_at": "2026-11-14"
+        }
+      ],
+      "startup_cost": "Un abonament AI cu limite mari (de la 100 USD/lună la Claude Max, preț verificat) plus o mașină virtuală sau un server pentru sandbox; costul real depinde de dimensiunea proiectelor.",
+      "time_to_first_client": "Necunoscut; depinde de reputația ta în securitate și de contactele din nișă.",
+      "difficulty": "mediu",
+      "risks": [
+        "Un raport al tău fără verificare umană poate conține alarme false sau pierde probleme reale, iar răspunderea e a ta.",
+        "Concurență gratuită: clientul poate rula chiar el același skill, iar Cloudflare îl actualizează public.",
+        "Consum mare de tokeni, greu de estimat înainte; poate depăși prețul serviciului.",
+        "Trebuie să ai acordul scris al clientului pentru codul auditat, iar codul lui ajunge la furnizorul modelului AI.",
+        "Probleme deschise de izolare (issue #128, #148) obligă la un sandbox foarte atent."
+      ],
+      "first_steps": [
+        "Rulează skill-ul pe un proiect propriu, într-o mașină virtuală izolată, cu profilul quick.",
+        "Compară rezultatele cu Semgrep și OSV-Scanner pe același cod, ca să vezi ce adaugă și ce pierde.",
+        "Scrie un șablon de raport pentru client, cu ce a fost confirmat, ce rămâne de validat și limitele auditului.",
+        "Oferă un audit pilot, la preț mic, unui prieten sau unui proiect open source, cu acordul lui."
+      ]
+    },
+    {
+      "model": "consultanță și training",
+      "what_you_sell": "Atelier practic pentru echipe mici: cum configurezi un sandbox, cum rulezi auditul pe un pull request sau pe un modul și cum triezi un findings.json.",
+      "for_whom": "Echipe de dezvoltare care folosesc deja agenți AI și vor un proces de securitate documentat, fără să cumpere o platformă.",
+      "license_check": {
+        "license": "MIT",
+        "commercial_use": "permis",
+        "conditions": "MIT permite folosirea comercială; păstrezi nota de copyright și textul licenței dacă redistribui codul skill-ului."
+      },
+      "path": "folosești repo-ul direct",
+      "own_build_notes": null,
+      "demand_evidence": [
+        {
+          "name": "Snyk (plan Team)",
+          "url": "https://snyk.io/plans/",
+          "price": "de la 25 USD/lună, plan Team (limită de 1.000 de teste Snyk Code pe lună)",
+          "what_it_proves": "Echipele mici plătesc deja pentru scanare de securitate a codului; există cerere pentru procese de securitate în dezvoltare.",
+          "checked_at": "2026-11-14"
+        },
+        {
+          "name": "GitHub Code Security",
+          "url": "https://github.com/security/plans",
+          "price": "30 USD pe committer activ pe lună",
+          "what_it_proves": "Securitatea codului este un produs vândut pe dezvoltator.",
+          "checked_at": "2026-11-14"
+        }
+      ],
+      "startup_cost": "Timpul de pregătit materialele și un mediu de demonstrație; fără costuri de licență.",
+      "time_to_first_client": "Necunoscut.",
+      "difficulty": "mediu",
+      "risks": [
+        "Materialul se învechește repede: repo-ul are multe PR-uri și issue-uri deschise și poate schimba contractul de validare.",
+        "Cursuri gratuite pe același subiect apar rapid; trebuie să oferi ceva mai bun, de exemplu adaptat pentru o nișă.",
+        "Pentru securitate ești credibil doar dacă ai experiență reală în domeniu."
+      ],
+      "first_steps": [
+        "Alege o singură nișă (de exemplu aplicații Laravel sau Node.js) și documentează o rulare completă, cu cost în tokeni.",
+        "Verifică în același mediu ce funcționează și ce nu pe Windows, macOS și Linux.",
+        "Publică un ghid scurt cu pașii și greșelile frecvente, apoi ține un atelier mic."
+      ]
+    }
+  ],
+  "updated_at": "2026-11-14",
+  "notes_summary": "Am citit README-ul, SKILL.md, fișierele de ghid și issue-urile deschise; n-am rulat nimic. Costul real în tokeni pe un proiect nu e documentat de autori, iar pe Windows validatoarele nu merg.",
+  "notes": "Repo nou, analizat 2026-11-14 din clonă superficială (commit c1c8a8c, 2026-09-14). Am citit README, LICENSE (MIT, Copyright 2025-2026 Cloudflare, Inc.), SKILL.md (primele secțiuni: moduri de operare, siguranța execuției, configurare, profiluri quick/standard/deep), VALIDATION-AND-REPORTING.md (fragmente), lista fișierelor și issue-urile 117, 128, 134, 144, 148; postarea Cloudflare „Build your own vulnerability harness” (cifrele din ea sunt pentru harness-ul intern, nu pentru skill; harness-ul complet nu e lansat). Steaua: 72.140 la 2026-11-14; o pagină terță arăta 19.454 la o dată anterioară nespecificată, nu am explicat diferența. Ultimul commit pe main e din 2026-09-14, dar repo-ul are zeci de issue-uri și PR-uri deschise (de exemplu #145 suport Windows, #141 citate verbatim în dovezi, #149 spațiu de lucru de încredere); nu sunt release-uri. Nu am rulat codul. Primii pași: povestea din dev.to (2026-11-12) este de la un om care își auditează propria aplicație; textul e în persoana I, cu cod și cu o greșeală proprie, dar nu pot dovedi că nu a fost editat cu ajutor AI; autorul e cofondatorul TrustCheck, fără legătură cu Cloudflare; nu compară cu lucrul fără skill. Căutat și respins: HN item 49736466 (comentarii scurte despre consum de tokeni, folosite doar în when_not_to_use), notes.nicolasdeville.com (rezumat al documentației, scris de model), alte bloguri-recenzie (smartscope, penligent, besthub). Prețuri verificate 2026-11-14: claude.com/pricing (Pro 17/20, Max 100, Claude Code inclus), learn.chatgpt.com/docs/pricing (Plus 20, Codex inclus), github.com/security/plans (Code Security 30, Secret Protection 19 per committer activ pe lună), snyk.io/plans (Team de la 25 USD/lună), getastra.com/pricing (Pentest Auto 2.999, Expert 5.999). Nu am găsit prețul Node.js sau al unui sandbox (null). Cost în tokeni: nedocumentat oficial; HN (comentarii): cel puțin 150k tokeni pe un proiect FastAPI mic, dev.to: limita atinsă de două ori. Platforme: Windows parțial (validatoarele depind de O_NOFOLLOW, confirmat în validate-findings.cjs linia 605 și în issue #117), Mac parțial (rulat în poveste, fără sandbox), Linux dedus. Skill-ul în sine nu trimite date nicăieri, dar codul auditat ajunge la furnizorul modelului agentului; am notat asta în when_not_to_use, nu ca risk_flag, deoarece nu e un comportament al repo-ului. Issue #128 este o raportare a unui utilizator, neconfirmată de autori. Partenerii verificați activi (ultimul push în ultimele 12 luni): usestrix/strix (Apache-2.0, 2026-11-13), semgrep/semgrep (LGPL-2.1, 2026-11-13), google/osv-scanner (Apache-2.0, 2026-11-13), gitleaks/gitleaks (MIT, 2026-10-28), vercel-labs/skills (MIT, 2026-11-12). Categoria propusă „Audit de securitate cod” nu s-a adăugat: s-a folosit „Agenți AI și securitate”, care există deja. Glosar: s-au adăugat doar termenii și aliasurile care lipseau."
+}

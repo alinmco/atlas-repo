@@ -1,0 +1,388 @@
+{
+  "slug": "open-genjutsu",
+  "repo_url": "https://github.com/Anil-matcha/open-genjutsu",
+  "name": "open-genjutsu (Genjutsu)",
+  "one_liner": "Înlocuiește o persoană dintr-un scurt clip video cu un personaj ales de tine.",
+  "problem_solved": "Vrei să refaci un clip scurt cu alt personaj sau alt actor, păstrând mișcările, decorul și sunetul originale, dar fără filmări noi. Fără o unealtă potrivită, asta înseamnă editare manuală grea sau abonamente la servicii de video AI.",
+  "features": [
+    "Aplicație web locală: încarci un clip de 4-15 secunde și până la 8 imagini cu personajul",
+    "Două motoare de randare la alegere: Genjutsu (Seedance 2.5) sau Genjutsu Lite (Wan 3.0)",
+    "Pregătește automat referințele: clip de adâncime, cadre de decor curățate, fișe de personaj, prompt scris de AI",
+    "Mod transfer de mișcare sau schimbare de obiect, cu raport de aspect și durată la alegere",
+    "Salvează un MP4 local cu sunetul clipului original pus la loc (prin FFmpeg)",
+    "Buton pentru ștergerea fișierelor locale; serverul rulează doar pe calculatorul tău (127.0.0.1)"
+  ],
+  "at_a_glance": {
+    "for_you_if": [
+      "Vrei să înlocuiești un actor sau un personaj dintr-un clip scurt, fără să filmezi din nou.",
+      "Ești ok să plătești credite pe consum la Muapi pentru fiecare clip generat."
+    ],
+    "not_for_you_if": [
+      "Vrei totul gratuit sau offline, pe calculatorul tău, fără trimiterea clipurilor într-un serviciu online.",
+      "Ai clipuri mai lungi de 15 secunde sau ai nevoie de un serviciu public cu conturi de utilizatori."
+    ],
+    "verdict": "O interfață locală simplă peste un serviciu plătit: utilă pentru clipuri scurte, dar nu rulează modelele pe calculatorul tău."
+  },
+  "cost": {
+    "level": "gratuit, dar cere servicii plătite",
+    "summary": "Codul e gratuit (MIT), dar fiecare clip se plătește în credite la serviciul Muapi, pe consum; abonamentul Claude sau ChatGPT nu ajută, ai nevoie de cheie API Muapi.",
+    "ai_access": {
+      "mode": "doar API",
+      "detail": "Toate etapele AI (adâncime, analiză video, imagini, prompt, randare) rulează prin API-ul Muapi, cu cheia ta și credite în cont; nu folosește abonamente de chat AI.",
+      "source_url": "https://github.com/Anil-matcha/open-genjutsu#requirements"
+    },
+    "items": [
+      {
+        "what": "Muapi: randare finală Seedance 2.5 Omni Reference (nivelul standard, 480p-4K)",
+        "price": "de la 0,17 USD pe secundă de video generat (480p); 0,34 / 0,85 / 1,70 USD pe secundă la rezoluții mai mari, după pagina Muapi, verificat 2026-11-14",
+        "required": false,
+        "source_url": "https://muapi.ai/seedance-2.5"
+      },
+      {
+        "what": "Muapi: randare finală Wan 3.0 Prime Reference to Video (pentru Genjutsu Lite; pagina nu arată prețul variantei standard)",
+        "price": "0,068 USD/s la 480p, 0,14 USD/s la 720p, 0,28 USD/s la 1080p, plus un cost pentru clipul de referință nespecificat, verificat 2026-11-14",
+        "required": false,
+        "source_url": "https://muapi.ai/wan-3"
+      },
+      {
+        "what": "Muapi: etapele de pregătire (adâncime, decor, fișe de personaj) în fluxul propriu Muapi Seedance 2.5 Motion Control; indicativ, aplicația ta folosește apeluri separate",
+        "price": "adâncime 0,04 USD/s de clip sursă; decor 0,06 USD/cadru; fișă de personaj 0,09 USD/imagine, verificat 2026-11-14",
+        "required": true,
+        "source_url": "https://muapi.ai/playground/seedance-2.5-motion-control"
+      },
+      {
+        "what": "Cont Muapi cu cheie API și credite (pe consum, fără abonament, după pagina principală)",
+        "price": null,
+        "required": true,
+        "source_url": "https://muapi.ai/"
+      },
+      {
+        "what": "Python 3.10+ și FFmpeg (programe gratuite, open-source)",
+        "price": null,
+        "required": true,
+        "source_url": "https://github.com/Anil-matcha/open-genjutsu#requirements"
+      }
+    ]
+  },
+  "platforms": {
+    "windows": "da",
+    "mac": "da",
+    "linux": "da",
+    "note": "README-ul dă instalarea FFmpeg pentru macOS (Homebrew) și Debian/Ubuntu, iar pentru Windows doar comanda de activare a mediului Python (PowerShell). Pe Windows, instalarea FFmpeg nu e descrisă, deci e dedusă; codul folosește doar Python și FFmpeg din PATH.",
+    "source_url": "https://github.com/Anil-matcha/open-genjutsu#requirements"
+  },
+  "risk_flags": [
+    {
+      "flag": "trimite date în cloud",
+      "detail": "Clipul sursă și imaginile cu personajul sunt încărcate la Muapi; README-ul spune că se aplică regulile lor de stocare și păstrare.",
+      "source_url": "https://github.com/Anil-matcha/open-genjutsu#privacy-and-local-files"
+    },
+    {
+      "flag": "cere cont",
+      "detail": "Ai nevoie de o cheie API Muapi, introdusă în pagina locală și trimisă cu fiecare cerere.",
+      "source_url": "https://github.com/Anil-matcha/open-genjutsu#run-locally"
+    },
+    {
+      "flag": "cere plată",
+      "detail": "Fiecare etapă de imagine, analiză video și generare video poate consuma credite din contul Muapi.",
+      "source_url": "https://github.com/Anil-matcha/open-genjutsu#api-adapter"
+    }
+  ],
+  "audience_reason": "ai nevoie de terminal, Python, FFmpeg și un cont cu credite plătite, dar nu de cod propriu",
+  "setup_difficulty_reason": "cheie API plătită și FFmpeg de instalat separat, deși fără GPU și cu doar câteva comenzi",
+  "analogy": "E ca un atelier de costume pe care îl conduci de acasă: tu aduci filmarea și fotografiile personajului, iar o fabrică plătită din oraș (Muapi) face munca grea, apoi tu pui sunetul la loc.",
+  "how_it_works": [
+    "Pasul 1 (intrare): încarci un clip MP4 sau MOV de 4-15 secunde și până la 8 imagini cu personajul în pagina locală.",
+    "Pasul 2 (pregătire): aplicația trimite fișierele la Muapi, care extrage un clip de adâncime, alege și curăță cadre de decor, face fișe de personaj și scrie un prompt (text de instrucțiuni) cu Gemini.",
+    "Pasul 3 (randare): la alegere, Seedance 2.5 sau Wan 3.0 generează noul clip pornind de la aceste referințe; aplicația întreabă din 3 în 3 secunde dacă e gata.",
+    "Pasul 4 (ieșire): aplicația descarcă rezultatul și, cu FFmpeg, pune la loc sunetul clipului original, apoi îți dă un fișier MP4."
+  ],
+  "first_steps": null,
+  "categories": [
+    "Editare video",
+    "Creare de conținut"
+  ],
+  "search_intents": [
+    "vreau să înlocuiesc un actor dintr-un clip video cu un alt personaj",
+    "vreau să transfer mișcările dintr-un video pe un personaj generat de AI",
+    "vreau să fac un clip cu avatar care dansează ca în filmarea mea",
+    "vreau o alternativă open-source la Runway Act-Two sau Kling Motion Control"
+  ],
+  "audience": "intermediar",
+  "setup_difficulty": "greu",
+  "replaces": [
+    {
+      "service": "Runway (Act-Two, transfer de performanță pe un personaj)",
+      "service_url": "https://runway.com/pricing",
+      "price": "Standard 12 USD/lună (facturat anual; 15 USD/lună lunar), 625 credite; Pro 28 USD/lună (35 lunar), 2.250 credite",
+      "price_source_url": "https://runway.com/pricing",
+      "price_checked_at": "2026-11-14",
+      "replacement_level": "parțial",
+      "what_you_keep": [
+        "Transferul unei performanțe dintr-un clip pe un personaj dintr-o imagine",
+        "Plata pe consum, fără abonament lunar fix, prin Muapi"
+      ],
+      "what_you_lose": [
+        "Editor video complet și celelalte unelte Runway",
+        "Suport și garanții de produs comercial",
+        "Pagina de prețuri nu arată costul în credite al Act-Two, deci comparația exactă n-a putut fi făcută"
+      ],
+      "hidden_costs": [
+        "Credite Muapi la fiecare încercare, inclusiv la rezultate pe care nu le păstrezi",
+        "Timp de configurare (Python, FFmpeg, cheie API)",
+        "Calculatorul trebuie pornit și pagina deschisă cât rulează un job"
+      ]
+    },
+    {
+      "service": "Kling Motion Control (API oficial)",
+      "service_url": "https://kling.ai/document-api/pricing/base/video.md",
+      "price": "Kling 3.0 Motion Control: 0,126 USD/s la 720p și 0,168 USD/s la 1080p (0,9 și 1,2 unități, unitate = 0,14 USD)",
+      "price_source_url": "https://kling.ai/document-api/pricing/base/video.md",
+      "price_checked_at": "2026-11-14",
+      "replacement_level": "parțial",
+      "what_you_keep": [
+        "Transferul de mișcare dintr-un clip real pe un personaj",
+        "Alegerea între două modele de randare în aceeași interfață"
+      ],
+      "what_you_lose": [
+        "Un singur apel de API simplu pentru motion control; aici rulează un lanț de mai multe etape plătite",
+        "Fidelitatea față de mișcarea originală: README-ul spune că Wan 3.0 poate să nu reproducă performanța cadru cu cadru"
+      ],
+      "hidden_costs": [
+        "Costul total pe clip e suma mai multor etape Muapi, nu doar randarea finală",
+        "Fără ștergere automată a fișierelor de pe serverul Muapi: depinde de termenii lor"
+      ]
+    },
+    {
+      "service": "Viggle AI (animarea personajelor după un clip)",
+      "service_url": "https://viggle.ai/pricing",
+      "price": "Free 0 USD; Pro 7,99 USD/lună (afișat redus de la 9,99); Live 15,99 USD/lună; Max 63,99 USD/lună",
+      "price_source_url": "https://viggle.ai/pricing",
+      "price_checked_at": "2026-11-14",
+      "replacement_level": "doar pentru cazuri simple",
+      "what_you_keep": [
+        "Animarea unui personaj după mișcările dintr-un clip",
+        "Restabilirea sunetului original în MP4-ul final"
+      ],
+      "what_you_lose": [
+        "Aplicație mobilă și web gata de folosit, cu comunitate și șabloane",
+        "Preț fix lunar, previzibil"
+      ],
+      "hidden_costs": [
+        "Cost pe consum, greu de prevăzut, dacă refaci des același clip",
+        "Mentenanță: dacă Muapi schimbă API-ul sau modelele, trebuie actualizat codul"
+      ]
+    }
+  ],
+  "examples": [
+    {
+      "title": "Pornești aplicația locală",
+      "scenario": "Clonezi repo-ul, creezi un mediu Python și pornești serverul local pe portul 8770.",
+      "prerequisites": [
+        "Python 3.10+",
+        "FFmpeg și ffprobe în PATH",
+        "O cheie API Muapi cu credite"
+      ],
+      "commands": [
+        "git clone https://github.com/Anil-matcha/open-genjutsu.git",
+        "cd open-genjutsu",
+        "python3 -m venv .venv",
+        "source .venv/bin/activate",
+        "pip install -r requirements.txt",
+        "python -m uvicorn app:app --host 127.0.0.1 --port 8770"
+      ],
+      "code": null,
+      "output_from_docs": null,
+      "source_url": "https://github.com/Anil-matcha/open-genjutsu#run-locally",
+      "kind": "instalare"
+    },
+    {
+      "title": "Refaci un clip cu alt personaj",
+      "scenario": "După pornire, deschizi pagina din browser și urmezi fluxul din documentație: încarci clipul sursă și imaginea personajului, apoi aplicația rulează etapele de pregătire și randare și îți dă MP4-ul final.",
+      "prerequisites": [
+        "Serverul local pornit (exemplul anterior)",
+        "Un clip sursă MP4 sau MOV de 4-15 secunde, maximum 50 MB",
+        "Una sau mai multe imagini JPEG, PNG sau WebP, maximum 10 MB fiecare"
+      ],
+      "commands": [],
+      "code": "Open <http://127.0.0.1:8770>, enter your API key, choose the source clip and character image, and upload them. The key stays in page memory and is forwarded by the local app with each request.",
+      "output_from_docs": null,
+      "source_url": "https://github.com/Anil-matcha/open-genjutsu#run-locally",
+      "kind": "folosire"
+    }
+  ],
+  "connectors": {
+    "inputs": [
+      "Fișier video MP4 sau MOV, 4-15 secunde, maximum 50 MB (clipul sursă)",
+      "1-8 imagini JPEG, PNG sau WebP, maximum 10 MB fiecare (personajul)",
+      "Opțional: un scurt text de idei (brief creativ), mod (transfer de mișcare sau schimbare de obiect), raport de aspect și durată",
+      "Cheie API Muapi, introdusă în pagina locală"
+    ],
+    "outputs": [
+      "Fișier MP4 local în runtime/exports/, cu sunetul clipului original restabilit când există",
+      "Rezultatul brut generat de Muapi, ca URL de descărcare"
+    ],
+    "pairs_well_with": [
+      {
+        "repo_url": "https://github.com/opencut-app/opencut",
+        "name": "OpenCut",
+        "why": "Importi MP4-ul rezultat în editor, ca să tai, adaugi titluri și muzică și exporți clipul final.",
+        "in_catalog": true
+      },
+      {
+        "repo_url": "https://github.com/Anil-matcha/Open-Generative-AI",
+        "name": "Open-Generative-AI",
+        "why": "Cu aceeași cheie Muapi poți genera imaginile cu personajul (PNG sau JPEG), care devin intrarea din open-genjutsu; același autor, MIT, activ.",
+        "in_catalog": false
+      },
+      {
+        "repo_url": "https://github.com/FFmpeg/FFmpeg",
+        "name": "FFmpeg",
+        "why": "Tai un clip lung la 4-15 secunde sau îl convertești în MP4 înainte de încărcare; rezultatul devine clipul sursă.",
+        "in_catalog": false
+      }
+    ],
+    "gaps_noticed": [
+      "Clipul sursă e limitat la 4-15 secunde și 50 MB: clipurile lungi trebuie tăiate manual, în afara aplicației.",
+      "Starea jobului e ținută în memorie și se pierde dacă repornești serverul; nu există coadă de joburi sau procesare în lot.",
+      "Aplicația nu are autentificare și README-ul cere să rămână pe 127.0.0.1, deci nu se poate oferi direct altor utilizatori.",
+      "Fișierul exportat are numele fix genjutsu-lite-final.mp4 în cod, chiar și pentru randarea Seedance."
+    ]
+  },
+  "when_not_to_use": [
+    "Dacă nu vrei ca clipurile și fețele din ele să ajungă la un serviciu terț: aici tot ce încarci merge la Muapi.",
+    "Dacă ai nevoie de randare complet offline sau gratuită: modelele nu rulează pe calculatorul tău.",
+    "Dacă lucrezi cu clipuri peste 15 secunde sau cu mulți utilizatori în paralel.",
+    "Dacă nu ai permisiunea de a folosi filmarea sau înfățișarea persoanelor din imagini: README-ul cere explicit acest lucru.",
+    "Dacă vrei fidelitate cadru cu cadru la mișcare cu Genjutsu Lite: README-ul spune că Wan 3.0 poate să nu reproducă performanța exact."
+  ],
+  "alternatives": [
+    {
+      "name": "Open-Generative-AI",
+      "url": "https://github.com/Anil-matcha/Open-Generative-AI",
+      "difference": "Același autor, tot pe Muapi, dar un studio mai larg de imagini și video (mai multe modele), nu un flux dedicat de înlocuire a performerului."
+    },
+    {
+      "name": "ComfyUI",
+      "url": "https://github.com/Comfy-Org/ComfyUI",
+      "difference": "Interfață cu noduri, rulată local pe calculatorul tău, GPL-3.0; flexibilă, dar mai greu de configurat și îți trebuie placă video."
+    },
+    {
+      "name": "Higgsfield (Genjutsu comercial)",
+      "url": "https://higgsfield.ai",
+      "difference": "Serviciul comercial cu un produs numit Genjutsu; abonament, interfață finisată, preț neverificat de mine (pagina de prețuri n-a putut fi citită)."
+    }
+  ],
+  "tech_sheet": {
+    "license": "MIT",
+    "language": "Python",
+    "commit_sha": "bef8514d1e9b855db38c189b98863c66552a1948",
+    "last_commit_date": "2026-11-03",
+    "stars": 1070,
+    "requirements": [
+      "Python 3.10 sau mai nou",
+      "Git (pentru clonare)",
+      "FFmpeg și ffprobe în PATH (macOS: brew install ffmpeg; Debian/Ubuntu: sudo apt install ffmpeg)",
+      "Cont Muapi cu cheie API și credite de generare (plătit, pe consum)",
+      "Pachete Python din requirements.txt: fastapi, uvicorn[standard], httpx, python-multipart, Pillow",
+      "Mediu virtual Python (python3 -m venv .venv); pe Windows PowerShell se activează cu .venv\\Scripts\\Activate.ps1",
+      "Port 8770 liber pe calculator și un browser web"
+    ]
+  },
+  "monetization": [
+    {
+      "model": "integrare pentru o nișă",
+      "what_you_sell": "Clipuri scurte refăcute la comandă: clientul îți dă un clip filmat și o mascotă sau un personaj de brand, iar tu livrezi MP4-ul cu personajul în locul performerului, după ce îl revizuiești.",
+      "for_whom": "Creatori de conținut, mici magazine online și agenții care vor reclame scurte cu mascotă, fără filmări noi.",
+      "license_check": {
+        "license": "MIT",
+        "commercial_use": "permis",
+        "conditions": "MIT permite folosirea comercială; păstrezi nota de drepturi de autor dacă redistribui codul. Termenii Muapi și ai modelelor (Seedance, Wan) se aplică separat și nu i-am citit: verifică-i înainte să vinzi."
+      },
+      "path": "folosești repo-ul direct",
+      "own_build_notes": null,
+      "demand_evidence": [
+        {
+          "name": "Viggle AI",
+          "url": "https://viggle.ai/pricing",
+          "price": "Pro 7,99 USD/lună; Live 15,99 USD/lună; Max 63,99 USD/lună",
+          "what_it_proves": "Oamenii plătesc deja abonamente pentru animarea personajelor după clipuri.",
+          "checked_at": "2026-11-14"
+        },
+        {
+          "name": "Runway",
+          "url": "https://runway.com/pricing",
+          "price": "Standard 12 USD/lună (facturat anual), Pro 28 USD/lună",
+          "what_it_proves": "Un serviciu mare vinde pachete de credite pentru video AI, inclusiv transfer de performanță.",
+          "checked_at": "2026-11-14"
+        },
+        {
+          "name": "Kling API, Motion Control",
+          "url": "https://kling.ai/document-api/pricing/base/video.md",
+          "price": "0,126 USD/s la 720p, 0,168 USD/s la 1080p",
+          "what_it_proves": "Transferul de mișcare se vinde direct, pe secundă de video.",
+          "checked_at": "2026-11-14"
+        }
+      ],
+      "startup_cost": "Cont Muapi cu credite pentru teste (suma depinde de câte încercări faci) și un calculator cu Python și FFmpeg.",
+      "time_to_first_client": "Greu de estimat; depinde de portofoliul tău și de cât de bune sunt rezultatele demonstrative.",
+      "difficulty": "mediu",
+      "risks": [
+        "Costul pe clip la Muapi e plătit de tine, inclusiv pentru încercările nereușite.",
+        "Concurență gratuită: oricine poate rula chiar acest repo sau poate folosi direct Muapi.",
+        "Dependență de Muapi și de modele: prețuri, API sau reguli se pot schimba.",
+        "Drepturi și consimțământ: ai nevoie de acordul persoanelor din clipuri și imagini; README-ul spune să folosești doar materiale pentru care ai permisiune."
+      ],
+      "first_steps": [
+        "Citește termenii Muapi și ai modelelor despre folosirea comercială.",
+        "Fă 2-3 clipuri demonstrative cu materiale proprii și notează costul în credite pentru fiecare.",
+        "Scrie o ofertă cu un număr limitat de încercări incluse și un contract simplu de consimțământ pentru imagini."
+      ]
+    },
+    {
+      "model": "produs construit peste repo",
+      "what_you_sell": "O versiune online cu conturi de utilizatori, coadă de joburi și plată, construită pe codul open-genjutsu (care acum e doar local, fără autentificare).",
+      "for_whom": "Creatori care vor un site simplu unde încarcă clipul și personajul, fără să instaleze Python sau FFmpeg.",
+      "license_check": {
+        "license": "MIT",
+        "commercial_use": "permis",
+        "conditions": "MIT permite modificarea și oferirea ca serviciu; păstrezi nota MIT. Serviciile Muapi și modelele au termeni separați, necitiți de mine."
+      },
+      "path": "folosești repo-ul direct",
+      "own_build_notes": null,
+      "demand_evidence": [
+        {
+          "name": "Muapi White Label",
+          "url": "https://muapi.ai/white-label",
+          "price": null,
+          "what_it_proves": "Chiar furnizorul vinde posibilitatea de a revinde studiouri AI sub brand propriu, deci există cerere, dar și concurență directă. Prețul nu a putut fi verificat pe pagină.",
+          "checked_at": "2026-11-14"
+        },
+        {
+          "name": "Viggle AI",
+          "url": "https://viggle.ai/pricing",
+          "price": "Pro 7,99 USD/lună",
+          "what_it_proves": "Un produs de consum pentru animarea personajelor are planuri lunare publice.",
+          "checked_at": "2026-11-14"
+        }
+      ],
+      "startup_cost": "Timp de programare serios (conturi, plăți, coadă, stocare) și credite Muapi de pre-finanțat sau de refacturat.",
+      "time_to_first_client": "Luni, dacă construiești singur autentificarea și plata; nu am o estimare mai precisă.",
+      "difficulty": "greu",
+      "risks": [
+        "Mulți utilizatori înseamnă mulți bani cheltuiți pe credite Muapi înainte să încasezi.",
+        "Servicii mari (Runway, Kling, Higgsfield, Viggle) vând deja ceva asemănător, cu bugete mai mari.",
+        "Răspundere pentru conținut: oricine poate încărca fețe ale altor persoane; ai nevoie de reguli și moderare.",
+        "Codul actual ține starea în memorie și n-are autentificare; ai de rescris părți mari."
+      ],
+      "first_steps": [
+        "Citește termenii Muapi despre revânzare și folosire comercială a modelelor.",
+        "Testează local repo-ul pe 3-5 clipuri ca să vezi costul real pe clip.",
+        "Schițează ce trebuie adăugat: conturi, coadă, stocare, politică de conținut."
+      ]
+    }
+  ],
+  "updated_at": "2026-11-14",
+  "notes_summary": "Am citit README-ul, app.py și interfața și am verificat prețurile Muapi, Kling, Runway și Viggle; n-am rulat nimic și n-am găsit o poveste reală de utilizare.",
+  "notes": "Cod citit: app.py (FastAPI, apeluri către https://api.muapi.ai/api/v1 cu antet x-api-key), static/index.html, README.md, LICENSE (MIT standard, Copyright 2026 Anil-matcha). Repo clonat superficial la commit bef8514 (2026-11-03). Istoricul a fost resetat ('Merge reset remote history'): GitHub arată creare în 2023, issue-urile vechi (pip install, 'Modules are not installed') și câteva issue-uri/PR-uri de promovare a unor routere AI sunt rămășițe dintr-un alt conținut; issue-ul #113 spune că README-ul a fost gol după un 'merge batch' din 3 octombrie, dar acum README-ul are 8 KB. Cele 1.070 stele nu pot fi interpretate ca interes pentru acest proiect, fiind posibil moștenite. Fonturile din interfață se încarcă de la Google Fonts (index.html), altfel n-am găsit telemetrie. Autorul promovează Muapi în alte repo-uri (ex. Open-Generative-AI, cu badge 'Powered by MuAPI' și ofertă White Label), deci nu e un proiect neutru față de furnizor. Prețuri verificate 2026-11-14: Muapi (seedance-2.5: de la 0,17 USD/s; wan-3: Prime 0,068/0,14/0,28 USD/s; playground motion-control: pregătire 0,04 USD/s sursă, 0,06 USD/cadru decor, 0,09 USD/fișă personaj - sunt prețurile fluxului propriu Muapi, iar aplicația apelează modele separate, deci indicativ), Kling API (documentația oficială), Runway (planuri; costul în credite pentru Act-Two nu apare pe pagină), Viggle. Prețul Higgsfield n-a putut fi citit pe pagina oficială (conținut gol), deci nu e în 'replaces' și apare doar ca alternativă fără preț. Prețul White Label Muapi nu apare pe pagină (README-ul Open-Generative-AI spune 'de la 49 USD/lună', neverificat pe site), deci price e null. Nu am citit termenii Muapi despre folosirea comercială a rezultatelor și nici licențele Seedance/Wan; ele pot restricționa monetizarea. Primii pași: nu am găsit o experiență reală potrivită. Am căutat: Hacker News (Algolia: open-genjutsu, genjutsu seedance, muapi, Anil-matcha, genjutsu video recast; apar doar postări ale autorului pe alte repo-uri), căutare web generală (doar pagini de produs Muapi/Dreamina), issue-urile repo-ului (30, fără povești de utilizare; GitHub Discussions e dezactivat). Parteneri verificați activi: OpenCut (commit 2026-09-24, MIT), Open-Generative-AI (push 2026-11-14, MIT), FFmpeg (push 2026-11-14). Comparația repo-ului cu serviciile: serviciile comerciale oferă și produse alături (editor, aplicații mobile). Termeni de glosar noi propuși: Muapi, Seedance, Wan 3.0, FFmpeg, FastAPI, mediu virtual, clip de adâncime, motion transfer."
+}
