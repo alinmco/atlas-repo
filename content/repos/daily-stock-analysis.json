@@ -1,0 +1,449 @@
+{
+  "slug": "daily-stock-analysis",
+  "repo_url": "https://github.com/ZhuLinsen/daily_stock_analysis",
+  "name": "Daily Stock Analysis",
+  "one_liner": "Analizează zilnic acțiunile tale cu AI și îți trimite raportul pe Telegram sau e-mail.",
+  "problem_solved": "Urmărirea zilnică a mai multor acțiuni (cotații, știri, indicatori) înseamnă ore de citit din surse diferite. Unealta strânge datele, cere unui model AI să le rezume și îți trimite un raport gata făcut, în fiecare zi.",
+  "features": [
+    "Raport zilnic pe acțiune: concluzie, scor, trend, riscuri, factori pozitivi și o listă de verificare",
+    "Acoperă acțiuni din China (A-shares), Hong Kong, SUA, Japonia, Coreea, Taiwan, plus ETF-uri",
+    "Trimite rapoartele pe Telegram, Discord, Slack, e-mail, WeChat Work sau Feishu",
+    "Rulează gratuit în GitHub Actions, în Docker sau local, cu program zilnic automat",
+    "Interfață web și aplicație desktop: analiză manuală, istoric, backtest, portofoliu",
+    "Chat cu strategii (medii mobile, unde Elliott, tendințe) unde poți pune întrebări de urmărire"
+  ],
+  "at_a_glance": {
+    "for_you_if": [
+      "Ai o listă de acțiuni și vrei un rezumat automat, zilnic, pe telefon.",
+      "Nu te deranjează să-ți faci o cheie API pentru un model AI."
+    ],
+    "not_for_you_if": [
+      "Vrei sfaturi de investiții de încredere sau semnale de tranzacționare garantate.",
+      "Vrei ceva fără nicio configurare, cu documentație în română."
+    ],
+    "verdict": "Bun ca unealtă de informare personală. Rapoartele AI nu sunt sfat de investiții (documentația spune că proiectul e doar pentru studiu și cercetare), iar documentația e în principal în chineză."
+  },
+  "cost": {
+    "level": "gratuit, dar cere servicii plătite",
+    "summary": "Codul e gratuit, dar îți trebuie o cheie API pentru un model AI (are plan gratuit la unii furnizori) sau abonamentul Claude/ChatGPT prin modul CLI experimental; sursele de știri sunt opționale și au planuri gratuite limitate.",
+    "ai_access": {
+      "mode": "abonament sau API",
+      "detail": "Modul principal folosește chei API (Gemini, OpenAI, Claude, DeepSeek etc.) sau Ollama local; modul experimental claude_code_cli/codex_cli poate folosi login-ul tău de abonament, dar nu merge în Actions/Docker, iar chatul cu agenți rămâne pe API.",
+      "source_url": "https://github.com/ZhuLinsen/daily_stock_analysis/blob/main/docs/LLM_CONFIG_GUIDE_EN.md"
+    },
+    "items": [
+      {
+        "what": "Cheie API Gemini (Google), model AI pentru rapoarte (are plan gratuit)",
+        "price": "plan gratuit disponibil; plătit pentru Gemini 3.8 Flash: 0,75 USD intrare / 3,75 USD ieșire la 1 milion de tokeni până pe 31 dec 2026, apoi 1,50 / 7,50 USD",
+        "required": false,
+        "source_url": "https://aistudio.google.com/docs/pricing"
+      },
+      {
+        "what": "Abonament Claude Pro (pentru modul experimental claude_code_cli, în loc de cheie API)",
+        "price": "20 USD/lună lunar sau 17 USD/lună cu plata anuală",
+        "required": false,
+        "source_url": "https://claude.com/pricing"
+      },
+      {
+        "what": "Abonament ChatGPT Plus (Codex inclus, pentru modul experimental codex_cli)",
+        "price": "20 USD/lună",
+        "required": false,
+        "source_url": "https://learn.chatgpt.com/docs/pricing"
+      },
+      {
+        "what": "Căutare de știri SerpAPI (recomandat în documentație pentru știri financiare)",
+        "price": "plan gratuit 250 căutări/lună; Starter 25 USD/lună pentru 1.000 căutări",
+        "required": false,
+        "source_url": "https://serpapi.com/pricing"
+      },
+      {
+        "what": "Căutare de știri Tavily (alternativă)",
+        "price": "plan gratuit 1.000 credite/lună; Project 30 USD/lună pentru 4.000 credite",
+        "required": false,
+        "source_url": "https://tavily.com/pricing"
+      },
+      {
+        "what": "Surse de cotații cu token (TickPlus, Tushare, Longbridge): opționale, pentru date mai stabile; sursele gratuite (AkShare, Baostock, YFinance) merg fără token",
+        "price": null,
+        "required": false,
+        "source_url": "https://github.com/ZhuLinsen/daily_stock_analysis/blob/main/docs/README_EN.md"
+      },
+      {
+        "what": "Server sau NAS pentru Docker (doar dacă nu folosești GitHub Actions)",
+        "price": null,
+        "required": false,
+        "source_url": "https://github.com/ZhuLinsen/daily_stock_analysis/blob/main/docs/DEPLOY_EN.md"
+      }
+    ]
+  },
+  "platforms": {
+    "windows": "da",
+    "mac": "da",
+    "linux": "da",
+    "note": "Python 3.10+ rulează pe toate; documentația oferă și instalator desktop Windows (exe) și DMG pentru macOS (nesemnat Apple, poate cere confirmare manuală), iar Docker e recomandat pe servere Linux.",
+    "source_url": "https://github.com/ZhuLinsen/daily_stock_analysis/blob/main/docs/desktop-package.md"
+  },
+  "risk_flags": [
+    {
+      "flag": "trimite date în cloud",
+      "detail": "Lista ta de acțiuni, știrile și promptul de analiză ajung la furnizorul de AI și la serviciile de căutare alese (și, în modul CLI, la serviciul din spatele Codex/Claude Code).",
+      "source_url": "https://github.com/ZhuLinsen/daily_stock_analysis/blob/main/docs/LLM_CONFIG_GUIDE_EN.md"
+    },
+    {
+      "flag": "cere cont",
+      "detail": "Ai nevoie de cont GitHub pentru varianta Actions și de cont plus cheie API la cel puțin un furnizor de AI și un canal de notificare.",
+      "source_url": "https://github.com/ZhuLinsen/daily_stock_analysis/blob/main/docs/README_EN.md"
+    }
+  ],
+  "audience_reason": "pornești ușor din GitHub Actions, dar trebuie să înțelegi chei API, secrete și variabile de mediu",
+  "setup_difficulty_reason": "mai mulți pași (fork, chei AI, canal de notificare, listă de acțiuni), plus un model AI cu cheie API",
+  "analogy": "Ca un analist care îți pune în fiecare seară pe birou un dosar scurt cu ce s-a întâmplat la acțiunile tale, scris după ce a citit cotațiile și știrile zilei.",
+  "how_it_works": [
+    "Pasul 1 (intrare): îi dai lista de acțiuni (de ex. 600519, AAPL, 2330.TW) și cheile pentru un model AI și un canal de notificare.",
+    "Pasul 2 (date): la ora programată, preia cotații, grafice, indicatori și știri din surse gratuite sau cu token, cu rezervă automată dacă o sursă pică.",
+    "Pasul 3 (AI): trimite datele unui model AI, care scrie un tablou de decizie cu scor, trend, riscuri și factori pozitivi.",
+    "Pasul 4 (ieșire): trimite raportul pe Telegram, e-mail, Discord etc. și îl păstrează în istoricul din interfața web."
+  ],
+  "first_steps": {
+    "origin": "experiență utilizator",
+    "story_url": "https://sspai.com/post/106821",
+    "story_platform": "blog",
+    "story_date": "2026-03-04",
+    "title": "Pe un NAS QNAP: analiză zilnică de acțiuni, cu push în grupul de lucru",
+    "intro": "Un pasionat de NAS-uri a vrut un analist automat care să-i trimită zilnic un raport despre acțiunile lui. A pus proiectul pe un NAS QNAP, în Docker Compose.",
+    "steps": [
+      {
+        "you_do": "A completat fișierul .env: lista de acțiuni și orele programate, plus modelul AI principal și unul de rezervă (printre cele încercate: Gemini, DeepSeek, un serviciu compatibil OpenAI).",
+        "what_happens": "Unealta știe ce acțiuni să urmărească și, dacă modelul principal pică, încearcă automat pe cel de rezervă.",
+        "source_url": "https://sspai.com/post/106821"
+      },
+      {
+        "you_do": "A adăugat un serviciu de căutare de știri (Tavily) și un canal de notificare, un webhook de grup WeCom.",
+        "what_happens": "Raportul include știri recente despre firmă și poate fi trimis în grupul de chat.",
+        "source_url": "https://sspai.com/post/106821"
+      },
+      {
+        "you_do": "A pornit două servicii din aceeași imagine Docker: unul pentru rularea programată și unul pentru interfața web pe portul 8068.",
+        "what_happens": "Interfața web se deschide la adresa NAS-ului; autorul a căutat o acțiune și a primit o analiză, apoi a pus întrebări de urmărire.",
+        "source_url": "https://sspai.com/post/106821"
+      },
+      {
+        "you_do": "A lăsat sistemul să ruleze zilnic la 19:00.",
+        "what_happens": "Primește o recapitulare a pieței (indici, sectoare) și câte un tablou de decizie pe acțiune, cu scor, trend, riscuri și factori pozitivi.",
+        "source_url": "https://sspai.com/post/106821"
+      },
+      {
+        "you_do": "A rulat pe nivelul gratuit al unui furnizor de modele (SiliconFlow).",
+        "what_happens": "Analiza a trei acțiuni plus trimiterea a durat aproape o jumătate de oră din cauza răspunsurilor lente; autorul recomandă un furnizor mai rapid.",
+        "source_url": "https://sspai.com/post/106821"
+      }
+    ],
+    "takeaway": "Autorul spune că unealta economisește mult timp la analiza rutinieră a acțiunilor; nu compară cifric cu lucrul manual și notează că rezultatele sunt doar informative, nu sfaturi de investiții."
+  },
+  "categories": [
+    "Analiză financiară",
+    "Agenți AI și automatizare",
+    "Monitorizare și audit"
+  ],
+  "search_intents": [
+    "vreau un raport zilnic automat despre acțiunile mele",
+    "vreau să analizez acțiuni cu AI",
+    "vreau să primesc analiza de piață pe Telegram sau e-mail",
+    "vreau o alternativă gratuită la platformele de analiză a acțiunilor",
+    "vreau să urmăresc acțiuni din SUA, Hong Kong și China într-un singur loc"
+  ],
+  "audience": "intermediar",
+  "setup_difficulty": "mediu",
+  "replaces": [
+    {
+      "service": "Seeking Alpha Premium",
+      "service_url": "https://seekingalpha.com/subscriptions",
+      "price": "239 USD/an (preț întreg pe pagina de ofertă oficială; nu am găsit un preț lunar)",
+      "price_source_url": "https://subscriptions.seekingalpha.com/lp_premium_bundle_sitewide_sale_2026_ppc/",
+      "price_checked_at": "2026-11-14",
+      "replacement_level": "doar pentru cazuri simple",
+      "what_you_keep": [
+        "rezumate zilnice cu riscuri și factori pozitivi pentru lista ta",
+        "alerte pe canalul ales de tine",
+        "date de piață din surse gratuite pentru mai multe piețe"
+      ],
+      "what_you_lose": [
+        "analize scrise de analiști umani și comunitate",
+        "ratinguri și scoruri calculate de o echipă dedicată",
+        "date proprii curate, fără ghinioane de scraping",
+        "aplicații mobile și suport"
+      ],
+      "hidden_costs": [
+        "cheie API pentru modelul AI, plătită pe consum",
+        "timp de configurare și de întreținere când sursele gratuite se schimbă sau limitează cererile",
+        "calitatea rapoartelor depinde de modelul ales"
+      ]
+    },
+    {
+      "service": "Finviz Elite",
+      "service_url": "https://finviz.com/elite.ashx",
+      "price": "39,50 USD/lună lunar; 149 USD primul an cu promoția Black Friday, apoi 299,50 USD/an",
+      "price_source_url": "https://finviz.com/elite.ashx",
+      "price_checked_at": "2026-11-14",
+      "replacement_level": "doar pentru cazuri simple",
+      "what_you_keep": [
+        "lista de urmărire și rapoarte periodice pe acțiunile tale",
+        "rapoarte salvate ca Markdown și acces prin API-ul FastAPI propriu"
+      ],
+      "what_you_lose": [
+        "grafice interactive, screener cu peste 20 de filtre și hărți de piață",
+        "cotații în timp real garantate",
+        "alerte nelimitate cu notificări push din aplicație"
+      ],
+      "hidden_costs": [
+        "cheie API AI și eventual servicii de știri plătite",
+        "date gratuite întârziate sau incomplete (documentația spune că stabilitatea nu e garantată)"
+      ]
+    },
+    {
+      "service": "TrendSpider",
+      "service_url": "https://trendspider.com/pricing/",
+      "price": "de la 32,94 USD/lună în oferta de Black Friday (preț promoțional, planul Standard, facturare nespecificată clar)",
+      "price_source_url": "https://trendspider.com/pricing/",
+      "price_checked_at": "2026-11-14",
+      "replacement_level": "doar pentru cazuri simple",
+      "what_you_keep": [
+        "analiză asistată de AI și un backtest simplu pe strategii predefinite",
+        "rapoarte generate automat"
+      ],
+      "what_you_lose": [
+        "recunoașterea automată a tiparelor pe grafice și alertele pe grafic",
+        "editor vizual de strategii și backtesting avansat",
+        "o platformă de grafice completă"
+      ],
+      "hidden_costs": [
+        "timpul tău pentru configurare și pentru verificarea rezultatelor AI",
+        "cheie API AI plătită pe consum"
+      ]
+    }
+  ],
+  "examples": [
+    {
+      "title": "Instalare locală (Python)",
+      "scenario": "Rulezi unealta pe calculatorul tău, fără GitHub Actions: clonezi, instalezi dependențele, completezi .env și pornești analiza.",
+      "prerequisites": [
+        "Python 3.10 sau mai nou",
+        "Git",
+        "o cheie API pentru un model AI, de ex. GEMINI_API_KEY",
+        "un canal de notificare (opțional la început, vezi --no-notify în ghid)"
+      ],
+      "commands": [
+        "# Clone the project",
+        "git clone https://github.com/ZhuLinsen/daily_stock_analysis.git && cd daily_stock_analysis",
+        "",
+        "# Install dependencies",
+        "pip install -r requirements.txt",
+        "",
+        "# Configure environment variables",
+        "cp .env.example .env && vim .env",
+        "",
+        "# Run analysis",
+        "python main.py"
+      ],
+      "code": "",
+      "output_from_docs": null,
+      "source_url": "https://github.com/ZhuLinsen/daily_stock_analysis/blob/main/docs/README_EN.md",
+      "kind": "instalare"
+    },
+    {
+      "title": "Analiză pe acțiuni alese și recapitularea pieței",
+      "scenario": "După instalare, analizezi câteva acțiuni din piețe diferite dintr-o singură comandă și ceri separat recapitularea pieței. Documentația arată și un exemplu de raport trimis (de test, pentru acțiuni din China).",
+      "prerequisites": [
+        "instalarea de mai sus, cu .env completat",
+        "lista STOCK_LIST sau parametrul --stocks"
+      ],
+      "commands": [
+        "python main.py --stocks 600519,hk00700,AAPL,2330.TW",
+        "python main.py --market-review"
+      ],
+      "code": "",
+      "output_from_docs": "🎯 2026-02-08 Decision Dashboard\nAnalyzed 3 stocks | 🟢 Buy:0 🟡 Watch:2 🔴 Sell:1\n\n📊 Summary\n🟡 000657: Watch | Score 65 | Bullish\n🟡 600105: Watch | Score 48 | Range-bound\n🔴 300260: Sell | Score 35 | Bearish\n\n🚨 Risk Alerts:\nRisk 1: Main-force funds showed notable outflow.\nRisk 2: Chip concentration suggests short-term resistance.\n\n✨ Positive Catalysts:\nCatalyst 1: AI-server supply-chain exposure remains a market focus.\nCatalyst 2: Recent earnings growth provides fundamental support.",
+      "source_url": "https://github.com/ZhuLinsen/daily_stock_analysis/blob/main/docs/README_EN.md",
+      "kind": "folosire"
+    }
+  ],
+  "connectors": {
+    "inputs": [
+      "listă de coduri de acțiuni (de ex. 600519, hk00700, AAPL, 7203.T, 005930.KS, 2330.TW) în variabila STOCK_LIST sau în --stocks",
+      "import din imagine, CSV/Excel sau clipboard prin interfața web",
+      "chei API pentru model AI, știri și surse de cotații, puse în .env sau în GitHub Secrets"
+    ],
+    "outputs": [
+      "mesaje Markdown cu tablou de decizie și recapitularea pieței, trimise pe Telegram, Discord, Slack, e-mail, WeChat Work sau Feishu",
+      "rapoarte complete Markdown și istoric în interfața web și în baza de date SQLite locală",
+      "API FastAPI pentru integrare cu alte programe"
+    ],
+    "pairs_well_with": [
+      {
+        "repo_url": "https://github.com/ZhuLinsen/alphasift",
+        "name": "AlphaSift",
+        "why": "AlphaSift filtrează acțiuni după criterii (screening), iar lista rezultată poate deveni STOCK_LIST pentru raportul zilnic al acestui repo.",
+        "in_catalog": false
+      },
+      {
+        "repo_url": "https://github.com/ZhuLinsen/alphaevo",
+        "name": "AlphaEvo",
+        "why": "AlphaEvo testează pe date istorice regulile de strategie, iar strategiile validate pot fi folosite apoi în analizele zilnice.",
+        "in_catalog": false
+      },
+      {
+        "repo_url": "https://github.com/akfamily/akshare",
+        "name": "AKShare",
+        "why": "Biblioteca de date financiare folosită ca sursă implicită de cotații, deci îți dă istoric și indicatori pentru acțiunile din China.",
+        "in_catalog": false
+      },
+      {
+        "repo_url": "https://github.com/searxng/searxng",
+        "name": "SearXNG",
+        "why": "Meta-motor de căutare auto-găzduit, folosit ca sursă gratuită de știri (SEARXNG_BASE_URLS) în locul unui API plătit.",
+        "in_catalog": false
+      },
+      {
+        "repo_url": "https://github.com/TauricResearch/TradingAgents",
+        "name": "TradingAgents",
+        "why": "Sistem multi-agent pentru decizii de tranzacționare, util ca a doua părere comparată cu raportul zilnic generat aici.",
+        "in_catalog": false
+      }
+    ],
+    "gaps_noticed": [
+      "Documentația principală e în chineză; versiunea engleză există, dar multe detalii și exemplele de rezultat (nume de firme, termeni precum chip concentration) sunt orientate spre piața chineză.",
+      "Limba rapoartelor: REPORT_LANGUAGE acceptă zh, en și ko, iar traducerea în română rămâne un pas manual.",
+      "Lista de acțiuni din alphasift nu se leagă automat de STOCK_LIST; trebuie copiată de mână sau printr-un script propriu."
+    ]
+  },
+  "when_not_to_use": [
+    "Rapoartele sunt generate de un model AI și nu sunt sfaturi de investiții; autorul spune că proiectul e doar pentru studiu și cercetare și că nu răspunde pentru pierderi. Nu lua decizii financiare doar pe baza lor.",
+    "Dacă vrei date garantate sau în timp real: sursele gratuite au limite de cereri, se pot schimba fără avertizare și documentația spune că stabilitatea nu e garantată.",
+    "Dacă vrei interfață și documentație în română: totul e în chineză sau engleză.",
+    "Dacă nu vrei să trimiți lista de acțiuni și știrile către un furnizor de AI din cloud (varianta locală cu Ollama există, dar cere un calculator suficient de puternic).",
+    "Dacă ai nevoie de grafice interactive și screenere avansate: unealta produce rapoarte text, nu o platformă de grafice."
+  ],
+  "alternatives": [
+    {
+      "name": "TradingAgents",
+      "url": "https://github.com/TauricResearch/TradingAgents",
+      "difference": "Mai mulți agenți AI care dezbat o decizie de tranzacționare; mai orientat spre cercetare decât spre raport zilnic cu notificări."
+    },
+    {
+      "name": "AI Hedge Fund",
+      "url": "https://github.com/virattt/ai-hedge-fund",
+      "difference": "Simulează un fond cu agenți inspirați de investitori celebri; are scop educațional, nu rapoarte programate pe canale de chat."
+    },
+    {
+      "name": "yfinance",
+      "url": "https://github.com/ranaroussi/yfinance",
+      "difference": "Doar bibliotecă de date Yahoo Finance; faci singur analiza și trimiterea mesajelor."
+    }
+  ],
+  "tech_sheet": {
+    "license": "MIT",
+    "language": "Python (cu interfață web și aplicație desktop Electron)",
+    "commit_sha": "ac9c33dfcf4cb84974d7bfee9c8661d88b8cfbff",
+    "last_commit_date": "2026-11-14",
+    "stars": 71977,
+    "requirements": [
+      "Python 3.10 sau mai nou (cu pip), Git",
+      "dependențele din requirements.txt (litellm, akshare, yfinance, FastAPI etc.)",
+      "variantă fără instalare: cont GitHub și Actions activate pe un fork",
+      "variantă Docker: Docker și Docker Compose, cel puțin 512 MB RAM, recomandat 1 GB",
+      "cel puțin o cheie API pentru model AI (Gemini, OpenAI-compatibil, Claude, DeepSeek) sau Ollama local",
+      "cel puțin un canal de notificare configurat (Telegram, Discord, Slack, e-mail, WeChat Work sau Feishu)",
+      "lista de acțiuni în STOCK_LIST (de ex. 600519,hk00700,AAPL)",
+      "opțional: cheie pentru știri (SerpAPI, Tavily etc.) și token pentru cotații (TickPlus, Tushare, Longbridge)"
+    ]
+  },
+  "monetization": [
+    {
+      "model": "serviciu de instalare și configurare",
+      "what_you_sell": "Instalezi și configurezi unealta pentru un investitor individual sau o comunitate mică: Docker pe NAS sau server, GitHub Actions, canalul Telegram, lista de acțiuni, cheile AI pe contul clientului și un ghid scurt în română.",
+      "for_whom": "Investitori individuali, creatori de comunități de investiții și mici cluburi care vor rapoarte zilnice, dar nu vor să se ocupe de chei, Docker sau variabile de mediu.",
+      "license_check": {
+        "license": "MIT",
+        "commercial_use": "permis",
+        "conditions": "MIT cere păstrarea notei de drepturi de autor în copii. Modulul de screening e derivat din AlphaSift (Apache-2.0) și are propria licență în THIRD_PARTY_NOTICES.md. Termenii surselor de date (de ex. Yahoo Finance prin yfinance, spus în README-ul lor că e pentru uz personal) nu sunt acoperiți de MIT; clientul rămâne responsabil de ei."
+      },
+      "path": "folosești repo-ul direct",
+      "own_build_notes": null,
+      "demand_evidence": [
+        {
+          "name": "Contra: bot de screening cu alerte zilnice pe Telegram, la comandă",
+          "url": "https://contra.com/s/W7UPcPls-custom-stock-screener-telegram-alert-bot",
+          "price": "de la 349 USD, durată 2 săptămâni",
+          "what_it_proves": "Oamenii plătesc pentru un bot de analiză de acțiuni livrat cu Docker și alerte zilnice pe Telegram.",
+          "checked_at": "2026-11-14"
+        },
+        {
+          "name": "Pagina oficială a repo-ului: colaborare și suport de implementare (README)",
+          "url": "https://github.com/ZhuLinsen/daily_stock_analysis#-%E8%81%94%E7%B3%BB%E4%B8%8E%E5%90%88%E4%BD%9C",
+          "price": null,
+          "what_it_proves": "Autorul însuși invită la colaborări pe consultanță, suport de implementare și extinderi, deci există cerere pentru instalare asistată.",
+          "checked_at": "2026-11-14"
+        }
+      ],
+      "startup_cost": "Practic zero: ai nevoie doar de un cont GitHub, un cont de test la un furnizor de AI și timp pentru a încerca configurația.",
+      "time_to_first_client": "Necunoscut; depinde de unde îți găsești clienții (comunități de investitori, freelancing).",
+      "difficulty": "mediu",
+      "risks": [
+        "Concurență gratuită: README-ul spune că instalarea cu GitHub Actions durează cam 5 minute, deci mulți clienți pot face singuri.",
+        "Documentația e în chineză, iar proiectul se schimbă des (ultima versiune 3.34.0 din 9 noiembrie 2026), deci rețetele pot deveni vechi repede.",
+        "Răspunderea pentru ce face clientul cu rapoartele: clarifică în scris că nu oferi sfaturi financiare.",
+        "Efort de suport când sursele gratuite de date se schimbă sau limitează cererile."
+      ],
+      "first_steps": [
+        "Fă singur un fork și rulează varianta Actions cu o cheie Gemini gratuită ca să vezi unde se blochează un începător.",
+        "Scrie un ghid de 1 pagină în română cu captură de ecran pentru secrete și un canal Telegram.",
+        "Definește un pachet clar (de ex. instalare plus o oră de explicații) și un text de risc care spune că rapoartele nu sunt sfaturi de investiții."
+      ]
+    },
+    {
+      "model": "produs construit peste repo",
+      "what_you_sell": "Un rezumat zilnic de piață în română, făcut cu repo-ul, pentru o nișă îngustă (de ex. ETF-uri sau acțiuni din UE), trimis pe un canal privat, strict ca informare educațională, fără semnale de cumpărare sau vânzare.",
+      "for_whom": "Investitori care vor să urmărească o listă fixă de titluri fără să citească zilnic mai multe site-uri.",
+      "license_check": {
+        "license": "MIT",
+        "commercial_use": "permis cu condiții",
+        "conditions": "Codul MIT permite utilizarea comercială cu păstrarea notei de copyright, dar datele aduse de sursele gratuite au termeni proprii: yfinance spune că API-ul Yahoo e pentru uz personal și trimite la termenii Yahoo, iar AkShare, Baostock și celelalte au reguli separate. Pentru un produs plătit trebuie să verifici licențele de date sau să alegi o sursă care permite redistribuirea. Oferirea de recomandări de investiții contra cost poate fi reglementată în țara ta; verifică legislația locală înainte de lansare."
+      },
+      "path": "folosești repo-ul direct",
+      "own_build_notes": null,
+      "demand_evidence": [
+        {
+          "name": "Seeking Alpha Premium",
+          "url": "https://subscriptions.seekingalpha.com/lp_premium_bundle_sitewide_sale_2026_ppc/",
+          "price": "239 USD/an (preț întreg, pagina de ofertă oficială)",
+          "what_it_proves": "Investitorii plătesc abonamente pentru cercetare și rezumate despre acțiuni.",
+          "checked_at": "2026-11-14"
+        },
+        {
+          "name": "Finviz Elite",
+          "url": "https://finviz.com/elite.ashx",
+          "price": "39,50 USD/lună; 299,50 USD/an după promoția primului an",
+          "what_it_proves": "Piața plătește și pentru alerte, liste de urmărire și date de piață ambalate pentru un public larg.",
+          "checked_at": "2026-11-14"
+        }
+      ],
+      "startup_cost": "Costul API-ului AI și al surselor de știri pe zi, plus un server mic sau Actions; fără o estimare fixă în documentație.",
+      "time_to_first_client": "Necunoscut; cere mai întâi un produs testat în real, cu audiență proprie.",
+      "difficulty": "greu",
+      "risks": [
+        "Termenii datelor și posibile reguli despre sfaturi financiare: cel mai mare risc legal, trebuie clarificat înainte de orice plată.",
+        "Concurență mare și gratuită: platformele mari au deja rezumate AI, iar repo-ul însuși e gratuit.",
+        "Calitatea modelului AI: pot apărea erori sau halucinații în rapoarte, iar răspunderea e a ta față de abonați.",
+        "Dependența de surse gratuite și de API-uri externe, care se pot schimba sau bloca."
+      ],
+      "first_steps": [
+        "Rulează o lună pentru uz propriu și compară ce spun rapoartele cu ce s-a întâmplat realist (fără a le folosi ca sfaturi).",
+        "Verifică termenii pentru fiecare sursă de date pe care vrei să o folosești comercial.",
+        "Cere sfatul unui jurist despre ce ai voie să publici contra cost în țara ta, înainte să iei bani."
+      ]
+    }
+  ],
+  "updated_at": "2026-11-14",
+  "notes_summary": "Am citit README-ul, documentația (config, LLM, deploy, FAQ), cerințele și licența; nu am rulat nimic; prețurile unor concurenți (Danelfin, Tickeron) nu au putut fi verificate și lipsesc.",
+  "notes": "Repo citit la commit ac9c33dfcf4cb84974d7bfee9c8661d88b8cfbff (2026-11-14). Stele: 71.977 si forks 57.388 (GitHub API, 2026-11-14). Ultimele versiuni: v3.34.0 (2026-11-09), v3.33.0 (2026-10-15). Licență: MIT în LICENSE; modulul src/services/screening e derivat din AlphaSift (Apache-2.0), cu licența copiată în src/services/screening/LICENSE și menționat în THIRD_PARTY_NOTICES.md. Disclaimer în README: doar studiu și cercetare, nu sfaturi de investiții. Telemetrie: n-am găsit nicio telemetrie către autor în cod (grep pe posthog/sentry/telemetry dă doar contoare locale de utilizare LLM în SQLite). Sponsori cu link-uri afiliate în README (Modelflare, AIHubMix, SerpAPI, TickPlus, Anspire): recomandările de servicii din README includ link-uri de afiliere, deci nu sunt neutre. Surse de date: AkShare, Baostock, YFinance sunt gratuite, dar FAQ spune că sursele gratuite (Eastmoney, Sina) au limitări anti-scraping și pot returna goluri. ai_access: moduri GENERATION_BACKEND=codex_cli/claude_code_cli/opencode_cli sunt marcate experimentale în documentație, nu merg în Docker/CI fără login local, iar chatul cu agenți rămâne pe LiteLLM (chei API); am verificat pe code.claude.com că Claude Code acceptă login cu abonament Pro/Max și că tokenul `claude setup-token` cere plan Pro/Max/Team/Enterprise, dar n-am verificat dacă termenii abonamentului permit utilizarea non-interactivă în producție, așa că rămâne de confirmat. Prețuri verificate azi (2026-11-14): Seeking Alpha Premium 239 USD/an (pagina subscriptions.seekingalpha.com, preț întreg; căutarea web arată și 299 USD în surse terțe, deci diferă); Finviz Elite 39,50/lună; TrendSpider afișează doar prețuri promoționale Black Friday (Standard de la 32,94/lună, text pagină neclar privind facturarea); SerpAPI Free 250/lună, Starter 25 USD/lună; Tavily 1.000 credite gratuite, Project 30 USD/lună; Claude Pro 20 lunar/17 anual; ChatGPT Plus 20 USD/lună; Gemini 3.8 Flash 0,75/3,75 USD per 1M tokeni până la 31 dec 2026 (apoi 1,50/7,50), nivel gratuit existent. Neverificate: Danelfin (403 pe site, surse terțe contradictorii) și Tickeron (pagină 404); TickPlus (conexiune refuzată), Tushare, Longbridge, ceilalți furnizori de AI. Parteneri verificați activi la 2026-11-14: alphasift (push 2026-11-13), alphaevo (push 2026-07-03, în limita de 12 luni), akshare (2026-11-14), searxng (2026-11-14, AGPL-3.0), TradingAgents (2026-11-04), yfinance (2026-11-12), ai-hedge-fund (2026-11-09). Primii pași: poveste de pe sspai.com (2026-03-04), scrisă de un utilizator care a instalat proiectul pe un NAS QNAP; datele despre pași vin din pagina descrisă de un rezumat automat al paginii (nu am citit textul chinezesc integral manual); pe HN există două postări (48619147, 48682687) fără text și fără comentarii, deci n-au putut fi folosite. Povestea e de la o versiune mai veche (martie 2026), cu configurarea Tushare și Tavily din acel moment; documentația actuală poate diferi. Platforme: Windows/Mac/Linux marcat da pe baza documentației de instalare desktop și a Python/Docker; macOS DMG nu e semnat Apple. Documentația repo-ului e în mare parte în chineză; am citit versiunea engleză unde exista (README_EN, DEPLOY_EN, FAQ_EN, full-guide_EN, LLM_CONFIG_GUIDE_EN) și am verificat termeni în chineză din README. Repo-ul are fișier SKILL.md (skill pentru agenți) și integrare OpenClaw; nu am analizat în detaliu. Nu am rulat codul."
+}

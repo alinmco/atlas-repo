@@ -677,5 +677,61 @@
     "suggested_by": "colibri",
     "why": "Interfață de chat în browser; presupunere dedusă din API-ul compatibil OpenAI (nu e descrisă în documentația colibri): adresa http://127.0.0.1:8000/v1 devine sursa modelelor.",
     "added_at": "2026-11-07"
+  },
+  {
+    "repo_url": "https://github.com/Anil-matcha/Open-Generative-AI",
+    "name": "Open-Generative-AI",
+    "suggested_by": "open-genjutsu",
+    "why": "Cu aceeași cheie Muapi poți genera imaginile cu personajul (PNG sau JPEG), care devin intrarea din open-genjutsu; același autor, MIT, activ.",
+    "added_at": "2026-11-14"
+  },
+  {
+    "repo_url": "https://github.com/ChromeDevTools/chrome-devtools-mcp",
+    "name": "Chrome DevTools MCP",
+    "suggested_by": "addyosmani-agent-skills",
+    "why": "Skill-ul browser-testing-with-devtools îi cere agentului să ruleze acest server MCP, iar datele din browser (DOM, consolă, rețea) devin dovada de verificare.",
+    "added_at": "2026-11-14"
+  },
+  {
+    "repo_url": "https://github.com/ZhuLinsen/alphasift",
+    "name": "AlphaSift",
+    "suggested_by": "daily-stock-analysis",
+    "why": "AlphaSift filtrează acțiuni după criterii (screening), iar lista rezultată poate deveni STOCK_LIST pentru raportul zilnic al acestui repo.",
+    "added_at": "2026-11-14"
+  },
+  {
+    "repo_url": "https://github.com/ZhuLinsen/alphaevo",
+    "name": "AlphaEvo",
+    "suggested_by": "daily-stock-analysis",
+    "why": "AlphaEvo testează pe date istorice regulile de strategie, iar strategiile validate pot fi folosite apoi în analizele zilnice.",
+    "added_at": "2026-11-14"
+  },
+  {
+    "repo_url": "https://github.com/akfamily/akshare",
+    "name": "AKShare",
+    "suggested_by": "daily-stock-analysis",
+    "why": "Biblioteca de date financiare folosită ca sursă implicită de cotații, deci îți dă istoric și indicatori pentru acțiunile din China.",
+    "added_at": "2026-11-14"
+  },
+  {
+    "repo_url": "https://github.com/TauricResearch/TradingAgents",
+    "name": "TradingAgents",
+    "suggested_by": "daily-stock-analysis",
+    "why": "Sistem multi-agent pentru decizii de tranzacționare, util ca a doua părere comparată cu raportul zilnic generat aici.",
+    "added_at": "2026-11-14"
+  },
+  {
+    "repo_url": "https://github.com/google/osv-scanner",
+    "name": "OSV-Scanner",
+    "suggested_by": "security-audit-skill",
+    "why": "Verifică dependențele după baza de vulnerabilități cunoscute, iar lista lui completează clasa de atac „lanț de livrare” din skill.",
+    "added_at": "2026-11-14"
+  },
+  {
+    "repo_url": "https://github.com/gitleaks/gitleaks",
+    "name": "Gitleaks",
+    "suggested_by": "security-audit-skill",
+    "why": "Caută secrete uitate în istoricul Git; rezultatul lui (raport JSON) arată ce chei trebuie rotite, ceea ce un audit de cod nu acoperă complet.",
+    "added_at": "2026-11-14"
   }
 ]

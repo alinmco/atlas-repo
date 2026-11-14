@@ -375,6 +375,12 @@
         "name": "Cloudroom",
         "why": "Skill-urile lui se încarcă în agenții Claude Code/Codex pornit de Cloudroom, ca agentul din cloud să lucreze metodic.",
         "in_catalog": true
+      },
+      {
+        "repo_url": "https://github.com/addyosmani/agent-skills",
+        "name": "Agent Skills (Addy Osmani)",
+        "why": "Superpowers dă un flux autonom cu subagenți pentru faza de construire, iar acest pachet adaugă fazele din jur (specificație, securitate, lansare); ambele sunt instalate în același agent, nu am testat compatibilitatea.",
+        "in_catalog": true
       }
     ],
     "gaps_noticed": [

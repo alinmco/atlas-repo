@@ -27,7 +27,9 @@
       "asistenți AI de programare",
       "agentul",
       "agenți",
-      "agent"
+      "agent",
+      "agentul de programare",
+      "coding agent"
     ],
     "explanation": "program AI care scrie și modifică cod la cererea ta"
   },
@@ -39,7 +41,8 @@
       "subagenților",
       "subagent-driven-development",
       "sub-agent",
-      "sub-agenți"
+      "sub-agenți",
+      "sub-agenții"
     ],
     "explanation": "agent ajutător pornit de agentul principal pentru o sarcină"
   },
@@ -229,7 +232,9 @@
     "aliases": [
       "tokeni",
       "tokenii",
-      "tokenilor"
+      "tokenilor",
+      "tokenuri",
+      "tokens"
     ],
     "explanation": "bucată mică de text pe care o citește sau scrie un AI"
   },
@@ -1321,7 +1326,10 @@
       "pentesturile",
       "test de penetrare",
       "teste de penetrare",
-      "penetration testing"
+      "penetration testing",
+      "pen-test",
+      "pentesting",
+      "pentestul"
     ],
     "explanation": "Atac simulat, cu acord, ca să afli unde ești vulnerabil"
   },
@@ -1401,7 +1409,8 @@
   {
     "term": "SAST",
     "aliases": [
-      "analiză statică de securitate"
+      "analiză statică de securitate",
+      "scaner SAST"
     ],
     "explanation": "Căutare de probleme de securitate direct în cod, fără a-l rula"
   },
@@ -1490,7 +1499,8 @@
     "term": "GitHub Actions",
     "aliases": [
       "workflow GitHub",
-      "flux GitHub Actions"
+      "flux GitHub Actions",
+      "Actions"
     ],
     "explanation": "Automatizări care rulează la fiecare modificare în GitHub"
   },
@@ -1982,14 +1992,16 @@
     "term": "mediu virtual",
     "aliases": [
       "venv",
-      "mediul virtual"
+      "mediul virtual",
+      ".venv"
     ],
     "explanation": "Folder izolat cu pachetele Python ale unui singur proiect"
   },
   {
     "term": "FFmpeg",
     "aliases": [
-      "ffmpeg"
+      "ffmpeg",
+      "ffprobe"
     ],
     "explanation": "Program gratuit care convertește fișiere audio și video"
   },
@@ -2823,7 +2835,9 @@
   },
   {
     "term": "FastAPI",
-    "aliases": [],
+    "aliases": [
+      "uvicorn"
+    ],
     "explanation": "bibliotecă Python pentru servere web, folosită la serverul local"
   },
   {
@@ -2870,7 +2884,8 @@
   {
     "term": "NAS",
     "aliases": [
-      "NAS-ul"
+      "NAS-ul",
+      "NAS-uri"
     ],
     "explanation": "mic server de acasă pentru stocat fișiere în rețea"
   },
@@ -3090,5 +3105,127 @@
       "cache-ul"
     ],
     "explanation": "rezervă rapidă cu ce s-a folosit recent"
+  },
+  {
+    "term": "Muapi",
+    "aliases": [],
+    "explanation": "Serviciu online plătit care rulează modele AI de imagine și video"
+  },
+  {
+    "term": "Seedance",
+    "aliases": [
+      "Seedance 2.5"
+    ],
+    "explanation": "Model AI de generare video, creat de ByteDance"
+  },
+  {
+    "term": "Wan 3.0",
+    "aliases": [
+      "Wan"
+    ],
+    "explanation": "Alt model AI pentru generare de video"
+  },
+  {
+    "term": "motion transfer",
+    "aliases": [
+      "transfer de mișcare"
+    ],
+    "explanation": "Copierea mișcărilor dintr-un clip pe alt personaj"
+  },
+  {
+    "term": "clip de adâncime",
+    "aliases": [
+      "depth video",
+      "video de adâncime"
+    ],
+    "explanation": "Video în tonuri de gri: cât de aproape e fiecare lucru"
+  },
+  {
+    "term": "PRD",
+    "aliases": [
+      "PRD-uri",
+      "document de cerințe"
+    ],
+    "explanation": "document care descrie ce trebuie să facă produsul"
+  },
+  {
+    "term": "Core Web Vitals",
+    "aliases": [],
+    "explanation": "măsurători Google pentru viteza și stabilitatea unei pagini web"
+  },
+  {
+    "term": "greenfield",
+    "aliases": [],
+    "explanation": "proiect început de la zero, fără cod vechi"
+  },
+  {
+    "term": "brownfield",
+    "aliases": [],
+    "explanation": "proiect cu cod vechi, deja în producție"
+  },
+  {
+    "term": "feature flag",
+    "aliases": [
+      "feature flags",
+      "steaguri de funcționalitate"
+    ],
+    "explanation": "întrerupător care activează o funcție nouă fără redeploy"
+  },
+  {
+    "term": "evals",
+    "aliases": [
+      "eval",
+      "teste de evaluare"
+    ],
+    "explanation": "teste care măsoară dacă skill-urile se comportă cum promit"
+  },
+  {
+    "term": "A-shares",
+    "aliases": [
+      "A-share",
+      "acțiuni A-shares"
+    ],
+    "explanation": "acțiuni chinezești listate la bursele din Shanghai și Shenzhen"
+  },
+  {
+    "term": "ETF",
+    "aliases": [
+      "ETF-uri",
+      "ETF-urile"
+    ],
+    "explanation": "fond tranzacționat la bursă, ca un coș de acțiuni"
+  },
+  {
+    "term": "GitHub Secrets",
+    "aliases": [
+      "Secrets"
+    ],
+    "explanation": "valoare ascunsă (cheie, parolă) păstrată în setările GitHub"
+  },
+  {
+    "term": "Telegram",
+    "aliases": [],
+    "explanation": "aplicație de mesaje, folosită aici pentru a primi rapoarte"
+  },
+  {
+    "term": "backtest",
+    "aliases": [
+      "backtesting"
+    ],
+    "explanation": "testarea unei strategii pe date din trecut"
+  },
+  {
+    "term": "prompt injection",
+    "aliases": [
+      "injecție de prompt"
+    ],
+    "explanation": "Text ascuns care păcălește un AI să execute ordine străine"
+  },
+  {
+    "term": "findings.json",
+    "aliases": [
+      "findings"
+    ],
+    "explanation": "Fișier JSON cu descoperirile de securitate, într-o structură fixă"
   }
 ]

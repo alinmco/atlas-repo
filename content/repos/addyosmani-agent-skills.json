@@ -1,0 +1,307 @@
+{
+  "slug": "addyosmani-agent-skills",
+  "repo_url": "https://github.com/addyosmani/agent-skills",
+  "name": "Agent Skills (Addy Osmani)",
+  "one_liner": "Pachet de 25 skill-uri care îl obligă agentul AI să lucreze ca un inginer atent.",
+  "problem_solved": "Agenții AI de programare aleg de obicei drumul cel mai scurt: sar peste specificație, teste și revizuire. Acest pachet le dă un proces pe faze, cu verificări la fiecare pas.",
+  "features": [
+    "25 de skill-uri pe faze: definire, plan, construire, verificare, revizuire, lansare",
+    "9 comenzi slash (/spec, /plan, /build, /test, /review, /ship și altele)",
+    "4 „personaje” de revizor: cod, teste, securitate, performanță web",
+    "7 liste de verificare: securitate, performanță, accesibilitate, teste și altele",
+    "Instalare cu o singură comandă în peste 70 de agenți, inclusiv Claude Code, Codex, Cursor",
+    "Teste proprii (evals) care verifică dacă skill-urile sunt alese corect"
+  ],
+  "at_a_glance": {
+    "for_you_if": [
+      "Folosești un agent AI de programare și vrei rezultate mai disciplinate, cu specificație și teste.",
+      "Vrei un proces gata făcut pentru tot ciclul unui proiect, nu doar pentru codare."
+    ],
+    "not_for_you_if": [
+      "Nu scrii cod și nu folosești un agent de programare.",
+      "Ai nevoie de ceva ușor: sunt multe fișiere lungi, iar agentul nu le activează mereu."
+    ],
+    "verdict": "Colecție de text bine documentată și gratuită, utilă ca bază de proces; agentul poate totuși să n-o urmeze."
+  },
+  "cost": {
+    "level": "gratuit, dar cere servicii plătite",
+    "summary": "Skill-urile sunt gratuite (MIT), dar rulează într-un agent AI plătit; poți folosi abonamentul agentului (ex: Claude Pro, ChatGPT Plus) sau o cheie API plătită pe consum, repo-ul nu cere chei proprii.",
+    "ai_access": {
+      "mode": "abonament sau API",
+      "detail": "Skill-urile sunt fișiere text încărcate de agentul tău; Claude Code acceptă login cu Pro/Max sau cheie API, iar Codex este inclus în planurile ChatGPT.",
+      "source_url": "https://code.claude.com/docs/en/authentication"
+    },
+    "items": [
+      {
+        "what": "Un agent AI de programare (ex: Claude Code) cu abonament Claude Pro",
+        "price": "17 USD/lună cu plată anuală (200 USD facturați odată) sau 20 USD/lună lunar",
+        "required": true,
+        "source_url": "https://claude.com/pricing"
+      },
+      {
+        "what": "Alternativă: Codex, inclus în ChatGPT Plus",
+        "price": "20 USD/lună (Go: 8 USD/lună; Pro: de la 100 USD/lună)",
+        "required": false,
+        "source_url": "https://learn.chatgpt.com/docs/pricing"
+      },
+      {
+        "what": "Alternativă: cheie API plătită pe consum la furnizorul agentului",
+        "price": null,
+        "required": false,
+        "source_url": "https://code.claude.com/docs/en/authentication"
+      },
+      {
+        "what": "Node.js (pentru comanda npx skills, dacă o folosești)",
+        "price": "gratuit (licență MIT)",
+        "required": false,
+        "source_url": "https://raw.githubusercontent.com/nodejs/node/main/LICENSE"
+      },
+      {
+        "what": "Chrome DevTools MCP (doar pentru skill-ul de testare în browser)",
+        "price": "gratuit (licență Apache-2.0)",
+        "required": false,
+        "source_url": "https://github.com/ChromeDevTools/chrome-devtools-mcp"
+      }
+    ]
+  },
+  "platforms": {
+    "windows": "da",
+    "mac": "da",
+    "linux": "da",
+    "note": "Skill-urile sunt text Markdown. Documentația spune că verificările din CI rulează pe Ubuntu, macOS și Windows; cârligele opționale (hooks) sunt scripturi bash care cer jq/curl (dedus din cod).",
+    "source_url": "https://github.com/addyosmani/agent-skills/blob/39b723ceebf81474d0557c1fecd01eddab585563/docs/developer-onboarding.md"
+  },
+  "risk_flags": [],
+  "audience_reason": "trebuie să știi deja să lucrezi cu un agent de programare și cu Git",
+  "setup_difficulty_reason": "o singură comandă de instalare și fără chei proprii, doar agentul tău deja configurat",
+  "analogy": "Ca o listă de verificare a unui pilot înainte de decolare: nu zboară avionul în locul tău, dar nu te lasă să sari peste pași.",
+  "how_it_works": [
+    "Pas 1: instalezi pachetul în agentul tău (plugin, comandă npx sau copiere de fișiere); skill-urile sunt fișiere SKILL.md cu pași și condiții de folosire.",
+    "Pas 2: scrii o comandă (ex: /spec) sau descrii o sarcină, iar agentul încarcă skill-ul care se potrivește descrierii.",
+    "Pas 3: agentul urmează pașii skill-ului (specificație, plan, teste, revizuire) și trebuie să arate dovezi: teste trecute, rezultat de build.",
+    "Pas 4: rezultatul sunt fișiere în proiectul tău (ex: SPEC.md, tasks/plan.md), commit-uri mici și o revizuire înainte de lansare."
+  ],
+  "first_steps": null,
+  "categories": [
+    "Skill-uri pentru agenți AI",
+    "Unelte pentru programatori"
+  ],
+  "search_intents": [
+    "vreau ca agentul AI să scrie teste înainte de cod",
+    "vreau un proces gata făcut pentru Claude Code, de la idee la lansare",
+    "vreau să instalez skill-uri pentru Claude Code, Codex sau Cursor",
+    "vreau ca agentul să facă revizuire de cod înainte de merge",
+    "vreau o specificație scrisă înainte să înceapă agentul să codeze"
+  ],
+  "audience": "intermediar",
+  "setup_difficulty": "ușor",
+  "replaces": [],
+  "examples": [
+    {
+      "title": "Instalare în Claude Code sau în orice agent",
+      "scenario": "Vrei skill-urile în agentul tău: fie ca plugin Claude Code, fie cu comanda npx care instalează în peste 70 de agenți.",
+      "prerequisites": [
+        "Claude Code instalat și autentificat (pentru varianta de plugin)",
+        "Node.js (pentru varianta npx)",
+        "Git"
+      ],
+      "commands": [
+        "/plugin marketplace add addyosmani/agent-skills",
+        "/plugin install agent-skills@addy-agent-skills",
+        "npx skills add addyosmani/agent-skills            # install all 25 skills",
+        "npx skills add addyosmani/agent-skills --list     # browse before installing"
+      ],
+      "code": "",
+      "output_from_docs": null,
+      "source_url": "https://github.com/addyosmani/agent-skills/blob/39b723ceebf81474d0557c1fecd01eddab585563/README.md#quick-start",
+      "kind": "instalare"
+    },
+    {
+      "title": "Fluxul zilnic pe un proiect nou",
+      "scenario": "După instalare, parcurgi o funcționalitate nouă cu comenzile pe faze; fiecare comandă activează skill-ul potrivit. Ghidul de adoptare arată ordinea pentru un proiect nou.",
+      "prerequisites": [
+        "Pachetul instalat în agent",
+        "Un proiect (folder) în care lucrezi cu agentul"
+      ],
+      "commands": [],
+      "code": "/spec   →  SPEC.md            (spec-driven-development)\n/plan   →  tasks/plan.md      (planning-and-task-breakdown)\n/build  →  one slice at a time (incremental-implementation + test-driven-development)\n/review →  before every merge  (code-review-and-quality)\n/ship   →  when going live     (shipping-and-launch)",
+      "output_from_docs": null,
+      "source_url": "https://github.com/addyosmani/agent-skills/blob/39b723ceebf81474d0557c1fecd01eddab585563/docs/adoption-guide.md",
+      "kind": "folosire"
+    }
+  ],
+  "connectors": {
+    "inputs": [
+      "Cererea ta în limbaj natural, într-un agent AI de programare (ex: Claude Code, Codex, Cursor)",
+      "Codul proiectului tău și, opțional, fișierele de reguli (CLAUDE.md, AGENTS.md)"
+    ],
+    "outputs": [
+      "Fișiere Markdown în proiect: SPEC.md și tasks/plan.md",
+      "Commit-uri Git mici, câte unul pe sarcină, plus teste scrise",
+      "Rapoarte de revizuire cu etichete de severitate (Nit, Optional, FYI) și un verdict go/no-go de la personajele de revizor"
+    ],
+    "pairs_well_with": [
+      {
+        "repo_url": "https://github.com/obra/superpowers",
+        "name": "Superpowers",
+        "why": "Superpowers dă un flux autonom cu subagenți pentru faza de construire, iar acest pachet adaugă fazele din jur (specificație, securitate, lansare); ambele sunt instalate în același agent, nu am testat compatibilitatea.",
+        "in_catalog": true
+      },
+      {
+        "repo_url": "https://github.com/mattpocock/skills",
+        "name": "Matt Pocock skills",
+        "why": "Interviul /grill-me clarifică cererea înainte de /spec, iar rezultatul clarificat devine intrarea pentru specificația scrisă cu spec-driven-development.",
+        "in_catalog": true
+      },
+      {
+        "repo_url": "https://github.com/vercel-labs/skills",
+        "name": "skills (npx skills)",
+        "why": "README-ul recomandă comanda npx skills add: ea copiază cele 25 de skill-uri din repo în folderele agentului tău.",
+        "in_catalog": false
+      },
+      {
+        "repo_url": "https://github.com/ChromeDevTools/chrome-devtools-mcp",
+        "name": "Chrome DevTools MCP",
+        "why": "Skill-ul browser-testing-with-devtools îi cere agentului să ruleze acest server MCP, iar datele din browser (DOM, consolă, rețea) devin dovada de verificare.",
+        "in_catalog": false
+      },
+      {
+        "repo_url": "https://github.com/pbakaus/impeccable",
+        "name": "Impeccable",
+        "why": "Pachetul aduce procesul (specificație, teste, revizuire), iar Impeccable adaugă judecata de design pentru interfața construită în faza /build.",
+        "in_catalog": true
+      }
+    ],
+    "gaps_noticed": [
+      "O instalare cu npx pentru un singur skill nu copiază folderul references/ cu listele de verificare (issue #361).",
+      "Comenzile /spec, /plan, /build nu apar în Copilot și nici în Antigravity CLI; acolo se invocă skill-urile pe nume.",
+      "Skill-urile cu cod lipit direct în cerere nu se activează mereu (issue #620)."
+    ]
+  },
+  "when_not_to_use": [
+    "Dacă nu folosești un agent AI de programare: skill-urile sunt instrucțiuni pentru agent, nu un program de sine stătător.",
+    "Agentul nu e obligat să le urmeze: un utilizator a raportat într-un issue că, pentru mai multe cereri cu cod lipit direct în prompt, skill-ul potrivit nu s-a activat în 0 din 6 rulări.",
+    "Pentru sarcini mici (redenumiri, greșeli de tipar): documentația însăși spune că interviul și procesul complet sunt prea mult.",
+    "Dacă încarci toate skill-urile deodată, consumi mult context (documentația recomandă încărcarea pe faze); regulile sunt scrise în engleză.",
+    "Skill-ul de testare în browser poate lega agentul de profilul tău real de Chrome (opțiunea --autoConnect); documentația avertizează că e riscant."
+  ],
+  "alternatives": [
+    {
+      "name": "Superpowers",
+      "url": "https://github.com/obra/superpowers",
+      "difference": "Metodologie autonomă cu subagenți, mai profundă pe bucla de construire și mai îngustă ca acoperire; licență MIT."
+    },
+    {
+      "name": "Matt Pocock skills",
+      "url": "https://github.com/mattpocock/skills",
+      "difference": "Set mai mic de comenzi alese de un singur autor, cu accent pe interviul /grill-me; Claude Code în primul rând; licență MIT."
+    },
+    {
+      "name": "GitHub Spec Kit",
+      "url": "https://github.com/github/spec-kit",
+      "difference": "Cadru care conduce procesul de la specificație la implementare; licență MIT. Nu l-am citit în detaliu."
+    },
+    {
+      "name": "Anthropic Skills",
+      "url": "https://github.com/anthropics/skills",
+      "difference": "Exemple oficiale de skill-uri și specificația formatului SKILL.md; punct de plecare dacă îți scrii propriile skill-uri."
+    }
+  ],
+  "tech_sheet": {
+    "license": "MIT",
+    "language": "Markdown (skill-uri), cu scripturi Node.js și Bash pentru validare",
+    "commit_sha": "39b723ceebf81474d0557c1fecd01eddab585563",
+    "last_commit_date": "2026-11-13",
+    "stars": 117281,
+    "requirements": [
+      "Un agent AI de programare compatibil: Claude Code, Codex (CLI v0.122+), Cursor, Gemini CLI, Copilot, OpenCode, Windsurf, Kiro și altele",
+      "Cont și plan la agentul ales (ex: abonament Claude Pro/Max sau cheie API) — repo-ul nu cere chei proprii",
+      "Git (marketplace-ul Claude Code clonează repo-ul; dacă n-ai chei SSH pe GitHub, folosește URL-ul HTTPS)",
+      "Node.js pentru comanda `npx skills add addyosmani/agent-skills` (varianta pentru orice agent)",
+      "Opțional: jq și curl pentru cârligele (hooks) din folderul hooks/",
+      "Opțional: Chrome și chrome-devtools-mcp pentru skill-ul browser-testing-with-devtools"
+    ]
+  },
+  "monetization": [
+    {
+      "model": "consultanță și training",
+      "what_you_sell": "Ateliere pentru echipe mici de programatori despre cum își integrează agentul AI într-un proces disciplinat (specificație, teste, revizuire, lansare) folosind skill-urile ca bază și ghidul de adoptare pentru proiecte noi și vechi. Vinzi adaptarea la proiectul clientului și explicația, nu codul.",
+      "for_whom": "Echipe mici și agenții de software care folosesc deja un agent AI de programare, dar obțin rezultate inconsecvente.",
+      "license_check": {
+        "license": "MIT",
+        "commercial_use": "permis",
+        "conditions": "MIT permite uz comercial, modificare și redistribuire cu condiția să păstrezi nota de copyright și textul licenței în copiile substanțiale. Numele și imaginea autorului (ex: imaginea de copertă din README) nu sunt acoperite de cod: nu sugera că ești afiliat cu Addy Osmani."
+      },
+      "path": "folosești repo-ul direct",
+      "own_build_notes": null,
+      "demand_evidence": [
+        {
+          "name": "valantic: Claude Code for Developers (curs, Germania)",
+          "url": "https://www.valantic.com/en/training-center/claude-code-for-developers/",
+          "price": "890 EUR per persoană (plus TVA), curs de două zile",
+          "what_it_proves": "Firme plătesc deja pentru training pe fluxuri de lucru cu agenți de programare, inclusiv skill-uri și CLAUDE.md.",
+          "checked_at": "2026-11-14"
+        },
+        {
+          "name": "Konigi: ateliere de echipă pentru Claude Code",
+          "url": "https://konigi.com/answers/team-workshops/",
+          "price": "7.500 USD pe zi, până la opt persoane; deplasarea se facturează separat",
+          "what_it_proves": "Există cerere pentru ateliere de echipă la tarif zilnic (aici pentru echipe de design).",
+          "checked_at": "2026-11-14"
+        }
+      ],
+      "startup_cost": "Practic zero în bani; abonament la un agent pentru pregătire (vezi prețurile din cost). Timp: câteva zile ca să citești skill-urile și ghidurile și să pregătești un atelier.",
+      "time_to_first_client": "Nu pot estima din surse; depinde de rețeaua ta. Un atelier gratuit sau cu preț mic pentru o echipă cunoscută e un prim pas.",
+      "difficulty": "mediu",
+      "risks": [
+        "Concurență gratuită: README-ul, ghidul de adoptare și tutorialele interactive de pe skills.addy.ie explică deja fluxul.",
+        "Pachetul se schimbă des (versiunea 0.6.16, mai multe versiuni pe lună), deci materialul tău se învechește repede.",
+        "Dacă skill-urile nu se activează mereu (issue #620), clienții vor întreba de comportamente ale agentului care nu țin de tine.",
+        "Dependență de agenți și planuri de abonament a căror ofertă se schimbă."
+      ],
+      "first_steps": [
+        "Parcurge tutorialele de pe skills.addy.ie (proiect nou, cod existent) cu un proiect mic de test.",
+        "Pregătește un atelier de 2-3 ore: instalare, /spec, /plan, /build, /review pe un exemplu al clientului.",
+        "Oferă-l gratuit sau la preț mic unei echipe cunoscute și cere o recomandare.",
+        "Compară-ți oferta cu trainingurile din tabelul de cerere înainte de a pune un preț."
+      ]
+    },
+    {
+      "model": "serviciu de instalare și configurare",
+      "what_you_sell": "Configurarea unui proiect existent pentru lucrul cu agentul AI: alegi skill-urile potrivite pe faze, scrii fișierul de reguli al proiectului (CLAUDE.md sau AGENTS.md) cu comenzile de test și zonele interzise și aplici calea „cod existent” din ghidul de adoptare.",
+      "for_whom": "Echipe cu cod vechi și puține teste, care vor să folosească agentul AI fără să strice lucruri.",
+      "license_check": {
+        "license": "MIT",
+        "commercial_use": "permis",
+        "conditions": "Aceleași condiții MIT: păstrezi nota de copyright dacă redistribui skill-urile. Fișierele AGENTS.md și CLAUDE.md din rădăcina repo-ului configurează doar proiectul lui, nu le copia la clienți (documentația cere asta explicit)."
+      },
+      "path": "folosești repo-ul direct",
+      "own_build_notes": null,
+      "demand_evidence": [
+        {
+          "name": "Konigi: configurare a agentului pe mașina fiecărui membru al echipei",
+          "url": "https://konigi.com/answers/team-workshops/",
+          "price": "7.500 USD pe zi, până la opt persoane",
+          "what_it_proves": "Pagina listează ca parte din atelier „Getting Claude Code set up and working on each designer's own machine”: configurarea e deja vândută ca serviciu.",
+          "checked_at": "2026-11-14"
+        }
+      ],
+      "startup_cost": "Practic zero în bani; abonament la un agent pentru pregătire.",
+      "time_to_first_client": "Nu pot estima din surse.",
+      "difficulty": "mediu",
+      "risks": [
+        "Concurență gratuită: instalarea e o comandă, iar ghidul de adoptare e public.",
+        "Valoarea ta e adaptarea la proiectul clientului, greu de dovedit fără exemple publice.",
+        "Un agent care nu activează skill-ul (issue #620) poate face configurarea să pară ineficientă."
+      ],
+      "first_steps": [
+        "Alege un proiect propriu cu cod vechi și aplică Faza 1 din ghidul de adoptare (reguli, revizuire, depanare).",
+        "Notează ce a funcționat și ce nu, ca studiu de caz pentru prima ofertă.",
+        "Pregătește o ofertă cu preț fix pentru configurarea unui proiect mic."
+      ]
+    }
+  ],
+  "updated_at": "2026-11-14",
+  "notes_summary": "Am citit README-ul, documentația, skill-urile și issue-urile, dar n-am rulat nimic; nu am găsit o poveste reală de folosire și nu există un înlocuitor plătit clar.",
+  "notes": "Slug ales addyosmani-agent-skills ca să nu se încurce cu scientific-agent-skills (K-Dense). Citit: README, docs/ (getting-started, adoption-guide, comparison, skill-anatomy, setup per agent), skill-uri (interview-me, code-review-and-quality, browser-testing-with-devtools), hooks/, evals/, plugin.json, .claude-plugin, issue-uri (#620, #432, #361). Licență: LICENSE = MIT (Copyright 2025 Addy Osmani); skill-urile nu au câmp license în frontmatter. Stele: 117.281 pe 2026-11-14 (repo creat 2026-02-15, fork-uri 12.270); nu am verificat ritmul de creștere. Clona shallow are 1 commit; ultimul commit 2026-11-13, ultima versiune 0.6.16 publicată pe 2026-11-14. Prețuri verificate pe 2026-11-14: claude.com/pricing (Pro 17 USD/lună anual, 20 lunar), learn.chatgpt.com/docs/pricing (Go 8, Plus 20, Pro de la 100), valantic (890 EUR), konigi (7.500 USD/zi). Notă: paginile de preț ChatGPT arată modele cu nume noi; le-am lăsat doar ca plan și preț. replaces = listă goală: pachetul e un set de instrucțiuni, nu un înlocuitor realist pentru un serviciu plătit (ex: boți de revizuire PR automată rulează pe GitHub, pachetul nu). Hook-urile din hooks/ nu sunt activate de plugin (documentat în session-start.sh); sdd-cache-pre/post fac cereri HTTP HEAD către pagini de documentație, doar dacă utilizatorul le adaugă în settings.json; de aceea risk_flags e gol. Nu am găsit telemetrie în hooks/ sau scripts/. Auto-instalarea cu `agy plugin install` are o limitare documentată pe Antigravity CLI (comenzile nu apar; issue #445). Primii pași: nu am găsit o experiență reală potrivită. Am căutat: Hacker News (postarea originală din 2026-05-04 cu 376 de puncte, plus cele din aprilie, august; comentariile sunt opinii sau scurte: ex. cineva spune că folosește pachetul pe un proiect personal, fără pași), dev.to (dublecc, yimtheppariyapol), blogul neelshah18, WebSearch. Textele găsite sunt analize ale repo-ului, nu folosiri personale (dev.to dublecc spune explicit că fluxul nu a fost rulat); LinkedIn (Om Mishra, comparație Superpowers vs Agent Skills) dă 403 la citire automată. Glosar: termenii adăugați (PRD, Core Web Vitals, greenfield, brownfield, feature flag, evals) trebuie verificați de editor față de content/glossary.json; „skill”, „SKILL.md”, „plugin”, „hook”, „TDD”, „CLAUDE.md”, „ADR”, „MCP”, „npx”, „CLI”, „marketplace” există deja. Categoriile folosite există în content/categories.json. Comparația din docs/comparison.md e scrisă de autorul repo-ului: tratată ca afirmație proprie, nu verificată independent."
+}

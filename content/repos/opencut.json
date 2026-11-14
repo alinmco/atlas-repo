@@ -171,6 +171,12 @@
         "name": "match-cut",
         "why": "Ieșirea (mp4-ul final) poate fi deschisă într-un editor video pentru retușuri manuale sau subtitrări; e un pas manual, nu o integrare documentată.",
         "in_catalog": true
+      },
+      {
+        "repo_url": "https://github.com/Anil-matcha/open-genjutsu",
+        "name": "open-genjutsu (Genjutsu)",
+        "why": "Importi MP4-ul rezultat în editor, ca să tai, adaugi titluri și muzică și exporți clipul final.",
+        "in_catalog": true
       }
     ],
     "gaps_noticed": [

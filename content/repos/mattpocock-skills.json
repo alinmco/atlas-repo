@@ -279,6 +279,12 @@
         "name": "AI Design Skills",
         "why": "Același format SKILL.md, instalabil în același agent; skill-urile lui Pocock dau procesul de lucru, iar acesta dă regulile paginii.",
         "in_catalog": true
+      },
+      {
+        "repo_url": "https://github.com/addyosmani/agent-skills",
+        "name": "Agent Skills (Addy Osmani)",
+        "why": "Interviul /grill-me clarifică cererea înainte de /spec, iar rezultatul clarificat devine intrarea pentru specificația scrisă cu spec-driven-development.",
+        "in_catalog": true
       }
     ],
     "gaps_noticed": [

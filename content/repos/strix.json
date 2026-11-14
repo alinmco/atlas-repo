@@ -320,6 +320,12 @@
         "name": "SafeLine",
         "why": "Strix atacă o aplicație proprie și produce un raport cu problemele găsite; îl rulezi pe o copie de test, fără WAF, apoi verifici dacă SafeLine oprește acele tipuri de cereri (doar pe ținte proprii sau autorizate).",
         "in_catalog": true
+      },
+      {
+        "repo_url": "https://github.com/cloudflare/security-audit-skill",
+        "name": "security-audit (Cloudflare)",
+        "why": "Skill-ul citește doar codul sursă, iar Strix atacă aplicația care rulează; problemele din findings.json devin ținte de testat dinamic.",
+        "in_catalog": true
       }
     ],
     "gaps_noticed": [

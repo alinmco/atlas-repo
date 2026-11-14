@@ -198,7 +198,8 @@
       "https://github.com/obra/superpowers",
       "https://github.com/anomalyco/opencode",
       "https://github.com/pbakaus/impeccable",
-      "https://github.com/elayadesign/ai-design-skills"
+      "https://github.com/elayadesign/ai-design-skills",
+      "https://github.com/addyosmani/agent-skills"
     ],
     "used_in_recipes": []
   },
@@ -234,7 +235,8 @@
       "https://github.com/JuliusBrussee/caveman",
       "https://github.com/pbakaus/impeccable",
       "https://github.com/elayadesign/ai-design-skills",
-      "https://github.com/davidondrej/cloudroom"
+      "https://github.com/davidondrej/cloudroom",
+      "https://github.com/addyosmani/agent-skills"
     ],
     "used_in_recipes": []
   },
@@ -379,7 +381,8 @@
       "https://github.com/yt-dlp/yt-dlp",
       "https://github.com/FFmpeg/FFmpeg",
       "https://github.com/mifi/lossless-cut",
-      "https://github.com/Sac-Y/match-cut"
+      "https://github.com/Sac-Y/match-cut",
+      "https://github.com/Anil-matcha/open-genjutsu"
     ],
     "used_in_recipes": []
   },
@@ -473,7 +476,8 @@
       "https://github.com/projectdiscovery/nuclei",
       "https://github.com/semgrep/semgrep",
       "https://github.com/smicallef/spiderfoot",
-      "https://github.com/chaitin/SafeLine"
+      "https://github.com/chaitin/SafeLine",
+      "https://github.com/cloudflare/security-audit-skill"
     ],
     "used_in_recipes": []
   },
@@ -675,7 +679,8 @@
       "https://github.com/obra/superpowers",
       "https://github.com/vercel-labs/skills",
       "https://github.com/microsoft/playwright-mcp",
-      "https://github.com/elayadesign/ai-design-skills"
+      "https://github.com/elayadesign/ai-design-skills",
+      "https://github.com/addyosmani/agent-skills"
     ],
     "used_in_recipes": []
   },
@@ -1055,6 +1060,118 @@
       "https://github.com/NousResearch/hermes-agent",
       "https://github.com/ggml-org/llama.cpp",
       "https://github.com/open-webui/open-webui"
+    ],
+    "used_in_recipes": []
+  },
+  {
+    "slug": "open-genjutsu",
+    "name": "open-genjutsu (Genjutsu)",
+    "one_liner": "Înlocuiește o persoană dintr-un scurt clip video cu un personaj ales de tine.",
+    "categories": [
+      "Editare video",
+      "Creare de conținut"
+    ],
+    "inputs": [
+      "Fișier video MP4 sau MOV, 4-15 secunde, maximum 50 MB (clipul sursă)",
+      "1-8 imagini JPEG, PNG sau WebP, maximum 10 MB fiecare (personajul)",
+      "Opțional: un scurt text de idei (brief creativ), mod (transfer de mișcare sau schimbare de obiect), raport de aspect și durată",
+      "Cheie API Muapi, introdusă în pagina locală"
+    ],
+    "outputs": [
+      "Fișier MP4 local în runtime/exports/, cu sunetul clipului original restabilit când există",
+      "Rezultatul brut generat de Muapi, ca URL de descărcare"
+    ],
+    "updated_at": "2026-11-14",
+    "pairs_well_with": [
+      "https://github.com/opencut-app/opencut",
+      "https://github.com/Anil-matcha/Open-Generative-AI",
+      "https://github.com/FFmpeg/FFmpeg"
+    ],
+    "used_in_recipes": []
+  },
+  {
+    "slug": "addyosmani-agent-skills",
+    "name": "Agent Skills (Addy Osmani)",
+    "one_liner": "Pachet de 25 skill-uri care îl obligă agentul AI să lucreze ca un inginer atent.",
+    "categories": [
+      "Skill-uri pentru agenți AI",
+      "Unelte pentru programatori"
+    ],
+    "inputs": [
+      "Cererea ta în limbaj natural, într-un agent AI de programare (ex: Claude Code, Codex, Cursor)",
+      "Codul proiectului tău și, opțional, fișierele de reguli (CLAUDE.md, AGENTS.md)"
+    ],
+    "outputs": [
+      "Fișiere Markdown în proiect: SPEC.md și tasks/plan.md",
+      "Commit-uri Git mici, câte unul pe sarcină, plus teste scrise",
+      "Rapoarte de revizuire cu etichete de severitate (Nit, Optional, FYI) și un verdict go/no-go de la personajele de revizor"
+    ],
+    "updated_at": "2026-11-14",
+    "pairs_well_with": [
+      "https://github.com/obra/superpowers",
+      "https://github.com/mattpocock/skills",
+      "https://github.com/vercel-labs/skills",
+      "https://github.com/ChromeDevTools/chrome-devtools-mcp",
+      "https://github.com/pbakaus/impeccable"
+    ],
+    "used_in_recipes": []
+  },
+  {
+    "slug": "daily-stock-analysis",
+    "name": "Daily Stock Analysis",
+    "one_liner": "Analizează zilnic acțiunile tale cu AI și îți trimite raportul pe Telegram sau e-mail.",
+    "categories": [
+      "Analiză financiară",
+      "Agenți AI și automatizare",
+      "Monitorizare și audit"
+    ],
+    "inputs": [
+      "listă de coduri de acțiuni (de ex. 600519, hk00700, AAPL, 7203.T, 005930.KS, 2330.TW) în variabila STOCK_LIST sau în --stocks",
+      "import din imagine, CSV/Excel sau clipboard prin interfața web",
+      "chei API pentru model AI, știri și surse de cotații, puse în .env sau în GitHub Secrets"
+    ],
+    "outputs": [
+      "mesaje Markdown cu tablou de decizie și recapitularea pieței, trimise pe Telegram, Discord, Slack, e-mail, WeChat Work sau Feishu",
+      "rapoarte complete Markdown și istoric în interfața web și în baza de date SQLite locală",
+      "API FastAPI pentru integrare cu alte programe"
+    ],
+    "updated_at": "2026-11-14",
+    "pairs_well_with": [
+      "https://github.com/ZhuLinsen/alphasift",
+      "https://github.com/ZhuLinsen/alphaevo",
+      "https://github.com/akfamily/akshare",
+      "https://github.com/searxng/searxng",
+      "https://github.com/TauricResearch/TradingAgents"
+    ],
+    "used_in_recipes": []
+  },
+  {
+    "slug": "security-audit-skill",
+    "name": "security-audit (Cloudflare)",
+    "one_liner": "Transformă agentul tău de programare într-un auditor care caută vulnerabilități în cod.",
+    "categories": [
+      "Agenți AI și securitate",
+      "Skill-uri pentru agenți AI"
+    ],
+    "inputs": [
+      "folderul unui repository de cod (sursă) pe care îl auditezi",
+      "o cerere în limbaj obișnuit către agent, de exemplu „security audit this codebase”",
+      "opțional: profil (quick, standard, deep), domeniu restrâns de fișiere sau buget maxim de agenți",
+      "opțional: rezultatele unei rulări anterioare (ledger și findings.json) pentru acoperirea golurilor"
+    ],
+    "outputs": [
+      "REPORT.md, FINDINGS-DETAIL.md și NEEDS-VALIDATION.md (Markdown)",
+      "findings.json, cu verdictele confirmed, needs_validation și rejected, validat față de report-schema.json",
+      "coverage-ledger.json, arhitectura în architecture.md și run-metadata.json",
+      "folder implicit: ~/security-audit-skill/<repo-name>/run-<N>"
+    ],
+    "updated_at": "2026-11-14",
+    "pairs_well_with": [
+      "https://github.com/usestrix/strix",
+      "https://github.com/semgrep/semgrep",
+      "https://github.com/google/osv-scanner",
+      "https://github.com/gitleaks/gitleaks",
+      "https://github.com/vercel-labs/skills"
     ],
     "used_in_recipes": []
   }
